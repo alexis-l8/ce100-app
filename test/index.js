@@ -1,2 +1,2 @@
 
-require('./initial.js');
+require('./server.test.js');
