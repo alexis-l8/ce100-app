@@ -4,12 +4,14 @@
   "description": "A networking, knowledge sharing and collaboration platform for the Circular Economy 100 network, an Ellen MacArthur Foundation programme.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test",
+    "testmon": "nodemon test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/emfoundation/ce100-app.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
