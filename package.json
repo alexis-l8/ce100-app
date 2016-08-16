@@ -18,11 +18,11 @@
   "homepage": "https://github.com/emfoundation/ce100-app#readme",
   "dependencies": {
     "hapi": "^14.2.0",
-    "joi": "^9.0.4",
-    "nodemon": "^1.10.0",
-    "tape":	 "^4.6.0"
+    "joi": "^9.0.4"
   },
   "devDependencies": {
-    "eslint": "^2.13.1"
+    "nodemon": "^1.10.0",
+    "tape": "^4.6.0",
+    "semistandard": "^8.0.0"
   }
 }
