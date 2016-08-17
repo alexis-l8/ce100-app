@@ -16,6 +16,11 @@ const routes = [
     handler: handlers.serveFile
   },
   {
+    method: 'POST',
+    path: '/add-user',
+    handler: handlers.createNewPrimaryUser
+  },
+  {
     method: 'GET',
     path: '/index2',
     handler: (request, reply) => {
