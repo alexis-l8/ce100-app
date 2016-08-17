@@ -20,8 +20,7 @@ server.register([Vision], err => {
       html: handlebars
     },
     relativeTo: path.resolve(__dirname, '..'),
-    path: './templates',
-    layoutPath: './templates/layout',
+    path: './templates/views',
     helpersPath: './templates/helpers'
   });
 });
