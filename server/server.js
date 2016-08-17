@@ -1,16 +1,17 @@
 const Hapi = require('hapi');
 const server = new Hapi.Server();
 
-const path = require('path')
+const path = require('path');
 //plugins
-const vision = require('vision')
-const routes = require('./routes.js')
+const Vision = require('vision');
 
-const handlebars = require('handlebars')
+const routes = require('./routes.js');
+
+const handlebars = require('handlebars');
 
 server.connection({ port: 3000 });
 
-server.register([vision], err => {
+server.register([Vision], err => {
 
   // TODO: look into hoek
   // Hoek.assert(!err, err)
@@ -22,8 +23,8 @@ server.register([vision], err => {
     path: './templates',
     layoutPath: './templates/layout',
     helpersPath: './templates/helpers'
-  })
-})
+  });
+});
 
 server.route(routes);
 
