@@ -1,5 +1,7 @@
 const Joi = require('joi');
 
+const handlers = require('./handlers.js');
+
 const routes = [
   {
     method: 'GET',
@@ -10,10 +12,8 @@ const routes = [
   },
   {
     method: 'GET',
-    path: '/index',
-    handler: (request, reply) => {
-      reply.view('add-user');
-    }
+    path: '/{path*}',
+    handler: handlers.serveFile
   },
   {
     method: 'GET',
