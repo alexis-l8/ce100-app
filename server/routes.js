@@ -1,3 +1,5 @@
+const Joi = require('joi');
+
 const routes = [
   {
     method: 'GET',
@@ -11,6 +13,20 @@ const routes = [
     path: '/index',
     handler: (request, reply) => {
       reply.view('add-user');
+    }
+  },
+  {
+    method: 'GET',
+    path: '/index2',
+    handler: (request, reply) => {
+      reply("Request:" + request.query);
+    },
+    config: {
+      validate: {
+        query: {
+          name: Joi.number()
+        }
+      }
     }
   }
 ]
