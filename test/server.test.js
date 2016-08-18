@@ -3,14 +3,14 @@ const tape = require('tape');
 
 const server = require('../server/server.js');
 
-tape('server sets up', (test) => {
+tape('server sets up', (t) => {
   const options = {
     method: 'GET',
     url: '/'
   };
   server.inject(options, (reply) => {
-    test.equal(reply.statusCode, 200, 'server.js exports a basic server');
-    server.stop(test.end());
+    t.equal(reply.statusCode, 200, 'server.js exports a basic server');
+    t.end();
   });
 });
 
@@ -22,11 +22,13 @@ const testingEndpoints = () => {
       method: 'GET',
       url: '/' + filename
     };
-    tape('testing endpoints', (test) => {
+    tape('testing endpoints', (t) => {
       server.inject(options, (reply) => {
-        test.equal(reply.statusCode, 200, 'testing the endpoint: ' + filename);
-        server.stop(test.end());
+        t.equal(reply.statusCode, 200, 'testing the endpoint: ' + filename);
+        t.end();
       });
     });
   })
 }
+
+// testingEndpoints();
