@@ -30,5 +30,3 @@ const testingEndpoints = () => {
     });
   })
 }
-
-testingEndpoints();

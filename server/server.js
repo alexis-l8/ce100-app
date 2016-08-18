@@ -1,20 +1,19 @@
 const Hapi = require('hapi');
-const server = new Hapi.Server();
-
-const path = require('path');
-//plugins
+const Hoek = require('hoek');
 const Vision = require('vision');
 
+const path = require('path');
+const handlebars = require('handlebars');
 const routes = require('./routes.js');
 
-const handlebars = require('handlebars');
+const server = new Hapi.Server();
 
 server.connection({ port: 3000 });
 
 server.register([Vision], err => {
 
-  // TODO: look into hoek
-  // Hoek.assert(!err, err)
+  Hoek.assert(!err, err);
+
   server.views({
     engines: {
       html: handlebars
