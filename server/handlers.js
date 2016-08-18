@@ -8,7 +8,7 @@ handlers.createNewPrimaryUser = (request, reply) => {
   const stringified = JSON.stringify(request.payload);
   // make new db
 
-  request.redis.SADD('users', stringified);
+  request.redis.SADD('people', stringified);
   reply.view('add-user');
 };
 
