@@ -5,6 +5,11 @@ const handlers = require('./handlers.js');
 const routes = [
   {
     method: 'GET',
+    path: '/',
+    handler: (request, reply) => reply("Hello World")
+  },
+  {
+    method: 'GET',
     path: '/{path*}',
     handler: handlers.serveFile
   },
