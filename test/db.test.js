@@ -1,51 +1,70 @@
 const tape = require('tape');
 const client = require('redis').createClient();
-const redis = require('../lib/db/redis.js');
+const server = require('../server/server.js');
 
-const mockUser = {
-  key: 'jm',
+const mockAddUserPayload = {
   first_name: 'jack',
   last_name: 'murphy',
   email: 'ja@mu.co',
-  organisation_id: 'org:apple',
+  organisation_id: '0',
   user_type: 'primary'
 };
 
+const mockNewUserAdded = {
+  id: 0,
+  first_name: 'jack',
+  last_name: 'murphy',
+  email: 'ja@mu.co',
+  organisation_id: 0,
+  user_type: 'primary',
+  active: true
+};
+
+const mockOrgPreUser = {
+  id: 0,
+  name: 'apple',
+  active: true,
+  mission_statement: 'Change the economy'
+};
+
+const mockOrgPostUser = {
+  id: 0,
+  name: 'apple',
+  active: true,
+  mission_statement: 'Change the economy',
+  primary_id: 0,
+  people: [0]
+};
+
+
 
 tape('set up db', t => {
-  // set up db?
+  // any db set up can be done in here
   t.end();
 });
 
-tape('can add a user to DB', (t) => {
-  t.plan(3);
-  t.ok(redis.addUser, 'addUser function exists');
-  redis.addUser(client, mockUser, (err, data) => {
-    t.equal(data, 'OK', 'it works');
-
-    client.hgetall(mockUser.key, (err, data) => {
-      const expected = mockUser.first_name;
-      const actual = data.first_name;
-      t.equal(expected, actual, 'correct first name of new user');
-      // TODO: Test all fields of user
-      t.end();
-    });
+tape('/add-user post adds a user to db', (t) => {
+  t.plan(1);
+  const options = {
+    method: 'POST',
+    url: '/add-user',
+    payload: JSON.stringify(mockAddUserPayload)
+  };
+  server.inject(options, reply => {
+    const exp = 200;
+    const act = reply.statusCode;
+    t.equal(exp, act, 'route exists and replies 200');
   });
+  // create new organisation
+  // test new organisation exists
+  // create new user
+  // test that user exists in db
+  // reply as expected
+  // Route should be authed
 });
-
-tape('can retrieve a user from DB', (t) => {
-  t.plan(2);
-  t.ok(redis.getUser, 'getUser function exists');
-  redis.getUser(client, mockUser.key, (err, data) => {
-    const expected = mockUser.first_name;
-    const actual = data.first_name;
-    t.equal(expected, actual, 'first name of user is correct');
-    t.end();
-  });
-});
-
 
 tape('teardown', t => {
+  client.flushdb();
   client.end(true);
   t.end();
 });

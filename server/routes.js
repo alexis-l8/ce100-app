@@ -10,23 +10,20 @@ const routes = [
   },
   {
     method: 'GET',
-    path: '/index',
+    path: '/add-user',
     handler: (request, reply) => {
       reply.view('add-user');
     }
   },
   {
-    method: 'GET',
-    path: '/index2',
+    method: 'POST',
+    path: '/add-user',
     handler: (request, reply) => {
-      reply('Request:' + request.query);
-    },
-    config: {
-      validate: {
-        query: {
-          name: Joi.number()
-        }
-      }
+      const stringified = JSON.stringify(request.payload);
+      // make new db
+
+      request.redis.SADD('users', stringified);
+      reply.view('add-user');
     }
   }
 ];

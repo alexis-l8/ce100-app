@@ -1,3 +1,3 @@
 
-require('./server.test.js');
+// require('./server.test.js');
 require('./db.test.js');

@@ -4,14 +4,14 @@ const Hoek = require('hoek');
 const path = require('path');
 //  plugins
 const Vision = require('vision');
-
+const HapiRedisConnection = require('hapi-redis-connection');
 const routes = require('./routes.js');
 
 const handlebars = require('handlebars');
 
 server.connection({ port: 3000 });
 
-server.register([Vision], err => {
+server.register([Vision, HapiRedisConnection], err => {
   Hoek.assert(!err, err);
 
   server.views({
