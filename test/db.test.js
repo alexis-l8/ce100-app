@@ -44,16 +44,22 @@ tape('set up db', t => {
 });
 
 tape('/add-user post adds a user to db', (t) => {
-  t.plan(1);
+  t.plan(2);
   const options = {
     method: 'POST',
     url: '/add-user',
     payload: JSON.stringify(mockAddUserPayload)
   };
   server.inject(options, reply => {
-    const exp = 200;
-    const act = reply.statusCode;
-    t.equal(exp, act, 'route exists and replies 200');
+    client.smembers('people', (error, data) => {
+      const user = JSON.parse(data[0]);
+      t.ok(data, 'adds mock data to db');
+      t.deepEqual(user, mockNewUserAdded);
+      t.end();
+    });
+    // const exp = 200;
+    // const act = reply.statusCode;
+    // t.equal(exp, act, 'route exists and replies 200');
   });
   // create new organisation
   // test new organisation exists
@@ -64,7 +70,7 @@ tape('/add-user post adds a user to db', (t) => {
 });
 
 tape('teardown', t => {
-  client.flushdb();
+  // client.flushdb();
   client.end(true);
   t.end();
 });
