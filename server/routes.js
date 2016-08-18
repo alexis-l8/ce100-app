@@ -19,7 +19,7 @@ const routes = [
     method: 'GET',
     path: '/index2',
     handler: (request, reply) => {
-      reply("Request:" + request.query);
+      reply('Request:' + request.query);
     },
     config: {
       validate: {
@@ -29,6 +29,6 @@ const routes = [
       }
     }
   }
-]
+];
 
 module.exports = routes;
