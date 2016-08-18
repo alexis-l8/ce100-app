@@ -23,6 +23,7 @@
     "handlebars": "^4.0.5",
     "hapi": "^14.2.0",
     "hoek": "^4.0.2",
+    "hapi-redis-connection": "^1.0.1",
     "joi": "^9.0.4",
     "redis": "^2.6.2",
     "vision": "^4.1.0"
