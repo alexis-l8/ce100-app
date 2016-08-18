@@ -6,17 +6,17 @@ const mockAddUserPayload = {
   first_name: 'jack',
   last_name: 'murphy',
   email: 'ja@mu.co',
-  organisation_id: '0',
+  organisation_id: 0,
   user_type: 'primary'
 };
 
 const mockNewUserAdded = {
-  id: 0,
   first_name: 'jack',
   last_name: 'murphy',
   email: 'ja@mu.co',
   organisation_id: 0,
   user_type: 'primary',
+  id: 0,
   active: true
 };
 
@@ -44,7 +44,7 @@ tape('set up db', t => {
 });
 
 tape('/add-user post adds a user to db', (t) => {
-  t.plan(2);
+  t.plan(3);
   const options = {
     method: 'POST',
     url: '/add-user',
@@ -52,14 +52,11 @@ tape('/add-user post adds a user to db', (t) => {
   };
   server.inject(options, reply => {
     client.smembers('people', (error, data) => {
-      const user = JSON.parse(data[0]);
+      t.equal(200, reply.statusCode, 'route exists and replies 200');
       t.ok(data, 'adds mock data to db');
-      t.deepEqual(user, mockNewUserAdded);
+      t.deepEqual(JSON.parse(data[0]), mockNewUserAdded, 'the new user has correct fields');
       t.end();
     });
-    // const exp = 200;
-    // const act = reply.statusCode;
-    // t.equal(exp, act, 'route exists and replies 200');
   });
   // create new organisation
   // test new organisation exists
@@ -70,7 +67,7 @@ tape('/add-user post adds a user to db', (t) => {
 });
 
 tape('teardown', t => {
-  // client.flushdb();
+  client.flushdb();
   client.end(true);
   t.end();
 });

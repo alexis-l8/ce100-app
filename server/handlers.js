@@ -5,11 +5,21 @@ handlers.serveFile = (request, reply) => {
 };
 
 handlers.createNewPrimaryUser = (request, reply) => {
-  const stringified = JSON.stringify(request.payload);
-  // make new db
+  const allPeople = request.redis.smembers('people', (err, data) => {
+    if (err) {
+      console.log(err);
+      reply('could not access people set');
+    } else {
+      const additionalInfo = {
+        id: data.length,
+        active: true
+      }
+      const newUser = JSON.stringify(Object.assign(additionalInfo, request.payload));
+      request.redis.SADD('people', newUser);
+      reply.view('add-user');
 
-  request.redis.SADD('people', stringified);
-  reply.view('add-user');
+    }
+  });
 };
 
 handlers.login = (request, reply) => {

@@ -23,7 +23,7 @@ const routes = [
           first_name: Joi.string().min(1).required(),
           last_name: Joi.string().min(1).required(),
           email: Joi.string().email().required(),
-          organisation_id: Joi.string().min(1).required(),
+          organisation_id: Joi.number().min(0).required(),
           user_type: ['primary', 'admin'],
           submit: 'Submit'
         }
