@@ -9,7 +9,7 @@ const routes = [
   },
   {
     method: 'POST',
-    path: '/register',
+    path: '/register/{id}',
     handler: handlers.register
   },
   {
