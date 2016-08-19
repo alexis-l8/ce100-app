@@ -8,9 +8,17 @@ const routes = [
     handler: (request, reply) => reply("Hello World")
   },
   {
+    method: 'GET',
+    path: '/users/{action}/{hashedId}',
+    handler: handlers.serveActivate
+  },
+  {
     method: 'POST',
-    path: '/register/{id}',
-    handler: handlers.register
+    path: '/users/activate/{hashedId}',
+    handler: handlers.activateUser,
+    config: {
+      validate: val.confirmPassword
+    }
   },
   {
     method: 'GET',

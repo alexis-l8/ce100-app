@@ -15,12 +15,11 @@ validate.adminAddUser = {
 
 validate.confirmPassword = {
   payload: {
-    password: Joi.string().min(6).required(),
-    confirmPassword: Joi.string().min(6).required(),
+    password: Joi.string().min(1).required(),
+    confirmPassword: Joi.string().min(1).required(),
+    // TODO: make min 6 & password match confirmPassword
     submit: 'Submit'
   }
 };
-
-
 
 module.exports = validate;

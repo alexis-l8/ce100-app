@@ -1,8 +1,9 @@
-const Bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const Boom = require('boom');
-const Hashids = require('hashids');
 const redis = require('redis');
 const env = require('env2')('config.env');
+const Hashids = require('hashids');
+const hash = new Hashids(process.env.HASHID_KEY);
 
 const handlers = {};
 
@@ -10,13 +11,49 @@ handlers.serveFile = (request, reply) => {
   reply.view(request.params.path);
 };
 
-handlers.register = (request, reply) => {
- const userId = request.params.id;
- // if (!userId) reply.view();
- const hash = new Hashids(process.env.HASHID_KEY);
- const hashedId = hash.encode(userId);
- console.log('hashed', hashedId);
- console.log('unhashed', hash.decode(hashedId));
+handlers.serveActivate = (request, reply) => {
+  reply.view(request.params.action);
+};
+
+handlers.activateUser = (request, reply) => {
+  const hashedId = request.params.hashedId; // currently not hashed
+  const userId = request.params.hashedId; // hash.decode(request.params.hashedId);
+  // hash password
+  bcrypt.hash(request.payload.password, 10, function (error, hashedPassword) {
+    if(error) {
+      console.log(error);
+      reply('hash failed');
+    } else {
+      request.redis.LINDEX('people', userId, (error, user) => {
+        if(error) {
+          console.log(error);
+          reply('hash failed');
+        } else {
+          const newDetails = {
+            password: hashedPassword,
+            last_login: Date.now()
+          };
+          const updatedUser = Object.assign(newDetails, JSON.parse(user));
+          request.redis.LSET('people', updatedUser.id, JSON.stringify(updatedUser), (err, response) => {
+            if (err) {
+              console.log(err);
+              reply('redis-failure');
+            } else {
+              const cookieConfig = {
+                ttl: 7 * 24 * 60 * 60 * 1000,
+                isSecure: false,
+                path: '/'
+              };
+              reply('OK').state('CEsession', hashedId, cookieConfig); // view dashboard and set new cookie
+            }
+          });
+        }
+      });
+    }
+  });
+// unhash id
+// check and update user
+// reply view home and set cookie
 };
 
 handlers.createNewPrimaryUser = (request, reply) => {

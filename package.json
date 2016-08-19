@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/emfoundation/ce100-app#readme",
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "handlebars": "^4.0.5",
     "hapi": "^14.2.0",
     "hapi-login": "^1.2.0",

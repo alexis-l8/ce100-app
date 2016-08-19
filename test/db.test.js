@@ -70,7 +70,7 @@ tape('/add-user post adds a user to db', (t) => {
 });
 
 tape('teardown', t => {
-  client.flushdb();
+  // client.flushdb();
   client.end(true);
   server.stop(() => {});
   t.end();
