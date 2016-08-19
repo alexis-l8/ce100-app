@@ -1,7 +1,22 @@
+const Bcrypt = require('bcrypt');
+const Boom = require('boom');
+const Hashids = require('hashids');
+const redis = require('redis');
+const env = require('env2')('config.env');
+
 const handlers = {};
 
 handlers.serveFile = (request, reply) => {
   reply.view(request.params.path);
+};
+
+handlers.register = (request, reply) => {
+ const userId = request.params.id;
+ // if (!userId) reply.view();
+ const hash = new Hashids(process.env.HASHID_KEY);
+ const hashedId = hash.encode(userId);
+ console.log('hashed', hashedId);
+ console.log('unhashed', hash.decode(hashedId));
 };
 
 handlers.createNewPrimaryUser = (request, reply) => {
