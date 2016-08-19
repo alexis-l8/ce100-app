@@ -1,7 +1,7 @@
+require('env2')('config.env');
+
 const bcrypt = require('bcrypt');
 const Boom = require('boom');
-const redis = require('redis');
-const env = require('env2')('config.env');
 const Hashids = require('hashids');
 const hash = new Hashids(process.env.HASHID_KEY);
 
@@ -20,12 +20,12 @@ handlers.activateUser = (request, reply) => {
   const userId = request.params.hashedId; // hash.decode(request.params.hashedId);
   // hash password
   bcrypt.hash(request.payload.password, 10, function (error, hashedPassword) {
-    if(error) {
+    if (error) {
       console.log(error);
       reply('hash failed');
     } else {
       request.redis.LINDEX('people', userId, (error, user) => {
-        if(error) {
+        if (error) {
           console.log(error);
           reply('hash failed');
         } else {
@@ -103,7 +103,36 @@ handlers.createNewPrimaryUser = (request, reply) => {
 };
 
 handlers.login = (request, reply) => {
-
+  const email = request.payload.email;
+  const password = request.payload.password;
+  request.redis.LRANGE('people', 0, -1, (error, allUsers) => {
+    if (error) {
+      console.log('ERROR', error);
+      reply('redis-failure');
+    } else {
+      const user = allUsers.filter((eachUser, index) => {
+        return JSON.parse(eachUser).email === email;
+      });
+      const userDetails = JSON.parse(user);
+      if (userDetails) {
+        bcrypt.compare(password, userDetails.password, function (err, isValid) {
+          if (!err && isValid) {
+            // TODO: update last login
+            const cookieConfig = {
+              ttl: 7 * 24 * 60 * 60 * 1000,
+              isSecure: false,
+              path: '/'
+            };
+            reply('OK').state('CEsession', hash.encode(userDetails.id), cookieConfig); // view dashboard
+          } else {
+            reply(Boom.notFound('Sorry, that email or password is invalid, please try again.'));
+          }
+        });
+      } else {
+        reply(Boom.notFound('Sorry, that email has not been registered.'));
+      }
+    }
+  });
 };
 
 module.exports = handlers;
