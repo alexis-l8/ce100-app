@@ -14,11 +14,22 @@ validate.adminAddUser = {
 };
 
 validate.confirmPassword = {
+  // TODO: check params exist
   payload: {
     password: Joi.string().min(1).required(),
     confirmPassword: Joi.string().min(1).required(),
     // TODO: make min 6 & password match confirmPassword
     submit: 'Submit'
+  }
+};
+
+validate.login = {
+  payload: {
+    email: Joi.string().email().required(),
+    password: Joi.string().min(1).required(),
+    // TODO: make min 6
+    submit: 'Submit',
+    failAction: 'error'
   }
 };
 
