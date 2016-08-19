@@ -9,6 +9,11 @@ const routes = [
     handler: (request, reply) => reply("Hello World")
   },
   {
+    method: 'POST',
+    path: '/register',
+    handler: handlers.register
+  },
+  {
     method: 'GET',
     path: '/{path*}',
     handler: handlers.serveFile
