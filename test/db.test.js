@@ -2,6 +2,9 @@ const tape = require('tape');
 const client = require('redis').createClient();
 const server = require('../server/server.js');
 
+// how to access client
+// delete organisation set the only wa
+
 const mockAddUserPayload = {
   first_name: 'jack',
   last_name: 'murphy',
@@ -36,10 +39,10 @@ const mockOrgPostUser = {
   people: [0]
 };
 
-
-
 tape('set up db', t => {
-  // any db set up can be done in here
+  client.RPUSH('organisations', JSON.stringify(mockOrgPreUser), (err, data) => {
+    console.log('Redis response to org added: ', data);
+  })
   t.end();
 });
 
@@ -51,7 +54,7 @@ tape('/add-user post adds a user to db', (t) => {
     payload: JSON.stringify(mockAddUserPayload)
   };
   server.inject(options, reply => {
-    client.smembers('people', (error, data) => {
+    client.LRANGE('people', 0, -1, (error, data) => {
       t.equal(200, reply.statusCode, 'route exists and replies 200');
       t.ok(data, 'adds mock data to db');
       t.deepEqual(JSON.parse(data[0]), mockNewUserAdded, 'the new user has correct fields');
@@ -69,5 +72,6 @@ tape('/add-user post adds a user to db', (t) => {
 tape('teardown', t => {
   client.flushdb();
   client.end(true);
+  server.stop(() => {});
   t.end();
 });

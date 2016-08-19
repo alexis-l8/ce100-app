@@ -6,47 +6,40 @@ handlers.serveFile = (request, reply) => {
 
 handlers.createNewPrimaryUser = (request, reply) => {
   const payload = request.payload;
-  const allPeople = request.redis.SCARD('people', (err, length) => {
-    if (err) {
-      console.log(err);
+  request.redis.LLEN('people', (error, length) => {
+    if (error) {
+      console.log(error);
       reply('redis-failure');
     } else {
       const additionalInfo = {
         id: length,
         active: true
-      }
+      };
       const newUser = Object.assign(additionalInfo, payload);
-      request.redis.SADD('people', JSON.stringify(newUser), (error, people) => {
+      request.redis.RPUSH('people', JSON.stringify(newUser), (error, people) => {
         if (error) {
           console.log('ERROR', error);
           reply('redis-failure');
         } else {
-          request.redis.SMEMBERS('organisation', (error, orgs) => {
+          const orgId = payload.organisation_id;
+          request.redis.LINDEX('organisations', orgId, (error, org) => {
             if (error) {
               console.log('ERROR', error);
               reply('redis-failure');
             } else {
-              request.redis.DEL('organisation', (error, response) => {
-                if (response) {
-                  const orgId = payload.organisation_id;
-                  const org = JSON.parse(orgs[orgId]);
-                  const orgUpdated =
-                  Object.assign({
-                    primary_id: newUser.id,
-                    people: org.people ? org.people.push(newUser.id) : [newUser.id]
-                  }, org);
-                  orgs[orgId] = JSON.stringify(orgUpdated);
-                  request.redis.SADD('organisation', orgs, (error, data) => {
-                    if (error) {
-                      console.log('ERROR', error);
-                      reply('redis-failure');
-                    } else {
-                      reply.view('add-user');
-                    }
-                  });
-                } else {
+              console.log('org redis', org);
+              const orgOld = JSON.parse(org);
+              const orgUpdated =
+                Object.assign({
+                  primary_id: newUser.id,
+                  people: orgOld.people ? orgOld.people.push(newUser.id) : [newUser.id]
+                }, orgOld);
+              request.redis.LSET('organisations', orgId, JSON.stringify(orgUpdated), (error, response) => {
+                if (error) {
                   console.log('ERROR', error);
                   reply('redis-failure');
+                } else {
+                  reply('success');
                 }
               });
             }
