@@ -1,5 +1,4 @@
-const Joi = require('joi');
-
+const val = require('./joi.js');
 const handlers = require('./handlers.js');
 
 const routes = [
@@ -18,16 +17,7 @@ const routes = [
     path: '/add-user',
     handler: handlers.createNewPrimaryUser,
     config: {
-      validate: {
-        payload: {
-          first_name: Joi.string().min(1).required(),
-          last_name: Joi.string().min(1).required(),
-          email: Joi.string().email().required(),
-          organisation_id: Joi.number().min(0).required(),
-          user_type: ['primary', 'admin'],
-          submit: 'Submit'
-        }
-      }
+      validate: val.adminAddUser
     }
   }
 ];
