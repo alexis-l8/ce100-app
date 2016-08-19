@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server/start.js",
     "test": "node test",
-    "testmon": "nodemon test"
+    "coverage": "istanbul cover test/*"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,8 @@
     "vision": "^4.1.0"
   },
   "devDependencies": {
+    "istanbul": "^0.4.4",
+    "codecov": "^1.0.1",
     "env2": "^2.1.1",
     "nodemon": "^1.10.0",
     "semistandard": "^8.0.0",
