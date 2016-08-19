@@ -5,7 +5,7 @@ const routes = [
   {
     method: 'GET',
     path: '/',
-    handler: (request, reply) => reply("Hello World")
+    handler: (request, reply) => reply('Hello World')
   },
   {
     method: 'GET',
@@ -18,6 +18,14 @@ const routes = [
     handler: handlers.activateUser,
     config: {
       validate: val.confirmPassword
+    }
+  },
+  {
+    method: 'POST',
+    path: '/login',
+    handler: handlers.login,
+    config: {
+      validate: val.login
     }
   },
   {
