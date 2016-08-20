@@ -33,10 +33,10 @@ handlers.activateUser = (request, reply) => {
       redis.LINDEX('people', userId, (error, user) => {
         if (error) {
           console.log(error);
-          reply('hash failed');
+          reply('redis-failure');
         } else {
           const updatedUser = addPasswordToUser(hashedPassword)(user);
-          redis.LSET('people', updatedUser.id, updatedUser, (err, response) => {
+          redis.LSET('people', userId, updatedUser, (err, response) => {
             if (err) {
               console.log(err);
               reply('redis-failure');

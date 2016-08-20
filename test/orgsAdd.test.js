@@ -1,11 +1,12 @@
 const tape = require('tape');
 const server = require('../server/server.js');
+const client = require('redis').createClient();
 
 const mocks = require('./mocks.js');
 
 // TODO: Route should be authed
 
-tape('set up activateUser.test.js', t => {
+tape('set orgsAdd.test.js', t => {
   // Set up db
   t.end();
 });
@@ -28,7 +29,7 @@ tape('orgs/add adds a new organisation', t => {
   });
 });
 
-tape('teardown activateUser.test.js', t => {
+tape('teardown orgsAdd.test.js', t => {
   client.FLUSHDB();
   client.end(true);
   server.stop(() => {});

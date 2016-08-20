@@ -5,7 +5,7 @@ const routes = [
   {
     method: 'GET',
     path: '/',
-    handler: (request, reply) => reply("Hello World")
+    handler: (request, reply) => reply('Hello World')
   },
   {
     method: 'GET',

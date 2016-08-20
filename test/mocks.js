@@ -50,4 +50,25 @@ mocks.orgPostUser = {
   people: [0]
 };
 
+// payload from activate account
+// via /users/activate
+mocks.usersActivatePayload = {
+  password: 'Hello1',
+  confirmPassword: 'Hello1'
+};
+
+// stored in `people` after account activated
+// via /users/activate
+mocks.usersActivateDB = {
+  first_name: 'jack',
+  last_name: 'murphy',
+  email: 'ja@mu.co',
+  organisation_id: 0,
+  user_type: 'primary',
+  id: 0,
+  active: true,
+  password: 'some hashed password',
+  last_login: Date.now()
+};
+
 module.exports = mocks;
