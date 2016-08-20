@@ -1,7 +1,7 @@
 const mocks = {};
 // Payload from Admin create new primary user
 // via /users/add
-mocks.AddUserPayload = {
+mocks.addUserPayload = {
   first_name: 'jack',
   last_name: 'murphy',
   email: 'ja@mu.co',
@@ -11,7 +11,7 @@ mocks.AddUserPayload = {
 
 // Stored in `people` DB after admin adds a user
 // via /users/add
-mocks.NewUserAdded = {
+mocks.newUserAdded = {
   first_name: 'jack',
   last_name: 'murphy',
   email: 'ja@mu.co',
@@ -23,7 +23,7 @@ mocks.NewUserAdded = {
 
 // Stored in `organisations` after admin adds a linked primary
 // via /users/add
-mocks.OrgPostUser = {
+mocks.orgPostUser = {
   id: 0,
   name: 'apple',
   active: true,
@@ -34,17 +34,19 @@ mocks.OrgPostUser = {
 
 // Payload from admin create new org
 // via /orgs/add
-mocks.AddOrgPayload = {
+mocks.addOrgPayload = {
   name: 'apple',
   mission_statement: 'Change the economy'
 };
 
 // Stored in `organisations` after admin adds and org
 // via /orgs/add
-mocks.OrgPreUser = {
+mocks.orgPreUser = {
   id: 0,
   name: 'apple',
   active: true,
   mission_statement: 'Change the economy',
   people: []
 };
+
+module.exports = mocks;
