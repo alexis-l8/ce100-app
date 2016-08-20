@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server/start.js",
     "test": "node test",
-    "testmon": "nodemon test"
+    "coverage": "istanbul cover test/*"
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,9 @@
   "homepage": "https://github.com/emfoundation/ce100-app#readme",
   "dependencies": {
     "bcrypt": "^0.8.7",
+    "boom": "^3.2.2",
     "handlebars": "^4.0.5",
     "hapi": "^14.2.0",
-    "hapi-login": "^1.2.0",
     "hapi-redis-connection": "^1.0.1",
     "hashids": "^1.1.0",
     "hoek": "^4.0.2",
@@ -32,6 +32,8 @@
     "vision": "^4.1.0"
   },
   "devDependencies": {
+    "istanbul": "^0.4.4",
+    "codecov": "^1.0.1",
     "env2": "^2.1.1",
     "nodemon": "^1.10.0",
     "semistandard": "^8.0.0",

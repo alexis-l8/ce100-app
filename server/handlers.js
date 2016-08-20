@@ -1,6 +1,7 @@
+require('env2')('config.env');
+
 const bcrypt = require('bcrypt');
 const Boom = require('boom');
-require('env2')('config.env');
 const Hashids = require('hashids');
 const hash = new Hashids(process.env.HASHID_KEY);
 
@@ -88,7 +89,31 @@ handlers.createNewPrimaryUser = (request, reply) => {
 };
 
 handlers.login = (request, reply) => {
-
+  const email = request.payload.email;
+  const password = request.payload.password;
+  request.redis.LRANGE('people', 0, -1, (error, allUsers) => {
+    if (error) {
+      console.log('ERROR', error);
+      reply('redis-failure');
+    } else {
+      const user = allUsers.filter((eachUser, index) => {
+        return JSON.parse(eachUser).email === email;
+      });
+      const userDetails = JSON.parse(user);
+      if (userDetails) {
+        bcrypt.compare(password, userDetails.password, function (err, isValid) {
+          if (!err && isValid) {
+            // TODO: update last login
+            reply('OK').state('CEsession', hash.encode(userDetails.id), cookieConfig); // view dashboard
+          } else {
+            reply(Boom.notFound('Sorry, that email or password is invalid, please try again.'));
+          }
+        });
+      } else {
+        reply(Boom.notFound('Sorry, that email has not been registered.'));
+      }
+    }
+  });
 };
 
 module.exports = handlers;
@@ -104,7 +129,6 @@ const initialiseNewUser = length => payload => {
 
 const addPrimaryToOrg = user => org => {
   const id = JSON.parse(user).id;
-  console.log('id should not be jnull', id);
   const orgOld = JSON.parse(org);
   const additionalInfo = {
     primary_id: id,

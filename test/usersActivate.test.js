@@ -29,6 +29,7 @@ tape('users/activate activates a new user', t => {
   server.inject(options, reply => {
     t.equal(200, reply.statusCode, 'route exists and replies 200');
     // check user has been updated
+    console.log('user');
     client.LRANGE('people', 0, -1, (err, people) => {
       const user = JSON.parse(people[0]);
       const lastLoginDiff = Date.now() - user.last_login;
