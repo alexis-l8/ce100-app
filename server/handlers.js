@@ -1,11 +1,16 @@
 const bcrypt = require('bcrypt');
 const Boom = require('boom');
-const redis = require('redis');
-const env = require('env2')('config.env');
+require('env2')('config.env');
 const Hashids = require('hashids');
 const hash = new Hashids(process.env.HASHID_KEY);
 
 const handlers = {};
+
+const cookieConfig = {
+  ttl: 7 * 24 * 60 * 60 * 1000,
+  isSecure: false,
+  path: '/'
+};
 
 handlers.serveFile = (request, reply) => {
   reply.view(request.params.path);
@@ -18,32 +23,24 @@ handlers.serveActivate = (request, reply) => {
 handlers.activateUser = (request, reply) => {
   const hashedId = request.params.hashedId; // currently not hashed
   const userId = request.params.hashedId; // hash.decode(request.params.hashedId);
+  const redis = request.redis;
   // hash password
   bcrypt.hash(request.payload.password, 10, function (error, hashedPassword) {
-    if(error) {
+    if (error) {
       console.log(error);
       reply('hash failed');
     } else {
-      request.redis.LINDEX('people', userId, (error, user) => {
-        if(error) {
+      redis.LINDEX('people', userId, (error, user) => {
+        if (error) {
           console.log(error);
           reply('hash failed');
         } else {
-          const newDetails = {
-            password: hashedPassword,
-            last_login: Date.now()
-          };
-          const updatedUser = Object.assign(newDetails, JSON.parse(user));
-          request.redis.LSET('people', updatedUser.id, JSON.stringify(updatedUser), (err, response) => {
+          const updatedUser = addPasswordToUser(hashedPassword)(user);
+          redis.LSET('people', updatedUser.id, updatedUser, (err, response) => {
             if (err) {
               console.log(err);
               reply('redis-failure');
             } else {
-              const cookieConfig = {
-                ttl: 7 * 24 * 60 * 60 * 1000,
-                isSecure: false,
-                path: '/'
-              };
               reply('OK').state('CEsession', hashedId, cookieConfig); // view dashboard and set new cookie
             }
           });
@@ -51,42 +48,30 @@ handlers.activateUser = (request, reply) => {
       });
     }
   });
-// unhash id
-// check and update user
-// reply view home and set cookie
 };
 
 handlers.createNewPrimaryUser = (request, reply) => {
+  const redis = request.redis;
   const payload = request.payload;
-  request.redis.LLEN('people', (error, length) => {
+  redis.LLEN('people', (error, length) => {
     if (error) {
       console.log(error);
       reply('redis-failure');
     } else {
-      const additionalInfo = {
-        id: length,
-        active: true
-      };
-      const newUser = Object.assign(additionalInfo, payload);
-      request.redis.RPUSH('people', JSON.stringify(newUser), (error, people) => {
+      const userUpdated = initialiseNewUser(length)(payload);
+      redis.RPUSH('people', userUpdated, (error, people) => {
         if (error) {
           console.log('ERROR', error);
           reply('redis-failure');
         } else {
           const orgId = payload.organisation_id;
-          request.redis.LINDEX('organisations', orgId, (error, org) => {
+          redis.LINDEX('organisations', orgId, (error, org) => {
             if (error) {
               console.log('ERROR', error);
               reply('redis-failure');
             } else {
-              console.log('org redis', org);
-              const orgOld = JSON.parse(org);
-              const orgUpdated =
-                Object.assign({
-                  primary_id: newUser.id,
-                  people: orgOld.people ? orgOld.people.push(newUser.id) : [newUser.id]
-                }, orgOld);
-              request.redis.LSET('organisations', orgId, JSON.stringify(orgUpdated), (error, response) => {
+              const orgUpdated = addPrimaryToOrg(userUpdated)(org);
+              redis.LSET('organisations', orgId, orgUpdated, (error, response) => {
                 if (error) {
                   console.log('ERROR', error);
                   reply('redis-failure');
@@ -107,3 +92,34 @@ handlers.login = (request, reply) => {
 };
 
 module.exports = handlers;
+
+const initialiseNewUser = length => payload => {
+  const additionalInfo = {
+    id: length,
+    active: true
+  };
+  const updatedUser = Object.assign(additionalInfo, payload);
+  return JSON.stringify(updatedUser);
+};
+
+const addPrimaryToOrg = user => org => {
+  const id = JSON.parse(user).id;
+  console.log('id should not be jnull', id);
+  const orgOld = JSON.parse(org);
+  const additionalInfo = {
+    primary_id: id,
+    people: orgOld.people.push(id)
+  };
+  const orgUpdated = Object.assign(additionalInfo, orgOld);
+  return JSON.stringify(orgUpdated);
+};
+
+const addPasswordToUser = hashed => user => {
+  const userOld = JSON.parse(user);
+  const newDetails = {
+    password: hashed,
+    last_login: Date.now()
+  };
+  const updatedUser = Object.assign(newDetails, userOld);
+  return JSON.stringify(updatedUser);
+};

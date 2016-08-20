@@ -1,2 +1,2 @@
-require('./db.test.js');
 require('./server.test.js');
+require('./createPrimary.test.js');
