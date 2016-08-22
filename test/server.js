@@ -3,32 +3,35 @@ const tape = require('tape');
 
 const server = require('../server/server.js');
 
-tape('server sets up', (t) => {
+tape('testing homepage is returned', (t) => {
   const options = {
     method: 'GET',
     url: '/'
   };
   server.inject(options, (reply) => {
-    t.equal(reply.statusCode, 200, 'server.js exports a basic server');
+    t.equal(reply.statusCode, 200, 'homepage returned with statusCode 200');
     t.end();
   });
 });
 
 const testingEndpoints = () => {
   const endpoints = fs.readdirSync('templates/views');
-  const failedEndpoints = [];
   endpoints.forEach(filename => {
     const options = {
       method: 'GET',
       url: '/' + filename
     };
-    tape('testing endpoints', (t) => {
+    tape('testing endpoint:' + filename, (t) => {
       server.inject(options, (reply) => {
         t.equal(reply.statusCode, 200, 'testing the endpoint: ' + filename);
         t.end();
       });
     });
-  })
-}
+  });
+};
 
-// testingEndpoints();
+testingEndpoints();
+
+tape.onFinish(() => {
+  process.exit(0);
+});
