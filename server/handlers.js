@@ -21,7 +21,7 @@ handlers.serveActivate = (request, reply) => {
   reply.view(request.params.action);
 };
 
-handlers.activateUser = (request, reply) => {
+handlers.activatePrimaryUser = (request, reply) => {
   const hashedId = request.params.hashedId; // currently not hashed
   const userId = request.params.hashedId; // hash.decode(request.params.hashedId);
   const redis = request.redis;
@@ -36,7 +36,7 @@ handlers.activateUser = (request, reply) => {
           console.log(error);
           reply('redis-failure');
         } else {
-          const updatedUser = addPasswordToUser(hashedPassword)(user);
+          const updatedUser = addPasswordToUser(hashedPassword, user);
           redis.LSET('people', userId, updatedUser, (err, response) => {
             if (err) {
               console.log(err);
@@ -54,12 +54,13 @@ handlers.activateUser = (request, reply) => {
 handlers.createNewPrimaryUser = (request, reply) => {
   const redis = request.redis;
   const payload = request.payload;
+  delete payload.submit;
   redis.LLEN('people', (error, length) => {
     if (error) {
       console.log(error);
       reply('redis-failure');
     } else {
-      const userUpdated = initialiseNewUser(length)(payload);
+      const userUpdated = initialiseNewUser(length, payload);
       redis.RPUSH('people', userUpdated, (error, people) => {
         if (error) {
           console.log('ERROR', error);
@@ -71,7 +72,7 @@ handlers.createNewPrimaryUser = (request, reply) => {
               console.log('ERROR', error);
               reply('redis-failure');
             } else {
-              const orgUpdated = addPrimaryToOrg(userUpdated)(org);
+              const orgUpdated = addPrimaryToOrg(userUpdated, org);
               redis.LSET('organisations', orgId, orgUpdated, (error, response) => {
                 if (error) {
                   console.log('ERROR', error);
@@ -118,7 +119,7 @@ handlers.login = (request, reply) => {
 
 module.exports = handlers;
 
-const initialiseNewUser = length => payload => {
+const initialiseNewUser = (length, payload) => {
   const additionalInfo = {
     id: length,
     active: true
@@ -127,7 +128,7 @@ const initialiseNewUser = length => payload => {
   return JSON.stringify(updatedUser);
 };
 
-const addPrimaryToOrg = user => org => {
+const addPrimaryToOrg = (user, org) => {
   const id = JSON.parse(user).id;
   const orgOld = JSON.parse(org);
   const additionalInfo = {
@@ -138,7 +139,7 @@ const addPrimaryToOrg = user => org => {
   return JSON.stringify(orgUpdated);
 };
 
-const addPasswordToUser = hashed => user => {
+const addPasswordToUser = (hashed, user) => {
   const userOld = JSON.parse(user);
   const newDetails = {
     password: hashed,
