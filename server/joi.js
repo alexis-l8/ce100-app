@@ -9,7 +9,7 @@ validate.adminAddUser = {
     email: Joi.string().email().required(),
     organisation_id: Joi.number().min(0).required(),
     user_type: ['primary', 'admin'],
-    submit: 'Submit'
+    submit: Joi.any().optional()
   }
 };
 
@@ -19,7 +19,7 @@ validate.confirmPassword = {
     password: Joi.string().min(1).required(),
     confirmPassword: Joi.string().min(1).required(),
     // TODO: make min 6 & password match confirmPassword
-    submit: 'Submit'
+    submit: Joi.any().optional()
   }
 };
 
@@ -28,7 +28,7 @@ validate.login = {
     email: Joi.string().email().required(),
     password: Joi.string().min(1).required(),
     // TODO: make min 6
-    submit: 'Submit',
+    submit: Joi.any().optional(),
     failAction: 'error'
   }
 };
