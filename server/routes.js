@@ -1,4 +1,4 @@
-const val = require('./joi.js');
+const validate = require('./joi.js');
 const handlers = require('./handlers.js');
 
 const routes = [
@@ -9,15 +9,15 @@ const routes = [
   },
   {
     method: 'GET',
-    path: '/users/{action}/{hashedId}',
+    path: '/people/{action}/{hashedId}',
     handler: handlers.serveActivate
   },
   {
     method: 'POST',
-    path: '/users/activate/{hashedId}',
-    handler: handlers.activateUser,
+    path: '/people/activate/{hashedId}',
+    handler: handlers.activatePrimaryUser,
     config: {
-      validate: val.confirmPassword
+      validate: validate.confirmPassword
     }
   },
   {
@@ -25,7 +25,7 @@ const routes = [
     path: '/login',
     handler: handlers.login,
     config: {
-      validate: val.login
+      validate: validate.login
     }
   },
   {
@@ -38,7 +38,7 @@ const routes = [
     path: '/add-user',
     handler: handlers.createNewPrimaryUser,
     config: {
-      validate: val.adminAddUser
+      validate: validate.adminAddUser
     }
   }
 ];
