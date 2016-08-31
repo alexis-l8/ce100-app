@@ -5,7 +5,7 @@ const routes = [
   {
     method: 'GET',
     path: '/',
-    handler: (request, reply) => reply('Hello World')
+    handler: handlers.checkUser // replace with handlers.serveSpecificFile('dashboard')
   },
   {
     method: 'GET',
