@@ -24,6 +24,14 @@ handlers.serveFile = (request, reply) => {
   reply.view(request.params.path);
 };
 
+handlers.checkUser = (request, reply) => {
+  if (request.headers.cookie) { // REPLACE WITH AUTH
+    reply.view('dashboard');
+  } else { // REPLACE WITH AUTH
+    reply().redirect('/login');
+  }
+};
+
 handlers.activatePrimaryUser = (request, reply) => {
   const hashedId = request.params.hashedId; // currently not hashed
   const userId = request.params.hashedId; // hash.decode(request.params.hashedId);
@@ -93,22 +101,30 @@ handlers.createNewPrimaryUser = (request, reply) => {
 };
 
 handlers.login = (request, reply) => {
+  const redis = request.redis;
   const email = request.payload.email;
   const password = request.payload.password;
-  request.redis.LRANGE('people', 0, -1, (error, allUsers) => {
+  redis.LRANGE('people', 0, -1, (error, allUsers) => {
     if (error) {
       console.log('ERROR', error);
       reply('redis-failure');
     } else {
-      const user = allUsers.filter((eachUser, index) => {
+      const user = allUsers.filter(eachUser => {
         return JSON.parse(eachUser).email === email;
       });
-      const userDetails = JSON.parse(user);
-      if (userDetails) {
+      if (user.length > 0) {
+        const userDetails = JSON.parse(user);
         bcrypt.compare(password, userDetails.password, function (err, isValid) {
           if (!err && isValid) {
-            // TODO: update last login
-            reply('OK').state('CEsession', hash.encode(userDetails.id), cookieConfig).redirect('/'); // view dashboard
+            userDetails.last_login = Date.now();
+            redis.LSET('people', userDetails.id, JSON.stringify(userDetails), (error, response) => {
+              if (error) {
+                console.log('ERROR', error);
+                reply(Boom.badImplementation('redis-failure'));
+              } else {
+                reply('OK').state('CEsession', hash.encode(userDetails.id), cookieConfig).redirect('/');
+              }
+            });
           } else {
             reply(Boom.notFound('Sorry, that email or password is invalid, please try again.'));
           }
