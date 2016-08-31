@@ -71,8 +71,8 @@ handlers.createNewPrimaryUser = (request, reply) => {
       console.log(error);
       reply('redis-failure');
     } else {
-      const userUpdated = initialiseNewUser(length, payload);
-      redis.RPUSH('people', userUpdated, (error, people) => {
+      const userUpdated = initialiseEntry(length, payload);
+      redis.RPUSH('people', userUpdated, (error, numberOfUsers) => {
         if (error) {
           console.log('ERROR', error);
           reply('redis-failure');
@@ -94,6 +94,25 @@ handlers.createNewPrimaryUser = (request, reply) => {
               });
             }
           });
+        }
+      });
+    }
+  });
+};
+
+handlers.createNewOrganisation = (request, reply) => {
+  const redis = request.redis;
+  redis.LLEN('organisations', (error, length) => {
+    if (error) {
+      console.log(error);
+      reply(Boom.badImplementation('redis-failure'));
+    } else {
+      const orgUpdated = initialiseEntry(length, { name: request.payload.name, mission_statement: '', people: [] });
+      redis.RPUSH('organisations', orgUpdated, (error, numberOfOrgs) => {
+        if (error) {
+          reply(Boom.badImplementation('redis-failure'));
+        } else {
+          reply('success');
         }
       });
     }
@@ -138,7 +157,7 @@ handlers.login = (request, reply) => {
 
 module.exports = handlers;
 
-const initialiseNewUser = (length, payload) => {
+const initialiseEntry = (length, payload) => {
   const additionalInfo = {
     id: length,
     active: true
