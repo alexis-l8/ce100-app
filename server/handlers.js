@@ -108,7 +108,7 @@ handlers.login = (request, reply) => {
         bcrypt.compare(password, userDetails.password, function (err, isValid) {
           if (!err && isValid) {
             // TODO: update last login
-            reply('OK').state('CEsession', hash.encode(userDetails.id), cookieConfig); // view dashboard
+            reply('OK').state('CEsession', hash.encode(userDetails.id), cookieConfig).redirect('/'); // view dashboard
           } else {
             reply(Boom.notFound('Sorry, that email or password is invalid, please try again.'));
           }
