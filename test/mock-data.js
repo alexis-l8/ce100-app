@@ -75,10 +75,17 @@ mockData.orgPostUser = {
 };
 
 // (8) via /login
-// Login data for a primary user
-mockData.loginPrimaryUser = {
+// Correct login data for a primary user
+mockData.loginPrimaryUserCorrect = {
   email: 'ja@mu.co',
   password: 'Hello1'
+};
+
+// (9) via /login
+// Incorrect login data for a primary user
+mockData.loginPrimaryUserIncorrect = {
+  email: 'ja@mu.co',
+  password: 'IncorrectPassword'
 };
 
 module.exports = mockData;
