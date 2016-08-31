@@ -34,6 +34,19 @@ const routes = [
     }
   },
   {
+    method: 'GET',
+    path: '/orgs/add',
+    handler: handlers.serveSpecificFile('add-organisation')
+  },
+  {
+    method: 'POST',
+    path: '/orgs/add',
+    handler: handlers.createNewOrganisation,
+    config: {
+      validate: validate.adminAddOrganisation
+    }
+  },
+  {
     method: 'POST',
     path: '/login',
     handler: handlers.login,
