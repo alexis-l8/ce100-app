@@ -17,14 +17,37 @@ tape('set up db: add organisation, add primary user to that organisation', t => 
   });
 });
 
-tape('/login post logs a user in, and returns the relevant information', t => {
+tape('/login load page', t => {
   const options = {
-    method: 'POST',
-    url: '/login',
-    payload: JSON.stringify(mockData.loginPrimaryUser)
+    method: 'GET',
+    url: '/login'
   };
   server.inject(options, reply => {
     t.equal(reply.statusCode, 200, 'route exists and replies 200');
+    t.end();
+  });
+});
+
+tape('/login post logs a user in with correct credentials', t => {
+  const options = {
+    method: 'POST',
+    url: '/login',
+    payload: JSON.stringify(mockData.loginPrimaryUserCorrect)
+  };
+  server.inject(options, reply => {
+    t.equal(reply.statusCode, 302, 'log in credentials are correct and user gets redirected to homepage');
+    t.end();
+  });
+});
+
+tape('/login post logs a user in with incorrect credentials', t => {
+  const options = {
+    method: 'POST',
+    url: '/login',
+    payload: JSON.stringify(mockData.loginPrimaryUserIncorrect)
+  };
+  server.inject(options, reply => {
+    t.equal(reply.statusCode, 404, 'log in credentials are incorrect');
     t.end();
   });
 });
