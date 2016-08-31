@@ -1,3 +1,5 @@
+require('env2')('config.env');
+
 const mockData = {};
 
 // (1) via add-user.html form
@@ -57,7 +59,7 @@ mockData.usersActivateDB = {
   user_type: 'primary',
   id: 0,
   active: true,
-  password: 'some hashed password',
+  password: process.env.MOCKDATA_HASHED_PASSWORD,
   last_login: Date.now()
 };
 
@@ -70,6 +72,13 @@ mockData.orgPostUser = {
   mission_statement: 'Change the economy',
   primary_id: 0,
   people: [0]
+};
+
+// (8) via /login
+// Login data for a primary user
+mockData.loginPrimaryUser = {
+  email: 'ja@mu.co',
+  password: 'Hello1'
 };
 
 module.exports = mockData;
