@@ -5,12 +5,25 @@ const routes = [
   {
     method: 'GET',
     path: '/',
-    handler: (request, reply) => reply('Hello World')
+    config: {
+      handler: (request, reply) => reply('Hello World')
+    }
+  },
+  {
+    method: 'GET',
+    path: '/set',
+    handler: (request, reply) => {
+      request.cookieAuth.set({userId: 0});
+      reply('cookie set');
+    },
+    config: {
+      auth: false
+    }
   },
   {
     method: 'GET',
     path: '/people/add',
-    handler: handlers.serveSpecificFile('add-user')
+    handler: handlers.serveView('add-user')
   },
   {
     method: 'POST',
@@ -23,7 +36,7 @@ const routes = [
   {
     method: 'GET',
     path: '/people/activate/{hashedId}',
-    handler: handlers.serveSpecificFile('activate')
+    handler: handlers.serveView('activate')
   },
   {
     method: 'POST',
@@ -34,17 +47,21 @@ const routes = [
     }
   },
   {
+    method: 'GET',
+    path: '/login',
+    handler: (request, reply) => reply('you need to log in'),
+    config: {
+      auth: false
+    }
+  },
+  {
     method: 'POST',
     path: '/login',
     handler: handlers.login,
     config: {
+      auth: false,
       validate: validate.login
     }
-  },
-  {
-    method: 'GET',
-    path: '/{path*}',
-    handler: handlers.serveFile
   }
 ];
 

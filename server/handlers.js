@@ -7,25 +7,11 @@ const hash = new Hashids(process.env.HASHID_KEY);
 
 const handlers = {};
 
-const cookieConfig = {
-  ttl: 7 * 24 * 60 * 60 * 1000,
-  isSecure: false,
-  path: '/'
-};
-
-// sorry for bad name, maybe we can replace this with serveFile?
-// gives us more control over route names i think.
-handlers.serveSpecificFile = (viewName) => (request, reply) => {
+handlers.serveView = viewName => (request, reply) => {
   reply.view(viewName);
 };
 
-// not sure if this is used for anything else at the moment?
-handlers.serveFile = (request, reply) => {
-  reply.view(request.params.path);
-};
-
 handlers.activatePrimaryUser = (request, reply) => {
-  const hashedId = request.params.hashedId; // currently not hashed
   const userId = request.params.hashedId; // hash.decode(request.params.hashedId);
   const redis = request.redis;
   // hash password
@@ -45,7 +31,8 @@ handlers.activatePrimaryUser = (request, reply) => {
               console.log(err);
               reply('redis-failure');
             } else {
-              reply('OK').state('CEsession', hashedId, cookieConfig); // view dashboard and set new cookie
+              request.cookieAuth.set({userId: userId});
+              reply('OK');
             }
           });
         }
@@ -108,7 +95,8 @@ handlers.login = (request, reply) => {
         bcrypt.compare(password, userDetails.password, function (err, isValid) {
           if (!err && isValid) {
             // TODO: update last login
-            reply('OK').state('CEsession', hash.encode(userDetails.id), cookieConfig); // view dashboard
+            request.cookieAuth.set({userId: userDetails.id});
+            reply('OK'); 
           } else {
             reply(Boom.notFound('Sorry, that email or password is invalid, please try again.'));
           }
