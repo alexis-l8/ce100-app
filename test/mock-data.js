@@ -35,16 +35,15 @@ mockData.usersActivatePayload = {
 // (4) via /orgs/add
 // Form Data, sent in payload, by admin to create new org
 mockData.orgsAddPayload = {
-  name: 'apple',
-  mission_statement: 'Change the economy'
+  name: 'apple'
 };
 
 // (5) via /orgs/add
 // Data, as saved in the DB, in `organisations` list, after admin adds org in (4)
 mockData.orgsAddDB = {
   name: 'apple',
-  mission_statement: 'Change the economy',
   active: true,
+  mission_statement: '',
   id: 0,
   people: []
 };
