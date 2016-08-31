@@ -17,7 +17,7 @@ tape('/add-user post adds a user and updates the linked organisation', (t) => {
   t.plan(3);
   const options = {
     method: 'POST',
-    url: '/add-user',
+    url: '/people/add',
     payload: JSON.stringify(mockData.usersAddPayload)
   };
   server.inject(options, reply => {

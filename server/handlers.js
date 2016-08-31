@@ -13,12 +13,15 @@ const cookieConfig = {
   path: '/'
 };
 
-handlers.serveFile = (request, reply) => {
-  reply.view(request.params.path);
+// sorry for bad name, maybe we can replace this with serveFile?
+// gives us more control over route names i think.
+handlers.serveSpecificFile = (viewName) => (request, reply) => {
+  reply.view(viewName);
 };
 
-handlers.serveActivate = (request, reply) => {
-  reply.view(request.params.action);
+// not sure if this is used for anything else at the moment?
+handlers.serveFile = (request, reply) => {
+  reply.view(request.params.path);
 };
 
 handlers.activatePrimaryUser = (request, reply) => {

@@ -9,8 +9,21 @@ const routes = [
   },
   {
     method: 'GET',
-    path: '/people/{action}/{hashedId}',
-    handler: handlers.serveActivate
+    path: '/people/add',
+    handler: handlers.serveSpecificFile('add-user')
+  },
+  {
+    method: 'POST',
+    path: '/people/add',
+    handler: handlers.createNewPrimaryUser,
+    config: {
+      validate: validate.adminAddUser
+    }
+  },
+  {
+    method: 'GET',
+    path: '/people/activate/{hashedId}',
+    handler: handlers.serveSpecificFile('activate')
   },
   {
     method: 'POST',
@@ -32,14 +45,6 @@ const routes = [
     method: 'GET',
     path: '/{path*}',
     handler: handlers.serveFile
-  },
-  {
-    method: 'POST',
-    path: '/add-user',
-    handler: handlers.createNewPrimaryUser,
-    config: {
-      validate: validate.adminAddUser
-    }
   }
 ];
 
