@@ -17,7 +17,7 @@ tape('orgs/add adds a new organisation', t => {
   server.inject(options, reply => {
     t.equal(200, reply.statusCode, 'route exists and replies 200');
     // check organisation has been added to db
-    client.LRANGE('organisations', (error, orgs) => {
+    client.LRANGE('organisations', 0, -1, (error, orgs) => {
       console.log('ERROR', error);
       t.deepEqual(JSON.parse(orgs[0]), mockData.orgsAddDB, 'new organisation has correct fields');
       t.end();
