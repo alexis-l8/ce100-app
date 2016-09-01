@@ -87,4 +87,49 @@ mockData.loginPrimaryUserIncorrect = {
   password: 'IncorrectPassword'
 };
 
+// (10) via /orgs/
+// Multiple (fully-completed) organisation account details
+mockData.completeOrgEntries = {
+  a: {
+    id: 1,
+    name: 'dwyl',
+    active: true,
+    mission_statement: 'Do What You Love!',
+    primary_id: 2,
+    people: [3]
+  },
+  b: {
+    id: 2,
+    name: 'charcoal',
+    active: false,
+    mission_statement: 'Summer!',
+    primary_id: 3,
+    people: [4]
+  },
+  c: {
+    id: 3,
+    name: 'emf',
+    active: true,
+    mission_statement: 'Change the economy',
+    primary_id: 4,
+    people: [5]
+  },
+  d: {
+    id: 4,
+    name: 'anon_org123',
+    active: false,
+    mission_statement: 'Anonymous',
+    primary_id: 5,
+    people: [6]
+  },
+  e: {
+    id: 0,
+    name: 'apple',
+    active: true,
+    mission_statement: 'Change the economy',
+    primary_id: 0,
+    people: [0]
+  }
+};
+
 module.exports = mockData;
