@@ -32,6 +32,31 @@ handlers.checkUser = (request, reply) => {
   }
 };
 
+handlers.viewAllOrganisations = (request, reply) => {
+  const redis = request.redis;
+  redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
+    if (error) console.log(error);
+    const organisations = {allOrganisations: stringifiedOrgs.map(element => JSON.parse(element))};
+    reply.view('organisations/view', organisations);
+  });
+};
+
+handlers.viewOrganisationDetails = (request, reply) => {
+  const redis = request.redis;
+  const userId = request.params.id;
+  redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
+    if (error) console.log(error);
+    // catch for case where org at specified userId doesn't exist.
+    const organisation = JSON.parse(stringifiedOrg);
+    redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
+      if (error) console.log(error);
+      const {first_name, last_name, email} = JSON.parse(stringifiedPrimaryUser);
+      const organisationDetails = Object.assign({first_name, last_name, email}, organisation);
+      reply.view('organisations/details', organisationDetails);
+    });
+  });
+};
+
 handlers.activatePrimaryUser = (request, reply) => {
   const hashedId = request.params.hashedId; // currently not hashed
   const userId = request.params.hashedId; // hash.decode(request.params.hashedId);
