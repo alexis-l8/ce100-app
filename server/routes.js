@@ -47,6 +47,16 @@ const routes = [
     }
   },
   {
+    method: 'GET',
+    path: '/orgs',
+    handler: handlers.viewAllOrganisations
+  },
+  {
+    method: 'GET',
+    path: '/orgs/{id}',
+    handler: handlers.viewOrganisationDetails
+  },
+  {
     method: 'POST',
     path: '/login',
     handler: handlers.login,
