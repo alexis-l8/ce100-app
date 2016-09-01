@@ -5,14 +5,21 @@ const routes = [
   {
     method: 'GET',
     path: '/',
+    handler: (request, reply) => reply('Hello World'),
+    config: { auth: false }
+  },
+  {
+    method: 'GET',
+    path: '/get',
     handler: (request, reply) => {
+      // console.log(request.auth);
       reply('Hello World');
+    },
+    config: {
+      auth: {
+        scope: 'primary'
+      }
     }
-    // config: {
-    //   auth: {
-    //     scope: 'primary'
-    //   }
-    // }
   },
   {
     method: 'GET',

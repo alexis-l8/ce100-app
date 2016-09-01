@@ -7,7 +7,7 @@ exports.register = (server, options, next) => {
   // register hapi-auth-cookie scheme
   server.register(require('hapi-auth-cookie'));
 
-  server.auth.strategy('initial', 'cookie', false, {
+  server.auth.strategy('initial', 'cookie', true, {
     // true -> auth is default, false ->  auth is not used
     password: process.env.COOKIE_PASSWORD,
     redirectTo: '/login',
@@ -23,9 +23,9 @@ exports.register = (server, options, next) => {
         else if (!userString) { return cb(null, false); }
         const user = JSON.parse(userString);
         if (user.active) {
-          // add scope === user_type to be accessed by the route handler
-          session.scope = user.user_type;
-          return cb(null, true);
+          // add scope to be accessed by the route handler
+          const override = Object.assign({ scope: user.user_type }, session);
+          return cb(null, true, override);
         }
         else { return cb(null, false); }
       });
