@@ -13,7 +13,7 @@ tape('set up db', t => {
   });
 });
 
-tape('/add-user post adds a user and updates the linked organisation', (t) => {
+tape('/people/add adds a user and updates the linked organisation', (t) => {
   t.plan(3);
   const options = {
     method: 'POST',
@@ -22,10 +22,13 @@ tape('/add-user post adds a user and updates the linked organisation', (t) => {
   };
   server.inject(options, reply => {
     t.equal(reply.statusCode, 200, 'route exists and replies 200');
-    //check user added to db
+    // check user added to db
     client.LRANGE('people', 0, -1, (error, people) => {
+      console.log('people', people);
+      if (error) { console.log(error); }
       t.deepEqual(JSON.parse(people[0]), mockData.newUserAdded, 'the new user has correct fields');
       client.LRANGE('organisations', 0, -1, (error, orgs) => {
+        if (error) { console.log(error); }
         t.deepEqual(JSON.parse(orgs[0]), mockData.orgPostUser, 'Primary user added to organisation');
         t.end();
       });

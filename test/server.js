@@ -30,7 +30,7 @@ const testingEndpoints = () => {
   });
 };
 
-testingEndpoints();
+// testingEndpoints();
 
 tape.onFinish(() => {
   process.exit(0);

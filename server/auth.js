@@ -1,11 +1,13 @@
 // setting a cookie from the request.
 // request.cookieAuth.set({userId: Number});
 
-// using hapi-auth-cookie scheme
 // default strategy to be used on each route
 // set auth: false in the config on each individual route we do not want authed
 exports.register = (server, options, next) => {
-  server.auth.strategy('initial', 'cookie', true, {
+  // register hapi-auth-cookie scheme
+  server.register(require('hapi-auth-cookie'));
+
+  server.auth.strategy('initial', 'cookie', false, {
     // true -> auth is default, false ->  auth is not used
     password: process.env.COOKIE_PASSWORD,
     redirectTo: '/login',
@@ -20,7 +22,11 @@ exports.register = (server, options, next) => {
         if (err) { return cb(err, null); }
         else if (!userString) { return cb(null, false); }
         const user = JSON.parse(userString);
-        if (user.active) { return cb(null, true); }
+        if (user.active) {
+          // add scope === user_type to be accessed by the route handler
+          session.scope = user.user_type;
+          return cb(null, true);
+        }
         else { return cb(null, false); }
       });
     }

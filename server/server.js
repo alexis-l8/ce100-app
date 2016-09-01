@@ -1,12 +1,13 @@
 const Hapi = require('hapi');
 const Hoek = require('hoek');
+const path = require('path');
 
 // plugins
 const Vision = require('vision');
 const HapiRedisConnection = require('hapi-redis-connection');
-const path = require('path');
 const handlebars = require('handlebars');
-const Cookie = require('hapi-auth-cookie');
+
+// custom plugins
 const Auth = require('./auth.js');
 
 const routes = require('./routes.js');
@@ -14,7 +15,7 @@ const server = new Hapi.Server();
 
 server.connection({ port: 3000 });
 
-server.register([Vision, HapiRedisConnection, Cookie, Auth], err => {
+server.register([Vision, HapiRedisConnection, Auth], err => {
   Hoek.assert(!err, err);
 
   server.views({

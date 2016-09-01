@@ -96,7 +96,7 @@ handlers.login = (request, reply) => {
           if (!err && isValid) {
             // TODO: update last login
             request.cookieAuth.set({userId: userDetails.id});
-            reply('OK'); 
+            reply('OK');
           } else {
             reply(Boom.notFound('Sorry, that email or password is invalid, please try again.'));
           }

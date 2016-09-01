@@ -5,9 +5,14 @@ const routes = [
   {
     method: 'GET',
     path: '/',
-    config: {
-      handler: (request, reply) => reply('Hello World')
+    handler: (request, reply) => {
+      reply('Hello World');
     }
+    // config: {
+    //   auth: {
+    //     scope: 'primary'
+    //   }
+    // }
   },
   {
     method: 'GET',
