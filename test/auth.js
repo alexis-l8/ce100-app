@@ -6,6 +6,7 @@ const mockData = require('./mock-data.js');
 
 require('env2')('config.env');
 const password = process.env.COOKIE_PASSWORD;
+const cookie = process.env.COOKIE
 
 tape('auth.js tests set up db', t => {
   client.RPUSH('people', JSON.stringify(mockData.newUserAdded), (err, data) => {
@@ -32,19 +33,15 @@ tape('hit an authed route without a cookie redirects to /login', t => {
 
 tape('hit an authed route with a valid cookie containing valid users information', t => {
   t.plan(1);
-  var obj = { userId: 0 };
-  Iron.seal(obj, password, Iron.defaults, function (err, sealed) {
     const options = {
       method: 'GET',
       url: '/get',
-      headers: {cookie: `session=${sealed}`}
+      headers: { cookie }
     };
     server.inject(options, res => {
-      console.log(res.headers);
       t.equal(res.statusCode, 200, 'route allowed');
       t.end();
     });
-  });
 });
 
 
