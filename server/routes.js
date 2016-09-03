@@ -1,11 +1,13 @@
 const validate = require('./joi.js');
 const handlers = require('./handlers.js');
 
+// TODO: check routes
+
 const routes = [
   {
     method: 'GET',
     path: '/',
-    handler: (request, reply) => reply('Hello World'),
+    handler: handlers.checkUser, // replace with handlers.serveSpecificFile('dashboard')
     config: { auth: false }
   },
   {
@@ -16,9 +18,9 @@ const routes = [
       reply('Hello World');
     },
     config: {
-      auth: {
-        scope: 'primary'
-      }
+      auth: false // {
+      //   scope: 'primary'
+      // }
     }
   },
   {
@@ -61,7 +63,7 @@ const routes = [
   {
     method: 'GET',
     path: '/login',
-    handler: (request, reply) => reply('you need to log in'),
+    handler: handlers.serveView('login'),
     config: {
       auth: false
     }
@@ -74,6 +76,29 @@ const routes = [
       auth: false,
       validate: validate.login
     }
+  },
+  {
+    method: 'GET',
+    path: '/orgs/add',
+    handler: handlers.serveView('add-organisation')
+  },
+  {
+    method: 'POST',
+    path: '/orgs/add',
+    handler: handlers.createNewOrganisation,
+    config: {
+      validate: validate.adminAddOrganisation
+    }
+  },
+  {
+    method: 'GET',
+    path: '/orgs',
+    handler: handlers.viewAllOrganisations
+  },
+  {
+    method: 'GET',
+    path: '/orgs/{id}',
+    handler: handlers.viewOrganisationDetails
   }
 ];
 

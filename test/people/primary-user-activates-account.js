@@ -41,6 +41,11 @@ tape('testing endpoint: people/activate/{userID}', t => {
   });
 });
 
+tape('teardown', t => {
+  client.FLUSHDB();
+  t.end();
+});
+
 tape.onFinish(() => {
   client.FLUSHDB();
   process.exit(0);

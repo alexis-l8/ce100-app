@@ -23,8 +23,9 @@ server.register([Vision, HapiRedisConnection, Auth], err => {
       html: handlebars
     },
     relativeTo: path.resolve(__dirname, '..'),
-    path: './templates/views',
-    helpersPath: './templates/helpers'
+    path: 'templates/views',
+    partialsPath: 'templates/partials',
+    helpersPath: 'templates/helpers'
   });
 });
 

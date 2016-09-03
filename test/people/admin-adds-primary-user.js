@@ -7,7 +7,8 @@ const mockData = require('../mock-data.js');
 // TODO: Route should be authed
 
 tape('set up db', t => {
-  client.RPUSH('organisations', JSON.stringify(mockData.orgsAddDB), (err, data) => {
+  client.RPUSH('organisations', JSON.stringify(mockData.orgsAddDB), (error, data) => {
+    console.log('ERROR', error);
     console.log('setup: redis response to org added: ', data);
     t.end();
   });
@@ -24,7 +25,6 @@ tape('/people/add adds a user and updates the linked organisation', (t) => {
     t.equal(reply.statusCode, 200, 'route exists and replies 200');
     // check user added to db
     client.LRANGE('people', 0, -1, (error, people) => {
-      console.log('people', people);
       if (error) { console.log(error); }
       t.deepEqual(JSON.parse(people[0]), mockData.newUserAdded, 'the new user has correct fields');
       client.LRANGE('organisations', 0, -1, (error, orgs) => {
@@ -34,6 +34,11 @@ tape('/people/add adds a user and updates the linked organisation', (t) => {
       });
     });
   });
+});
+
+tape('teardown', t => {
+  client.FLUSHDB();
+  t.end();
 });
 
 tape.onFinish(() => {

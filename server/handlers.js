@@ -11,6 +11,39 @@ handlers.serveView = viewName => (request, reply) => {
   reply.view(viewName);
 };
 
+handlers.checkUser = (request, reply) => {
+  if (request.headers.cookie) { // REPLACE WITH AUTH
+    reply.view('dashboard');
+  } else { // REPLACE WITH AUTH
+    reply().redirect('/login');
+  }
+};
+
+handlers.viewAllOrganisations = (request, reply) => {
+  const redis = request.redis;
+  redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
+    if (error) console.log(error);
+    const organisations = {allOrganisations: stringifiedOrgs.map(element => JSON.parse(element))};
+    reply.view('organisations/view', organisations);
+  });
+};
+
+handlers.viewOrganisationDetails = (request, reply) => {
+  const redis = request.redis;
+  const userId = request.params.id;
+  redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
+    if (error) console.log(error);
+    // catch for case where org at specified userId doesn't exist.
+    const organisation = JSON.parse(stringifiedOrg);
+    redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
+      if (error) console.log(error);
+      const {first_name, last_name, email} = JSON.parse(stringifiedPrimaryUser);
+      const organisationDetails = Object.assign({first_name, last_name, email}, organisation);
+      reply.view('organisations/details', organisationDetails);
+    });
+  });
+};
+
 handlers.activatePrimaryUser = (request, reply) => {
   const userId = request.params.hashedId; // hash.decode(request.params.hashedId);
   const redis = request.redis;
@@ -50,8 +83,8 @@ handlers.createNewPrimaryUser = (request, reply) => {
       console.log(error);
       reply('redis-failure');
     } else {
-      const userUpdated = initialiseNewUser(length, payload);
-      redis.RPUSH('people', userUpdated, (error, people) => {
+      const userUpdated = initialiseEntry(length, payload);
+      redis.RPUSH('people', userUpdated, (error, numberOfUsers) => {
         if (error) {
           console.log('ERROR', error);
           reply('redis-failure');
@@ -79,24 +112,51 @@ handlers.createNewPrimaryUser = (request, reply) => {
   });
 };
 
+handlers.createNewOrganisation = (request, reply) => {
+  const redis = request.redis;
+  redis.LLEN('organisations', (error, length) => {
+    if (error) {
+      console.log(error);
+      reply(Boom.badImplementation('redis-failure'));
+    } else {
+      const orgUpdated = initialiseEntry(length, { name: request.payload.name, mission_statement: '', people: [] });
+      redis.RPUSH('organisations', orgUpdated, (error, numberOfOrgs) => {
+        if (error) {
+          reply(Boom.badImplementation('redis-failure'));
+        } else {
+          reply('success');
+        }
+      });
+    }
+  });
+};
+
 handlers.login = (request, reply) => {
+  const redis = request.redis;
   const email = request.payload.email;
   const password = request.payload.password;
-  request.redis.LRANGE('people', 0, -1, (error, allUsers) => {
+  redis.LRANGE('people', 0, -1, (error, allUsers) => {
     if (error) {
       console.log('ERROR', error);
       reply('redis-failure');
     } else {
-      const user = allUsers.filter((eachUser, index) => {
+      const user = allUsers.filter(eachUser => {
         return JSON.parse(eachUser).email === email;
       });
-      const userDetails = JSON.parse(user);
-      if (userDetails) {
+      if (user.length > 0) {
+        const userDetails = JSON.parse(user);
         bcrypt.compare(password, userDetails.password, function (err, isValid) {
           if (!err && isValid) {
-            // TODO: update last login
-            request.cookieAuth.set({userId: userDetails.id});
-            reply('OK');
+            userDetails.last_login = Date.now();
+            redis.LSET('people', userDetails.id, JSON.stringify(userDetails), (error, response) => {
+              if (error) {
+                console.log('ERROR', error);
+                reply(Boom.badImplementation('redis-failure'));
+              } else {
+                request.cookieAuth.set({userId: userDetails.id});
+                reply.redirect('/');
+              }
+            });
           } else {
             reply(Boom.notFound('Sorry, that email or password is invalid, please try again.'));
           }
@@ -110,7 +170,7 @@ handlers.login = (request, reply) => {
 
 module.exports = handlers;
 
-const initialiseNewUser = (length, payload) => {
+const initialiseEntry = (length, payload) => {
   const additionalInfo = {
     id: length,
     active: true

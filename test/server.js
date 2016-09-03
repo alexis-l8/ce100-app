@@ -1,3 +1,4 @@
+require('env2')('config.env');
 const fs = require('fs');
 const tape = require('tape');
 
@@ -9,7 +10,7 @@ tape('testing homepage is returned', (t) => {
     url: '/'
   };
   server.inject(options, (reply) => {
-    t.equal(reply.statusCode, 200, 'homepage returned with statusCode 200');
+    t.equal(reply.statusCode, 302, 'redirected to log in page because no cookie');
     t.end();
   });
 });
