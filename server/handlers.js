@@ -1,4 +1,4 @@
-require('env2')('config.env');
+// require('env2')('config.env');
 
 const bcrypt = require('bcrypt');
 const Boom = require('boom');
