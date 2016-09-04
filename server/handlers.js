@@ -2,9 +2,7 @@ require('env2')('config.env');
 
 const bcrypt = require('bcrypt');
 const Boom = require('boom');
-const Hashids = require('hashids');
-const hash = new Hashids(process.env.HASHID_KEY);
-
+const Iron = require('iron');
 const handlers = {};
 
 handlers.serveView = viewName => (request, reply) => {
@@ -37,32 +35,38 @@ handlers.viewOrganisationDetails = (request, reply) => {
 };
 
 handlers.activatePrimaryUser = (request, reply) => {
-  const userId = request.params.hashedId; // hash.decode(request.params.hashedId);
+  const hashedId = request.params.hashedId;
   const redis = request.redis;
-  // hash password
-  bcrypt.hash(request.payload.password, 10, function (error, hashedPassword) {
-    if (error) {
-      console.log(error);
-      reply('hash failed');
-    } else {
-      redis.LINDEX('people', userId, (error, user) => {
-        if (error) {
-          console.log(error);
-          reply('redis-failure');
-        } else {
-          const updatedUser = addPasswordToUser(hashedPassword, user);
-          redis.LSET('people', userId, updatedUser, (err, response) => {
-            if (err) {
-              console.log(err);
-              reply('redis-failure');
-            } else {
-              request.cookieAuth.set({userId: userId});
-              reply('OK');
-            }
-          });
-        }
-      });
+  Iron.unseal(hashedId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, userId) => {
+    if (err) {
+      console.log(err);
+      return reply('hash failed');
     }
+    // hash password
+    bcrypt.hash(request.payload.password, 10, function (error, hashedPassword) {
+      if (error) {
+        console.log(error);
+        reply('hash failed');
+      } else {
+        redis.LINDEX('people', userId, (error, user) => {
+          if (error) {
+            console.log(error);
+            reply('redis-failure');
+          } else {
+            const updatedUser = addPasswordToUser(hashedPassword, user);
+            redis.LSET('people', userId, updatedUser, (err, response) => {
+              if (err) {
+                console.log(err);
+                reply('redis-failure');
+              } else {
+                request.cookieAuth.set({userId: userId});
+                reply.redirect('/');
+              }
+            });
+          }
+        });
+      }
+    });
   });
 };
 

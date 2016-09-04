@@ -40,14 +40,18 @@ const routes = [
   {
     method: 'GET',
     path: '/people/activate/{hashedId}',
-    handler: handlers.serveView('activate')
+    handler: handlers.serveView('activate'),
+    config: {
+      auth: false
+    }
   },
   {
     method: 'POST',
     path: '/people/activate/{hashedId}',
     handler: handlers.activatePrimaryUser,
     config: {
-      validate: validate.confirmPassword
+      validate: validate.confirmPassword,
+      auth: false
     }
   },
   {

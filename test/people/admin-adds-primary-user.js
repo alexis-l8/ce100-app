@@ -4,6 +4,8 @@ const server = require('../../server/server.js');
 const mockData = require('../helpers/mock-data.js');
 const setup = require('../helpers/set-up.js');
 
+const Iron = require('iron');
+
 require('env2')('config.env');
 
 tape('set up: initialise db', t => {
@@ -14,19 +16,19 @@ tape('/people/add check auth', t => {
   t.plan(3);
   const primaryCookie = {
     method: 'GET',
-    url: '/orgs/add',
+    url: '/people/add',
     payload: JSON.stringify(mockData.orgsAddPayload),
     headers: { cookie: process.env.PRIMARY_COOKIE }
   };
   const adminCookie = {
     method: 'GET',
-    url: '/orgs/add',
+    url: '/people/add',
     payload: JSON.stringify(mockData.orgsAddPayload),
     headers: { cookie: process.env.ADMIN_COOKIE }
   };
   const primaryCookiePost = {
     method: 'POST',
-    url: '/orgs/add',
+    url: '/people/add',
     payload: JSON.stringify(mockData.orgsAddPayload),
     headers: { cookie: process.env.PRIMARY_COOKIE }
   };
@@ -42,8 +44,8 @@ tape('/people/add check auth', t => {
   });
 });
 
-tape('/people/add POST adds a user and updates the linked organisation', t => {
-  t.plan(3);
+tape('add and activate a new user and updates the linked organisation', t => {
+  t.plan(5);
   const addOrg = {
     method: 'POST',
     url: '/orgs/add',
@@ -61,8 +63,20 @@ tape('/people/add POST adds a user and updates the linked organisation', t => {
     server.inject(addPerson, reply => {
       t.equal(reply.statusCode, 302, 'redirects');
       const newUrl = reply.headers.location;
-      t.ok(newUrl.indexOf('/people/') > -1, 'route redirects to /people/ind');
-      t.end();
+      t.ok(newUrl.indexOf('/people/') > -1, 'route redirects to /people/index');
+      const userId = newUrl.split('/')[2];
+      Iron.seal(userId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, hashed) => {
+        const activateUser = {
+          method: 'POST',
+          url: `/people/activate/${hashed}`,
+          payload: JSON.stringify(mockData.usersActivatePayload)
+        };
+        server.inject(activateUser, reply => {
+          t.equal(reply.headers.location, '/', 'completing activate user redirects to dashboard');
+          t.ok(reply.headers['set-cookie'], 'cookie has been set');
+          t.end();
+        });
+      });
     });
   });
 });
