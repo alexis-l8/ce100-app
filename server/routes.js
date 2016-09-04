@@ -80,7 +80,12 @@ const routes = [
   {
     method: 'GET',
     path: '/orgs/add',
-    handler: handlers.serveView('add-organisation')
+    handler: handlers.serveView('add-organisation'),
+    config: {
+      auth: {
+        scope: 'admin'
+      }
+    }
   },
   {
     method: 'POST',

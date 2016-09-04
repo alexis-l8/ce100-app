@@ -9,8 +9,7 @@ mockData.usersAddPayload = {
   last_name: 'Ivanovic',
   email: 'an@iv.co',
   organisation_id: 5,
-  user_type: 'primary',
-  submit: 'Submit'
+  user_type: 'primary'
 };
 
 // (2) via /people/add

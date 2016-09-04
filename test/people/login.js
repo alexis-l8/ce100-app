@@ -5,9 +5,7 @@ const mockData = require('../helpers/mock-data.js');
 
 const setup = require('../helpers/set-up.js');
 
-// TODO: Route should be authed
-
-tape('set up db: add organisation, add primary user to that organisation', t => {
+tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
 });
 
@@ -51,7 +49,9 @@ tape('/login post logs a user in with incorrect credentials', t => {
 
 tape('teardown', t => {
   client.FLUSHDB();
-  client.end(true);
-  server.stop(() => {});
   t.end();
+});
+
+tape.onFinish(() => {
+  process.exit(0);
 });
