@@ -11,14 +11,6 @@ handlers.serveView = viewName => (request, reply) => {
   reply.view(viewName);
 };
 
-handlers.checkUser = (request, reply) => {
-  if (request.headers.cookie) { // REPLACE WITH AUTH
-    reply.view('dashboard');
-  } else { // REPLACE WITH AUTH
-    reply().redirect('/login');
-  }
-};
-
 handlers.viewAllOrganisations = (request, reply) => {
   const redis = request.redis;
   redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
@@ -101,7 +93,7 @@ handlers.createNewPrimaryUser = (request, reply) => {
                   console.log('ERROR', error);
                   reply('redis-failure');
                 } else {
-                  reply('success');
+                  reply.redirect(`/people/${length}`);
                 }
               });
             }

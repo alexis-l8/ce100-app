@@ -7,21 +7,7 @@ const routes = [
   {
     method: 'GET',
     path: '/',
-    handler: handlers.checkUser, // replace with handlers.serveSpecificFile('dashboard')
-    config: { auth: false }
-  },
-  {
-    method: 'GET',
-    path: '/get',
-    handler: (request, reply) => {
-      // console.log(request.auth);
-      reply('Hello World');
-    },
-    config: {
-      auth: false // {
-      //   scope: 'primary'
-      // }
-    }
+    handler: handlers.serveView('dashboard')
   },
   {
     method: 'GET',
@@ -37,13 +23,17 @@ const routes = [
   {
     method: 'GET',
     path: '/people/add',
-    handler: handlers.serveView('add-user')
+    handler: handlers.serveView('add-user'),
+    config: {
+      auth: { scope: 'admin' }
+    }
   },
   {
     method: 'POST',
     path: '/people/add',
     handler: handlers.createNewPrimaryUser,
     config: {
+      auth: { scope: 'admin' },
       validate: validate.adminAddUser
     }
   },
@@ -82,9 +72,7 @@ const routes = [
     path: '/orgs/add',
     handler: handlers.serveView('add-organisation'),
     config: {
-      auth: {
-        scope: 'admin'
-      }
+      auth: { scope: 'admin' }
     }
   },
   {
@@ -92,6 +80,7 @@ const routes = [
     path: '/orgs/add',
     handler: handlers.createNewOrganisation,
     config: {
+      auth: { scope: 'admin' },
       validate: validate.adminAddOrganisation
     }
   },
