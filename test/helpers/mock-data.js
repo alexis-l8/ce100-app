@@ -73,18 +73,14 @@ mockData.orgPostUser = {
   people: [7]
 };
 
-// (8) via /login
-// Correct login data for a primary user
-mockData.loginPrimaryUserCorrect = {
-  email: 'an@iv.co',
+mockData.loginAdminCorrect = {
+  email: 'ja@mu.co',
   password: 'Hello1'
 };
 
-// (9) via /login
-// Incorrect login data for a primary user
-mockData.loginPrimaryUserIncorrect = {
-  email: 'an@iv.co',
-  password: 'IncorrectPassword'
+mockData.loginAdminIncorrect = {
+  email: 'ja@mu.co',
+  password: 'Hello2'
 };
 
 // (10) via /orgs/

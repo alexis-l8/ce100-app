@@ -14,8 +14,8 @@ setupData.initialPeople = [
   },
   {
     first_name: 'Marie',
-    last_name: 'Farie',
-    email: 'ma@fa.co',
+    last_name: 'Kasai',
+    email: 'ma@ka.co',
     user_type: 'admin',
     id: 1,
     active: true,
