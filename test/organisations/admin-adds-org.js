@@ -2,7 +2,7 @@ const tape = require('tape');
 const client = require('redis').createClient();
 const server = require('../../server/server.js');
 
-const mockData = require('../mock-data.js');
+const mockData = require('../helpers/mock-data.js');
 
 require('env2')('config.env');
 const cookie = process.env.COOKIE;

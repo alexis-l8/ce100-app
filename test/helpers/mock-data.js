@@ -2,15 +2,13 @@ require('env2')('config.env');
 
 const mockData = {};
 
-// TODO: finish adding mock users and make them correspond with mock orgs
-
 // (1) via add-user.html form
 // Form data, sent in payload, by Admin to create new primary user
 mockData.usersAddPayload = {
-  first_name: 'jack',
-  last_name: 'murphy',
-  email: 'ja@mu.co',
-  organisation_id: 0,
+  first_name: 'Anna',
+  last_name: 'Ivanovic',
+  email: 'an@iv.co',
+  organisation_id: 5,
   user_type: 'primary',
   submit: 'Submit'
 };
@@ -18,12 +16,12 @@ mockData.usersAddPayload = {
 // (2) via /people/add
 // Data, as saved in the DB, in `people` list, after admin adds a user in (1)
 mockData.newUserAdded = {
-  first_name: 'jack',
-  last_name: 'murphy',
-  email: 'ja@mu.co',
-  organisation_id: 0,
+  first_name: 'Anna',
+  last_name: 'Ivanovic',
+  email: 'an@iv.co',
+  organisation_id: 5,
   user_type: 'primary',
-  id: 0,
+  id: 7,
   active: true
 };
 
@@ -37,28 +35,28 @@ mockData.usersActivatePayload = {
 // (4) via /orgs/add
 // Form Data, sent in payload, by admin to create new org
 mockData.orgsAddPayload = {
-  name: 'apple'
+  name: 'acer'
 };
 
 // (5) via /orgs/add
 // Data, as saved in the DB, in `organisations` list, after admin adds org in (4)
 mockData.orgsAddDB = {
-  name: 'apple',
+  name: 'acer',
   active: true,
   mission_statement: '',
-  id: 0,
+  id: 5,
   people: []
 };
 
 // (6) via /people/activate/{primaryUserId}
 // Data, as saved in DB, in `people` list after account activated in (2)
 mockData.usersActivateDB = {
-  first_name: 'jack',
-  last_name: 'murphy',
-  email: 'ja@mu.co',
-  organisation_id: 0,
+  first_name: 'Anna',
+  last_name: 'Ivanovic',
+  email: 'an@iv.co',
+  organisation_id: 5,
   user_type: 'primary',
-  id: 0,
+  id: 7,
   active: true,
   password: process.env.MOCKDATA_HASHED_PASSWORD,
   last_login: Date.now()
@@ -67,25 +65,25 @@ mockData.usersActivateDB = {
 // (7) via /people/add
 // Data, as saved in the DB, in `organisations` list, after admin adds a linked primary in (1)
 mockData.orgPostUser = {
-  id: 0,
-  name: 'apple',
+  name: 'acer',
+  id: 5,
   active: true,
   mission_statement: '',
-  primary_id: 0,
-  people: [0]
+  primary_id: 7,
+  people: [7]
 };
 
 // (8) via /login
 // Correct login data for a primary user
 mockData.loginPrimaryUserCorrect = {
-  email: 'ja@mu.co',
+  email: 'an@iv.co',
   password: 'Hello1'
 };
 
 // (9) via /login
 // Incorrect login data for a primary user
 mockData.loginPrimaryUserIncorrect = {
-  email: 'ja@mu.co',
+  email: 'an@iv.co',
   password: 'IncorrectPassword'
 };
 
@@ -97,7 +95,7 @@ mockData.completeOrgEntries = {
     name: 'apple',
     active: true,
     mission_statement: 'Change the economy',
-    primary_id: 0,
+    primary_id: 2,
     people: [0]
   },
   b: {
@@ -105,7 +103,7 @@ mockData.completeOrgEntries = {
     name: 'dwyl',
     active: true,
     mission_statement: 'Do What You Love!',
-    primary_id: 2,
+    primary_id: 3,
     people: [3]
   },
   c: {
@@ -113,7 +111,7 @@ mockData.completeOrgEntries = {
     name: 'charcoal',
     active: false,
     mission_statement: 'Summer!',
-    primary_id: 3,
+    primary_id: 4,
     people: [4]
   },
   d: {
@@ -121,7 +119,7 @@ mockData.completeOrgEntries = {
     name: 'emf',
     active: true,
     mission_statement: 'Change the economy',
-    primary_id: 4,
+    primary_id: 5,
     people: [5]
   },
   e: {
@@ -129,13 +127,13 @@ mockData.completeOrgEntries = {
     name: 'anon_org123',
     active: false,
     mission_statement: 'Anonymous',
-    primary_id: 5,
+    primary_id: 6,
     people: [6]
   }
 };
 
 // people
-mockData.completePeopleEntries = [
+mockData.initialPeople = [
   {
     first_name: 'jack',
     last_name: 'murphy',
@@ -174,6 +172,39 @@ mockData.completePeopleEntries = [
     organisation_id: 1,
     user_type: 'primary',
     id: 3,
+    active: true,
+    password: process.env.MOCKDATA_HASHED_PASSWORD,
+    last_login: Date.now()
+  },
+  {
+    first_name: 'Andy',
+    last_name: 'Murray',
+    email: 'an@mu.co',
+    organisation_id: 2,
+    user_type: 'primary',
+    id: 4,
+    active: true,
+    password: process.env.MOCKDATA_HASHED_PASSWORD,
+    last_login: Date.now()
+  },
+  {
+    first_name: 'Gale',
+    last_name: 'Simon',
+    email: 'ga@si.co',
+    organisation_id: 3,
+    user_type: 'primary',
+    id: 5,
+    active: true,
+    password: process.env.MOCKDATA_HASHED_PASSWORD,
+    last_login: Date.now()
+  },
+  {
+    first_name: 'Maria',
+    last_name: 'Sharap',
+    email: 'ma@sh.co',
+    organisation_id: 4,
+    user_type: 'primary',
+    id: 6,
     active: true,
     password: process.env.MOCKDATA_HASHED_PASSWORD,
     last_login: Date.now()
