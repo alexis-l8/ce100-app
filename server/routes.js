@@ -9,8 +9,13 @@ const routes = [
   },
   {
     method: 'GET',
-    path: '/people/add',
-    handler: handlers.serveSpecificFile('add-user')
+    path: '/people',
+    handler: handlers.viewAllUsers
+  },
+  {
+    method: 'GET',
+    path: '/people/{id}',
+    handler: handlers.viewUserDetails
   },
   {
     method: 'POST',
@@ -19,6 +24,11 @@ const routes = [
     config: {
       validate: validate.adminAddUser
     }
+  },
+  {
+    method: 'GET',
+    path: '/people/add',
+    handler: handlers.serveSpecificFile('add-user')
   },
   {
     method: 'GET',
