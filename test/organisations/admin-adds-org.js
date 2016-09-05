@@ -4,12 +4,9 @@ const server = require('../../server/server.js');
 const payloads = require('../helpers/mock-payloads.js');
 const setup = require('../helpers/set-up.js');
 
-
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
 });
-
-// TODO: finish orgs/add test to check response indicating org has been added
 
 tape('orgs/add view', t => {
   t.plan(2);
@@ -33,23 +30,26 @@ tape('orgs/add view', t => {
 });
 
 tape('orgs/add admin adds a new organisation', t => {
-  t.plan(1);
+  t.plan(3);
   const options = {
     method: 'POST',
     url: '/orgs/add',
     payload: JSON.stringify(payloads.orgsAddPayload),
     headers: { cookie: process.env.ADMIN_COOKIE }
   };
-  // hit endpoint with mock form
   server.inject(options, reply => {
-    t.equal(reply.statusCode, 200, 'route exists and replies 200');
-    t.end();
-    // check organisation has been added to db
-    // client.LRANGE('organisations', 0, -1, (error, orgs) => {
-    //   console.log('ERROR', error);
-    //   t.deepEqual(payloads.orgsAddDB, JSON.parse(orgs[0]), 'new organisation has correct fields');
-    //   t.end();
-    // });
+    t.equal(reply.statusCode, 302, 'admin is redirected');
+    const url = reply.headers.location;
+    t.ok(url.indexOf('/orgs/') > -1, 'string', 'redirected to the new organisations view');
+    const options2 = {
+      method: 'GET',
+      url: '/orgs',
+      headers: { cookie: process.env.ADMIN_COOKIE }
+    };
+    server.inject(options2, reply => {
+      t.ok(reply.payload.indexOf(payloads.orgsAddPayload.name) > -1, 'mock organisation was added');
+      t.end();
+    });
   });
 });
 

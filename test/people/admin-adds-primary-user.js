@@ -57,7 +57,7 @@ tape('add and activate a new user and updates the linked organisation', t => {
     headers: { cookie: process.env.ADMIN_COOKIE }
   };
   server.inject(addOrg, reply => {
-    t.equal(reply.statusCode, 200, 'route exists and replies 200');
+    t.equal(reply.statusCode, 302, 'redirects');
     server.inject(addPerson, reply => {
       t.equal(reply.statusCode, 302, 'redirects');
       const newUrl = reply.headers.location;

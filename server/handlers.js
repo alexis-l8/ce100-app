@@ -143,7 +143,7 @@ handlers.createNewOrganisation = (request, reply) => {
         if (error) {
           reply(Boom.badImplementation('redis-failure'));
         } else {
-          reply('success');
+          reply.redirect(`/orgs/${length}`);
         }
       });
     }
