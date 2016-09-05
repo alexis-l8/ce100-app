@@ -27,20 +27,19 @@ handlers.serveFile = (request, reply) => {
 handlers.activatePrimaryUser = (request, reply) => {
   const hashedId = request.params.hashedId; // currently not hashed
   const userId = request.params.hashedId; // hash.decode(request.params.hashedId);
-  const redis = request.redis;
   // hash password
   bcrypt.hash(request.payload.password, 10, function (error, hashedPassword) {
     if (error) {
       console.log(error);
       reply('hash failed');
     } else {
-      redis.LINDEX('people', userId, (error, user) => {
+      request.redis.LINDEX('people', userId, (error, user) => {
         if (error) {
           console.log(error);
           reply('redis-failure');
         } else {
           const updatedUser = addPasswordToUser(hashedPassword, user);
-          redis.LSET('people', userId, updatedUser, (err, response) => {
+          request.redis.LSET('people', userId, updatedUser, (err, response) => {
             if (err) {
               console.log(err);
               reply('redis-failure');
@@ -55,28 +54,27 @@ handlers.activatePrimaryUser = (request, reply) => {
 };
 
 handlers.createNewPrimaryUser = (request, reply) => {
-  const redis = request.redis;
   const payload = request.payload;
   delete payload.submit;
-  redis.LLEN('people', (error, length) => {
+  request.redis.LLEN('people', (error, length) => {
     if (error) {
       console.log(error);
       reply('redis-failure');
     } else {
       const userUpdated = initialiseNewUser(length, payload);
-      redis.RPUSH('people', userUpdated, (error, people) => {
+      request.redis.RPUSH('people', userUpdated, (error, people) => {
         if (error) {
           console.log('ERROR', error);
           reply('redis-failure');
         } else {
           const orgId = payload.organisation_id;
-          redis.LINDEX('organisations', orgId, (error, org) => {
+          request.redis.LINDEX('organisations', orgId, (error, org) => {
             if (error) {
               console.log('ERROR', error);
               reply('redis-failure');
             } else {
               const orgUpdated = addPrimaryToOrg(userUpdated, org);
-              redis.LSET('organisations', orgId, orgUpdated, (error, response) => {
+              request.redis.LSET('organisations', orgId, orgUpdated, (error, response) => {
                 if (error) {
                   console.log('ERROR', error);
                   reply('redis-failure');
