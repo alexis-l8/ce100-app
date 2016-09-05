@@ -177,11 +177,11 @@ handlers.login = (request, reply) => {
               }
             });
           } else {
-            reply(Boom.notFound('Sorry, that email or password is invalid, please try again.'));
+            reply(Boom.unauthorized('Sorry, that email or password is invalid, please try again.'));
           }
         });
       } else {
-        reply(Boom.notFound('Sorry, that email has not been registered.'));
+        reply(Boom.unauthorized('Sorry, that email has not been registered.'));
       }
     }
   });

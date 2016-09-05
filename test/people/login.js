@@ -21,6 +21,18 @@ tape('/login load page', t => {
   });
 });
 
+tape('/login with an unrecognised email address', t => {
+  const options = {
+    method: 'POST',
+    url: '/login',
+    payload: JSON.stringify(payloads.loginBadEmail)
+  };
+  server.inject(options, reply => {
+    t.equal(reply.statusCode, 401, 'unrecognised email replies with unauthorized error');
+    t.end();
+  });
+});
+
 tape('/login admin successful', t => {
   t.plan(2);
   const options = {
@@ -42,7 +54,7 @@ tape('/login post logs a user in with incorrect credentials', t => {
     payload: JSON.stringify(payloads.loginAdminIncorrect)
   };
   server.inject(options, reply => {
-    t.equal(reply.statusCode, 404, 'log in credentials are incorrect');
+    t.equal(reply.statusCode, 401, 'log in credentials are incorrect');
     t.end();
   });
 });

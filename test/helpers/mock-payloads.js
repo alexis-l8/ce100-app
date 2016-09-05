@@ -36,4 +36,9 @@ mockPayloads.loginAdminIncorrect = {
   password: 'Hello2'
 };
 
+mockPayloads.loginBadEmail = {
+  email: 'jaaaaaa@mu.co',
+  password: 'Hello1'
+};
+
 module.exports = mockPayloads;
