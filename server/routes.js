@@ -1,8 +1,6 @@
 const validate = require('./joi.js');
 const handlers = require('./handlers.js');
 
-// TODO: check routes
-
 const routes = [
   {
     method: 'GET',
@@ -11,11 +9,21 @@ const routes = [
   },
   {
     method: 'GET',
+    path: '/people',
+    handler: handlers.viewAllUsers
+  },
+  {
+    method: 'GET',
     path: '/people/add',
     handler: handlers.serveView('add-user'),
     config: {
       auth: { scope: 'admin' }
     }
+  },
+  {
+    method: 'GET',
+    path: '/people/{id}',
+    handler: handlers.viewUserDetails
   },
   {
     method: 'POST',

@@ -1,0 +1,10 @@
+<h1>All People</h1>
+<div>
+  {{#if allUsers}}
+    {{#each allUsers}}
+      {{>user}}
+    {{/each}}
+  {{else}}
+    <h3>Sorry! No users were found</h3>
+  {{/if}}
+</div>

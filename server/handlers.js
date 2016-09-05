@@ -68,6 +68,31 @@ handlers.activatePrimaryUser = (request, reply) => {
   });
 };
 
+handlers.viewAllUsers = (request, reply) => {
+  const redis = request.redis;
+  redis.LRANGE('people', 0, -1, (error, stringifiedUsers) => {
+    if (error) console.log(error);
+    const allUsers = {allUsers: stringifiedUsers.map(element => JSON.parse(element))};
+    reply.view('people/view', allUsers);
+  });
+};
+
+handlers.viewUserDetails = (request, reply) => {
+  const redis = request.redis;
+  const userId = request.params.id;
+  redis.LINDEX('people', userId, (error, stringifiedUser) => {
+    if (error) console.log(error);
+    // catch for case where user at specified userId doesn't exist.
+    const user = JSON.parse(stringifiedUser);
+    redis.LINDEX('organisations', user.organisation_id, (error, stringifiedOrg) => {
+      if (error) console.log(error);
+      const {name, mission_statement} = JSON.parse(stringifiedOrg);
+      const userDetails = Object.assign({name, mission_statement}, user);
+      reply.view('people/details', userDetails);
+    });
+  });
+};
+
 handlers.createNewPrimaryUser = (request, reply) => {
   const redis = request.redis;
   const payload = request.payload;
@@ -138,7 +163,7 @@ handlers.login = (request, reply) => {
         return JSON.parse(eachUser).email === email;
       });
       if (user.length > 0) {
-        const userDetails = JSON.parse(user);
+        const userDetails = JSON.parse(user[0]);
         bcrypt.compare(password, userDetails.password, function (err, isValid) {
           if (!err && isValid) {
             userDetails.last_login = Date.now();
