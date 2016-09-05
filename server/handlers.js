@@ -120,16 +120,16 @@ handlers.login = (request, reply) => {
 
 module.exports = handlers;
 
-const initialiseNewUser = (length, payload) => {
+function initialiseNewUser (length, payload) {
   const additionalInfo = {
     id: length,
     active: true
   };
   const updatedUser = Object.assign(additionalInfo, payload);
   return JSON.stringify(updatedUser);
-};
+}
 
-const addPrimaryToOrg = (user, org) => {
+function addPrimaryToOrg (user, org) {
   const id = JSON.parse(user).id;
   const orgOld = JSON.parse(org);
   const additionalInfo = {
@@ -138,9 +138,9 @@ const addPrimaryToOrg = (user, org) => {
   };
   const orgUpdated = Object.assign(additionalInfo, orgOld);
   return JSON.stringify(orgUpdated);
-};
+}
 
-const addPasswordToUser = (hashed, user) => {
+function addPasswordToUser (hashed, user) {
   const userOld = JSON.parse(user);
   const newDetails = {
     password: hashed,
@@ -148,4 +148,4 @@ const addPasswordToUser = (hashed, user) => {
   };
   const updatedUser = Object.assign(newDetails, userOld);
   return JSON.stringify(updatedUser);
-};
+}
