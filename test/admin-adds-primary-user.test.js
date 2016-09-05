@@ -45,11 +45,8 @@ tape('/add-user post adds a user and updates the linked organisation', (t) => {
   });
 });
 
-tape('teardown', t => {
-  client.FLUSHDB();
-  t.end();
-});
-
 tape.onFinish(() => {
-  process.exit(0);
+  client.FLUSHDB();
+  client.end(true);
+  server.stop(() => {});
 });
