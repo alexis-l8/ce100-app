@@ -2,6 +2,8 @@ language: node_js
 node_js:
   - "4"
   - "6"
+services:
+  - redis-server
 before_install:
   - pip install --user codecov
   - $CXX --version
