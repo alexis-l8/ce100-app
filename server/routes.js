@@ -11,17 +11,6 @@ const routes = [
   },
   {
     method: 'GET',
-    path: '/set',
-    handler: (request, reply) => {
-      request.cookieAuth.set({userId: 0});
-      reply('cookie set');
-    },
-    config: {
-      auth: false
-    }
-  },
-  {
-    method: 'GET',
     path: '/people/add',
     handler: handlers.serveView('add-user'),
     config: {
