@@ -34,14 +34,6 @@ const routes = [
     }
   },
   {
-    method: 'POST',
-    path: '/login',
-    handler: handlers.login,
-    config: {
-      validate: validate.login
-    }
-  },
-  {
     method: 'GET',
     path: '/{path*}',
     handler: handlers.serveFile
