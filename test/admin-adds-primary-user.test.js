@@ -1,8 +1,8 @@
 const tape = require('tape');
 const client = require('redis').createClient();
-const server = require('../../server/server.js');
+const server = require('../server/server.js');
 
-const mockData = require('../mock-data.js');
+const mockData = require('./mock-data.js');
 
 // TODO: Route should be authed
 
