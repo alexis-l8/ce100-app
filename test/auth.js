@@ -1,22 +1,13 @@
 const tape = require('tape');
 const client = require('redis').createClient();
 const server = require('../server/server.js');
-const Iron = require('iron');
-const mockData = require('./mock-data.js');
 
+const setup = require('./helpers/set-up.js');
 require('env2')('config.env');
-const password = process.env.COOKIE_PASSWORD;
-const cookie = process.env.COOKIE
 
-
-tape('auth.js tests set up db', t => {
-  client.RPUSH('people', JSON.stringify(mockData.newUserAdded), (err, data) => {
-    if (err) { console.log(err); }
-    console.log('setup: redis response to primary user added: ', data);
-    t.end();
-  });
+tape('set up: initialise db', t => {
+  setup.initialiseDB(t.end);
 });
-
 
 tape('hit an authed route without a cookie redirects to /login', t => {
   t.plan(2);
@@ -31,22 +22,37 @@ tape('hit an authed route without a cookie redirects to /login', t => {
   });
 });
 
+tape('A primary user is forbidden access to an admin view', t => {
+  t.plan(1);
+  const options = {
+    method: 'GET',
+    url: '/people/add',
+    headers: { cookie: process.env.PRIMARY_COOKIE }
+  };
+  server.inject(options, res => {
+    t.equal(res.statusCode, 403, 'incorrect permission request is forbidden');
+    t.end();
+  });
+});
 
 tape('hit an authed route with a valid cookie containing valid users information', t => {
   t.plan(1);
-    const options = {
-      method: 'GET',
-      url: '/get',
-      headers: { cookie }
-    };
-    server.inject(options, res => {
-      console.log(res,headers);
-      t.equal(res.statusCode, 200, 'route allowed');
-      t.end();
-    });
+  const options = {
+    method: 'GET',
+    url: '/people/add',
+    headers: { cookie: process.env.ADMIN_COOKIE }
+  };
+  server.inject(options, res => {
+    t.equal(res.statusCode, 200, 'route allowed');
+    t.end();
+  });
+});
+
+tape('teardown', t => {
+  client.FLUSHDB();
+  t.end();
 });
 
 tape.onFinish(() => {
-  client.FLUSHDB();
   process.exit(0);
 });

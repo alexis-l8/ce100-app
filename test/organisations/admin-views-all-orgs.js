@@ -38,6 +38,5 @@ tape('teardown', t => {
 });
 
 tape.onFinish(() => {
-  client.FLUSHDB();
   process.exit(0);
 });
