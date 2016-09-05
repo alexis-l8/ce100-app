@@ -49,7 +49,6 @@ handlers.activatePrimaryUser = (request, reply) => {
 
 handlers.createNewPrimaryUser = (request, reply) => {
   const payload = request.payload;
-  delete payload.submit;
   request.redis.LLEN('people', (error, length) => {
     if (error) {
       reply('redis-failure');
