@@ -1,15 +1,15 @@
 const bcrypt = require('bcrypt');
 const Boom = require('boom');
 const Iron = require('iron');
-const handlers = {};
+
+var handlers = {};
 
 handlers.serveView = viewName => (request, reply) => {
   reply.view(viewName);
 };
 
 handlers.viewAllOrganisations = (request, reply) => {
-  const redis = request.redis;
-  redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
+  request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
     if (error) console.log(error);
     const organisations = {allOrganisations: stringifiedOrgs.map(element => JSON.parse(element))};
     reply.view('organisations/view', organisations);
@@ -17,13 +17,12 @@ handlers.viewAllOrganisations = (request, reply) => {
 };
 
 handlers.viewOrganisationDetails = (request, reply) => {
-  const redis = request.redis;
   const userId = request.params.id;
-  redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
+  request.redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
     if (error) console.log(error);
     // catch for case where org at specified userId doesn't exist.
     const organisation = JSON.parse(stringifiedOrg);
-    redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
+    request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
       if (error) console.log(error);
       const {first_name, last_name, email} = JSON.parse(stringifiedPrimaryUser);
       const organisationDetails = Object.assign({first_name, last_name, email}, organisation);
@@ -34,7 +33,6 @@ handlers.viewOrganisationDetails = (request, reply) => {
 
 handlers.activatePrimaryUser = (request, reply) => {
   const hashedId = request.params.hashedId;
-  const redis = request.redis;
   Iron.unseal(hashedId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, userId) => {
     if (err) {
       console.log(err);
@@ -46,13 +44,13 @@ handlers.activatePrimaryUser = (request, reply) => {
         console.log(error);
         reply('hash failed');
       } else {
-        redis.LINDEX('people', userId, (error, user) => {
+        request.redis.LINDEX('people', userId, (error, user) => {
           if (error) {
             console.log(error);
             reply('redis-failure');
           } else {
             const updatedUser = addPasswordToUser(hashedPassword, user);
-            redis.LSET('people', userId, updatedUser, (err, response) => {
+            request.redis.LSET('people', userId, updatedUser, (err, response) => {
               if (err) {
                 console.log(err);
                 reply('redis-failure');
@@ -69,8 +67,7 @@ handlers.activatePrimaryUser = (request, reply) => {
 };
 
 handlers.viewAllUsers = (request, reply) => {
-  const redis = request.redis;
-  redis.LRANGE('people', 0, -1, (error, stringifiedUsers) => {
+  request.redis.LRANGE('people', 0, -1, (error, stringifiedUsers) => {
     if (error) console.log(error);
     const allUsers = {allUsers: stringifiedUsers.map(element => JSON.parse(element))};
     reply.view('people/view', allUsers);
@@ -78,13 +75,12 @@ handlers.viewAllUsers = (request, reply) => {
 };
 
 handlers.viewUserDetails = (request, reply) => {
-  const redis = request.redis;
   const userId = request.params.id;
-  redis.LINDEX('people', userId, (error, stringifiedUser) => {
+  request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
     if (error) console.log(error);
     // catch for case where user at specified userId doesn't exist.
     const user = JSON.parse(stringifiedUser);
-    redis.LINDEX('organisations', user.organisation_id, (error, stringifiedOrg) => {
+    request.redis.LINDEX('organisations', user.organisation_id, (error, stringifiedOrg) => {
       if (error) console.log(error);
       const {name, mission_statement} = JSON.parse(stringifiedOrg);
       const userDetails = Object.assign({name, mission_statement}, user);
@@ -94,9 +90,8 @@ handlers.viewUserDetails = (request, reply) => {
 };
 
 handlers.createNewPrimaryUser = (request, reply) => {
-  const redis = request.redis;
   const payload = request.payload;
-  delete payload.submit;
+  const redis = request.redis;
   redis.LLEN('people', (error, length) => {
     if (error) {
       console.log(error);
@@ -189,16 +184,16 @@ handlers.login = (request, reply) => {
 
 module.exports = handlers;
 
-const initialiseEntry = (length, payload) => {
+function initialiseEntry (length, payload) {
   const additionalInfo = {
     id: length,
     active: true
   };
   const updatedUser = Object.assign(additionalInfo, payload);
   return JSON.stringify(updatedUser);
-};
+}
 
-const addPrimaryToOrg = (user, org) => {
+function addPrimaryToOrg (user, org) {
   const id = JSON.parse(user).id;
   const orgOld = JSON.parse(org);
   const additionalInfo = {
@@ -207,9 +202,9 @@ const addPrimaryToOrg = (user, org) => {
   };
   const orgUpdated = Object.assign(additionalInfo, orgOld);
   return JSON.stringify(orgUpdated);
-};
+}
 
-const addPasswordToUser = (hashed, user) => {
+function addPasswordToUser (hashed, user) {
   const userOld = JSON.parse(user);
   const newDetails = {
     password: hashed,
@@ -217,4 +212,4 @@ const addPasswordToUser = (hashed, user) => {
   };
   const updatedUser = Object.assign(newDetails, userOld);
   return JSON.stringify(updatedUser);
-};
+}

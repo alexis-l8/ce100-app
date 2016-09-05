@@ -1,4 +1,4 @@
-const validate = require('./joi.js');
+const validate = require('./person.js');
 const handlers = require('./handlers.js');
 
 const routes = [

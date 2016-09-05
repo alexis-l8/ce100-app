@@ -59,6 +59,6 @@ tape('teardown', t => {
 });
 
 tape.onFinish(() => {
-  console.log('in on finish');
-  process.exit(0);
+  client.end(true);
+  server.stop(() => {});
 });

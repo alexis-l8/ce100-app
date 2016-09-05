@@ -14,5 +14,5 @@ tape('testing homepage is returned', (t) => {
 });
 
 tape.onFinish(() => {
-  process.exit(0);
+  server.stop(() => {});
 });

@@ -1,8 +1,8 @@
-require('./people/login.js');
-require('./organisations/admin-adds-org.js');
-require('./people/admin-adds-primary-user.js');
-require('./organisations/admin-views-all-orgs.js');
-require('./server.js');
-require('./auth.js');
-require('./people/view-all-users.js');
-require('./people/view-user-details.js');
+require('./people/login.test.js');
+require('./organisations/admin-adds-org.test.js');
+require('./people/admin-adds-primary-user.test.js');
+require('./organisations/admin-views-all-orgs.test.js');
+require('./server.test.js');
+require('./auth.test.js');
+require('./people/view-all-users.test.js');
+require('./people/view-user-details.test.js');
