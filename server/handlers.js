@@ -5,7 +5,7 @@ const Boom = require('boom');
 const Hashids = require('hashids');
 const hash = new Hashids(process.env.HASHID_KEY);
 
-const handlers = {};
+var handlers = {};
 
 const cookieConfig = {
   ttl: 7 * 24 * 60 * 60 * 1000,
