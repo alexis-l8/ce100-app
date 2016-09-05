@@ -6,7 +6,6 @@ const setup = require('../helpers/set-up.js');
 
 const Iron = require('iron');
 
-require('env2')('config.env');
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);

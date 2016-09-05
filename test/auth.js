@@ -3,7 +3,6 @@ const client = require('redis').createClient();
 const server = require('../server/server.js');
 
 const setup = require('./helpers/set-up.js');
-require('env2')('config.env');
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);

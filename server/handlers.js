@@ -1,5 +1,3 @@
-require('env2')('config.env');
-
 const bcrypt = require('bcrypt');
 const Boom = require('boom');
 const Iron = require('iron');

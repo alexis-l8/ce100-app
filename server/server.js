@@ -1,3 +1,4 @@
+require('env2')('config.env');
 const Hapi = require('hapi');
 const Hoek = require('hoek');
 const path = require('path');

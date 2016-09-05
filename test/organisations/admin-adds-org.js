@@ -4,7 +4,6 @@ const server = require('../../server/server.js');
 const mockData = require('../helpers/mock-data.js');
 const setup = require('../helpers/set-up.js');
 
-require('env2')('config.env');
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
