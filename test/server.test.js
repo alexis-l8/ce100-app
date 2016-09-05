@@ -21,8 +21,9 @@ var views = [
   '/activate'
 ];
 
-views.forEach(template => {
+views.forEach((template, index) => {
   getViews(template);
+  if (index === views.length - 1) server.stop(() => {});
 });
 
 tape.onFinish(() => {
