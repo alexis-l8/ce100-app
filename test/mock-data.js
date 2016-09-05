@@ -1,4 +1,4 @@
-const mockData = {};
+var mockData = {};
 
 // (1) via add-user.html form
 // Form data, sent in payload, by Admin to create new primary user
