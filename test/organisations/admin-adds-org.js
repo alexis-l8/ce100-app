@@ -1,7 +1,7 @@
 const tape = require('tape');
 const client = require('redis').createClient();
 const server = require('../../server/server.js');
-const mockData = require('../helpers/mock-data.js');
+const payloads = require('../helpers/mock-payloads.js');
 const setup = require('../helpers/set-up.js');
 
 
@@ -37,7 +37,7 @@ tape('orgs/add admin adds a new organisation', t => {
   const options = {
     method: 'POST',
     url: '/orgs/add',
-    payload: JSON.stringify(mockData.orgsAddPayload),
+    payload: JSON.stringify(payloads.orgsAddPayload),
     headers: { cookie: process.env.ADMIN_COOKIE }
   };
   // hit endpoint with mock form
@@ -47,7 +47,7 @@ tape('orgs/add admin adds a new organisation', t => {
     // check organisation has been added to db
     // client.LRANGE('organisations', 0, -1, (error, orgs) => {
     //   console.log('ERROR', error);
-    //   t.deepEqual(mockData.orgsAddDB, JSON.parse(orgs[0]), 'new organisation has correct fields');
+    //   t.deepEqual(payloads.orgsAddDB, JSON.parse(orgs[0]), 'new organisation has correct fields');
     //   t.end();
     // });
   });

@@ -1,7 +1,7 @@
 const tape = require('tape');
 const client = require('redis').createClient();
 const server = require('../../server/server.js');
-const mockData = require('../helpers/mock-data.js');
+const payloads = require('../helpers/mock-payloads.js');
 
 const setup = require('../helpers/set-up.js');
 
@@ -26,7 +26,7 @@ tape('/login admin successful', t => {
   const options = {
     method: 'POST',
     url: '/login',
-    payload: JSON.stringify(mockData.loginAdminCorrect)
+    payload: JSON.stringify(payloads.loginAdminCorrect)
   };
   server.inject(options, reply => {
     t.equal(reply.statusCode, 302, 'log in credentials are correct and user gets redirected to homepage');
@@ -39,7 +39,7 @@ tape('/login post logs a user in with incorrect credentials', t => {
   const options = {
     method: 'POST',
     url: '/login',
-    payload: JSON.stringify(mockData.loginAdminIncorrect)
+    payload: JSON.stringify(payloads.loginAdminIncorrect)
   };
   server.inject(options, reply => {
     t.equal(reply.statusCode, 404, 'log in credentials are incorrect');

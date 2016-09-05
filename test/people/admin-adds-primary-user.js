@@ -1,11 +1,10 @@
 const tape = require('tape');
 const client = require('redis').createClient();
 const server = require('../../server/server.js');
-const mockData = require('../helpers/mock-data.js');
+const payloads = require('../helpers/mock-payloads.js');
 const setup = require('../helpers/set-up.js');
 
 const Iron = require('iron');
-
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
@@ -16,19 +15,19 @@ tape('/people/add check auth', t => {
   const primaryCookie = {
     method: 'GET',
     url: '/people/add',
-    payload: JSON.stringify(mockData.orgsAddPayload),
+    payload: JSON.stringify(payloads.orgsAddPayload),
     headers: { cookie: process.env.PRIMARY_COOKIE }
   };
   const adminCookie = {
     method: 'GET',
     url: '/people/add',
-    payload: JSON.stringify(mockData.orgsAddPayload),
+    payload: JSON.stringify(payloads.orgsAddPayload),
     headers: { cookie: process.env.ADMIN_COOKIE }
   };
   const primaryCookiePost = {
     method: 'POST',
     url: '/people/add',
-    payload: JSON.stringify(mockData.orgsAddPayload),
+    payload: JSON.stringify(payloads.orgsAddPayload),
     headers: { cookie: process.env.PRIMARY_COOKIE }
   };
   server.inject(primaryCookie, reply => {
@@ -48,13 +47,13 @@ tape('add and activate a new user and updates the linked organisation', t => {
   const addOrg = {
     method: 'POST',
     url: '/orgs/add',
-    payload: JSON.stringify(mockData.orgsAddPayload),
+    payload: JSON.stringify(payloads.orgsAddPayload),
     headers: { cookie: process.env.ADMIN_COOKIE }
   };
   const addPerson = {
     method: 'POST',
     url: '/people/add',
-    payload: JSON.stringify(mockData.usersAddPayload),
+    payload: JSON.stringify(payloads.usersAddPayload),
     headers: { cookie: process.env.ADMIN_COOKIE }
   };
   server.inject(addOrg, reply => {
@@ -68,7 +67,7 @@ tape('add and activate a new user and updates the linked organisation', t => {
         const activateUser = {
           method: 'POST',
           url: `/people/activate/${hashed}`,
-          payload: JSON.stringify(mockData.usersActivatePayload)
+          payload: JSON.stringify(payloads.usersActivatePayload)
         };
         server.inject(activateUser, reply => {
           t.equal(reply.headers.location, '/', 'completing activate user redirects to dashboard');
