@@ -142,7 +142,7 @@ handlers.createNewPrimaryUser = (request, reply) => {
                   console.log('ERROR', error);
                   reply('redis-failure');
                 } else {
-                  reply.redirect(`/people/${length}`);
+                  reply.redirect('/people');
                 }
               });
             }
@@ -165,7 +165,7 @@ handlers.createNewOrganisation = (request, reply) => {
         if (error) {
           reply(Boom.badImplementation('redis-failure'));
         } else {
-          reply.redirect(`/orgs/${length}`);
+          reply.redirect('/orgs');
         }
       });
     }
@@ -195,12 +195,16 @@ handlers.viewOrganisationDetails = (request, reply) => {
     if (error) console.log(error);
     // catch for case where org at specified userId doesn't exist.
     const organisation = JSON.parse(stringifiedOrg);
-    request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
-      if (error) console.log(error);
-      const {first_name, last_name, email, phone, job} = JSON.parse(stringifiedPrimaryUser);
-      const organisationDetails = Object.assign({first_name, last_name, email, phone, job}, organisation);
-      reply.view('organisations/details', organisationDetails);
-    });
+    if (organisation.primary_id) {
+      request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
+        if (error) console.log(error);
+        const {first_name, last_name, email, phone, job} = JSON.parse(stringifiedPrimaryUser);
+        const organisationDetails = Object.assign({first_name, last_name, email, phone, job}, organisation);
+        reply.view('organisations/details', organisationDetails);
+      });
+    } else {
+      reply.view('organisations/details', organisation);
+    }
   });
 };
 
