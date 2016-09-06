@@ -210,9 +210,18 @@ handlers.editOrganisationDetails = (request, reply) => {
     if (error) {
       console.log(error);
       return reply(error);
+    } else {
+      const organisation = JSON.parse(stringifiedOrg);
+      request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
+        if (error) console.log(error);
+        const {first_name, last_name, id} = JSON.parse(stringifiedPrimaryUser);
+        const organisationDetails = Object.assign({}, organisation, {
+          primary_user_name: `${first_name} ${last_name}`,
+          primary_user_id: id
+        });
+        reply.view('organisations/edit', organisationDetails);
+      });
     }
-    const organisation = JSON.parse(stringifiedOrg);
-    reply.view('organisations/edit', organisation);
   });
 };
 
