@@ -84,12 +84,16 @@ handlers.viewUserDetails = (request, reply) => {
     if (error) console.log(error);
     // catch for case where user at specified userId doesn't exist.
     const user = JSON.parse(stringifiedUser);
-    request.redis.LINDEX('organisations', user.organisation_id, (error, stringifiedOrg) => {
-      if (error) console.log(error);
-      const {name, mission_statement} = JSON.parse(stringifiedOrg);
-      const userDetails = Object.assign({name, mission_statement}, user);
-      reply.view('people/details', userDetails);
-    });
+    if (user.user_type === 'admin') {
+      reply.view('people/details', user);
+    } else {
+      request.redis.LINDEX('organisations', user.organisation_id, (error, stringifiedOrg) => {
+        if (error) console.log(error);
+        const {name, mission_statement} = JSON.parse(stringifiedOrg);
+        const userDetails = Object.assign({name, mission_statement}, user);
+        reply.view('people/details', userDetails);
+      });
+    }
   });
 };
 
