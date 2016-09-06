@@ -31,6 +31,7 @@
     "inert": "^4.0.2",
     "joi": "^9.0.4",
     "redis": "^2.6.2",
+    "sendemail": "^2.3.0",
     "vision": "^4.1.0"
   },
   "devDependencies": {
