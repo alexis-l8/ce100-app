@@ -1,3 +1,7 @@
+<!-- Include Navbar -->
+{{>navbar}}
+
+<!-- Main Content -->
 <div class="container">
     <h1 class="title">Edit Organisation Details</h1>
     <form class="form" method="post">
@@ -18,7 +22,7 @@
         <label class="form__label" for="primary_user_name">Primary User</label>
         <div class="form__input" name="primary_user_name" id="primary_user_name">
           {{primary_user_name}}
-          <a href="/people/{{primary_user_id}}/edit"><button class="button-small float-right">EDIT PRIMARY USER</button></a>
+          <a href="/people/{{primary_user_id}}/edit" class="button-small float-right">EDIT PRIMARY USER</a>
         </div>
 
         <button class="button" type="submit">SUBMIT</button>
