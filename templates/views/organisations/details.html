@@ -10,12 +10,18 @@
         <p class="card__copy">{{mission_statement}}</p>
     </div>
 
+    {{#if first_name}}
     <div class="card">
-        <span class="card__data">{{first_name}} {{last_name}}</span>
-        <span class="card__data">{{job}}</span>
-        <span class="card__data">{{phone}}</span>
-        <span class="card__data">{{email}}</span>
+      <span class="card__data">{{first_name}} {{last_name}}</span>
+      <span class="card__data">{{job}}</span>
+      <span class="card__data">{{phone}}</span>
+      <span class="card__data">{{email}}</span>
     </div>
+    {{else}}
+    <div class="card">
+      <span class="card__data">No Primary User Yet</span>
+    </div>
+    {{/if}}
 
     <a class="button" href="/orgs/{{id}}/edit">Edit</a>
 
