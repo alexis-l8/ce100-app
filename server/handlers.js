@@ -103,7 +103,12 @@ handlers.createNewPrimaryUserForm = (request, reply) => {
       console.log(error);
       reply(Boom.badImplementation('redis-failure'));
     } else {
-      const allOrganisations = {allOrganisations: stringifiedOrgs.map(org => JSON.parse(org))};
+      const allOrganisations = {
+        allOrganisations: stringifiedOrgs.map(org => {
+          const details = JSON.parse(org);
+          return {value: details.id, display: details.name};
+        })
+      };
       reply.view('people/add', allOrganisations);
     }
   });
