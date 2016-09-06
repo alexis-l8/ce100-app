@@ -4,31 +4,36 @@
 <!-- Main Content -->
 <div class="container">
     <h1 class="title">Add New User</h1>
-    <form method="post">
-      First Name:<br>
-      <input type="text" name="first_name"><br>
-      Last Name:<br>
-      <input type="text" name="last_name"><br>
-      Email:<br>
-      <input type="text" name="email"><br>
-      Organisation:<br>
+
+    <form class="form" method="post">
+      <label class="form__label" for="first_name">First Name</label>
+      <input class="form__input" type="text" name="first_name" id="first_name" placeholder="Write Here...">
+
+      <label class="form__label" for="last_name">Last Name</label>
+      <input class="form__input" type="text" name="last_name" id="last_name" placeholder="Write Here...">
+      
+      <label class="form__label" for="email">Email</label>
+      <input class="form__input" type="text" name="email" id="email" placeholder="Write Here...">
+      
+      <span class="form__label">User Type</span>
+      {{#each userTypes}}
+        {{>radio}}
+      {{/each}}
+
+      <label class="form__label" for="organisation_id">Organisation</label>
       {{#if allOrganisations}}
-      <select name="organisation_id">
+      <select class="form__input" name="organisation_id">
         {{#each allOrganisations}}
           {{>dropdown}}
         {{/each}}
         <option value='admin'>N/A (Admin)</option>
       </select>
       {{else}}
-      <select name="organisation_id">
+      <select class="form__input" name="organisation_id">
         <option value='admin'>N/A (Admin)</option>
       </select>
       {{/if}}
-      <br>
-      User Type: <br>
-      {{#each userTypes}}
-        {{>radio}}
-      {{/each}}
-      <input type="submit"><br>
+      
+      <button class="button">Submit</button>
     </form>
 </div>

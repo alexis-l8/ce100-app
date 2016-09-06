@@ -1,5 +1,15 @@
-<form method="post">
-  Organisation Name:<br>
-  <input type="text" name="name"><br>
-  <input type="submit" name="submit"><br>
+<!-- Include Navbar -->
+{{>navbar}}
+
+<!-- Main Content -->
+<div class="container">
+    <h1 class="title">Add Organisation</h1>
+
+<form class="form" method="post">
+  <label class="form__label" for="name">Organisation Name</label>
+  <input class="form__input" type="text" name="name">
+
+  <button class="button">Submit</button>
 </form>
+
+</div>
