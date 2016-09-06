@@ -3,8 +3,8 @@ const setupData = {};
 // people
 setupData.initialPeople = [
   {
-    first_name: 'jack',
-    last_name: 'murphy',
+    first_name: 'Jack',
+    last_name: 'Murphy',
     email: 'ja@mu.co',
     user_type: 'admin',
     id: 0,
@@ -82,7 +82,7 @@ setupData.initialPeople = [
 setupData.initialOrgs = [
   {
     id: 0,
-    name: 'apple',
+    name: 'Apple',
     active: true,
     mission_statement: 'Change the economy',
     primary_id: 2,
@@ -98,15 +98,15 @@ setupData.initialOrgs = [
   },
   {
     id: 2,
-    name: 'charcoal',
-    active: false,
+    name: 'Charcoal',
+    active: true,
     mission_statement: 'Summer!',
     primary_id: 4,
     people: [4]
   },
   {
     id: 3,
-    name: 'emf',
+    name: 'EMF',
     active: true,
     mission_statement: 'Change the economy',
     primary_id: 5,
@@ -114,11 +114,27 @@ setupData.initialOrgs = [
   },
   {
     id: 4,
-    name: 'anon_org123',
-    active: false,
+    name: 'BP',
+    active: true,
     mission_statement: 'Anonymous',
     primary_id: 6,
     people: [6]
+  },
+  {
+    id: 4,
+    name: 'Asda',
+    active: false,
+    mission_statement: 'Every Little Helps',
+    primary_id: "",
+    people: []
+  },
+  {
+    id: 4,
+    name: 'Coca Cola',
+    active: false,
+    mission_statement: 'Santa',
+    primary_id: "",
+    people: []
   }
 ];
 module.exports = setupData;
