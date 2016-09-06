@@ -1,21 +1,22 @@
 <div class="container">
-    <h1>Edit Organisation Details</h1>
+    <h1 class="title">Edit Organisation Details</h1>
     <form class="form" method="post">
-        <label for="name">Organisation Name</label>
-        <input class="form__input" name="name" value="{{name}}">
+        <label class="form__label" for="org_name">Organisation Name</label>
+        <input class="form__input" name="name" value="{{name}}" id="org_name">
 
-        <label for="mission_statement">Mission Statement</label>
-        <input class="form__input" name="mission_statement" value="{{mission_statement}}">
+        <label class="form__label" for="mission_statement">Mission Statement</label>
+        <input class="form__input" name="mission_statement" value="{{mission_statement}}" id="mission_statement">
 
-        <input class="form__input" type="checkbox" name="archive">
-        <span>Archive Organisation</span>
-        <a href="/orgs/{{id}}/toggle-archive">
+        <a class="anchor anchor--danger" href="/orgs/{{id}}/toggle-archive">
           {{#if active}}
           Archive Organisation
           {{else}}
           Unarchive Organisation
           {{/if}}
         </a>
-      <button type="submit">SUBMIT</button> <a href="/orgs/{{id}}">CANCEL</a>
+
+        <button class="button" type="submit">SUBMIT</button> 
+        <a class="anchor" href="/orgs/{{id}}">CANCEL</a>
+
     </form>
 </div>

@@ -77,7 +77,7 @@ Bluey-grey:     #89a0ae;
 
 White:          #ffffff;
 
-
+Danger-red:     #900000;
 */
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -324,14 +324,37 @@ White:          #ffffff;
     color: rgb(255, 255, 255);
     text-align: center;
     text-decoration: none; 
-    
+
     background-color: rgb(0, 50, 83);
 
     border: none;
     border-radius: 100px;
 }
 
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Anchors
+  |||||||||||||||||||||||||||||||||||||||||||*/
 
+.anchor:link {
+    text-align: center;
+    display: block;
+    line-height: 2.75;
+    color: #89a0ae;
+}
+.anchor:visited {
+    color: #40667e;
+}
+.anchor:hover {
+    text-decoration: none;
+}
+.anchor:active {
+    font-size: 0.9em;
+}
+
+.anchor--danger:link {
+    color: #900000;
+    margin: 1rem auto 4rem;
+}
 
 
 
