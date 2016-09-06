@@ -1,11 +1,20 @@
-<h1>All People</h1>
-<div>
-  {{#if allUsers}}
-  <a href="/people/add"><button>Add New User</button></a>
-    {{#each allUsers}}
-      {{>user}}
-    {{/each}}
-  {{else}}
-    <h3>Sorry! No users were found</h3>
-  {{/if}}
+<!-- Include Navbar -->
+{{>navbar}}
+
+<!-- Main Content -->
+<div class="container">
+    <h1 class="title">Contact List</h1>
+
+    {{#if allUsers}}
+        <ul class="list">
+            {{#each allUsers}}
+
+                {{>user}}
+
+            {{/each}}
+        </ul>
+
+        {{else}}
+        <h3>Sorry! No users were found</h3>
+    {{/if}}
 </div>

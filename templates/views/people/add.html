@@ -1,28 +1,34 @@
-<h1>Add New User</h1>
-<form method="post">
-  First Name:<br>
-  <input type="text" name="first_name"><br>
-  Last Name:<br>
-  <input type="text" name="last_name"><br>
-  Email:<br>
-  <input type="text" name="email"><br>
-  Organisation:<br>
-  {{#if allOrganisations}}
-    <select name="organisation_id">
-      {{#each allOrganisations}}
-        {{>dropdown}}
+<!-- Include Navbar -->
+{{>navbar}}
+
+<!-- Main Content -->
+<div class="container">
+    <h1 class="title">Add New User</h1>
+    <form method="post">
+      First Name:<br>
+      <input type="text" name="first_name"><br>
+      Last Name:<br>
+      <input type="text" name="last_name"><br>
+      Email:<br>
+      <input type="text" name="email"><br>
+      Organisation:<br>
+      {{#if allOrganisations}}
+      <select name="organisation_id">
+        {{#each allOrganisations}}
+          {{>dropdown}}
+        {{/each}}
+        <option value='admin'>N/A (Admin)</option>
+      </select>
+      {{else}}
+      <select name="organisation_id">
+        <option value='admin'>N/A (Admin)</option>
+      </select>
+      {{/if}}
+      <br>
+      User Type: <br>
+      {{#each userTypes}}
+        {{>radio}}
       {{/each}}
-      <option value='admin'>N/A (Admin)</option>
-    </select>
-  {{else}}
-    <select name="organisation_id">
-      <option value='admin'>N/A (Admin)</option>
-    </select>
-  {{/if}}
-  <br>
-  User Type: <br>
-  {{#each userTypes}}
-    {{>radio}}
-  {{/each}}
-  <input type="submit"><br>
-</form>
+      <input type="submit"><br>
+    </form>
+</div>
