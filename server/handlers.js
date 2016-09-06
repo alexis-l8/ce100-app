@@ -97,6 +97,18 @@ handlers.viewUserDetails = (request, reply) => {
   });
 };
 
+handlers.createNewPrimaryUserForm = (request, reply) => {
+  request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
+    if (error) {
+      console.log(error);
+      reply(Boom.badImplementation('redis-failure'));
+    } else {
+      const allOrganisations = {allOrganisations: stringifiedOrgs.map(org => JSON.parse(org))};
+      reply.view('people/add', allOrganisations);
+    }
+  });
+};
+
 handlers.createNewPrimaryUser = (request, reply) => {
   const payload = request.payload;
   const redis = request.redis;
