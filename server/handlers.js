@@ -67,7 +67,6 @@ handlers.viewAllUsers = (request, reply) => {
               name: 'Orgs'
             }]
           };
-          console.log(users);
           reply.view('people/view', allUsers);
         }
       });
