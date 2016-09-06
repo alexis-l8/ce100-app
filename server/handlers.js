@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const Boom = require('boom');
 const Iron = require('iron');
+const sendEmail = require('./email.js');
 
 var handlers = {};
 
@@ -14,6 +15,7 @@ handlers.serveFile = (request, reply) => {
 
 handlers.activatePrimaryUser = (request, reply) => {
   const hashedId = request.params.hashedId;
+  console.log(hashedId);
   Iron.unseal(hashedId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, userId) => {
     if (err) {
       console.log(err);
@@ -25,6 +27,7 @@ handlers.activatePrimaryUser = (request, reply) => {
         console.log(error);
         reply('hash failed');
       } else {
+        console.log(userId);
         request.redis.LINDEX('people', userId, (error, user) => {
           if (error) {
             console.log(error);
@@ -37,7 +40,7 @@ handlers.activatePrimaryUser = (request, reply) => {
                 reply('redis-failure');
               } else {
                 request.cookieAuth.set({userId: userId});
-                reply.redirect('/');
+                reply.redirect('/orgs');
               }
             });
           }
@@ -116,8 +119,8 @@ handlers.createNewPrimaryUserForm = (request, reply) => {
 
 handlers.createNewPrimaryUser = (request, reply) => {
   const payload = request.payload;
-  console.log(payload);
   const redis = request.redis;
+  console.log(payload);
   redis.LLEN('people', (error, length) => {
     if (error) {
       console.log(error);
@@ -141,7 +144,16 @@ handlers.createNewPrimaryUser = (request, reply) => {
                   console.log('ERROR', error);
                   reply('redis-failure');
                 } else {
-                  reply.redirect('/people');
+                  Iron.seal(length, process.env.COOKIE_PASSWORD, Iron.defaults, (err, hashed) => {
+                    const newUser = Object.assign({}, payload, {
+                      organisation_name: JSON.parse(org).name,
+                      hashedId: hashed
+                    });
+                    sendEmail.newUser(newUser, (error, response) => {
+                      if (error) reply(Boom.badImplementation(error));
+                      else reply.redirect('/people');
+                    });
+                  });
                 }
               });
             }
