@@ -12,7 +12,6 @@ handlers.serveFile = (request, reply) => {
   reply.file(request.params.path);
 };
 
-
 handlers.activatePrimaryUser = (request, reply) => {
   const hashedId = request.params.hashedId;
   Iron.unseal(hashedId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, userId) => {
@@ -51,7 +50,16 @@ handlers.activatePrimaryUser = (request, reply) => {
 handlers.viewAllUsers = (request, reply) => {
   request.redis.LRANGE('people', 0, -1, (error, stringifiedUsers) => {
     if (error) console.log(error);
-    const allUsers = {allUsers: stringifiedUsers.map(element => JSON.parse(element))};
+    const allUsers = {
+      allUsers: stringifiedUsers.map(element => JSON.parse(element)),
+      alternate: [{
+        path: '/people/add',
+        name: '+'
+      }, {
+        path: '/orgs',
+        name: 'Orgs'
+      }]
+    };
     reply.view('people/view', allUsers);
   });
 };
@@ -156,7 +164,16 @@ handlers.createNewOrganisation = (request, reply) => {
 handlers.viewAllOrganisations = (request, reply) => {
   request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
     if (error) console.log(error);
-    const organisations = {allOrganisations: stringifiedOrgs.map(element => JSON.parse(element))};
+    const organisations = {
+      allOrganisations: stringifiedOrgs.map(element => JSON.parse(element)),
+      alternate: [{
+        path: '/orgs/add',
+        name: '+'
+      }, {
+        path: '/people',
+        name: 'People'
+      }]
+    };
     reply.view('organisations/view', organisations);
   });
 };
