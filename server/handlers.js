@@ -12,28 +12,6 @@ handlers.serveFile = (request, reply) => {
   reply.file(request.params.path);
 };
 
-handlers.viewAllOrganisations = (request, reply) => {
-  request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
-    if (error) console.log(error);
-    const organisations = {allOrganisations: stringifiedOrgs.map(element => JSON.parse(element))};
-    reply.view('organisations/view', organisations);
-  });
-};
-
-handlers.viewOrganisationDetails = (request, reply) => {
-  const userId = request.params.id;
-  request.redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
-    if (error) console.log(error);
-    // catch for case where org at specified userId doesn't exist.
-    const organisation = JSON.parse(stringifiedOrg);
-    request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
-      if (error) console.log(error);
-      const {first_name, last_name, email} = JSON.parse(stringifiedPrimaryUser);
-      const organisationDetails = Object.assign({first_name, last_name, email}, organisation);
-      reply.view('organisations/details', organisationDetails);
-    });
-  });
-};
 
 handlers.activatePrimaryUser = (request, reply) => {
   const hashedId = request.params.hashedId;
@@ -146,6 +124,41 @@ handlers.createNewOrganisation = (request, reply) => {
         }
       });
     }
+  });
+};
+
+handlers.viewAllOrganisations = (request, reply) => {
+  request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
+    if (error) console.log(error);
+    const organisations = {allOrganisations: stringifiedOrgs.map(element => JSON.parse(element))};
+    reply.view('organisations/view', organisations);
+  });
+};
+
+handlers.viewOrganisationDetails = (request, reply) => {
+  const userId = request.params.id;
+  request.redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
+    if (error) console.log(error);
+    // catch for case where org at specified userId doesn't exist.
+    const organisation = JSON.parse(stringifiedOrg);
+    request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
+      if (error) console.log(error);
+      const {first_name, last_name, email} = JSON.parse(stringifiedPrimaryUser);
+      const organisationDetails = Object.assign({first_name, last_name, email}, organisation);
+      reply.view('organisations/details', organisationDetails);
+    });
+  });
+};
+
+handlers.editOrganisationDetails = (request, reply) => {
+  const orgId = request.params.id;
+  request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
+    if (error) {
+      console.log(error);
+      return reply(error);
+    }
+    const organisation = JSON.parse(stringifiedOrg);
+    reply.view('organisations/edit', organisation);
   });
 };
 
