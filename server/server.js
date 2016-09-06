@@ -29,6 +29,8 @@ server.register([Vision, HapiRedisConnection, Auth], err => {
     },
     relativeTo: path.resolve(__dirname, '..'),
     path: 'templates/views',
+    layout: 'default',
+    layoutPath: 'templates/layout',
     partialsPath: 'templates/partials',
     helpersPath: 'templates/helpers'
   });
