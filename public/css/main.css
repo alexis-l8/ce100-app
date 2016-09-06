@@ -4,24 +4,81 @@
 
 /*
 
-Marine-blue : #003253;
+Marine-blue :   #003253;
+Navy:           #002944;
+
+Denim:          #40667e;
+
+Bluey-grey:     #89a0ae;
+
+White:          #ffffff;
 
 
 */
 
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Resets
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
 
 html {
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
+    font-size: 14px;
+    font-family: 'Noto Sans', Helvetica, Ariel, sans-serif;
 }
+
 body {
-    margin: 0;
+    min-height: 100vh;
+    line-height: 1.5rem;
 }
-ul {
-    margin: 0;
-    padding: 0;
-}
+
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Nav Bar
@@ -29,8 +86,190 @@ ul {
 
 
 .navbar {
-    height: 47px;
+    height: 3.4285714286rem; /* 48px */
     width: 100%;
     background-color: #003253;
+    position: relative;
+}
+
+.navbar__logo {
+    display: none;
+    /*************************************
+    WARNING TO BE REMOVED*/
+}
+
+.navbar__links {
+    display: table;
+    width: 100%;
+    max-width: 54.857142857rem;
+    margin: auto;
+}
+    .navbar__item {
+        display: table-cell;
+        vertical-align: middle;
+        width: 50%;
+        text-align: center;
+    } 
+        .navbar__link:link {
+            display: block;
+            padding: 1rem 0;
+            color: ;
+        }
+        .navbar__link:visited {
+            color: ;
+        }
+        .navbar__link:hover {
+            color: ;
+        }
+        .navbar__link:active {
+            color: ;
+        }
+
+.navbar__hamburger {
+}
+
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Containers
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.container {
+    max-width: 54.857142857rem;
+    margin: auto;
+}
+
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Titles
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.title {
+    padding: 1.5rem 0;
+    margin: 0;
+
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 1rem;
+    font-weight: normal;
+    color: #ffffff;
+    
+    background: #002944; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#002944, #003253); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#002944, #003253); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#002944, #003253); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#002944, #003253); /* Standard syntax */
+}
+
+.title--with-logo {
+    padding: 3.5rem 0;
+}
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Lists
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.list {
 
 }
+
+.list__item {
+    position: relative;
+    padding: 1rem 8%;
+    list-style: none;
+    border-bottom: #89a0ae 1px solid;
+}
+
+.list__data {
+    display: block;
+    color: #89a0ae;
+}
+.list__data--primary {
+    color: #40667e;
+}
+
+.list__hidden-details {
+    display: none;
+}
+
+.list__ellipsis {
+    position: absolute;
+    right: 8%;
+    top: 0;
+
+    padding: 1rem;
+    margin-right: -1rem;
+    cursor: pointer;
+}
+
+.list__ellipsis:focus {
+    outline: none;
+}
+
+.list__ellipsis:focus > * {
+    background-color: #40667e;
+}
+
+.list__ellipsis:focus ~ .list__hidden-details {
+    display: block;
+}
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Shapes
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.circle {
+    display: inline-block;
+    background-color: #89a0ae;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Cards  
+    -------- (Cards are blocks of content)
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+
+.card {
+    padding: 5rem 1rem;
+    text-align: center;
+    color: #40667e;
+    border-bottom: 1px solid #89a0ae;
+}
+
+.card__copy {
+    margin-bottom: 1.5rem;
+}
+.card__data {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,14 +1,19 @@
-<div>
-    <details>
-        <summary>{{first_name}} {{last_name}}</summary>            
-        
-        <span>Email:</span>
-        <span>{{email}}</span>
+<li class="list__item">
 
-        <span>User Type:</span>
-        <span>{{user_type}}</span>
+    <span class="list__data list__data--primary">{{first_name}} {{last_name}}</span>            
+    
+    <div class="list__ellipsis" tabindex="1">
+        <i class="circle"></i>
+        <i class="circle"></i>
+        <i class="circle"></i>
+    </div>
+    
+    <div class="list__hidden-details">
 
-        <span>Active:</span>
-        <span>{{active}}</span>
-    </details>
-</div>
+        <span class="list__data">{{email}}</span>
+
+        <span class="list__data">{{user_type}}</span>
+
+        <span class="list__data">{{active}}</span>
+    </div>
+</li>
