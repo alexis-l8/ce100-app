@@ -101,6 +101,11 @@ const routes = [
     handler: handlers.editOrganisationDetails
   },
   {
+    method: 'POST',
+    path: '/orgs/{id}/edit',
+    handler: handlers.submitEditOrg
+  },
+  {
     method: 'GET',
     path: '/{path*}',
     handler: handlers.serveFile

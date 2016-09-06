@@ -162,6 +162,27 @@ handlers.editOrganisationDetails = (request, reply) => {
   });
 };
 
+handlers.submitEditOrg = (request, reply) => {
+  //assuming org not deleted. New route or handler?
+  const orgId = request.params.id;
+  request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
+    if (error) {
+      console.log(error);
+      return reply(Boom.badImplementation('redis-failure'));
+    }
+    if (!stringifiedOrg) return reply(Boom.notFound('Organisation does not exist'));
+    const oldOrg = JSON.parse(stringifiedOrg);
+    const orgUpdated = Object.assign({}, oldOrg, request.payload);
+    request.redis.LSET('organisations', orgId, JSON.stringify(orgUpdated), (error, response) => {
+      if (error) {
+        console.log(error);
+        return reply(Boom.badImplementation('redis-failure'));
+      }
+      reply.redirect(`/orgs/${orgId}`);
+    });
+  });
+};
+
 handlers.login = (request, reply) => {
   const redis = request.redis;
   const email = request.payload.email;
