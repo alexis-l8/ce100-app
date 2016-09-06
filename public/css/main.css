@@ -331,7 +331,7 @@ Danger-red:     #900000;
     border-radius: 100px;
 }
 
-.button-small-right {
+.button-small {
     padding: 0.5rem;
     cursor: pointer;
 
@@ -376,5 +376,5 @@ Danger-red:     #900000;
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .float-right {
-  float-right: right
+  float: right
 }
