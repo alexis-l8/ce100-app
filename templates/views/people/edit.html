@@ -1,3 +1,7 @@
+<!-- Include Navbar -->
+{{>navbar}}
+
+<!-- Main Content -->
 <div class="container">
     <h1>Edit User Details</h1>
     <form class="form" method="post">
@@ -17,7 +21,6 @@
         {{/each}}
 
         <label class="form__label" for="organisation_id">Organisation</label>
-        <!-- how to set default from outside the option??               -->
         {{#if allOrganisations}}
         <select class="form__input" name="organisation_id">
           <option value="{{organisation.value}}">{{organisation.display}}</option>
@@ -32,16 +35,15 @@
         </select>
         {{/if}}
 
-        <input class="form__input" type="checkbox" name="archive">
         <span>Archive User</span>
-        <a href="/orgs/{{id}}/toggle-archive">
+        <a href="/orgs/{{user.id}}/toggle-archive">
           {{#if user.active}}
           Archive Organisation
           {{else}}
           Unarchive Organisation
           {{/if}}
         </a>
-      <button type="submit">SUBMIT</button> <a href="/orgs/{{id}}">CANCEL</a>
+      <button type="submit">SUBMIT</button> <a href="/orgs/{{user.id}}">CANCEL</a>
     </form>
 </div>
 
