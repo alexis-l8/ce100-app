@@ -111,6 +111,11 @@ const routes = [
   },
   {
     method: 'GET',
+    path: '/orgs/{id}/toggle-archive',
+    handler: handlers.toggleArchiveOrg
+  },
+  {
+    method: 'GET',
     path: '/{path*}',
     handler: handlers.serveFile
   }

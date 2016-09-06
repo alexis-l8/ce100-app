@@ -11,8 +11,14 @@
         <input name="mission_statement" value="{{mission_statement}}"><br>
       </div>
       <div>
-        <input type="checkbox" name="archive">
-        <span>Archive Organisation</span><br>
+          <a href="/orgs/{{id}}/toggle-archive">
+            {{#if active}}
+              Archive Organisation
+            {{else}}
+              Unarchive Organisation
+            {{/if}}
+          </a>
+      </div>
       <button type="submit">SUBMIT</button> <a href="/orgs/{{id}}">CANCEL</a>
     </form>
   </div>
