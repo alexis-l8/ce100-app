@@ -50,17 +50,28 @@ handlers.activatePrimaryUser = (request, reply) => {
 handlers.viewAllUsers = (request, reply) => {
   request.redis.LRANGE('people', 0, -1, (error, stringifiedUsers) => {
     if (error) console.log(error);
-    const allUsers = {
-      allUsers: stringifiedUsers.map(element => JSON.parse(element)),
-      alternate: [{
-        path: '/people/add',
-        name: '+'
-      }, {
-        path: '/orgs',
-        name: 'Orgs'
-      }]
-    };
-    reply.view('people/view', allUsers);
+    request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
+      if (error) console.log(error);
+      var organisations = stringifiedOrgs.map(element => JSON.parse(element));
+      var users = stringifiedUsers.map(element => JSON.parse(element));
+      users.forEach((user, index) => {
+        user.organisation_name = user.organisation_id ? organisations[user.organisation_id].name : false;
+        if (index === users.length - 1) {
+          var allUsers = {
+            allUsers: users,
+            alternate: [{
+              path: '/people/add',
+              name: '+'
+            }, {
+              path: '/orgs',
+              name: 'Orgs'
+            }]
+          };
+          console.log(users);
+          reply.view('people/view', allUsers);
+        }
+      });
+    });
   });
 };
 
