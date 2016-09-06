@@ -1,19 +1,14 @@
-<div>
-  <h2>Edit Organisation Details</h2>
-  <div>
-    <form method="post">
-      <div>
-        <span>Organisation Name:</span><br>
-        <input name="name" value="{{name}}"><br>
-      </div>
-      <div>
-        <span>Mission Statement:</span><br>
-        <input name="mission_statement" value="{{mission_statement}}"><br>
-      </div>
-      <div>
-        <input type="checkbox" name="archive">
-        <span>Archive Organisation</span><br>
+<div class="container">
+    <h1>Edit Organisation Details</h1>
+    <form class="form" method="post">
+        <label for="name">Organisation Name</label>
+        <input class="form__input" name="name" value="{{name}}">
+
+        <label for="mission_statement">Mission Statement</label>
+        <input class="form__input" name="mission_statement" value="{{mission_statement}}">
+        
+        <input class="form__input" type="checkbox" name="archive">
+        <span>Archive Organisation</span>
       <button type="submit">SUBMIT</button> <a href="/orgs/{{id}}">CANCEL</a>
     </form>
-  </div>
 </div>
