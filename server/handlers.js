@@ -103,10 +103,14 @@ handlers.createNewPrimaryUserForm = (request, reply) => {
       console.log(error);
       reply(Boom.badImplementation('redis-failure'));
     } else {
+      const userTypes = ['admin', 'primary'];
       const allOrganisations = {
         allOrganisations: stringifiedOrgs.map(org => {
           const details = JSON.parse(org);
           return {value: details.id, display: details.name};
+        }),
+        userTypes: userTypes.map(user => {
+          return {name: 'user_type', value: user, display: user};
         })
       };
       reply.view('people/add', allOrganisations);
@@ -116,6 +120,7 @@ handlers.createNewPrimaryUserForm = (request, reply) => {
 
 handlers.createNewPrimaryUser = (request, reply) => {
   const payload = request.payload;
+  console.log(payload);
   const redis = request.redis;
   redis.LLEN('people', (error, length) => {
     if (error) {
