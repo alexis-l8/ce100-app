@@ -12,29 +12,6 @@ handlers.serveFile = (request, reply) => {
   reply.file(request.params.path);
 };
 
-handlers.viewAllOrganisations = (request, reply) => {
-  request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
-    if (error) console.log(error);
-    const organisations = {allOrganisations: stringifiedOrgs.map(element => JSON.parse(element))};
-    reply.view('organisations/view', organisations);
-  });
-};
-
-handlers.viewOrganisationDetails = (request, reply) => {
-  const userId = request.params.id;
-  request.redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
-    if (error) console.log(error);
-    // catch for case where org at specified userId doesn't exist.
-    const organisation = JSON.parse(stringifiedOrg);
-    request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
-      if (error) console.log(error);
-      const {first_name, last_name, email} = JSON.parse(stringifiedPrimaryUser);
-      const organisationDetails = Object.assign({first_name, last_name, email}, organisation);
-      reply.view('organisations/details', organisationDetails);
-    });
-  });
-};
-
 handlers.activatePrimaryUser = (request, reply) => {
   const hashedId = request.params.hashedId;
   Iron.unseal(hashedId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, userId) => {
@@ -73,7 +50,16 @@ handlers.activatePrimaryUser = (request, reply) => {
 handlers.viewAllUsers = (request, reply) => {
   request.redis.LRANGE('people', 0, -1, (error, stringifiedUsers) => {
     if (error) console.log(error);
-    const allUsers = {allUsers: stringifiedUsers.map(element => JSON.parse(element))};
+    const allUsers = {
+      allUsers: stringifiedUsers.map(element => JSON.parse(element)),
+      alternate: [{
+        path: '/people/add',
+        name: '+'
+      }, {
+        path: '/orgs',
+        name: 'Orgs'
+      }]
+    };
     reply.view('people/view', allUsers);
   });
 };
@@ -84,17 +70,43 @@ handlers.viewUserDetails = (request, reply) => {
     if (error) console.log(error);
     // catch for case where user at specified userId doesn't exist.
     const user = JSON.parse(stringifiedUser);
-    request.redis.LINDEX('organisations', user.organisation_id, (error, stringifiedOrg) => {
-      if (error) console.log(error);
-      const {name, mission_statement} = JSON.parse(stringifiedOrg);
-      const userDetails = Object.assign({name, mission_statement}, user);
-      reply.view('people/details', userDetails);
-    });
+    if (user.user_type === 'admin') {
+      reply.view('people/details', user);
+    } else {
+      request.redis.LINDEX('organisations', user.organisation_id, (error, stringifiedOrg) => {
+        if (error) console.log(error);
+        const {name, mission_statement} = JSON.parse(stringifiedOrg);
+        const userDetails = Object.assign({name, mission_statement}, user);
+        reply.view('people/details', userDetails);
+      });
+    }
+  });
+};
+
+handlers.createNewPrimaryUserForm = (request, reply) => {
+  request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
+    if (error) {
+      console.log(error);
+      reply(Boom.badImplementation('redis-failure'));
+    } else {
+      const userTypes = ['admin', 'primary'];
+      const allOrganisations = {
+        allOrganisations: stringifiedOrgs.map(org => {
+          const details = JSON.parse(org);
+          return {value: details.id, display: details.name};
+        }),
+        userTypes: userTypes.map(user => {
+          return {name: 'user_type', value: user, display: user};
+        })
+      };
+      reply.view('people/add', allOrganisations);
+    }
   });
 };
 
 handlers.createNewPrimaryUser = (request, reply) => {
   const payload = request.payload;
+  console.log(payload);
   const redis = request.redis;
   redis.LLEN('people', (error, length) => {
     if (error) {
@@ -146,6 +158,50 @@ handlers.createNewOrganisation = (request, reply) => {
         }
       });
     }
+  });
+};
+
+handlers.viewAllOrganisations = (request, reply) => {
+  request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
+    if (error) console.log(error);
+    const organisations = {
+      allOrganisations: stringifiedOrgs.map(element => JSON.parse(element)),
+      alternate: [{
+        path: '/orgs/add',
+        name: '+'
+      }, {
+        path: '/people',
+        name: 'People'
+      }]
+    };
+    reply.view('organisations/view', organisations);
+  });
+};
+
+handlers.viewOrganisationDetails = (request, reply) => {
+  const userId = request.params.id;
+  request.redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
+    if (error) console.log(error);
+    // catch for case where org at specified userId doesn't exist.
+    const organisation = JSON.parse(stringifiedOrg);
+    request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
+      if (error) console.log(error);
+      const {first_name, last_name, email} = JSON.parse(stringifiedPrimaryUser);
+      const organisationDetails = Object.assign({first_name, last_name, email}, organisation);
+      reply.view('organisations/details', organisationDetails);
+    });
+  });
+};
+
+handlers.editOrganisationDetails = (request, reply) => {
+  const orgId = request.params.id;
+  request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
+    if (error) {
+      console.log(error);
+      return reply(error);
+    }
+    const organisation = JSON.parse(stringifiedOrg);
+    reply.view('organisations/edit', organisation);
   });
 };
 
