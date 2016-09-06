@@ -1,6 +1,7 @@
 <h1>All Organisations</h1>
 <div>
   {{#if allOrganisations}}
+  <a href="/orgs/add"><button>Add New Organisation</button></a>
     {{#each allOrganisations}}
       {{>organisation}}
     {{/each}}
