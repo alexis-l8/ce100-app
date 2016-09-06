@@ -21,6 +21,8 @@
   {{/if}}
   <br>
   User Type: <br>
-  <input type="text" name="user_type"><br>
+  {{#each userTypes}}
+    {{>checkbox}}
+  {{/each}}
   <input type="submit"><br>
 </form>
