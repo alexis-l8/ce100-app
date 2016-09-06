@@ -4,6 +4,8 @@ node_js:
   - "6"
 services:
   - redis-server
+script:
+  - npm run coverage
 before_install:
   - pip install --user codecov
   - $CXX --version
