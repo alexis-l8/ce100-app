@@ -15,7 +15,7 @@ const routes = [
   {
     method: 'GET',
     path: '/people/add',
-    handler: handlers.serveView('add-user'),
+    handler: handlers.createNewPrimaryUserForm,
     config: {
       // auth: { scope: 'admin' }
     }
