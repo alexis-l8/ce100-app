@@ -97,6 +97,11 @@ const routes = [
   },
   {
     method: 'GET',
+    path: '/orgs/{id}/edit',
+    handler: handlers.editOrganisationDetails
+  },
+  {
+    method: 'GET',
     path: '/{path*}',
     handler: handlers.serveFile
   }
