@@ -77,6 +77,7 @@ html {
 body {
     min-height: 100vh;
     line-height: 1.5rem;
+    background-color: #fafafa;
 }
 
 
@@ -113,16 +114,17 @@ body {
         .navbar__link:link {
             display: block;
             padding: 1rem 0;
-            color: ;
+            text-decoration: none;
+            color: #ffffff;
         }
         .navbar__link:visited {
-            color: ;
+            color: #ffffff;
         }
         .navbar__link:hover {
-            color: ;
+            text-decoration: underline;
         }
         .navbar__link:active {
-            color: ;
+            font-size: 0.9em;
         }
 
 .navbar__hamburger {
@@ -169,49 +171,71 @@ body {
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .list {
-
+    background-color: #ffffff;
 }
 
-.list__item {
-    position: relative;
-    padding: 1rem 8%;
-    list-style: none;
-    border-bottom: #89a0ae 1px solid;
-}
+    .list__item {
+        position: relative;
+        padding: 1rem 8%;
+        list-style: none;
+        border-bottom: #89a0ae 1px solid;
+    }
+    .list__item--big {
+        text-align: center;
+        padding: 2rem 8%;
+        font-size: 1.15em;
+        text-transform: capitalize;
+        /* Note inheritance and conditional fontsize */
+    }
 
-.list__data {
-    display: block;
-    color: #89a0ae;
-}
-.list__data--primary {
-    color: #40667e;
-}
+        .list__link:link {
+            text-decoration: none;
+        }
+        .list__link:visited {
+            color: ;
+        }
+        .list__link:hover {
+            
+        }
+        .list__link:active {
+            
+        }
 
-.list__hidden-details {
-    display: none;
-}
+        .list__data {
+            display: block;
+            color: #89a0ae;
+        }
+        .list__data--primary {
+            color: #40667e;
+        }
+        
+        /* Expandable List Items */
 
-.list__ellipsis {
-    position: absolute;
-    right: 8%;
-    top: 0;
+        .list__hidden-details {
+            display: none;
+        }
 
-    padding: 1rem;
-    margin-right: -1rem;
-    cursor: pointer;
-}
+        .list__ellipsis {
+            position: absolute;
+            right: 8%;
+            top: 0;
 
-.list__ellipsis:focus {
-    outline: none;
-}
+            padding: 1rem;
+            margin-right: -1rem;
+            cursor: pointer;
+        }
 
-.list__ellipsis:focus > * {
-    background-color: #40667e;
-}
+        .list__ellipsis:focus {
+            outline: none;
+        }
 
-.list__ellipsis:focus ~ .list__hidden-details {
-    display: block;
-}
+        .list__ellipsis:focus > * {
+            background-color: #40667e;
+        }
+
+        .list__ellipsis:focus ~ .list__hidden-details {
+            display: block;
+        }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Shapes
