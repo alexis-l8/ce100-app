@@ -1,6 +1,7 @@
 <h1>All People</h1>
 <div>
   {{#if allUsers}}
+  <a href="/people/add"><button>Add New User</button></a>
     {{#each allUsers}}
       {{>user}}
     {{/each}}
