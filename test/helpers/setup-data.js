@@ -76,7 +76,30 @@ setupData.initialPeople = [
     active: true,
     password: process.env.MOCKDATA_HASHED_PASSWORD,
     last_login: Date.now()
-  }];
+  },
+  {
+    first_name: 'Cocoa',
+    last_name: 'Bean',
+    email: 'ga@si.co',
+    organisation_id: "",
+    user_type: 'primary',
+    id: 7,
+    active: false,
+    password: process.env.MOCKDATA_HASHED_PASSWORD,
+    last_login: Date.now()
+  },
+  {
+    first_name: 'Mixed',
+    last_name: 'Nuts',
+    email: 'ga@si.co',
+    organisation_id: "",
+    user_type: 'primary',
+    id: 8,
+    active: false,
+    password: process.env.MOCKDATA_HASHED_PASSWORD,
+    last_login: Date.now()
+  }
+];
 
 // organisations
 setupData.initialOrgs = [
@@ -121,7 +144,7 @@ setupData.initialOrgs = [
     people: [6]
   },
   {
-    id: 4,
+    id: 5,
     name: 'Asda',
     active: false,
     mission_statement: 'Every Little Helps',
@@ -129,7 +152,7 @@ setupData.initialOrgs = [
     people: []
   },
   {
-    id: 4,
+    id: 6,
     name: 'Coca Cola',
     active: false,
     mission_statement: 'Santa',
