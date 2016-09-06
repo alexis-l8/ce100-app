@@ -75,22 +75,48 @@ handlers.viewAllUsers = (request, reply) => {
   });
 };
 
-handlers.viewUserDetails = (request, reply) => {
+// handlers.viewUserDetails = (request, reply) => {
+//   const userId = request.params.id;
+//   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
+//     if (error) console.log(error);
+//     // catch for case where user at specified userId doesn't exist.
+//     const user = JSON.parse(stringifiedUser);
+//     if (user.user_type === 'admin') {
+//       reply.view('people/details', user);
+//     } else {
+//       request.redis.LINDEX('organisations', user.organisation_id, (error, stringifiedOrg) => {
+//         if (error) console.log(error);
+//         const {name, mission_statement} = JSON.parse(stringifiedOrg);
+//         const userDetails = Object.assign({name, mission_statement}, user);
+//         reply.view('people/details', userDetails);
+//       });
+//     }
+//   });
+// };
+
+// TODO: Add default radio button functionality
+handlers.editUserView = (request, reply) => {
   const userId = request.params.id;
   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
-    if (error) console.log(error);
-    // catch for case where user at specified userId doesn't exist.
-    const user = JSON.parse(stringifiedUser);
-    if (user.user_type === 'admin') {
-      reply.view('people/details', user);
-    } else {
-      request.redis.LINDEX('organisations', user.organisation_id, (error, stringifiedOrg) => {
-        if (error) console.log(error);
-        const {name, mission_statement} = JSON.parse(stringifiedOrg);
-        const userDetails = Object.assign({name, mission_statement}, user);
-        reply.view('people/details', userDetails);
-      });
+    if (error) {
+      console.log(error);
+      return reply(error);
     }
+    request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
+      if (error) {
+        console.log(error);
+        return reply(Boom.badImplementation('redis-failure'));
+      }
+      var allOrgs = orgsDropdown(stringifiedOrgs);
+      var userObj = JSON.parse(stringifiedUser);
+      var user = {
+        user: userObj,
+        organisation: allOrgs.allOrganisations[userObj.organisation_id]
+      };
+      var filteredOrgs = { allOrganisations: allOrgs.allOrganisations.filter(org => org.value !== userObj.organisation_id) };
+      var options = Object.assign({}, filteredOrgs, userTypeRadios(), user);
+      reply.view('people/edit', options);
+    });
   });
 };
 
@@ -100,24 +126,14 @@ handlers.createNewPrimaryUserForm = (request, reply) => {
       console.log(error);
       reply(Boom.badImplementation('redis-failure'));
     } else {
-      const userTypes = ['admin', 'primary'];
-      const allOrganisations = {
-        allOrganisations: stringifiedOrgs.map(org => {
-          const details = JSON.parse(org);
-          return {value: details.id, display: details.name};
-        }),
-        userTypes: userTypes.map(user => {
-          return {name: 'user_type', value: user, display: user};
-        })
-      };
-      reply.view('people/add', allOrganisations);
+      var options = Object.assign({}, orgsDropdown(stringifiedOrgs), userTypeRadios());
+      reply.view('people/add', options);
     }
   });
 };
 
 handlers.createNewPrimaryUser = (request, reply) => {
   const payload = request.payload;
-  console.log(payload);
   const redis = request.redis;
   redis.LLEN('people', (error, length) => {
     if (error) {
@@ -305,6 +321,22 @@ handlers.login = (request, reply) => {
 };
 
 module.exports = handlers;
+
+function orgsDropdown (stringifiedOrgs) {
+  var orgsArray = stringifiedOrgs.map(org => {
+    const details = JSON.parse(org);
+    return {value: details.id, display: details.name};
+  });
+  return { allOrganisations: orgsArray };
+}
+
+function userTypeRadios () {
+  const userTypes = ['admin', 'primary'];
+  var userTypeArr = userTypes.map(user => {
+    return {name: 'user_type', value: user, display: user};
+  });
+  return { userTypes: userTypeArr };
+}
 
 function deactivate (stringifiedData) {
   var data = JSON.parse(stringifiedData);

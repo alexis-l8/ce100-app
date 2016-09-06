@@ -22,11 +22,6 @@ const routes = [
     }
   },
   {
-    method: 'GET',
-    path: '/people/{id}',
-    handler: handlers.viewUserDetails
-  },
-  {
     method: 'POST',
     path: '/people/add',
     handler: handlers.createNewPrimaryUser,
@@ -34,6 +29,16 @@ const routes = [
       // auth: { scope: 'admin' },
       validate: validatePerson.adminAddUser
     }
+  },
+  // {
+  //   method: 'GET',
+  //   path: '/people/{id}',
+  //   handler: handlers.viewUserDetails
+  // },
+  {
+    method: 'GET',
+    path: '/people/{id}/edit',
+    handler: handlers.editUserView
   },
   {
     method: 'GET',
