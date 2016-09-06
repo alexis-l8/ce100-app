@@ -8,6 +8,10 @@ handlers.serveView = viewName => (request, reply) => {
   reply.view(viewName);
 };
 
+handlers.serveFile = (request, reply) => {
+  reply.file(request.params.path);
+};
+
 handlers.viewAllOrganisations = (request, reply) => {
   request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
     if (error) console.log(error);
