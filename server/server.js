@@ -16,6 +16,10 @@ const server = new Hapi.Server();
 
 server.connection({ port: 3000 });
 
+// setup db with some info
+const setup = require('../test/helpers/set-up.js');
+setup.initialiseDB(() => {});
+
 server.register([Vision, HapiRedisConnection, Auth], err => {
   Hoek.assert(!err, err);
 
