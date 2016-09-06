@@ -205,6 +205,44 @@ handlers.editOrganisationDetails = (request, reply) => {
   });
 };
 
+handlers.submitEditOrg = (request, reply) => {
+  const orgId = request.params.id;
+  request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
+    if (error) {
+      console.log(error);
+      return reply(Boom.badImplementation('redis-failure'));
+    }
+    if (!stringifiedOrg) return reply(Boom.notFound('Organisation does not exist'));
+    const oldOrg = JSON.parse(stringifiedOrg);
+    const orgUpdated = Object.assign({}, oldOrg, request.payload);
+    request.redis.LSET('organisations', orgId, JSON.stringify(orgUpdated), (error, response) => {
+      if (error) {
+        console.log(error);
+        return reply(Boom.badImplementation('redis-failure'));
+      }
+      reply.redirect(`/orgs/${orgId}`);
+    });
+  });
+};
+
+handlers.toggleArchiveOrg = (request, reply) => {
+  const orgId = request.params.id;
+  request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
+    if (error) {
+      console.log(error);
+      return reply(Boom.badImplementation('redis-failure'));
+    }
+    if (!stringifiedOrg) return reply(Boom.notFound('Organisation does not exist'));
+    request.redis.LSET('organisations', orgId, deactivate(stringifiedOrg), (error, response) => {
+      if (error) {
+        console.log(error);
+        return reply(Boom.badImplementation('redis-failure'));
+      }
+      reply.redirect('/orgs');
+    });
+  });
+};
+
 handlers.login = (request, reply) => {
   const redis = request.redis;
   const email = request.payload.email;
@@ -243,6 +281,12 @@ handlers.login = (request, reply) => {
 };
 
 module.exports = handlers;
+
+function deactivate (stringifiedData) {
+  var data = JSON.parse(stringifiedData);
+  var updated = Object.assign({}, data, { active: !data.active });
+  return JSON.stringify(updated);
+}
 
 function initialiseEntry (length, payload) {
   const additionalInfo = {

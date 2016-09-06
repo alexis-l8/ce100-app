@@ -14,9 +14,7 @@ validate.adminAddUser = {
 
 validate.adminAddOrganisation = {
   payload: {
-    name: Joi.string().min(1).required(),
-    // user_type: ['admin']
-    submit: Joi.any().optional()
+    name: Joi.string().min(1).required()
   }
 };
 

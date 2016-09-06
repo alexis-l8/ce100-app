@@ -6,9 +6,16 @@
 
         <label for="mission_statement">Mission Statement</label>
         <input class="form__input" name="mission_statement" value="{{mission_statement}}">
-        
+
         <input class="form__input" type="checkbox" name="archive">
         <span>Archive Organisation</span>
+        <a href="/orgs/{{id}}/toggle-archive">
+          {{#if active}}
+          Archive Organisation
+          {{else}}
+          Unarchive Organisation
+          {{/if}}
+        </a>
       <button type="submit">SUBMIT</button> <a href="/orgs/{{id}}">CANCEL</a>
     </form>
 </div>

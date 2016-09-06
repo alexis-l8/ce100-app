@@ -1,4 +1,5 @@
-const validate = require('./person.js');
+const validatePerson = require('./person.js');
+const validateOrg = require('./organisation.js');
 const handlers = require('./handlers.js');
 
 const routes = [
@@ -31,7 +32,7 @@ const routes = [
     handler: handlers.createNewPrimaryUser,
     config: {
       // auth: { scope: 'admin' },
-      validate: validate.adminAddUser
+      validate: validatePerson.adminAddUser
     }
   },
   {
@@ -47,7 +48,7 @@ const routes = [
     path: '/people/activate/{hashedId}',
     handler: handlers.activatePrimaryUser,
     config: {
-      validate: validate.confirmPassword,
+      validate: validatePerson.confirmPassword,
       auth: false
     }
   },
@@ -65,7 +66,7 @@ const routes = [
     handler: handlers.login,
     config: {
       auth: false,
-      validate: validate.login
+      validate: validatePerson.login
     }
   },
   {
@@ -82,7 +83,7 @@ const routes = [
     handler: handlers.createNewOrganisation,
     config: {
       // auth: { scope: 'admin' },
-      validate: validate.adminAddOrganisation
+      validate: validatePerson.adminAddOrganisation
     }
   },
   {
@@ -99,6 +100,19 @@ const routes = [
     method: 'GET',
     path: '/orgs/{id}/edit',
     handler: handlers.editOrganisationDetails
+  },
+  {
+    method: 'POST',
+    path: '/orgs/{id}/edit',
+    handler: handlers.submitEditOrg,
+    config: {
+      validate: validateOrg.adminEditOrg
+    }
+  },
+  {
+    method: 'GET',
+    path: '/orgs/{id}/toggle-archive',
+    handler: handlers.toggleArchiveOrg
   },
   {
     method: 'GET',
