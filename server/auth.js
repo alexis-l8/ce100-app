@@ -7,7 +7,7 @@ exports.register = (server, options, next) => {
   // register hapi-auth-cookie scheme
   server.register(require('hapi-auth-cookie'));
 
-  server.auth.strategy('initial', 'cookie', true, {
+  server.auth.strategy('initial', 'cookie', false, {
     // true -> auth is default, false ->  auth is not used
     password: process.env.COOKIE_PASSWORD,
     redirectTo: '/login',
