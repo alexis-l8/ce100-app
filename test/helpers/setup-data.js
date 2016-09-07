@@ -80,7 +80,7 @@ setupData.initialPeople = [
   },
   {
     first_name: 'Maria',
-    last_name: 'Sharap',
+    last_name: 'Sharapova',
     email: 'ma@sh.co',
     phone: '07111111111',
     job: 'Tennis Player',
@@ -92,11 +92,11 @@ setupData.initialPeople = [
     last_login: Date.now()
   },
   {
-    first_name: 'Cocoa',
-    last_name: 'Bean',
+    first_name: 'Coco',
+    last_name: 'Harris',
     email: 'co@co.a',
     phone: '07111111111',
-    job: 'Food',
+    job: 'Managing Director',
     organisation_id: '',
     user_type: 'primary',
     id: 7,
@@ -105,11 +105,11 @@ setupData.initialPeople = [
     last_login: Date.now()
   },
   {
-    first_name: 'Mixed',
-    last_name: 'Nuts',
+    first_name: 'Frank',
+    last_name: 'Goldsmith',
     email: 'mi@nu.ts',
     phone: '07111111111',
-    job: 'Food',
+    job: 'CEO',
     organisation_id: '',
     user_type: 'primary',
     id: 8,
@@ -173,7 +173,7 @@ setupData.initialOrgs = [
     id: 6,
     name: 'Coca Cola',
     active: false,
-    mission_statement: 'Santa',
+    mission_statement: 'Refresh The Nation',
     primary_id: '',
     people: []
   }
