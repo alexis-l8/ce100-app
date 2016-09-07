@@ -1,12 +1,15 @@
 <!-- Main Content -->
 <div class="container">
-    <h1>Edit User Details</h1>
+    <h1 class="title">Edit User Details</h1>
     <form class="form" method="post">
         <label for="first_name">First Name</label>
         <input class="form__input" name="first_name" value="{{user.first_name}}">
 
         <label for="last_name">Last Name</label>
         <input class="form__input" name="last_name" value="{{user.last_name}}">
+
+        <label for="job">Job Title</label>
+        <input class="form__input" name="job" value="{{user.job}}">
 
         <label class="form__label" for="email">Email</label>
         <input class="form__input" type="email" name="email" value="{{user.email}}">
@@ -31,15 +34,14 @@
         </select>
         {{/if}}
 
-        <span>Archive User</span>
-        <a href="/orgs/{{user.id}}/toggle-archive">
+        <a class="anchor anchor--danger" href="/orgs/{{user.id}}/toggle-archive">
           {{#if user.active}}
-          Archive Organisation
+          Archive User
           {{else}}
-          Unarchive Organisation
+          Unarchive User
           {{/if}}
         </a>
-      <button type="submit">SUBMIT</button> <a href="/orgs/{{user.organisation_id}}">CANCEL</a>
+      <button class="button" type="submit">SUBMIT</button> <a class="anchor" href="/orgs/{{user.organisation_id}}">CANCEL</a>
     </form>
 </div>
 

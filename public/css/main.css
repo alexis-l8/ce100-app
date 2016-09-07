@@ -137,7 +137,7 @@ Danger-red:     #900000;
 
 .container {
     max-width: 54.857142857rem;
-    margin: 0 auto 3rem;
+    margin: 0 auto 6rem;
 }
 
 
@@ -370,6 +370,9 @@ Danger-red:     #900000;
 .anchor--danger:link {
     color: #900000;
     margin: 1rem auto 4rem;
+}
+.anchor--danger:visited {
+    color: #900000;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
