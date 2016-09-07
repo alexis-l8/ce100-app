@@ -58,7 +58,7 @@ handlers.viewAllUsers = (request, reply) => {
       var organisations = stringifiedOrgs.map(element => JSON.parse(element));
       var users = stringifiedUsers.map(element => JSON.parse(element));
       users.forEach((user, index) => {
-        user.organisation_name = user.organisation_id ? organisations[user.organisation_id].name : false;
+        user.organisation_name = typeof user.organisation_id === 'number' ? organisations[user.organisation_id].name : false;
         if (index === users.length - 1) {
           var allUsers = {
             allUsers: users,
@@ -161,15 +161,20 @@ handlers.createNewPrimaryUser = (request, reply) => {
                   console.log('ERROR', error);
                   reply('redis-failure');
                 } else {
-                  Iron.seal(length, process.env.COOKIE_PASSWORD, Iron.defaults, (err, hashed) => {
-                    const newUser = Object.assign({}, payload, {
-                      organisation_name: JSON.parse(org).name,
-                      hashedId: hashed
-                    });
-                    sendEmail.newUser(newUser, (error, response) => {
-                      if (error) reply(Boom.badImplementation(error));
-                      else reply.redirect('/people');
-                    });
+                  Iron.seal(length, process.env.COOKIE_PASSWORD, Iron.defaults, (error, hashed) => {
+                    if (error) {
+                      console.log(error);
+                      reply(Boom.badImplementation(error));
+                    } else {
+                      const newUser = Object.assign({}, payload, {
+                        organisation_name: JSON.parse(org).name,
+                        hashedId: hashed
+                      });
+                      sendEmail.newUser(newUser, (error, response) => {
+                        if (error) reply(Boom.badImplementation(error));
+                        else reply.redirect('/people');
+                      });
+                    }
                   });
                 }
               });
