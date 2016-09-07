@@ -15,7 +15,6 @@ handlers.serveFile = (request, reply) => {
 
 handlers.activatePrimaryUser = (request, reply) => {
   const hashedId = request.params.hashedId;
-  console.log(hashedId);
   Iron.unseal(hashedId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, userId) => {
     if (err) {
       console.log(err);
@@ -27,7 +26,6 @@ handlers.activatePrimaryUser = (request, reply) => {
         console.log(error);
         reply('hash failed');
       } else {
-        console.log(userId);
         request.redis.LINDEX('people', userId, (error, user) => {
           if (error) {
             console.log(error);
@@ -116,11 +114,18 @@ handlers.editUserView = (request, reply) => {
         organisation: allOrgs.allOrganisations[userObj.organisation_id]
       };
       var filteredOrgs = { allOrganisations: allOrgs.allOrganisations.filter(org => org.value !== userObj.organisation_id) };
-      var options = Object.assign({}, filteredOrgs, userTypeRadios(), user);
+      var userTypes = userTypeRadios();
+      var userTypesWithDefault = setDefaultUserTypes(userTypes, userObj);
+      var options = Object.assign({}, filteredOrgs, userTypesWithDefault, user);
       reply.view('people/edit', options);
     });
   });
 };
+
+function setDefaultUserTypes (types, user) {
+  types.map(t => t.value === user.user_type )
+  return types;
+}
 
 handlers.createNewPrimaryUserForm = (request, reply) => {
   request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
