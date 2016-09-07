@@ -122,11 +122,6 @@ handlers.editUserView = (request, reply) => {
   });
 };
 
-function setDefaultUserTypes (types, user) {
-  types.map(t => t.value === user.user_type )
-  return types;
-}
-
 handlers.createNewPrimaryUserForm = (request, reply) => {
   request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
     if (error) {
@@ -353,6 +348,13 @@ function userTypeRadios () {
     return {name: 'user_type', value: user, display: user};
   });
   return { userTypes: userTypeArr };
+}
+
+function setDefaultUserTypes (types, user) {
+  var checked = { isChecked: 'checked' };
+  var selectedTypes = types.userTypes.map(t => t.value === user.user_type
+    ? Object.assign({}, t, checked) : t);
+  return { userTypes: selectedTypes };
 }
 
 function deactivate (stringifiedData) {
