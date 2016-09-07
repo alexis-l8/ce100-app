@@ -332,10 +332,10 @@ Danger-red:     #900000;
 }
 
 .button-small {
-    padding: 0.5rem;
+    padding: 0.2rem 1rem;
     cursor: pointer;
 
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: rgb(255, 255, 255);
     text-align: center;
     text-decoration: none;
@@ -377,4 +377,13 @@ Danger-red:     #900000;
 
 .float-right {
   float: right
+}
+
+.log-in {
+  height: 100vh;
+  background: radial-gradient(10em at 50% 30%, #618298, #003253);
+}
+
+.log-in-layout {
+  padding-top: 18rem;
 }
