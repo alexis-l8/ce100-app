@@ -18,7 +18,7 @@ const routes = [
     path: '/people/add',
     handler: handlers.createNewPrimaryUserForm,
     config: {
-      // auth: { scope: 'admin' }
+      auth: { scope: 'admin' }
     }
   },
   {
@@ -26,7 +26,7 @@ const routes = [
     path: '/people/add',
     handler: handlers.createNewPrimaryUser,
     config: {
-      // auth: { scope: 'admin' },
+      auth: { scope: 'admin' },
       validate: validatePerson.adminAddUser
     }
   },
@@ -87,7 +87,7 @@ const routes = [
     path: '/orgs/add',
     handler: handlers.serveView('add-organisation'),
     config: {
-      // auth: { scope: 'admin' }
+      auth: { scope: 'admin' }
     }
   },
   {
@@ -95,7 +95,7 @@ const routes = [
     path: '/orgs/add',
     handler: handlers.createNewOrganisation,
     config: {
-      // auth: { scope: 'admin' },
+      auth: { scope: 'admin' },
       validate: validatePerson.adminAddOrganisation
     }
   },
