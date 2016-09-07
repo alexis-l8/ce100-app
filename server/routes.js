@@ -41,6 +41,14 @@ const routes = [
     handler: handlers.editUserView
   },
   {
+    method: 'POST',
+    path: '/people/{id}/edit',
+    handler: handlers.editUserSubmit,
+    config: {
+      validate: validatePerson.editUser
+    }
+  },
+  {
     method: 'GET',
     path: '/people/activate/{hashedId}',
     handler: handlers.serveView('activate'),

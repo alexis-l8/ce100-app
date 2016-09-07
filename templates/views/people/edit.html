@@ -14,7 +14,6 @@
         <label class="form__label" for="email">Email</label>
         <input class="form__input" type="email" name="email" value="{{user.email}}">
 
-        <!-- how to set default from outside the input radio (checked)?? -->
         <span class="form__label">User Type</span>
         {{#each userTypes}}
           {{>radio}}
@@ -43,8 +42,6 @@
           Unarchive Organisation
           {{/if}}
         </a>
-      <button type="submit">SUBMIT</button> <a href="/orgs/{{user.id}}">CANCEL</a>
+      <button type="submit">SUBMIT</button> <a href="/orgs/{{user.organisation_id}}">CANCEL</a>
     </form>
 </div>
-
-<!-- give view the correct additional info (from people/add get request) -->

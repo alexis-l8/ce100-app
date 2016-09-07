@@ -1,2 +1,6 @@
-<input class="form__input form__input--radio" type="radio" name={{name}} value={{value}} id="{{value}}">
+{{#if isChecked}}
+  <input class="form__input form__input--radio" type="radio" name={{name}} value={{value}} id="{{value}}" checked>
+{{else}}
+  <input class="form__input form__input--radio" type="radio" name={{name}} value={{value}} id="{{value}}">
+{{/if}}
 <label class="form__label form__label--radio" for="{{value}}">{{display}}</label>

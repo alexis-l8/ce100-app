@@ -15,7 +15,6 @@ handlers.serveFile = (request, reply) => {
 
 handlers.activatePrimaryUser = (request, reply) => {
   const hashedId = request.params.hashedId;
-  console.log(hashedId);
   Iron.unseal(hashedId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, userId) => {
     if (err) {
       console.log(err);
@@ -27,7 +26,6 @@ handlers.activatePrimaryUser = (request, reply) => {
         console.log(error);
         reply('hash failed');
       } else {
-        console.log(userId);
         request.redis.LINDEX('people', userId, (error, user) => {
           if (error) {
             console.log(error);
@@ -96,7 +94,6 @@ handlers.viewAllUsers = (request, reply) => {
 //   });
 // };
 
-// TODO: Add default radio button functionality
 handlers.editUserView = (request, reply) => {
   const userId = request.params.id;
   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
@@ -116,8 +113,39 @@ handlers.editUserView = (request, reply) => {
         organisation: allOrgs.allOrganisations[userObj.organisation_id]
       };
       var filteredOrgs = { allOrganisations: allOrgs.allOrganisations.filter(org => org.value !== userObj.organisation_id) };
-      var options = Object.assign({}, filteredOrgs, userTypeRadios(), user);
+      var userTypes = userTypeRadios();
+      var userTypesWithDefault = setDefaultUserTypes(userTypes, userObj);
+      var options = Object.assign({}, filteredOrgs, userTypesWithDefault, user);
       reply.view('people/edit', options);
+    });
+  });
+};
+
+handlers.editUserSubmit = (request, reply) => {
+  const userId = request.params.id;
+  console.log(request.payload);
+  request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
+    if (error) {
+      console.log(error);
+      return reply(error);
+    }
+    var user = JSON.parse(stringifiedUser);
+    var updatedUser = Object.assign({}, user, request.payload);
+    console.log(updatedUser);
+    // update user
+    request.redis.LSET('people', userId, JSON.stringify(updatedUser), (error, response) => {
+      if (error) {
+        console.log(error);
+        return reply(error);
+      }
+      // check if organisation has changed => update organisation as well
+      if (request.payload.organisation_id === user.organisation_id) {
+        return reply.redirect(`/orgs/${user.organisation_id}`);
+      }
+      // TODO: UDATE OLD ORGANISATION DETAILS AND NEW ORGANISATION DETAILS IF THERE ARE ANY
+      // ALSO NEED TO CHECK FOR ANY USERS THAT WERE ATTACHED TO THAT OLD ORGANISATION AND UPDATE THEM.
+      // NOW ASKING ALEX WHAT HE WANTS TO HAPPEN WITH THESE USERS
+      return reply.redirect(`orgs/${user.organisation_id}`); // FOR DEMO PURPOSES DO NOT UPDATE ORGANISATION
     });
   });
 };
@@ -249,15 +277,19 @@ handlers.editOrganisationDetails = (request, reply) => {
       return reply(error);
     } else {
       const organisation = JSON.parse(stringifiedOrg);
-      request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
-        if (error) console.log(error);
-        const {first_name, last_name, id} = JSON.parse(stringifiedPrimaryUser);
-        const organisationDetails = Object.assign({}, organisation, {
-          primary_user_name: `${first_name} ${last_name}`,
-          primary_user_id: id
+      if (organisation.primary_id) {
+        request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
+          if (error) console.log(error);
+          const {first_name, last_name, id} = JSON.parse(stringifiedPrimaryUser);
+          const organisationDetails = Object.assign({}, organisation, {
+            primary_user_name: `${first_name} ${last_name}`,
+            primary_user_id: id
+          });
+          reply.view('organisations/edit', organisationDetails);
         });
-        reply.view('organisations/edit', organisationDetails);
-      });
+      } else {
+        reply.view('organisations/edit', organisation)
+      }
     }
   });
 };
@@ -353,6 +385,13 @@ function userTypeRadios () {
     return {name: 'user_type', value: user, display: user};
   });
   return { userTypes: userTypeArr };
+}
+
+function setDefaultUserTypes (types, user) {
+  var checked = { isChecked: 'checked' };
+  var selectedTypes = types.userTypes.map(t => t.value === user.user_type
+    ? Object.assign({}, t, checked) : t);
+  return { userTypes: selectedTypes };
 }
 
 function deactivate (stringifiedData) {
