@@ -387,3 +387,9 @@ Danger-red:     #900000;
 .log-in-layout {
   padding-top: 18rem;
 }
+
+.log-in-fields {
+  width: 280px;
+  border: 1px solid #618298;
+  border-radius: 25px;
+}
