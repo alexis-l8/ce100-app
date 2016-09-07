@@ -323,7 +323,7 @@ handlers.login = (request, reply) => {
                 reply(Boom.badImplementation('redis-failure'));
               } else {
                 request.cookieAuth.set({userId: userDetails.id});
-                reply.redirect('/');
+                reply.redirect('/orgs');
               }
             });
           } else {
