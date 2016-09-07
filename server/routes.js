@@ -130,7 +130,10 @@ const routes = [
   {
     method: 'GET',
     path: '/{path*}',
-    handler: handlers.serveFile
+    handler: handlers.serveFile,
+    config: {
+      auth: false
+    }
   }
 ];
 
