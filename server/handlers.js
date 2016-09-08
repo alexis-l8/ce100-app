@@ -19,13 +19,22 @@ handlers.viewAllOrganisations = (request, reply) => {
 handlers.viewOrganisationDetails = (request, reply) => {
   const userId = request.params.id;
   request.redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
+    console.log(' - - - - - - - - - - - - - - - - - - ')
+    console.log(arguments);
+    console.log(' - - - - - - - - - - - - - - - - - ')
     if (error) console.log(error);
     // catch for case where org at specified userId doesn't exist.
     const organisation = JSON.parse(stringifiedOrg);
     request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
-      if (error) console.log(error);
-      const {first_name, last_name, email} = JSON.parse(stringifiedPrimaryUser);
-      const organisationDetails = Object.assign({first_name, last_name, email}, organisation);
+
+      if (error) console.log(error); // please see: https://github.com/dwyl/hapi-error
+      var u = JSON.parse(stringifiedPrimaryUser)
+      var user = {
+        first_name: u.first_name,
+        last_name: u.last_name,
+        email: u.last_name
+      };
+      var organisationDetails = Object.assign(user, organisation);
       reply.view('organisations/details', organisationDetails);
     });
   });
@@ -82,8 +91,12 @@ handlers.viewUserDetails = (request, reply) => {
     const user = JSON.parse(stringifiedUser);
     request.redis.LINDEX('organisations', user.organisation_id, (error, stringifiedOrg) => {
       if (error) console.log(error);
-      const {name, mission_statement} = JSON.parse(stringifiedOrg);
-      const userDetails = Object.assign({name, mission_statement}, user);
+
+      var u = JSON.parse(stringifiedOrg)
+      var userDetails = Object.assign({
+        name: u.name,
+        mission_statement: u.mission_statement
+      }, user);
       reply.view('people/details', userDetails);
     });
   });

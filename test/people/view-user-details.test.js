@@ -16,7 +16,6 @@ tape('/people page loads with a users info', t => {
     headers: { cookie: process.env.PRIMARY_COOKIE }
   };
   server.inject(options, reply => {
-    t.plan(2);
     t.equal(reply.statusCode, 200, 'route exists and replies 200');
     t.ok(reply.payload.indexOf(setupData.initialPeople[3].first_name) > -1, 'route replies with view containing users name');
     t.end();

@@ -22,6 +22,7 @@ tape('orgs/add view', t => {
   };
   server.inject(primaryCookie, reply => {
     t.equal(reply.statusCode, 403, 'unauthorised user cannot access the route');
+
     server.inject(adminCookie, reply => {
       t.equal(reply.statusCode, 200, 'admin can access the route');
       t.end();
