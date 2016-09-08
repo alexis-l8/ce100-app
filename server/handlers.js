@@ -19,9 +19,6 @@ handlers.viewAllOrganisations = (request, reply) => {
 handlers.viewOrganisationDetails = (request, reply) => {
   const userId = request.params.id;
   request.redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
-    console.log(' - - - - - - - - - - - - - - - - - - ')
-    console.log(arguments);
-    console.log(' - - - - - - - - - - - - - - - - - ')
     if (error) console.log(error);
     // catch for case where org at specified userId doesn't exist.
     const organisation = JSON.parse(stringifiedOrg);
