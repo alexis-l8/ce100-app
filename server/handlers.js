@@ -1,10 +1,10 @@
 const bcrypt = require('bcrypt');
 const Boom = require('boom');
 const Iron = require('iron');
-
+const jwt = require('jsonwebtoken');
 var handlers = {};
 
-handlers.serveView = viewName => (request, reply) => {
+handlers.serveView = (viewName) => (request, reply) => {
   reply.view(viewName);
 };
 
@@ -23,9 +23,8 @@ handlers.viewOrganisationDetails = (request, reply) => {
     // catch for case where org at specified userId doesn't exist.
     const organisation = JSON.parse(stringifiedOrg);
     request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
-
       if (error) console.log(error); // please see: https://github.com/dwyl/hapi-error
-      var u = JSON.parse(stringifiedPrimaryUser)
+      var u = JSON.parse(stringifiedPrimaryUser);
       var user = {
         first_name: u.first_name,
         last_name: u.last_name,
@@ -61,8 +60,8 @@ handlers.activatePrimaryUser = (request, reply) => {
                 console.log(err);
                 reply('redis-failure');
               } else {
-                request.cookieAuth.set({userId: userId});
-                reply.redirect('/');
+                var token = jwt.sign({userId: userId}, process.env.JWT_SECRET);
+                reply.redirect('/').state('token', token);
               }
             });
           }
@@ -88,8 +87,7 @@ handlers.viewUserDetails = (request, reply) => {
     const user = JSON.parse(stringifiedUser);
     request.redis.LINDEX('organisations', user.organisation_id, (error, stringifiedOrg) => {
       if (error) console.log(error);
-
-      var u = JSON.parse(stringifiedOrg)
+      var u = JSON.parse(stringifiedOrg);
       var userDetails = Object.assign({
         name: u.name,
         mission_statement: u.mission_statement
@@ -177,7 +175,7 @@ handlers.login = (request, reply) => {
                 console.log('ERROR', error);
                 reply(Boom.badImplementation('redis-failure'));
               } else {
-                request.cookieAuth.set({userId: userDetails.id});
+                jwt.sign({userId: userDetails.id}, process.env.JWT_SECRET);
                 reply.redirect('/');
               }
             });
