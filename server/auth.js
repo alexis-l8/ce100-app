@@ -5,8 +5,6 @@ exports.register = (server, options, next) => {
     key: process.env.JWT_SECRET,
     verifyOptions: { algorithms: ['HS256'] },
     validateFunc: (decoded, request, cb) => {
-      console.log(' - - - - - - - DECODED token:');
-      console.log(decoded);
       request.redis.LINDEX('people', decoded.userId, (err, userString) => {
         if (err) { return cb(err, null); }
         else if (!userString) { return cb(null, false); }

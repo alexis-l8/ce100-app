@@ -175,8 +175,8 @@ handlers.login = (request, reply) => {
                 console.log('ERROR', error);
                 reply(Boom.badImplementation('redis-failure'));
               } else {
-                jwt.sign({userId: userDetails.id}, process.env.JWT_SECRET);
-                reply.redirect('/');
+                var token = jwt.sign({userId: userDetails.id}, process.env.JWT_SECRET);
+                reply.redirect('/orgs').state('token', token);
               }
             });
           } else {
