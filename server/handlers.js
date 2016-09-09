@@ -44,7 +44,7 @@ handlers.activatePrimaryUser = (request, reply) => {
       return reply('hash failed');
     }
     // hash password
-    bcrypt.hash(request.payload.password, 10, function (error, hashedPassword) {
+    bcrypt.hash(request.payload.password, 13, function (error, hashedPassword) {
       if (error) {
         console.log(error);
         reply('hash failed');
