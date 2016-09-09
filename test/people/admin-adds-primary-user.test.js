@@ -6,6 +6,12 @@ const setup = require('../helpers/set-up.js');
 
 const Iron = require('iron');
 
+var jwt = require('jsonwebtoken');
+var admin_token = jwt.sign({userId: 0}, process.env.JWT_SECRET);
+var primary_token = jwt.sign({userId: 2}, process.env.JWT_SECRET);
+
+
+
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
 });
@@ -16,19 +22,19 @@ tape('/people/add check auth', t => {
     method: 'GET',
     url: '/people/add',
     payload: JSON.stringify(payloads.orgsAddPayload),
-    headers: { cookie: process.env.PRIMARY_COOKIE }
+    headers: { cookie: `token=${primary_token}` }
   };
   const adminCookie = {
     method: 'GET',
     url: '/people/add',
     payload: JSON.stringify(payloads.orgsAddPayload),
-    headers: { cookie: process.env.ADMIN_COOKIE }
+    headers: { cookie: `token=${admin_token}`}
   };
   const primaryCookiePost = {
     method: 'POST',
     url: '/people/add',
     payload: JSON.stringify(payloads.orgsAddPayload),
-    headers: { cookie: process.env.PRIMARY_COOKIE }
+    headers: { cookie: `token=${primary_token}` }
   };
   server.inject(primaryCookie, reply => {
     t.equal(reply.statusCode, 403, 'primary cannot access /people/add');
@@ -48,13 +54,13 @@ tape('add and activate a new user and updates the linked organisation', t => {
     method: 'POST',
     url: '/orgs/add',
     payload: JSON.stringify(payloads.orgsAddPayload),
-    headers: { cookie: process.env.ADMIN_COOKIE }
+    headers: { cookie: `token=${admin_token}`}
   };
   const addPerson = {
     method: 'POST',
     url: '/people/add',
     payload: JSON.stringify(payloads.usersAddPayload),
-    headers: { cookie: process.env.ADMIN_COOKIE }
+    headers: { cookie: `token=${admin_token}`}
   };
   server.inject(addOrg, reply => {
     t.equal(reply.statusCode, 302, 'redirects');
