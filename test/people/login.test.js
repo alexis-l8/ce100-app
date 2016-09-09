@@ -41,6 +41,7 @@ tape('/login admin successful', t => {
     payload: JSON.stringify(payloads.loginAdminCorrect)
   };
   server.inject(options, reply => {
+    console.log(reply.headers);
     t.equal(reply.statusCode, 302, 'log in credentials are correct and user gets redirected to homepage');
     t.ok(reply.headers['set-cookie'], 'cookie has been set');
     t.end();
