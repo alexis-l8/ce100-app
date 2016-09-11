@@ -1,30 +1,16 @@
-// setting a cookie from the request.
-// request.cookieAuth.set({userId: Number});
-
-// default strategy to be used on each route
-// set auth: false in the config on each individual route we do not want authed
 exports.register = (server, options, next) => {
-  // register hapi-auth-cookie scheme
-  server.register(require('hapi-auth-cookie'));
+  server.register(require('hapi-auth-jwt2'));
 
-  server.auth.strategy('initial', 'cookie', true, {
-    // true -> auth is default, false ->  auth is not used
-    password: process.env.COOKIE_PASSWORD,
-    redirectTo: '/login',
-    cookie: 'session',
-    ttl: 1000 * 60 * 60 * 24 * 7,
-    keepAlive: true,
-    isSecure: false,
-    validateFunc: (request, session, cb) => {
-      // session holds the decoded object of form { userId: Number }
-      // check that the users id is in the db and that the user is active
-      request.redis.LINDEX('people', session.userId, (err, userString) => {
+  server.auth.strategy('jwt2', 'jwt', true, {
+    key: process.env.JWT_SECRET,
+    verifyOptions: { algorithms: ['HS256'] },
+    validateFunc: (decoded, request, cb) => {
+      request.redis.LINDEX('people', decoded.userId, (err, userString) => {
         if (err) { return cb(err, null); }
         else if (!userString) { return cb(null, false); }
         const user = JSON.parse(userString);
         if (user.active) {
-          // add scope to be accessed by the route handler
-          const override = Object.assign({ scope: user.user_type }, session);
+          const override = Object.assign({ scope: user.user_type }, decoded);
           return cb(null, true, override);
         }
         else { return cb(null, false); }

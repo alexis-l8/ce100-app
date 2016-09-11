@@ -15,11 +15,9 @@ const Auth = require('./auth.js');
 const routes = require('./routes.js');
 const server = new Hapi.Server();
 
-server.connection({ port: 3000 });
+require('../test/helpers/set-up.js').initialiseDB(() => {});
 
-// setup db with some info
-const setup = require('../test/helpers/set-up.js');
-setup.initialiseDB(() => {});
+server.connection({ port: 3000 });
 
 server.register([Inert, Vision, HapiRedisConnection, Auth], err => {
   Hoek.assert(!err, err);

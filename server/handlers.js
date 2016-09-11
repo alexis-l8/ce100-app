@@ -2,10 +2,12 @@ const bcrypt = require('bcrypt');
 const Boom = require('boom');
 const Iron = require('iron');
 const sendEmail = require('./email.js');
+const jwt = require('jsonwebtoken');
+const Hoek = require('hoek');
 
 var handlers = {};
 
-handlers.serveView = viewName => (request, reply) => {
+handlers.serveView = (viewName) => (request, reply) => {
   reply.view(viewName);
 };
 
@@ -15,48 +17,36 @@ handlers.serveFile = (request, reply) => {
 
 handlers.activatePrimaryUser = (request, reply) => {
   const hashedId = request.params.hashedId;
-  Iron.unseal(hashedId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, userId) => {
-    if (err) {
-      console.log(err);
-      return reply('hash failed');
-    }
+  Iron.unseal(hashedId, process.env.COOKIE_PASSWORD, Iron.defaults, (error, userId) => {
+    Hoek.assert(!error, 'Iron error');
     // hash password
-    bcrypt.hash(request.payload.password, 10, function (error, hashedPassword) {
-      if (error) {
-        console.log(error);
-        reply('hash failed');
-      } else {
-        request.redis.LINDEX('people', userId, (error, user) => {
-          if (error) {
-            console.log(error);
-            reply('redis-failure');
-          } else {
-            const updatedUser = addPasswordToUser(hashedPassword, user);
-            request.redis.LSET('people', userId, updatedUser, (err, response) => {
-              if (err) {
-                console.log(err);
-                reply('redis-failure');
-              } else {
-                request.cookieAuth.set({userId: userId});
-                reply.redirect('/orgs');
-              }
-            });
-          }
+    bcrypt.hash(request.payload.password, 13, function (error, hashedPassword) {
+      Hoek.assert(!error, 'bcrypt error');
+      request.redis.LINDEX('people', userId, (error, user) => {
+        Hoek.assert(!error, 'redis error');
+        const updatedUser = addPasswordToUser(hashedPassword, user);
+        request.redis.LSET('people', userId, updatedUser, (error, response) => {
+          Hoek.assert(!error, 'redis error');
+          var token = jwt.sign({userId: userId}, process.env.JWT_SECRET);
+          reply.redirect('/').state('token', token);
         });
-      }
+      });
     });
   });
 };
 
 handlers.viewAllUsers = (request, reply) => {
   request.redis.LRANGE('people', 0, -1, (error, stringifiedUsers) => {
-    if (error) console.log(error);
+  Hoek.assert(!error, 'redis error');
     request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
-      if (error) console.log(error);
+      Hoek.assert(!error, 'redis error');
       var organisations = stringifiedOrgs.map(element => JSON.parse(element));
       var users = stringifiedUsers.map(element => JSON.parse(element));
+      // TODO: Pull out to helper function
       users.forEach((user, index) => {
-        user.organisation_name = typeof user.organisation_id === 'number' ? organisations[user.organisation_id].name : false;
+        user.organisation_name = typeof user.organisation_id === 'number'
+          ? organisations[user.organisation_id].name
+          : false;
         if (index === users.length - 1) {
           var allUsers = {
             allUsers: users,
@@ -75,6 +65,7 @@ handlers.viewAllUsers = (request, reply) => {
   });
 };
 
+// this handler is not currently in use but it is likely to be included soon.
 // handlers.viewUserDetails = (request, reply) => {
 //   const userId = request.params.id;
 //   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
@@ -94,18 +85,14 @@ handlers.viewAllUsers = (request, reply) => {
 //   });
 // };
 
+
 handlers.editUserView = (request, reply) => {
   const userId = request.params.id;
   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
-    if (error) {
-      console.log(error);
-      return reply(error);
-    }
+    Hoek.assert(!error, 'redis error');
     request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
-      if (error) {
-        console.log(error);
-        return reply(Boom.badImplementation('redis-failure'));
-      }
+      Hoek.assert(!error, 'redis error');
+      // TODO: refactor into reusable helper functions.
       var allOrgs = orgsDropdown(stringifiedOrgs);
       var userObj = JSON.parse(stringifiedUser);
       var user = {
@@ -123,28 +110,20 @@ handlers.editUserView = (request, reply) => {
 
 handlers.editUserSubmit = (request, reply) => {
   const userId = request.params.id;
-  console.log(request.payload);
   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
-    if (error) {
-      console.log(error);
-      return reply(error);
-    }
+    Hoek.assert(!error, 'redis error');
     var user = JSON.parse(stringifiedUser);
     var updatedUser = Object.assign({}, user, request.payload);
-    console.log(updatedUser);
     // update user
     request.redis.LSET('people', userId, JSON.stringify(updatedUser), (error, response) => {
-      if (error) {
-        console.log(error);
-        return reply(error);
-      }
+      Hoek.assert(!error, 'redis error');
       // check if organisation has changed => update organisation as well
       if (request.payload.organisation_id === user.organisation_id) {
         return reply.redirect(`/orgs/${user.organisation_id}`);
       }
       // TODO: UDATE OLD ORGANISATION DETAILS AND NEW ORGANISATION DETAILS IF THERE ARE ANY
       // ALSO NEED TO CHECK FOR ANY USERS THAT WERE ATTACHED TO THAT OLD ORGANISATION AND UPDATE THEM.
-      // NOW ASKING ALEX WHAT HE WANTS TO HAPPEN WITH THESE USERS
+      // THERE IS ISSUE OPEN REGARDING WHAT ACTION SHOULD BE TAKEN
       return reply.redirect(`orgs/${user.organisation_id}`); // FOR DEMO PURPOSES DO NOT UPDATE ORGANISATION
     });
   });
@@ -152,90 +131,59 @@ handlers.editUserSubmit = (request, reply) => {
 
 handlers.createNewPrimaryUserForm = (request, reply) => {
   request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
-    if (error) {
-      console.log(error);
-      reply(Boom.badImplementation('redis-failure'));
-    } else {
-      var options = Object.assign({}, orgsDropdown(stringifiedOrgs), userTypeRadios());
-      reply.view('people/add', options);
-    }
+    Hoek.assert(!error, 'redis error');
+    var options = Object.assign({}, orgsDropdown(stringifiedOrgs), userTypeRadios());
+    reply.view('people/add', options);
   });
 };
 
 handlers.createNewPrimaryUser = (request, reply) => {
   const payload = request.payload;
   const redis = request.redis;
-  console.log(payload);
   redis.LLEN('people', (error, length) => {
-    if (error) {
-      console.log(error);
-      reply('redis-failure');
-    } else {
-      const userUpdated = initialiseEntry(length, payload);
-      redis.RPUSH('people', userUpdated, (error, numberOfUsers) => {
-        if (error) {
-          console.log('ERROR', error);
-          reply('redis-failure');
-        } else {
-          const orgId = payload.organisation_id;
-          redis.LINDEX('organisations', orgId, (error, org) => {
-            if (error) {
-              console.log('ERROR', error);
-              reply('redis-failure');
-            } else {
-              const orgUpdated = addPrimaryToOrg(userUpdated, org);
-              redis.LSET('organisations', orgId, orgUpdated, (error, response) => {
-                if (error) {
-                  console.log('ERROR', error);
-                  reply('redis-failure');
-                } else {
-                  Iron.seal(length, process.env.COOKIE_PASSWORD, Iron.defaults, (error, hashed) => {
-                    if (error) {
-                      console.log(error);
-                      reply(Boom.badImplementation(error));
-                    } else {
-                      const newUser = Object.assign({}, payload, {
-                        organisation_name: JSON.parse(org).name,
-                        hashedId: hashed
-                      });
-                      sendEmail.newUser(newUser, (error, response) => {
-                        if (error) reply(Boom.badImplementation(error));
-                        else reply.redirect('/people');
-                      });
-                    }
-                  });
-                }
-              });
-            }
+    Hoek.assert(!error, 'redis error');
+    const userUpdated = initialiseEntry(length, payload);
+    redis.RPUSH('people', userUpdated, (error, numberOfUsers) => {
+      Hoek.assert(!error, 'redis error');
+      const orgId = payload.organisation_id;
+      redis.LINDEX('organisations', orgId, (error, org) => {
+        Hoek.assert(!error, 'redis error');
+        const orgUpdated = addPrimaryToOrg(userUpdated, org);
+        redis.LSET('organisations', orgId, orgUpdated, (error, response) => {
+          Hoek.assert(!error, 'redis error');
+          Iron.seal(length, process.env.COOKIE_PASSWORD, Iron.defaults, (error, hashed) => {
+            Hoek.assert(!error, 'Iron error');
+            const newUser = Object.assign({}, payload, {
+              organisation_name: JSON.parse(org).name,
+              hashedId: hashed
+            });
+            sendEmail.newUser(newUser, (error, response) => {
+              Hoek.assert(!error, 'Send Email error');
+              reply({ userId: length }).redirect('/people');
+            });
           });
-        }
+        });
       });
-    }
+    });
   });
 };
 
 handlers.createNewOrganisation = (request, reply) => {
   const redis = request.redis;
   redis.LLEN('organisations', (error, length) => {
-    if (error) {
-      console.log(error);
-      reply(Boom.badImplementation('redis-failure'));
-    } else {
-      const orgUpdated = initialiseEntry(length, { name: request.payload.name, mission_statement: '', people: [] });
-      redis.RPUSH('organisations', orgUpdated, (error, numberOfOrgs) => {
-        if (error) {
-          reply(Boom.badImplementation('redis-failure'));
-        } else {
-          reply.redirect('/orgs');
-        }
-      });
-    }
+    Hoek.assert(!error, 'redis error');
+    var initialOrgInfo = { name: request.payload.name, mission_statement: '', people: [] };
+    const orgUpdated = initialiseEntry(length, initialOrgInfo);
+    redis.RPUSH('organisations', orgUpdated, (error, numberOfOrgs) => {
+      Hoek.assert(!error, 'redis error');
+      reply.redirect('/orgs');
+    });
   });
 };
 
 handlers.viewAllOrganisations = (request, reply) => {
   request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
-    if (error) console.log(error);
+    Hoek.assert(!error, 'redis error');
     const organisations = {
       allOrganisations: stringifiedOrgs.map(element => JSON.parse(element)),
       alternate: [{
@@ -253,12 +201,12 @@ handlers.viewAllOrganisations = (request, reply) => {
 handlers.viewOrganisationDetails = (request, reply) => {
   const userId = request.params.id;
   request.redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
-    if (error) console.log(error);
-    // catch for case where org at specified userId doesn't exist.
+    Hoek.assert(!error, 'redis error');
+    // TODO: catch for case where org at specified userId doesn't exist.
     const organisation = JSON.parse(stringifiedOrg);
     if (organisation.primary_id) {
       request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
-        if (error) console.log(error);
+        Hoek.assert(!error, 'redis error');
         const {first_name, last_name, email, phone, job} = JSON.parse(stringifiedPrimaryUser);
         const organisationDetails = Object.assign({first_name, last_name, email, phone, job}, organisation);
         reply.view('organisations/details', organisationDetails);
@@ -272,43 +220,32 @@ handlers.viewOrganisationDetails = (request, reply) => {
 handlers.editOrganisationDetails = (request, reply) => {
   const orgId = request.params.id;
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
-    if (error) {
-      console.log(error);
-      return reply(error);
-    } else {
-      const organisation = JSON.parse(stringifiedOrg);
-      if (organisation.primary_id) {
-        request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
-          if (error) console.log(error);
-          const {first_name, last_name, id} = JSON.parse(stringifiedPrimaryUser);
-          const organisationDetails = Object.assign({}, organisation, {
-            primary_user_name: `${first_name} ${last_name}`,
-            primary_user_id: id
-          });
-          reply.view('organisations/edit', organisationDetails);
-        });
-      } else {
-        reply.view('organisations/edit', organisation)
-      }
+    Hoek.assert(!error, 'redis error');
+    const organisation = JSON.parse(stringifiedOrg);
+    if (!organisation.primary_id) {
+      return reply.view('organisations/edit', organisation);
     }
+    request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
+      Hoek.assert(!error, 'redis error');
+      const {first_name, last_name, id} = JSON.parse(stringifiedPrimaryUser);
+      const organisationDetails = Object.assign({}, organisation, {
+        primary_user_name: `${first_name} ${last_name}`,
+        primary_user_id: id
+      });
+      reply.view('organisations/edit', organisationDetails);
+    });
   });
 };
 
 handlers.submitEditOrg = (request, reply) => {
   const orgId = request.params.id;
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
-    if (error) {
-      console.log(error);
-      return reply(Boom.badImplementation('redis-failure'));
-    }
+    Hoek.assert(!error, 'redis error');
     if (!stringifiedOrg) return reply(Boom.notFound('Organisation does not exist'));
     const oldOrg = JSON.parse(stringifiedOrg);
     const orgUpdated = Object.assign({}, oldOrg, request.payload);
     request.redis.LSET('organisations', orgId, JSON.stringify(orgUpdated), (error, response) => {
-      if (error) {
-        console.log(error);
-        return reply(Boom.badImplementation('redis-failure'));
-      }
+      Hoek.assert(!error, 'redis error');
       reply.redirect(`/orgs/${orgId}`);
     });
   });
@@ -317,16 +254,10 @@ handlers.submitEditOrg = (request, reply) => {
 handlers.toggleArchiveOrg = (request, reply) => {
   const orgId = request.params.id;
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
-    if (error) {
-      console.log(error);
-      return reply(Boom.badImplementation('redis-failure'));
-    }
+    Hoek.assert(!error, 'redis error');
     if (!stringifiedOrg) return reply(Boom.notFound('Organisation does not exist'));
     request.redis.LSET('organisations', orgId, deactivate(stringifiedOrg), (error, response) => {
-      if (error) {
-        console.log(error);
-        return reply(Boom.badImplementation('redis-failure'));
-      }
+      Hoek.assert(!error, 'redis error');
       reply.redirect('/orgs');
     });
   });
@@ -337,35 +268,24 @@ handlers.login = (request, reply) => {
   const email = request.payload.email;
   const password = request.payload.password;
   redis.LRANGE('people', 0, -1, (error, allUsers) => {
-    if (error) {
-      console.log('ERROR', error);
-      reply('redis-failure');
-    } else {
-      const user = allUsers.filter(eachUser => {
-        return JSON.parse(eachUser).email === email;
-      });
-      if (user.length > 0) {
-        const userDetails = JSON.parse(user[0]);
-        bcrypt.compare(password, userDetails.password, function (err, isValid) {
-          if (!err && isValid) {
-            userDetails.last_login = Date.now();
-            redis.LSET('people', userDetails.id, JSON.stringify(userDetails), (error, response) => {
-              if (error) {
-                console.log('ERROR', error);
-                reply(Boom.badImplementation('redis-failure'));
-              } else {
-                request.cookieAuth.set({userId: userDetails.id});
-                reply.redirect('/orgs');
-              }
-            });
-          } else {
-            reply(Boom.unauthorized('Sorry, that email or password is invalid, please try again.'));
-          }
-        });
-      } else {
-        reply(Boom.unauthorized('Sorry, that email has not been registered.'));
-      }
+    Hoek.assert(!error, 'redis error');
+    const user = allUsers.filter(eachUser => JSON.parse(eachUser).email === email);
+    if (user.length === 0) {
+      return reply(Boom.unauthorized('Sorry, that email has not been registered.'));
     }
+    const userDetails = JSON.parse(user[0]);
+    bcrypt.compare(password, userDetails.password, function (error, isValid) {
+      Hoek.assert(!error, 'bcrypt failure');
+      if (!isValid) {
+        return reply(Boom.unauthorized('Sorry, that password is invalid, please try again.'));
+      }
+      userDetails.last_login = Date.now();
+      redis.LSET('people', userDetails.id, JSON.stringify(userDetails), (error, response) => {
+        Hoek.assert(!error, 'redis error');
+        var token = jwt.sign({userId: userDetails.id}, process.env.JWT_SECRET);
+        reply.redirect('/orgs').state('token', token);
+      });
+    });
   });
 };
 

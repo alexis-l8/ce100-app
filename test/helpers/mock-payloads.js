@@ -4,7 +4,7 @@ let mockPayloads = {};
 mockPayloads.usersAddPayload = {
   first_name: 'Anna',
   last_name: 'Ivanovic',
-  email: 'an@iv.co',
+  email: 'ce100.emf@gmail.com',
   organisation_id: 5,
   user_type: 'primary'
 };
