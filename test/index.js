@@ -6,6 +6,8 @@ require('./organisations/admin-views-all-orgs.test.js');
 require('./people/admin-adds-primary-user.test.js');
 require('./people/login.test.js');
 require('./people/view-all-users.test.js');
+require('./people/view-dashboard.test.js');
+require('./people/admin-edit-user.testjs');
 
 require('./auth.test.js');
 
