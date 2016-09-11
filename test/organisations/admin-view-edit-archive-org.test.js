@@ -16,7 +16,7 @@ tape('set up: initialise db', t => {
 // TODO: edit primary user attached to this org
 
 tape('admin can view an org, edit, archive and unarchive it', t => {
-  t.plan(11);
+  // t.plan(11);
   // view org, edit org, view org, archive org, view org, unarchive org
   var adminViewOrg = {
     method: 'GET',
@@ -50,18 +50,20 @@ tape('admin can view an org, edit, archive and unarchive it', t => {
       server.inject(adminEditOrgSubmit, res => {
         t.equal(res.statusCode, 302, '/orgs/id/edit post route redirects');
         t.equal(res.headers.location, '/orgs/3', 'redirects to /orgs');
-        console.log(res);
-        t.ok(res.payload.indexOf(payloads.adminEditOrg.name) > -1, 'the orgs name has been edited');
-        t.ok(res.payload.indexOf(payloads.adminEditOrg.mission_statement) > -1, 'the orgs mission_statement has been edited');
-        server.inject(adminToggleArchiveOrg, res => {
-          t.equal(res.statusCode, 200, '/orgs/id/toggle-archive route exists');
-          t.equal(res.headers.location, '/orgs/3', 'admin is sent orgs/id view after editing');
-          server.inject(adminEditOrgView, res => {
-            t.ok(res.payload.indexOf('Unarchive') > -1, 'admin successfully archived org');
-            server.inject(adminToggleArchiveOrg, res => {
-              console.log(res);
-              // TODO: check that org has been unarchived
-              t.end();
+        server.inject(adminViewOrg, res => {
+          t.ok(res.payload.indexOf(payloads.adminEditOrg.name) > -1, 'the orgs name has been edited');
+          t.ok(res.payload.indexOf(payloads.adminEditOrg.mission_statement) > -1, 'the orgs mission_statement has been edited');
+          server.inject(adminToggleArchiveOrg, res => {
+            t.equal(res.statusCode, 302, '/orgs/id/toggle-archive route redirects');
+            t.equal(res.headers.location, '/orgs', 'admin is sent orgs view after editing');
+            server.inject(adminEditOrgView, res => {
+              t.ok(res.payload.indexOf('Unarchive') > -1, 'admin successfully archived org');
+              server.inject(adminToggleArchiveOrg, res => {
+                server.inject(adminEditOrgView, res => {
+                  t.ok(res.payload.indexOf('Archive') > -1, 'org has been unarchived');
+                  t.end();
+                });
+              });
             });
           });
         });
@@ -69,7 +71,6 @@ tape('admin can view an org, edit, archive and unarchive it', t => {
     });
   });
 });
-
 
 tape('teardown', t => {
   client.FLUSHDB();
