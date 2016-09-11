@@ -1,7 +1,7 @@
 var email = require('sendemail');
 email.set_template_directory('server/email-templates');
 
-var Hoek = require('Hoek');
+var Hoek = require('hoek');
 var sendEmail = {};
 
 sendEmail.newUser = (person, callback) => {

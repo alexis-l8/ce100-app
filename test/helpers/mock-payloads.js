@@ -41,4 +41,9 @@ mockPayloads.loginBadEmail = {
   password: 'Hello1'
 };
 
+mockPayloads.adminEditOrg = {
+  name: 'McDonalds',
+  mission_statement: 'Improve diets'
+};
+
 module.exports = mockPayloads;

@@ -15,7 +15,7 @@ const Auth = require('./auth.js');
 const routes = require('./routes.js');
 const server = new Hapi.Server();
 
-require('../test/helpers/set-up.js').initialiseDB(() => {});
+// require('../test/helpers/set-up.js').initialiseDB(() => {});
 
 server.connection({ port: 3000 });
 
