@@ -1,7 +1,7 @@
-const tape = require('tape');
-const client = require('redis').createClient();
-const server = require('../server/server.js');
-const setup = require('./helpers/set-up.js');
+var tape = require('tape');
+var client = require('redis').createClient();
+var server = require('../server/server.js');
+var setup = require('./helpers/set-up.js');
 
 var jwt = require('jsonwebtoken');
 var admin_token = jwt.sign({userId: 0}, process.env.JWT_SECRET);
@@ -15,7 +15,7 @@ tape('set up: initialise db', t => {
 // need to implement hapi-error to get redirect to work.
 // tape('hit an authed route without a cookie redirects to /login', t => {
 //   t.plan(2);
-//   const options = {
+//   var options = {
 //     method: 'GET',
 //     url: '/people/add'
 //   };
@@ -27,8 +27,8 @@ tape('set up: initialise db', t => {
 // });
 
 tape('A primary user is forbidden access to an admin view', t => {
-  t.plan(1);
-  const options = {
+
+  var options = {
     method: 'GET',
     url: '/people/add',
     headers: { cookie: `token=${primary_token}` }
@@ -40,8 +40,8 @@ tape('A primary user is forbidden access to an admin view', t => {
 });
 
 tape('hit an authed route with a valid cookie containing valid users information', t => {
-  t.plan(1);
-  const options = {
+
+  var options = {
     method: 'GET',
     url: '/people/add',
     headers: { cookie: `token=${admin_token}` }

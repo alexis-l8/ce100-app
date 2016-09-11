@@ -5,15 +5,19 @@ exports.register = (server, options, next) => {
     key: process.env.JWT_SECRET,
     verifyOptions: { algorithms: ['HS256'] },
     validateFunc: (decoded, request, cb) => {
-      request.redis.LINDEX('people', decoded.userId, (err, userString) => {
-        if (err) { return cb(err, null); }
-        else if (!userString) { return cb(null, false); }
-        const user = JSON.parse(userString);
+      request.redis.LINDEX('people', decoded.userId, (err, user) => {
+        if (err || !user) {
+          return cb(err, null);
+        }
+        user = JSON.parse(user);
+
         if (user.active) {
-          const override = Object.assign({ scope: user.user_type }, decoded);
+          var override = Object.assign({ scope: user.user_type }, decoded);
           return cb(null, true, override);
         }
-        else { return cb(null, false); }
+        else {
+          return cb(null, false);
+        }
       });
     }
   });
