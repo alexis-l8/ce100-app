@@ -12,58 +12,38 @@ tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
 });
 
-tape('test user profile updated for different organisation', t => {
-  t.plan(5);
-  var getOptions = {
-    method: 'GET',
-    url: '/people/3/edit',
-    headers: { cookie: `token=${admin_token}` }
-  };
-  server.inject(getOptions, reply => {
-    t.equal(reply.statusCode, 200, 'route exists and replies 200');
-    var postOptions = {
-      method: 'POST',
-      url: '/people/3/edit',
-      payload: payloads.editUserPayload,
-      headers: { cookie: `token=${admin_token}` }
-    };
-    server.inject(postOptions, reply => {
-      console.log(reply.result);
-      t.equal(reply.statusCode, 302, 'on updating a user, page redirects to /people/{{id}}');
-      server.inject(getOptions, reply => {
-        // console.log(reply);
-        t.equal(reply.statusCode, 200, 'route exists and replies 200');
-        t.ok(reply.result.indexOf('<input class="form__input" name="first_name" value="Ben">'), 'old information has been kept');
-        t.ok(reply.result.indexOf('<input class="form__input" name="last" value="Maynard">'), 'updates have been saved');
-        t.end();
-      });
-    });
-  });
-});
+// test editing a user, leaving their linked organisation alone.
 
-tape('test user profile updated (for same organisation)', t => {
+// oldOrgId = 1, newOrgId = 1.
+tape('admin edits user profile but doesnt change organisation', t => {
   t.plan(5);
   var getOptions = {
     method: 'GET',
     url: '/people/3/edit',
     headers: { cookie: `token=${admin_token}` }
   };
-  server.inject(getOptions, reply => {
-    t.equal(reply.statusCode, 200, 'route exists and replies 200');
-    var postOptions = {
-      method: 'POST',
-      url: '/people/3/edit',
-      payload: payloads.editUserPayloadOrgUnchanged,
-      headers: { cookie: `token=${admin_token}` }
-    };
-    server.inject(postOptions, reply => {
-      console.log(reply.result);
-      t.equal(reply.statusCode, 302, 'on updating a user, page redirects to /people/{{id}}');
-      server.inject(getOptions, reply => {
-        // console.log(reply);
-        t.equal(reply.statusCode, 200, 'route exists and replies 200');
-        t.ok(reply.result.indexOf('<input class="form__input" name="first_name" value="Ben">'), 'old information has been kept');
-        t.ok(reply.result.indexOf('<input class="form__input" name="last" value="Maynard">'), 'updates have been saved');
+  var postOptions = {
+    method: 'POST',
+    url: '/people/3/edit',
+    payload: payloads.editUserPayloadOrgUnchanged,
+    headers: { cookie: `token=${admin_token}` }
+  };
+  var viewOrg = {
+    method: 'GET',
+    url: '/people/3/edit',
+    payload: payloads.editUserPayloadOrgUnchanged,
+    headers: { cookie: `token=${admin_token}` }
+  }
+  server.inject(getOptions, res => {
+    console.log('before edit', res.result);
+    t.equal(res.statusCode, 200, 'route exists and replies 200');
+    server.inject(postOptions, res => {
+      t.equal(res.statusCode, 302, 'on updating a user, page redirects to /people/{{id}}');
+      server.inject(getOptions, res => {
+        console.log('after edit', res.payload);
+        t.equal(res.statusCode, 200, 'route exists and replies 200');
+        t.ok(res.result.indexOf('Ben') > -1, 'old information has been kept');
+        t.ok(res.result.indexOf('Maynard') > -1, 'updates have been saved');
         t.end();
       });
     });

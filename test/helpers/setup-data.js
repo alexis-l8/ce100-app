@@ -103,7 +103,7 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 7,
     active: false,
-    password: process.env.MOCKDATA_HASHED_PASSWORD,
+    password: bcrypt.hashSync('Hello1', 13),
     last_login: Date.now()
   },
   {
@@ -116,7 +116,7 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 8,
     active: false,
-    password: process.env.MOCKDATA_HASHED_PASSWORD,
+    password: bcrypt.hashSync('Hello1', 13),
     last_login: Date.now()
   }
 ];
