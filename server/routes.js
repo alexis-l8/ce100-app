@@ -1,8 +1,8 @@
-const validatePerson = require('./person.js');
-const validateOrg = require('./organisation.js');
-const handlers = require('./handlers.js');
+var validatePerson = require('./person.js');
+var validateOrg = require('./organisation.js');
+var handlers = require('./handlers.js');
 
-const routes = [
+var routes = [
   {
     method: 'GET',
     path: '/',

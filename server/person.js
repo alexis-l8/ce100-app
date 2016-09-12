@@ -1,6 +1,6 @@
-const Joi = require('joi');
+var Joi = require('joi');
 
-const validate = {};
+var validate = {};
 
 validate.adminAddUser = {
   payload: {

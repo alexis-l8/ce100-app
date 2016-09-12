@@ -1,13 +1,12 @@
-const tape = require('tape');
-const client = require('redis').createClient();
-const server = require('../../server/server.js');
-
-const setup = require('../helpers/set-up.js');
-const setupData = require('../helpers/setup-data.js');
-
+var tape = require('tape');
+var client = require('redis').createClient();
+var server = require('../../server/server.js');
 var jwt = require('jsonwebtoken');
-var admin_token = jwt.sign({userId: 0}, process.env.JWT_SECRET);
-var primary_token = jwt.sign({userId: 2}, process.env.JWT_SECRET);
+
+var setup = require('../helpers/set-up.js');
+var setupData = require('../helpers/setup-data.js');
+var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
+var primary_token = jwt.sign(setupData.initialSessions[2], process.env.JWT_SECRET);
 
 
 tape('set up: initialise db', t => {
@@ -15,7 +14,7 @@ tape('set up: initialise db', t => {
 });
 
 tape('/orgs load general view', t => {
-  const options = {
+  var options = {
     method: 'GET',
     url: '/orgs',
     headers: { cookie: `token=${primary_token}` }
@@ -28,7 +27,7 @@ tape('/orgs load general view', t => {
 });
 
 tape('/orgs/0 load specific organisation page', t => {
-  const options = {
+  var options = {
     method: 'GET',
     url: '/orgs/0',
     headers: { cookie: `token=${primary_token}` }
