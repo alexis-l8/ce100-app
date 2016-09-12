@@ -5,8 +5,9 @@ const payloads = require('../helpers/mock-payloads.js');
 const setup = require('../helpers/set-up.js');
 
 var jwt = require('jsonwebtoken');
-var admin_token = jwt.sign({userId: 0}, process.env.JWT_SECRET);
-var primary_token = jwt.sign({userId: 2}, process.env.JWT_SECRET);
+var setupData = require('../helpers/setup-data.js');
+var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
+var primary_token = jwt.sign(setupData.initialSessions[2], process.env.JWT_SECRET);
 
 
 tape('set up: initialise db', t => {
@@ -27,7 +28,6 @@ tape('orgs/add view', t => {
   };
   server.inject(primaryCookie, reply => {
     t.equal(reply.statusCode, 403, 'unauthorised user cannot access the route');
-
     server.inject(adminCookie, reply => {
       t.equal(reply.statusCode, 200, 'admin can access the route');
       t.end();
@@ -46,7 +46,7 @@ tape('orgs/add admin adds a new organisation', t => {
   server.inject(options, reply => {
     t.equal(reply.statusCode, 302, 'admin is redirected');
     const url = reply.headers.location;
-    t.ok(url.indexOf('/orgs/') > -1, 'string', 'redirected to the new organisations view');
+    t.ok(url === ('/orgs'), 'redirected to the new organisations view');
     const options2 = {
       method: 'GET',
       url: '/orgs',

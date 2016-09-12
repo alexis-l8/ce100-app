@@ -7,8 +7,9 @@ const setup = require('../helpers/set-up.js');
 const Iron = require('iron');
 
 var jwt = require('jsonwebtoken');
-var admin_token = jwt.sign({userId: 0}, process.env.JWT_SECRET);
-var primary_token = jwt.sign({userId: 2}, process.env.JWT_SECRET);
+var setupData = require('../helpers/setup-data.js');
+var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
+var primary_token = jwt.sign(setupData.initialSessions[2], process.env.JWT_SECRET);
 
 
 
@@ -54,21 +55,21 @@ tape('add and activate a new user and updates the linked organisation', t => {
     method: 'POST',
     url: '/orgs/add',
     payload: JSON.stringify(payloads.orgsAddPayload),
-    headers: { cookie: `token=${admin_token}`}
+    headers: { cookie: `token=${admin_token}` }
   };
   const addPerson = {
     method: 'POST',
     url: '/people/add',
     payload: JSON.stringify(payloads.usersAddPayload),
-    headers: { cookie: `token=${admin_token}`}
+    headers: { cookie: `token=${admin_token}` }
   };
   server.inject(addOrg, reply => {
     t.equal(reply.statusCode, 302, 'redirects');
     server.inject(addPerson, reply => {
       t.equal(reply.statusCode, 302, 'redirects');
       const newUrl = reply.headers.location;
-      t.ok(newUrl.indexOf('/people/') > -1, 'route redirects to /people/index');
-      const userId = newUrl.split('/')[2];
+      t.ok(newUrl === '/people', 'route redirects to /people');
+      const userId = reply.result.userId;
       Iron.seal(userId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, hashed) => {
         const activateUser = {
           method: 'POST',
