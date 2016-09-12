@@ -1,0 +1,10 @@
+<h1>All Organisations</h1>
+<div>
+  {{#if allOrganisations}}
+    {{#each allOrganisations}}
+      {{>organisation}}
+    {{/each}}
+  {{else}}
+    <h3>Sorry! No organisations were found</h3>
+  {{/if}}
+</div>

@@ -5,38 +5,95 @@ const routes = [
   {
     method: 'GET',
     path: '/',
-    handler: (request, reply) => reply('Hello World')
+    handler: handlers.serveView('dashboard')
+  },
+  {
+    method: 'GET',
+    path: '/people',
+    handler: handlers.viewAllUsers
   },
   {
     method: 'GET',
     path: '/people/add',
-    handler: handlers.serveSpecificFile('add-user')
+    handler: handlers.serveView('add-user'),
+    config: {
+      auth: { scope: 'admin' }
+    }
+  },
+  {
+    method: 'GET',
+    path: '/people/{id}',
+    handler: handlers.viewUserDetails
   },
   {
     method: 'POST',
     path: '/people/add',
     handler: handlers.createNewPrimaryUser,
     config: {
+      auth: { scope: 'admin' },
       validate: validate.adminAddUser
     }
   },
   {
     method: 'GET',
     path: '/people/activate/{hashedId}',
-    handler: handlers.serveSpecificFile('activate')
+    handler: handlers.serveView('activate'),
+    config: {
+      auth: false
+    }
   },
   {
     method: 'POST',
     path: '/people/activate/{hashedId}',
     handler: handlers.activatePrimaryUser,
     config: {
-      validate: validate.confirmPassword
+      validate: validate.confirmPassword,
+      auth: false
     }
   },
   {
     method: 'GET',
-    path: '/{path*}',
-    handler: handlers.serveFile
+    path: '/login',
+    handler: handlers.serveView('login'),
+    config: {
+      auth: false
+    }
+  },
+  {
+    method: 'POST',
+    path: '/login',
+    handler: handlers.login,
+    config: {
+      auth: false,
+      validate: validate.login
+    }
+  },
+  {
+    method: 'GET',
+    path: '/orgs/add',
+    handler: handlers.serveView('add-organisation'),
+    config: {
+      auth: { scope: 'admin' }
+    }
+  },
+  {
+    method: 'POST',
+    path: '/orgs/add',
+    handler: handlers.createNewOrganisation,
+    config: {
+      auth: { scope: 'admin' },
+      validate: validate.adminAddOrganisation
+    }
+  },
+  {
+    method: 'GET',
+    path: '/orgs',
+    handler: handlers.viewAllOrganisations
+  },
+  {
+    method: 'GET',
+    path: '/orgs/{id}',
+    handler: handlers.viewOrganisationDetails
   }
 ];
 

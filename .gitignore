@@ -1,9 +1,10 @@
-coverage/
-
 node_modules
+
+coverage/
 
 npm-debug.log
 
 config.env
+.env
 
 dump.rdb

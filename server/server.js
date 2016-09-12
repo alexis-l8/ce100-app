@@ -1,31 +1,38 @@
+require('env2')('.env');
 const Hapi = require('hapi');
 const Hoek = require('hoek');
-
-// plugins
-const Vision = require('vision');
-const HapiRedisConnection = require('hapi-redis-connection');
-
 const path = require('path');
-const handlebars = require('handlebars');
-
-const routes = require('./routes.js');
 const server = new Hapi.Server();
+
+require('../test/helpers/set-up.js').initialiseDB(() => {});
 
 server.connection({ port: 3000 });
 
-server.register([Vision, HapiRedisConnection], err => {
+server.register([ // one plugin per line
+  require('vision'),
+  require('hapi-redis-connection'),
+  require('hapi-error'),
+  // custom plugins
+  require('./auth.js')
+], err => {
   Hoek.assert(!err, err);
 
   server.views({
     engines: {
-      html: handlebars
+      html: require('handlebars')
     },
     relativeTo: path.resolve(__dirname, '..'),
-    path: './templates/views',
-    helpersPath: './templates/helpers'
+    path: 'templates/views',
+    partialsPath: 'templates/partials',
+    helpersPath: 'templates/helpers'
   });
 });
 
-server.route(routes);
+server.route(require('./routes.js'));
+
+server.start(err => {
+  Hoek.assert(!err, err);
+  console.log(`Server running at port: ${server.info.uri}`);
+});
 
 module.exports = server;
