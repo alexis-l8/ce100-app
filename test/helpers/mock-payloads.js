@@ -48,6 +48,16 @@ mockPayloads.editUserPayload = {
   email: 'be@ma.co',
   user_type: 'admin',
   organisation_id: -1
+};
+
+mockPayloads.editUserPayloadOrgUnchanged = {
+  first_name: 'Ben',
+  last_name: 'Maynard',
+  job: 'Full Stack Web Developer',
+  email: 'be@ma.co',
+  user_type: 'admin',
+  organisation_id: 1
+};
 
 mockPayloads.adminEditOrg = {
   name: 'McDonalds',

@@ -5,8 +5,8 @@ var payloads = require('../helpers/mock-payloads.js');
 var setup = require('../helpers/set-up.js');
 var setupData = require('../helpers/setup-data.js');
 var jwt = require('jsonwebtoken');
-var admin_token = jwt.sign({userId: 0}, process.env.JWT_SECRET);
-var primary_token = jwt.sign({userId: 2}, process.env.JWT_SECRET);
+var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
+var primary_token = jwt.sign(setupData.initialSessions[2], process.env.JWT_SECRET);
 
 
 tape('set up: initialise db', t => {
@@ -86,6 +86,7 @@ tape('admin can view and edit an org which does not have a primary user attached
   };
   var orgName = setupData.initialOrgs[5].name;
   server.inject(adminViewOrg, res => {
+    console.log(res.result);
     t.equal(res.statusCode, 200, '/orgs/id route exists for org without primary user');
     t.ok(res.payload.indexOf(orgName) > -1, 'server sends back the correct view');
     t.ok(res.payload.indexOf('No Primary User Yet') > -1, 'org view reacts to having no primary user correctly');
@@ -98,7 +99,7 @@ tape('admin can view and edit an org which does not have a primary user attached
       t.ok(res.payload.indexOf('Primary User') === -1, 'edit org view reacts to having no primary user correctly');
       t.end();
     });
-  }); 
+  });
 });
 
 tape('teardown', t => {

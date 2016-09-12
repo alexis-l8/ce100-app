@@ -4,8 +4,9 @@ var server = require('../../server/server.js');
 var setup = require('../helpers/set-up.js');
 
 var jwt = require('jsonwebtoken');
-var admin_token = jwt.sign({userId: 0}, process.env.JWT_SECRET);
-var primary_token = jwt.sign({userId: 2}, process.env.JWT_SECRET);
+var setupData = require('../helpers/setup-data.js');
+var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
+var primary_token = jwt.sign(setupData.initialSessions[2], process.env.JWT_SECRET);
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);

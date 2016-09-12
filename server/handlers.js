@@ -7,14 +7,10 @@ var Hoek = require('hoek');
 var aguid = require('aguid');
 var handlers = {};
 
-handlers.serveView = (viewName) => (request, reply) => {
-  reply.view(viewName);
-};
+handlers.serveView = (viewName) => (request, reply) => reply.view(viewName);
 
 // what does this do and why isn't it tested?
-// handlers.serveFile = (request, reply) => {
-//   reply.file(request.params.path);
-// };
+// handlers.serveFile = (request, reply) => reply.file(request.params.path);
 
 handlers.activatePrimaryUser = (request, reply) => {
   var hashedId = request.params.hashedId;
@@ -38,7 +34,7 @@ handlers.activatePrimaryUser = (request, reply) => {
 
 handlers.viewAllUsers = (request, reply) => {
   request.redis.LRANGE('people', 0, -1, (error, stringifiedUsers) => {
-  Hoek.assert(!error, 'redis error');
+    Hoek.assert(!error, 'redis error');
     request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
       Hoek.assert(!error, 'redis error');
       var organisations = stringifiedOrgs.map(element => JSON.parse(element));
@@ -67,78 +63,75 @@ handlers.viewAllUsers = (request, reply) => {
 };
 
 // this handler is not currently in use but it is likely to be included soon.
-handlers.viewUserDetails = (request, reply) => {
+// handlers.viewUserDetails = (request, reply) => {
+//   var userId = request.params.id;
+//   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
+//     Hoek.assert(!error, error);
+//     // catch for case where user at specified userId doesn't exist.
+//     var user = JSON.parse(stringifiedUser);
+//     if (user.user_type === 'admin') { // uncomment this when you add a Test for it!!
+//       reply.view('people/details', user);
+//     } else {
+//       request.redis.LINDEX('organisations', user.organisation_id, (error, stringifiedOrg) => {
+//         Hoek.assert(!error, error);
+//         var {name, mission_statement} = JSON.parse(stringifiedOrg);
+//         var userDetails = Object.assign({name, mission_statement}, user);
+//         reply.view('people/details', userDetails);
+//       });
+//     }
+//   });
+// };
+
+handlers.editUserView = (request, reply) => {
   var userId = request.params.id;
   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
-    Hoek.assert(!error, error);
-    // catch for case where user at specified userId doesn't exist.
-    var user = JSON.parse(stringifiedUser);
-    // if (user.user_type === 'admin') { // uncomment this when you add a Test for it!!
-    //   reply.view('people/details', user);
-    // } else {
-      request.redis.LINDEX('organisations', user.organisation_id, (error, stringifiedOrg) => {
-        Hoek.assert(!error, error);
-        var {name, mission_statement} = JSON.parse(stringifiedOrg);
-        var userDetails = Object.assign({name, mission_statement}, user);
-        reply.view('people/details', userDetails);
-      });
-    // }
+    Hoek.assert(!error, 'redis error');
+    request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
+      Hoek.assert(!error, 'redis error');
+      // TODO: refactor into reusable helper functions.
+      var allOrgs = orgsDropdown(stringifiedOrgs);
+      var userObj = JSON.parse(stringifiedUser);
+      var user = {
+        user: userObj,
+        organisation: allOrgs.allOrganisations[userObj.organisation_id]
+      };
+      var filteredOrgs = { allOrganisations: allOrgs.allOrganisations.filter(org => org.value !== userObj.organisation_id) };
+      var userTypes = userTypeRadios();
+      var userTypesWithDefault = setDefaultUserTypes(userTypes, userObj);
+      var options = Object.assign({}, filteredOrgs, userTypesWithDefault, user);
+      reply.view('people/edit', options);
+    });
   });
 };
 
-// please add a TEST for this handler then uncomment it
-// handlers.editUserView = (request, reply) => {
-//   var userId = request.params.id;
-//   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
-//     Hoek.assert(!error, 'redis error');
-//     request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
-//       Hoek.assert(!error, 'redis error');
-//       // TODO: refactor into reusable helper functions.
-//       var allOrgs = orgsDropdown(stringifiedOrgs);
-//       var userObj = JSON.parse(stringifiedUser);
-//       var user = {
-//         user: userObj,
-//         organisation: allOrgs.allOrganisations[userObj.organisation_id]
-//       };
-//       var filteredOrgs = { allOrganisations: allOrgs.allOrganisations.filter(org => org.value !== userObj.organisation_id) };
-//       var userTypes = userTypeRadios();
-//       var userTypesWithDefault = setDefaultUserTypes(userTypes, userObj);
-//       var options = Object.assign({}, filteredOrgs, userTypesWithDefault, user);
-//       reply.view('people/edit', options);
-//     });
-//   });
-// };
+handlers.editUserSubmit = (request, reply) => {
+  var userId = request.params.id;
+  request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
+    Hoek.assert(!error, 'redis error');
+    var user = JSON.parse(stringifiedUser);
+    var updatedUser = Object.assign({}, user, request.payload);
+    // update user
+    request.redis.LSET('people', userId, JSON.stringify(updatedUser), (error, response) => {
+      Hoek.assert(!error, 'redis error');
+      // check if organisation has changed => update organisation as well
+      // if (request.payload.organisation_id === user.organisation_id) {
+      //   return reply.redirect(`/orgs/${user.organisation_id}`);
+      // }
+      // TODO: UDATE OLD ORGANISATION DETAILS AND NEW ORGANISATION DETAILS IF THERE ARE ANY
+      // ALSO NEED TO CHECK FOR ANY USERS THAT WERE ATTACHED TO THAT OLD ORGANISATION AND UPDATE THEM.
+      // THERE IS ISSUE OPEN REGARDING WHAT ACTION SHOULD BE TAKEN
+      return reply.redirect(`orgs/${user.organisation_id}`); // FOR DEMO PURPOSES DO NOT UPDATE ORGANISATION
+    });
+  });
+};
 
-// please add a TEST for this handler then uncomment it
-// handlers.editUserSubmit = (request, reply) => {
-//   var userId = request.params.id;
-//   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
-//     Hoek.assert(!error, 'redis error');
-//     var user = JSON.parse(stringifiedUser);
-//     var updatedUser = Object.assign({}, user, request.payload);
-//     // update user
-//     request.redis.LSET('people', userId, JSON.stringify(updatedUser), (error, response) => {
-//       Hoek.assert(!error, 'redis error');
-//       // check if organisation has changed => update organisation as well
-//       if (request.payload.organisation_id === user.organisation_id) {
-//         return reply.redirect(`/orgs/${user.organisation_id}`);
-//       }
-//       // TODO: UDATE OLD ORGANISATION DETAILS AND NEW ORGANISATION DETAILS IF THERE ARE ANY
-//       // ALSO NEED TO CHECK FOR ANY USERS THAT WERE ATTACHED TO THAT OLD ORGANISATION AND UPDATE THEM.
-//       // THERE IS ISSUE OPEN REGARDING WHAT ACTION SHOULD BE TAKEN
-//       return reply.redirect(`orgs/${user.organisation_id}`); // FOR DEMO PURPOSES DO NOT UPDATE ORGANISATION
-//     });
-//   });
-// };
-
-// please add a TEST for this handler then uncomment it
-// handlers.createNewPrimaryUserForm = (request, reply) => {
-//   request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
-//     Hoek.assert(!error, 'redis error');
-//     var options = Object.assign({}, orgsDropdown(stringifiedOrgs), userTypeRadios());
-//     reply.view('people/add', options);
-//   });
-// };
+handlers.createNewPrimaryUserForm = (request, reply) => {
+  request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
+    Hoek.assert(!error, 'redis error');
+    var options = Object.assign({}, orgsDropdown(stringifiedOrgs), userTypeRadios());
+    reply.view('people/add', options);
+  });
+};
 
 handlers.createNewPrimaryUser = (request, reply) => {
   var payload = request.payload;
@@ -184,23 +177,6 @@ handlers.createNewOrganisation = (request, reply) => {
   });
 };
 
-handlers.viewAllOrganisations = (request, reply) => {
-  request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
-    Hoek.assert(!error, 'redis error');
-    var organisations = {
-      allOrganisations: stringifiedOrgs.map(element => JSON.parse(element)),
-      alternate: [{
-        path: '/orgs/add',
-        name: '+'
-      }, {
-        path: '/people',
-        name: 'People'
-      }]
-    };
-    reply.view('organisations/view', organisations);
-  });
-};
-
 handlers.viewOrganisationDetails = (request, reply) => {
   var userId = request.params.id;
   request.redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
@@ -236,72 +212,54 @@ handlers.viewAllOrganisations = (request, reply) => {
   });
 };
 
-handlers.viewOrganisationDetails = (request, reply) => {
-  var userId = request.params.id;
-  request.redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
+// please add a TEST for this handler then uncomment it
+handlers.editOrganisationDetails = (request, reply) => {
+  var orgId = request.params.id;
+  request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
-    // TODO: catch for case where org at specified userId doesn't exist.
     var organisation = JSON.parse(stringifiedOrg);
-    // if (organisation.primary_id) {
-      request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
-        Hoek.assert(!error, 'redis error');
-        var {first_name, last_name, email, phone, job} = JSON.parse(stringifiedPrimaryUser);
-        var organisationDetails = Object.assign({first_name, last_name, email, phone, job}, organisation);
-        reply.view('organisations/details', organisationDetails);
+    if (!organisation.primary_id) {
+      return reply.view('organisations/edit', organisation);
+    }
+    request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
+      Hoek.assert(!error, 'redis error');
+      var {first_name, last_name, id} = JSON.parse(stringifiedPrimaryUser);
+      var organisationDetails = Object.assign({}, organisation, {
+        primary_user_name: `${first_name} ${last_name}`,
+        primary_user_id: id
       });
-    // } else {
-    //   reply.view('organisations/details', organisation);
-    // }
+      reply.view('organisations/edit', organisationDetails);
+    });
   });
 };
-// please add a TEST for this handler then uncomment it
-// handlers.editOrganisationDetails = (request, reply) => {
-//   var orgId = request.params.id;
-//   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
-//     Hoek.assert(!error, 'redis error');
-//     var organisation = JSON.parse(stringifiedOrg);
-//     if (!organisation.primary_id) {
-//       return reply.view('organisations/edit', organisation);
-//     }
-//     request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
-//       Hoek.assert(!error, 'redis error');
-//       var {first_name, last_name, id} = JSON.parse(stringifiedPrimaryUser);
-//       var organisationDetails = Object.assign({}, organisation, {
-//         primary_user_name: `${first_name} ${last_name}`,
-//         primary_user_id: id
-//       });
-//       reply.view('organisations/edit', organisationDetails);
-//     });
-//   });
-// };
 
 // please add a TEST for this handler then uncomment it
-// handlers.submitEditOrg = (request, reply) => {
-//   var orgId = request.params.id;
-//   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
-//     Hoek.assert(!error, 'redis error');
-//     Hoek.assert(stringifiedOrg, 'Organisation does not exist');
-//     var oldOrg = JSON.parse(stringifiedOrg);
-//     var orgUpdated = Object.assign({}, oldOrg, request.payload);
-//     request.redis.LSET('organisations', orgId, JSON.stringify(orgUpdated), (error, response) => {
-//       Hoek.assert(!error, 'redis error');
-//       reply.redirect(`/orgs/${orgId}`);
-//     });
-//   });
-// };
+handlers.submitEditOrg = (request, reply) => {
+  var orgId = request.params.id;
+  request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
+    Hoek.assert(!error, 'redis error');
+    Hoek.assert(stringifiedOrg, 'Organisation does not exist');
+    var oldOrg = JSON.parse(stringifiedOrg);
+    var orgUpdated = Object.assign({}, oldOrg, request.payload);
+    request.redis.LSET('organisations', orgId, JSON.stringify(orgUpdated), (error, response) => {
+      Hoek.assert(!error, 'redis error');
+      reply.redirect(`/orgs/${orgId}`);
+    });
+  });
+};
 
 // please add a TEST for this handler then uncomment it
-// handlers.toggleArchiveOrg = (request, reply) => {
-//   var orgId = request.params.id;
-//   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
-//     Hoek.assert(!error, 'redis error');
-//     Hoek.assert(stringifiedOrg, 'Organisation does not exist');
-//     request.redis.LSET('organisations', orgId, deactivate(stringifiedOrg), (error, response) => {
-//       Hoek.assert(!error, 'redis error');
-//       reply.redirect('/orgs');
-//     });
-//   });
-// };
+handlers.toggleArchiveOrg = (request, reply) => {
+  var orgId = request.params.id;
+  request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
+    Hoek.assert(!error, 'redis error');
+    Hoek.assert(stringifiedOrg, 'Organisation does not exist');
+    request.redis.LSET('organisations', orgId, deactivate(stringifiedOrg), (error, response) => {
+      Hoek.assert(!error, 'redis error');
+      reply.redirect('/orgs');
+    });
+  });
+};
 
 handlers.login = (request, reply) => {
   var redis = request.redis;
@@ -339,34 +297,34 @@ handlers.login = (request, reply) => {
 module.exports = handlers;
 
 // please add a TEST for these methods then uncomment them
-// function orgsDropdown (stringifiedOrgs) {
-//   var orgsArray = stringifiedOrgs.map(org => {
-//     var details = JSON.parse(org);
-//     return {value: details.id, display: details.name};
-//   });
-//   return { allOrganisations: orgsArray };
-// }
-//
-// function userTypeRadios () {
-//   var userTypes = ['admin', 'primary'];
-//   var userTypeArr = userTypes.map(user => {
-//     return {name: 'user_type', value: user, display: user};
-//   });
-//   return { userTypes: userTypeArr };
-// }
-//
-// function setDefaultUserTypes (types, user) {
-//   var checked = { isChecked: 'checked' };
-//   var selectedTypes = types.userTypes.map(t => t.value === user.user_type
-//     ? Object.assign({}, t, checked) : t);
-//   return { userTypes: selectedTypes };
-// }
-//
-// function deactivate (stringifiedData) {
-//   var data = JSON.parse(stringifiedData);
-//   var updated = Object.assign({}, data, { active: !data.active });
-//   return JSON.stringify(updated);
-// }
+function orgsDropdown (stringifiedOrgs) {
+  var orgsArray = stringifiedOrgs.map(org => {
+    var details = JSON.parse(org);
+    return {value: details.id, display: details.name};
+  });
+  return { allOrganisations: orgsArray };
+}
+
+function userTypeRadios () {
+  var userTypes = ['admin', 'primary'];
+  var userTypeArr = userTypes.map(user => {
+    return {name: 'user_type', value: user, display: user};
+  });
+  return { userTypes: userTypeArr };
+}
+
+function setDefaultUserTypes (types, user) {
+  var checked = { isChecked: 'checked' };
+  var selectedTypes = types.userTypes.map(t => t.value === user.user_type
+    ? Object.assign({}, t, checked) : t);
+  return { userTypes: selectedTypes };
+}
+
+function deactivate (stringifiedData) {
+  var data = JSON.parse(stringifiedData);
+  var updated = Object.assign({}, data, { active: !data.active });
+  return JSON.stringify(updated);
+}
 
 function initialiseEntry (length, payload) {
   var additionalInfo = {
