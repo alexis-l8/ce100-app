@@ -2,7 +2,6 @@ const tape = require('tape');
 var jwt = require('jsonwebtoken');
 var aguid = require('aguid');
 
-// const client = require('redis').createClient();
 const server = require('../../server/server.js');
 const setup = require('../helpers/set-up.js');
 
@@ -15,19 +14,17 @@ tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
 });
 
-// need to implement hapi-error to get redirect to work.
-// tape('hit an authed route without a cookie redirects to /login', t => {
-//   t.plan(2);
-//   const options = {
-//     method: 'GET',
-//     url: '/people/add'
-//   };
-//   server.inject(options, res => {
-//     t.equal(res.statusCode, 302, 'un authed request replies with a redirect');
-//     t.equal(res.headers.location, '/login', 'redirects to `login`');
-//     t.end();
-//   });
-// });
+
+tape('hit an authed route without a cookie get 401', t => {
+  const options = {
+    method: 'GET',
+    url: '/people/add'
+  };
+  server.inject(options, res => {
+    t.equal(res.statusCode, 401, 'request a endpoint requiring auth get 401');
+    t.end();
+  });
+});
 
 tape('A valid JWT with invalid jti fails Auth', t => {
   var uid = Math.ceil(Math.random() * 10000000000);
@@ -115,12 +112,6 @@ tape('hit an authed route with a valid cookie containing valid users information
   });
 });
 
-tape('teardown', t => {
-  // client.FLUSHDB();
-  t.end();
-});
-
 tape.onFinish(() => {
-  // client.end(true);
   server.stop(() => {});
 });

@@ -6,8 +6,6 @@ exports.register = (server, options, next) => {
     verifyOptions: { algorithms: ['HS256'] },
     validateFunc: (decoded, request, cb) => {
       request.redis.HGET('sessions', decoded.jti, (err, session) => {
-        console.log(err, session);
-        console.log(' - - - - - - - - - - - ')
         if(err || !session) {
           return cb(err, false);
         }

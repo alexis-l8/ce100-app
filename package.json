@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon server/start.js",
     "test": "istanbul cover tape ./test/*/*.test.js | node_modules/tap-spec/bin/cmd.js",
+    "coverage": "istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
     "fast": "tape ./test/*/*.test.js"
   },
   "repository": {
@@ -40,11 +41,16 @@
     "env2": "^2.1.1",
     "istanbul": "^0.4.4",
     "nodemon": "^1.10.0",
+    "pre-commit": "^1.1.3",
     "semistandard": "^8.0.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.0"
   },
   "engines": {
     "node": "^6.5.0"
-  }
+  },
+  "pre-commit": [
+    "test",
+    "coverage"
+  ]
 }
