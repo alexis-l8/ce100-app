@@ -10,7 +10,7 @@ var handlers = {};
 handlers.serveView = (viewName) => (request, reply) => reply.view(viewName);
 
 // what does this do and why isn't it tested?
-// handlers.serveFile = (request, reply) => reply.file(request.params.path);
+handlers.serveFile = (request, reply) => reply.file(request.params.path);
 
 handlers.activatePrimaryUser = (request, reply) => {
   var hashedId = request.params.hashedId;
