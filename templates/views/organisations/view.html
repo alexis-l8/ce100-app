@@ -1,10 +1,18 @@
-<h1>All Organisations</h1>
-<div>
-  {{#if allOrganisations}}
-    {{#each allOrganisations}}
-      {{>organisation}}
-    {{/each}}
-  {{else}}
-    <h3>Sorry! No organisations were found</h3>
-  {{/if}}
+<!-- Main Content -->
+<div class="container">
+    <h1 class="title">Organisations</h1>
+
+    {{#if allOrganisations}}
+        <ul class="list">
+            {{#each allOrganisations}}
+                {{>organisation}}
+            {{/each}}
+        </ul>
+
+        {{else}}
+        <h3>Sorry! No organisations were found</h3>
+    {{/if}}
 </div>
+
+<!-- Include Navbar -->
+{{>navbar}}

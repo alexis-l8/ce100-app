@@ -1,7 +1,8 @@
-const validate = require('./person.js');
-const handlers = require('./handlers.js');
+var validatePerson = require('./person.js');
+var validateOrg = require('./organisation.js');
+var handlers = require('./handlers.js');
 
-const routes = [
+var routes = [
   {
     method: 'GET',
     path: '/',
@@ -15,15 +16,10 @@ const routes = [
   {
     method: 'GET',
     path: '/people/add',
-    handler: handlers.serveView('add-user'),
+    handler: handlers.createNewPrimaryUserForm,
     config: {
       auth: { scope: 'admin' }
     }
-  },
-  {
-    method: 'GET',
-    path: '/people/{id}',
-    handler: handlers.viewUserDetails
   },
   {
     method: 'POST',
@@ -31,7 +27,25 @@ const routes = [
     handler: handlers.createNewPrimaryUser,
     config: {
       auth: { scope: 'admin' },
-      validate: validate.adminAddUser
+      validate: validatePerson.adminAddUser
+    }
+  },
+  // {
+  //   method: 'GET',
+  //   path: '/people/{id}',
+  //   handler: handlers.viewUserDetails
+  // },
+  {
+    method: 'GET',
+    path: '/people/{id}/edit',
+    handler: handlers.editUserView
+  },
+  {
+    method: 'POST',
+    path: '/people/{id}/edit',
+    handler: handlers.editUserSubmit,
+    config: {
+      validate: validatePerson.editUser
     }
   },
   {
@@ -47,7 +61,7 @@ const routes = [
     path: '/people/activate/{hashedId}',
     handler: handlers.activatePrimaryUser,
     config: {
-      validate: validate.confirmPassword,
+      validate: validatePerson.confirmPassword,
       auth: false
     }
   },
@@ -65,7 +79,7 @@ const routes = [
     handler: handlers.login,
     config: {
       auth: false,
-      validate: validate.login
+      validate: validatePerson.login
     }
   },
   {
@@ -82,7 +96,7 @@ const routes = [
     handler: handlers.createNewOrganisation,
     config: {
       auth: { scope: 'admin' },
-      validate: validate.adminAddOrganisation
+      validate: validatePerson.adminAddOrganisation
     }
   },
   {
@@ -94,7 +108,33 @@ const routes = [
     method: 'GET',
     path: '/orgs/{id}',
     handler: handlers.viewOrganisationDetails
+  },
+  {
+    method: 'GET',
+    path: '/orgs/{id}/edit',
+    handler: handlers.editOrganisationDetails
+  },
+  {
+    method: 'POST',
+    path: '/orgs/{id}/edit',
+    handler: handlers.submitEditOrg,
+    config: {
+      validate: validateOrg.adminEditOrg
+    }
+  },
+  {
+    method: 'GET',
+    path: '/orgs/{id}/toggle-archive',
+    handler: handlers.toggleArchiveOrg
   }
+  // {
+  //   method: 'GET',
+  //   path: '/{path*}',
+  //   handler: handlers.serveFile,
+  //   config: {
+  //     auth: false
+  //   }
+  // }
 ];
 
 module.exports = routes;

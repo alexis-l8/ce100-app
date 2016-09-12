@@ -1,0 +1,399 @@
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Resets
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+html {
+    font-size: 14px;
+    font-family: 'Noto Sans', Helvetica, Ariel, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    line-height: 1.5rem;
+    background-color: #fafafa;
+}
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Colours
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+/*
+
+Marine-blue :   #003253;
+Navy:           #002944;
+
+Denim:          #40667e;
+
+Bluey-grey:     #89a0ae;
+
+White:          #ffffff;
+
+Danger-red:     #900000;
+*/
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Nav Bar
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+
+.navbar {
+    height: 3.4285714286rem; /* 48px */
+    width: 100%;
+    background-color: #003253;
+    position: fixed;
+    bottom: 0;
+}
+
+.navbar__logo {
+    display: none;
+    /*************************************
+    WARNING TO BE REMOVED*/
+}
+
+.navbar__links {
+    display: table;
+    width: 100%;
+    max-width: 54.857142857rem;
+    margin: auto;
+}
+    .navbar__item {
+        display: table-cell;
+        vertical-align: middle;
+        width: 50%;
+        text-align: center;
+    }
+        .navbar__link:link {
+            display: block;
+            padding: 1rem 0;
+            text-decoration: none;
+            color: #ffffff;
+        }
+        .navbar__link:visited {
+            color: #ffffff;
+        }
+        .navbar__link:hover {
+            text-decoration: underline;
+        }
+        .navbar__link:active {
+            font-size: 0.9em;
+        }
+
+.navbar__hamburger {
+}
+
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Containers
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.container {
+    max-width: 54.857142857rem;
+    margin: 0 auto 6rem;
+}
+
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Titles
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.title {
+    padding: 1.5rem 0;
+    margin: 0;
+
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 1rem;
+    font-weight: normal;
+    color: #ffffff;
+
+    background: #002944; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#002944, #003253); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#002944, #003253); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#002944, #003253); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#002944, #003253); /* Standard syntax */
+}
+
+.title--with-logo {
+    padding: 3.5rem 0;
+}
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Lists
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.list {
+    background-color: #ffffff;
+}
+
+    .list__item {
+        position: relative;
+        padding: 1rem 8%;
+        list-style: none;
+        border-bottom: #89a0ae 1px solid;
+    }
+    .list__item--big {
+        text-align: center;
+        padding: 2rem 8%;
+        font-size: 1.15em;
+        text-transform: capitalize;
+        /* Note inheritance and conditional fontsize */
+    }
+
+        .list__link:link {
+            text-decoration: none;
+        }
+        .list__link:visited {
+            color: ;
+        }
+        .list__link:hover {
+
+        }
+        .list__link:active {
+
+        }
+
+        .list__data {
+            display: block;
+            color: #89a0ae;
+        }
+        .list__data--primary {
+            color: #40667e;
+        }
+
+        /* Expandable List Items */
+
+        .list__hidden-details {
+            display: none;
+        }
+
+        .list__ellipsis {
+            position: absolute;
+            right: 8%;
+            top: 0;
+
+            padding: 1rem;
+            margin-right: -1rem;
+            cursor: pointer;
+        }
+
+        .list__ellipsis:focus {
+            outline: none;
+        }
+
+        .list__ellipsis:focus > * {
+            background-color: #40667e;
+        }
+
+        .list__ellipsis:focus ~ .list__hidden-details {
+            display: block;
+        }
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Shapes
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.circle {
+    display: inline-block;
+    background-color: #89a0ae;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Cards
+    -------- (Cards are blocks of content)
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+
+.card {
+    padding: 5rem 1rem;
+    text-align: center;
+    color: #40667e;
+    border-bottom: 1px solid #89a0ae;
+}
+
+.card__copy {
+    margin-bottom: 1.5rem;
+}
+.card__data {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Forms
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+
+.form {
+    margin-top: 2rem;
+    padding: 0 7%;
+}
+    .form__label, .form__input {
+        display: block;
+        font-size: 1rem;
+    }
+
+    .form__label {
+        text-transform: capitalize;
+        margin-bottom: 1rem;
+        color: #89a0ae;
+    }
+
+    .form__input {
+        margin-bottom: 1.25rem;
+        line-height: 2.25;
+        width: 100%;
+
+        border-radius: 3px;
+        background-color: #f2f2f2;
+        border: solid 1px #ebeced;
+    }
+
+
+    .form__label--radio, .form__input--radio {
+        display: inline-block;
+        width: auto;
+    }
+    .form__label--radio {
+
+    }
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Buttons
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.button {
+    display: block;
+    margin: 2rem auto;
+    padding: 1rem;
+    width: 75%;
+    cursor: pointer;
+
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-decoration: none;
+
+    background-color: rgb(0, 50, 83);
+
+    border: none;
+    border-radius: 100px;
+}
+
+.button-small {
+    padding: 0.2rem 1rem;
+    cursor: pointer;
+
+    font-size: 0.8rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-decoration: none;
+
+    background-color: rgb(0, 50, 83);
+
+    border: none;
+    border-radius: 100px;
+}
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Anchors
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.anchor:link {
+    text-align: center;
+    display: block;
+    line-height: 2.75;
+    color: #89a0ae;
+}
+.anchor:visited {
+    color: #40667e;
+}
+.anchor:hover {
+    text-decoration: none;
+}
+.anchor:active {
+    font-size: 0.9em;
+}
+
+.anchor--danger:link {
+    color: #900000;
+    margin: 1rem auto 4rem;
+}
+.anchor--danger:visited {
+    color: #900000;
+}
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Anchors
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.float-right {
+  float: right
+}
+
+.log-in {
+  height: 100vh;
+  background: radial-gradient(10em at 50% 30%, #618298, #003253);
+}
+
+.log-in-layout {
+  padding-top: 18rem;
+}
+
+.log-in-fields {
+  width: 280px;
+  border: 1px solid #618298;
+  border-radius: 25px;
+}

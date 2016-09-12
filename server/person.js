@@ -1,22 +1,20 @@
-const Joi = require('joi');
+var Joi = require('joi');
 
-const validate = {};
+var validate = {};
 
 validate.adminAddUser = {
   payload: {
     first_name: Joi.string().min(1).required(),
     last_name: Joi.string().min(1).required(),
     email: Joi.string().email().required(),
-    organisation_id: Joi.number().min(0).required(),
-    user_type: ['primary', 'admin']
+    organisation_id: Joi.number().min(-1).required(),
+    user_type: Joi.string().valid('admin', 'primary')
   }
 };
 
 validate.adminAddOrganisation = {
   payload: {
-    name: Joi.string().min(1).required(),
-    // user_type: ['admin']
-    submit: Joi.any().optional()
+    name: Joi.string().min(1).required()
   }
 };
 
@@ -35,6 +33,17 @@ validate.login = {
     password: Joi.string().min(1).required(),
     // TODO: make min 6
     failAction: 'error'
+  }
+};
+
+validate.editUser = {
+  payload: {
+    first_name: Joi.string().min(1).required(),
+    last_name: Joi.string().min(1).required(),
+    job: Joi.any().optional(),
+    email: Joi.string().email().required(),
+    organisation_id: Joi.number().min(-1).required(),
+    user_type: Joi.string().valid('admin', 'primary')
   }
 };
 

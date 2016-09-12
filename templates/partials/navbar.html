@@ -1,0 +1,17 @@
+<nav class="navbar">
+    <img class="navbar__logo" alt="" src=""></img>
+
+    <div class="navbar__hamburger" tabindex="1"></div>
+    <ul class="navbar__links">
+        {{#if alternate}}
+          {{#each alternate}}
+            {{>navbar-list}}
+          {{/each}}
+        {{else}}
+        <li class="navbar__item">
+          <a href="/orgs" class="navbar__link">Orgs</a></li>
+        <li class="navbar__item">
+          <a href="/people" class="navbar__link">People</a></li>
+        {{/if}}
+    </ul>
+</nav>

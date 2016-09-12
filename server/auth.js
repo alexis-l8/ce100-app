@@ -16,7 +16,7 @@ exports.register = (server, options, next) => {
               return cb(err, false);
             }
             var user = JSON.parse(userString);
-            const override = Object.assign({ scope: user.user_type }, decoded);
+            var override = Object.assign({ scope: user.user_type }, decoded);
             return cb(null, true, override);
           });
         }

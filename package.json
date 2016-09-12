@@ -4,7 +4,7 @@
   "description": "A networking, knowledge sharing and collaboration platform for the Circular Economy 100 network, an Ellen MacArthur Foundation programme.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/start.js",
+    "start": "nodemon server/server.js",
     "test": "istanbul cover tape ./test/*/*.test.js | node_modules/tap-spec/bin/cmd.js",
     "coverage": "istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
     "fast": "tape ./test/*/*.test.js"
@@ -31,6 +31,7 @@
     "hapi-redis-connection": "^1.0.1",
     "hashids": "^1.1.0",
     "hoek": "^4.0.2",
+    "inert": "^4.0.2",
     "iron": "^4.0.3",
     "joi": "^9.0.4",
     "redis": "^2.6.2",

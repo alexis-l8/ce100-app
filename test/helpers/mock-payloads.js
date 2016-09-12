@@ -4,7 +4,7 @@ var mockPayloads = {};
 mockPayloads.usersAddPayload = {
   first_name: 'Anna',
   last_name: 'Ivanovic',
-  email: 'an@iv.co',
+  email: 'ce100.emf@gmail.com',
   organisation_id: 5,
   user_type: 'primary'
 };
@@ -39,6 +39,29 @@ mockPayloads.loginAdminIncorrect = {
 mockPayloads.loginBadEmail = {
   email: 'jaaaaaa@mu.co',
   password: 'Hello1'
+};
+
+mockPayloads.editUserPayload = {
+  first_name: 'Ben',
+  last_name: 'Maynard',
+  job: 'Full Stack Web Developer',
+  email: 'be@ma.co',
+  user_type: 'admin',
+  organisation_id: -1
+};
+
+mockPayloads.editUserPayloadOrgUnchanged = {
+  first_name: 'Ben',
+  last_name: 'Maynard',
+  job: 'Full Stack Web Developer',
+  email: 'be@ma.co',
+  user_type: 'admin',
+  organisation_id: 1
+};
+
+mockPayloads.adminEditOrg = {
+  name: 'McDonalds',
+  mission_statement: 'Improve diets'
 };
 
 module.exports = mockPayloads;

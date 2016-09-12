@@ -12,18 +12,18 @@ tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
 });
 
-tape('/people page loads with a users info', t => {
-  var options = {
-    method: 'GET',
-    url: '/people/3',
-    headers: { cookie: `token=${primary_token}` }
-  };
-  server.inject(options, reply => {
-    t.equal(reply.statusCode, 200, 'route exists and replies 200');
-    t.ok(reply.payload.indexOf(setupData.initialPeople[3].first_name) > -1, 'route replies with view containing users name');
-    t.end();
-  });
-});
+// tape('/people page loads with a users info', t => {
+//   var options = {
+//     method: 'GET',
+//     url: '/people/3',
+//     headers: { cookie: `token=${primary_token}` }
+//   };
+//   server.inject(options, reply => {
+//     t.equal(reply.statusCode, 200, 'route exists and replies 200');
+//     t.ok(reply.payload.indexOf(setupData.initialPeople[3].first_name) > -1, 'route replies with view containing users name');
+//     t.end();
+//   });
+// });
 
 tape('teardown', t => {
   client.FLUSHDB();
