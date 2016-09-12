@@ -48,6 +48,10 @@ mockPayloads.editUserPayload = {
   email: 'be@ma.co',
   user_type: 'admin',
   organisation_id: -1
+
+mockPayloads.adminEditOrg = {
+  name: 'McDonalds',
+  mission_statement: 'Improve diets'
 };
 
 module.exports = mockPayloads;

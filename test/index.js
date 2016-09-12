@@ -1,7 +1,7 @@
 // organisations
 require('./organisations/admin-adds-org.test.js');
 require('./organisations/admin-views-all-orgs.test.js');
-
+require('./organisations/admin-view-edit-archive-org.test.js');
 // people
 require('./people/admin-adds-primary-user.test.js');
 require('./people/login.test.js');

@@ -204,16 +204,15 @@ handlers.viewOrganisationDetails = (request, reply) => {
     Hoek.assert(!error, 'redis error');
     // TODO: catch for case where org at specified userId doesn't exist.
     const organisation = JSON.parse(stringifiedOrg);
-    if (organisation.primary_id) {
-      request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
-        Hoek.assert(!error, 'redis error');
-        const {first_name, last_name, email, phone, job} = JSON.parse(stringifiedPrimaryUser);
-        const organisationDetails = Object.assign({first_name, last_name, email, phone, job}, organisation);
-        reply.view('organisations/details', organisationDetails);
-      });
-    } else {
-      reply.view('organisations/details', organisation);
+    if (!organisation.primary_id) {
+      return reply.view('organisations/details', organisation);
     }
+    request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
+      Hoek.assert(!error, 'redis error');
+      const {first_name, last_name, email, phone, job} = JSON.parse(stringifiedPrimaryUser);
+      const organisationDetails = Object.assign({first_name, last_name, email, phone, job}, organisation);
+      reply.view('organisations/details', organisationDetails);
+    });
   });
 };
 
@@ -241,7 +240,8 @@ handlers.submitEditOrg = (request, reply) => {
   const orgId = request.params.id;
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
-    if (!stringifiedOrg) return reply(Boom.notFound('Organisation does not exist'));
+    Hoek.assert(stringifiedOrg, 'Organisation does not exist');
+    // if (!stringifiedOrg) return reply(Boom.notFound('Organisation does not exist'));
     const oldOrg = JSON.parse(stringifiedOrg);
     const orgUpdated = Object.assign({}, oldOrg, request.payload);
     request.redis.LSET('organisations', orgId, JSON.stringify(orgUpdated), (error, response) => {
@@ -255,7 +255,7 @@ handlers.toggleArchiveOrg = (request, reply) => {
   const orgId = request.params.id;
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
-    if (!stringifiedOrg) return reply(Boom.notFound('Organisation does not exist'));
+    Hoek.assert(stringifiedOrg, 'Organisation does not exist');
     request.redis.LSET('organisations', orgId, deactivate(stringifiedOrg), (error, response) => {
       Hoek.assert(!error, 'redis error');
       reply.redirect('/orgs');
