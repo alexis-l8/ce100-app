@@ -118,6 +118,19 @@ setupData.initialPeople = [
     active: false,
     password: bcrypt.hashSync('Hello1', 13),
     last_login: Date.now()
+  },
+  {
+    first_name: 'Anna',
+    last_name: 'Freud',
+    email: 'an@fr.co',
+    phone: '07111001111',
+    job: 'CEO',
+    organisation_id: '',
+    user_type: 'primary',
+    id: 9,
+    active: true,
+    password: bcrypt.hashSync('Hello1', 13),
+    last_login: Date.now()
   }
 ];
 

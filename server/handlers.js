@@ -105,6 +105,7 @@ handlers.editUserView = (request, reply) => {
 };
 
 // TODO: remove '' as default for organisation_id primary_id
+// needs to be implemented in handlebars with a helper
 handlers.editUserSubmit = (request, reply) => {
   var userId = request.params.id;
   var newOrgId = request.payload.organisation_id;
@@ -116,14 +117,12 @@ handlers.editUserSubmit = (request, reply) => {
     request.redis.LSET('people', userId, JSON.stringify(updatedUser), (error, response) => {
       Hoek.assert(!error, 'redis error');
       var oldOrgId = user.organisation_id;
-      // TODO: remove
-      console.log(oldOrgId, '<------ oldOrgId, newOrgId ------->', newOrgId);
       // if org unchanged
       if ((newOrgId === -1 && oldOrgId === '') || newOrgId === oldOrgId) {
         return reply.redirect(`/orgs/${user.organisation_id}`);
       }
       // if old org is removed and no new org added -> update old org
-      else {//if (newOrgId === -1) {
+      else if (newOrgId === -1) {
         request.redis.LINDEX('organisations', oldOrgId, (error, orgString) => {
           Hoek.assert(!error, 'redis error');
           Hoek.assert(orgString, 'Organisation does not exist');
@@ -140,13 +139,20 @@ handlers.editUserSubmit = (request, reply) => {
         });
       }
       // if user did not have old org but has now been assigned to one
-      // eg: oldOrgId: -1, newOrgId: 3
-      // else if (oldOrgId === -1 || '') {
-      //   return reply.redirect(`/orgs/${user.organisation_id}`);
-      // }
-      // TODO: UDATE OLD ORGANISATION DETAILS AND NEW ORGANISATION DETAILS IF THERE ARE ANY
-      // ALSO NEED TO CHECK FOR ANY USERS THAT WERE ATTACHED TO THAT OLD ORGANISATION AND UPDATE THEM.
-      // THERE IS ISSUE OPEN REGARDING WHAT ACTION SHOULD BE TAKEN
+      // eg: oldOrgId: -1, newOrgId: 6
+      else { // if (oldOrgId === -1 || oldOrgId === '') { left this here as need to check if there is another case
+        console.log(' in else of handler - - -- - - -- - ');
+        request.redis.LINDEX('organisations', newOrgId, (error, newOrgString) => {
+          Hoek.assert(!error, 'redis error');
+          Hoek.assert(newOrgString, 'Organisation does not exist');
+          var updatedOrg = addPrimaryToOrg(stringifiedUser, newOrgString);
+          console.log(updatedOrg, stringifiedUser);
+          request.redis.LSET('organisations', newOrgId, updatedOrg, (error, response) => {
+            Hoek.assert(!error, 'redis error');
+            return reply.redirect('/people');
+          });
+        });
+      }
     });
   });
 };
@@ -368,7 +374,7 @@ function addPrimaryToOrg (user, org) {
     primary_id: id,
     people: orgOld.people.push(id)
   };
-  var orgUpdated = Object.assign(additionalInfo, orgOld);
+  var orgUpdated = Object.assign({}, orgOld, additionalInfo);
   return JSON.stringify(orgUpdated);
 }
 
