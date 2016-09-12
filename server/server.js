@@ -1,4 +1,4 @@
-require('env2')('config.env');
+require('env2')('.env');
 const Hapi = require('hapi');
 const Hoek = require('hoek');
 const path = require('path');
@@ -11,6 +11,7 @@ server.connection({ port: 3000 });
 server.register([ // one plugin per line
   require('vision'),
   require('hapi-redis-connection'),
+  require('hapi-error'),
   // custom plugins
   require('./auth.js')
 ], err => {
