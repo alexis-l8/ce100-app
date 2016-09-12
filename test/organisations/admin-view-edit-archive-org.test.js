@@ -72,6 +72,35 @@ tape('admin can view an org, edit, archive and unarchive it', t => {
   });
 });
 
+tape('admin can view and edit an org which does not have a primary user attached to it yet', t => {
+  t.plan(6);
+  var adminViewOrg = {
+    method: 'GET',
+    url: '/orgs/5',
+    headers: { cookie: `token=${admin_token}` }
+  };
+  var adminEditOrgView = {
+    method: 'GET',
+    url: '/orgs/5/edit',
+    headers: { cookie: `token=${admin_token}` }
+  };
+  var orgName = setupData.initialOrgs[5].name;
+  server.inject(adminViewOrg, res => {
+    t.equal(res.statusCode, 200, '/orgs/id route exists for org without primary user');
+    t.ok(res.payload.indexOf(orgName) > -1, 'server sends back the correct view');
+    t.ok(res.payload.indexOf('No Primary User Yet') > -1, 'org view reacts to having no primary user correctly');
+
+    server.inject(adminEditOrgView, res => {
+      t.equal(res.statusCode, 200, '/orgs/id/edit route exists for org without primary user');
+      t.ok(res.payload.indexOf(orgName) > -1, 'server sends back the correct org');
+      // at the moment there is no instruction as to how this view should look when in edit mode and no primary user is attached.
+      // Currently there is no mention of `primary user` in this view, but this may change.
+      t.ok(res.payload.indexOf('Primary User') === -1, 'edit org view reacts to having no primary user correctly');
+      t.end();
+    });
+  }); 
+});
+
 tape('teardown', t => {
   client.FLUSHDB();
   t.end();
