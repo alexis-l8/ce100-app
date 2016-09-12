@@ -1,9 +1,9 @@
-const tape = require('tape');
-const client = require('redis').createClient();
-const server = require('../../server/server.js');
-const payloads = require('../helpers/mock-payloads.js');
+var tape = require('tape');
+var client = require('redis').createClient();
+var server = require('../../server/server.js');
+var payloads = require('../helpers/mock-payloads.js');
 
-const setup = require('../helpers/set-up.js');
+var setup = require('../helpers/set-up.js');
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
@@ -11,7 +11,7 @@ tape('set up: initialise db', t => {
 
 tape('/login load page', t => {
   t.plan(1);
-  const options = {
+  var options = {
     method: 'GET',
     url: '/login'
   };
@@ -22,7 +22,7 @@ tape('/login load page', t => {
 });
 
 tape('/login with an unrecognised email address', t => {
-  const options = {
+  var options = {
     method: 'POST',
     url: '/login',
     payload: JSON.stringify(payloads.loginBadEmail)
@@ -35,7 +35,7 @@ tape('/login with an unrecognised email address', t => {
 
 tape('/login admin successful', t => {
   t.plan(2);
-  const options = {
+  var options = {
     method: 'POST',
     url: '/login',
     payload: JSON.stringify(payloads.loginAdminCorrect)
@@ -48,7 +48,7 @@ tape('/login admin successful', t => {
 });
 
 tape('/login post logs a user in with incorrect credentials', t => {
-  const options = {
+  var options = {
     method: 'POST',
     url: '/login',
     payload: JSON.stringify(payloads.loginAdminIncorrect)

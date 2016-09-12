@@ -1,5 +1,5 @@
 
-let mockPayloads = {};
+var mockPayloads = {};
 
 mockPayloads.usersAddPayload = {
   first_name: 'Anna',

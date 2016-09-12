@@ -1,8 +1,8 @@
-const tape = require('tape');
-const client = require('redis').createClient();
-const server = require('../../server/server.js');
+var tape = require('tape');
+var client = require('redis').createClient();
+var server = require('../../server/server.js');
 
-const setup = require('../helpers/set-up.js');
+var setup = require('../helpers/set-up.js');
 
 var jwt = require('jsonwebtoken');
 var setupData = require('../helpers/setup-data.js');
@@ -15,7 +15,7 @@ tape('set up: initialise db', t => {
 });
 
 tape('/orgs load general view', t => {
-  const options = {
+  var options = {
     method: 'GET',
     url: '/orgs',
     headers: { cookie: `token=${primary_token}` }
@@ -28,7 +28,7 @@ tape('/orgs load general view', t => {
 });
 
 tape('/orgs/0 load specific organisation page', t => {
-  const options = {
+  var options = {
     method: 'GET',
     url: '/orgs/0',
     headers: { cookie: `token=${primary_token}` }

@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt');
-const aguid = require('aguid');
-const setupData = {};
+var bcrypt = require('bcrypt');
+var aguid = require('aguid');
+var setupData = {};
 
 // people
 setupData.initialPeople = [

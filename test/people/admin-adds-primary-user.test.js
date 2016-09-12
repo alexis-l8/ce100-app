@@ -1,10 +1,10 @@
-const tape = require('tape');
-const client = require('redis').createClient();
-const server = require('../../server/server.js');
-const payloads = require('../helpers/mock-payloads.js');
-const setup = require('../helpers/set-up.js');
+var tape = require('tape');
+var client = require('redis').createClient();
+var server = require('../../server/server.js');
+var payloads = require('../helpers/mock-payloads.js');
+var setup = require('../helpers/set-up.js');
 
-const Iron = require('iron');
+var Iron = require('iron');
 
 var jwt = require('jsonwebtoken');
 var setupData = require('../helpers/setup-data.js');
@@ -19,19 +19,19 @@ tape('set up: initialise db', t => {
 
 tape('/people/add check auth', t => {
   t.plan(3);
-  const primaryCookie = {
+  var primaryCookie = {
     method: 'GET',
     url: '/people/add',
     payload: JSON.stringify(payloads.orgsAddPayload),
     headers: { cookie: `token=${primary_token}` }
   };
-  const adminCookie = {
+  var adminCookie = {
     method: 'GET',
     url: '/people/add',
     payload: JSON.stringify(payloads.orgsAddPayload),
     headers: { cookie: `token=${admin_token}`}
   };
-  const primaryCookiePost = {
+  var primaryCookiePost = {
     method: 'POST',
     url: '/people/add',
     payload: JSON.stringify(payloads.orgsAddPayload),
@@ -51,13 +51,13 @@ tape('/people/add check auth', t => {
 
 tape('add and activate a new user and updates the linked organisation', t => {
   t.plan(5);
-  const addOrg = {
+  var addOrg = {
     method: 'POST',
     url: '/orgs/add',
     payload: JSON.stringify(payloads.orgsAddPayload),
     headers: { cookie: `token=${admin_token}` }
   };
-  const addPerson = {
+  var addPerson = {
     method: 'POST',
     url: '/people/add',
     payload: JSON.stringify(payloads.usersAddPayload),
@@ -67,11 +67,11 @@ tape('add and activate a new user and updates the linked organisation', t => {
     t.equal(reply.statusCode, 302, 'redirects');
     server.inject(addPerson, reply => {
       t.equal(reply.statusCode, 302, 'redirects');
-      const newUrl = reply.headers.location;
+      var newUrl = reply.headers.location;
       t.ok(newUrl === '/people', 'route redirects to /people');
-      const userId = reply.result.userId;
+      var userId = reply.result.userId;
       Iron.seal(userId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, hashed) => {
-        const activateUser = {
+        var activateUser = {
           method: 'POST',
           url: `/people/activate/${hashed}`,
           payload: JSON.stringify(payloads.usersActivatePayload)

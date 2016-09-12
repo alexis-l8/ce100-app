@@ -1,9 +1,9 @@
-const tape = require('tape');
+var tape = require('tape');
 var jwt = require('jsonwebtoken');
 var aguid = require('aguid');
 
-const server = require('../../server/server.js');
-const setup = require('../helpers/set-up.js');
+var server = require('../../server/server.js');
+var setup = require('../helpers/set-up.js');
 
 var setupData = require('../helpers/setup-data.js');
 var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
@@ -16,7 +16,7 @@ tape('set up: initialise db', t => {
 
 
 tape('hit an authed route without a cookie get 401', t => {
-  const options = {
+  var options = {
     method: 'GET',
     url: '/people/add'
   };
@@ -88,7 +88,7 @@ tape('A valid JWT without a user in the database fails Auth', t => {
 
 tape('A primary user is forbidden access to an admin view', t => {
   t.plan(1);
-  const options = {
+  var options = {
     method: 'GET',
     url: '/people/add',
     headers: { cookie: `token=${primary_token}` }
@@ -101,7 +101,7 @@ tape('A primary user is forbidden access to an admin view', t => {
 
 tape('hit an authed route with a valid cookie containing valid users information', t => {
   t.plan(1);
-  const options = {
+  var options = {
     method: 'GET',
     url: '/people/add',
     headers: { cookie: `token=${admin_token}` }

@@ -1,7 +1,7 @@
-const tape = require('tape');
-const client = require('redis').createClient();
-const server = require('../../server/server.js');
-const setup = require('../helpers/set-up.js');
+var tape = require('tape');
+var client = require('redis').createClient();
+var server = require('../../server/server.js');
+var setup = require('../helpers/set-up.js');
 
 var jwt = require('jsonwebtoken');
 var setupData = require('../helpers/setup-data.js');
@@ -13,7 +13,7 @@ tape('set up: initialise db', t => {
 });
 
 tape('/people page loads with a users info', t => {
-  const options = {
+  var options = {
     method: 'GET',
     url: '/people/3',
     headers: { cookie: `token=${primary_token}` }
