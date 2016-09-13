@@ -6,7 +6,6 @@ exports.register = (server, options, next) => {
     isSecure: !process.env.NODE_ENV,
     ttl: 1000 * 60 * 60 * 24 * 30
   };
-  console.log({ isSecure: process.env.NODE_ENV });
   server.state('token', tokenOptions);
   server.auth.strategy('jwt2', 'jwt', true, {
     key: process.env.JWT_SECRET,
