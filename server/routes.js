@@ -126,15 +126,15 @@ var routes = [
     method: 'GET',
     path: '/orgs/{id}/toggle-archive',
     handler: handlers.toggleArchiveOrg
+  },
+  {
+    method: 'GET',
+    path: '/{path*}',
+    handler: handlers.serveFile,
+    config: {
+      auth: false
+    }
   }
-  // {
-  //   method: 'GET',
-  //   path: '/{path*}',
-  //   handler: handlers.serveFile,
-  //   config: {
-  //     auth: false
-  //   }
-  // }
 ];
 
 module.exports = routes;

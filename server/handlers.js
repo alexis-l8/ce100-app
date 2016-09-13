@@ -10,7 +10,7 @@ var handlers = {};
 handlers.serveView = (viewName) => (request, reply) => reply.view(viewName);
 
 // what does this do and why isn't it tested?
-// handlers.serveFile = (request, reply) => reply.file(request.params.path);
+handlers.serveFile = (request, reply) => reply.file(request.params.path);
 
 handlers.activatePrimaryUser = (request, reply) => {
   var hashedId = request.params.hashedId;
@@ -104,8 +104,10 @@ handlers.editUserView = (request, reply) => {
   });
 };
 
+// TODO: remove '' as default for organisation_id primary_id
 handlers.editUserSubmit = (request, reply) => {
   var userId = request.params.id;
+  var newOrgId = request.payload.organisation_id;
   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
     Hoek.assert(!error, 'redis error');
     var user = JSON.parse(stringifiedUser);
@@ -113,14 +115,38 @@ handlers.editUserSubmit = (request, reply) => {
     // update user
     request.redis.LSET('people', userId, JSON.stringify(updatedUser), (error, response) => {
       Hoek.assert(!error, 'redis error');
-      // check if organisation has changed => update organisation as well
-      // if (request.payload.organisation_id === user.organisation_id) {
+      var oldOrgId = user.organisation_id;
+      // TODO: remove
+      console.log(oldOrgId, '<------ oldOrgId, newOrgId ------->', newOrgId);
+      // if org unchanged
+      if ((newOrgId === -1 && oldOrgId === '') || newOrgId === oldOrgId) {
+        return reply.redirect(`/orgs/${user.organisation_id}`);
+      }
+      // if old org is removed and no new org added -> update old org
+      else {//if (newOrgId === -1) {
+        request.redis.LINDEX('organisations', oldOrgId, (error, orgString) => {
+          Hoek.assert(!error, 'redis error');
+          Hoek.assert(orgString, 'Organisation does not exist');
+          var oldOrg = JSON.parse(orgString);
+          var oldOrgUpdatedDetails = {
+            primary_id: '',
+            people: oldOrg.people.filter(u => u.id !== userId)
+          };
+          var updatedOldOrg = Object.assign({}, oldOrg, oldOrgUpdatedDetails);
+          request.redis.LSET('organisations', oldOrgId, JSON.stringify(updatedOldOrg), (error, response) => {
+            Hoek.assert(!error, 'redis error');
+            return reply.redirect('/people');
+          });
+        });
+      }
+      // if user did not have old org but has now been assigned to one
+      // eg: oldOrgId: -1, newOrgId: 3
+      // else if (oldOrgId === -1 || '') {
       //   return reply.redirect(`/orgs/${user.organisation_id}`);
       // }
       // TODO: UDATE OLD ORGANISATION DETAILS AND NEW ORGANISATION DETAILS IF THERE ARE ANY
       // ALSO NEED TO CHECK FOR ANY USERS THAT WERE ATTACHED TO THAT OLD ORGANISATION AND UPDATE THEM.
       // THERE IS ISSUE OPEN REGARDING WHAT ACTION SHOULD BE TAKEN
-      return reply.redirect(`orgs/${user.organisation_id}`); // FOR DEMO PURPOSES DO NOT UPDATE ORGANISATION
     });
   });
 };

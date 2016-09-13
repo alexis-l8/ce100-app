@@ -41,7 +41,7 @@ mockPayloads.loginBadEmail = {
   password: 'Hello1'
 };
 
-mockPayloads.editUserPayload = {
+mockPayloads.editUserRemoveOrg = {
   first_name: 'Ben',
   last_name: 'Maynard',
   job: 'Full Stack Web Developer',
