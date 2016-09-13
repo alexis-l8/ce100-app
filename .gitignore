@@ -7,3 +7,8 @@ npm-debug.log
 .env
 
 dump.rdb
+
+.~lock.members.csv#
+.~lock.topics.csv#
+members.json
+topics.json
