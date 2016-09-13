@@ -35,12 +35,10 @@ tape('admin edits user profile but doesnt change organisation', t => {
     headers: { cookie: `token=${admin_token}` }
   }
   server.inject(getOptions, res => {
-    console.log('before edit', res.result);
     t.equal(res.statusCode, 200, 'route exists and replies 200');
     server.inject(postOptions, res => {
       t.equal(res.statusCode, 302, 'on updating a user, page redirects to /people/{{id}}');
       server.inject(getOptions, res => {
-        console.log('after edit', res.payload);
         t.equal(res.statusCode, 200, 'route exists and replies 200');
         t.ok(res.result.indexOf('Ben') > -1, 'old information has been kept');
         t.ok(res.result.indexOf('Maynard') > -1, 'updates have been saved');

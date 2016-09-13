@@ -59,6 +59,15 @@ mockPayloads.editUserPayloadOrgUnchanged = {
   organisation_id: 1
 };
 
+mockPayloads.editUserAddOrg = {
+  first_name: 'Anna',
+  last_name: 'Freud',
+  email: 'an@fr.co',
+  job: 'CEO',
+  organisation_id: 6,
+  user_type: 'primary'
+};
+
 mockPayloads.adminEditOrg = {
   name: 'McDonalds',
   mission_statement: 'Improve diets'

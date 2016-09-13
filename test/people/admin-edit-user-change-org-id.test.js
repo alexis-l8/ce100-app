@@ -13,7 +13,7 @@ tape('set up: initialise db', t => {
 });
 
 //test editing an attached user, but removing their link to an organisation
-// oldOrgId = 1, newOrgId = 2.
+// oldOrgId = 1, newOrgId = -1.
 // then go on to test oldOrgId = -1, newOrgId = -1.
 tape('admin edits user profile includes removing their link to an organisation', t => {
   t.plan(9);

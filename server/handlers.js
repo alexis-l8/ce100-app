@@ -12,6 +12,22 @@ handlers.serveView = (viewName) => (request, reply) => reply.view(viewName);
 // what does this do and why isn't it tested?
 handlers.serveFile = (request, reply) => reply.file(request.params.path);
 
+handlers.activateAccountView = (request, reply) => {
+  // check if the user has aready activated account
+  var hashedId = request.params.hashedId;
+  Iron.unseal(hashedId, process.env.COOKIE_PASSWORD, Iron.defaults, (error, userId) => {
+    Hoek.assert(!error, 'Iron error');
+    request.redis.LINDEX('people', userId, (error, userString) => {
+      Hoek.assert(!error, 'redis error');
+      var user = JSON.parse(userString);
+      if (user.last_login) {
+        return reply.redirect('/login');
+      }
+      return reply.view('activate');
+    });
+  });
+};
+
 handlers.activatePrimaryUser = (request, reply) => {
   var hashedId = request.params.hashedId;
   Iron.unseal(hashedId, process.env.COOKIE_PASSWORD, Iron.defaults, (error, userId) => {
@@ -105,6 +121,7 @@ handlers.editUserView = (request, reply) => {
 };
 
 // TODO: remove '' as default for organisation_id primary_id
+// needs to be implemented in handlebars with a helper
 handlers.editUserSubmit = (request, reply) => {
   var userId = request.params.id;
   var newOrgId = request.payload.organisation_id;
@@ -116,14 +133,12 @@ handlers.editUserSubmit = (request, reply) => {
     request.redis.LSET('people', userId, JSON.stringify(updatedUser), (error, response) => {
       Hoek.assert(!error, 'redis error');
       var oldOrgId = user.organisation_id;
-      // TODO: remove
-      console.log(oldOrgId, '<------ oldOrgId, newOrgId ------->', newOrgId);
       // if org unchanged
       if ((newOrgId === -1 && oldOrgId === '') || newOrgId === oldOrgId) {
         return reply.redirect(`/orgs/${user.organisation_id}`);
       }
       // if old org is removed and no new org added -> update old org
-      else {//if (newOrgId === -1) {
+      else if (newOrgId === -1) {
         request.redis.LINDEX('organisations', oldOrgId, (error, orgString) => {
           Hoek.assert(!error, 'redis error');
           Hoek.assert(orgString, 'Organisation does not exist');
@@ -140,13 +155,18 @@ handlers.editUserSubmit = (request, reply) => {
         });
       }
       // if user did not have old org but has now been assigned to one
-      // eg: oldOrgId: -1, newOrgId: 3
-      // else if (oldOrgId === -1 || '') {
-      //   return reply.redirect(`/orgs/${user.organisation_id}`);
-      // }
-      // TODO: UDATE OLD ORGANISATION DETAILS AND NEW ORGANISATION DETAILS IF THERE ARE ANY
-      // ALSO NEED TO CHECK FOR ANY USERS THAT WERE ATTACHED TO THAT OLD ORGANISATION AND UPDATE THEM.
-      // THERE IS ISSUE OPEN REGARDING WHAT ACTION SHOULD BE TAKEN
+      // eg: oldOrgId: -1, newOrgId: 6
+      else { // if (oldOrgId === -1 || oldOrgId === '') { left this here as need to check if there is another case
+        request.redis.LINDEX('organisations', newOrgId, (error, newOrgString) => {
+          Hoek.assert(!error, 'redis error');
+          Hoek.assert(newOrgString, 'Organisation does not exist');
+          var updatedOrg = addPrimaryToOrg(stringifiedUser, newOrgString);
+          request.redis.LSET('organisations', newOrgId, updatedOrg, (error, response) => {
+            Hoek.assert(!error, 'redis error');
+            return reply.redirect('/people');
+          });
+        });
+      }
     });
   });
 };
@@ -274,17 +294,37 @@ handlers.submitEditOrg = (request, reply) => {
   });
 };
 
-// please add a TEST for this handler then uncomment it
 handlers.toggleArchiveOrg = (request, reply) => {
   var orgId = request.params.id;
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
     Hoek.assert(stringifiedOrg, 'Organisation does not exist');
-    request.redis.LSET('organisations', orgId, deactivate(stringifiedOrg), (error, response) => {
+    request.redis.LSET('organisations', orgId, toggleActivate(stringifiedOrg), (error, response) => {
       Hoek.assert(!error, 'redis error');
-      reply.redirect('/orgs');
+      var org = JSON.parse(stringifiedOrg);
+      // if org has no primary user, return here
+      // if org is going from 'inactive' to 'active' -> do not change primary user.
+      if (org.primary_id === -1 || '' || !org.active) {
+        return reply.redirect('/orgs');
+      }
+      // otherwise org is being deactivated and has a linked priamry user, so deactivate them
+      request.redis.LINDEX('people', org.primary_id, (error, userString) => {
+        Hoek.assert(!error, 'redis error');
+        Hoek.assert(userString, 'That user does not exist');
+        var deactivatedUser = deactivate(userString);
+        request.redis.LSET('people', org.primary_id, deactivatedUser, (error, response) => {
+          Hoek.assert(!error, 'redis error');
+          return reply.redirect('/orgs');
+        });
+      });
     });
   });
+};
+
+handlers.logout = (request, reply) => {
+  var userId = request.auth.credentials.userId;
+  // deactivate token -> need to confirm with nelson how to do this.
+  reply.redirect('/').state('token', 'null');
 };
 
 handlers.login = (request, reply) => {
@@ -312,6 +352,7 @@ handlers.login = (request, reply) => {
           iat: Date.now() // session creation time (start)
         };
         redis.HSET('sessions', session.jti, JSON.stringify(session), (error, res) => {
+          Hoek.assert(!error, 'redis error');
           var token = jwt.sign(session, process.env.JWT_SECRET);
           reply.redirect('/orgs').state('token', token);
         });
@@ -346,6 +387,12 @@ function setDefaultUserTypes (types, user) {
   return { userTypes: selectedTypes };
 }
 
+function toggleActivate (stringifiedData) {
+  var data = JSON.parse(stringifiedData);
+  var updated = Object.assign({}, data, { active: !data.active });
+  return JSON.stringify(updated);
+}
+
 function deactivate (stringifiedData) {
   var data = JSON.parse(stringifiedData);
   var updated = Object.assign({}, data, { active: !data.active });
@@ -368,7 +415,7 @@ function addPrimaryToOrg (user, org) {
     primary_id: id,
     people: orgOld.people.push(id)
   };
-  var orgUpdated = Object.assign(additionalInfo, orgOld);
+  var orgUpdated = Object.assign({}, orgOld, additionalInfo);
   return JSON.stringify(orgUpdated);
 }
 
