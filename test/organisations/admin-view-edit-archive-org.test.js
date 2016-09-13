@@ -13,37 +13,40 @@ tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
 });
 
-// TODO: edit primary user attached to this org
-
 tape('admin can view an org, edit, archive and unarchive it', t => {
-  // t.plan(11);
+  var org = setupData.initialOrgs[3]
   // view org, edit org, view org, archive org, view org, unarchive org
   var adminViewOrg = {
     method: 'GET',
-    url: '/orgs/3',
+    url: `/orgs/${org.id}`,
     headers: { cookie: `token=${admin_token}` }
   };
   var adminEditOrgView = {
     method: 'GET',
-    url: '/orgs/3/edit',
+    url: `/orgs/${org.id}/edit`,
     headers: { cookie: `token=${admin_token}` }
   };
   var adminEditOrgSubmit = {
     method: 'POST',
-    url: '/orgs/3/edit',
+    url: `/orgs/${org.id}/edit`,
     payload: payloads.adminEditOrg,
     headers: { cookie: `token=${admin_token}` }
   };
   var adminToggleArchiveOrg = {
     method: 'GET',
-    url: '/orgs/3/toggle-archive',
+    url: `/orgs/${org.id}/toggle-archive`,
     headers: { cookie: `token=${admin_token}` }
   };
-  var orgName = setupData.initialOrgs[3].name;
+  var editUserView = {
+    method: 'GET',
+    url: `/people/${org.primary_id}/edit`,
+    headers: { cookie: `token=${admin_token}` }
+  };
+
+  var orgName = org.name;
   server.inject(adminViewOrg, res => {
     t.equal(res.statusCode, 200, '/orgs/id route exists');
     t.ok(res.payload.indexOf(orgName) > -1, 'server sends back the correct view');
-
     server.inject(adminEditOrgView, res => {
       t.equal(res.statusCode, 200, '/orgs/id/edit route exists');
       t.ok(res.payload.indexOf(orgName) > -1, 'server sends back the correct org');
@@ -56,12 +59,18 @@ tape('admin can view an org, edit, archive and unarchive it', t => {
           server.inject(adminToggleArchiveOrg, res => {
             t.equal(res.statusCode, 302, '/orgs/id/toggle-archive route redirects');
             t.equal(res.headers.location, '/orgs', 'admin is sent orgs view after editing');
-            server.inject(adminEditOrgView, res => {
-              t.ok(res.payload.indexOf('Unarchive') > -1, 'admin successfully archived org');
-              server.inject(adminToggleArchiveOrg, res => {
-                server.inject(adminEditOrgView, res => {
-                  t.ok(res.payload.indexOf('Archive') > -1, 'org has been unarchived');
-                  t.end();
+            server.inject(editUserView, res => {
+              t.ok(res.payload.indexOf('Unarchive User') > -1, 'user was deactivated as a result of deactivating organisation');
+              server.inject(adminEditOrgView, res => {
+                t.ok(res.payload.indexOf('Unarchive') > -1, 'admin successfully archived org');
+                server.inject(adminToggleArchiveOrg, res => {
+                  server.inject(adminEditOrgView, res => {
+                    t.ok(res.payload.indexOf('Archive') > -1, 'org has been unarchived');
+                    server.inject(editUserView, res => {
+                      t.ok(res.payload.indexOf('Unarchive User') > -1, 'users activation status was unchanged as a result of reactivating linked organisation organisation');
+                      t.end();
+                    });
+                  });
                 });
               });
             });
@@ -86,7 +95,6 @@ tape('admin can view and edit an org which does not have a primary user attached
   };
   var orgName = setupData.initialOrgs[5].name;
   server.inject(adminViewOrg, res => {
-    console.log(res.result);
     t.equal(res.statusCode, 200, '/orgs/id route exists for org without primary user');
     t.ok(res.payload.indexOf(orgName) > -1, 'server sends back the correct view');
     t.ok(res.payload.indexOf('No Primary User Yet') > -1, 'org view reacts to having no primary user correctly');
