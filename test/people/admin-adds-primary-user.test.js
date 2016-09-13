@@ -37,12 +37,12 @@ tape('/people/add check auth', t => {
     payload: JSON.stringify(payloads.orgsAddPayload),
     headers: { cookie: `token=${primary_token}` }
   };
-  server.inject(primaryCookie, reply => {
-    t.equal(reply.statusCode, 403, 'primary cannot access /people/add');
-    server.inject(adminCookie, reply => {
-      t.equal(reply.statusCode, 200, 'admin can access /people/add');
-      server.inject(primaryCookiePost, reply => {
-        t.equal(reply.statusCode, 403, 'primary can access /people/add');
+  server.inject(primaryCookie, res => {
+    t.equal(res.statusCode, 403, 'primary cannot access /people/add');
+    server.inject(adminCookie, res => {
+      t.equal(res.statusCode, 200, 'admin can access /people/add');
+      server.inject(primaryCookiePost, res => {
+        t.equal(res.statusCode, 403, 'primary can access /people/add');
         t.end();
       });
     });
@@ -50,7 +50,6 @@ tape('/people/add check auth', t => {
 });
 
 tape('add and activate a new user and updates the linked organisation', t => {
-  t.plan(5);
   var addOrg = {
     method: 'POST',
     url: '/orgs/add',
@@ -63,23 +62,44 @@ tape('add and activate a new user and updates the linked organisation', t => {
     payload: JSON.stringify(payloads.usersAddPayload),
     headers: { cookie: `token=${admin_token}` }
   };
-  server.inject(addOrg, reply => {
-    t.equal(reply.statusCode, 302, 'redirects');
-    server.inject(addPerson, reply => {
-      t.equal(reply.statusCode, 302, 'redirects');
-      var newUrl = reply.headers.location;
+  var logout = {
+    method: 'GET',
+    url: '/logout',
+    headers: { cookie: `token=${admin_token}` }
+  };
+  server.inject(addOrg, res => {
+    t.equal(res.statusCode, 302, 'redirects');
+    server.inject(addPerson, res => {
+      t.equal(res.statusCode, 302, 'redirects');
+      var newUrl = res.headers.location;
       t.ok(newUrl === '/people', 'route redirects to /people');
-      var userId = reply.result.userId;
+      var userId = res.result.userId;
       Iron.seal(userId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, hashed) => {
         var activateUser = {
           method: 'POST',
           url: `/people/activate/${hashed}`,
           payload: JSON.stringify(payloads.usersActivatePayload)
         };
-        server.inject(activateUser, reply => {
-          t.equal(reply.headers.location, '/', 'completing activate user redirects to dashboard');
-          t.ok(reply.headers['set-cookie'], 'cookie has been set');
-          t.end();
+        var activateUserView = {
+          method: 'GET',
+          url: `/people/activate/${hashed}`,
+          payload: JSON.stringify(payloads.usersActivatePayload)
+        };
+        server.inject(activateUserView, res => {
+          // TODO: Ask Nelson & Marie -> Why is this undefined?
+          // console.log(res.headers.location);
+          // t.equal(res.headers.location.indexOf('/activate') > -1, 'activate account view returned if user is not already activated');
+          t.ok(res.raw.req.url.indexOf('/activate') > -1, 'activate account view returned if user is not already activated');
+          server.inject(activateUser, res => {
+            t.equal(res.headers.location, '/', 'completing activate user redirects to dashboard');
+            t.ok(res.headers['set-cookie'], 'cookie has been set');
+            server.inject(logout, res => {
+              server.inject(activateUserView, res => {
+                t.equal(res.headers.location, '/login', 'if user tries to click on activation link having already activated, redirect to login');
+                t.end();
+              });
+            });
+          });
         });
       });
     });

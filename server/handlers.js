@@ -12,6 +12,22 @@ handlers.serveView = (viewName) => (request, reply) => reply.view(viewName);
 // what does this do and why isn't it tested?
 handlers.serveFile = (request, reply) => reply.file(request.params.path);
 
+handlers.activateAccountView = (request, reply) => {
+  // check if the user has aready activated account
+  var hashedId = request.params.hashedId;
+  Iron.unseal(hashedId, process.env.COOKIE_PASSWORD, Iron.defaults, (error, userId) => {
+    Hoek.assert(!error, 'Iron error');
+    request.redis.LINDEX('people', userId, (error, userString) => {
+      Hoek.assert(!error, 'redis error');
+      var user = JSON.parse(userString);
+      if (user.last_login) {
+        return reply.redirect('/login');
+      }
+      return reply.view('activate');
+    });
+  });
+};
+
 handlers.activatePrimaryUser = (request, reply) => {
   var hashedId = request.params.hashedId;
   Iron.unseal(hashedId, process.env.COOKIE_PASSWORD, Iron.defaults, (error, userId) => {
@@ -141,12 +157,10 @@ handlers.editUserSubmit = (request, reply) => {
       // if user did not have old org but has now been assigned to one
       // eg: oldOrgId: -1, newOrgId: 6
       else { // if (oldOrgId === -1 || oldOrgId === '') { left this here as need to check if there is another case
-        console.log(' in else of handler - - -- - - -- - ');
         request.redis.LINDEX('organisations', newOrgId, (error, newOrgString) => {
           Hoek.assert(!error, 'redis error');
           Hoek.assert(newOrgString, 'Organisation does not exist');
           var updatedOrg = addPrimaryToOrg(stringifiedUser, newOrgString);
-          console.log(updatedOrg, stringifiedUser);
           request.redis.LSET('organisations', newOrgId, updatedOrg, (error, response) => {
             Hoek.assert(!error, 'redis error');
             return reply.redirect('/people');
@@ -305,6 +319,12 @@ handlers.toggleArchiveOrg = (request, reply) => {
       });
     });
   });
+};
+
+handlers.logout = (request, reply) => {
+  var userId = request.auth.credentials.userId;
+  // deactivate token -> need to confirm with nelson how to do this.
+  reply.redirect('/').state('token', 'null');
 };
 
 handlers.login = (request, reply) => {

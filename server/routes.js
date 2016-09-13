@@ -51,7 +51,7 @@ var routes = [
   {
     method: 'GET',
     path: '/people/activate/{hashedId}',
-    handler: handlers.serveView('activate'),
+    handler: handlers.activateAccountView,
     config: {
       auth: false
     }
@@ -81,6 +81,11 @@ var routes = [
       auth: false,
       validate: validatePerson.login
     }
+  },
+  {
+    method: 'GET',
+    path: '/logout',
+    handler: handlers.logout
   },
   {
     method: 'GET',
