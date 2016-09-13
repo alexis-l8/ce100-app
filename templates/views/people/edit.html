@@ -14,6 +14,9 @@
         <label class="form__label" for="email">Email</label>
         <input class="form__input" type="email" name="email" value="{{user.email}}">
 
+        <label class="form__label" for="phone">Phone Number</label>
+        <input class="form__input" type="tel" name="phone" value="{{user.phone}}">
+
         <span class="form__label">User Type</span>
         {{#each userTypes}}
           {{>radio}}
