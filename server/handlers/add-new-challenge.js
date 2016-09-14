@@ -17,9 +17,9 @@ module.exports = (request, reply) => {
         org.challenges.push(challengeId);
         var challenge = Object.assign({}, payload, {
           id: challengeId,
-          org: orgId,
-          creator: userId,
-          created: Date.now(),
+          org_id: orgId,
+          creator_id: userId,
+          date: Date.now(),
           tags: [],
           archived: false
         });
