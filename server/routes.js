@@ -134,6 +134,11 @@ var routes = [
   },
   {
     method: 'GET',
+    path: '/tags',
+    handler: require('./handlers/view-all-tags.js')
+  },
+  {
+    method: 'GET',
     path: '/{path*}',
     handler: handlers.serveFile,
     config: {
