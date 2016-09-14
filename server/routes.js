@@ -50,6 +50,11 @@ var routes = [
   },
   {
     method: 'GET',
+    path: '/people/{id}/toggle-archive',
+    handler: handlers.toggleArchiveUser
+  },
+  {
+    method: 'GET',
     path: '/people/activate/{hashedId}',
     handler: handlers.activateAccountView,
     config: {
