@@ -8,9 +8,11 @@ var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET)
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(() => {
-    getTags('/members.csv');
-    getTags('/topics.csv');
-    t.end();
+    getTags('/members.csv', () => {
+      getTags('/topics.csv', () => {
+        t.end();
+      });
+    });
   });
 });
 

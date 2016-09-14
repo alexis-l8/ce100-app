@@ -2,7 +2,7 @@ var Hoek = require('hoek');
 var fs = require('fs');
 var path = require('path');
 
-module.exports = (fileName) => {
+module.exports = (fileName, callback) => {
   fs.readFile(path.join(__dirname, fileName), (error, data) => {
     Hoek.assert(!error, error);
     var csv = data.toString().split(/\n/g);
@@ -30,6 +30,7 @@ module.exports = (fileName) => {
           var jsonFile = fileName.split(/\./g).shift() + '.json';
           fs.writeFile(path.join(__dirname, jsonFile), JSON.stringify(allTags), (error, response) => {
             Hoek.assert(!error, error);
+            callback();
           });
         }
       });
