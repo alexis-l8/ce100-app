@@ -2,7 +2,7 @@ var Hoek = require('hoek');
 var fs = require('fs');
 var path = require('path');
 
-function csvToJson (fileName) {
+module.exports = (fileName) => {
   fs.readFile(path.join(__dirname, fileName), (error, data) => {
     Hoek.assert(!error, error);
     var csv = data.toString().split(/\n/g);
@@ -35,7 +35,4 @@ function csvToJson (fileName) {
       });
     });
   });
-}
-
-csvToJson('/members.csv');
-csvToJson('/topics.csv');
+};
