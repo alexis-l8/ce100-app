@@ -208,6 +208,10 @@ Danger-red:     #900000;
         .list__data--primary {
             color: #40667e;
         }
+        .list__data--secondary {
+            color: #89a0ae;
+            padding: 0.1em 0em;
+        }
 
         /* Expandable List Items */
 
