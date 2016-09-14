@@ -1,12 +1,15 @@
 var tape = require('tape');
 var server = require('../../server/server.js');
 var jwt = require('jsonwebtoken');
+var getTags = require('../../tags/csv-to-json.js');
 var setup = require('../helpers/set-up.js');
 var setupData = require('../helpers/setup-data.js');
 var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(() => {
+    getTags('/members.csv');
+    getTags('/topics.csv');
     t.end();
   });
 });
