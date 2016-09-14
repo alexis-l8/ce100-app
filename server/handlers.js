@@ -53,27 +53,28 @@ handlers.viewAllUsers = (request, reply) => {
     Hoek.assert(!error, 'redis error');
     request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
       Hoek.assert(!error, 'redis error');
-      var organisations = stringifiedOrgs.map(element => JSON.parse(element));
-      var users = stringifiedUsers.map(element => JSON.parse(element));
-      // TODO: Pull out to helper function
-      users.forEach((user, index) => {
-        user.organisation_name = typeof user.organisation_id === 'number'
-          ? organisations[user.organisation_id].name
-          : false;
-        if (index === users.length - 1) {
-          var allUsers = {
-            allUsers: users,
-            alternate: [{
-              path: '/people/add',
-              name: '+'
-            }, {
-              path: '/orgs',
-              name: 'Orgs'
-            }]
-          };
-          reply.view('people/view', allUsers);
-        }
+      var orgs = stringifiedOrgs.map(element => JSON.parse(element));
+      var users = stringifiedUsers.map(u => {
+        var user = JSON.parse(u);
+        var additionalInfo = {
+          organisation_id: user.organisation_id > -1
+            ? orgs[user.organisation_id].name
+            : false
+        };
+        return Object.assign(additionalInfo, user);
       });
+      // TODO: Can this navbar logic go somewhere else?
+      var allUsers = {
+        allUsers: users,
+        alternate: [{
+          path: '/people/add',
+          name: '+'
+        }, {
+          path: '/orgs',
+          name: 'Orgs'
+        }]
+      };
+      reply.view('people/view', allUsers);
     });
   });
 };
@@ -104,24 +105,15 @@ handlers.editUserView = (request, reply) => {
     Hoek.assert(!error, 'redis error');
     request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
       Hoek.assert(!error, 'redis error');
-      // TODO: refactor into reusable helper functions.
-      var allOrgs = orgsDropdown(stringifiedOrgs);
-      var userObj = JSON.parse(stringifiedUser);
-      var user = {
-        user: userObj,
-        organisation: allOrgs.allOrganisations[userObj.organisation_id]
-      };
-      var filteredOrgs = { allOrganisations: allOrgs.allOrganisations.filter(org => org.value !== userObj.organisation_id) };
-      var userTypes = userTypeRadios();
-      var userTypesWithDefault = setDefaultUserTypes(userTypes, userObj);
-      var options = Object.assign({}, filteredOrgs, userTypesWithDefault, user);
+      var allOrgs = orgsDropdown(stringifiedOrgs, stringifiedUser);
+      var user = { user: JSON.parse(stringifiedUser) };
+      var userTypes = userTypeRadios(stringifiedUser);
+      var options = Object.assign({}, allOrgs, userTypes, user);
       reply.view('people/edit', options);
     });
   });
 };
 
-// TODO: remove '' as default for organisation_id primary_id
-// needs to be implemented in handlebars with a helper
 handlers.editUserSubmit = (request, reply) => {
   var userId = request.params.id;
   var newOrgId = request.payload.organisation_id;
@@ -134,7 +126,7 @@ handlers.editUserSubmit = (request, reply) => {
       Hoek.assert(!error, 'redis error');
       var oldOrgId = user.organisation_id;
       // if org unchanged
-      if ((newOrgId === -1 && oldOrgId === '') || newOrgId === oldOrgId) {
+      if (newOrgId === oldOrgId) {
         return reply.redirect(`/orgs/${user.organisation_id}`);
       }
       // if old org is removed and no new org added -> update old org
@@ -142,13 +134,8 @@ handlers.editUserSubmit = (request, reply) => {
         request.redis.LINDEX('organisations', oldOrgId, (error, orgString) => {
           Hoek.assert(!error, 'redis error');
           Hoek.assert(orgString, 'Organisation does not exist');
-          var oldOrg = JSON.parse(orgString);
-          var oldOrgUpdatedDetails = {
-            primary_id: '',
-            people: oldOrg.people.filter(u => u.id !== userId)
-          };
-          var updatedOldOrg = Object.assign({}, oldOrg, oldOrgUpdatedDetails);
-          request.redis.LSET('organisations', oldOrgId, JSON.stringify(updatedOldOrg), (error, response) => {
+          var updatedOldOrg = removeUserFromOrg(orgString, userId);
+          request.redis.LSET('organisations', oldOrgId, updatedOldOrg, (error, response) => {
             Hoek.assert(!error, 'redis error');
             return reply.redirect('/people');
           });
@@ -210,11 +197,38 @@ handlers.createNewPrimaryUser = (request, reply) => {
   });
 };
 
+handlers.toggleArchiveUser = (request, reply) => {
+  var userId = request.params.id;
+  request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
+    Hoek.assert(!error, 'redis error');
+    Hoek.assert(stringifiedUser, 'User does not exist');
+    request.redis.LSET('people', userId, toggleActivateUser(stringifiedUser), (error, response) => {
+      Hoek.assert(!error, 'redis error');
+      var user = JSON.parse(stringifiedUser);
+      // if user has no organisation attached to it, return here
+      // if user is going from 'inactive' to 'active' -> do not change the organisation
+      if (user.organisation_id === -1 || !user.active) {
+        return reply.redirect('/orgs');
+      }
+      // otherwise user is being deactivated and has a linked org, so deactivate them
+      request.redis.LINDEX('organisations', user.organisation_id, (error, orgString) => {
+        Hoek.assert(!error, 'redis error');
+        Hoek.assert(orgString, 'The linked organisation does not exist');
+        var updatedOrg = removeUserFromOrg(orgString, userId);
+        request.redis.LSET('organisations', user.organisation_id, updatedOrg, (error, response) => {
+          Hoek.assert(!error, 'redis error');
+          return reply.redirect('/orgs');
+        });
+      });
+    });
+  });
+};
+
 handlers.createNewOrganisation = (request, reply) => {
   var redis = request.redis;
   redis.LLEN('organisations', (error, length) => {
     Hoek.assert(!error, 'redis error');
-    var initialOrgInfo = { name: request.payload.name, mission_statement: '', people: [] };
+    var initialOrgInfo = { name: request.payload.name, mission_statement: '', primary_id: -1, people: [] };
     var orgUpdated = initialiseEntry(length, initialOrgInfo);
     redis.RPUSH('organisations', orgUpdated, (error, numberOfOrgs) => {
       Hoek.assert(!error, 'redis error');
@@ -224,12 +238,11 @@ handlers.createNewOrganisation = (request, reply) => {
 };
 
 handlers.viewOrganisationDetails = (request, reply) => {
-  var userId = request.params.id;
-  request.redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
+  var orgId = request.params.id;
+  request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
-    // TODO: catch for case where org at specified userId doesn't exist.
     var organisation = JSON.parse(stringifiedOrg);
-    if (!organisation.primary_id) {
+    if (organisation.primary_id === -1) {
       return reply.view('organisations/details', organisation);
     }
     request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
@@ -258,13 +271,13 @@ handlers.viewAllOrganisations = (request, reply) => {
   });
 };
 
-// please add a TEST for this handler then uncomment it
 handlers.editOrganisationDetails = (request, reply) => {
   var orgId = request.params.id;
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
     var organisation = JSON.parse(stringifiedOrg);
-    if (!organisation.primary_id) {
+
+    if (organisation.primary_id === -1) {
       return reply.view('organisations/edit', organisation);
     }
     request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
@@ -274,12 +287,12 @@ handlers.editOrganisationDetails = (request, reply) => {
         primary_user_name: `${first_name} ${last_name}`,
         primary_user_id: id
       });
+
       reply.view('organisations/edit', organisationDetails);
     });
   });
 };
 
-// please add a TEST for this handler then uncomment it
 handlers.submitEditOrg = (request, reply) => {
   var orgId = request.params.id;
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
@@ -304,7 +317,7 @@ handlers.toggleArchiveOrg = (request, reply) => {
       var org = JSON.parse(stringifiedOrg);
       // if org has no primary user, return here
       // if org is going from 'inactive' to 'active' -> do not change primary user.
-      if (org.primary_id === -1 || '' || !org.active) {
+      if (org.primary_id === -1 || !org.active) {
         return reply.redirect('/orgs');
       }
       // otherwise org is being deactivated and has a linked priamry user, so deactivate them
@@ -363,33 +376,45 @@ handlers.login = (request, reply) => {
 
 module.exports = handlers;
 
-// please add a TEST for these methods then uncomment them
-function orgsDropdown (stringifiedOrgs) {
-  var orgsArray = stringifiedOrgs.map(org => {
-    var details = JSON.parse(org);
-    return {value: details.id, display: details.name};
+function orgsDropdown (stringifiedOrgs, stringifiedUser) {
+  var user = typeof stringifiedUser === 'string' ? JSON.parse(stringifiedUser) : false;
+  var orgsArray = stringifiedOrgs.map(orgString => {
+    var org = JSON.parse(orgString);
+    return {
+      value: org.id,
+      display: org.name,
+      isDisabled: org.primary_id > -1 && user.organisation_id !== org.id,
+      isSelected: user.organisation_id === org.id
+    };
   });
   return { allOrganisations: orgsArray };
 }
 
-function userTypeRadios () {
+// function takes optional user argument.
+function userTypeRadios (userString) {
+  // default to primary
+  var checkedType = userString ? JSON.parse(userString).user_type : 'primary';
   var userTypes = ['admin', 'primary'];
-  var userTypeArr = userTypes.map(user => {
-    return {name: 'user_type', value: user, display: user};
+  var userTypeArr = userTypes.map(type => {
+    return {
+      name: 'user_type',
+      value: type,
+      display: type,
+      isChecked: checkedType === type
+    };
   });
   return { userTypes: userTypeArr };
-}
-
-function setDefaultUserTypes (types, user) {
-  var checked = { isChecked: 'checked' };
-  var selectedTypes = types.userTypes.map(t => t.value === user.user_type
-    ? Object.assign({}, t, checked) : t);
-  return { userTypes: selectedTypes };
 }
 
 function toggleActivate (stringifiedData) {
   var data = JSON.parse(stringifiedData);
   var updated = Object.assign({}, data, { active: !data.active });
+  return JSON.stringify(updated);
+}
+
+function toggleActivateUser (stringifiedData) {
+  var data = JSON.parse(stringifiedData);
+  var updated = Object.assign({}, data, { active: !data.active, organisation_id: -1 });
   return JSON.stringify(updated);
 }
 
@@ -427,4 +452,14 @@ function addPasswordToUser (hashed, user) {
   };
   var updatedUser = Object.assign(newDetails, userOld);
   return JSON.stringify(updatedUser);
+}
+
+function removeUserFromOrg (orgString, userId) {
+  var org = JSON.parse(orgString);
+  var newInfo = {
+    primary_id: -1,
+    people: org.people.filter(u => u.id !== userId)
+  };
+  var updatedOrg = Object.assign({}, org, newInfo);
+  return JSON.stringify(updatedOrg);
 }
