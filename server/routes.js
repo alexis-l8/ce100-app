@@ -139,7 +139,7 @@ var routes = [
     path: '/orgs/{id}/edit',
     handler: require('./handlers/edit-org.js'),
     config: {
-      validate: require('./models/admin-add-org.js')
+      validate: require('./models/admin-edit-org.js')
     }
   },
   {
