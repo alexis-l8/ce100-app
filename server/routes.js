@@ -117,7 +117,7 @@ var routes = [
   {
     method: 'GET',
     path: '/orgs/{id}',
-    handler: handlers.viewOrganisationDetails
+    handler: require('./handlers/view-org-details.js')
   },
   {
     method: 'GET',
@@ -136,6 +136,16 @@ var routes = [
     method: 'GET',
     path: '/orgs/{id}/toggle-archive',
     handler: handlers.toggleArchiveOrg
+  },
+  {
+    method: 'GET',
+    path: '/challenges/add',
+    handler: handlers.serveView('challenges/add')
+  },
+  {
+    method: 'POST',
+    path: '/challenges/add',
+    handler: require('./handlers/add-new-challenge.js')
   },
   {
     method: 'GET',
