@@ -228,7 +228,7 @@ handlers.createNewOrganisation = (request, reply) => {
   var redis = request.redis;
   redis.LLEN('organisations', (error, length) => {
     Hoek.assert(!error, 'redis error');
-    var initialOrgInfo = { name: request.payload.name, mission_statement: '', people: [] };
+    var initialOrgInfo = { name: request.payload.name, mission_statement: '', primary_id: -1, people: [] };
     var orgUpdated = initialiseEntry(length, initialOrgInfo);
     redis.RPUSH('organisations', orgUpdated, (error, numberOfOrgs) => {
       Hoek.assert(!error, 'redis error');
@@ -238,8 +238,8 @@ handlers.createNewOrganisation = (request, reply) => {
 };
 
 handlers.viewOrganisationDetails = (request, reply) => {
-  var userId = request.params.id;
-  request.redis.LINDEX('organisations', userId, (error, stringifiedOrg) => {
+  var orgId = request.params.id;
+  request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
     var organisation = JSON.parse(stringifiedOrg);
     if (organisation.primary_id === -1) {
