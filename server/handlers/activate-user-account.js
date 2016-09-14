@@ -3,8 +3,7 @@ var jwt = require('jsonwebtoken');
 var Iron = require('iron');
 var aguid = require('aguid');
 var helpers = require('./helpers.js');
-
-/// TODO: fix session
+var bcrypt = require('bcrypt');
 
 module.exports = (request, reply) => {
   var hashedId = request.params.hashedId;
@@ -18,8 +17,16 @@ module.exports = (request, reply) => {
         var updatedUser = helpers.addPasswordToUser(hashedPassword, user);
         request.redis.LSET('people', userId, updatedUser, (error, response) => {
           Hoek.assert(!error, 'redis error');
-          var token = jwt.sign({userId: userId}, process.env.JWT_SECRET);
-          reply.redirect('/').state('token', token);
+          var session = {
+            userId: userId,
+            jti: aguid(),
+            iat: Date.now()
+          };
+          request.redis.HSET('sessions', session.jti, JSON.stringify(session), (error, res) => {
+            Hoek.assert(!error, 'redis error');
+            var token = jwt.sign(session, process.env.JWT_SECRET);
+            reply.redirect('/orgs').state('token', token);
+          });
         });
       });
     });
