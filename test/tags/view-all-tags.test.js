@@ -35,6 +35,7 @@ tape('view all parent tags', t => {
   };
   server.inject(options, res => {
     t.equal(res.statusCode, 200, 'endpoint exists');
+    t.ok(res.result.indexOf('Tags'), 'view with correct title is returned');
     t.end();
   });
 });
