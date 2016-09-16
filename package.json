@@ -8,7 +8,8 @@
     "test": "istanbul cover tape ./test/*/*.test.js | node_modules/tap-spec/bin/cmd.js",
     "coverage": "istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
     "fast": "tape ./test/*/*.test.js",
-    "csv-to-json": "node tags/convert-csv.js"
+    "csv-to-json": "node tags/convert-csv.js",
+    "heroku-postbuild": "npm run csv-to-json"
   },
   "repository": {
     "type": "git",
