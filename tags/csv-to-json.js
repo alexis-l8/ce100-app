@@ -20,7 +20,7 @@ module.exports = (fileName, callback) => {
       tags.forEach((tag, columnLength) => {
         if (tag) {
           allTags[columnLength].tags.push({
-            id: rowLength,
+            id: [columnLength, rowLength],
             name: tag,
             parent_id: columnLength,
             enabled: true
