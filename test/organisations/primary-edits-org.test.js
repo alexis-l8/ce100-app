@@ -23,7 +23,6 @@ tape('primary can log in, view and edit an org they are related to', t => {
   };
 
   server.inject(primaryLogin, res => {
-    // console.log(res);
     t.equal(res.headers.location, `/orgs/${user.organisation_id}`, "user gets redirected to their organisation's profile");
     t.ok(res.headers['set-cookie'], 'cookie set upon primary login');
     var cookie = res.headers['set-cookie'][0].split(';')[0];
@@ -32,12 +31,22 @@ tape('primary can log in, view and edit an org they are related to', t => {
       url: '/orgs/0/edit',
       headers: { cookie }
     };
+    var primaryEditOrg = {
+      method: 'POST',
+      url: '/orgs/0/edit',
+      payload: { mission_statement: 'Ice cream for all!' },
+      headers: { cookie }
+    };
     server.inject(primaryEditOrgView, res => {
       t.equal(res.statusCode, 200, 'primary user edit org gives 200 status code');
       // t.equal(res.headers.location, '/orgs/0/edit', 'and correct endpoint'); Why is headers.location not there sometimes?
       t.ok(res.payload.indexOf('rchive') === -1, 'primary user cannot archive/unarchive their organisation');
-      // TODO: Make and edit, check that the edit saves
-      t.end();
+      server.inject(primaryEditOrg, res => {
+        t.equal(res.statusCode, 302, 'primary user is redirected');
+        t.equal(res.headers.location, '/orgs/0', "user is redirected to their org's profile view");
+        t.ok(res.payload.indexOf('Ice cream for all!') > -1, 'primary user can successfuly edit their own organisations mission_statement');
+        t.end();
+      });
     });
   });
 });
