@@ -1,20 +1,21 @@
 var Hoek = require('hoek');
+var helpers = require('./helpers');
 
 module.exports = (request, reply) => {
   var orgId = +request.params.id;
-  var loggedIn = request.auth.credentials;
+  var permissions = helpers.getPermissions(request.auth.credentials, 'organisation_id', orgId);
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
     var organisation = JSON.parse(stringifiedOrg);
     if (organisation.primary_id === -1) {
-      return reply.view('organisations/details', organisation);
+      var options = Object.assign({}, organisation, permissions);
+      return reply.view('organisations/details', options);
     }
     request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
       Hoek.assert(!error, 'redis error');
-      var {organisation_id, first_name, last_name, email, phone, job} = JSON.parse(stringifiedPrimaryUser);
-      var editable = { editable: loggedIn.organisation_id === orgId || loggedIn.scope === 'admin' };
-      var organisationDetails = Object.assign({first_name, last_name, email, phone, job}, organisation, editable);
-      reply.view('organisations/details', organisationDetails);
+      var {first_name, last_name, email, phone, job} = JSON.parse(stringifiedPrimaryUser);
+      var options = Object.assign({first_name, last_name, email, phone, job}, organisation, permissions);
+      reply.view('organisations/details', options);
     });
   });
 };

@@ -2,7 +2,8 @@ var bcrypt = require('bcrypt');
 var aguid = require('aguid');
 var setupData = {};
 
-var salt = process.env.NODE_ENV ? 10 : 13;
+var salt = 10;
+
 
 // people
 setupData.initialPeople = [
@@ -42,7 +43,7 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 2,
     active: true,
-    password: bcrypt.hashSync('a', salt),
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
