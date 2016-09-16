@@ -36,7 +36,7 @@ tape('/challenges/add (POST) - submit new challenge as an admin (expect fail)', 
     headers: { cookie: `token=${admin_token}` }
   };
   server.inject(options, reply => {
-    t.equal(reply.statusCode, 500, 'Admin cannot add challenge, as no org attaached');
+    t.equal(reply.statusCode, 500, 'Admin cannot add challenge, as no org attached');
     t.ok(reply.payload.indexOf('Admins cannot create a new challenge as no organisation is attached.'), 'Error message to admin ok');
     t.end();
   });
@@ -76,7 +76,7 @@ tape('/challenges/add (POST) - submit new challenge as a primary_user', t => {
 });
 
 tape('teardown', t => {
-  // client.FLUSHDB();
+  client.FLUSHDB();
   t.end();
 });
 
