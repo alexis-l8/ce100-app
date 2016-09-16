@@ -51,7 +51,7 @@ tape('primary cannot get edit-org view if they are not linked and cannot make su
   var primaryEditDiffOrg = {
     method: 'POST',
     url: '/orgs/3/edit',
-    payload: { name: 'Apple', mission_statement: 'evil trickster' },
+    payload: { mission_statement: 'evil trickster' },
     headers: { cookie: `token=${primary_token}` }
   };
   server.inject(primaryEditOrgView, res => {
