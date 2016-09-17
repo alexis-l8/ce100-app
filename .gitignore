@@ -8,7 +8,5 @@ npm-debug.log
 
 dump.rdb
 
-.~lock.members.csv#
-.~lock.topics.csv#
-members.json
-topics.json
+.~lock.tags.csv#
+tags.json
