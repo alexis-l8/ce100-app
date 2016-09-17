@@ -2,9 +2,9 @@
 <div class="container">
     <h1 class="title">Tags</h1>
 
-    {{#if tags}}
+    {{#if parent_tags}}
       <form class="form" method="post">
-          {{#each tags}}
+          {{#each parent_tags}}
             {{>tag}}
           {{/each}}
           <button class="button" type="submit">SELECT</button> <a class="anchor" href="/orgs">CANCEL</a>
