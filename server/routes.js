@@ -50,6 +50,11 @@ var routes = [
   },
   {
     method: 'GET',
+    path: '/people/{id}/toggle-archive',
+    handler: handlers.toggleArchiveUser
+  },
+  {
+    method: 'GET',
     path: '/people/activate/{hashedId}',
     handler: handlers.activateAccountView,
     config: {
@@ -112,7 +117,7 @@ var routes = [
   {
     method: 'GET',
     path: '/orgs/{id}',
-    handler: handlers.viewOrganisationDetails
+    handler: require('./handlers/view-org-details.js')
   },
   {
     method: 'GET',
@@ -141,6 +146,19 @@ var routes = [
     method: 'POST',
     path: '/tags',
     handler: require('./handlers/select-tags.js')
+  },
+  {
+    method: 'GET',
+    path: '/challenges/add',
+    handler: handlers.serveView('challenges/add')
+  },
+  {
+    method: 'POST',
+    path: '/challenges/add',
+    handler: require('./handlers/add-new-challenge.js'),
+    config: {
+      validate: require('./models/add-new-challenge.js')
+    }
   },
   {
     method: 'GET',
