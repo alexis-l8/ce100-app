@@ -208,6 +208,10 @@ Danger-red:     #900000;
         .list__data--primary {
             color: #40667e;
         }
+        .list__data--secondary {
+            color: #89a0ae;
+            padding: 0.1em 0em;
+        }
 
         /* Expandable List Items */
 
@@ -236,6 +240,52 @@ Danger-red:     #900000;
         .list__ellipsis:focus ~ .list__hidden-details {
             display: block;
         }
+
+        /*|||||||||||||||||||||||||||||||||||||||||||||
+            Lists
+          |||||||||||||||||||||||||||||||||||||||||||*/
+
+.tags__toggle-title {
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: bold;
+    color: red;
+    margin: 1em;
+
+}
+
+.tags__toggle-title + input {
+    display: none;
+}
+
+.tags__toggle-title + input + div {
+    display: none;
+}
+
+.tags__toggle-title + input:checked + div {
+    display: block;
+}
+
+.tags__toggle-label {
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 3.5em;
+    margin: 1em;
+    background-color: #f2f2f2;
+}
+
+.tags__toggle-input:checked + .tags__toggle-label {
+    background-color: #89a0ae;
+}
+
+.tags__toggle-input {
+    display: none;
+}
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Shapes
