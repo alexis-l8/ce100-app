@@ -16,14 +16,14 @@
           {{/if}}
         </a>
 
+        {{#hasPrimary primary_id}}
         <!-- Only show primary section if primary user is linked to this org -->
-        {{#if primary_id}}
         <label class="form__label" for="primary_user_name">Primary User</label>
         <div class="form__input" name="primary_user_name" id="primary_user_name">
           {{primary_user_name}}
           <a href="/people/{{primary_user_id}}/edit" class="button-small float-right">EDIT</a>
         </div>
-        {{/if}}
+        {{/hasPrimary}}
 
         <button class="button" type="submit">SUBMIT</button>
         <a class="anchor" href="/orgs/{{id}}">CANCEL</a>

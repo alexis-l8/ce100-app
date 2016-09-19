@@ -11,6 +11,7 @@ setupData.initialPeople = [
     phone: '07111111111',
     job: 'Developer',
     user_type: 'admin',
+    organisation_id: -1,
     id: 0,
     active: true,
     password: bcrypt.hashSync('Hello1', 13),
@@ -23,6 +24,7 @@ setupData.initialPeople = [
     phone: '07111111111',
     job: 'Developer',
     user_type: 'admin',
+    organisation_id: -1,
     id: 1,
     active: true,
     password: bcrypt.hashSync('Hello1', 13),
@@ -99,7 +101,7 @@ setupData.initialPeople = [
     email: 'co@co.a',
     phone: '07111111111',
     job: 'Managing Director',
-    organisation_id: '',
+    organisation_id: -1,
     user_type: 'primary',
     id: 7,
     active: false,
@@ -112,7 +114,7 @@ setupData.initialPeople = [
     email: 'mi@nu.ts',
     phone: '07111111111',
     job: 'CEO',
-    organisation_id: '',
+    organisation_id: -1,
     user_type: 'primary',
     id: 8,
     active: false,
@@ -125,7 +127,7 @@ setupData.initialPeople = [
     email: 'an@fr.co',
     phone: '07111001111',
     job: 'CEO',
-    organisation_id: '',
+    organisation_id: -1,
     user_type: 'primary',
     id: 9,
     active: true,
@@ -181,7 +183,7 @@ setupData.initialOrgs = [
     name: 'Asda',
     active: false,
     mission_statement: 'Every Little Helps',
-    primary_id: '',
+    primary_id: -1,
     people: []
   },
   {
@@ -189,7 +191,7 @@ setupData.initialOrgs = [
     name: 'Coca Cola',
     active: false,
     mission_statement: 'Refresh The Nation',
-    primary_id: '',
+    primary_id: -1,
     people: []
   }
 ];
