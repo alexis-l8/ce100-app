@@ -241,9 +241,9 @@ Danger-red:     #900000;
             display: block;
         }
 
-        /*|||||||||||||||||||||||||||||||||||||||||||||
-            Lists
-          |||||||||||||||||||||||||||||||||||||||||||*/
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Tags
+  |||||||||||||||||||||||||||||||||||||||||||*/
 
 .tags__toggle-title {
     cursor: pointer;
@@ -284,6 +284,40 @@ Danger-red:     #900000;
 }
 
 .tags__toggle-input {
+    display: none;
+}
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Tag-buttons
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.tag-button__label {
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: bold;
+    color: red;
+    margin: 0.3em;
+    padding: 0.3em;
+    border-radius: 1em;
+    border-style: solid;
+    border-color: #f2f2f2;
+}
+
+.add-tag-button__label {
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: bold;
+    color: red;
+    margin: 1em;
+
+}
+
+.add-tag-button__input {
     display: none;
 }
 
