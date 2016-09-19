@@ -117,7 +117,7 @@ var routes = [
   {
     method: 'GET',
     path: '/orgs/{id}',
-    handler: handlers.viewOrganisationDetails
+    handler: require('./handlers/view-org-details.js')
   },
   {
     method: 'GET',
@@ -141,6 +141,19 @@ var routes = [
     method: 'GET',
     path: '/tags',
     handler: require('./handlers/view-all-tags.js')
+  },
+  {
+    method: 'GET',
+    path: '/challenges/add',
+    handler: require('./handlers/add-new-challenge-view.js')
+  },
+  {
+    method: 'POST',
+    path: '/challenges/add',
+    handler: require('./handlers/add-new-challenge.js'),
+    config: {
+      validate: require('./models/add-new-challenge.js')
+    }
   },
   {
     method: 'GET',

@@ -1,0 +1,22 @@
+<!-- Main Content -->
+<div class="container">
+    <h1 class="title">Add A New Challenge</h1>
+
+    <form class="form" method="post">
+      <label class="form__label" for="title">Title</label>
+      <input class="form__input" type="text" name="title" id="title" placeholder="Write Here...">
+
+      <label class="form__label" for="description">Description</label>
+      <input class="form__input" type="text" name="description" id="description" placeholder="Write Here...">
+
+      {{#each tags}}
+        {{>tag-button}}
+      {{/each}}
+      {{>add-tag-button}}
+
+      <button class="button" type="submit">SUBMIT</button> <a class="anchor" href="/orgs">CANCEL</a>
+    </form>
+</div>
+
+<!-- Include Navbar -->
+{{>navbar}}
