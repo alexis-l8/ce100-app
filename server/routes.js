@@ -143,14 +143,9 @@ var routes = [
     handler: require('./handlers/view-all-tags.js')
   },
   {
-    method: 'POST',
-    path: '/tags',
-    handler: require('./handlers/select-tags.js')
-  },
-  {
     method: 'GET',
     path: '/challenges/add',
-    handler: handlers.serveView('challenges/add')
+    handler: require('./handlers/add-new-challenge-view.js')
   },
   {
     method: 'POST',
