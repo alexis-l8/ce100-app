@@ -12,6 +12,7 @@ sendEmail.newUser = (person, callback) => {
     Hoek.assert(!error, 'Send email error'); // uncomment this when you have valid sender email in .env
     callback(error, result);
   });
+
 };
 
 module.exports = sendEmail;
