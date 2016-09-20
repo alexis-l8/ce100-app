@@ -17,36 +17,34 @@
         <label class="form__label" for="phone">Phone Number</label>
         <input class="form__input" type="tel" name="phone" value="{{user.phone}}">
 
-        <span class="form__label">User Type</span>
-        {{#each userTypes}}
-          {{>radio}}
-        {{/each}}
-
-        <label class="form__label" for="organisation_id">Organisation</label>
-        {{#if allOrganisations}}
-        <select class="form__input" name="organisation_id">
-
-          <option value=-1>Please Select</option>
-          {{#each allOrganisations}}
-            {{>dropdown}}
+        {{#if permissions.admin}}
+          <span class="form__label">User Type</span>
+          {{#each userTypes}}
+            {{>radio}}
           {{/each}}
-        </select>
-
-        {{else}}
-
-        <select class="form__input" name="organisation_id">
-          <option value='admin'>N/A (Admin)</option>
-        </select>
-
-        {{/if}}
-
-        <a class="anchor anchor--danger" href="/people/{{user.id}}/toggle-archive">
-          {{#if user.active}}
-          Archive User
+          <label class="form__label" for="organisation_id">Organisation</label>
+          {{#if allOrganisations}}
+            <select class="form__input" name="organisation_id">
+            <option value=-1>Please Select</option>
+            {{#each allOrganisations}}
+              {{>dropdown}}
+            {{/each}}
+            </select>
           {{else}}
-          Unarchive User
+          <select class="form__input" name="organisation_id">
+            <option value='admin'>N/A (Admin)</option>
+          </select>
           {{/if}}
-        </a>
+          <a class="anchor anchor--danger" href="/people/{{user.id}}/toggle-archive">
+            {{#if user.active}}
+            Archive User
+            {{else}}
+            Unarchive User
+            {{/if}}
+          </a>
+      {{/if}}
+
+
       <button class="button" type="submit">SUBMIT</button> <a class="anchor" href="/orgs/{{user.organisation_id}}">CANCEL</a>
     </form>
 </div>
