@@ -49,7 +49,7 @@ mockPayloads.loginPrimary = {
 mockPayloads.editUserRemoveOrg = {
   first_name: 'Ben',
   last_name: 'Maynard',
-  job: 'Full Stack Web Developer',
+  job_title: 'Full Stack Web Developer',
   email: 'be@ma.co',
   user_type: 'admin',
   organisation_id: -1
@@ -58,7 +58,7 @@ mockPayloads.editUserRemoveOrg = {
 mockPayloads.editUserPayloadOrgUnchanged = {
   first_name: 'Ben',
   last_name: 'Maynard',
-  job: 'Full Stack Web Developer',
+  job_title: 'Full Stack Web Developer',
   email: 'be@ma.co',
   user_type: 'admin',
   organisation_id: 1
@@ -68,7 +68,7 @@ mockPayloads.editUserAddOrg = {
   first_name: 'Anna',
   last_name: 'Freud',
   email: 'an@fr.co',
-  job: 'CEO',
+  job_title: 'CEO',
   organisation_id: 6,
   user_type: 'primary'
 };

@@ -8,9 +8,8 @@ module.exports = (request, reply) => {
   var permissions = helpers.getPermissions(loggedIn, 'userId', userId);
 
   // if incorrect user - reply unauthorized
-  // TODO: replace with permissions.editable ?
-  if (userId !== loggedIn.userId && loggedIn.scope !== 'admin') {
-    return reply(Boom.unauthorized('You do not have permission to edit that organisation.'));
+  if (!permissions.permissions.editable) {
+    return reply(Boom.unauthorized('You do not have permission to edit that user.'));
   }
 
   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
