@@ -1,6 +1,5 @@
 var Hoek = require('hoek');
 var Boom = require('boom');
-var bcrypt = require('bcrypt');
 
 var helpers = require('./helpers.js');
 
