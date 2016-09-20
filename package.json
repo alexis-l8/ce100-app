@@ -1,6 +1,6 @@
 {
   "name": "ce100-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A networking, knowledge sharing and collaboration platform for the Circular Economy 100 network, an Ellen MacArthur Foundation programme.",
   "main": "index.js",
   "scripts": {
