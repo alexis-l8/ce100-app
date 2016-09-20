@@ -37,11 +37,11 @@
     "joi": "^9.0.4",
     "redis": "^2.6.2",
     "sendemail": "^2.3.0",
+    "env2": "^2.1.1",
     "vision": "^4.1.0"
   },
   "devDependencies": {
     "codecov": "^1.0.1",
-    "env2": "^2.1.1",
     "istanbul": "^0.4.4",
     "nodemon": "^1.10.0",
     "pre-commit": "^1.1.3",
