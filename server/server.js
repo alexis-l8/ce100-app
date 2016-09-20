@@ -10,7 +10,7 @@ var server = new Hapi.Server();
 
 require('../test/helpers/set-up.js').initialiseDB(() => {});
 
-server.connection({ port: 3000 });
+server.connection({ port: process.env.PORT || 3000 });
 
 server.register([ // one plugin per line
   require('inert'),
