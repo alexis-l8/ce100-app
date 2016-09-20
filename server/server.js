@@ -1,4 +1,7 @@
 require('env2')('.env');
+console.log(' - - - - - - - - - - - process.env:');
+console.log(process.env)
+console.log(' - - - - - - - - - - - ');
 var Hapi = require('hapi');
 var Hoek = require('hoek');
 var path = require('path');
