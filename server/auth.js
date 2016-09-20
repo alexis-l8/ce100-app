@@ -22,7 +22,7 @@ exports.register = (server, options, next) => {
               return cb(err, false);
             }
             var user = JSON.parse(userString);
-            var override = Object.assign({ scope: user.user_type }, decoded);
+            var override = Object.assign({ scope: user.user_type, organisation_id: user.organisation_id }, decoded);
             return cb(null, true, override);
           });
         }
