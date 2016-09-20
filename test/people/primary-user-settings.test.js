@@ -37,9 +37,50 @@ tape('primary user cannot GET or POST to edit user for different user', t => {
   });
 });
 
-// TODO: finish edit user POST functionailty
-tape('primary user can edit their own profile', t => {
-  t.end();
+tape('primary user can view their own edit profile view', t => {
+  var user = setupData.initialPeople[2];
+  var getOptions = {
+    method: 'GET',
+    url: `/people/${user.id}/edit`,
+    headers: { cookie: `token=${primary_token}` }
+  };
+  server.inject(getOptions, res => {
+    t.equal(res.payload.indexOf('rchive User'), -1, 'primary user cannot archive themselves');
+    t.equal(res.payload.indexOf('User Type'), -1, 'primary user cannot edit their user type');
+    t.ok(res.payload.indexOf('First Name') > -1, 'primary user can view/edit their first name');
+    t.ok(res.payload.indexOf('Phone Number') > -1, 'primary user can view/edit their phone number');
+    t.ok(res.payload.indexOf('Email') > -1, 'primary user can view/edit their email');
+    t.ok(res.payload.indexOf('Old Password') > -1, 'primary user can change their password');
+    t.ok(res.payload.indexOf('New Password') > -1, 'primary user can change their password');
+    t.ok(res.payload.indexOf('Confirm New Password'), -1, 'primary user can change their password');
+    t.end();
+  });
+});
+
+tape('primary user can edit their profile', t => {
+  var user = setupData.initialPeople[2];
+  var getOptions = {
+    method: 'GET',
+    url: `/people/${user.id}/edit`,
+    headers: { cookie: `token=${primary_token}` }
+  };
+  var postOptions = {
+    method: `POST`,
+    url: `/people/${user.id}/edit`,
+    payload: payloads.editUserPayloadOrgUnchanged,
+    headers: { cookie: `token=${primary_token}` }
+  };
+  server.inject(getOptions, res => {
+    t.equal(res.payload.indexOf('rchive User'), -1, 'primary user cannot archive themselves');
+    t.equal(res.payload.indexOf('User Type'), -1, 'primary user cannot edit their user type');
+    t.ok(res.payload.indexOf('First Name') > -1, 'primary user can view/edit their first name');
+    t.ok(res.payload.indexOf('Phone Number') > -1, 'primary user can view/edit their phone number');
+    t.ok(res.payload.indexOf('Email') > -1, 'primary user can view/edit their email');
+    t.ok(res.payload.indexOf('Old Password') > -1, 'primary user can change their password');
+    t.ok(res.payload.indexOf('New Password') > -1, 'primary user can change their password');
+    t.ok(res.payload.indexOf('Confirm New Password'), -1, 'primary user can change their password');
+    t.end();
+  });
 });
 
 tape('teardown', t => {
