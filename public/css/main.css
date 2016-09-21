@@ -138,6 +138,7 @@ Danger-red:     #900000;
 .container {
     max-width: 54.857142857rem;
     margin: 0 auto;
+    padding-bottom: 3rem;
 }
 
 
@@ -216,13 +217,12 @@ Danger-red:     #900000;
         }
 
         .list__ellipsis {
-            position: absolute;
-            right: 8%;
-            top: 0;
-
-            padding: 1rem;
-            margin-right: -1rem;
-            cursor: pointer;
+          position: absolute;
+          right: 14%;
+          top: 0;
+          padding: 0.5rem;
+          margin-top: -0.5rem;
+          cursor: pointer;
         }
 
         .list__ellipsis:focus {
@@ -237,6 +237,14 @@ Danger-red:     #900000;
             display: block;
         }
 
+        /* List Edit SVG */
+        .list__edit {
+          position: absolute;
+          right: 0;
+          top: 0;
+          cursor: pointer;
+        }
+
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Shapes
   |||||||||||||||||||||||||||||||||||||||||||*/
@@ -244,8 +252,8 @@ Danger-red:     #900000;
 .circle {
     display: inline-block;
     background-color: #89a0ae;
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
 }
 
