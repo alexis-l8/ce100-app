@@ -22,7 +22,7 @@ module.exports = (callback) => {
         type: tagGroups[index]
       };
     });
-    var body = csv.slice(1);
+    var body = csv.slice(2);
     body.forEach((row, rowLength) => {
       var tags = row.split(/,/g);
       tags.forEach((tag, columnLength) => {
