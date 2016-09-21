@@ -9,12 +9,15 @@
       <label class="form__label" for="description">Description</label>
       <input class="form__input" type="text" name="description" id="description" placeholder="Write Here...">
 
-      {{#each tags}}
-        {{>tag-button}}
-      {{/each}}
-      {{>add-tag-button}}
+      {{#if tags}}
+        {{#each tags}}
+          {{>tag-button}}
+        {{/each}}
+      {{else}}
+        <h3>Add tags on the next screen</h3>
+      {{/if}}
 
-      <button class="button" type="submit">SUBMIT</button> <a class="anchor" href="/orgs">CANCEL</a>
+      <button class="button" type="submit">NEXT</button>
     </form>
 </div>
 
