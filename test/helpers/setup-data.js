@@ -5,16 +5,16 @@ var setupData = {};
 // people
 setupData.initialPeople = [
   {
-    first_name: 'Jack',
-    last_name: 'Murphy',
-    email: 'ja@mu.co',
+    first_name: 'Alex',
+    last_name: 'Wijns',
+    email: 'admin@mu.co',
     phone: '07111111111',
     job_title: 'Developer',
     user_type: 'admin',
     organisation_id: -1,
     id: 0,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    password: bcrypt.hashSync('adminadmin', 13),
     last_login: Date.now()
   },
   {
