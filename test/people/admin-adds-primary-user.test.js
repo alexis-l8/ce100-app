@@ -42,7 +42,7 @@ tape('/people/add check auth', t => {
     server.inject(adminCookie, res => {
       t.equal(res.statusCode, 200, 'admin can access /people/add');
       server.inject(primaryCookiePost, res => {
-        t.equal(res.statusCode, 403, 'primary can access /people/add');
+        t.equal(res.statusCode, 403, 'primary cannot access /people/add');
         t.end();
       });
     });

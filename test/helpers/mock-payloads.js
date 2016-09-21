@@ -27,18 +27,18 @@ mockPayloads.orgsAddDB = {
 };
 
 mockPayloads.loginAdminCorrect = {
-  email: 'ja@mu.co',
-  password: 'Hello1'
+  email: 'admin@mu.co',
+  password: 'adminadmin'
 };
 
 mockPayloads.loginAdminIncorrect = {
-  email: 'ja@mu.co',
+  email: 'admin@mu.co',
   password: 'Hello2'
 };
 
 mockPayloads.loginBadEmail = {
   email: 'jaaaaaa@mu.co',
-  password: 'Hello1'
+  password: 'adminadmin'
 };
 
 mockPayloads.loginPrimary = {

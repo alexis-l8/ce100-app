@@ -4,6 +4,9 @@ var helpers = require('./helpers');
 module.exports = (request, reply) => {
   var orgId = +request.params.id;
   var permissions = helpers.getPermissions(request.auth.credentials, 'organisation_id', orgId);
+  if (orgId === -1) {
+    return reply.redirect('/orgs');
+  }
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
     var organisation = JSON.parse(stringifiedOrg);
