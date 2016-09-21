@@ -15,7 +15,8 @@ setupData.initialPeople = [
     id: 0,
     active: true,
     password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now()
+    last_login: Date.now(),
+    challenges: []
   },
   {
     first_name: 'Marie',
@@ -28,7 +29,8 @@ setupData.initialPeople = [
     id: 1,
     active: true,
     password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now()
+    last_login: Date.now(),
+    challenges: []
   },
   {
     first_name: 'Sally',
@@ -41,7 +43,8 @@ setupData.initialPeople = [
     id: 2,
     active: true,
     password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now()
+    last_login: Date.now(),
+    challenges: []
   },
   {
     first_name: 'Ben',
@@ -54,7 +57,8 @@ setupData.initialPeople = [
     id: 3,
     active: true,
     password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now()
+    last_login: Date.now(),
+    challenges: []
   },
   {
     first_name: 'Andy',
@@ -67,7 +71,8 @@ setupData.initialPeople = [
     id: 4,
     active: true,
     password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now()
+    last_login: Date.now(),
+    challenges: []
   },
   {
     first_name: 'Gale',
@@ -80,7 +85,8 @@ setupData.initialPeople = [
     id: 5,
     active: true,
     password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now()
+    last_login: Date.now(),
+    challenges: []
   },
   {
     first_name: 'Maria',
@@ -93,7 +99,8 @@ setupData.initialPeople = [
     id: 6,
     active: true,
     password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now()
+    last_login: Date.now(),
+    challenges: []
   },
   {
     first_name: 'Coco',
@@ -106,7 +113,8 @@ setupData.initialPeople = [
     id: 7,
     active: false,
     password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now()
+    last_login: Date.now(),
+    challenges: []
   },
   {
     first_name: 'Frank',
@@ -119,7 +127,8 @@ setupData.initialPeople = [
     id: 8,
     active: false,
     password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now()
+    last_login: Date.now(),
+    challenges: []
   },
   {
     first_name: 'Anna',
@@ -132,7 +141,8 @@ setupData.initialPeople = [
     id: 9,
     active: true,
     password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now()
+    last_login: Date.now(),
+    challenges: []
   }
 ];
 
@@ -144,7 +154,8 @@ setupData.initialOrgs = [
     active: true,
     mission_statement: 'Change the economy',
     primary_id: 2,
-    people: [0]
+    people: [0],
+    challenges: []
   },
   {
     id: 1,
@@ -152,7 +163,8 @@ setupData.initialOrgs = [
     active: true,
     mission_statement: 'Do What You Love!',
     primary_id: 3,
-    people: [3]
+    people: [3],
+    challenges: []
   },
   {
     id: 2,
@@ -160,7 +172,8 @@ setupData.initialOrgs = [
     active: true,
     mission_statement: 'Summer!',
     primary_id: 4,
-    people: [4]
+    people: [4],
+    challenges: []
   },
   {
     id: 3,
@@ -168,7 +181,8 @@ setupData.initialOrgs = [
     active: true,
     mission_statement: 'Change the economy',
     primary_id: 5,
-    people: [5]
+    people: [5],
+    challenges: []
   },
   {
     id: 4,
@@ -176,7 +190,8 @@ setupData.initialOrgs = [
     active: true,
     mission_statement: 'Anonymous',
     primary_id: 6,
-    people: [6]
+    people: [6],
+    challenges: []
   },
   {
     id: 5,
@@ -184,7 +199,8 @@ setupData.initialOrgs = [
     active: false,
     mission_statement: 'Every Little Helps',
     primary_id: -1,
-    people: []
+    people: [],
+    challenges: []
   },
   {
     id: 6,
@@ -192,7 +208,8 @@ setupData.initialOrgs = [
     active: false,
     mission_statement: 'Refresh The Nation',
     primary_id: -1,
-    people: []
+    people: [],
+    challenges: []
   }
 ];
 

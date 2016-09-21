@@ -146,6 +146,19 @@ var routes = [
     method: 'GET',
     path: '/orgs/{id}/toggle-archive',
     handler: require('./handlers/toggle-archive-org.js')
+  },
+  {
+    method: 'GET',
+    path: '/challenges/add',
+    handler: require('./handlers/serve-view.js')('challenges/add'),
+  },
+  {
+    method: 'POST',
+    path: '/challenges/add',
+    handler: require('./handlers/add-new-challenge.js'),
+    config: {
+      validate: require('./models/add-new-challenge.js')
+    }
   }
 ];
 
