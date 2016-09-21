@@ -73,14 +73,22 @@ mockPayloads.adminEditOrg = {
   mission_statement: 'Improve diets'
 };
 
-mockPayloads.addChallenge1 = {
+mockPayloads.addChallenge = {
   title: 'Challenge Number 1',
   description: 'What can I...?'
-}
+};
 
-mockPayloads.addChallenge2 = {
-  title: 'Challenge Number 2',
-  description: 'How can I...?'
-}
+mockPayloads.noTagsAdded = {
+  tags: ''
+};
+
+mockPayloads.addOneTagOnly = {
+  tags: '[0, 0]' // corresponds to tags with name: 'Global Partner'
+};
+
+mockPayloads.addTags = {
+  tags: ['[0, 0]', '[2, 1]'] // corresponds to tags with names: 'Global Partner' and 'USA'
+};
+
 
 module.exports = mockPayloads;
