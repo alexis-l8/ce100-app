@@ -4,7 +4,7 @@ var routes = [
   {
     method: 'GET',
     path: '/',
-    handler: require('./handlers/serve-view.js')('dashboard')
+    handler: (request, reply) => reply.redirect('/orgs')
   },
   {
     method: 'GET',
