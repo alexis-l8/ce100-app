@@ -4,7 +4,6 @@ module.exports = (request, reply) => {
   var orgId = request.params.id;
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
-    // TODO: catch for case where org at specified orgId doesn't exist.
     var organisation = JSON.parse(stringifiedOrg);
     var orgDetails = {
       organisation: organisation
