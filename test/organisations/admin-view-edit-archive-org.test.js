@@ -3,10 +3,11 @@ var client = require('redis').createClient();
 var server = require('../../server/server.js');
 var payloads = require('../helpers/mock-payloads.js');
 var setup = require('../helpers/set-up.js');
-var setupData = require('../helpers/setup-data.js');
 var jwt = require('jsonwebtoken');
-var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
-var primary_token = jwt.sign(setupData.initialSessions[2], process.env.JWT_SECRET);
+var sessions = require('../helpers/setup/sessions.js')['sessions'];
+var orgs = require('../helpers/setup/orgs.js')['orgs'];
+var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
+var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
 
 
 tape('set up: initialise db', t => {
@@ -14,7 +15,7 @@ tape('set up: initialise db', t => {
 });
 
 tape('admin can view an org, edit, archive and unarchive it', t => {
-  var org = setupData.initialOrgs[3]
+  var org = orgs[3]
   // view org, edit org, view org, archive org, view org, unarchive org
   var adminViewOrg = {
     method: 'GET',
@@ -93,7 +94,7 @@ tape('admin can view and edit an org which does not have a primary user attached
     url: '/orgs/5/edit',
     headers: { cookie: `token=${admin_token}` }
   };
-  var orgName = setupData.initialOrgs[5].name;
+  var orgName = orgs[5].name;
   server.inject(adminViewOrg, res => {
     t.equal(res.statusCode, 200, '/orgs/id route exists for org without primary user');
     t.ok(res.payload.indexOf(orgName) > -1, 'server sends back the correct view');

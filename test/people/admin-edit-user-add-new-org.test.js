@@ -2,11 +2,12 @@ var tape = require('tape');
 var client = require('redis').createClient();
 var server = require('../../server/server.js');
 var setup = require('../helpers/set-up.js');
-var setupData = require('../helpers/setup-data.js');
 var payloads = require('../helpers/mock-payloads.js');
 
 var jwt = require('jsonwebtoken');
-var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
+var sessions = require('../helpers/setup/sessions.js')['sessions'];
+var orgs = require('../helpers/setup/orgs.js')['orgs'];
+var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
@@ -16,7 +17,7 @@ tape('set up: initialise db', t => {
 // oldOrgId = -1, newOrgId = 6.
 tape('admin edits user profile includes removing their link to an organisation', t => {
   t.plan(4);
-  var newOrg = setupData.initialOrgs[6];
+  var newOrg = orgs[6];
   var editUserView = {
     method: 'GET',
     url: '/people/9/edit',

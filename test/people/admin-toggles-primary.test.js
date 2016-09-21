@@ -2,20 +2,19 @@ var tape = require('tape');
 var client = require('redis').createClient();
 var server = require('../../server/server.js');
 var setup = require('../helpers/set-up.js');
-var setupData = require('../helpers/setup-data.js');
 var payloads = require('../helpers/mock-payloads.js');
 
 var jwt = require('jsonwebtoken');
-var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
+var sessions = require('../helpers/setup/sessions.js')['sessions'];
+var people = require('../helpers/setup/people.js')['people'];
+var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
 });
 
 tape('admin edits user profile but doesnt change organisation', t => {
-
-  var user = setupData.initialPeople[3]
-
+  var user = people[3];
   var toggleArchive = {
     method: 'GET',
     url: `/people/${user.id}/toggle-archive`,
@@ -31,7 +30,7 @@ tape('admin edits user profile but doesnt change organisation', t => {
     method: 'GET',
     url: `/orgs/${user.organisation_id}`,
     headers: { cookie: `token=${admin_token}` }
-  }
+  };
   server.inject(viewEdit, res => {
     t.equal(res.statusCode, 200, 'route exists and replies 200');
     t.ok(res.payload.indexOf('Archive User') > -1, 'user is active');
@@ -54,7 +53,6 @@ tape('admin edits user profile but doesnt change organisation', t => {
     });
   });
 });
-
 
 tape('teardown', t => {
   client.FLUSHDB();

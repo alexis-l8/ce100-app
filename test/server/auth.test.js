@@ -5,15 +5,13 @@ var aguid = require('aguid');
 var server = require('../../server/server.js');
 var setup = require('../helpers/set-up.js');
 
-var setupData = require('../helpers/setup-data.js');
-var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
-var primary_token = jwt.sign(setupData.initialSessions[2], process.env.JWT_SECRET);
-
+var sessions = require('../helpers/setup/sessions.js')['sessions'];
+var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
+var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
 });
-
 
 tape('hit an authed route without a cookie get 401', t => {
   var options = {
@@ -27,9 +25,7 @@ tape('hit an authed route without a cookie get 401', t => {
 });
 
 tape('A valid JWT with invalid jti fails Auth', t => {
-  var uid = Math.ceil(Math.random() * 10000000000);
-  var validTokenNoSession = jwt.sign({jti: aguid() }, process.env.JWT_SECRET);
-
+  var validTokenNoSession = jwt.sign({ jti: aguid() }, process.env.JWT_SECRET);
   var options = {
     method: 'GET',
     url: '/people/add',
@@ -42,8 +38,7 @@ tape('A valid JWT with invalid jti fails Auth', t => {
 });
 
 tape('A valid user with EXPIRED SESSION', t => {
-  var uid = Math.ceil(Math.random() * 10000000000);
-  var expired = jwt.sign(setupData.initialSessions[3], process.env.JWT_SECRET);
+  var expired = jwt.sign(sessions[3], process.env.JWT_SECRET);
 
   var options = {
     method: 'GET',
@@ -57,8 +52,7 @@ tape('A valid user with EXPIRED SESSION', t => {
 });
 
 tape('A valid JWT.jti (session) without a valid user fails auth', t => {
-  var uid = Math.ceil(Math.random() * 10000000000);
-  var nouser = jwt.sign(setupData.initialSessions[4], process.env.JWT_SECRET);
+  var nouser = jwt.sign(sessions[4], process.env.JWT_SECRET);
 
   var options = {
     method: 'GET',
