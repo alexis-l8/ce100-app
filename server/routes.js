@@ -147,6 +147,9 @@ var routes = [
     path: '/orgs/{id}/toggle-archive',
     handler: require('./handlers/toggle-archive-org.js')
   },
+
+  /*  ---  GENERAL ROUTES  ---  */
+
   {
     method: 'GET',
     path: '/challenges/{challengeId}/tags',
