@@ -4,15 +4,10 @@
 
     {{#if parent_tags}}
       <form class="form" method="post">
-          {{#if hide}}
-          <input class="form__input" type="hidden" name="title" id="title" value="{{hide.title}}">
-          <input class="form__input" type="hidden" name="description" id="description" value="{{hide.description}}">
-          {{/if}}
-
           {{#each parent_tags}}
             {{>tag}}
           {{/each}}
-          <button class="button" type="submit">SELECT</button> <a class="anchor" href="/orgs">CANCEL</a>
+          <button class="button" type="submit">SELECT</button>
       </form>
     {{else}}
         <h3>Sorry! No tags were found</h3>
