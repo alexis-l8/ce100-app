@@ -10,9 +10,12 @@ var setupData = require('../helpers/setup-data.js');
 var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
 var primary_token = jwt.sign(setupData.initialSessions[2], process.env.JWT_SECRET);
 
-
 tape('set up: initialise db', t => {
-  setup.initialiseDB(t.end);
+  setup.initialiseDB(() => {
+    require('../../tags/csv-to-json.js')(() => {
+      t.end();
+    });
+  });
 });
 
 tape('/challenges/add load general view', t => {
@@ -42,34 +45,107 @@ tape('/challenges/add (POST) - submit new challenge as an admin (expect fail)', 
   });
 });
 
-tape('/challenges/add (POST) - submit new challenge as a primary_user', t => {
+tape('/challenges/add (POST) - submit new challenge as a primary_user without tags', t => {
   var options1 = {
     method: 'POST',
     url: '/challenges/add',
-    payload: payloads.addChallenge1,
+    payload: payloads.addChallenge,
     headers: { cookie: `token=${primary_token}` }
   };
   var options2 = {
     method: 'POST',
+    url: '/challenges/0/tags',
+    payload: payloads.noTagsAdded,
+    headers: { cookie: `token=${primary_token}` }
+  };
+  server.inject(options1, reply => {
+    t.equal(reply.statusCode, 302, 'create challenge');
+    t.deepEquals(reply.result, { challengeId: 0 }, 'user is redirected to /challenges/0/tags to add tags');
+    server.inject(options2, reply => {
+      t.equal(reply.statusCode, 302, 'select no tags');
+      t.ok(reply.headers.location.indexOf('/orgs/0') > -1, 'user is redirected to /orgs/0 to add tags');
+      t.end();
+    });
+  });
+});
+
+tape('/challenges/add (POST) - submit new challenge as a primary_user with one tag only', t => {
+  var options1 = {
+    method: 'POST',
     url: '/challenges/add',
-    payload: payloads.addChallenge2,
+    payload: payloads.addChallenge,
+    headers: { cookie: `token=${primary_token}` }
+  };
+  var options2 = {
+    method: 'GET',
+    url: '/challenges/1/tags',
     headers: { cookie: `token=${primary_token}` }
   };
   var options3 = {
+    method: 'POST',
+    url: '/challenges/1/tags',
+    payload: payloads.addOneTagOnly,
+    headers: { cookie: `token=${primary_token}` }
+  };
+  var options4 = {
     method: 'GET',
     url: '/orgs/0',
     headers: { cookie: `token=${primary_token}` }
   };
   server.inject(options1, reply => {
-    t.equal(reply.statusCode, 302, 'on successful challenge creation, user is redirected');
-    t.ok(reply.headers.location, '/orgs/0', 'User is redirected to /orgs/{{orgId}}');
+    t.equal(reply.statusCode, 302, 'create challenge');
+    t.deepEquals(reply.result, { challengeId: 1 }, 'user is redirected to /challenges/0/tags to add tags');
     server.inject(options2, reply => {
-      t.equal(reply.statusCode, 302, 'on successful challenge creation, user is redirected');
-      t.ok(reply.headers.location, '/orgs/0', 'User is redirected to /orgs/{{orgId}}');
+      t.equal(reply.statusCode, 200, 'select-tags-view exists (endpoint: /challenges/{id}/tags)');
       server.inject(options3, reply => {
-        t.ok(reply.payload.indexOf(payloads.addChallenge1.title), 'two challenges are now displayed');
-        t.ok(reply.payload.indexOf(payloads.addChallenge2.title), 'two challenges are now displayed');
-        t.end();
+        t.equal(reply.statusCode, 302, 'user selects some tags and is redirected to org view');
+        t.ok(reply.headers.location.indexOf('/orgs/0') > -1, 'user is redirected to /orgs/0 upon successful completion of form');
+        server.inject(options4, reply => {
+          t.ok(reply.result.indexOf('Global Partner') > -1, 'challenge is displayed with Global Partners tag');
+          t.end();
+        });
+      });
+    });
+  });
+});
+
+
+tape('/challenges/add (POST) - submit new challenge as a primary_user with multiple tags', t => {
+  var options1 = {
+    method: 'POST',
+    url: '/challenges/add',
+    payload: payloads.addChallenge,
+    headers: { cookie: `token=${primary_token}` }
+  };
+  var options2 = {
+    method: 'GET',
+    url: '/challenges/2/tags',
+    headers: { cookie: `token=${primary_token}` }
+  };
+  var options3 = {
+    method: 'POST',
+    url: '/challenges/2/tags',
+    payload: payloads.addTags,
+    headers: { cookie: `token=${primary_token}` }
+  };
+  var options4 = {
+    method: 'GET',
+    url: '/orgs/0',
+    headers: { cookie: `token=${primary_token}` }
+  };
+  server.inject(options1, reply => {
+    t.equal(reply.statusCode, 302, 'create challenge');
+    t.deepEquals(reply.result, { challengeId: 2 }, 'user is redirected to /challenges/0/tags to add tags');
+    server.inject(options2, reply => {
+      t.equal(reply.statusCode, 200, 'select-tags-view exists (endpoint: /challenges/{id}/tags)');
+      server.inject(options3, reply => {
+        t.equal(reply.statusCode, 302, 'user selects some tags and is redirected to org view');
+        t.ok(reply.headers.location.indexOf('/orgs/0') > -1, 'user is redirected to /orgs/0 upon successful completion of form');
+        server.inject(options4, reply => {
+          t.ok(reply.result.indexOf('Global Partner') > -1, 'challenge is displayed with Global Partners tag');
+          t.ok(reply.result.indexOf('USA') > -1, 'challenge is displayed with USA tag');
+          t.end();
+        });
       });
     });
   });
