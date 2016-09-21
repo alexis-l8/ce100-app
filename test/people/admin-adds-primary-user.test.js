@@ -42,7 +42,7 @@ tape('/people/add check auth', t => {
     server.inject(adminCookie, res => {
       t.equal(res.statusCode, 200, 'admin can access /people/add');
       server.inject(primaryCookiePost, res => {
-        t.equal(res.statusCode, 403, 'primary can access /people/add');
+        t.equal(res.statusCode, 403, 'primary cannot access /people/add');
         t.end();
       });
     });
@@ -91,7 +91,7 @@ tape('add and activate a new user and updates the linked organisation', t => {
           // t.equal(res.headers.location.indexOf('/activate') > -1, 'activate account view returned if user is not already activated');
           t.ok(res.raw.req.url.indexOf('/activate') > -1, 'activate account view returned if user is not already activated');
           server.inject(activateUser, res => {
-            t.equal(res.headers.location, '/', 'completing activate user redirects to dashboard');
+            t.equal(res.headers.location, '/orgs', 'completing activate user redirects to dashboard');
             t.ok(res.headers['set-cookie'], 'cookie has been set');
             server.inject(logout, res => {
               server.inject(activateUserView, res => {
