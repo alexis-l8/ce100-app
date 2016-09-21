@@ -139,8 +139,13 @@ var routes = [
   },
   {
     method: 'GET',
-    path: '/tags',
-    handler: require('./handlers/view-all-tags.js')
+    path: '/challenges/{challengeId}/tags',
+    handler: require('./handlers/select-tags-view.js')
+  },
+  {
+    method: 'POST',
+    path: '/challenges/{challengeId}/tags',
+    handler: require('./handlers/select-tags.js')
   },
   {
     method: 'GET',
