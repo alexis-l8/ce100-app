@@ -1,7 +1,6 @@
 var Hoek = require('hoek');
 
 module.exports = (request, reply) => {
-  console.log(request.payload);
   var challengeId = request.params.challengeId;
   var payload = request.payload.tags;
   var tags = payload && payload !== -1
@@ -13,7 +12,6 @@ module.exports = (request, reply) => {
     var updatedChallenge = Object.assign(challenge, { tags: tags });
     request.redis.LSET('challenges', challengeId, JSON.stringify(updatedChallenge), (error, response) => {
       Hoek.assert(!error, error);
-      console.log(challenge.org_id);
       reply.redirect(`/orgs/${challenge.org_id}`);
     });
   });
