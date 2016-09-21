@@ -148,7 +148,7 @@ var routes = [
     handler: require('./handlers/toggle-archive-org.js')
   },
 
-  /*  ---  GENERAL ROUTES  ---  */
+  /*  ---  CHALLENGE ROUTES  ---  */
 
   {
     method: 'GET',
