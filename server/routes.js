@@ -168,9 +168,9 @@ var routes = [
   {
     method: 'POST',
     path: '/challenges/add',
-    handler: require('./handlers/add-new-challenge.js'),
+    handler: require('./handlers/add-challenge.js'),
     config: {
-      validate: require('./models/add-new-challenge.js')
+      validate: require('./models/add-challenge.js')
     }
   }
 ];
