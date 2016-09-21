@@ -390,8 +390,9 @@ Danger-red:     #900000;
 
 .log-in-logo {
   width: 60%;
+  max-width: 300px; /*Just a guess*/
   margin: 0 auto;
-  padding: 7rem 0 0 0;
+  padding: 7rem 0 4rem 0;
 }
 
 .log-in-fields {
