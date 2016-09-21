@@ -7,9 +7,7 @@ module.exports = (request, reply) => {
     // TODO: catch for case where org at specified orgId doesn't exist.
     var organisation = JSON.parse(stringifiedOrg);
     var orgDetails = {
-      organisation: organisation,
-      editable: false,
-      challenges: []
+      organisation: organisation
     };
     if (organisation.primary_id === -1 && organisation.challenges.length === 0) {
       return reply.view('organisations/details', orgDetails);
@@ -22,17 +20,18 @@ module.exports = (request, reply) => {
           request.redis.LRANGE('challenges', 0, -1, (error, challengesList) => {
             Hoek.assert(!error, 'redis error');
             var allTags = require('../../tags/tags.json');
-            organisation.challenges.forEach((challengeId, index) => {
+            orgDetails.challenges = organisation.challenges.map((challengeId, index) => {
               var challengeCard = JSON.parse(challengesList[challengeId]);
-              challengeCard.tags = challengeCard.tags.map(tagId => {
+              var tagsArray = challengeCard.tags.map(tagId => {
                 return {
                   id: tagId,
                   name: allTags[tagId[0]].tags[tagId[1]].name
                 };
               });
-              orgDetails.challenges.push(challengeCard);
-              if (index === organisation.challenges.length - 1) reply.view('organisations/details', orgDetails);
+              return Object.assign({}, challengeCard, {tags: tagsArray});
             });
+            console.log('>>>>>>>>>>>>>>>>>>>>', orgDetails);
+            reply.view('organisations/details', orgDetails);
           });
         } else {
           reply.view('organisations/details', orgDetails);
