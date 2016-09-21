@@ -28,7 +28,7 @@ var routes = [
     handler: require('./handlers/login.js'),
     config: {
       auth: false,
-      // validate: require('./models/login.js')
+      validate: require('./models/login.js')
     }
   },
   {

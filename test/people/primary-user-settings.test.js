@@ -69,7 +69,7 @@ tape('primary user can edit their profile', t => {
 
   server.inject(postOptions, res => {
     t.equal(res.statusCode, 302, 'user is redirected');
-    t.equal(res.headers.location, `/people/${user.id}/edit`);
+    t.equal(res.headers.location, `/orgs/${user.organisation_id}`);
     server.inject(getPrimaryEditView, res => {
       t.ok(res.payload.indexOf(payloads.primaryEdit.phone) > -1, 'Users phone number has been updated');
       t.end();
