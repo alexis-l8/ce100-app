@@ -6,8 +6,12 @@ module.exports = (request, reply) => {
     Hoek.assert(!error, 'redis error');
     // TODO: catch for case where org at specified orgId doesn't exist.
     var organisation = JSON.parse(stringifiedOrg);
-    var orgDetails = {organisation: organisation};
-    if (orgDetails.organisation.primary_id === -1 && orgDetails.organisation.challenges.length === 0) {
+    var orgDetails = {
+      organisation: organisation,
+      editable: false,
+      challenges: []
+    };
+    if (organisation.primary_id === -1 && organisation.challenges.length === 0) {
       return reply.view('organisations/details', orgDetails);
     } else {
       request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
@@ -15,30 +19,22 @@ module.exports = (request, reply) => {
         var {first_name, last_name, email, phone, job} = JSON.parse(stringifiedPrimaryUser);
         orgDetails.primary_user = Object.assign({}, {first_name, last_name, email, phone, job});
         if (organisation.challenges.length > 0) {
-          request.redis.LRANGE('challenges', 0, -1, (error, allChallenges) => {
+          request.redis.LRANGE('challenges', 0, -1, (error, challengesList) => {
             Hoek.assert(!error, 'redis error');
             var allTags = require('../../tags/tags.json');
-            orgDetails.challenges = organisation.challenges.map(orgChallengeId => {
-              var detail = JSON.parse(allChallenges.filter(challenge => JSON.parse(challenge).id === orgChallengeId)[0]);
-              // if (detail.tags.length > 1) {
-              //   detail.tags = detail.tags.map(tagId => {
-              //     return {
-              //       id: tagId,
-              //       name: allTags[tagId[0]].tags[tagId[1]].name
-              //     };
-              //   });
-              // } else {
-                detail.tags = {
-                  id: detail.tags,
-                  name: allTags[detail.tags[0]].tags[detail.tags[1]].name
+            organisation.challenges.forEach((challengeId, index) => {
+              var challengeCard = JSON.parse(challengesList[challengeId]);
+              challengeCard.tags = challengeCard.tags.map(tagId => {
+                return {
+                  id: tagId,
+                  name: allTags[tagId[0]].tags[tagId[1]].name
                 };
-              // }
-              // return detail;
+              });
+              orgDetails.challenges.push(challengeCard);
+              if (index === organisation.challenges.length - 1) reply.view('organisations/details', orgDetails);
             });
-            // reply.view('organisations/details', orgDetails);
           });
         } else {
-          orgDetails.challenges = false;
           reply.view('organisations/details', orgDetails);
         }
       });
