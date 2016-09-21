@@ -40,7 +40,7 @@ tape('/challenges/add (POST) - submit new challenge as an admin (expect fail)', 
   };
   server.inject(options, reply => {
     t.equal(reply.statusCode, 500, 'Admin cannot add challenge, as no org attached');
-    t.ok(reply.payload.indexOf('Admins cannot create a new challenge as no organisation is attached.'), 'Error message to admin ok');
+    t.ok(reply.payload.indexOf('Admins cannot create a new challenge as no organisation is attached.' > -1), 'Error message to admin ok');
     t.end();
   });
 });
