@@ -19,18 +19,11 @@ module.exports = (request, reply) => {
         if (organisation.challenges.length > 0) {
           request.redis.LRANGE('challenges', 0, -1, (error, challengesList) => {
             Hoek.assert(!error, 'redis error');
-            var allTags = require('../../tags/tags.json');
             orgDetails.challenges = organisation.challenges.map((challengeId, index) => {
               var challengeCard = JSON.parse(challengesList[challengeId]);
-              var tagsArray = challengeCard.tags.map(tagId => {
-                return {
-                  id: tagId,
-                  name: allTags[tagId[0]].tags[tagId[1]].name
-                };
-              });
+              var tagsArray = getTagNames(challengeCard.tags);
               return Object.assign({}, challengeCard, {tags: tagsArray});
             });
-            console.log('>>>>>>>>>>>>>>>>>>>>', orgDetails);
             reply.view('organisations/details', orgDetails);
           });
         } else {
@@ -40,3 +33,13 @@ module.exports = (request, reply) => {
     }
   });
 };
+
+function getTagNames (tagIds) {
+  var allTags = require('../../tags/tags.json');
+  return tagIds.map(tagId => {
+    return {
+      id: tagId,
+      name: allTags[tagId[0]].tags[tagId[1]].name
+    };
+  });
+}
