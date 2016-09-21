@@ -1,79 +1,23 @@
-var validatePerson = require('./person.js');
-var validateOrg = require('./organisation.js');
-var handlers = require('./handlers.js');
-
 var routes = [
+
+  /*  ---  GENERAL ROUTES  ---  */
   {
     method: 'GET',
     path: '/',
-    handler: handlers.serveView('dashboard')
+    handler: require('./handlers/serve-view.js')('dashboard')
   },
   {
     method: 'GET',
-    path: '/people',
-    handler: handlers.viewAllUsers
-  },
-  {
-    method: 'GET',
-    path: '/people/add',
-    handler: handlers.createNewPrimaryUserForm,
+    path: '/{path*}',
+    handler: require('./handlers/serve-file.js'),
     config: {
-      auth: { scope: 'admin' }
-    }
-  },
-  {
-    method: 'POST',
-    path: '/people/add',
-    handler: handlers.createNewPrimaryUser,
-    config: {
-      auth: { scope: 'admin' },
-      validate: validatePerson.adminAddUser
-    }
-  },
-  // {
-  //   method: 'GET',
-  //   path: '/people/{id}',
-  //   handler: handlers.viewUserDetails
-  // },
-  {
-    method: 'GET',
-    path: '/people/{id}/edit',
-    handler: handlers.editUserView
-  },
-  {
-    method: 'POST',
-    path: '/people/{id}/edit',
-    handler: handlers.editUserSubmit,
-    config: {
-      validate: validatePerson.editUser
-    }
-  },
-  {
-    method: 'GET',
-    path: '/people/{id}/toggle-archive',
-    handler: handlers.toggleArchiveUser
-  },
-  {
-    method: 'GET',
-    path: '/people/activate/{hashedId}',
-    handler: handlers.activateAccountView,
-    config: {
-      auth: false
-    }
-  },
-  {
-    method: 'POST',
-    path: '/people/activate/{hashedId}',
-    handler: handlers.activatePrimaryUser,
-    config: {
-      validate: validatePerson.confirmPassword,
       auth: false
     }
   },
   {
     method: 'GET',
     path: '/login',
-    handler: handlers.serveView('login'),
+    handler: require('./handlers/serve-view.js')('login'),
     config: {
       auth: false
     }
@@ -81,21 +25,87 @@ var routes = [
   {
     method: 'POST',
     path: '/login',
-    handler: handlers.login,
+    handler: require('./handlers/login.js'),
     config: {
       auth: false,
-      validate: validatePerson.login
+      validate: require('./models/login.js')
     }
   },
   {
     method: 'GET',
     path: '/logout',
-    handler: handlers.logout
+    handler: require('./handlers/logout.js')
+  },
+
+  /*  ---  /people ROUTES  ---  */
+  {
+    method: 'GET',
+    path: '/people',
+    handler: require('./handlers/all-users-view.js')
   },
   {
     method: 'GET',
+    path: '/people/add',
+    handler: require('./handlers/create-user-view.js'),
+    config: {
+      auth: { scope: 'admin' }
+    }
+  },
+  {
+    method: 'POST',
+    path: '/people/add',
+    handler: require('./handlers/create-new-user.js'),
+    config: {
+      auth: { scope: 'admin' },
+      validate: require('./models/admin-add-user.js')
+    }
+  },
+  // {
+  //   method: 'GET',
+  //   path: '/people/{id}',
+  //   handler: require('./handlers/user-details-view.js')
+  // },
+  {
+    method: 'GET',
+    path: '/people/{id}/edit',
+    handler: require('./handlers/edit-user-view.js')
+  },
+  {
+    method: 'POST',
+    path: '/people/{id}/edit',
+    handler: require('./handlers/edit-user.js'),
+    config: {
+      validate: require('./models/edit-user')
+    }
+  },
+  {
+    method: 'GET',
+    path: '/people/{id}/toggle-archive',
+    handler: require('./handlers/toggle-archive-user.js')
+  },
+  {
+    method: 'GET',
+    path: '/people/activate/{hashedId}',
+    handler: require('./handlers/activate-account-view.js'),
+    config: {
+      auth: false
+    }
+  },
+  {
+    method: 'POST',
+    path: '/people/activate/{hashedId}',
+    handler: require('./handlers/activate-user-account.js'),
+    config: {
+      validate: require('./models/confirm-password.js'),
+      auth: false
+    }
+  },
+
+    /*  ---  /orgs ROUTES  ---  */
+  {
+    method: 'GET',
     path: '/orgs/add',
-    handler: handlers.serveView('add-organisation'),
+    handler: require('./handlers/serve-view.js')('add-organisation'),
     config: {
       auth: { scope: 'admin' }
     }
@@ -103,39 +113,39 @@ var routes = [
   {
     method: 'POST',
     path: '/orgs/add',
-    handler: handlers.createNewOrganisation,
+    handler: require('./handlers/create-new-org.js'),
     config: {
       auth: { scope: 'admin' },
-      validate: validatePerson.adminAddOrganisation
+      validate: require('./models/admin-add-org.js')
     }
   },
   {
     method: 'GET',
     path: '/orgs',
-    handler: handlers.viewAllOrganisations
+    handler: require('./handlers/all-orgs-view.js')
   },
   {
     method: 'GET',
     path: '/orgs/{id}',
-    handler: handlers.viewOrganisationDetails
+    handler: require('./handlers/org-details-view.js')
   },
   {
     method: 'GET',
     path: '/orgs/{id}/edit',
-    handler: handlers.editOrganisationDetails
+    handler: require('./handlers/edit-org-view.js')
   },
   {
     method: 'POST',
     path: '/orgs/{id}/edit',
-    handler: handlers.submitEditOrg,
+    handler: require('./handlers/edit-org.js'),
     config: {
-      validate: validateOrg.adminEditOrg
+      validate: require('./models/admin-edit-org.js')
     }
   },
   {
     method: 'GET',
     path: '/orgs/{id}/toggle-archive',
-    handler: handlers.toggleArchiveOrg
+    handler: require('./handlers/toggle-archive-org.js')
   },
   {
     method: 'GET',
@@ -146,14 +156,6 @@ var routes = [
     method: 'POST',
     path: '/tags',
     handler: require('./handlers/select-tags.js')
-  },
-  {
-    method: 'GET',
-    path: '/{path*}',
-    handler: handlers.serveFile,
-    config: {
-      auth: false
-    }
   }
 ];
 
