@@ -137,7 +137,7 @@ Danger-red:     #900000;
 
 .container {
     max-width: 54.857142857rem;
-    margin: 0 auto 6rem;
+    margin: 0 auto;
 }
 
 
@@ -379,21 +379,24 @@ Danger-red:     #900000;
     Anchors
   |||||||||||||||||||||||||||||||||||||||||||*/
 
-.float-right {
-  float: right
-}
-
-.log-in {
+.log-in-layout {
   height: 100vh;
   background: radial-gradient(10em at 50% 30%, #618298, #003253);
 }
 
-.log-in-layout {
-  padding-top: 18rem;
+.float-right {
+  float: right
+}
+
+.log-in-logo {
+  width: 60%;
+  margin: 0 auto;
+  padding: 7rem 0 0 0;
 }
 
 .log-in-fields {
-  width: 280px;
+  width: 75%;
+  margin: 2rem auto;
   border: 1px solid #618298;
   border-radius: 25px;
 }

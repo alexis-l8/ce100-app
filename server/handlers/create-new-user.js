@@ -4,7 +4,6 @@ var sendEmail = require('../email.js');
 var helpers = require('./helpers.js');
 
 module.exports = (request, reply) => {
-  console.log('in handler');
   var payload = request.payload;
   var redis = request.redis;
   redis.LLEN('people', (error, length) => {
