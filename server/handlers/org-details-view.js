@@ -13,8 +13,8 @@ module.exports = (request, reply) => {
     }
     request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
       Hoek.assert(!error, 'redis error');
-      var {first_name, last_name, email, phone, job} = JSON.parse(stringifiedPrimaryUser);
-      var organisationDetails = Object.assign({first_name, last_name, email, phone, job}, organisation);
+      var {first_name, last_name, email, phone, job_title} = JSON.parse(stringifiedPrimaryUser);
+      var organisationDetails = Object.assign({first_name, last_name, email, phone, job_title}, organisation);
       reply.view('organisations/details', organisationDetails);
     });
   });
