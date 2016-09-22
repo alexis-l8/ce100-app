@@ -1,0 +1,9 @@
+<label class="tags__toggle-title" for="{{@index}}">{{name}}</label>
+<input type="checkbox" class="tags__toggle-input" id="{{@index}}">
+
+<div>
+    {{#each tags}}
+        <input type="checkbox" class="tags__toggle-input" id=[{{id}}] name="tags" value=[{{id}}]>
+        <label class="tags__toggle-label" for=[{{id}}]>{{name}}</label>
+    {{/each}}
+</div>

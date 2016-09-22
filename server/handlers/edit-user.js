@@ -1,9 +1,17 @@
 var Hoek = require('hoek');
+var Boom = require('boom');
+
 var helpers = require('./helpers.js');
 
 module.exports = (request, reply) => {
-  var userId = request.params.id;
-  var newOrgId = request.payload.organisation_id;
+  var userId = +request.params.id;
+  var loggedIn = request.auth.credentials;
+  var permissions = helpers.getPermissions(loggedIn, 'userId', userId);
+
+  // if incorrect user - reply unauthorized
+  if (!permissions.permissions.editable) {
+    return reply(Boom.unauthorized('You do not have permission to edit that user.'));
+  }
   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
     Hoek.assert(!error, 'redis error');
     var user = JSON.parse(stringifiedUser);
@@ -11,6 +19,12 @@ module.exports = (request, reply) => {
     // update user
     request.redis.LSET('people', userId, JSON.stringify(updatedUser), (error, response) => {
       Hoek.assert(!error, 'redis error');
+
+      if (loggedIn.scope === 'primary') {
+        return reply.redirect(`/orgs/${loggedIn.organisation_id}`);
+      }
+
+      var newOrgId = request.payload.organisation_id;
       var oldOrgId = user.organisation_id;
       // if org unchanged
       if (newOrgId === oldOrgId) {
