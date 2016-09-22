@@ -137,7 +137,8 @@ Danger-red:     #900000;
 
 .container {
     max-width: 54.857142857rem;
-    margin: 0 auto 6rem;
+    margin: 0 auto;
+    padding-bottom: 3rem;
 }
 
 
@@ -208,6 +209,10 @@ Danger-red:     #900000;
         .list__data--primary {
             color: #40667e;
         }
+        .list__data--secondary {
+            color: #89a0ae;
+            padding: 0.1em 0em;
+        }
 
         /* Expandable List Items */
 
@@ -216,13 +221,12 @@ Danger-red:     #900000;
         }
 
         .list__ellipsis {
-            position: absolute;
-            right: 8%;
-            top: 0;
-
-            padding: 1rem;
-            margin-right: -1rem;
-            cursor: pointer;
+          position: absolute;
+          right: 14%;
+          top: 0;
+          padding: 0.5rem;
+          margin-top: -0.5rem;
+          cursor: pointer;
         }
 
         .list__ellipsis:focus {
@@ -237,6 +241,94 @@ Danger-red:     #900000;
             display: block;
         }
 
+        /* List Edit SVG */
+        .list__edit {
+          position: absolute;
+          right: 0;
+          top: 0;
+          cursor: pointer;
+        }
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Tags
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.tags__toggle-title {
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: bold;
+    color: red;
+    margin: 1em;
+
+}
+
+.tags__toggle-title + input {
+    display: none;
+}
+
+.tags__toggle-title + input + div {
+    display: none;
+}
+
+.tags__toggle-title + input:checked + div {
+    display: block;
+}
+
+.tags__toggle-label {
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 3.5em;
+    margin: 1em;
+    background-color: #f2f2f2;
+}
+
+.tags__toggle-input:checked + .tags__toggle-label {
+    background-color: #89a0ae;
+}
+
+.tags__toggle-input {
+    display: none;
+}
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Tag-buttons
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.tag-button__label {
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: bold;
+    color: red;
+    margin: 0.3em;
+    padding: 0.3em;
+    border-radius: 1em;
+    border-style: solid;
+    border-color: #f2f2f2;
+}
+
+.add-tag-button__label {
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: bold;
+    color: red;
+    margin: 1em;
+
+}
+
+.add-tag-button__input {
+    display: none;
+}
+
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Shapes
   |||||||||||||||||||||||||||||||||||||||||||*/
@@ -244,8 +336,8 @@ Danger-red:     #900000;
 .circle {
     display: inline-block;
     background-color: #89a0ae;
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
 }
 
@@ -379,21 +471,25 @@ Danger-red:     #900000;
     Anchors
   |||||||||||||||||||||||||||||||||||||||||||*/
 
-.float-right {
-  float: right
-}
-
-.log-in {
+.log-in-layout {
   height: 100vh;
   background: radial-gradient(10em at 50% 30%, #618298, #003253);
 }
 
-.log-in-layout {
-  padding-top: 18rem;
+.float-right {
+  float: right
+}
+
+.log-in-logo {
+  width: 60%;
+  max-width: 300px; /*Just a guess*/
+  margin: 0 auto;
+  padding: 7rem 0 4rem 0;
 }
 
 .log-in-fields {
-  width: 280px;
+  width: 75%;
+  margin: 2rem auto;
   border: 1px solid #618298;
   border-radius: 25px;
 }

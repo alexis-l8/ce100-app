@@ -3,16 +3,16 @@ var bcrypt = require('bcrypt');
 module.exports = {
   people: [
     {
-      first_name: 'Jack',
-      last_name: 'Murphy',
-      email: 'ja@mu.co',
+      first_name: 'Alex',
+      last_name: 'Wijns',
+      email: 'admin@mu.co',
       phone: '07111111111',
       job_title: 'Developer',
       user_type: 'admin',
       organisation_id: -1,
       id: 0,
       active: true,
-      password: bcrypt.hashSync('Hello1', 13),
+      password: bcrypt.hashSync('adminadmin', 10),
       last_login: Date.now(),
       challenges: []
     },
@@ -26,7 +26,7 @@ module.exports = {
       organisation_id: -1,
       id: 1,
       active: true,
-      password: bcrypt.hashSync('Hello1', 13),
+      password: bcrypt.hashSync('Hello1', 10),
       last_login: Date.now(),
       challenges: []
     },
@@ -40,7 +40,7 @@ module.exports = {
       user_type: 'primary',
       id: 2,
       active: true,
-      password: bcrypt.hashSync('Hello1', 13),
+      password: bcrypt.hashSync('Hello1', 10),
       last_login: Date.now(),
       challenges: [0, 1, 2]
     },
@@ -54,7 +54,7 @@ module.exports = {
       user_type: 'primary',
       id: 3,
       active: true,
-      password: bcrypt.hashSync('Hello1', 13),
+      password: bcrypt.hashSync('Hello1', 10),
       last_login: Date.now(),
       challenges: [3, 4]
     },
@@ -68,7 +68,7 @@ module.exports = {
       user_type: 'primary',
       id: 4,
       active: true,
-      password: bcrypt.hashSync('Hello1', 13),
+      password: bcrypt.hashSync('Hello1', 10),
       last_login: Date.now(),
       challenges: [5]
     },
@@ -82,7 +82,7 @@ module.exports = {
       user_type: 'primary',
       id: 5,
       active: true,
-      password: bcrypt.hashSync('Hello1', 13),
+      password: bcrypt.hashSync('Hello1', 10),
       last_login: Date.now(),
       challenges: [6]
     },
@@ -96,7 +96,7 @@ module.exports = {
       user_type: 'primary',
       id: 6,
       active: true,
-      password: bcrypt.hashSync('Hello1', 13),
+      password: bcrypt.hashSync('Hello1', 10),
       last_login: Date.now(),
       challenges: []
     },
@@ -110,7 +110,7 @@ module.exports = {
       user_type: 'primary',
       id: 7,
       active: false,
-      password: bcrypt.hashSync('Hello1', 13),
+      password: bcrypt.hashSync('Hello1', 10),
       last_login: Date.now(),
       challenges: []
     },
@@ -124,7 +124,7 @@ module.exports = {
       user_type: 'primary',
       id: 8,
       active: false,
-      password: bcrypt.hashSync('Hello1', 13),
+      password: bcrypt.hashSync('Hello1', 10),
       last_login: Date.now(),
       challenges: []
     },
@@ -138,7 +138,7 @@ module.exports = {
       user_type: 'primary',
       id: 9,
       active: true,
-      password: bcrypt.hashSync('Hello1', 13),
+      password: bcrypt.hashSync('Hello1', 10),
       last_login: Date.now(),
       challenges: []
     }

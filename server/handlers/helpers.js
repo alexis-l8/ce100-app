@@ -1,5 +1,14 @@
 var helpers = {};
 
+helpers.getPermissions = (loggedIn, key, identifier) => {
+  return {
+    permissions: {
+      editable: loggedIn[key] === identifier || loggedIn.scope === 'admin',
+      [loggedIn.scope]: true
+    }
+  };
+};
+
 helpers.removeUserFromOrg = (orgString, userId) => {
   var org = JSON.parse(orgString);
   var newInfo = {

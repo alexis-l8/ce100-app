@@ -18,7 +18,8 @@ tape('root (dashboard) page loads', t => {
     headers: { cookie: `token=${admin_token}` }
   };
   server.inject(options, reply => {
-    t.equal(reply.statusCode, 200, 'route exists and replies 200');
+    // TODO: CAN CHANGE WHEN WE MAKE A DASHBOARD
+    t.equal(reply.statusCode, 302, 'route redircts to /orgs');
     t.end();
   });
 });
