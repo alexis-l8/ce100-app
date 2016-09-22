@@ -4,7 +4,7 @@ var helpers = require('./helpers.js');
 
 module.exports = (request, reply) => {
   var loggedIn = request.auth.credentials;
-  var userId = +request.params.id;
+  var userId = parseInt(request.params.id, 10);
   var permissions = helpers.getPermissions(loggedIn, 'userId', userId);
 
   // if incorrect user - reply unauthorized

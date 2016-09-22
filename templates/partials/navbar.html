@@ -1,7 +1,14 @@
 <nav class="navbar">
-    <img class="navbar__logo" alt="" src=""></img>
-
-    <div class="navbar__hamburger" tabindex="1"></div>
+  {{#if permissions.primary}}
+    <ul class="navbar__links">
+      <li class="navbar__item">
+        <a href="/orgs" class="navbar__link">Browse</a></li>
+      <li class="navbar__item">
+        <a href="/challenges/add" class="navbar__link">Add Challenge</a></li>
+      <li class="navbar__item">
+        <a href="/orgs/{{permissions.organisation_id}}" class="navbar__link">Profile</a></li>
+      </ul>
+  {{else}}
     <ul class="navbar__links">
         {{#if alternate}}
           {{#each alternate}}
@@ -12,6 +19,7 @@
           <a href="/orgs" class="navbar__link">Orgs</a></li>
         <li class="navbar__item">
           <a href="/people" class="navbar__link">People</a></li>
-        {{/if}}
-    </ul>
+          {{/if}}
+        </ul>
+    {{/if}}
 </nav>
