@@ -5,7 +5,6 @@ var client = require('redis').createClient();
 var server = require('../../server/server.js');
 var payloads = require('../helpers/mock-payloads.js');
 var setup = require('../helpers/set-up.js');
-var setupData = require('../helpers/setup-data.js');
 
 var sessions = require('../helpers/setup/sessions.js')['sessions'];
 var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
@@ -146,9 +145,6 @@ tape('/challenges/add (POST) - submit new challenge as a primary_user with multi
           headers: { cookie: `token=${primary_token}` }
         };
         server.inject(options4, reply => {
-          console.log('===================================');
-          console.log(reply);
-          console.log('===================================');
           t.ok(reply.result.indexOf('Global Partner') > -1, 'challenge is displayed with Global Partners tag');
           t.ok(reply.result.indexOf('USA') > -1, 'challenge is displayed with USA tag');
           t.end();

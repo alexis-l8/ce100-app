@@ -3,18 +3,19 @@ var client = require('redis').createClient();
 var server = require('../../server/server.js');
 var payloads = require('../helpers/mock-payloads.js');
 var setup = require('../helpers/set-up.js');
-var setupData = require('../helpers/setup-data.js');
 var jwt = require('jsonwebtoken');
-var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
-var primary_token = jwt.sign(setupData.initialSessions[2], process.env.JWT_SECRET);
 
+var sessions = require('../helpers/setup/sessions.js')['sessions'];
+var people = require('../helpers/setup/people.js')['people'];
+var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
+var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
 });
 
 tape('primary can log in, view and edit an org they are related to', t => {
-  var user = setupData.initialPeople[2];
+  var user = people[2];
 
   var primaryLogin = {
     method: 'POST',
