@@ -50,16 +50,20 @@ table {
     border-spacing: 0;
 }
 
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Custom Presets
+  |||||||||||||||||||||||||||||||||||||||||||*/
 
 html {
-    font-size: 14px;
-    font-family: 'Noto Sans', Helvetica, Ariel, sans-serif;
+    font-size: 16px; /* for REM size declarations */
+    font-family: 'Karla', Helvetica, Ariel, sans-serif;
 }
 
 body {
     min-height: 100vh;
     line-height: 1.5rem;
     background-color: #fafafa;
+    font-size: 0.875rem; /* 14px */
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -69,6 +73,7 @@ body {
 /*
 
 Marine-blue :   #003253;
+
 Navy:           #002944;
 
 Denim:          #40667e;
@@ -78,15 +83,15 @@ Bluey-grey:     #89a0ae;
 White:          #ffffff;
 
 Danger-red:     #900000;
+
 */
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Nav Bar
   |||||||||||||||||||||||||||||||||||||||||||*/
 
-
 .navbar {
-    height: 3.4285714286rem; /* 48px */
+    height: 3rem; /* 48px */
     width: 100%;
     background-color: #003253;
     position: fixed;
@@ -136,10 +141,16 @@ Danger-red:     #900000;
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .container {
-    max-width: 54.857142857rem;
+    max-width: 48rem; /* 768 px */
     margin: 0 auto;
     padding-bottom: 3rem;
 }
+    .container--login {
+        height: 100vh;
+        padding: 6rem 1.25rem 3rem;
+        background: radial-gradient(10em at 50% 30%, #618298, #003253);
+    }
+
 
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -166,6 +177,23 @@ Danger-red:     #900000;
 .title--with-logo {
     padding: 3.5rem 0;
 }
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Copy
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.copy {
+    display: block;
+    line-height: 1.5;
+    text-align: center;
+    margin: auto;
+}
+    .copy--login {
+        max-width: 16.25rem;
+        color: #ffffff;
+        letter-spacing: ;
+    }
+
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Lists
@@ -372,6 +400,9 @@ Danger-red:     #900000;
     margin-top: 2rem;
     padding: 0 7%;
 }
+    .form--login {
+        margin-top: 3rem;
+    }
     .form__label, .form__input {
         display: block;
         font-size: 1rem;
@@ -392,7 +423,31 @@ Danger-red:     #900000;
         background-color: #f2f2f2;
         border: solid 1px #ebeced;
     }
+        .form__input--login {
+            width: 100%;
+            height: 3rem;
+            margin: 0 0 0.875rem;
+            background-color: #184460; /* teal colour */
+            border: none;
+            border-radius: 25px;
 
+            text-indent: 1.25rem;
+        }
+            .form__input--login::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+              color: #89a0ae;
+            }
+            .form__input--login::-moz-placeholder { /* Firefox 19+ */
+              color: #89a0ae;
+              opacity: 1;
+            }
+            .form__input--login:-ms-input-placeholder { /* IE 10+ */
+              color: #89a0ae;
+            }
+            .form__input--login:-moz-placeholder { /* Firefox 18- */
+              color: #89a0ae;
+              opacity: 1;
+            }
+        }
 
     .form__label--radio, .form__input--radio {
         display: inline-block;
@@ -468,28 +523,18 @@ Danger-red:     #900000;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
-    Anchors
+    Logo
   |||||||||||||||||||||||||||||||||||||||||||*/
 
-.log-in-layout {
-  height: 100vh;
-  background: radial-gradient(10em at 50% 30%, #618298, #003253);
+.logo {
+    display: block;
+    margin: 0 auto 2rem;
+    width: 9rem; /* 144px */
 }
 
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Helper classes
+  |||||||||||||||||||||||||||||||||||||||||||*/
 .float-right {
   float: right
-}
-
-.log-in-logo {
-  width: 60%;
-  max-width: 300px; /*Just a guess*/
-  margin: 0 auto;
-  padding: 7rem 0 4rem 0;
-}
-
-.log-in-fields {
-  width: 75%;
-  margin: 2rem auto;
-  border: 1px solid #618298;
-  border-radius: 25px;
 }
