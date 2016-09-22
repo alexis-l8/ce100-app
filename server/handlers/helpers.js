@@ -4,7 +4,9 @@ helpers.getPermissions = (loggedIn, key, identifier) => {
   return {
     permissions: {
       editable: loggedIn[key] === identifier || loggedIn.scope === 'admin',
-      [loggedIn.scope]: true
+      [loggedIn.scope]: true,
+      userId: loggedIn.userId,
+      organisation_id: loggedIn.organisation_id
     }
   };
 };
