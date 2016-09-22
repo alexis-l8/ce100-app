@@ -1,7 +1,7 @@
 var helpers = {};
 
 helpers.getPermissions = (loggedIn, key, identifier) => {
-  return {
+  return loggedIn && {
     permissions: {
       editable: loggedIn[key] === identifier || loggedIn.scope === 'admin',
       [loggedIn.scope]: true,

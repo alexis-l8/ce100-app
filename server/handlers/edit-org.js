@@ -2,7 +2,7 @@ var Hoek = require('hoek');
 var Boom = require('boom');
 
 module.exports = (request, reply) => {
-  var orgId = +request.params.id;
+  var orgId = parseInt(request.params.id, 10);
   var loggedIn = request.auth.credentials;
   if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin') {
     return reply(Boom.unauthorized('You do not have permission to edit that organisation.'));
