@@ -1,18 +1,18 @@
 <!-- Main Content -->
 <div class="container">
-    <h1 class="title title--with-logo">{{name}}</h1>
+    <h1 class="title title--with-logo">{{organisation.name}}</h1>
 
     <div class="card">
         <p class="card__copy">Our circular economy vision</p>
-        <p class="card__copy">{{mission_statement}}</p>
+        <p class="card__copy">{{organisation.mission_statement}}</p>
     </div>
 
-    {{#if first_name}}
+    {{#if primary_user}}
     <div class="card">
-      <span class="card__data">{{first_name}} {{last_name}}</span>
-      <span class="card__data">{{job_title}}</span>
-      <span class="card__data">{{phone}}</span>
-      <span class="card__data">{{email}}</span>
+      <span class="card__data">{{primary_user.first_name}} {{primary_user.last_name}}</span>
+      <span class="card__data">{{primary_user.job}}</span>
+      <span class="card__data">{{primary_user.phone}}</span>
+      <span class="card__data">{{primary_user.email}}</span>
     </div>
     {{else}}
     <div class="card">
@@ -21,8 +21,15 @@
     {{/if}}
 
     {{#if permissions.editable}}
-    <a class="button" href="/orgs/{{id}}/edit">Edit</a>
+    <a class="button" href="/orgs/{{organisation.id}}/edit">Edit</a>
     {{/if}}
+
+    {{#if challenges}}
+      {{#each challenges}}
+        {{>challenge}}
+      {{/each}}
+    {{/if}}
+
 </div>
 
 <!-- Include Navbar -->

@@ -1,0 +1,18 @@
+<!-- Main Content -->
+<div class="container">
+    <h1 class="title">Tags</h1>
+
+    {{#if parent_tags}}
+      <form class="form" method="post">
+          {{#each parent_tags}}
+            {{>tag}}
+          {{/each}}
+          <button class="button" type="submit">SELECT</button>
+      </form>
+    {{else}}
+        <h3>Sorry! No tags were found</h3>
+    {{/if}}
+</div>
+
+<!-- Include Navbar -->
+{{>navbar}}
