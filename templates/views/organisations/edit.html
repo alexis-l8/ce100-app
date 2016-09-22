@@ -2,31 +2,46 @@
 <div class="container">
     <h1 class="title">Edit Organisation Details</h1>
     <form class="form" method="post">
+
+        <!-- Company name and image -->
+        {{#if permissions.admin}}
         <label class="form__label" for="org_name">Organisation Name</label>
         <input class="form__input" name="name" value="{{name}}" id="org_name">
+        {{else}}
+        <label class="form__label" for="org_name">Organisation Name</label>
+        <span class="form__input" name="name" id="org_name">{{name}}</span>
+        {{/if}}
 
-        <label class="form__label" for="mission_statement">Mission Statement</label>
+        <label class="form__label" for="mission_statement">
+          {{#if permissions.primary}}
+          Add your circular economy vision
+          {{else}}
+          Organisation's mission statement
+          {{/if}}
+        </label>
         <input class="form__input" name="mission_statement" value="{{mission_statement}}" id="mission_statement">
 
-        <a class="anchor anchor--danger" href="/orgs/{{id}}/toggle-archive">
-          {{#if active}}
-          Archive Organisation
-          {{else}}
-          Unarchive Organisation
-          {{/if}}
-        </a>
+        {{#if permissions.admin}}
+        <!-- Show archive and primary user if admin is logge in -->
+          <a class="anchor anchor--danger" href="/orgs/{{id}}/toggle-archive">
+            {{#if active}}
+            Archive Organisation
+            {{else}}
+            Unarchive Organisation
+            {{/if}}
+          </a>
+          {{#hasPrimary primary_id}}
+          <!-- Only show primary section if primary user is linked to this org -->
+          <label class="form__label" for="primary_user_name">Primary User</label>
+          <div class="form__input" name="primary_user_name" id="primary_user_name">
+            {{primary_user_name}}
+            <a href="/people/{{primary_user_id}}/edit" class="button-small float-right">EDIT</a>
+          </div>
+          {{/hasPrimary}}
+        {{/if}}
 
-        {{#hasPrimary primary_id}}
-        <!-- Only show primary section if primary user is linked to this org -->
-        <label class="form__label" for="primary_user_name">Primary User</label>
-        <div class="form__input" name="primary_user_name" id="primary_user_name">
-          {{primary_user_name}}
-          <a href="/people/{{primary_user_id}}/edit" class="button-small float-right">EDIT</a>
-        </div>
-        {{/hasPrimary}}
-
-        <button class="button" type="submit">SUBMIT</button>
-        <a class="anchor" href="/orgs/{{id}}">CANCEL</a>
+        <button class="button" type="submit">Save</button>
+        <a class="anchor" href="/orgs/{{id}}">Cancel</a>
 
     </form>
 </div>

@@ -2,6 +2,9 @@ var bcrypt = require('bcrypt');
 var aguid = require('aguid');
 var setupData = {};
 
+var salt = 10;
+
+
 // people
 setupData.initialPeople = [
   {
@@ -14,7 +17,7 @@ setupData.initialPeople = [
     organisation_id: -1,
     id: 0,
     active: true,
-    password: bcrypt.hashSync('adminadmin', 13),
+    password: bcrypt.hashSync('adminadmin', salt),
     last_login: Date.now()
   },
   {
@@ -27,7 +30,7 @@ setupData.initialPeople = [
     organisation_id: -1,
     id: 1,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -40,7 +43,7 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 2,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -53,7 +56,7 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 3,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -66,7 +69,7 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 4,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -79,7 +82,7 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 5,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -92,7 +95,7 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 6,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -105,7 +108,7 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 7,
     active: false,
-    password: bcrypt.hashSync('Hello1', 13),
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -118,7 +121,7 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 8,
     active: false,
-    password: bcrypt.hashSync('Hello1', 13),
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -131,7 +134,7 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 9,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   }
 ];

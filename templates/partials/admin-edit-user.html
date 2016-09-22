@@ -1,0 +1,24 @@
+<span class="form__label">User Type</span>
+{{#each userTypes}}
+  {{>radio}}
+{{/each}}
+<label class="form__label" for="organisation_id">Organisation</label>
+{{#if allOrganisations}}
+  <select class="form__input" name="organisation_id">
+  <option value=-1>Please Select</option>
+  {{#each allOrganisations}}
+    {{>dropdown}}
+  {{/each}}
+  </select>
+{{else}}
+<select class="form__input" name="organisation_id">
+  <option value='admin'>N/A (Admin)</option>
+</select>
+{{/if}}
+<a class="anchor anchor--danger" href="/people/{{user.id}}/toggle-archive">
+  {{#if user.active}}
+  Archive User
+  {{else}}
+  Unarchive User
+  {{/if}}
+</a>

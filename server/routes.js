@@ -75,7 +75,7 @@ var routes = [
     path: '/people/{id}/edit',
     handler: require('./handlers/edit-user.js'),
     config: {
-      validate: require('./models/edit-user')
+      validate: require('./models/edit-user.js')
     }
   },
   {

@@ -41,6 +41,11 @@ mockPayloads.loginBadEmail = {
   password: 'adminadmin'
 };
 
+mockPayloads.loginPrimary = {
+  email: 'sa@ro.co',
+  password: 'Hello1'
+};
+
 mockPayloads.editUserRemoveOrg = {
   first_name: 'Ben',
   last_name: 'Maynard',
@@ -71,6 +76,14 @@ mockPayloads.editUserAddOrg = {
 mockPayloads.adminEditOrg = {
   name: 'McDonalds',
   mission_statement: 'Improve diets'
+};
+
+mockPayloads.primaryEdit = {
+  first_name: 'Sally',
+  last_name: 'Robbins',
+  job_title: 'Athlete',
+  email: 'sa@ro.co',
+  phone: '02088884444'
 };
 
 module.exports = mockPayloads;
