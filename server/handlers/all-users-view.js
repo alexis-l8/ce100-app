@@ -2,6 +2,9 @@ var Hoek = require('hoek');
 var helpers = require('./helpers.js');
 
 module.exports = (request, reply) => {
+  var loggedIn = request.auth.credentials;
+  var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
+
   request.redis.LRANGE('people', 0, -1, (error, stringifiedUsers) => {
     Hoek.assert(!error, 'redis error');
     request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
@@ -27,7 +30,8 @@ module.exports = (request, reply) => {
           name: 'Orgs'
         }]
       };
-      reply.view('people/view', allUsers);
+      var options = Object.assign({}, allUsers, permissions);
+      reply.view('people/view', options);
     });
   });
 };
