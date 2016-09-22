@@ -146,6 +146,11 @@ var routes = [
     method: 'GET',
     path: '/orgs/{id}/toggle-archive',
     handler: require('./handlers/toggle-archive-org.js')
+  },
+  {
+    method: 'GET',
+    path: '/tags',
+    handler: require('./handlers/view-all-tags.js')
   }
 ];
 
