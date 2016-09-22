@@ -4,9 +4,9 @@ var server = require('../../server/server.js');
 var jwt = require('jsonwebtoken');
 
 var setup = require('../helpers/set-up.js');
-var setupData = require('../helpers/setup-data.js');
-var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
-var primary_token = jwt.sign(setupData.initialSessions[2], process.env.JWT_SECRET);
+var sessions = require('../helpers/setup/sessions.js')['sessions'];
+var orgs = require('../helpers/setup/orgs.js')['orgs'];
+var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
@@ -20,7 +20,7 @@ tape('/orgs load general view', t => {
   };
   server.inject(options, reply => {
     t.equal(reply.statusCode, 200, 'route exists and replies 200');
-    t.ok(reply.payload.indexOf(setupData.initialOrgs[0].name), 'organisations have been displayed');
+    t.ok(reply.payload.indexOf(orgs[0].name), 'organisations have been displayed');
     t.end();
   });
 });
