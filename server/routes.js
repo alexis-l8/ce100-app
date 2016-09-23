@@ -172,6 +172,19 @@ var routes = [
     config: {
       validate: require('./models/add-challenge.js')
     }
+  },
+  {
+    method: 'GET',
+    path: '/challenges/{id}/edit',
+    handler: require('./handlers/edit-challenge-view.js')
+  },
+  {
+    method: 'POST',
+    path: '/challenges/{id}/edit',
+    handler: require('./handlers/edit-challenge.js')
+    // config: {
+    //   validate: require('./models/edit-challenge.js')
+    // }
   }
 ];
 

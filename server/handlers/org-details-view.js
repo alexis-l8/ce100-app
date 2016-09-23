@@ -1,5 +1,5 @@
 var Hoek = require('hoek');
-var helpers = require('./helpers');
+var helpers = require('./helpers.js');
 
 module.exports = (request, reply) => {
   var orgId = +request.params.id;
