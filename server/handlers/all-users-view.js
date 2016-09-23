@@ -29,8 +29,9 @@ module.exports = (request, reply) => {
 function filterActiveAndAdmin (arr) {
   return arr.filter(el => el.active && el.user_type !== 'admin');
 }
+
 function cloneArray (arr) {
-  return arr && JSON.parse(JSON.stringify(arr));
+  return arr.map(el => Object.assign({}, el));
 }
 
 function sortAlphabetically (arr) {
