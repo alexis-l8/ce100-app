@@ -89,16 +89,41 @@ Light-teal:     #66d9e0;
 */
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
+    Icons
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.icon {
+    width: 0.875rem;
+    height: 0.875rem;
+    display: block;
+    margin: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.icon--spyglass {
+    background-image: url("../assets/Browse.svg");
+}
+.icon--plus {
+    background-image: url("../assets/Plus.svg");
+}
+.icon--profile {
+    background-image: url("../assets/Profile.svg");
+}
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
     Nav Bar
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .navbar {
     height: 3rem; /* 48px */
     width: 100%;
-    background-color: #003253;
+    background-color: #ffffff;
     position: fixed;
     bottom: 0;
-}
+    -webkit-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.17);
+    -moz-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.17);
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.17);
+    }
 
 .navbar__logo {
     display: none;
@@ -109,6 +134,8 @@ Light-teal:     #66d9e0;
 .navbar__links {
     display: table;
     width: 100%;
+    height: 100%;
+    table-layout: fixed;
     max-width: 54.857142857rem;
     margin: auto;
 }
@@ -118,25 +145,27 @@ Light-teal:     #66d9e0;
         width: 50%;
         text-align: center;
     }
-        .navbar__link:link {
+    .navbar__item:hover {
+        background-color: #f2f2f2;
+    }
+        .navbar__icon {}
+        .navbar__link {
             display: block;
-            padding: 1rem 0;
             text-decoration: none;
-            color: #ffffff;
+            color: #40667e; /* Denim */
+            font-size: 1em;
+            line-height: 2;
         }
         .navbar__link:visited {
-            color: #ffffff;
+            color: #40667e; /* Denim */
         }
         .navbar__link:hover {
-            text-decoration: underline;
+            text-decoration: none;
         }
-        .navbar__link:active {
-            font-size: 0.9em;
-        }
-
-.navbar__hamburger {
-}
-
+        .navbar__link:active {}
+        .navbar__link--with-icon {
+            font-size: 0.625rem;
+        }    
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Containers
@@ -294,18 +323,15 @@ Light-teal:     #66d9e0;
 .tag__title {
     cursor: pointer;
     text-align: center;
-    text-transform: uppercase;
     font-size: 1em;
     font-weight: bold;
-    color: red;
-    margin: 1em;
     display: block;
     margin: 0;
     padding: 1rem;
     line-height: 1rem;
     border-top: solid 1px rgba(0,49,83,0.1);
     color: rgb(0, 41, 68);
-    text-transform: capitalize;
+    text-transform: uppercase;
 }
 
 .tag__title + input {
@@ -579,6 +605,7 @@ Light-teal:     #66d9e0;
 }
     .logo--with-title {
         display: table-cell;
+        background-color: #ffffff;
         border-radius: 50%;
         margin: 0;
         max-width: 2.5rem;
