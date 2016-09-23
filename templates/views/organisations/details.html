@@ -3,15 +3,24 @@
 
 <!-- Main Content -->
 <div class="container">
-    <h1 class="title title--with-logo">{{organisation.name}}</h1>
+    <div class="card card--header card--tall">
+      <img class="logo logo--with-title" src="../public/assets/Profile.svg" alt="{{organisation.name}} logo">
+      <h1 class="title title--with-logo">{{organisation.name}}</h1>
+    </div>
 
     <div class="card">
-        <p class="card__copy">Our circular economy vision</p>
-        <p class="card__copy">{{organisation.mission_statement}}</p>
+      <h2 class="card__header">Our circular economy vision</h2>
+      <p class="card__copy">{{organisation.mission_statement}}</p>
+
+      {{#if permissions.editable}}
+        <a class="button button--small" href="/orgs/{{organisation.id}}/edit">Edit</a>
+      {{/if}}
+
     </div>
 
     {{#if primary_user}}
     <div class="card">
+      <h2 class="card__header">Contact</h2>
       <span class="card__data">{{primary_user.first_name}} {{primary_user.last_name}}</span>
       <span class="card__data">{{primary_user.job}}</span>
       <span class="card__data">{{primary_user.phone}}</span>
@@ -23,11 +32,10 @@
     </div>
     {{/if}}
 
-    {{#if permissions.editable}}
-    <a class="button" href="/orgs/{{organisation.id}}/edit">Edit</a>
-    {{/if}}
-
     {{#if challenges}}
+      <div class="card card--header card--tall">
+        <h2 class="title title--tall">Our Current Challenges</h2>
+      </div>
       {{#each challenges}}
         {{>challenge}}
       {{/each}}

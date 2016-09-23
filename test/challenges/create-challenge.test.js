@@ -129,7 +129,7 @@ tape('/challenges/add (POST) - submit new challenge as a primary_user with multi
     };
     server.inject(options2, reply => {
       t.equal(reply.statusCode, 200, 'select-tags-view exists (endpoint: /challenges/{id}/tags)');
-      t.ok(reply.payload.indexOf('<h1 class="title">Tags</h1>') > -1, 'user is redirected to /challenges/{id}/tags to add tags');
+      t.ok(reply.payload.indexOf('Tags') > -1, 'user is redirected to /challenges/{id}/tags to add tags');
       var options3 = {
         method: 'POST',
         url: `/challenges/${challengeId}/tags`,
