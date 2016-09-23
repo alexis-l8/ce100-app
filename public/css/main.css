@@ -325,8 +325,8 @@ Light-teal:     #66d9e0;
 .tag__label {
     display: inline-block;
     margin: 0 0.625rem 0.625rem 0;
-    padding: 0.375rem 1rem;
-    line-height: 2;
+    padding: 0.5625rem 1rem;
+    line-height: 1.5rem;
     background-color: #66d9e0; /* Light-teal */
     border: 1px solid #ffffff;
     border-radius: 3rem;
