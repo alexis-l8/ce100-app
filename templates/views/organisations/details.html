@@ -13,7 +13,9 @@
       <p class="card__copy">{{organisation.mission_statement}}</p>
 
       {{#if permissions.editable}}
-        <a class="button button--small" href="/orgs/{{organisation.id}}/edit">Edit</a>
+        <a class="icon icon--edit" href="/orgs/{{organisation.id}}/edit">
+          <img src="../../../public/assets/Edit.svg" alt="Edit" />
+        </a>
       {{/if}}
 
     </div>
@@ -37,7 +39,7 @@
         <h2 class="title title--tall">Our Current Challenges</h2>
       </div>
       {{#each challenges}}
-        {{>challenge}}
+        {{>challenge permissions=../permissions}}
       {{/each}}
     {{/if}}
 

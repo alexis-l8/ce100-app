@@ -364,6 +364,7 @@ Light-teal:     #66d9e0;
     color: #40667e;
     border-bottom: 1px solid #89a0ae;
     line-height: 1.5;
+    position: relative;
 }
 .card--header {
     display: table;
@@ -641,4 +642,10 @@ Light-teal:     #66d9e0;
     float: right;
     padding-right: 0.6rem;
     padding-top: 0.9rem;
+}
+
+.icon--edit {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
