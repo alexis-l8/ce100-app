@@ -1,4 +1,26 @@
-<div>
-  <img class="navbar__logo" alt="" src=""></img>
-  <div class="navbar__hamburger" tabindex="1"></div>
-</div>
+<nav class="navbar__top">
+  <img class="navbar__top__logo" alt="" src="../../public/assets/CE100-midnightBlueAqua.svg"></img>
+  <!-- <div class="navbar__top__hamburger" tabindex="1"></div> -->
+
+  {{#if permissions.primary}}
+    <ul class="navbar__top__links">
+      <li class="navbar__top__item">
+        <a href="/people/{{permissions.userId}}/edit" class="navbar__top__link">Settings</a></li>
+      <li class="navbar__top__item">
+        <a href="/people" class="navbar__top__link">Contacts</a></li>
+    </ul>
+  {{else}}
+    <!-- <ul class="navbar__top__links">
+        {{#if alternate}}
+          {{#each alternate}}
+            {{>navbar-list}}
+          {{/each}}
+        {{else}}
+        <li class="navbar__top__item">
+          <a href="/orgs" class="navbar__top__link">Orgs</a></li>
+        <li class="navbar__top__item">
+          <a href="/people" class="navbar__top__link">People</a></li>
+          {{/if}}
+        </ul> -->
+    {{/if}}
+</nav>

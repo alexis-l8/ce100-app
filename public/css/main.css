@@ -493,3 +493,33 @@ Danger-red:     #900000;
   border: 1px solid #618298;
   border-radius: 25px;
 }
+
+
+
+
+
+/*-----------NAVBAR TOP-------------*/
+.navbar__top {
+    background-color: #003253;
+    height: 3.4rem;
+}
+.navbar__top__logo {
+    width: 2.6rem;
+    margin-top: 0.7rem;
+    margin-left: 1.1rem;
+}
+.navbar__top__links {
+    display: inline;
+}
+.navbar__top__link {
+    font-size: 0.7rem;
+    color: white;
+    text-decoration: none;
+    float: right;
+}
+.navbar__top__item {
+    display: inline;
+    float: right;
+    padding-right: 0.6rem;
+    padding-top: 0.9rem;
+}
