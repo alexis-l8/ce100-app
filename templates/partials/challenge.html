@@ -1,9 +1,9 @@
-<div class="card">
-  <p class="card__copy">{{title}}</p>
+<div class="card card--challenge">
+  <p class="card__header card__header--challenge">{{title}}</p>
   <p class="card__copy">{{description}}</p>
   {{#if tags}}
     {{#each tags}}
-      {{>tag-button}}
+      <span class="tag__label">{{name}}</span>
     {{/each}}
   {{/if}}
 </div>
