@@ -26,8 +26,9 @@
       {{/each}}
     {{/if}}
 
+    {{#if permissions.editable}}
     <a class="button" href="/orgs/{{id}}/edit">Edit</a>
-
+    {{/if}}
 </div>
 
 <!-- Include Navbar -->

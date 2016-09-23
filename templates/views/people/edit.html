@@ -2,51 +2,25 @@
 <div class="container">
     <h1 class="title">Edit User Details</h1>
     <form class="form" method="post">
-        <label for="first_name">First Name</label>
-        <input class="form__input" name="first_name" value="{{user.first_name}}">
+      <label for="first_name">First Name</label>
+      <input class="form__input" name="first_name" value="{{user.first_name}}">
 
-        <label for="last_name">Last Name</label>
-        <input class="form__input" name="last_name" value="{{user.last_name}}">
+      <label for="last_name">Last Name</label>
+      <input class="form__input" name="last_name" value="{{user.last_name}}">
 
-        <label for="job_title">Job Title</label>
-        <input class="form__input" name="job_title" value="{{user.job_title}}">
+      <label for="job_title">Job Title</label>
+      <input class="form__input" name="job_title" value="{{user.job_title}}">
 
-        <label class="form__label" for="email">Email</label>
-        <input class="form__input" type="email" name="email" value="{{user.email}}">
+      <label class="form__label" for="email">Email</label>
+      <input class="form__input" type="email" name="email" value="{{user.email}}">
 
-        <label class="form__label" for="phone">Phone Number</label>
-        <input class="form__input" type="tel" name="phone" value="{{user.phone}}">
+      <label class="form__label" for="phone">Phone Number</label>
+      <input class="form__input" type="tel" name="phone" value="{{user.phone}}">
 
-        <span class="form__label">User Type</span>
-        {{#each userTypes}}
-          {{>radio}}
-        {{/each}}
+      {{#if permissions.admin}}
+      {{>admin-edit-user}}
+      {{/if}}
 
-        <label class="form__label" for="organisation_id">Organisation</label>
-        {{#if allOrganisations}}
-        <select class="form__input" name="organisation_id">
-
-          <option value=-1>Please Select</option>
-          {{#each allOrganisations}}
-            {{>dropdown}}
-          {{/each}}
-        </select>
-
-        {{else}}
-
-        <select class="form__input" name="organisation_id">
-          <option value='admin'>N/A (Admin)</option>
-        </select>
-
-        {{/if}}
-
-        <a class="anchor anchor--danger" href="/people/{{user.id}}/toggle-archive">
-          {{#if user.active}}
-          Archive User
-          {{else}}
-          Unarchive User
-          {{/if}}
-        </a>
       <button class="button" type="submit">SUBMIT</button> <a class="anchor" href="/orgs/{{user.organisation_id}}">CANCEL</a>
     </form>
 </div>

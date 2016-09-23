@@ -4,7 +4,7 @@ var routes = [
   {
     method: 'GET',
     path: '/',
-    handler: require('./handlers/serve-view.js')('dashboard')
+    handler: (request, reply) => reply.redirect('/orgs')
   },
   {
     method: 'GET',
@@ -75,7 +75,7 @@ var routes = [
     path: '/people/{id}/edit',
     handler: require('./handlers/edit-user.js'),
     config: {
-      validate: require('./models/edit-user')
+      validate: require('./models/edit-user.js')
     }
   },
   {
@@ -150,7 +150,7 @@ var routes = [
   {
     method: 'GET',
     path: '/challenges/add',
-    handler: require('./handlers/serve-view.js')('challenges/add'),
+    handler: require('./handlers/serve-view.js')('challenges/add')
   },
   {
     method: 'POST',
@@ -159,6 +159,11 @@ var routes = [
     config: {
       validate: require('./models/add-new-challenge.js')
     }
+  },
+  {
+    method: 'GET',
+    path: '/tags',
+    handler: require('./handlers/view-all-tags.js')
   }
 ];
 
