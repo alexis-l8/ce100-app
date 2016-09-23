@@ -2,19 +2,22 @@ var bcrypt = require('bcrypt');
 var aguid = require('aguid');
 var setupData = {};
 
+var salt = 10;
+
 // people
 setupData.initialPeople = [
   {
-    first_name: 'Jack',
-    last_name: 'Murphy',
-    email: 'ja@mu.co',
+    first_name: 'Alex',
+    last_name: 'Wijns',
+    email: 'admin@mu.co',
     phone: '07111111111',
     job_title: 'Developer',
     user_type: 'admin',
     organisation_id: -1,
     id: 0,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    challenges: [],
+    password: bcrypt.hashSync('adminadmin', salt),
     last_login: Date.now()
   },
   {
@@ -27,7 +30,8 @@ setupData.initialPeople = [
     organisation_id: -1,
     id: 1,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -40,7 +44,8 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 2,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -53,7 +58,8 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 3,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -66,7 +72,8 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 4,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -79,7 +86,8 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 5,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -92,7 +100,8 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 6,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -105,7 +114,8 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 7,
     active: false,
-    password: bcrypt.hashSync('Hello1', 13),
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -118,7 +128,8 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 8,
     active: false,
-    password: bcrypt.hashSync('Hello1', 13),
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   },
   {
@@ -131,7 +142,8 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 9,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
     last_login: Date.now()
   }
 ];
@@ -144,7 +156,8 @@ setupData.initialOrgs = [
     active: true,
     mission_statement: 'Change the economy',
     primary_id: 2,
-    people: [0]
+    people: [0],
+    challenges: []
   },
   {
     id: 1,
@@ -152,7 +165,8 @@ setupData.initialOrgs = [
     active: true,
     mission_statement: 'Do What You Love!',
     primary_id: 3,
-    people: [3]
+    people: [3],
+    challenges: []
   },
   {
     id: 2,
@@ -160,7 +174,8 @@ setupData.initialOrgs = [
     active: true,
     mission_statement: 'Summer!',
     primary_id: 4,
-    people: [4]
+    people: [4],
+    challenges: []
   },
   {
     id: 3,
@@ -168,7 +183,8 @@ setupData.initialOrgs = [
     active: true,
     mission_statement: 'Change the economy',
     primary_id: 5,
-    people: [5]
+    people: [5],
+    challenges: []
   },
   {
     id: 4,
@@ -176,7 +192,8 @@ setupData.initialOrgs = [
     active: true,
     mission_statement: 'Anonymous',
     primary_id: 6,
-    people: [6]
+    people: [6],
+    challenges: []
   },
   {
     id: 5,
@@ -184,7 +201,8 @@ setupData.initialOrgs = [
     active: false,
     mission_statement: 'Every Little Helps',
     primary_id: -1,
-    people: []
+    people: [],
+    challenges: []
   },
   {
     id: 6,
@@ -192,7 +210,8 @@ setupData.initialOrgs = [
     active: false,
     mission_statement: 'Refresh The Nation',
     primary_id: -1,
-    people: []
+    people: [],
+    challenges: []
   }
 ];
 

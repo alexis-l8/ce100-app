@@ -39,6 +39,7 @@ git clone https://github.com/emfoundation/ce100-app.git
 Ensure you have the required `.env` file, then run:
 
 ```sh
+npm run csv-to-json
 npm start
 ```
 
@@ -72,12 +73,16 @@ npm test
 
 #### Executing a _Single_ Test
 
-If you are attempting to _debug_ or _extned_ a single test,
+If you are attempting to _debug_ or _extend_ a single test,
 you can _run_ a single test _file_ by executing it as node script. e.g:
 
 ```
 node test/auth/auth.test.js
 ```
+
+#### Adding/Updating Tags (Admin)
+
+Please refer to the [wiki](https://github.com/emfoundation/ce100-app/wiki/Add-Update-Tags) for information on how to do this.
 
 ## Questions?
 

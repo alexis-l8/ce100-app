@@ -3,8 +3,7 @@ var Joi = require('joi');
 module.exports = {
   payload: {
     email: Joi.string().email().required(),
-    password: Joi.string().min(1).required(),
-    // TODO: make min 6
+    password: Joi.string().min(6).required(),
     failAction: 'error'
   }
 };

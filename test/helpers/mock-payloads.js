@@ -27,24 +27,29 @@ mockPayloads.orgsAddDB = {
 };
 
 mockPayloads.loginAdminCorrect = {
-  email: 'ja@mu.co',
-  password: 'Hello1'
+  email: 'admin@mu.co',
+  password: 'adminadmin'
 };
 
 mockPayloads.loginAdminIncorrect = {
-  email: 'ja@mu.co',
+  email: 'admin@mu.co',
   password: 'Hello2'
 };
 
 mockPayloads.loginBadEmail = {
   email: 'jaaaaaa@mu.co',
+  password: 'adminadmin'
+};
+
+mockPayloads.loginPrimary = {
+  email: 'sa@ro.co',
   password: 'Hello1'
 };
 
 mockPayloads.editUserRemoveOrg = {
   first_name: 'Ben',
   last_name: 'Maynard',
-  job: 'Full Stack Web Developer',
+  job_title: 'Full Stack Web Developer',
   email: 'be@ma.co',
   user_type: 'admin',
   organisation_id: -1
@@ -53,7 +58,7 @@ mockPayloads.editUserRemoveOrg = {
 mockPayloads.editUserPayloadOrgUnchanged = {
   first_name: 'Ben',
   last_name: 'Maynard',
-  job: 'Full Stack Web Developer',
+  job_title: 'Full Stack Web Developer',
   email: 'be@ma.co',
   user_type: 'admin',
   organisation_id: 1
@@ -63,7 +68,7 @@ mockPayloads.editUserAddOrg = {
   first_name: 'Anna',
   last_name: 'Freud',
   email: 'an@fr.co',
-  job: 'CEO',
+  job_title: 'CEO',
   organisation_id: 6,
   user_type: 'primary'
 };
@@ -71,6 +76,24 @@ mockPayloads.editUserAddOrg = {
 mockPayloads.adminEditOrg = {
   name: 'McDonalds',
   mission_statement: 'Improve diets'
+};
+
+mockPayloads.addChallenge1 = {
+  title: 'Challenge Number 1',
+  description: 'What can I...?'
+};
+
+mockPayloads.addChallenge2 = {
+  title: 'Challenge Number 2',
+  description: 'How can I...?'
+};
+
+mockPayloads.primaryEdit = {
+  first_name: 'Sally',
+  last_name: 'Robbins',
+  job_title: 'Athlete',
+  email: 'sa@ro.co',
+  phone: '02088884444'
 };
 
 module.exports = mockPayloads;
