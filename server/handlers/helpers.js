@@ -96,6 +96,16 @@ helpers.addPasswordToUser = (hashed, user) => {
   return JSON.stringify(updatedUser);
 };
 
+helpers.getTagNames = (tagIds) => {
+  var allTags = require('../../tags/tags.json');
+  return tagIds.map(tagId => {
+    return {
+      id: tagId,
+      name: allTags[tagId[0]].tags[tagId[1]].name
+    };
+  });
+};
+
 module.exports = helpers;
 
 // Leaving these helpers in here but they are not currently used

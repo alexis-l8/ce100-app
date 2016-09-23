@@ -21,6 +21,14 @@
         </label>
         <input class="form__input" name="mission_statement" value="{{mission_statement}}" id="mission_statement">
 
+        {{#if organisation.tags}}
+          {{#each organisation.tags}}
+            {{>tag-button}}
+          {{/each}}
+        {{else}}
+          <h3>Add tags on the next screen</h3>
+        {{/if}}
+
         {{#if permissions.admin}}
         <!-- Show archive and primary user if admin is logge in -->
           <a class="anchor anchor--danger" href="/orgs/{{id}}/toggle-archive">

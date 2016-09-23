@@ -14,7 +14,7 @@ module.exports = (request, reply) => {
     var orgUpdated = Object.assign({}, oldOrg, request.payload);
     request.redis.LSET('organisations', orgId, JSON.stringify(orgUpdated), (error, response) => {
       Hoek.assert(!error, 'redis error');
-      reply(orgUpdated).redirect(`/orgs/${orgId}`);
+      reply(orgUpdated).redirect(`/orgs/${orgId}/tags`);
     });
   });
 };
