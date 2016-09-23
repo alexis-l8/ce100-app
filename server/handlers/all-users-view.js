@@ -11,7 +11,7 @@ module.exports = (request, reply) => {
       Hoek.assert(!error, 'redis error');
       var allUsers = attachOrgsToUsers(stringifiedOrgs, stringifiedUsers);
       var users = {
-        allUsers: loggedIn.scope === 'admin' ? allUsers : filterActiveAndAdmin(allUsers),
+        allUsers: loggedIn.scope === 'admin' ? allUsers : sortAlphabetically(filterActiveAndAdmin(allUsers)),
         alternate: [{
           path: '/people/add',
           name: '+'
@@ -29,6 +29,23 @@ module.exports = (request, reply) => {
 function filterActiveAndAdmin (arr) {
   return arr.filter(el => el.active && el.user_type !== 'admin');
 }
+function cloneArray (arr) {
+  return arr && JSON.parse(JSON.stringify(arr));
+}
+
+function sortAlphabetically (arr) {
+  return cloneArray(arr).sort((user1, user2) => {
+    var name1 = user1.first_name.toUpperCase();
+    var name2 = user2.first_name.toUpperCase();
+    if (name1 < name2) {
+      return -1;
+    }
+    if (name1 > name2) {
+      return 1;
+    }
+    return 0;
+  });
+}
 
 function attachOrgsToUsers (stringifiedOrgs, stringifiedUsers) {
   var orgs = stringifiedOrgs.map(element => JSON.parse(element));
@@ -40,5 +57,5 @@ function attachOrgsToUsers (stringifiedOrgs, stringifiedUsers) {
         : false
     };
     return Object.assign(additionalInfo, user);
-  })
+  });
 }
