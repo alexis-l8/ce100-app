@@ -165,7 +165,7 @@ Light-teal:     #66d9e0;
         .navbar__link:active {}
         .navbar__link--with-icon {
             font-size: 0.625rem;
-        }    
+        }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Containers
@@ -502,7 +502,7 @@ Light-teal:     #66d9e0;
         background-color: #184460; /* teal colour */
         border: none;
         border-radius: 25px;
-
+        color: #ffffff;
         text-indent: 1.25rem;
     }
     /* Placeholder styles */
