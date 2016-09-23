@@ -4,7 +4,7 @@ var routes = [
   {
     method: 'GET',
     path: '/',
-    handler: require('./handlers/serve-view.js')('dashboard')
+    handler: (request, reply) => reply.redirect('/orgs')
   },
   {
     method: 'GET',
@@ -75,7 +75,7 @@ var routes = [
     path: '/people/{id}/edit',
     handler: require('./handlers/edit-user.js'),
     config: {
-      validate: require('./models/edit-user')
+      validate: require('./models/edit-user.js')
     }
   },
   {

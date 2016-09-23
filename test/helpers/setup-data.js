@@ -2,21 +2,23 @@ var bcrypt = require('bcrypt');
 var aguid = require('aguid');
 var setupData = {};
 
+var salt = 10;
+
 // people
 setupData.initialPeople = [
   {
-    first_name: 'Jack',
-    last_name: 'Murphy',
-    email: 'ja@mu.co',
+    first_name: 'Alex',
+    last_name: 'Wijns',
+    email: 'admin@mu.co',
     phone: '07111111111',
     job_title: 'Developer',
     user_type: 'admin',
     organisation_id: -1,
     id: 0,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now(),
-    challenges: []
+    challenges: [],
+    password: bcrypt.hashSync('adminadmin', salt),
+    last_login: Date.now()
   },
   {
     first_name: 'Marie',
@@ -28,9 +30,9 @@ setupData.initialPeople = [
     organisation_id: -1,
     id: 1,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now(),
-    challenges: []
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
+    last_login: Date.now()
   },
   {
     first_name: 'Sally',
@@ -42,9 +44,9 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 2,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now(),
-    challenges: []
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
+    last_login: Date.now()
   },
   {
     first_name: 'Ben',
@@ -56,9 +58,9 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 3,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now(),
-    challenges: []
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
+    last_login: Date.now()
   },
   {
     first_name: 'Andy',
@@ -70,9 +72,9 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 4,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now(),
-    challenges: []
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
+    last_login: Date.now()
   },
   {
     first_name: 'Gale',
@@ -84,9 +86,9 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 5,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now(),
-    challenges: []
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
+    last_login: Date.now()
   },
   {
     first_name: 'Maria',
@@ -98,9 +100,9 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 6,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now(),
-    challenges: []
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
+    last_login: Date.now()
   },
   {
     first_name: 'Coco',
@@ -112,9 +114,9 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 7,
     active: false,
-    password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now(),
-    challenges: []
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
+    last_login: Date.now()
   },
   {
     first_name: 'Frank',
@@ -126,9 +128,9 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 8,
     active: false,
-    password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now(),
-    challenges: []
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
+    last_login: Date.now()
   },
   {
     first_name: 'Anna',
@@ -140,9 +142,9 @@ setupData.initialPeople = [
     user_type: 'primary',
     id: 9,
     active: true,
-    password: bcrypt.hashSync('Hello1', 13),
-    last_login: Date.now(),
-    challenges: []
+    challenges: [],
+    password: bcrypt.hashSync('Hello1', salt),
+    last_login: Date.now()
   }
 ];
 
