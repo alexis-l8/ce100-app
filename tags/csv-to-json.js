@@ -5,7 +5,7 @@ var path = require('path');
 module.exports = (callback) => {
   fs.readFile(path.join(__dirname, 'tags.csv'), (error, data) => {
     Hoek.assert(!error, error);
-    var csv = data.toString().split(/\n/g);
+    var csv = data.toString().toUpperCase().split(/\n/g);
     var groupReplace;
     var tagGroups = csv[0].split(/,/g).map((group, index, array) => {
       if (!group) {
