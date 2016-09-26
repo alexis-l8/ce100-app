@@ -4,7 +4,6 @@ var helpers = require('./helpers');
 module.exports = (request, reply) => {
   var orgId = +request.params.id;
   var permissions = helpers.getPermissions(request.auth.credentials, 'organisation_id', orgId);
-  console.log(orgId, permissions);
   if (orgId === -1) {
     return reply.redirect('/orgs');
   }
@@ -41,21 +40,23 @@ function getUserInfo (stringifiedUser) {
 
 function getChallenges (challengesList, organisation) {
   var challengeArr = organisation.challenges.map((challengeId, index) => {
-    var challengeCard = JSON.parse(challengesList[challengeId]);
-    var tagsArray = getTagNames(challengeCard.tags);
-    return Object.assign({}, challengeCard, {tags: tagsArray});
+    // var challengeCard = JSON.parse(challengesList[challengeId]);
+    // Commented out until merged in with csv branch
+    // var tagsArray = getTagNames(challengeCard.tags);
+    // return Object.assign({}, challengeCard, {tags: tagsArray});
+    // FOR NOW:
+    return JSON.parse(challengesList[challengeId]);
   });
   return challengeArr.length === 0 ? false : challengeArr;
 }
 
-function getTagNames (tagIds) {
-  var allTags = require('../../tags/tags.json');
-  return tagIds;
-  // This will make sense in a future commit. Has been cherry picked from 76a18c05f24d6eb6649c45ee28222af82628e3e2
-  // return tagIds.map(tagId => {
-  //   return {
-  //     id: tagId,
-  //     name: allTags[tagId[0]].tags[tagId[1]].name
-  //   };
-  // });
-}
+// This will make sense in a future commit. Has been cherry picked from 76a18c05f24d6eb6649c45ee28222af82628e3e2
+// function getTagNames (tagIds) {
+//   var allTags = require('../../tags/tags.json');
+//   return tagIds.map(tagId => {
+//     return {
+//       id: tagId,
+//       name: allTags[tagId[0]].tags[tagId[1]].name
+//     };
+//   });
+// }
