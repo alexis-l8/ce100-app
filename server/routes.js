@@ -163,7 +163,7 @@ var routes = [
   {
     method: 'GET',
     path: '/challenges/add',
-    handler: require('./handlers/serve-view')('challenges/add')
+    handler: require('./handlers/add-challenge-view.js')
   },
   {
     method: 'POST',

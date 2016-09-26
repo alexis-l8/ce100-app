@@ -5,6 +5,7 @@
 <div class="container">
     <div class="card card--header">
       <h1 class="title">Edit User Details</h1>
+      <a class="icon icon--cancel" href="/orgs/{{user.organisation_id}}"></a>
     </div>
     <form class="form" method="post">
       <label for="first_name">First Name</label>
@@ -26,7 +27,7 @@
       {{>admin-edit-user}}
       {{/if}}
 
-      <button class="button" type="submit">SUBMIT</button> <a class="anchor" href="/orgs/{{user.organisation_id}}">CANCEL</a>
+      <button class="button" type="submit">SUBMIT</button>
     </form>
 </div>
 
