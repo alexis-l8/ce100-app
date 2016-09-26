@@ -149,6 +149,20 @@ var routes = [
   },
   {
     method: 'GET',
+    path: '/challenges/add',
+    handler: require('./handlers/serve-view.js')('challenges/add')
+  },
+  {
+    method: 'POST',
+    path: '/challenges/add',
+    handler: require('./handlers/add-new-challenge.js'),
+    config: {
+      validate: require('./models/add-new-challenge.js'),
+      auth: { scope: 'primary' }
+    }
+  },
+  {
+    method: 'GET',
     path: '/tags',
     handler: require('./handlers/view-all-tags.js')
   }

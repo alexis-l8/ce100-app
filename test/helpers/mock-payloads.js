@@ -78,6 +78,16 @@ mockPayloads.adminEditOrg = {
   mission_statement: 'Improve diets'
 };
 
+mockPayloads.addChallenge1 = {
+  title: 'Challenge Number 1',
+  description: 'What can I...?'
+};
+
+mockPayloads.addChallenge2 = {
+  title: 'Challenge Number 2',
+  description: 'How can I...?'
+};
+
 mockPayloads.primaryEdit = {
   first_name: 'Sally',
   last_name: 'Robbins',
