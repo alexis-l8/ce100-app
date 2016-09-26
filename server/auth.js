@@ -1,6 +1,12 @@
 exports.register = (server, options, next) => {
   server.register(require('hapi-auth-jwt2'));
 
+  // TODO: Only decide on cookie options and best way to determine if dev or production
+  var tokenOptions = {
+    isSecure: process.env.NODE_ENV !== 'development',
+    ttl: 1000 * 60 * 60 * 24 * 30
+  };
+  server.state('token', tokenOptions);
   server.auth.strategy('jwt2', 'jwt', true, {
     key: process.env.JWT_SECRET,
     verifyOptions: { algorithms: ['HS256'] },
@@ -16,7 +22,7 @@ exports.register = (server, options, next) => {
               return cb(err, false);
             }
             var user = JSON.parse(userString);
-            const override = Object.assign({ scope: user.user_type }, decoded);
+            var override = Object.assign({ scope: user.user_type, organisation_id: user.organisation_id }, decoded);
             return cb(null, true, override);
           });
         }

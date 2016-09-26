@@ -1,0 +1,7 @@
+{{#if isDisabled}}
+  <option value={{value}} disabled>{{display}}</option>
+{{else if isSelected}}
+  <option value={{value}} selected>{{display}}</option>
+{{else}}
+  <option value={{value}}>{{display}}</option>
+{{/if}}

@@ -4,7 +4,13 @@ coverage/
 
 npm-debug.log
 
-config.env
 .env
 
 dump.rdb
+
+tags/.~lock.members.csv#
+tags/.~lock.topics.csv#
+tags/.~lock.tags.csv#
+tags/*.json
+
+

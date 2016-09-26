@@ -1,14 +1,16 @@
 require('env2')('.env');
-const Hapi = require('hapi');
-const Hoek = require('hoek');
-const path = require('path');
-const server = new Hapi.Server();
+var Hapi = require('hapi');
+var Hoek = require('hoek');
+var path = require('path');
+
+var server = new Hapi.Server();
 
 require('../test/helpers/set-up.js').initialiseDB(() => {});
 
-server.connection({ port: 3000 });
+server.connection({ port: process.env.PORT || 3000 });
 
 server.register([ // one plugin per line
+  require('inert'),
   require('vision'),
   require('hapi-redis-connection'),
   require('hapi-error'),
@@ -21,10 +23,12 @@ server.register([ // one plugin per line
     engines: {
       html: require('handlebars')
     },
-    relativeTo: path.resolve(__dirname, '..'),
-    path: 'templates/views',
-    partialsPath: 'templates/partials',
-    helpersPath: 'templates/helpers'
+    relativeTo: path.resolve(__dirname),
+    layout: 'default',
+    layoutPath: '../templates/layout',
+    path: '../templates/views',
+    partialsPath: '../templates/partials',
+    helpersPath: '../templates/helpers'
   });
 });
 

@@ -1,0 +1,28 @@
+<!-- Main Content -->
+<div class="container">
+    <h1 class="title">Tags</h1>
+
+    {{#if topics}}
+        <ul class="list">
+            {{#each topics}}
+                {{>tag}}
+            {{/each}}
+        </ul>
+
+        {{else}}
+        <h3>Sorry! No organisations were found</h3>
+    {{/if}}
+    {{#if members}}
+        <ul class="list">
+            {{#each members}}
+                {{>tag}}
+            {{/each}}
+        </ul>
+
+        {{else}}
+        <h3>Sorry! No organisations were found</h3>
+    {{/if}}
+</div>
+
+<!-- Include Navbar -->
+{{>navbar}}
