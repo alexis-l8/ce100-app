@@ -165,6 +165,11 @@ var routes = [
     method: 'GET',
     path: '/tags',
     handler: require('./handlers/view-all-tags.js')
+  },
+  {
+    method: 'POST',
+    path: '/tags',
+    handler: require('./handlers/select-tags.js')
   }
 ];
 

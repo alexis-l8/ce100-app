@@ -1,17 +1,9 @@
-<li class="list__item">
+<label class="tags__toggle-title" for="{{@index}}">{{name}}</label>
+<input type="checkbox" class="tags__toggle-input" id="{{@index}}">
 
-    <span class="list__data list__data--primary">{{name}}</span>
-
-    <div class="list__ellipsis" tabindex="1">
-        <i class="circle"></i>
-        <i class="circle"></i>
-        <i class="circle"></i>
-    </div>
-
-    <div class="list__hidden-details">
-      {{#each tags}}
-        <span class="list__data list__data--secondary">{{name}}</span>
-      {{/each}}
-    </div>
-
-</li>
+<div>
+    {{#each tags}}
+        <input type="checkbox" class="tags__toggle-input" id="{{id}}" name="tags" value="{{id}}">
+        <label class="tags__toggle-label" for="{{id}}">{{name}}</label>
+    {{/each}}
+</div>
