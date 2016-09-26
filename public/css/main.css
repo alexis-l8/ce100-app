@@ -167,6 +167,35 @@ Light-teal:     #66d9e0;
             font-size: 0.625rem;
         }
 
+
+  /*|||||||||||||||||||||||||||||||||||||||||||||
+    Toggle Bar
+  |||||||||||||||||||||||||||||||||||||||||||*/
+  .togglebar__item {
+    background: #033352;
+  }
+    .togglebar__item:hover {
+      background: #194462;
+    }
+  .togglebar__item--selected {
+    background: #ece9e9;
+  }
+  .togglebar__item--selected:hover {
+    background: #ece9e9;
+  }
+  .togglebar__link {
+    padding: 1.5rem;
+    color: #66d9e0;
+  }
+  .togglebar__link:visited {
+    color: #66d9e0;
+  }
+  .togglebar__link--selected {
+      color: #033352;
+  }
+    .togglebar__link--selected:visited {
+      color: #033352;
+    }
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Containers
   |||||||||||||||||||||||||||||||||||||||||||*/
@@ -424,7 +453,12 @@ Light-teal:     #66d9e0;
         display: block;
         margin-bottom: 0.5rem;
     }
-
+    .card__additional {
+      color: #89a0ae;
+      transform: translate(0%,100%);
+      -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+      -ms-transform: translate(30deg); /* IE 9 */
+    }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Forms
