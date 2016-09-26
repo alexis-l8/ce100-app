@@ -321,6 +321,10 @@ Danger-red:     #900000;
     .form__label--radio {
 
     }
+    .form__input--non-editable {
+      background-color: #fafafa;
+      border: none;
+    }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Buttons
