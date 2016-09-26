@@ -7,7 +7,6 @@ module.exports = (request, reply) => {
   var userId = +request.params.id;
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'userId', userId);
-  console.log(userId, loggedIn, permissions);
 
   // if incorrect user - reply unauthorized
   if (!permissions.permissions.editable) {

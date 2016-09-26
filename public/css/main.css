@@ -253,11 +253,11 @@ Danger-red:     #900000;
   cursor: pointer;
 }
 
-.tags__toggle-title {
+.tags__toggle-title,
+.tags__toggle-label {
     cursor: pointer;
     display: block;
     text-align: center;
-    text-transform: uppercase;
     font-size: 1em;
     font-weight: bold;
     color: red;
@@ -278,12 +278,9 @@ Danger-red:     #900000;
 }
 
 .tags__toggle-label {
-    cursor: pointer;
-    display: block;
-    text-align: center;
-    text-transform: uppercase;
+    color: black;
+    font-weight: normal;
     line-height: 3.5em;
-    margin: 1em;
     background-color: #f2f2f2;
 }
 

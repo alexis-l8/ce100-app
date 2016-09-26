@@ -4,7 +4,6 @@ var helpers = require('./helpers');
 module.exports = (request, reply) => {
   var orgId = +request.params.id;
   var permissions = helpers.getPermissions(request.auth.credentials, 'organisation_id', orgId);
-  console.log(orgId, permissions);
   if (orgId === -1) {
     return reply.redirect('/orgs');
   }
