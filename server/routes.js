@@ -147,29 +147,32 @@ var routes = [
     path: '/orgs/{id}/toggle-archive',
     handler: require('./handlers/toggle-archive-org.js')
   },
+
+  /*  ---  CHALLENGE ROUTES  ---  */
+
+  {
+    method: 'GET',
+    path: '/challenges/{challengeId}/tags',
+    handler: require('./handlers/select-tags-view.js')
+  },
+  {
+    method: 'POST',
+    path: '/challenges/{challengeId}/tags',
+    handler: require('./handlers/select-tags.js')
+  },
   {
     method: 'GET',
     path: '/challenges/add',
-    handler: require('./handlers/serve-view.js')('challenges/add')
+    handler: require('./handlers/serve-view')('challenges/add')
   },
   {
     method: 'POST',
     path: '/challenges/add',
-    handler: require('./handlers/add-new-challenge.js'),
+    handler: require('./handlers/add-challenge.js'),
     config: {
-      validate: require('./models/add-new-challenge.js'),
+      validate: require('./models/add-challenge.js'),
       auth: { scope: 'primary' }
     }
-  },
-  {
-    method: 'GET',
-    path: '/tags',
-    handler: require('./handlers/view-all-tags.js')
-  },
-  {
-    method: 'POST',
-    path: '/tags',
-    handler: require('./handlers/select-tags.js')
   }
 ];
 

@@ -1,4 +1,9 @@
 <div class="card">
   <p class="card__copy">{{title}}</p>
   <p class="card__copy">{{description}}</p>
+  {{#if tags}}
+    {{#each tags}}
+      {{>tag-button}}
+    {{/each}}
+  {{/if}}
 </div>

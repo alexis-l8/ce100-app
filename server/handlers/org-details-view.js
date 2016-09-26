@@ -40,23 +40,19 @@ function getUserInfo (stringifiedUser) {
 
 function getChallenges (challengesList, organisation) {
   var challengeArr = organisation.challenges.map((challengeId, index) => {
-    // var challengeCard = JSON.parse(challengesList[challengeId]);
-    // Commented out until merged in with csv branch
-    // var tagsArray = getTagNames(challengeCard.tags);
-    // return Object.assign({}, challengeCard, {tags: tagsArray});
-    // FOR NOW:
-    return JSON.parse(challengesList[challengeId]);
+    var challengeCard = JSON.parse(challengesList[challengeId]);
+    var tagsArray = getTagNames(challengeCard.tags);
+    return Object.assign({}, challengeCard, {tags: tagsArray});
   });
   return challengeArr.length === 0 ? false : challengeArr;
 }
 
-// This will make sense in a future commit. Has been cherry picked from 76a18c05f24d6eb6649c45ee28222af82628e3e2
-// function getTagNames (tagIds) {
-//   var allTags = require('../../tags/tags.json');
-//   return tagIds.map(tagId => {
-//     return {
-//       id: tagId,
-//       name: allTags[tagId[0]].tags[tagId[1]].name
-//     };
-//   });
-// }
+function getTagNames (tagIds) {
+  var allTags = require('../../tags/tags.json');
+  return tagIds.map(tagId => {
+    return {
+      id: tagId,
+      name: allTags[tagId[0]].tags[tagId[1]].name
+    };
+  });
+}

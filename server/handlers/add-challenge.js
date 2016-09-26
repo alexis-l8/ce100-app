@@ -19,7 +19,6 @@ module.exports = (request, reply) => {
           org_id: orgId,
           creator_id: userId,
           date: Date.now(),
-          tags: [],
           archived: false
         });
         request.redis.RPUSH('challenges', JSON.stringify(challenge), (error, response) => {
@@ -28,7 +27,7 @@ module.exports = (request, reply) => {
             Hoek.assert(!error, error);
             request.redis.LSET('organisations', orgId, JSON.stringify(org), (error, response) => {
               Hoek.assert(!error, error);
-              reply({orgId: orgId}).redirect(`/orgs/${orgId}`);
+              reply({challengeId: challengeId}).redirect(`/challenges/${challengeId}/tags`);
             });
           });
         });
