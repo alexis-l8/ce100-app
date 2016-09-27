@@ -26,7 +26,7 @@ tape('/challenges/add load general view', t => {
   };
   server.inject(options, reply => {
     t.equal(reply.statusCode, 200, 'route exists and replies 200');
-    t.ok(reply.payload.indexOf('Add A New Challenge'), 'organisations have been displayed');
+    t.ok(reply.payload.indexOf('Add A New Challenge') > -1, 'organisations have been displayed');
     t.end();
   });
 });
@@ -39,8 +39,7 @@ tape('/challenges/add (POST) - submit new challenge as an admin (expect fail)', 
     headers: { cookie: `token=${admin_token}` }
   };
   server.inject(options, reply => {
-    t.equal(reply.statusCode, 500, 'Admin cannot add challenge, as no org attached');
-    t.ok(reply.payload.indexOf('Admins cannot create a new challenge as no organisation is attached.' > -1), 'Error message to admin ok');
+    t.equal(reply.statusCode, 403, 'Admin cannot add challenge, as no org attached');
     t.end();
   });
 });
@@ -54,7 +53,7 @@ tape('/challenges/add (POST) - submit new challenge as a primary_user without ta
   };
   server.inject(options1, reply => {
     t.equal(reply.statusCode, 302, 'create challenge');
-    t.ok(reply.result.challengeId > -1, 'user is redirected to /challenges/0/tags to add tags');
+    t.ok(reply.result.challengeId > -1, 'user is redirected to /challenges/14/tags to add tags');
     var options2 = {
       method: 'POST',
       url: `/challenges/${reply.result.challengeId}/tags`,
