@@ -13,7 +13,7 @@ module.exports = (request, reply) => {
     var options = Object.assign({}, challenge, updates);
     request.redis.LSET('challenges', challengeId, JSON.stringify(options), (error, response) => {
       Hoek.assert(!error, error);
-      reply.redirect(`/challenges/${challengeId}/tags`);
+      reply(updates).redirect(`/challenges/${challengeId}/tags`);
     });
   });
 };
