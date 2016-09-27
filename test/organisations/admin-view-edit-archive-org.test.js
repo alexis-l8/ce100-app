@@ -74,14 +74,14 @@ tape('admin can view an org, edit, archive and unarchive it', t => {
           t.equal(res.headers.location, '/orgs/3/tags', 'redirects to /tags view');
           server.inject(adminEditAddTagsView, res => {
             t.equal(res.statusCode, 200, '/orgs/{id}/tags view exists');
-            t.ok(res.result.indexOf('<h1 class="title">Tags</h1>') > -1, '/tags view displayed');
+            t.ok(res.result.indexOf('<h1 class="title">Select Tags</h1>') > -1, '/tags view displayed');
             server.inject(adminEditAddTagsSubmit, res => {
               t.equal(res.statusCode, 302, '/orgs/id/tag post route redirects');
               t.equal(res.headers.location, '/orgs/3', 'redirects to /tags view');
               server.inject(adminViewOrg, res => {
                 t.ok(res.payload.indexOf(payloads.adminEditOrg.name) > -1, 'the orgs name has been edited');
                 t.ok(res.payload.indexOf(payloads.adminEditOrg.mission_statement) > -1, 'the orgs mission_statement has been edited');
-                t.ok(res.payload.indexOf('Global Partner') > -1, 'the Global Partners tag has been added');
+                t.ok(res.payload.indexOf('GLOBAL PARTNER') > -1, 'the Global Partners tag has been added');
                 server.inject(adminToggleArchiveOrg, res => {
                   t.equal(res.statusCode, 302, '/orgs/id/toggle-archive route redirects');
                   t.equal(res.headers.location, '/orgs', 'admin is sent orgs view after editing');

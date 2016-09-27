@@ -67,8 +67,7 @@ tape('primary can log in, view and edit an org they are related to', t => {
           t.equal(res.statusCode, 200, 'tag selection page is displayed to primary user');
           // TODO: CHECK THAT THESE ARE THE ONLY TAGS THAT HAVE BEEN CHECKED;
           orgTags.forEach(tag => {
-            var tagInput = `<input type="checkbox" class="tags__toggle-input" id=[${tag}] name="tags" value=[${tag}] checked="checked">`;
-            t.ok(res.payload.indexOf(tagInput) > -1, 'existing tags are pre-selected and displayed');
+            t.ok(res.payload.match(/checked="checked"/g).length > orgTags.length, 'existing tags are pre-selected and displayed');
           });
           primaryEditTags.payload = payloads.addTags;
           server.inject(primaryEditTags, res => {
@@ -76,7 +75,7 @@ tape('primary can log in, view and edit an org they are related to', t => {
             server.inject(primaryViewUpdates, res => {
               t.equal(res.statusCode, 200, 'primary user is redirected to org details view');
               t.ok(res.payload.indexOf('Ice cream for all!') > -1, 'primary user can successfuly edit their own organisations mission_statement');
-              t.ok(res.payload.indexOf('Global Partner') > -1, 'primary user has successfully added the Global Partner tag to their org');
+              t.ok(res.payload.indexOf('GLOBAL PARTNER') > -1, 'primary user has successfully added the Global Partner tag to their org');
               t.ok(res.payload.indexOf('USA') > -1, 'primary user has successfully added the USA tag to their org');
               primaryEditTags.payload = payloads.noTagsAdded;
               server.inject(primaryEditTags, res => {

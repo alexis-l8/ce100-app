@@ -4,6 +4,7 @@ var client = require('redis').createClient();
 
 var server = require('../../server/server.js');
 var payloads = require('../helpers/mock-payloads.js');
+var allTags = require('../../tags/tags.json');
 var setup = require('../helpers/set-up.js');
 var initialChallenges = require('../helpers/setup/challenges.js')['challenges'];
 
@@ -26,6 +27,7 @@ tape('set up: initialise db', t => {
 tape('testing archiving/unarchiving of challenges', t => {
   var challengeCardId = 3;
   var orgId = initialChallenges[challengeCardId].org_id;
+  var tags = initialChallenges[challengeCardId].tags;
   var loadEditView = {
     method: 'GET',
     url: `/challenges/${challengeCardId}/edit`,
@@ -44,10 +46,10 @@ tape('testing archiving/unarchiving of challenges', t => {
     t.equal(reply.statusCode, 200, 'route exists and replies 200');
     t.ok(reply.result.indexOf(initialChallenges[challengeCardId].title) > -1, 'title has been pre-filled correctly');
     t.ok(reply.result.indexOf(initialChallenges[challengeCardId].description) > -1, 'description has been pre-filled correctly');
-    t.ok(reply.result.indexOf('Automotive and Transport Manufacturing') > -1, 'existing tags are correctly displayed');
-    t.ok(reply.result.indexOf('Chemicals'), 'existing tags are correctly displayed') > -1;
-    t.ok(reply.result.indexOf('Secondary education') > -1, 'existing tags are correctly displayed');
-    t.ok(reply.result.indexOf('Design for disassembly') > -1, 'existing tags are correctly displayed');
+    tags.forEach(tag => {
+      var tagName = allTags[tag[0]].tags[tag[1]].name;
+      t.ok(reply.result.indexOf(tagName) > -1, 'existing tags are correctly displayed');
+    });
     server.inject(archiveChallenge, reply => {
       t.equal(reply.statusCode, 302, 'challenge card archived - page redirecting');
       var url = reply.headers.location;

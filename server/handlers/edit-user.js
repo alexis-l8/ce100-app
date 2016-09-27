@@ -4,7 +4,7 @@ var Boom = require('boom');
 var helpers = require('./helpers.js');
 
 module.exports = (request, reply) => {
-  var userId = +request.params.id;
+  var userId = parseInt(request.params.id, 10);
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'userId', userId);
 
@@ -12,6 +12,7 @@ module.exports = (request, reply) => {
   if (!permissions.permissions.editable) {
     return reply(Boom.unauthorized('You do not have permission to edit that user.'));
   }
+
   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
     Hoek.assert(!error, 'redis error');
     var user = JSON.parse(stringifiedUser);

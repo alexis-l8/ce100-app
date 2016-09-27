@@ -1,17 +1,31 @@
-<label class="tags__toggle-title" for="{{@index}}">{{name}}</label>
+<label class="tag__title" for="{{@index}}">{{name}}</label>
 {{#if selected}}
-  <input type="checkbox" class="tags__toggle-input" id="{{@index}}" checked="checked">
+  <input  type="checkbox"
+          class="tag__input"
+          id="{{@index}}"
+          checked="checked">
 {{else}}
-  <input type="checkbox" class="tags__toggle-input" id="{{@index}}">
+  <input  type="checkbox"
+          class="tag__input"
+          id="{{@index}}">
 {{/if}}
 
-<div>
+<div class="form__subsection">
     {{#each tags}}
         {{#if selected}}
-          <input type="checkbox" class="tags__toggle-input" id=[{{id}}] name="tags" value=[{{id}}] checked="checked">
+          <input  type="checkbox"
+                  class="tag__input"
+                  id=[{{id}}]
+                  name="tags"
+                  value=[{{id}}]
+                  checked="checked">
         {{else}}
-          <input type="checkbox" class="tags__toggle-input" id=[{{id}}] name="tags" value=[{{id}}]>
+          <input  type="checkbox"
+                  class="tag__input"
+                  id=[{{id}}]
+                  name="tags"
+                  value=[{{id}}]>
         {{/if}}
-        <label class="tags__toggle-label" for=[{{id}}]>{{name}}</label>
+        <label class="tag__label" for=[{{id}}]>{{name}}</label>
     {{/each}}
 </div>

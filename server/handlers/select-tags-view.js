@@ -11,6 +11,8 @@ module.exports = (request, reply) => {
         allTags[tag[0]].tags[tag[1]].selected = true;
       });
     }
-    reply.view('tags', { parent_tags: allTags });
+    var permissions = require('./helpers.js').getPermissions(request.auth.credentials, 'scope', 'admin');
+    var options = Object.assign({ parent_tags: allTags }, permissions);
+    reply.view('tags', options);
   });
 };

@@ -1,17 +1,20 @@
+<!-- Include Top Navbar -->
+{{>top-nav}}
+
 <!-- Main Content -->
 <div class="container">
-    <h1 class="title">Contact List</h1>
+
+    <div class="card card--header">
+        <h1 class="title">Contact List</h1>
+    </div>
 
     {{#if allUsers}}
         <ul class="list">
-            {{#each allUsers}}
-
-                {{>user}}
-
-            {{/each}}
+        {{#each allUsers}}
+          {{>user permissions=../permissions}}
+        {{/each}}
         </ul>
-
-        {{else}}
+    {{else}}
         <h3>Sorry! No users were found</h3>
     {{/if}}
 </div>

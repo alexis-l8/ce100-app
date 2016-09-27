@@ -141,6 +141,20 @@ module.exports = {
       password: bcrypt.hashSync('Hello1', 10),
       last_login: Date.now(),
       challenges: []
+    },
+    {
+      first_name: 'Ben',
+      last_name: 'Morphous',
+      email: 'ben@fra.co',
+      phone: '07111111112',
+      job_title: 'CEO',
+      organisation_id: 7,
+      user_type: 'primary',
+      id: 10,
+      active: true,
+      password: bcrypt.hashSync('Hello1', 10),
+      last_login: Date.now(),
+      challenges: []
     }
   ]
 };

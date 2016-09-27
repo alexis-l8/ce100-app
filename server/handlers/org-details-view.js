@@ -2,13 +2,14 @@ var Hoek = require('hoek');
 var helpers = require('./helpers.js');
 
 module.exports = (request, reply) => {
-  var orgId = +request.params.id;
+  var orgId = parseInt(request.params.id, 10);
   var permissions = helpers.getPermissions(request.auth.credentials, 'organisation_id', orgId);
   if (orgId === -1) {
     return reply.redirect('/orgs');
   }
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
+    // TODO: catch for case where org at specified userId doesn't exist.
     var organisation = JSON.parse(stringifiedOrg);
     var organisationTags = organisation.tags && getTagNames(organisation.tags);
     organisation.tags = organisationTags;

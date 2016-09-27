@@ -63,6 +63,15 @@ module.exports = {
       primary_id: -1,
       people: [],
       challenges: []
+    },
+    {
+      id: 7,
+      name: 'Fanta',
+      active: false,
+      mission_statement: 'Refresh The Nation',
+      primary_id: 10,
+      people: [7],
+      challenges: []
     }
   ]
 };

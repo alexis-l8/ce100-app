@@ -1,23 +1,33 @@
+<!-- Include Top Navbar -->
+{{>top-nav}}
+
 <!-- Main Content -->
 <div class="container">
-    <h1 class="title">Add A New Challenge</h1>
-
+    <div class="card card--header">
+      <h1 class="title">Add A New Challenge</h1>
+    </div>
+  
     <form class="form" method="post">
-      <label class="form__label" for="title">Title</label>
-      <input class="form__input" type="text" name="title" id="title" placeholder="Write Here...">
 
-      <label class="form__label" for="description">Description</label>
-      <input class="form__input" type="text" name="description" id="description" placeholder="Write Here...">
+      <div class="form__section">
+
+        <label class="form__label" for="title">Title</label>
+        <input class="form__input" type="text" name="title" id="title" placeholder="Write Here...">
+
+        <label class="form__label" for="description">Description</label>
+        <input class="form__input" type="text" name="description" id="description" placeholder="Write Here...">
 
       {{#if tags}}
         {{#each tags}}
-          {{>tag-button}}
+          <span class="tag__label">{{name}}</span>
         {{/each}}
       {{else}}
         <h3>Add tags on the next screen</h3>
       {{/if}}
+      </div>
 
-      <button class="button" type="submit">NEXT</button>
+      <button class="button button--margin" type="submit">next</button>
+
     </form>
 </div>
 
