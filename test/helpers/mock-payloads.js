@@ -9,6 +9,15 @@ mockPayloads.usersAddPayload = {
   user_type: 'primary'
 };
 
+mockPayloads.newUserRepeatedName = {
+  first_name: 'Ben',
+  last_name: 'Matthews',
+  email: 'ben@mat.co',
+  phone: '07111111112',
+  organisation_id: 6,
+  user_type: 'primary'
+};
+
 mockPayloads.usersActivatePayload = {
   password: 'Hello1',
   confirmPassword: 'Hello1'

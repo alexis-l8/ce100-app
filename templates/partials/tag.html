@@ -1,9 +1,15 @@
-<label class="tags__toggle-title" for="{{@index}}">{{name}}</label>
-<input type="checkbox" class="tags__toggle-input" id="{{@index}}">
+<label class="tag__title" for="{{@index}}">{{name}}</label>
+<input  type="checkbox" 
+        class="tag__input" 
+        id="{{@index}}">
 
-<div>
+<div class="form__subsection">
     {{#each tags}}
-        <input type="checkbox" class="tags__toggle-input" id=[{{id}}] name="tags" value=[{{id}}]>
-        <label class="tags__toggle-label" for=[{{id}}]>{{name}}</label>
+        <input  type="checkbox" 
+                class="tag__input" 
+                id=[{{id}}] 
+                name="tags" 
+                value=[{{id}}]>
+        <label class="tag__label" for=[{{id}}]>{{name}}</label>
     {{/each}}
 </div>

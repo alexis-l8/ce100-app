@@ -1,8 +1,13 @@
 <!-- Main Content -->
 <div class="container">
   <div class="error">
-    <h1 class="title">{{statusCode}}</h1>
-    <h2>{{errorMessage}}</h2>
+    <div class="card card--header">
+        <h1 class="title">{{statusCode}}</h1>
+    </div>
+    <div class="card">
+        <h2 class="card__copy">{{errorMessage}}</h2 class="card__copy">
+        <a href="/login" class="button">Login</a>
+    </div>
     <!-- <p>{{email}}</p> -->
   </div>
 </div>
