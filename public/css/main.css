@@ -308,17 +308,10 @@ Light-teal:     #66d9e0;
             display: block;
         }
 
-        /* List Edit SVG */
-        .list__edit {
-          position: absolute;
-          right: 0;
-          top: 0;
-          cursor: pointer;
-        }
-
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Tags
   |||||||||||||||||||||||||||||||||||||||||||*/
+
 
 .tag__title {
     cursor: pointer;
@@ -526,6 +519,10 @@ Light-teal:     #66d9e0;
     }
     .form__label--radio {
 
+    }
+    .form__input--non-editable {
+      background-color: #fafafa;
+      border: none;
     }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
