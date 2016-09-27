@@ -3,7 +3,6 @@ var Hoek = require('hoek');
 module.exports = (request, reply) => {
   var payload = request.payload;
   var userId = request.auth.credentials.userId;
-  Hoek.assert(request.auth.credentials.scope === 'primary', 'Admins cannot create a new challenge as no organisation is attached.');
   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
     Hoek.assert(!error, error);
     var user = JSON.parse(stringifiedUser);

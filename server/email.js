@@ -6,6 +6,7 @@ var sendEmail = {};
 
 sendEmail.newUser = (person, callback) => {
   var recipient = Object.assign({}, person, { subject: 'Welcome to CE100!' });
+
   callback(null, true);
   // email('welcome', recipient, function (error, result) {
   //   console.log('WELCOME EMAIL:', error, result);

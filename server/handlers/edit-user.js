@@ -12,6 +12,7 @@ module.exports = (request, reply) => {
   if (!permissions.permissions.editable) {
     return reply(Boom.unauthorized('You do not have permission to edit that user.'));
   }
+
   request.redis.LINDEX('people', userId, (error, stringifiedUser) => {
     Hoek.assert(!error, 'redis error');
     var user = JSON.parse(stringifiedUser);

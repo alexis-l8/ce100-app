@@ -174,7 +174,8 @@ var routes = [
     path: '/challenges/add',
     handler: require('./handlers/add-challenge.js'),
     config: {
-      validate: require('./models/add-challenge.js')
+      validate: require('./models/add-challenge.js'),
+      auth: { scope: 'primary' }
     }
   }
 ];

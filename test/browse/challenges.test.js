@@ -29,7 +29,7 @@ tape('browse challenges', t => {
   var addChallenge = cookie => ({
     method: 'POST',
     url: '/challenges/add',
-    payload: payloads.addChallenge2,
+    payload: payloads.addChallenge3,
     headers: { cookie }
   });
   var addTags = cookie => id => ({
