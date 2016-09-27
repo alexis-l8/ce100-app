@@ -168,7 +168,11 @@ var routes = [
   {
     method: 'POST',
     path: '/challenges/{challengeId}/tags',
-    handler: require('./handlers/select-tags.js')
+    handler: require('./handlers/select-tags.js'),
+    config: {
+      validate: require('./models/max-allowed-tags.js'),
+      auth: { scope: 'primary' }
+    }
   },
   {
     method: 'GET',
@@ -180,7 +184,8 @@ var routes = [
     path: '/challenges/add',
     handler: require('./handlers/add-challenge.js'),
     config: {
-      validate: require('./models/add-challenge.js')
+      validate: require('./models/add-edit-challenge.js'),
+      auth: { scope: 'primary' }
     }
   },
   {
@@ -191,10 +196,11 @@ var routes = [
   {
     method: 'POST',
     path: '/challenges/{id}/edit',
-    handler: require('./handlers/edit-challenge.js')
-    // config: {
-    //   validate: require('./models/edit-challenge.js')
-    // }
+    handler: require('./handlers/edit-challenge.js'),
+    config: {
+      validate: require('./models/add-edit-challenge.js'),
+      auth: { scope: 'primary' }
+    }
   },
   {
     method: 'GET',
