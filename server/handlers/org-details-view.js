@@ -16,7 +16,7 @@ module.exports = (request, reply) => {
     // get all challenges
     request.redis.LRANGE('challenges', 0, -1, (error, challengesList) => {
       Hoek.assert(!error, 'redis error');
-      var challenges = getChallenges(challengesList, organisation);
+      var challenges = getChallenges(challengesList, organisation.challenges);
 
       // if no primary user then reply
       if (organisation.primary_id === -1) {
@@ -29,7 +29,6 @@ module.exports = (request, reply) => {
         Hoek.assert(!error, 'redis error');
         var primary_user = getUserInfo(stringifiedUser);
         var options = Object.assign({}, {primary_user}, {challenges}, {organisation}, permissions);
-        console.log(options);
         return reply.view('organisations/details', options);
       });
     });
@@ -41,8 +40,8 @@ function getUserInfo (stringifiedUser) {
   return {first_name, last_name, email, phone, job_title};
 }
 
-function getChallenges (challengesList, organisation) {
-  var challengeArr = organisation.challenges.map((challengeId, index) => {
+function getChallenges (challengesList, organisationChallenges) {
+  var challengeArr = organisationChallenges.map((challengeId, index) => {
     var challengeCard = JSON.parse(challengesList[challengeId]);
     var tagsArray = getTagNames(challengeCard.tags);
     return Object.assign({}, challengeCard, {tags: tagsArray});
