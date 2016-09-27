@@ -241,23 +241,23 @@ Danger-red:     #900000;
             display: block;
         }
 
-        /* List Edit SVG */
-        .list__edit {
-          position: absolute;
-          right: 0;
-          top: 0;
-          cursor: pointer;
-        }
-
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Tags
   |||||||||||||||||||||||||||||||||||||||||||*/
 
-.tags__toggle-title {
+/* List Edit SVG */
+.list__edit {
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.tags__toggle-title,
+.tags__toggle-label {
     cursor: pointer;
     display: block;
     text-align: center;
-    text-transform: uppercase;
     font-size: 1em;
     font-weight: bold;
     color: red;
@@ -278,12 +278,9 @@ Danger-red:     #900000;
 }
 
 .tags__toggle-label {
-    cursor: pointer;
-    display: block;
-    text-align: center;
-    text-transform: uppercase;
+    color: black;
+    font-weight: normal;
     line-height: 3.5em;
-    margin: 1em;
     background-color: #f2f2f2;
 }
 
@@ -400,6 +397,10 @@ Danger-red:     #900000;
     }
     .form__label--radio {
 
+    }
+    .form__input--non-editable {
+      background-color: #fafafa;
+      border: none;
     }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
