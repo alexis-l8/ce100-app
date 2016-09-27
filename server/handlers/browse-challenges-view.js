@@ -17,14 +17,24 @@ module.exports = (request, reply) => {
       var allChallenges = challengesFromIds(allChallengesString, challengeIds);
       // remove any archived challenges
       var challenges = addSharedBy(allOrgsString, filterArchived(allChallenges));
-      // filter by tags
+      // TODO: filter by tags
       // sort by most recent
-      var options = Object.assign({}, {challenges}, permissions);
+      var sorted = sortByDate(cloneArray(challenges));
 
+      var options = Object.assign({}, {challenges: sorted}, permissions);
       reply.view('browse', options);
     });
   });
 };
+
+// TODO: put clone array into helpers
+function cloneArray (arr) {
+  return arr.map(el => Object.assign({}, el));
+}
+
+function sortByDate (arr) {
+  return arr.sort((ch1, ch2) => ch2.date - ch1.date);
+}
 
 function addSharedBy (allOrgs, challenges) {
   return challenges.map(chal => {

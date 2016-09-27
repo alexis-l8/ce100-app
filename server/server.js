@@ -5,7 +5,7 @@ var path = require('path');
 
 var server = new Hapi.Server();
 
-require('../test/helpers/set-up.js').initialiseDB(() => {});
+// require('../test/helpers/set-up.js').initialiseDB(() => {});
 
 server.connection({ port: process.env.PORT || 3000 });
 

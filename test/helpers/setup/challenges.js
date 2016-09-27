@@ -69,6 +69,16 @@ module.exports = {
       description: 'Is it possible to...?',
       archived: false,
       tags: [[6, 2]]
+    },
+    {
+      id: 7,
+      date: Date.now(),
+      org_id: 1,
+      creator_id: 2,
+      title: 'Ice Bucket',
+      description: 'How much ice?',
+      archived: true,
+      tags: [[1, 1], [1, 3]]
     }
   ]
 };

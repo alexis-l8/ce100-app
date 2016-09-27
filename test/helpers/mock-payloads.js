@@ -35,7 +35,7 @@ mockPayloads.orgsAddDB = {
   people: []
 };
 
-mockPayloads.loginAdminCorrect = {
+mockPayloads.loginAdmin = {
   email: 'admin@mu.co',
   password: 'adminadmin'
 };
@@ -98,6 +98,11 @@ mockPayloads.primaryEdit = {
 mockPayloads.addChallenge = {
   title: 'Challenge Number 1',
   description: 'What can I...?'
+};
+
+mockPayloads.addChallenge2 = {
+  title: 'How to extract oil',
+  description: 'I want to extract olive oil.'
 };
 
 mockPayloads.noTagsAdded = {
