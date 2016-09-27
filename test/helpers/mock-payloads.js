@@ -86,6 +86,10 @@ mockPayloads.primaryEdit = {
   phone: '02088884444'
 };
 
+mockPayloads.primaryEditOrg = {
+  mission_statement: 'Ice cream for all!'
+};
+
 mockPayloads.addChallenge = {
   title: 'Challenge Number 1',
   description: 'What can I...?'
@@ -101,6 +105,11 @@ mockPayloads.addOneTagOnly = {
 
 mockPayloads.addTags = {
   tags: ['[0, 0]', '[2, 1]'] // corresponds to tags with names: 'Global Partner' and 'USA'
+};
+
+mockPayloads.updateChallengeCardTitleAndDescription = {
+  title: 'Challenge Number 4 has been updated',
+  description: 'Did the dinosaurs die out because of the beetles?'
 };
 
 module.exports = mockPayloads;
