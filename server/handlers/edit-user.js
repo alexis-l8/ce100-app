@@ -4,7 +4,7 @@ var Boom = require('boom');
 var helpers = require('./helpers.js');
 
 module.exports = (request, reply) => {
-  var userId = +request.params.id;
+  var userId = parseInt(request.params.id, 10);
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'userId', userId);
 

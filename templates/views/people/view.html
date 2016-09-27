@@ -1,19 +1,18 @@
 <!-- Main Content -->
 <div class="container">
-    <h1 class="title">Contact List</h1>
+  <h1 class="title">Contact List</h1>
 
-    {{#if allUsers}}
-        <ul class="list">
-            {{#each allUsers}}
+  {{#if allUsers}}
+    <ul class="list">
 
-                {{>user}}
+      {{#each allUsers}}
+        {{>user permissions=../permissions}}
+      {{/each}}
+    </ul>
 
-            {{/each}}
-        </ul>
-
-        {{else}}
-        <h3>Sorry! No users were found</h3>
-    {{/if}}
+    {{else}}
+    <h3>Sorry! No users were found</h3>
+  {{/if}}
 </div>
 
 <!-- Include Navbar -->

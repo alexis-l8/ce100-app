@@ -1,3 +1,5 @@
 module.exports = (request, reply) => {
-  reply.view('tags', { parent_tags: require('../../tags/tags.json') });
+  var permissions = require('./helpers.js').getPermissions(request.auth.credentials, 'scope', 'admin');
+  var options = Object.assign({ parent_tags: require('../../tags/tags.json') }, permissions);
+  reply.view('tags', options);
 };
