@@ -10,10 +10,10 @@ module.exports = (request, reply) => {
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
     var org = JSON.parse(stringifiedOrg);
-    var updatedOrg = Object.assign(org, { tags: tags });
-    request.redis.LSET('organisations', orgId, JSON.stringify(updatedOrg), (error, response) => {
+    org.tags = tags;
+    request.redis.LSET('organisations', orgId, JSON.stringify(org), (error, response) => {
       Hoek.assert(!error, error);
-      reply.redirect(`/orgs/${org.id}`);
+      reply.redirect(`/orgs/${orgId}`);
     });
   });
 };
