@@ -2,11 +2,11 @@ var tape = require('tape');
 var client = require('redis').createClient();
 var server = require('../../server/server.js');
 var setup = require('../helpers/set-up.js');
-var setupData = require('../helpers/setup-data.js');
 var payloads = require('../helpers/mock-payloads.js');
 
 var jwt = require('jsonwebtoken');
-var admin_token = jwt.sign(setupData.initialSessions[0], process.env.JWT_SECRET);
+var sessions = require('../helpers/setup/sessions.js')['sessions'];
+var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
@@ -28,12 +28,12 @@ tape('admin edits user profile but doesnt change organisation', t => {
     payload: payloads.editUserPayloadOrgUnchanged,
     headers: { cookie: `token=${admin_token}` }
   };
-  var viewOrg = {
-    method: 'GET',
-    url: '/people/3/edit',
-    payload: payloads.editUserPayloadOrgUnchanged,
-    headers: { cookie: `token=${admin_token}` }
-  }
+  // var viewOrg = {
+  //   method: 'GET',
+  //   url: '/people/3/edit',
+  //   payload: payloads.editUserPayloadOrgUnchanged,
+  //   headers: { cookie: `token=${admin_token}` }
+  // }
   server.inject(getOptions, res => {
     t.equal(res.statusCode, 200, 'route exists and replies 200');
     server.inject(postOptions, res => {
@@ -47,7 +47,6 @@ tape('admin edits user profile but doesnt change organisation', t => {
     });
   });
 });
-
 
 tape('teardown', t => {
   client.FLUSHDB();

@@ -2,11 +2,15 @@ var tape = require('tape');
 var client = require('redis').createClient();
 var server = require('../../server/server.js');
 var setup = require('../helpers/set-up.js');
-var setupData = require('../helpers/setup-data.js');
 var payloads = require('../helpers/mock-payloads.js');
 
 var jwt = require('jsonwebtoken');
-var primary_token = jwt.sign(setupData.initialSessions[2], process.env.JWT_SECRET);
+
+var sessions = require('../helpers/setup/sessions.js')['sessions'];
+var orgs = require('../helpers/setup/orgs.js')['orgs'];
+var people = require('../helpers/setup/people.js')['people'];
+
+var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
@@ -35,7 +39,7 @@ tape('primary user cannot GET or POST to edit user for different user', t => {
 
 // test a primary user editing their settings
 tape('primary user can view their own edit profile view', t => {
-  var user = setupData.initialPeople[2];
+  var user = people[2];
   var getOptions = {
     method: 'GET',
     url: `/people/${user.id}/edit`,
@@ -52,7 +56,7 @@ tape('primary user can view their own edit profile view', t => {
 });
 
 tape('primary user can edit their profile', t => {
-  var user = setupData.initialPeople[2];
+  var user = people[2];
 
   var postOptions = {
     method: `POST`,
