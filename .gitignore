@@ -11,5 +11,5 @@ dump.rdb
 tags/tags.json
 tags/.~lock.members.csv#
 tags/.~lock.topics.csv#
-tags/members.json
-tags/topics.json
+tags/.~lock.tags.csv#
+tags/*.json

@@ -78,11 +78,32 @@ mockPayloads.adminEditOrg = {
   mission_statement: 'Improve diets'
 };
 
+mockPayloads.addChallenge = {
+  title: 'Challenge Number 1',
+  description: 'What can I...?'
+};
+
+mockPayloads.noTagsAdded = {
+  tags: ''
+};
+
+mockPayloads.addOneTagOnly = {
+  tags: '[0, 0]' // corresponds to tags with name: 'Global Partner'
+};
+
+mockPayloads.addTags = {
+  tags: ['[0, 0]', '[2, 1]'] // corresponds to tags with names: 'Global Partner' and 'USA'
+};
+
+mockPayloads.addChallenge2 = {
+  title: 'Challenge Number 2',
+  description: 'How can I...?'
+};
+
 mockPayloads.primaryEdit = {
   first_name: 'Sally',
   last_name: 'Robbins',
   job_title: 'Athlete',
-  email: 'sa@ro.co',
   phone: '02088884444'
 };
 
