@@ -7,7 +7,8 @@ module.exports = {
       mission_statement: 'Change the economy',
       primary_id: 2,
       people: [0],
-      challenges: [0, 1, 2]
+      challenges: [0, 1, 2],
+      tags: [[0, 0], [2, 0]]
     },
     {
       id: 1,
