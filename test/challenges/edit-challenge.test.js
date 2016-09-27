@@ -5,6 +5,7 @@ var client = require('redis').createClient();
 var server = require('../../server/server.js');
 var payloads = require('../helpers/mock-payloads.js');
 var setup = require('../helpers/set-up.js');
+var initialChallenges = require('../helpers/setup/challenges.js')['challenges'];
 
 var sessions = require('../helpers/setup/sessions.js')['sessions'];
 var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
@@ -18,26 +19,102 @@ tape('set up: initialise db', t => {
   });
 });
 
-// load edit view
-// check pre-filled
-// check existing tags are displayed
+tape('update challenge card: title, description and tags', t => {
+  var challengeCardId = 3;
+  var challengeTags = initialChallenges[challengeCardId].tags;
+  var updatedChallenge = payloads.updateChallengeCardTitleAndDescription;
 
-
-// server.inject - POST overwrite the existing title and description
-// server.inject - POST remove 1 tag, add 5 new tags
-// server.inject - GET org view - check title, description and tags have been updated.
-
-
-// CHECK PERMISSION TO EDIT!!!
-tape('/challenges/edit load general view', t => {
-  var options = {
+  var loadEditView = {
     method: 'GET',
-    url: '/challenges/0/edit',
+    url: `/challenges/${challengeCardId}/edit`,
     headers: { cookie: `token=${primary_token}` }
   };
-  server.inject(options, reply => {
+  var updateTitleAndDescription = {
+    method: 'POST',
+    url: `/challenges/${challengeCardId}/edit`,
+    payload: updatedChallenge,
+    headers: { cookie: `token=${primary_token}` }
+  };
+  var removeTitleAndDescription = {
+    method: 'POST',
+    url: `/challenges/${challengeCardId}/edit`,
+    payload: { title: '', description: '' },
+    headers: { cookie: `token=${primary_token}` }
+  };
+  var viewExistingTags = {
+    method: 'GET',
+    url: `/challenges/${challengeCardId}/tags`,
+    headers: { cookie: `token=${primary_token}` }
+  };
+  var updateTags = {
+    method: 'POST',
+    url: `/challenges/${challengeCardId}/tags`,
+    headers: { cookie: `token=${primary_token}` }
+  };
+  var viewUpdates = {
+    method: 'GET',
+    headers: { cookie: `token=${primary_token}` }
+  };
+  server.inject(loadEditView, reply => {
     t.equal(reply.statusCode, 200, 'route exists and replies 200');
-    t.ok(reply.payload.indexOf('Add A New Challenge'), 'organisations have been displayed');
-    t.end();
+    t.ok(reply.result.indexOf(initialChallenges[challengeCardId].title) > -1, 'title has been pre-filled correctly');
+    t.ok(reply.result.indexOf(initialChallenges[challengeCardId].description) > -1, 'description has been pre-filled correctly');
+    t.ok(reply.result.indexOf('Automotive and Transport Manufacturing') > -1, 'existing tags are correctly displayed');
+    t.ok(reply.result.indexOf('Chemicals'), 'existing tags are correctly displayed') > -1;
+    t.ok(reply.result.indexOf('Secondary education') > -1, 'existing tags are correctly displayed');
+    t.ok(reply.result.indexOf('Design for disassembly') > -1, 'existing tags are correctly displayed');
+    server.inject(updateTitleAndDescription, reply => {
+      t.equal(reply.statusCode, 302, 'challenge card title and description updated - page redirecting');
+      t.ok(reply.headers.location.indexOf(`/challenges/${challengeCardId}/tags`) > -1, 'redirected to tags selection page correctly');
+      updateTags.payload = payloads.noTagsAdded;
+      server.inject(viewExistingTags, reply => {
+        t.equal(reply.statusCode, 200, 'tag-selection view displayed');
+        challengeTags.forEach(tag => {
+          var tagCheckbox = `<input type="checkbox" class="tags__toggle-input" id=[${tag}] name="tags" value=[${tag}] checked="checked">`;
+          t.ok(reply.result.indexOf(tagCheckbox) > -1, 'existing tags are displayed with their checkboxes checked');
+        });
+        server.inject(updateTags, reply => {
+          t.equal(reply.statusCode, 302, 'challenge card tags updated - page redirecting');
+          var url = reply.headers.location;
+          t.ok(url.indexOf('/orgs/1') > -1, 'redirects to org details view');
+          viewUpdates.url = url;
+          server.inject(loadEditView, reply => {
+            t.ok(reply.result.indexOf(payloads.updateChallengeCardTitleAndDescription.title) > -1, 'title has been pre-filled correctly');
+            t.ok(reply.result.indexOf(payloads.updateChallengeCardTitleAndDescription.description) > -1, 'description has been pre-filled correctly');
+            t.ok(reply.result.indexOf('<h3>Add tags on the next screen</h3>') > -1, 'tags successfully removed');
+            server.inject(viewUpdates, reply => {
+              t.equal(reply.statusCode, 200, 'org details view displays');
+              updateTags.payload = payloads.addTags;
+              server.inject(removeTitleAndDescription, reply => {
+                t.equal(reply.statusCode, 302, ' updated - page redirecting');
+                t.equal(reply.result.title, updatedChallenge.title, ' blank title is overwritten by last complete title');
+                t.equal(reply.result.description, updatedChallenge.description, ' blank description is overwritten by last complete title');
+                server.inject(updateTags, reply => {
+                  t.equal(reply.statusCode, 302, 'challenge card tags updated - page redirecting');
+                  var url = reply.headers.location;
+                  t.ok(url.indexOf('/orgs/1') > -1, 'redirects to org details view');
+                  server.inject(viewUpdates, reply => {
+                    t.equal(reply.statusCode, 200, 'org details view displays');
+                    t.ok(reply.result.indexOf('Global Partner') > -1, 'challenge no longer displays with Global Partner tag');
+                    t.ok(reply.result.indexOf('USA') > -1, 'challenge no longer displays with USA tag');
+                    t.end();
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
   });
+});
+
+tape('teardown', t => {
+  client.FLUSHDB();
+  t.end();
+});
+
+tape.onFinish(() => {
+  client.end(true);
+  server.stop(() => {});
 });
