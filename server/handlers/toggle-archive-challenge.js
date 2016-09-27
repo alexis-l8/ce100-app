@@ -2,7 +2,6 @@ var Hoek = require('hoek');
 var helpers = require('./helpers.js');
 
 module.exports = (request, reply) => {
-  console.log('INSIDE TOGGLE');
   var challengeId = request.params.id;
   request.redis.LINDEX('challenges', challengeId, (error, stringifiedChallenge) => {
     Hoek.assert(!error, 'redis error');
@@ -10,7 +9,7 @@ module.exports = (request, reply) => {
     request.redis.LSET('challenges', challengeId, helpers.toggleActivate(stringifiedChallenge), (error, response) => {
       Hoek.assert(!error, 'redis error');
       var challenge = JSON.parse(stringifiedChallenge);
-      return reply.redirect(`/orgs/${challenge.org_id}`);
+      reply.redirect(`/orgs/${challenge.org_id}`);
     });
   });
 };
