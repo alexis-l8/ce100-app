@@ -37,7 +37,7 @@ module.exports = {
       creator_id: 3,
       title: 'Challenge Number 4',
       description: 'Who should I...?',
-      active: false,
+      active: true,
       tags: [[1, 1], [1, 3], [5, 1], [6, 2]]
     },
     {
