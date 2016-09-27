@@ -9,8 +9,8 @@ module.exports = (request, reply) => {
   }
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
+    // TODO: catch for case where org at specified userId doesn't exist.
     var organisation = JSON.parse(stringifiedOrg);
-
     // get all challenges
     request.redis.LRANGE('challenges', 0, -1, (error, challengesList) => {
       Hoek.assert(!error, 'redis error');

@@ -21,7 +21,6 @@ var schema = {
     first_name: Joi.string().min(1).required(),
     last_name: Joi.string().min(1).required(),
     job_title: Joi.any().optional(),
-    email: Joi.string().email().required(),
     phone: Joi.string().min(8).max(13)
   }
 };
