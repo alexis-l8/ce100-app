@@ -7,6 +7,7 @@ var jwt = require('jsonwebtoken');
 
 var sessions = require('../helpers/setup/sessions.js')['sessions'];
 var people = require('../helpers/setup/people.js')['people'];
+var orgs = require('../helpers/setup/orgs.js')['orgs'];
 var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
 var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
 
@@ -16,6 +17,8 @@ tape('set up: initialise db', t => {
 
 tape('primary can log in, view and edit an org they are related to', t => {
   var user = people[2];
+  var orgId = 0;
+  var orgTags = orgs[orgId].tags;
 
   var primaryLogin = {
     method: 'POST',
@@ -29,24 +32,65 @@ tape('primary can log in, view and edit an org they are related to', t => {
     var cookie = res.headers['set-cookie'][0].split(';')[0];
     var primaryEditOrgView = {
       method: 'GET',
-      url: '/orgs/0/edit',
+      url: `/orgs/${orgId}/edit`,
       headers: { cookie }
     };
     var primaryEditOrg = {
       method: 'POST',
-      url: '/orgs/0/edit',
-      payload: { mission_statement: 'Ice cream for all!' },
+      url: `/orgs/${orgId}/edit`,
+      payload: payloads.primaryEditOrg,
       headers: { cookie }
+    };
+    var primaryEditTagsView = {
+      method: 'GET',
+      url: `/orgs/${orgId}/tags`,
+      headers: { cookie: `token=${primary_token}` }
+    };
+    var primaryEditTags = {
+      method: 'POST',
+      url: `/orgs/${orgId}/tags`,
+      headers: { cookie: `token=${primary_token}` }
+    };
+    var primaryViewUpdates = {
+      method: 'GET',
+      url: `/orgs/${orgId}`,
+      headers: { cookie: `token=${primary_token}` }
     };
     server.inject(primaryEditOrgView, res => {
       t.equal(res.statusCode, 200, 'primary user edit org gives 200 status code');
       // t.equal(res.headers.location, '/orgs/0/edit', 'and correct endpoint'); Why is headers.location not there sometimes?
-      t.ok(res.payload.indexOf('rchive') === -1, 'primary user cannot archive/unarchive their organisation');
+      t.ok(res.payload.indexOf('archive') === -1, 'primary user cannot archive/unarchive their organisation');
       server.inject(primaryEditOrg, res => {
         t.equal(res.statusCode, 302, 'primary user is redirected');
-        t.equal(res.headers.location, '/orgs/0', "user is redirected to their org's profile view");
-        t.ok(res.payload.indexOf('Ice cream for all!') > -1, 'primary user can successfuly edit their own organisations mission_statement');
-        t.end();
+        t.equal(res.headers.location, '/orgs/0/tags', "user is redirected to their org's profile view");
+        server.inject(primaryEditTagsView, res => {
+          t.equal(res.statusCode, 200, 'tag selection page is displayed to primary user');
+          // TODO: CHECK THAT THESE ARE THE ONLY TAGS THAT HAVE BEEN CHECKED;
+          orgTags.forEach(tag => {
+            var tagInput = `<input type="checkbox" class="tags__toggle-input" id=[${tag}] name="tags" value=[${tag}] checked="checked">`;
+            t.ok(res.payload.indexOf(tagInput) > -1, 'existing tags are pre-selected and displayed');
+          });
+          primaryEditTags.payload = payloads.addTags;
+          server.inject(primaryEditTags, res => {
+            t.equal(res.statusCode, 302, 'primary user is redirected to org details view');
+            server.inject(primaryViewUpdates, res => {
+              t.equal(res.statusCode, 200, 'primary user is redirected to org details view');
+              t.ok(res.payload.indexOf('Ice cream for all!') > -1, 'primary user can successfuly edit their own organisations mission_statement');
+              t.ok(res.payload.indexOf('Global Partner') > -1, 'primary user has successfully added the Global Partner tag to their org');
+              t.ok(res.payload.indexOf('USA') > -1, 'primary user has successfully added the USA tag to their org');
+              primaryEditTags.payload = payloads.noTagsAdded;
+              server.inject(primaryEditTags, res => {
+                t.equal(res.statusCode, 302, 'primary user is redirected to org details view');
+                server.inject(primaryViewUpdates, res => {
+                  t.equal(res.statusCode, 200, 'primary user is redirected to org details view');
+                  t.ok(res.payload.indexOf('Global Partner') === -1, 'primary user has successfully removed the Global Partner tag to their org');
+                  t.ok(res.payload.indexOf('USA') === -1, 'primary user has successfully removed the USA tag to their org');
+                  t.end();
+                });
+              });
+            });
+          });
+        });
       });
     });
   });
