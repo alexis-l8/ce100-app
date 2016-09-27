@@ -13,21 +13,34 @@ var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(() => {
-    require('../../tags/csv-to-json.js')(t.end);
+    require('../../tags/csv-to-json.js')(() => t.end());
   });
 });
 
-tape('/challenges/add load general view', t => {
-  var options = {
-    method: 'GET',
-    url: '/challenges/add',
-    headers: { cookie: `token=${primary_token}` }
+tape('primary browse challenges', t => {
+  var login = {
+    method: 'POST',
+    url: '/login',
+    payload: payloads.loginPrimary
   };
+  var browseChallenges = cookie => ({
+    method: 'GET',
+    url: '/challenges',
+    headers: { cookie }
+  });
 
-});
-
-tape('/challenges/add (POST) - submit new challenge as an admin (expect fail)', t => {
-
+  server.inject(login)
+    .then(res => {
+      t.ok(res.headers['set-cookie'], 'cookie set upon login');
+      var cookie = res.headers['set-cookie'][0].split(';')[0];
+      return server.inject(browseChallenges(cookie));
+    })
+    .then(res => {
+      res.staus
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 tape('teardown', t => {
