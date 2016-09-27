@@ -43,7 +43,6 @@ tape('admin edits user profile includes removing their link to an organisation',
       t.equal(res.statusCode, 302, 'on updating a user, page redirects to /people/{{id}}');
       server.inject(editUserView, res => {
         t.equal(res.statusCode, 200, 'route exists and replies 200');
-        // console.log('user details after edit:', res.payload);
         // TODO: check if org has been removed from their profile
         // maybe view /people and check that ben doesn't have an org?
         t.ok(res.result.indexOf('Ben') > -1, 'old information has been kept');
@@ -56,7 +55,6 @@ tape('admin edits user profile includes removing their link to an organisation',
           server.inject(editUserSubmit, res => {
             t.equal(res.statusCode, 302, 'edit user again and leave user without an org. POST request redirects.');
             server.inject(editUserView, res => {
-              // console.log(res.payload);
               // TODO: test that the seleceted/checked organisation_id is still -1
               t.ok(res.payload, 'user still has no org'); // dummy test, see line above
               // check the org still has no link to old primary user
