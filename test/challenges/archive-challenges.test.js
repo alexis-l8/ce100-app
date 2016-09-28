@@ -20,10 +20,6 @@ tape('set up: initialise db', t => {
   });
 });
 
-// server.inject - POST overwrite the existing title and description
-// server.inject - POST remove 1 tag, add 5 new tags
-// server.inject - GET org view - check title, description and tags have been updated.
-
 tape('testing archiving/unarchiving of challenges', t => {
   var challengeCardId = 3;
   var orgId = initialChallenges[challengeCardId].org_id;
