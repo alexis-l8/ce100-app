@@ -26,7 +26,6 @@ tape('add tags view', t => {
   });
 });
 
-
 tape('teardown', t => {
   client.FLUSHDB();
   t.end();

@@ -179,6 +179,7 @@ var routes = [
     }
   },
   /*  ---  BROWSE ROUTES  ---  */
+  // TODO: ADD VALIDATION TO QUERY PARAMS & REACT TO NON EXISTING TAG
   {
     method: 'GET',
     path: '/{type}/browse/tags',

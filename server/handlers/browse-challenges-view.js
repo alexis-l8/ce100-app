@@ -17,15 +17,31 @@ module.exports = (request, reply) => {
       var allChallenges = challengesFromIds(allChallengesString, challengeIds);
       // remove any archived challenges
       var challenges = addSharedBy(allOrgsString, filterArchived(allChallenges));
-      // TODO: filter by tags
       // sort by most recent
       var sorted = sortByDate(cloneArray(challenges));
-
-      var options = Object.assign({}, {challenges: sorted}, permissions);
+      // filter challenges by tags
+      var filtered = filterByTag(getFilterTag(request.query.filter), sorted);
+      var options = Object.assign({}, {challenges: filtered}, permissions);
       reply.view('browse/browse', options);
     });
   });
 };
+
+// function takes the filter query param and returns [id,id] array or false if no param
+function getFilterTag (filter) {
+  return filter && filter.split(',').map(id => parseInt(id, 10));
+}
+
+// TODO: split up into smaller fns if reusable
+function filterByTag (filtered, arr) {
+  return !filtered
+    ? arr // if no tag to be filtered by, return array
+    : arr.filter(el =>
+      // reduce each challenge cards tag array to true or false
+      el.tags.reduce((bool, tag) =>
+        tag.id[0] === filtered[0] && tag.id[1] === filtered[1] ? true : bool
+      , false));
+}
 
 // TODO: put clone array into helpers
 function cloneArray (arr) {

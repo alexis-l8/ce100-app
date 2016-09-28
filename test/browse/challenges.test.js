@@ -69,7 +69,7 @@ tape('browse challenges', t => {
       t.equal(res.payload.indexOf('Challenge Number 1'), -1, 'archived challenges created by my org do not show up');
       t.equal(res.payload.indexOf('Challenge Number 2'), -1, 'challenges created by my org do not show up');
       t.equal(res.payload.indexOf('Challenge Number 3'), -1, 'challenges created by my org do not show up');
-      // next we can add filters to the browse
+      // TODO: Add some filters to search challenges by
       return server.inject(login(payloads.loginAdmin));
     })
     // admin login
