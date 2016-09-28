@@ -21,6 +21,14 @@
 
     </div>
 
+    {{#if organisation.tags}}
+      <div class="card">
+        {{#each organisation.tags}}
+          <span class="tag__label">{{name}}</span>
+        {{/each}}
+      </div>
+    {{/if}}
+
     {{#if primary_user}}
     <div class="card">
       <h2 class="card__header">Contact</h2>

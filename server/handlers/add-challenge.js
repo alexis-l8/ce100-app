@@ -19,7 +19,7 @@ module.exports = (request, reply) => {
           org_id: orgId,
           creator_id: userId,
           date: Date.now(),
-          archived: false
+          active: true
         });
         request.redis.RPUSH('challenges', JSON.stringify(challenge), (error, response) => {
           Hoek.assert(!error, error);

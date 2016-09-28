@@ -87,6 +87,17 @@ mockPayloads.adminEditOrg = {
   mission_statement: 'Improve diets'
 };
 
+mockPayloads.primaryEdit = {
+  first_name: 'Sally',
+  last_name: 'Robbins',
+  job_title: 'Athlete',
+  phone: '02088884444'
+};
+
+mockPayloads.primaryEditOrg = {
+  mission_statement: 'Ice cream for all!'
+};
+
 mockPayloads.addChallenge = {
   title: 'Challenge Number 1',
   description: 'What can I...?'
@@ -104,16 +115,9 @@ mockPayloads.addTags = {
   tags: ['[0, 0]', '[2, 1]'] // corresponds to tags with names: 'Global Partner' and 'USA'
 };
 
-mockPayloads.addChallenge2 = {
-  title: 'Challenge Number 2',
-  description: 'How can I...?'
-};
-
-mockPayloads.primaryEdit = {
-  first_name: 'Sally',
-  last_name: 'Robbins',
-  job_title: 'Athlete',
-  phone: '02088884444'
+mockPayloads.updateChallengeCardTitleAndDescription = {
+  title: 'Challenge Number 4 has been updated',
+  description: 'Did the dinosaurs die out because of the beetles?'
 };
 
 module.exports = mockPayloads;

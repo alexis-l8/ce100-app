@@ -1,15 +1,31 @@
 <label class="tag__title" for="{{@index}}">{{name}}</label>
-<input  type="checkbox" 
-        class="tag__input" 
-        id="{{@index}}">
+{{#if selected}}
+  <input  type="checkbox"
+          class="tag__input"
+          id="{{@index}}"
+          checked="checked">
+{{else}}
+  <input  type="checkbox"
+          class="tag__input"
+          id="{{@index}}">
+{{/if}}
 
 <div class="form__subsection">
     {{#each tags}}
-        <input  type="checkbox" 
-                class="tag__input" 
-                id=[{{id}}] 
-                name="tags" 
-                value=[{{id}}]>
+        {{#if selected}}
+          <input  type="checkbox"
+                  class="tag__input"
+                  id=[{{id}}]
+                  name="tags"
+                  value=[{{id}}]
+                  checked="checked">
+        {{else}}
+          <input  type="checkbox"
+                  class="tag__input"
+                  id=[{{id}}]
+                  name="tags"
+                  value=[{{id}}]>
+        {{/if}}
         <label class="tag__label" for=[{{id}}]>{{name}}</label>
     {{/each}}
 </div>

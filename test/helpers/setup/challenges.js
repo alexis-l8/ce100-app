@@ -7,7 +7,7 @@ module.exports = {
       creator_id: 2,
       title: 'Challenge Number 1',
       description: 'What can I...?',
-      archived: true,
+      active: true,
       tags: []
     },
     {
@@ -17,7 +17,7 @@ module.exports = {
       creator_id: 2,
       title: 'Challenge Number 2',
       description: 'How can I...?',
-      archived: false,
+      active: false,
       tags: [[0, 1]]
     },
     {
@@ -27,7 +27,7 @@ module.exports = {
       creator_id: 2,
       title: 'Challenge Number 3',
       description: 'Where can I...?',
-      archived: false,
+      active: false,
       tags: [[3, 1], [10, 3], [8, 2]]
     },
     {
@@ -37,7 +37,7 @@ module.exports = {
       creator_id: 3,
       title: 'Challenge Number 4',
       description: 'Who should I...?',
-      archived: false,
+      active: true,
       tags: [[1, 1], [1, 3], [5, 1], [6, 2]]
     },
     {
@@ -47,7 +47,7 @@ module.exports = {
       creator_id: 3,
       title: 'Challenge Number 5',
       description: 'How have...?',
-      archived: false,
+      active: false,
       tags: []
     },
     {
@@ -57,7 +57,7 @@ module.exports = {
       creator_id: 4,
       title: 'Challenge Number 6',
       description: 'Is there a way to...?',
-      archived: false,
+      active: false,
       tags: []
     },
     {
@@ -67,7 +67,7 @@ module.exports = {
       creator_id: 5,
       title: 'Challenge Number 7',
       description: 'Is it possible to...?',
-      archived: false,
+      active: false,
       tags: [[6, 2]]
     }
   ]
