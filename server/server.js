@@ -5,8 +5,6 @@ var path = require('path');
 
 var server = new Hapi.Server();
 
-require('../test/helpers/set-up.js').initialiseDB(() => {});
-
 server.connection({ port: process.env.PORT || 3000 });
 
 server.register([
@@ -33,10 +31,5 @@ server.register([
 });
 
 server.route(require('./routes.js'));
-
-server.start(err => {
-  Hoek.assert(!err, err);
-  console.log(`Server running at port: ${server.info.uri}`);
-});
 
 module.exports = server;
