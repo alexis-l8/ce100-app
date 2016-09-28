@@ -14,7 +14,7 @@ module.exports = (request, reply) => {
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
     var organisation = JSON.parse(stringifiedOrg);
-    var organisationTags = organisation.tags && getTagNames(organisation.tags);
+    var organisationTags = organisation.tags && helpers.getTagNames(organisation.tags);
     organisation.tags = organisationTags;
 
     if (organisation.primary_id === -1) {
@@ -32,13 +32,3 @@ module.exports = (request, reply) => {
     });
   });
 };
-
-function getTagNames (tagIds) {
-  var allTags = require('../../tags/tags.json');
-  return tagIds.map(tagId => {
-    return {
-      id: tagId,
-      name: allTags[tagId[0]].tags[tagId[1]].name
-    };
-  });
-}
