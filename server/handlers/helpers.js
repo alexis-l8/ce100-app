@@ -99,7 +99,9 @@ helpers.addPasswordToUser = (hashed, user) => {
 };
 
 helpers.getTagNames = (tagIds) => {
-  var allTags = require('../../tags/tags.json');
+  var fs = require('fs');
+  var path = require('path');
+  var allTags = JSON.parse(fs.readFileSync(path.join(__dirname, '../../tags/tags.json'), 'utf8'));
   return tagIds.map(tagId => {
     return {
       id: tagId,
