@@ -6,14 +6,11 @@ var sendEmail = {};
 
 sendEmail.newUser = (person, callback) => {
   var recipient = Object.assign({}, person, { subject: 'Welcome to CE100!' });
-
-  callback(null, true);
-  // email('welcome', recipient, function (error, result) {
-  //   console.log('WELCOME EMAIL:', error, result);
-  //   Hoek.assert(!error, 'Send email error'); // uncomment this when you have valid sender email in .env
-  //   callback(error, result);
-  // });
-
+  email('welcome', recipient, function (error, result) {
+    console.log('WELCOME EMAIL:', error, result);
+    Hoek.assert(!error, 'Send email error'); // uncomment this when you have valid sender email in .env
+    callback(error, result);
+  });
 };
 
 module.exports = sendEmail;
