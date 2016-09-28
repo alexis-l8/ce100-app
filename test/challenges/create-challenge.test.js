@@ -52,17 +52,20 @@ tape('/challenges/add (POST) - submit new challenge as a primary_user without ta
     headers: { cookie: `token=${primary_token}` }
   };
   server.inject(options1, reply => {
-    t.equal(reply.statusCode, 302, 'create challenge');
-    t.ok(reply.result.challengeId > -1, 'user is redirected to /challenges/14/tags to add tags');
+    var challengeId = reply.result.challengeId;
+    var url = reply.headers.location;
+    t.equal(reply.statusCode, 302, 'challenge created and user is redirected to different view');
+    t.equal(url, `/challenges/${challengeId}/tags`, 'user is redirected to /challenges/{id}/tags to add tags');
     var options2 = {
       method: 'POST',
-      url: `/challenges/${reply.result.challengeId}/tags`,
+      url: url,
       payload: payloads.noTagsAdded,
       headers: { cookie: `token=${primary_token}` }
     };
     server.inject(options2, reply => {
+      var orgId = reply.result.orgId;
       t.equal(reply.statusCode, 302, 'select no tags');
-      t.ok(reply.headers.location.indexOf('/orgs/0') > -1, 'user is redirected to /orgs/0 to add tags');
+      t.equal(reply.headers.location, `/orgs/${orgId}`, 'user is redirected to /orgs/{id} to add tags');
       t.end();
     });
   });
@@ -75,40 +78,44 @@ tape('/challenges/add (POST) - submit new challenge as a primary_user with one t
     payload: payloads.addChallenge,
     headers: { cookie: `token=${primary_token}` }
   };
+  var options2 = {
+    method: 'GET',
+    headers: { cookie: `token=${primary_token}` }
+  };
+  var options3 = {
+    method: 'POST',
+    payload: payloads.addOneTagOnly,
+    headers: { cookie: `token=${primary_token}` }
+  };
+  var options4 = {
+    method: 'GET',
+    headers: { cookie: `token=${primary_token}` }
+  };
   server.inject(options1, reply => {
-    t.equal(reply.statusCode, 302, 'create challenge');
-    t.ok(reply.result.challengeId > -1, 'user is redirected to /challenges/0/tags to add tags');
     var challengeId = reply.result.challengeId;
-    var options2 = {
-      method: 'GET',
-      url: `/challenges/${challengeId}/tags`,
-      headers: { cookie: `token=${primary_token}` }
-    };
+    var url = reply.headers.location;
+    t.equal(reply.statusCode, 302, 'challenge created and user is redirected to different view');
+    t.equal(url, `/challenges/${challengeId}/tags`, 'user is redirected to /challenges/{id}/tags to add tags');
+    options2.url = url;
+    options3.url = url;
     server.inject(options2, reply => {
       t.equal(reply.statusCode, 200, 'select-tags-view exists (endpoint: /challenges/{id}/tags)');
-      var options3 = {
-        method: 'POST',
-        url: `/challenges/${challengeId}/tags`,
-        payload: payloads.addOneTagOnly,
-        headers: { cookie: `token=${primary_token}` }
-      };
+      t.ok(reply.payload.indexOf('Select Tags'), 'user is displayed the tag-selection page');
       server.inject(options3, reply => {
+        var orgId = reply.result.orgId;
+        var url2 = reply.headers.location;
         t.equal(reply.statusCode, 302, 'user selects some tags and is redirected to org view');
-        t.ok(reply.headers.location.indexOf('/orgs') > -1, 'user is redirected to /orgs/0 upon successful completion of form');
-        var options4 = {
-          method: 'GET',
-          url: reply.headers.location,
-          headers: { cookie: `token=${primary_token}` }
-        };
+        t.equal(url2, `/orgs/${orgId}`, 'user is redirected to /orgs/{id} to add tags');
+        options4.url = url2;
         server.inject(options4, reply => {
           t.ok(reply.result.indexOf('GLOBAL PARTNER') > -1, 'challenge is displayed with Global Partners tag');
+          t.ok(reply.result.indexOf('USA') === -1, 'challenge is _not_ displayed with USA tag');
           t.end();
         });
       });
     });
   });
 });
-
 
 tape('/challenges/add (POST) - submit new challenge as a primary_user with multiple tags', t => {
   var options1 = {
@@ -117,32 +124,35 @@ tape('/challenges/add (POST) - submit new challenge as a primary_user with multi
     payload: payloads.addChallenge,
     headers: { cookie: `token=${primary_token}` }
   };
+  var options2 = {
+    method: 'GET',
+    headers: { cookie: `token=${primary_token}` }
+  };
+  var options3 = {
+    method: 'POST',
+    payload: payloads.addTags,
+    headers: { cookie: `token=${primary_token}` }
+  };
+  var options4 = {
+    method: 'GET',
+    headers: { cookie: `token=${primary_token}` }
+  };
   server.inject(options1, reply => {
-    t.equal(reply.statusCode, 302, 'create challenge');
     var challengeId = reply.result.challengeId;
-    t.ok(challengeId > -1, 'user is redirected to /challenges/{id}/tags to add tags');
-    var options2 = {
-      method: 'GET',
-      url: `/challenges/${challengeId}/tags`,
-      headers: { cookie: `token=${primary_token}` }
-    };
+    var url = reply.headers.location;
+    t.equal(reply.statusCode, 302, 'challenge created and user is redirected to different view');
+    t.equal(url, `/challenges/${challengeId}/tags`, 'user is redirected to /challenges/{id}/tags to add tags');
+    options2.url = url;
+    options3.url = url;
     server.inject(options2, reply => {
       t.equal(reply.statusCode, 200, 'select-tags-view exists (endpoint: /challenges/{id}/tags)');
-      t.ok(reply.payload.indexOf('Tags') > -1, 'user is redirected to /challenges/{id}/tags to add tags');
-      var options3 = {
-        method: 'POST',
-        url: `/challenges/${challengeId}/tags`,
-        payload: payloads.addTags,
-        headers: { cookie: `token=${primary_token}` }
-      };
+      t.ok(reply.payload.indexOf('Select Tags'), 'user is displayed the tag-selection page');
       server.inject(options3, reply => {
+        var orgId = reply.result.orgId;
+        var url2 = reply.headers.location;
         t.equal(reply.statusCode, 302, 'user selects some tags and is redirected to org view');
-        t.ok(reply.headers.location.indexOf('/orgs') > -1, 'user is redirected to /orgs/0 upon successful completion of form');
-        var options4 = {
-          method: 'GET',
-          url: reply.headers.location,
-          headers: { cookie: `token=${primary_token}` }
-        };
+        t.equal(url2, `/orgs/${orgId}`, 'user is redirected to /orgs/{id} to add tags');
+        options4.url = url2;
         server.inject(options4, reply => {
           t.ok(reply.result.indexOf('GLOBAL PARTNER') > -1, 'challenge is displayed with Global Partners tag');
           t.ok(reply.result.indexOf('USA') > -1, 'challenge is displayed with USA tag');
