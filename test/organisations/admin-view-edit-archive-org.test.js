@@ -51,7 +51,7 @@ tape('admin can view an org, edit, archive and unarchive it', t => {
 
   var orgName = org.name;
   server.inject(adminViewOrgBadId, res => {
-    t.equal(res.headers.location, '/orgs', '/orgs/-1 redirects to /orgs');
+    t.equal(res.headers.location, '/orgs/browse', '/orgs/-1 redirects to /orgs/browse');
     server.inject(adminViewOrg, res => {
       t.equal(res.statusCode, 200, '/orgs/id route exists');
       t.ok(res.payload.indexOf(orgName) > -1, 'server sends back the correct view');
@@ -60,13 +60,13 @@ tape('admin can view an org, edit, archive and unarchive it', t => {
         t.ok(res.payload.indexOf(orgName) > -1, 'server sends back the correct org');
         server.inject(adminEditOrgSubmit, res => {
           t.equal(res.statusCode, 302, '/orgs/id/edit post route redirects');
-          t.equal(res.headers.location, '/orgs/3', 'redirects to /orgs');
+          t.equal(res.headers.location, '/orgs/3', 'redirects to /orgs/browse');
           server.inject(adminViewOrg, res => {
             t.ok(res.payload.indexOf(payloads.adminEditOrg.name) > -1, 'the orgs name has been edited');
             t.ok(res.payload.indexOf(payloads.adminEditOrg.mission_statement) > -1, 'the orgs mission_statement has been edited');
             server.inject(adminToggleArchiveOrg, res => {
               t.equal(res.statusCode, 302, '/orgs/id/toggle-archive route redirects');
-              t.equal(res.headers.location, '/orgs', 'admin is sent orgs view after editing');
+              t.equal(res.headers.location, '/orgs/browse', 'admin is sent orgs view after editing');
               server.inject(editUserView, res => {
                 t.ok(res.payload.indexOf('Unarchive User') > -1, 'user was deactivated as a result of deactivating organisation');
                 server.inject(adminEditOrgView, res => {

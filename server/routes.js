@@ -4,7 +4,7 @@ var routes = [
   {
     method: 'GET',
     path: '/',
-    handler: (request, reply) => reply.redirect('/orgs')
+    handler: (request, reply) => reply.redirect('/orgs/browse')
   },
   {
     method: 'GET',
@@ -121,7 +121,7 @@ var routes = [
   },
   {
     method: 'GET',
-    path: '/orgs',
+    path: '/orgs/browse',
     handler: require('./handlers/all-orgs-view.js')
   },
   {
@@ -151,7 +151,7 @@ var routes = [
   /*  ---  CHALLENGE ROUTES  ---  */
   {
     method: 'GET',
-    path: '/challenges',
+    path: '/challenges/browse',
     handler: require('./handlers/browse-challenges-view.js')
   },
   {
@@ -177,7 +177,14 @@ var routes = [
       validate: require('./models/add-challenge.js'),
       auth: { scope: 'primary' }
     }
+  },
+  /*  ---  BROWSE ROUTES  ---  */
+  {
+    method: 'GET',
+    path: '/{type}/browse/tags',
+    handler: require('./handlers/browse-add-tags-view.js')
   }
+
 ];
 
 module.exports = routes;

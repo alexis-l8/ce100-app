@@ -3,22 +3,26 @@
 
 <!-- Main Content -->
 <div class="container">
-    <div class="card card--header">
-      <h1 class="title">Select tags</h1>
+    <div class="card card--header daintree--blue">
+      {{#if challenges}}
+      <a href="/challenges/browse/tags"><h1 class="title">Select tags</h1></a>
+      {{else if allOrganisations}}
+      <a href="/orgs/browse/tags"><h1 class="title">Select tags</h1></a>
+      {{/if}}
     </div>
 
     <div class="card card--header">
       <ul class="navbar__links">
         {{#if challenges}}
           <li class="navbar__item togglebar__item">
-            <a class="navbar__link togglebar__link" href="/orgs">Organisations</a></li>
+            <a class="navbar__link togglebar__link" href="/orgs/browse">Organisations</a></li>
           <li class="navbar__item togglebar__item--selected">
-            <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges">Challenges</a></li>
+            <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges/browse">Challenges</a></li>
         {{else if allOrganisations}}
           <li class="navbar__item togglebar__item--selected">
-            <a class="navbar__link togglebar__link togglebar__link--selected" href="/orgs">Organisations</a></li>
+            <a class="navbar__link togglebar__link togglebar__link--selected" href="/orgs/browse">Organisations</a></li>
           <li class="navbar__item togglebar__item">
-            <a class="navbar__link togglebar__link" href="/challenges">Challenges</a></li>
+            <a class="navbar__link togglebar__link" href="/challenges/browse">Challenges</a></li>
         {{/if}}
       </ul>
     </div>

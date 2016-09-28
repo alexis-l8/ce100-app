@@ -16,7 +16,7 @@ module.exports = (request, reply) => {
           path: '/people/add',
           name: '+'
         }, {
-          path: '/orgs',
+          path: '/orgs/browse',
           name: 'Orgs'
         }]
       };

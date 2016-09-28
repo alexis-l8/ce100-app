@@ -34,7 +34,7 @@ module.exports = (request, reply) => {
           var token = jwt.sign(session, process.env.JWT_SECRET);
           return userDetails.user_type === 'primary'
             ? reply.redirect(`/orgs/${userDetails.organisation_id}`).state('token', token)
-            : reply.redirect('/orgs').state('token', token);
+            : reply.redirect('/orgs/browse').state('token', token);
         });
       });
     });

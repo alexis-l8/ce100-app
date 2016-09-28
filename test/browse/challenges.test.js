@@ -23,7 +23,7 @@ tape('browse challenges', t => {
   });
   var browseChallenges = cookie => ({
     method: 'GET',
-    url: '/challenges',
+    url: '/challenges/browse',
     headers: { cookie }
   });
   var addChallenge = cookie => ({
@@ -63,7 +63,7 @@ tape('browse challenges', t => {
     })
     // browse challenges view
     .then(res => {
-      t.equal(res.statusCode, 200, '/challenges route returns 200');
+      t.equal(res.statusCode, 200, '/challenges/browse route returns 200');
       t.ok(res.payload.indexOf('Challenge Number 5') > -1, 'challenges created by other orgs show up');
       t.equal(res.payload.indexOf('Ice Bucket'), -1, 'archived challenges do not show up');
       t.equal(res.payload.indexOf('Challenge Number 1'), -1, 'archived challenges created by my org do not show up');

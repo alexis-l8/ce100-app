@@ -22,7 +22,7 @@ module.exports = (request, reply) => {
       var sorted = sortByDate(cloneArray(challenges));
 
       var options = Object.assign({}, {challenges: sorted}, permissions);
-      reply.view('browse', options);
+      reply.view('browse/browse', options);
     });
   });
 };
