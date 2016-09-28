@@ -1,10 +1,12 @@
 var tape = require('tape');
 var jwt = require('jsonwebtoken');
+var fs = require('fs');
+var path = require('path');
 var client = require('redis').createClient();
 
 var server = require('../../server/server.js');
 var payloads = require('../helpers/mock-payloads.js');
-var allTags = require('../../tags/tags.json');
+var allTags = JSON.parse(fs.readFileSync(path.join(__dirname, '../../tags/tags.json'), 'utf8'));
 var setup = require('../helpers/set-up.js');
 var initialChallenges = require('../helpers/setup/challenges.js')['challenges'];
 
