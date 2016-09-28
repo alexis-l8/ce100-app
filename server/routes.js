@@ -105,7 +105,7 @@ var routes = [
   {
     method: 'GET',
     path: '/orgs/add',
-    handler: require('./handlers/serve-view.js')('add-organisation'),
+    handler: require('./handlers/serve-view.js')('organisations/add'),
     config: {
       auth: { scope: 'admin' }
     }
