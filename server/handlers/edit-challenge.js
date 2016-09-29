@@ -7,8 +7,8 @@ module.exports = (request, reply) => {
     Hoek.assert(!error, error);
     var challenge = JSON.parse(stringifiedChallenge);
     var updates = {
-      title: payload.title || challenge.title,
-      description: payload.description || challenge.description
+      title: payload.title,
+      description: payload.description
     };
     var options = Object.assign({}, challenge, updates);
     request.redis.LSET('challenges', challengeId, JSON.stringify(options), (error, response) => {
