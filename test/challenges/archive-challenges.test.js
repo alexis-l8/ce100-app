@@ -22,8 +22,9 @@ tape('set up: initialise db', t => {
 
 tape('testing archiving/unarchiving of challenges', t => {
   var challengeCardId = 3;
-  var orgId = initialChallenges[challengeCardId].org_id;
-  var tags = initialChallenges[challengeCardId].tags;
+  var challengeCardDetails = initialChallenges[challengeCardId];
+  var orgId = challengeCardDetails.org_id;
+  var tags = challengeCardDetails.tags;
   var loadEditView = {
     method: 'GET',
     url: `/challenges/${challengeCardId}/edit`,
@@ -40,8 +41,8 @@ tape('testing archiving/unarchiving of challenges', t => {
   };
   server.inject(loadEditView, reply => {
     t.equal(reply.statusCode, 200, 'route exists and replies 200');
-    t.ok(reply.result.indexOf(initialChallenges[challengeCardId].title) > -1, 'title has been pre-filled correctly');
-    t.ok(reply.result.indexOf(initialChallenges[challengeCardId].description) > -1, 'description has been pre-filled correctly');
+    t.ok(reply.result.indexOf(challengeCardDetails.title) > -1, 'title has been pre-filled correctly');
+    t.ok(reply.result.indexOf(challengeCardDetails.description) > -1, 'description has been pre-filled correctly');
     tags.forEach(tag => {
       var tagName = allTags[tag[0]].tags[tag[1]].name;
       t.ok(reply.result.indexOf(tagName) > -1, 'existing tags are correctly displayed');
@@ -53,7 +54,7 @@ tape('testing archiving/unarchiving of challenges', t => {
       viewUpdates.url = url;
       server.inject(viewUpdates, reply => {
         t.equal(reply.statusCode, 200, 'org details view displays (statusCode 200)');
-        t.ok(reply.result.indexOf(initialChallenges[challengeCardId].title) === -1, 'title of challenge card no longer visible');
+        t.ok(reply.result.indexOf(challengeCardDetails.title) === -1, 'title of challenge card no longer visible');
         t.end();
       });
     });
