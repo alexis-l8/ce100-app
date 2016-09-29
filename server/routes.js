@@ -161,7 +161,7 @@ var routes = [
   /*  ---  CHALLENGE ROUTES  ---  */
   {
     method: 'GET',
-    path: '/challenges/browse',
+    path: '/browse/challenges',
     handler: require('./handlers/browse-challenges-view.js')
   },
   {

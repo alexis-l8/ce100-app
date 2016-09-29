@@ -19,7 +19,7 @@ tape('filtered browse', t => {
 
   var filteredBrowse = tagId => ({
     method: 'GET',
-    url: `/challenges/browse?filter=${tagId}`,
+    url: `/browse/challenges?filter=${tagId}`,
     headers: { cookie: `token=${primary_token}` }
   });
 
