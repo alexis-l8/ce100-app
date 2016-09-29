@@ -100,12 +100,14 @@ helpers.addPasswordToUser = (hashed, user) => {
 
 helpers.getTagNames = (tagIds) => {
   var allTags = require('../../tags/tags.json');
-  return tagIds.map(tagId => {
-    return {
-      id: tagId,
-      name: allTags[tagId[0]].tags[tagId[1]].name
-    };
-  });
+  return tagIds
+    ? tagIds.map(tagId => {
+      return {
+        id: tagId,
+        name: allTags[tagId[0]].tags[tagId[1]].name
+      };
+    })
+    : false;
 };
 
 module.exports = helpers;
