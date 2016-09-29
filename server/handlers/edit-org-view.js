@@ -14,6 +14,8 @@ module.exports = (request, reply) => {
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
     var organisation = JSON.parse(stringifiedOrg);
+    var organisationTags = helpers.getTagNames(organisation.tags);
+    organisation.tags = organisationTags;
 
     if (organisation.primary_id === -1) {
       var options = Object.assign({}, organisation, permissions);

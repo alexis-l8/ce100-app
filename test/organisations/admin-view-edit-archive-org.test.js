@@ -38,6 +38,17 @@ tape('admin can view an org, edit, archive and unarchive it', t => {
     payload: payloads.adminEditOrg,
     headers: { cookie: `token=${admin_token}` }
   };
+  var adminEditAddTagsView = {
+    method: 'GET',
+    url: `/orgs/${org.id}/tags`,
+    headers: { cookie: `token=${admin_token}` }
+  };
+  var adminEditAddTagsSubmit = {
+    method: 'POST',
+    url: `/orgs/${org.id}/tags`,
+    payload: payloads.addOneTagOnly,
+    headers: { cookie: `token=${admin_token}` }
+  };
   var adminToggleArchiveOrg = {
     method: 'GET',
     url: `/orgs/${org.id}/toggle-archive`,
@@ -60,23 +71,32 @@ tape('admin can view an org, edit, archive and unarchive it', t => {
         t.ok(res.payload.indexOf(orgName) > -1, 'server sends back the correct org');
         server.inject(adminEditOrgSubmit, res => {
           t.equal(res.statusCode, 302, '/orgs/id/edit post route redirects');
-          t.equal(res.headers.location, '/orgs/3', 'redirects to /orgs');
-          server.inject(adminViewOrg, res => {
-            t.ok(res.payload.indexOf(payloads.adminEditOrg.name) > -1, 'the orgs name has been edited');
-            t.ok(res.payload.indexOf(payloads.adminEditOrg.mission_statement) > -1, 'the orgs mission_statement has been edited');
-            server.inject(adminToggleArchiveOrg, res => {
-              t.equal(res.statusCode, 302, '/orgs/id/toggle-archive route redirects');
-              t.equal(res.headers.location, '/orgs', 'admin is sent orgs view after editing');
-              server.inject(editUserView, res => {
-                t.ok(res.payload.indexOf('Unarchive User') > -1, 'user was deactivated as a result of deactivating organisation');
-                server.inject(adminEditOrgView, res => {
-                  t.ok(res.payload.indexOf('Unarchive') > -1, 'admin successfully archived org');
-                  server.inject(adminToggleArchiveOrg, res => {
+          t.equal(res.headers.location, '/orgs/3/tags', 'redirects to /tags view');
+          server.inject(adminEditAddTagsView, res => {
+            t.equal(res.statusCode, 200, '/orgs/{id}/tags view exists');
+            t.ok(res.result.indexOf('<h1 class="title">Select Tags</h1>') > -1, '/tags view displayed');
+            server.inject(adminEditAddTagsSubmit, res => {
+              t.equal(res.statusCode, 302, '/orgs/id/tag post route redirects');
+              t.equal(res.headers.location, '/orgs/3', 'redirects to /tags view');
+              server.inject(adminViewOrg, res => {
+                t.ok(res.payload.indexOf(payloads.adminEditOrg.name) > -1, 'the orgs name has been edited');
+                t.ok(res.payload.indexOf(payloads.adminEditOrg.mission_statement) > -1, 'the orgs mission_statement has been edited');
+                t.ok(res.payload.indexOf('GLOBAL PARTNER') > -1, 'the Global Partners tag has been added');
+                server.inject(adminToggleArchiveOrg, res => {
+                  t.equal(res.statusCode, 302, '/orgs/id/toggle-archive route redirects');
+                  t.equal(res.headers.location, '/orgs', 'admin is sent orgs view after editing');
+                  server.inject(editUserView, res => {
+                    t.ok(res.payload.indexOf('Unarchive User') > -1, 'user was deactivated as a result of deactivating organisation');
                     server.inject(adminEditOrgView, res => {
-                      t.ok(res.payload.indexOf('Archive') > -1, 'org has been unarchived');
-                      server.inject(editUserView, res => {
-                        t.ok(res.payload.indexOf('Unarchive User') > -1, 'users activation status was unchanged as a result of reactivating linked organisation organisation');
-                        t.end();
+                      t.ok(res.payload.indexOf('Unarchive') > -1, 'admin successfully archived org');
+                      server.inject(adminToggleArchiveOrg, res => {
+                        server.inject(adminEditOrgView, res => {
+                          t.ok(res.payload.indexOf('Archive') > -1, 'org has been unarchived');
+                          server.inject(editUserView, res => {
+                            t.ok(res.payload.indexOf('Unarchive User') > -1, 'users activation status was unchanged as a result of reactivating linked organisation organisation');
+                            t.end();
+                          });
+                        });
                       });
                     });
                   });
