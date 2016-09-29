@@ -4,11 +4,15 @@
 <!-- Main Content -->
 <div class="container">
     <div class="card card--header daintree--blue">
-      <!-- TODO SHOW WHICH TAG IS SELECTED HERE -->
+      <!-- TODO logic breaks when nothing meets search criteria -->
       {{#if challenges}}
-      <a href="/challenges/browse/tags"><h1 class="title">Select tags</h1></a>
+      <a href="/challenges/browse/tags"><h1 class="title">
+        {{#if filters}}{{filters.name}}{{else}}Select tags{{/if}}
+      </h1></a>
       {{else if allOrganisations}}
-      <a href="/orgs/browse/tags"><h1 class="title">Select tags</h1></a>
+      <a href="/orgs/browse/tags"><h1 class="title">
+        {{#if filters}}{{filters.name}}{{else}}Select tags{{/if}}
+      </h1></a>
       {{/if}}
     </div>
 
@@ -17,14 +21,27 @@
         <!-- TODO logic breaks when nothing meets search criteria -->
         {{#if challenges}}
           <li class="navbar__item togglebar__item">
-            <a class="navbar__link togglebar__link" href="/orgs/browse">Organisations</a></li>
+            {{#if filters}}
+            <a class="navbar__link togglebar__link" href="/orgs/browse?filters={{filters.id}}">
+            {{else}}
+            <a class="navbar__link togglebar__link" href="/orgs/browse">
+            {{/if}}
+              Organisations
+          </a></li>
           <li class="navbar__item togglebar__item--selected">
             <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges/browse">Challenges</a></li>
+
         {{else if allOrganisations}}
           <li class="navbar__item togglebar__item--selected">
             <a class="navbar__link togglebar__link togglebar__link--selected" href="/orgs/browse">Organisations</a></li>
           <li class="navbar__item togglebar__item">
-            <a class="navbar__link togglebar__link" href="/challenges/browse">Challenges</a></li>
+            {{#if filters}}
+            <a class="navbar__link togglebar__link" href="challenges/browse?filters={{filters.id}}">
+            {{else}}
+            <a class="navbar__link togglebar__link" href="/challenges/browse">
+            {{/if}}
+            Challenges
+            </a></li>
         {{/if}}
       </ul>
     </div>

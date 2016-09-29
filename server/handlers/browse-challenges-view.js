@@ -20,8 +20,10 @@ module.exports = (request, reply) => {
       // sort by most recent
       var sorted = sortByDate(cloneArray(challenges));
       // filter challenges by tags
-      var filtered = filterByTag(getFilterTag(request.query.filter), sorted);
-      var options = Object.assign({}, {challenges: filtered}, permissions);
+      var filterTag = getFilterTag(request.query.filter);
+      var filtered = filterByTag(filterTag, sorted);
+      var filters = getTagFromId(require('../../tags/tags.json'))(filterTag);
+      var options = Object.assign({}, {challenges: filtered}, {filters}, permissions);
       reply.view('browse/browse', options);
     });
   });
@@ -68,12 +70,18 @@ function challengesFromIds (challenges, ids) {
   });
 }
 
+function getTagFromId (allTags) {
+  return function (id) {
+    return id && allTags[id[0]] && allTags[id[0]].tags[id[1]] && {
+        id: id,
+        name: allTags[id[0]].tags[id[1]].name
+    };
+  };
+}
+
 function getTagNames (tagIds) {
   var allTags = require('../../tags/tags.json');
-  return tagIds.map(tagId => ({
-    id: tagId,
-    name: allTags[tagId[0]].tags[tagId[1]].name
-  }));
+  return tagIds.map(getTagFromId(allTags));
 }
 
 function filterActive (arr) {
