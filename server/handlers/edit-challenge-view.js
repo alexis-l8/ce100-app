@@ -11,7 +11,8 @@ module.exports = (request, reply) => {
       return;
     }
     var tags = { tags: helpers.getTagNames(challenge.tags) };
-    var options = Object.assign({}, challenge, tags);
+    var permissions = require('./helpers.js').getPermissions(request.auth.credentials, 'scope', 'admin');
+    var options = Object.assign({}, challenge, tags, permissions);
     reply.view('challenges/edit', options);
   });
 };
