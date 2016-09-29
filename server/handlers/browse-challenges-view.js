@@ -24,7 +24,11 @@ module.exports = (request, reply) => {
       var filtered = filterByTag(filterTag, sorted);
       // format the name of the current tag being filtered for the use of handlebars
       var filters = getTagFromId(require('../../tags/tags.json'))(filterTag);
-      var options = Object.assign({}, {challenges: filtered}, {filters}, permissions);
+      // provide handlebars view with information as to which view to render
+      // currently fixed to challenges as this handler is not reused,
+      // in the next PR i am going to work on browse/orgs flow which may end up using this handler
+      var view = { challenges: true };
+      var options = Object.assign({}, {challenges: filtered}, {filters}, {view}, permissions);
       reply.view('browse/browse', options);
     });
   });

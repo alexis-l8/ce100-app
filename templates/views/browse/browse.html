@@ -4,8 +4,7 @@
 <!-- Main Content -->
 <div class="container">
     <div class="card card--header daintree--blue">
-      <!-- TODO logic breaks when nothing meets search criteria -->
-      {{#if challenges}}
+      {{#if view.challenges}}
       <a class="title--link" href="/browse/challenges/tags"><h1 class="title">
         {{#if filters}}{{filters.name}}{{else}}Select tags{{/if}}
       {{else if allOrganisations}}
@@ -19,8 +18,7 @@
 
     <div class="card card--header">
       <ul class="navbar__links">
-        <!-- TODO logic breaks when nothing meets search criteria -->
-        {{#if challenges}}
+        {{#if view.challenges}}
           <li class="navbar__item togglebar__item">
             {{#if filters}}
             <a class="navbar__link togglebar__link" href="/browse/orgs?filters={{filters.id}}">
