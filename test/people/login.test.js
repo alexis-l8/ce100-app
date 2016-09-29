@@ -38,7 +38,7 @@ tape('/login admin successful', t => {
   var options = {
     method: 'POST',
     url: '/login',
-    payload: JSON.stringify(payloads.loginAdminCorrect)
+    payload: JSON.stringify(payloads.loginAdmin)
   };
   server.inject(options, reply => {
     t.equal(reply.statusCode, 302, 'log in credentials are correct and user gets redirected to homepage');

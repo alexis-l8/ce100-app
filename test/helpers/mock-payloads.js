@@ -35,7 +35,7 @@ mockPayloads.orgsAddDB = {
   people: []
 };
 
-mockPayloads.loginAdminCorrect = {
+mockPayloads.loginAdmin = {
   email: 'admin@mu.co',
   password: 'adminadmin'
 };
@@ -103,6 +103,16 @@ mockPayloads.addChallenge = {
   description: 'What can I...?'
 };
 
+mockPayloads.addChallenge2 = {
+  title: 'Challenge Number 2',
+  description: 'How can I...?'
+};
+
+mockPayloads.addChallenge3 = {
+  title: 'How to extract oil',
+  description: 'I want to extract olive oil.'
+};
+
 mockPayloads.noTagsAdded = {
   tags: ''
 };
@@ -113,6 +123,13 @@ mockPayloads.addOneTagOnly = {
 
 mockPayloads.addTags = {
   tags: ['[0, 0]', '[2, 1]'] // corresponds to tags with names: 'Global Partner' and 'USA'
+};
+
+mockPayloads.primaryEdit = {
+  first_name: 'Sally',
+  last_name: 'Robbins',
+  job_title: 'Athlete',
+  phone: '02088884444'
 };
 
 mockPayloads.updateChallengeCardTitleAndDescription = {

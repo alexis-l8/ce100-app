@@ -30,6 +30,7 @@ function filterActiveAndAdmin (arr) {
   return arr.filter(el => el.active && el.user_type !== 'admin');
 }
 
+// TODO: put cloneArry in helpers
 function cloneArray (arr) {
   return arr.map(el => Object.assign({}, el));
 }
