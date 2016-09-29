@@ -109,6 +109,15 @@ Light-teal:     #66d9e0;
 .icon--profile {
     background-image: url("../assets/Profile.svg");
 }
+.icon--dropdown {
+  background-image: url("../assets/Dropdown.svg");
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+  -ms-transform: translate(-50%,-50%); /* IE 9 */
+}
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Nav Bar
@@ -227,6 +236,10 @@ Light-teal:     #66d9e0;
     vertical-align: middle;
     display: table-cell;
 }
+.title--link {
+    text-decoration: none;
+}
+
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Copy

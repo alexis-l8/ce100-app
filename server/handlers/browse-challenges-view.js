@@ -22,6 +22,7 @@ module.exports = (request, reply) => {
       // filter challenges by tags
       var filterTag = getFilterTag(request.query.filter);
       var filtered = filterByTag(filterTag, sorted);
+      // format the name of the current tag being filtered for the use of handlebars
       var filters = getTagFromId(require('../../tags/tags.json'))(filterTag);
       var options = Object.assign({}, {challenges: filtered}, {filters}, permissions);
       reply.view('browse/browse', options);

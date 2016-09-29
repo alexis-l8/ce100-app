@@ -6,14 +6,15 @@
     <div class="card card--header daintree--blue">
       <!-- TODO logic breaks when nothing meets search criteria -->
       {{#if challenges}}
-      <a href="/challenges/browse/tags"><h1 class="title">
+      <a class="title--link" href="/challenges/browse/tags"><h1 class="title">
         {{#if filters}}{{filters.name}}{{else}}Select tags{{/if}}
-      </h1></a>
       {{else if allOrganisations}}
-      <a href="/orgs/browse/tags"><h1 class="title">
+      <a class="title--link" href="/orgs/browse/tags"><h1 class="title">
         {{#if filters}}{{filters.name}}{{else}}Select tags{{/if}}
-      </h1></a>
       {{/if}}
+      </h1>
+      <div class="icon icon--dropdown"></div>
+      </a>
     </div>
 
     <div class="card card--header">
