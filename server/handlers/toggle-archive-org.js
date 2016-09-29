@@ -12,7 +12,7 @@ module.exports = (request, reply) => {
       // if org has no primary user, return here
       // if org is going from 'inactive' to 'active' -> do not change primary user.
       if (org.primary_id === -1 || !org.active) {
-        return reply.redirect('/orgs/browse');
+        return reply.redirect('/browse/orgs');
       }
       // otherwise org is being deactivated and has a linked priamry user, so deactivate them
       request.redis.LINDEX('people', org.primary_id, (error, userString) => {
@@ -21,7 +21,7 @@ module.exports = (request, reply) => {
         var deactivatedUser = helpers.deactivate(userString);
         request.redis.LSET('people', org.primary_id, deactivatedUser, (error, response) => {
           Hoek.assert(!error, 'redis error');
-          return reply.redirect('/orgs/browse');
+          return reply.redirect('/browse/orgs');
         });
       });
     });

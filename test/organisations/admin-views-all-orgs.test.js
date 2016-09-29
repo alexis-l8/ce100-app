@@ -14,15 +14,15 @@ tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
 });
 
-tape('/orgs/browse load general view', t => {
+tape('/browse/orgs load general view', t => {
   var options = {
     method: 'GET',
-    url: '/orgs/browse',
+    url: '/browse/orgs',
     headers: { cookie: `token=${primary_token}` }
   };
   server.inject(options, reply => {
     t.equal(reply.statusCode, 200, 'route exists and replies 200');
-    t.ok(reply.payload.indexOf(orgs[0].name), 'organisations have been displayed');
+    t.ok(reply.payload.indexOf(orgs[0].name) > -1, 'organisations have been displayed');
     t.end();
   });
 });

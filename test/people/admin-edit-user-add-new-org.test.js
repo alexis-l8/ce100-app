@@ -38,7 +38,6 @@ tape('admin edits user profile includes removing their link to an organisation',
     t.equal(res.statusCode, 302, 'on updating a user, page redirects');
     server.inject(editUserView, res => {
       t.equal(res.statusCode, 200, 'route exists and replies 200');
-      // console.log('user details after edit:', res.payload);
       // TODO: make real test testing org has been added
       t.ok(res.payload.indexOf(newOrg.name) > -1, 'Organisation has been added to user');
       // check that the org has been updated and has a primary user attached

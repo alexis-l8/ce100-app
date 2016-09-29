@@ -1,20 +1,29 @@
 <!-- Include Top Navbar -->
 {{>top-nav}}
 
+<!-- <a class="icon icon--edit" href="/challenges/{{id}}/edit">
+  <img src="../../../public/assets/Edit.svg" alt="Edit" />
+</a> -->
+
 <!-- Main Content -->
 <div class="container">
     <div class="card card--header">
       <h1 class="title">Edit Organisation Details</h1>
+      <a class="icon icon--cancel" href="/orgs/{{id}}"></a>
     </div>
-    <form class="form" method="post">
 
+    {{#if permissions.primary}}
+    <div class="card card--header card--tall card--header--white">
+      <img class="logo logo--with-title" src="/public/assets/Profile.svg" alt="{{organisation.name}} logo">
+      <h1 class="title title--with-logo title--with-logo--blue">{{name}}</h1>
+    </div>
+    {{/if}}
+
+    <form class="form" method="post">
         <!-- Company name and image -->
         {{#if permissions.admin}}
         <label class="form__label" for="org_name">Organisation Name</label>
         <input class="form__input" name="name" value="{{name}}" id="org_name">
-        {{else}}
-        <label class="form__label" for="org_name">Organisation Name</label>
-        <span class="form__input" name="name" id="org_name">{{name}}</span>
         {{/if}}
 
         <label class="form__label" for="mission_statement">
@@ -25,6 +34,14 @@
           {{/if}}
         </label>
         <input class="form__input" name="mission_statement" value="{{mission_statement}}" id="mission_statement">
+
+        {{#if organisation.tags}}
+          {{#each organisation.tags}}
+            <span class="tag__label">{{organisation.name}}</span>
+          {{/each}}
+        {{else}}
+          <h3>Add tags on the next screen</h3>
+        {{/if}}
 
         {{#if permissions.admin}}
         <!-- Show archive and primary user if admin is logge in -->
@@ -46,7 +63,6 @@
         {{/if}}
 
         <button class="button" type="submit">Save</button>
-        <a class="anchor" href="/orgs/{{id}}">Cancel</a>
 
     </form>
 </div>

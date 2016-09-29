@@ -15,12 +15,12 @@ tape('set up: initialise db', t => {
 
 tape('add tags view', t => {
   var addTagsView = {
-    url: '/orgs/browse/tags',
+    url: '/browse/orgs/tags',
     method: 'GET',
     headers: { cookie: `token=${primary_token}` }
   };
   server.inject(addTagsView, res => {
-    t.equal(res.statusCode, 200, '/challenges/browse/tags exists');
+    t.equal(res.statusCode, 200, '/browse/orgs/tags exists');
     t.ok(res.payload.indexOf('Select Tags') > -1, 'correct view is displayed');
     t.end();
   });

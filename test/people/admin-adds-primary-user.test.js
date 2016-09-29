@@ -89,7 +89,7 @@ tape('add and activate a new user and updates the linked organisation', t => {
           // t.equal(res.headers.location.indexOf('/activate') > -1, 'activate account view returned if user is not already activated');
           t.ok(res.raw.req.url.indexOf('/activate') > -1, 'activate account view returned if user is not already activated');
           server.inject(activateUser, res => {
-            t.equal(res.headers.location, '/orgs/browse', 'completing activate user redirects to dashboard');
+            t.equal(res.headers.location, '/browse/orgs', 'completing activate user redirects to dashboard');
             t.ok(res.headers['set-cookie'], 'cookie has been set');
             server.inject(logout, res => {
               server.inject(activateUserView, res => {

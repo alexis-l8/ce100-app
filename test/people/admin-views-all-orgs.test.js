@@ -15,12 +15,12 @@ tape('set up: initialise db', t => {
 tape('/orgs load general view', t => {
   var options = {
     method: 'GET',
-    url: '/orgs/browse',
+    url: '/browse/orgs',
     headers: { cookie: `token=${primary_token}` }
   };
   server.inject(options, reply => {
     t.equal(reply.statusCode, 200, 'route exists and replies 200');
-    t.ok(reply.payload.indexOf(orgs[0].name), 'organisations have been displayed');
+    t.ok(reply.payload.indexOf(orgs[0].name) > -1, 'organisations have been displayed');
     t.end();
   });
 });
@@ -37,7 +37,7 @@ tape('/orgs load specific organisation page for org with primary user', t => {
   });
 });
 
-tape('/orgs/browse load specific organisation page for org _without_ primary user', t => {
+tape('/browse/orgs load specific organisation page for org _without_ primary user', t => {
   var options = {
     method: 'GET',
     url: '/orgs/5',

@@ -1,20 +1,23 @@
 var Hoek = require('hoek');
-var helpers = require('./helpers');
+var helpers = require('./helpers.js');
 
 module.exports = (request, reply) => {
   var orgId = parseInt(request.params.id, 10);
   var permissions = helpers.getPermissions(request.auth.credentials, 'organisation_id', orgId);
   if (orgId === -1) {
-    return reply.redirect('/orgs/browse');
+    return reply.redirect('/browse/orgs');
   }
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
     // TODO: catch for case where org at specified userId doesn't exist.
     var organisation = JSON.parse(stringifiedOrg);
+    var organisationTags = organisation.tags && getTagNames(organisation.tags);
+    organisation.tags = organisationTags;
+
     // get all challenges
     request.redis.LRANGE('challenges', 0, -1, (error, challengesList) => {
       Hoek.assert(!error, 'redis error');
-      var challenges = getChallenges(challengesList, organisation);
+      var challenges = getChallenges(challengesList, organisation.challenges);
 
       // if no primary user then reply
       if (organisation.primary_id === -1) {
@@ -38,13 +41,14 @@ function getUserInfo (stringifiedUser) {
   return {first_name, last_name, email, phone, job_title};
 }
 
-function getChallenges (challengesList, organisation) {
-  var challengeArr = organisation.challenges.map((challengeId, index) => {
+function getChallenges (challengesList, organisationChallenges) {
+  var challengeArr = organisationChallenges.map((challengeId, index) => {
     var challengeCard = JSON.parse(challengesList[challengeId]);
     var tagsArray = getTagNames(challengeCard.tags);
     return Object.assign({}, challengeCard, {tags: tagsArray});
   });
-  return challengeArr.length === 0 ? false : challengeArr;
+  var activeChallenges = challengeArr.filter(challenge => challenge.active);
+  return challengeArr.length === 0 ? false : activeChallenges;
 }
 
 function getTagNames (tagIds) {

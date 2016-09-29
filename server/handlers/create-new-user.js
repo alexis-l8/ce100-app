@@ -1,6 +1,6 @@
 var Hoek = require('hoek');
 var Iron = require('iron');
-var sendEmail = require('../email.js');
+// var sendEmail = require('../email.js');
 var helpers = require('./helpers.js');
 
 module.exports = (request, reply) => {
@@ -23,10 +23,10 @@ module.exports = (request, reply) => {
               organisation_name: JSON.parse(org).name,
               hashedId: hashed
             });
-            sendEmail.newUser(newUser, (error, response) => {
+            // sendEmail.newUser(newUser, (error, response) => {
               Hoek.assert(!error, 'Send Email error');
               reply({ userId: length }).redirect('/people');
-            });
+            // });
           });
         });
       });

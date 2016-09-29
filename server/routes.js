@@ -4,7 +4,7 @@ var routes = [
   {
     method: 'GET',
     path: '/',
-    handler: (request, reply) => reply.redirect('/orgs/browse')
+    handler: (request, reply) => reply.redirect('/browse/orgs')
   },
   {
     method: 'GET',
@@ -121,7 +121,7 @@ var routes = [
   },
   {
     method: 'GET',
-    path: '/orgs/browse',
+    path: '/browse/orgs',
     handler: require('./handlers/all-orgs-view.js')
   },
   {
@@ -147,6 +147,16 @@ var routes = [
     path: '/orgs/{id}/toggle-archive',
     handler: require('./handlers/toggle-archive-org.js')
   },
+  {
+    method: 'GET',
+    path: '/orgs/{id}/tags',
+    handler: require('./handlers/org-select-tags-view.js')
+  },
+  {
+    method: 'POST',
+    path: '/orgs/{id}/tags',
+    handler: require('./handlers/org-select-tags.js')
+  },
 
   /*  ---  CHALLENGE ROUTES  ---  */
   {
@@ -162,30 +172,52 @@ var routes = [
   {
     method: 'POST',
     path: '/challenges/{challengeId}/tags',
-    handler: require('./handlers/select-tags.js')
+    handler: require('./handlers/select-tags.js'),
+    config: {
+      validate: require('./models/max-allowed-tags.js'),
+      auth: { scope: 'primary' }
+    }
   },
   {
     method: 'GET',
     path: '/challenges/add',
-    handler: require('./handlers/serve-view')('challenges/add')
+    handler: require('./handlers/add-challenge-view.js')
   },
   {
     method: 'POST',
     path: '/challenges/add',
     handler: require('./handlers/add-challenge.js'),
     config: {
-      validate: require('./models/add-challenge.js'),
+      validate: require('./models/add-edit-challenge.js'),
       auth: { scope: 'primary' }
     }
+  },
+  {
+    method: 'GET',
+    path: '/challenges/{id}/edit',
+    handler: require('./handlers/edit-challenge-view.js')
+  },
+  {
+    method: 'POST',
+    path: '/challenges/{id}/edit',
+    handler: require('./handlers/edit-challenge.js'),
+    config: {
+      validate: require('./models/add-edit-challenge.js'),
+      auth: { scope: 'primary' }
+    }
+  },
+  {
+    method: 'GET',
+    path: '/challenges/{id}/toggle-archive',
+    handler: require('./handlers/toggle-archive-challenge.js')
   },
   /*  ---  BROWSE ROUTES  ---  */
   // TODO: ADD VALIDATION TO QUERY PARAMS & REACT TO NON EXISTING TAG
   {
     method: 'GET',
-    path: '/{type}/browse/tags',
+    path: '/browse/orgs/tags',
     handler: require('./handlers/browse-add-tags-view.js')
   }
-
 ];
 
 module.exports = routes;
