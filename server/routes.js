@@ -215,7 +215,7 @@ var routes = [
   // TODO: ADD VALIDATION TO QUERY PARAMS & REACT TO NON EXISTING TAG
   {
     method: 'GET',
-    path: '/browse/orgs/tags',
+    path: '/browse/{type}/tags',
     handler: require('./handlers/browse-add-tags-view.js')
   }
 ];
