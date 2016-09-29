@@ -109,6 +109,21 @@ Light-teal:     #66d9e0;
 .icon--profile {
     background-image: url("../assets/Profile.svg");
 }
+.icon--cancel {
+    background-image: url("../assets/Cross.svg");
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-100%, -50%);
+    -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+    -ms-transform: translate(30deg); /* IE 9 */
+}
+.icon--edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+}
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Nav Bar
@@ -228,11 +243,13 @@ Light-teal:     #66d9e0;
     font-weight: normal;
     color: #ffffff;
 }
-
 .title--with-logo {
     display: table-cell;
     text-align: left;
     vertical-align: middle;
+}
+.title--with-logo--blue {
+    color: #40667e;
 }
 .title--tall {
     vertical-align: middle;
@@ -427,6 +444,10 @@ Light-teal:     #66d9e0;
     background: -o-linear-gradient(#002944, #1b4664);
     background: -moz-linear-gradient(#002944, #1b4664);
     background: linear-gradient(#002944, #1b4664);
+}
+.card--header--white {
+    background: #fafafa;
+    border-bottom: #89a0ae 1px solid;
 }
 .card--tall {
     height: 7.5rem; /* 120px */
@@ -700,11 +721,4 @@ Light-teal:     #66d9e0;
     float: right;
     padding-right: 0.6rem;
     padding-top: 0.9rem;
-}
-
-.icon--edit {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: auto;
 }

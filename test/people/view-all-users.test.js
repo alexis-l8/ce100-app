@@ -57,7 +57,6 @@ tape('/people quick contact list sort users correctly', t => {
     viewableUsers.forEach((el, i) => {
       el.indexOf('Ben M') > -1 && benInstances.push(i);
     });
-    console.log(benInstances);
     t.equal(benInstances.length, 2, 'There are two users with the same name in contact list');
     t.equal(benInstances[0] + 1, benInstances[1], 'The users called Ben are listed together, sorting alphabetically worked');
     t.end();
