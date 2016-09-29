@@ -70,7 +70,6 @@ tape('update challenge card: title, description and tags', t => {
       updateTags.payload = payloads.noTagsAdded;
       server.inject(viewExistingTags, reply => {
         t.equal(reply.statusCode, 200, 'tag-selection view displayed');
-        // MAKE THE TEST BELOW: .match === TO A CERTAIN LENGTH ---> need to find out how many child tags belong to the same parent, etc.
         t.ok(reply.payload.match(/checked="checked"/g).length > challengeTags.length, 'existing tags are displayed with their checkboxes checked');
         server.inject(updateTags, reply => {
           t.equal(reply.statusCode, 302, 'challenge card tags updated - page redirecting');
@@ -85,9 +84,7 @@ tape('update challenge card: title, description and tags', t => {
               t.equal(reply.statusCode, 200, 'org details view displays');
               updateTags.payload = payloads.addTags;
               server.inject(removeTitleAndDescription, reply => {
-                t.equal(reply.statusCode, 302, ' updated - page redirecting');
-                t.equal(reply.result.title, updatedChallenge.title, ' blank title is overwritten by last complete title');
-                t.equal(reply.result.description, updatedChallenge.description, ' blank description is overwritten by last complete title');
+                t.equal(reply.statusCode, 400, ' validator kicks in - invalid update');
                 server.inject(updateTags, reply => {
                   t.equal(reply.statusCode, 302, 'challenge card tags updated - page redirecting');
                   var url = reply.headers.location;
