@@ -7,7 +7,7 @@
       {{#if view.challenges}}
       <a class="title--link" href="/browse/challenges/tags"><h1 class="title">
         {{#if filters}}{{filters.name}}{{else}}Select tags{{/if}}
-      {{else if allOrganisations}}
+      {{else if view.orgs}}
       <a class="title--link" href="/browse/orgs/tags"><h1 class="title">
         {{#if filters}}{{filters.name}}{{else}}Select tags{{/if}}
       {{/if}}
@@ -21,7 +21,7 @@
         {{#if view.challenges}}
           <li class="navbar__item togglebar__item">
             {{#if filters}}
-            <a class="navbar__link togglebar__link" href="/browse/orgs?filters={{filters.id}}">
+            <a class="navbar__link togglebar__link" href="/browse/orgs?filter={{filters.id}}">
             {{else}}
             <a class="navbar__link togglebar__link" href="/browse/orgs">
             {{/if}}
@@ -30,12 +30,12 @@
           <li class="navbar__item togglebar__item--selected">
             <a class="navbar__link togglebar__link togglebar__link--selected" href="/browse/challenges">Challenges</a></li>
 
-        {{else if allOrganisations}}
+        {{else if view.orgs}}
           <li class="navbar__item togglebar__item--selected">
             <a class="navbar__link togglebar__link togglebar__link--selected" href="/browse/orgs">Organisations</a></li>
           <li class="navbar__item togglebar__item">
             {{#if filters}}
-            <a class="navbar__link togglebar__link" href="challenges/browse?filters={{filters.id}}">
+            <a class="navbar__link togglebar__link" href="/browse/challenges?filter={{filters.id}}">
             {{else}}
             <a class="navbar__link togglebar__link" href="/browse/challenges">
             {{/if}}
@@ -45,20 +45,20 @@
       </ul>
     </div>
 
-    {{#if challenges}}
-      {{#each challenges}}
-        {{>challenge}}
-      {{/each}}
-
-    {{else if allOrganisations}}
-      {{#each allOrganisations}}
-        {{>organisation}}
-      {{/each}}
-
-    {{else}}
-    <!-- TODO fix styling of this error message -->
+      {{#if data}}
+      {{#if view.challenges}}
+        {{#each data}}
+          {{>challenge}}
+        {{/each}}
+      {{else}}
+        {{#each data}}
+          {{>organisation}}
+        {{/each}}
+      {{/if}}
+      {{else}}
+      <!-- TODO fix styling of this error message -->
       <h3>Nothing meets your search criteria.</h3>
-    {{/if}}
+      {{/if}}
 </div>
 
 <!-- Include Navbar -->
