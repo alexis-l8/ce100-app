@@ -625,6 +625,9 @@ Light-teal:     #66d9e0;
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Anchors
   |||||||||||||||||||||||||||||||||||||||||||*/
+.anchor {
+  text-decoration: none;
+}
 
 .anchor:link {
     text-align: center;
@@ -680,6 +683,10 @@ Light-teal:     #66d9e0;
   |||||||||||||||||||||||||||||||||||||||||||*/
 .float-right {
   float: right
+}
+
+.text-decoration {
+  text-decoration: none;
 }
 
 .log-in-logo {
