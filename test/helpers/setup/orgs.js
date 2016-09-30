@@ -53,7 +53,8 @@ module.exports = {
       mission_statement: 'Every Little Helps',
       primary_id: -1,
       people: [],
-      challenges: []
+      challenges: [],
+      tags: [[1, 1]]
     },
     {
       id: 6,
