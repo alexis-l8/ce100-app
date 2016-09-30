@@ -17,7 +17,8 @@ module.exports = {
       mission_statement: 'Do What You Love!',
       primary_id: 3,
       people: [3],
-      challenges: [3, 4]
+      challenges: [3, 4],
+      tags: []
     },
     {
       id: 2,
@@ -26,7 +27,8 @@ module.exports = {
       mission_statement: 'Summer!',
       primary_id: 4,
       people: [4],
-      challenges: [5]
+      challenges: [5],
+      tags: []
     },
     {
       id: 3,
@@ -35,7 +37,8 @@ module.exports = {
       mission_statement: 'Change the economy',
       primary_id: 5,
       people: [5],
-      challenges: [6]
+      challenges: [6],
+      tags: [[1, 1], [1, 7], [6, 2], [10, 1], [13, 2], [13, 3], [13, 5]]
     },
     {
       id: 4,
@@ -44,7 +47,8 @@ module.exports = {
       mission_statement: 'Anonymous',
       primary_id: 6,
       people: [6],
-      challenges: []
+      challenges: [],
+      tags: [[1, 4], [6, 2], [12, 1], [12, 2]]
     },
     {
       id: 5,
@@ -54,7 +58,7 @@ module.exports = {
       primary_id: -1,
       people: [],
       challenges: [],
-      tags: [[1, 1]]
+      tags: [[1, 1], [6, 2], [13, 2], [13, 3]]
     },
     {
       id: 6,
@@ -63,7 +67,8 @@ module.exports = {
       mission_statement: 'Refresh The Nation',
       primary_id: -1,
       people: [],
-      challenges: []
+      challenges: [],
+      tags: []
     },
     {
       id: 7,
@@ -72,7 +77,8 @@ module.exports = {
       mission_statement: 'Refresh The Nation',
       primary_id: 10,
       people: [7],
-      challenges: []
+      challenges: [],
+      tags: []
     }
   ]
 };

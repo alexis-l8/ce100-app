@@ -19,7 +19,7 @@ module.exports = (request, reply) => {
     request.redis.LRANGE('challenges', 0, -1, (error, allChallengesString) => {
       Hoek.assert(!error, 'redis error');
       // Filter out inactive orgs
-      var activeOrgs = filterActive(allOrgsString);
+      var activeOrgs = helpers.filterActive(allOrgsString);
       // get tag we are filtering by
       var filterTag = getFilterTag(request.query.filter);
       // format the name of the current tag being filtered for the use of handlebars
@@ -34,7 +34,7 @@ module.exports = (request, reply) => {
         // map through all challenge id's
         var allChallenges = challengesFromIds(allChallengesString, challengeIds);
         // remove any archived challenges
-        var challenges = addSharedBy(allOrgsString, filterActive(allChallenges));
+        var challenges = addSharedBy(allOrgsString, helpers.filterActive(allChallenges));
         // sort by most recent
         sortedData = helpers.sortByDate(challenges);
       }
@@ -95,10 +95,6 @@ function getTagFromId (allTags) {
 function getTagNames (tagIds) {
   var allTags = require('../../tags/tags.json');
   return tagIds.map(getTagFromId(allTags));
-}
-
-function filterActive (arr) {
-  return arr.filter((el) => typeof el === 'string' ? JSON.parse(el).active : el.active);
 }
 
 function allChallengeIds (orgsString) {
