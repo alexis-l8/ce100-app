@@ -91,19 +91,11 @@ function getUserInfo (stringifiedUser) {
 function getChallenges (challengesList, organisationChallenges) {
   var challengeArr = organisationChallenges.map((challengeId, index) => {
     var challengeCard = JSON.parse(challengesList[challengeId]);
-    var tagsData = getTagNames(challengeCard.tags);
+    var tagsData = helpers.getTagNames(challengeCard.tags);
     return Object.assign({}, challengeCard, {tagsData});
   });
   var activeChallenges = challengeArr.filter(challenge => challenge.active);
   return challengeArr.length === 0 ? false : activeChallenges;
 }
 
-function getTagNames (tagIds) {
-  var allTags = require('../../tags/tags.json');
-  return tagIds.map(tagId => {
-    return {
-      id: tagId,
-      name: allTags[tagId[0]].tags[tagId[1]].name
-    };
-  });
 }

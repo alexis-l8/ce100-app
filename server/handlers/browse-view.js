@@ -23,7 +23,7 @@ module.exports = (request, reply) => {
       // get tag we are filtering by
       var filterTag = getFilterTag(request.query.filter);
       // format the name of the current tag being filtered for the use of handlebars
-      var filters = getTagFromId(require('../../tags/tags.json'))(filterTag);
+      var filters = helpers.getTagFromId(require('../../tags/tags.json'))(filterTag);
       // provide handlebars view with information as to which view to render
       var view = { [request.params.view]: true };
       var sortedData;
@@ -78,24 +78,11 @@ function addSharedBy (allOrgs, challenges) {
 function challengesFromIds (challenges, ids) {
   return ids.map(id => {
     var challengeCard = JSON.parse(challenges[id]);
-    var tagsData = getTagNames(challengeCard.tags);
+    var tagsData = helpers.getTagNames(challengeCard.tags);
     return Object.assign({}, challengeCard, {tagsData});
   });
 }
 
-function getTagFromId (allTags) {
-  return function (id) {
-    return id && allTags[id[0]] && allTags[id[0]].tags[id[1]] && {
-      id: id,
-      name: allTags[id[0]].tags[id[1]].name
-    };
-  };
-}
-
-function getTagNames (tagIds) {
-  var allTags = require('../../tags/tags.json');
-  return tagIds.map(getTagFromId(allTags));
-}
 
 function allChallengeIds (orgsString) {
   return orgsString.reduce((challengeIds, org) => challengeIds.concat(JSON.parse(org).challenges), []);

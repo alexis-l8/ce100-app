@@ -98,16 +98,6 @@ helpers.addPasswordToUser = (hashed, user) => {
   return JSON.stringify(updatedUser);
 };
 
-helpers.getTagNames = (tagIds) => {
-  var allTags = require('../../tags/tags.json');
-  return tagIds && tagIds.map(tagId => {
-    return {
-      id: tagId,
-      name: allTags[tagId[0]].tags[tagId[1]].name
-    };
-  });
-};
-
 helpers.cloneArray = (arr) => arr.map(el => Object.assign({}, el));
 
 helpers.sortAlphabetically = (key) => (arr) =>
@@ -128,6 +118,20 @@ helpers.sortByDate = (arr) =>
 
 helpers.filterActive = (arr) => arr.filter((el) =>
   typeof el === 'string' ? JSON.parse(el).active : el.active);
+
+// add the names to all tagIds that this function receives
+helpers.getTagNames = (tagIds) => {
+  var allTags = require('../../tags/tags.json');
+  return tagIds.map(helpers.getTagFromId(allTags));
+}
+
+// map through the inner function which takes a tag id, and returns named object for that tag
+helpers.getTagFromId = (allTags) => (id) =>
+  id && allTags[id[0]] && allTags[id[0]].tags[id[1]] && {
+    id: id,
+    name: allTags[id[0]].tags[id[1]].name
+  };
+
 
 module.exports = helpers;
 
