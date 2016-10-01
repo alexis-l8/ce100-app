@@ -10,14 +10,15 @@ module.exports = (request, reply) => {
   }
   request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
     Hoek.assert(!error, 'redis error');
-    // TODO: catch for case where org at specified userId doesn't exist.
-    var organisation = JSON.parse(stringifiedOrgs[orgId]);
-    var organisationTags = organisation.tags && getTagNames(organisation.tags);
-    organisation.tags = organisationTags;
-
     // get all challenges
     request.redis.LRANGE('challenges', 0, -1, (error, challengesList) => {
       Hoek.assert(!error, 'redis error');
+
+      var orgs = helpers.parseArray(stringifiedOrgs);
+      var organisation = orgs[orgId];
+
+      var organisationTags = organisation.tags && helpers.getTagNames(organisation.tags);
+      organisation.tagsData = organisationTags;
 
       var challenges = getChallenges(challengesList, organisation.challenges);
       // only add matches if primary user is logged in.
