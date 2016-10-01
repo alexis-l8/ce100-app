@@ -18,8 +18,11 @@ module.exports = (request, reply) => {
     Hoek.assert(!error, 'redis error');
     request.redis.LRANGE('challenges', 0, -1, (error, allChallengesString) => {
       Hoek.assert(!error, 'redis error');
-      // Filter out inactive orgs
-      var activeOrgs = helpers.filterActive(allOrgsString);
+      var orgs = helpers.parseArray(allOrgsString);
+      var challenges = helpers.parseArray(allChallengesString);
+
+      // Filter out unwanted orgs depending on permissions
+      var browsableOrgs = getBrowsable(loggedIn.scope, orgs);
       // get tag we are filtering by
       var filterTag = getFilterTag(request.query.filter);
       // format the name of the current tag being filtered for the use of handlebars
@@ -27,20 +30,20 @@ module.exports = (request, reply) => {
       // provide handlebars view with information as to which view to render
       var view = { [request.params.view]: true };
       var sortedData;
-      // if view is challenges:
+      // if browsing challenges:
       if (view.challenges) {
         // build up array of all relevent challenge ids
-        var challengeIds = allChallengeIds(activeOrgs);
+        var challengeIds = allChallengeIds(browsableOrgs);
         // map through all challenge id's
-        var allChallenges = challengesFromIds(allChallengesString, challengeIds);
-        // remove any archived challenges
-        var challenges = addSharedBy(allOrgsString, helpers.filterActive(allChallenges));
+        var allChallenges = challengesFromIds(challenges, challengeIds);
+        // remove any archived challenges and add the `shared_by` key
+        var active = addSharedBy(browsableOrgs, helpers.filterActive(allChallenges));
         // sort by most recent
-        sortedData = helpers.sortByDate(challenges);
+        sortedData = helpers.sortByDate(active);
       }
+      // if browsing orgs
       else {
-        var orgs = activeOrgs.map(org => JSON.parse(org));
-        sortedData = helpers.sortAlphabetically('name')(orgs);
+        sortedData = helpers.sortAlphabetically('name')(browsableOrgs);
       }
       // filter challenges by tags
       var filtered = filterByTag(filterTag, sortedData);
@@ -50,7 +53,13 @@ module.exports = (request, reply) => {
   });
 };
 
-// function takes the filter query param and returns [id,id] array or false if no param
+function getBrowsable (scope, orgs) {
+  return scope === 'admin'
+    ? orgs
+    : helpers.filterActive(orgs);
+}
+
+// function takes the filter query param and returns [id,id] array or falsey if no param
 function getFilterTag (filter) {
   return filter && filter.split(',').map(id => parseInt(id, 10));
 }
@@ -67,9 +76,10 @@ function filterByTag (filtered, arr) {
     );
 }
 
+// add key `shared_by` to each challenge
 function addSharedBy (allOrgs, challenges) {
   return challenges.map(chal => {
-    var shared_by = JSON.parse(allOrgs[chal.org_id]).name;
+    var shared_by = allOrgs[chal.org_id].name;
     return Object.assign({}, chal, {shared_by});
   });
 }
@@ -77,19 +87,13 @@ function addSharedBy (allOrgs, challenges) {
 // TODO: refactor to reuse functions from org-details-view.js
 function challengesFromIds (challenges, ids) {
   return ids.map(id => {
-    var challengeCard = JSON.parse(challenges[id]);
+    var challengeCard = challenges[id];
     var tagsData = helpers.getTagNames(challengeCard.tags);
     return Object.assign({}, challengeCard, {tagsData});
   });
 }
 
-
-function allChallengeIds (orgsString) {
-  return orgsString.reduce((challengeIds, org) => challengeIds.concat(JSON.parse(org).challenges), []);
+// build up an array of all challenge ids from all given orgs
+function allChallengeIds (orgs) {
+  return orgs.reduce((challengeIds, org) => challengeIds.concat(org.challenges), []);
 }
-
-// At the moment there is no requirement to remove the users organisation from the list
-// function removeUsersOrg (loggedIn, allOrgsString) {
-//   if (loggedIn.organisation_id === -1) { return allOrgsString; }
-//   return allOrgsString.slice(0, loggedIn.organisation_id).concat(allOrgsString.slice(loggedIn.organisation_id + 1));
-// }

@@ -116,8 +116,9 @@ helpers.sortAlphabetically = (key) => (arr) =>
 helpers.sortByDate = (arr) =>
   helpers.cloneArray(arr).sort((ch1, ch2) => ch2.date - ch1.date);
 
-helpers.filterActive = (arr) => arr.filter((el) =>
-  typeof el === 'string' ? JSON.parse(el).active : el.active);
+helpers.filterActive = (arr) => arr.filter((el) => el.active);
+
+helpers.parseArray = (arr) => arr.map(el => JSON.parse(el));
 
 // add the names to all tagIds that this function receives
 helpers.getTagNames = (tagIds) => {

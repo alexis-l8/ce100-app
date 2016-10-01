@@ -8,6 +8,7 @@ module.exports = (request, reply) => {
   if (orgId === -1) {
     return reply.redirect('/browse/orgs');
   }
+  // get all orgs
   request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
     Hoek.assert(!error, 'redis error');
     // get all challenges
@@ -23,8 +24,8 @@ module.exports = (request, reply) => {
       var challenges = getChallenges(challengesList, organisation.challenges);
       // only add matches if primary user is logged in.
       if (loggedIn.organisation_id === orgId) {
-        //  Filter inactive organisations, TODO: and users own org
-        var organisations = helpers.filterActive(stringifiedOrgs.map(el => JSON.parse(el)));
+        //  Filter inactive organisations, and users own org
+        var organisations = helpers.filterActive(removeUsersOrg(loggedIn, orgs));
         challenges = addMatchesToChallenges(organisations, challenges);
       }
       // if no primary user then reply
@@ -45,7 +46,6 @@ module.exports = (request, reply) => {
 };
 
 function addMatchesToChallenges (allOrgs, allChallenges) {
-  // TODO: ensure there are challenges to looop through
   return allChallenges.map(ch => {
     var matches = getMatches(allOrgs, ch);
     var filtered = filterZeroMatches(matches);
@@ -98,4 +98,6 @@ function getChallenges (challengesList, organisationChallenges) {
   return challengeArr.length === 0 ? false : activeChallenges;
 }
 
+function removeUsersOrg (loggedIn, allOrgs) {
+  return allOrgs.filter(org => loggedIn !== allOrgs.id);
 }
