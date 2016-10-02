@@ -13,13 +13,13 @@ module.exports = (request, reply) => {
     Hoek.assert(!error, 'redis error');
     var user = allUsers.filter(eachUser => JSON.parse(eachUser).email === email);
     if (user.length === 0) {
-      return reply(Boom.unauthorized('Sorry, that email has not been registered.'));
+      return reply.view('login', {error: rejectLogin(request.payload)}).code(401);
     }
     var userDetails = JSON.parse(user[0]);
     bcrypt.compare(password, userDetails.password, function (error, isValid) {
       Hoek.assert(!error, 'bcrypt failure');
-      if (!isValid) {
-        return reply(Boom.unauthorized('Sorry, that password is invalid, please try again.'));
+      if (error || !isValid) {
+        return reply.view('login', {error: rejectLogin(request.payload)}).code(401);
       }
       userDetails.last_login = Date.now();
       redis.LSET('people', userDetails.id, JSON.stringify(userDetails), (error, response) => {
@@ -40,3 +40,10 @@ module.exports = (request, reply) => {
     });
   });
 };
+
+function rejectLogin (values) {
+  return {
+    message: 'Sorry, that email or password is incorrect. Please try again.',
+    values
+  };
+}

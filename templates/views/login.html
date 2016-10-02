@@ -7,12 +7,14 @@
     <input  class="form__input form__input--login"
             type="email"
             name="email"
-            placeholder="Enter email">
+            placeholder="Enter email"
+            value="{{error.values.email}}">
     <input  class="form__input form__input--login"
             type="password"
             name="password"
             placeholder="Enter password">
     <button class="button button--login">Login</button>
+    <p class="error error--login">{{error.message}}</p>
   </form>
 
   <!-- <a href="#" class="copy copy__text-link">Forgot password?</a> -->

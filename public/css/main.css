@@ -742,3 +742,18 @@ Light-teal:     #66d9e0;
     padding-right: 0.6rem;
     padding-top: 0.9rem;
 }
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    error classes
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+.error {
+  color: #e4164c;
+  text-align: center;
+}
+/*.error__snackbar {
+  text-align: center;
+  background-color: white;
+}*/
+.error--login {
+  color: #ff5e5e;
+}
