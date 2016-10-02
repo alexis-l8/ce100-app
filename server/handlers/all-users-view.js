@@ -35,7 +35,7 @@ function attachOrgsToUsers (stringifiedOrgs, stringifiedUsers) {
   return stringifiedUsers.map(u => {
     var user = JSON.parse(u);
     var additionalInfo = {
-      organisation_id: user.organisation_id > -1
+      organisation_name: user.organisation_id > -1
         ? orgs[user.organisation_id].name
         : false
     };
