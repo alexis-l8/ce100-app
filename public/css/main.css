@@ -530,6 +530,10 @@ Light-teal:     #66d9e0;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
     }
+      .form__input-error {
+        border: 1px solid #f5c7c7;
+        background-color: #fff4f4;
+      }
     /* Focus state styles */
         .form__input:focus {
             outline-offset: -0.5rem;
@@ -743,20 +747,27 @@ Light-teal:     #66d9e0;
     padding-top: 0.9rem;
 }
 /*|||||||||||||||||||||||||||||||||||||||||||||
-    error classes
+    snackbar classes
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .error {
   color: #e4164c;
   text-align: center;
+  font-size: 0.8rem;
 }
   .error::first-letter {
     text-transform: capitalize;
   }
-/*.error__snackbar {
+.snackbar {
   text-align: center;
-  background-color: white;
-}*/
+  padding: 0.4rem 0;
+}
+  .snackbar-error {
+    background-color: #ffe2e2
+  }
+  .snackbar-success {
+    background-color: #4bbf97;
+  }
 .error--login {
   color: #ff5e5e;
 }
