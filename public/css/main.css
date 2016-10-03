@@ -750,6 +750,9 @@ Light-teal:     #66d9e0;
   color: #e4164c;
   text-align: center;
 }
+  .error::first-letter {
+    text-transform: capitalize;
+  }
 /*.error__snackbar {
   text-align: center;
   background-color: white;

@@ -3,7 +3,18 @@ var Joi = require('joi');
 module.exports = {
   payload: {
     email: Joi.string().email().required(),
-    password: Joi.string().min(6).required(),
-    failAction: 'error'
-  }
+    password: Joi.string().min(6).required()
+  },
+  failAction: failAction
 };
+
+function failAction (request, reply, source, error) {
+  reply.view('login', {error: errorOptions(error)}).code(401);
+}
+
+function errorOptions (err) {
+  return {
+    values: err.data._object,
+    message: err.data.details[0].message.split('"').join('').split('_').join('').split('-').join('')
+  };
+}

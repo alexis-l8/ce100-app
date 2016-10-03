@@ -1,9 +1,7 @@
 var Hoek = require('hoek');
-var Boom = require('boom');
 var jwt = require('jsonwebtoken');
 var aguid = require('aguid');
 var bcrypt = require('bcrypt');
-var helpers = require('./helpers.js');
 
 module.exports = (request, reply) => {
   var redis = request.redis;
