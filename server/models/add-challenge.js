@@ -9,7 +9,6 @@ module.exports = {
 };
 
 function failAction (view) {
-  console.log('in failaction function');
   return function (request, reply, source, error) {
     reply.view(view, {error: errorOptions(error)}).code(401);
   };
