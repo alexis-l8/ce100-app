@@ -51,6 +51,7 @@ tape('/challenges/add (POST) - submit new challenge as a primary_user without ta
     payload: payloads.addChallenge,
     headers: { cookie: `token=${primary_token}` }
   };
+
   server.inject(createNewChallenge, reply => {
     var challengeId = reply.result.challengeId;
     var url = reply.headers.location;
@@ -159,6 +160,26 @@ tape('/challenges/add (POST) - submit new challenge as a primary_user with multi
           t.end();
         });
       });
+    });
+  });
+});
+
+tape('/challenges/add (POST) fail validation', t => {
+  var failValidation = (payload) => ({
+    method: 'POST',
+    url: '/challenges/add',
+    payload: payload,
+    headers: { cookie: `token=${primary_token}` }
+  });
+  var noTitle = {title: '', description: 'hello description'};
+  var noDescription = {title: 'Hello', description: ''};
+  server.inject(failValidation(noTitle), res => {
+    t.equal(res.statusCode, 401, 'No title fails validation returns 401');
+    t.ok(res.payload.indexOf('title is not allowed to be empty') > -1, 'No title fails validation with error message: "title is not allowed to be empty"');
+    server.inject(failValidation(noDescription), res => {
+      t.equal(res.statusCode, 401, 'No description fails validation returns 401');
+      t.ok(res.payload.indexOf('description is not allowed to be empty') > -1, 'No description fails validation with error message: "description is not allowed to be empty"');
+      t.end();
     });
   });
 });
