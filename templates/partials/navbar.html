@@ -1,5 +1,5 @@
-<nav class="navbar">
   {{#if permissions.primary}}
+  <nav class="navbar">
     <ul class="navbar__links">
       <li class="navbar__item">
         <a href="/orgs" class="navbar__link">
@@ -19,19 +19,26 @@
           <span class="navbar__link navbar__link--with-icon">Profile</span>
         </a>
       </li>
-      </ul>
+    </ul>
+  </nav>
   {{else}}
-    <ul class="navbar__links">
-        {{#if alternate}}
-          {{#each alternate}}
-            {{>navbar-list}}
-          {{/each}}
-        {{else}}
-        <li class="navbar__item">
-          <a href="/orgs" class="navbar__link">Orgs</a></li>
-        <li class="navbar__item">
-          <a href="/people" class="navbar__link">People</a></li>
-          {{/if}}
-        </ul>
-    {{/if}}
-</nav>
+  <nav class="navbar">
+    <div class="navbar__links">
+      <div class="navbar__item">
+        <a href="/orgs" class="navbar__link">
+          <i class="navbar__icon icon icon--spyglass"></i>
+          <span class="navbar__link navbar__link--with-icon">Browse</span>
+        </a>
+      </div>
+      <div class="navbar__item navbar__item--toggle">
+        <label class="navbar__link" for="add-more">+</label>
+        <input class="navbar__link--checkbox" type="checkbox" name="add-more" />
+        <div class="navbar__item--hidden">
+          <a href="/orgs" class="navbar__link--toggle-menu">Orgs</a>
+          <a href="/people" class="navbar__link--toggle-menu">Users</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  {{/if}}
