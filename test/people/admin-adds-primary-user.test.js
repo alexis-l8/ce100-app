@@ -47,6 +47,39 @@ tape('/people/add check auth', t => {
   });
 });
 
+tape('/people/add fail validation', t => {
+  var fail = (payload) => ({
+    method: 'POST',
+    url: '/people/add',
+    payload: payload,
+    headers: { cookie: `token=${admin_token}` }
+  });
+
+  // failing payloads
+  var noFirst = {first_name: ''};
+  var noLast = {first_name: 'Jaja', last_name: ''};
+  var noPhone = {first_name: 'Jaja', last_name: 'Bink', email: 'ja@ju.co', phone: '', organisation_id: '-1'};
+  var shortPhone = {first_name: 'Jaja', last_name: 'Bink', email: 'ja@ju.co', phone: '+442088377', organisation_id: '-1'};
+
+  server.inject(fail(noFirst), res => {
+    t.equal(res.statusCode, 401, 'no first name fails validation at /people/add');
+    t.ok(res.payload.indexOf('first name is not allowed to be empty') > -1, 'reply to user with following message: "first name is not allowed to be empty"');
+    server.inject(fail(noLast), res => {
+      t.equal(res.statusCode, 401, 'no last name fails validation at /people/add');
+      t.ok(res.payload.indexOf('last name is not allowed to be empty') > -1, 'reply to user with following message: "last name is not allowed to be empty"');
+      server.inject(fail(noPhone), res => {
+        t.equal(res.statusCode, 401, 'no phone number fails validation at /people/add');
+        t.ok(res.payload.indexOf('phone must be a number') > -1, 'reply to user with following message: "phone must be a number"');
+        server.inject(fail(shortPhone), res => {
+          t.equal(res.statusCode, 401, 'Too short phone number fails validation at /people/add');
+          t.ok(res.payload.indexOf('phone must be larger than or equal to') > -1, 'reply to user with following message: "phone must be at least"');
+          t.end();
+        });
+      });
+    });
+  });
+});
+
 tape('add and activate a new user and updates the linked organisation', t => {
   var addOrg = {
     method: 'POST',
