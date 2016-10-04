@@ -6,7 +6,7 @@ module.exports = (request, reply) => {
   request.redis.LINDEX('organisations', request.params.id, (error, stringifiedOrg) => {
     Hoek.assert(!error, error);
     var org = JSON.parse(stringifiedOrg);
-    fs.readFile(path.join(__dirname, '../../tags/tags.json'), 'utf8', (error, data) => {
+    request.redis.HGET('tags', 'tags', (error, data) => {
       Hoek.assert(!error, error);
       var allTags = JSON.parse(data);
       if (org.tags) {
