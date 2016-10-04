@@ -98,18 +98,20 @@ helpers.addPasswordToUser = (hashed, user) => {
   return JSON.stringify(updatedUser);
 };
 
-helpers.getTagNames = (tagIds) => {
-  var fs = require('fs');
-  var path = require('path');
-  var allTags = JSON.parse(fs.readFileSync(path.join(__dirname, '../../tags/tags.json'), 'utf8'));
-  return tagIds
-    ? tagIds.map(tagId => {
-      return {
-        id: tagId,
-        name: allTags[tagId[0]].tags[tagId[1]].name
-      };
-    })
-  : false;
+helpers.getTagNames = (redis, tagIds, callback) => {
+  var Hoek = require('hoek');
+  redis.HGET('tags', 'tags', (error, response) => {
+    Hoek.assert(!error, error);
+    var allTags = JSON.parse(response);
+    var tags = tagIds
+      ? tagIds.map(tagId => {
+        return {
+          id: tagId,
+          name: allTags[tagId[0]].tags[tagId[1]].name
+        };
+      }) : false;
+    callback(tags);
+  });
 };
 
 module.exports = helpers;
