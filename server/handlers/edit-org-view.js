@@ -14,21 +14,21 @@ module.exports = (request, reply) => {
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');
     var organisation = JSON.parse(stringifiedOrg);
-    var organisationTags = helpers.getTagNames(organisation.tags);
-    organisation.tags = organisationTags;
-
-    if (organisation.primary_id === -1) {
-      var options = Object.assign({}, organisation, permissions);
-      return reply.view('organisations/edit', options);
-    }
-    request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
-      Hoek.assert(!error, 'redis error');
-      var {first_name, last_name, id} = JSON.parse(stringifiedPrimaryUser);
-      var options = Object.assign({}, organisation, {
-        primary_user_name: `${first_name} ${last_name}`,
-        primary_user_id: id
-      }, permissions);
-      reply.view('organisations/edit', options);
+    helpers.getTagNames(request.redis, organisation.tags, organisationTags => {
+      organisation.tags = organisationTags;
+      if (organisation.primary_id === -1) {
+        var options = Object.assign({}, organisation, permissions);
+        return reply.view('organisations/edit', options);
+      }
+      request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedPrimaryUser) => {
+        Hoek.assert(!error, 'redis error');
+        var {first_name, last_name, id} = JSON.parse(stringifiedPrimaryUser);
+        var options = Object.assign({}, organisation, {
+          primary_user_name: `${first_name} ${last_name}`,
+          primary_user_id: id
+        }, permissions);
+        reply.view('organisations/edit', options);
+      });
     });
   });
 };
