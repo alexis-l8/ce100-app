@@ -1,12 +1,18 @@
 <!-- Main Content -->
 <div class="container log-in-layout">
 
+  {{#if error}}
+  <div class="snackbar snackbar-error">
+    <h1 class="error">{{error.message}}</h1>
+  </div>
+  {{/if}}
+
   <form class="form" method="post">
-    <label class="form__label" for="name">Password</label>
-    <input class="form__input log-in-fields" type="password" name="password">
+    <label class="form__label" for="password">Password</label>
+    <input class="form__input log-in-fields {{error.password}}" type="password" name="password">
     <label class="form__label" for="name">Confirm Password</label>
-    <input class="form__input log-in-fields" type="password" name="confirmPassword">
-    <button class="button log-in-fields">Login</button>
+    <input class="form__input log-in-fields {{error.confirm_password}}" type="password" name="confirm_password">
+    <button class="button log-in-fields" type="submit">Login</button>
   </form>
 
 </div>

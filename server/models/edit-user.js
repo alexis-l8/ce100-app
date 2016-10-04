@@ -4,7 +4,8 @@ module.exports = {
   payload: (value, options, next) => {
     var scope = options.context.auth.credentials.scope;
     return Joi.validate(value, schema[scope], next);
-  }
+  },
+  failAction: require('../handlers/edit-user-view.js')
 };
 
 var schema = {
@@ -15,7 +16,7 @@ var schema = {
     email: Joi.string().email().required(),
     phone: Joi.string().min(8).max(13),
     organisation_id: Joi.number().min(-1).required(),
-    user_type: Joi.string().valid('admin', 'primary')
+    user_type: Joi.string().valid('admin', 'primary').required()
   },
   primary: {
     first_name: Joi.string().min(1).required(),
