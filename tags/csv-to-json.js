@@ -1,4 +1,5 @@
 var Hoek = require('hoek');
+var redis = require('redis').createClient();
 var fs = require('fs');
 var path = require('path');
 
@@ -35,7 +36,7 @@ module.exports = (callback) => {
           });
         }
         if (rowLength === body.length - 1) {
-          fs.writeFile(path.join(__dirname, 'tags.json'), JSON.stringify(allTags), (error, response) => {
+          redis.HSET('tags', 'tags', JSON.stringify(allTags), (error, response) => {
             Hoek.assert(!error, error);
             callback('Hello');
           });
