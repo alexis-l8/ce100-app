@@ -11,7 +11,7 @@ module.exports = (request, reply) => {
     Hoek.assert(!error, 'redis error');
     // TODO: catch for case where org at specified userId doesn't exist.
     var organisation = JSON.parse(stringifiedOrg);
-    var organisationTags = organisation.tags && getTagNames(organisation.tags);
+    var organisationTags = organisation.tags && helpers.getTagNames(organisation.tags);
     organisation.tags = organisationTags;
 
     // get all challenges
@@ -44,19 +44,9 @@ function getUserInfo (stringifiedUser) {
 function getChallenges (challengesList, organisationChallenges) {
   var challengeArr = organisationChallenges.map((challengeId, index) => {
     var challengeCard = JSON.parse(challengesList[challengeId]);
-    var tagsArray = getTagNames(challengeCard.tags);
+    var tagsArray = helpers.getTagNames(challengeCard.tags);
     return Object.assign({}, challengeCard, {tags: tagsArray});
   });
   var activeChallenges = challengeArr.filter(challenge => challenge.active);
   return challengeArr.length === 0 ? false : activeChallenges;
-}
-
-function getTagNames (tagIds) {
-  var allTags = require('../../tags/tags.json');
-  return tagIds.map(tagId => {
-    return {
-      id: tagId,
-      name: allTags[tagId[0]].tags[tagId[1]].name
-    };
-  });
 }
