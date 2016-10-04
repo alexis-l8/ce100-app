@@ -12,9 +12,9 @@ module.exports = (request, reply) => {
       var allUsers = attachOrgsToUsers(stringifiedOrgs, stringifiedUsers);
       var users = {
         allUsers: loggedIn.scope === 'admin' ? allUsers : sortAlphabetically(filterActiveAndAdmin(allUsers)),
-        alternate: [{
-          path: '/people/add',
-          name: '+'
+        links: [{
+          path: '/people',
+          name: 'Users'
         }, {
           path: '/orgs',
           name: 'Orgs'
