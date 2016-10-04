@@ -6,7 +6,7 @@ module.exports = (request, reply) => {
   request.redis.LINDEX('challenges', request.params.challengeId, (error, stringifiedChallenge) => {
     Hoek.assert(!error, error);
     var challenge = JSON.parse(stringifiedChallenge);
-    fs.readFile(path.join(__dirname, '../../tags/tags.json'), 'utf8', (error, data) => {
+    request.redis.HGET('tags', 'tags', (error, data) => {
       Hoek.assert(!error, error);
       var allTags = JSON.parse(data);
       if (challenge.tags) {
