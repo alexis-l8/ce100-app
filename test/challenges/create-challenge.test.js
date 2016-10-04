@@ -134,10 +134,17 @@ tape('/challenges/add (POST) - submit new challenge as a primary_user with multi
     payload: payloads.addTags,
     headers: { cookie: `token=${primary_token}` }
   };
+  var exceedMaxTags = url => ({
+    method: 'POST',
+    url: url,
+    payload: { tags: ['[0, 0]', '[0, 1]', '[0, 2]', '[0, 3]', '[0, 4]', '[0, 5]', '[1, 0]', '[1, 1]', '[1, 2]', '[1, 3]', '[1, 4]', '[1, 5]'] },
+    headers: { cookie: `token=${primary_token}` }
+  });
   var viewOrgDetails = {
     method: 'GET',
     headers: { cookie: `token=${primary_token}` }
   };
+
   server.inject(createNewChallenge, reply => {
     var challengeId = reply.result.challengeId;
     var url = reply.headers.location;
@@ -145,19 +152,24 @@ tape('/challenges/add (POST) - submit new challenge as a primary_user with multi
     t.equal(url, `/challenges/${challengeId}/tags`, 'user is redirected to /challenges/{id}/tags to add tags');
     viewSelectedTags.url = url;
     updateSelectedTags.url = url;
-    server.inject(viewSelectedTags, reply => {
-      t.equal(reply.statusCode, 200, 'select-tags-view exists (endpoint: /challenges/{id}/tags)');
-      t.ok(reply.payload.indexOf('Select Tags'), 'user is displayed the tag-selection page');
-      server.inject(updateSelectedTags, reply => {
-        var orgId = reply.result.orgId;
-        var url2 = reply.headers.location;
-        t.equal(reply.statusCode, 302, 'user selects some tags and is redirected to org view');
-        t.equal(url2, `/orgs/${orgId}`, 'user is redirected to /orgs/{id} to add tags');
-        viewOrgDetails.url = url2;
-        server.inject(viewOrgDetails, reply => {
-          t.ok(reply.result.indexOf('GLOBAL PARTNER') > -1, 'challenge is displayed with Global Partners tag');
-          t.ok(reply.result.indexOf('USA') > -1, 'challenge is displayed with USA tag');
-          t.end();
+
+    server.inject(exceedMaxTags(url), reply => {
+      t.equal(reply.statusCode, 401, 'exceeding 10 tags returns 401 status code');
+      t.ok(reply.payload.indexOf('a maximum of 10 tags can be chosen') > -1, 'reply with message indicating the user can pick a maximum of 10 tags');
+      server.inject(viewSelectedTags, reply => {
+        t.equal(reply.statusCode, 200, 'select-tags-view exists (endpoint: /challenges/{id}/tags)');
+        t.ok(reply.payload.indexOf('Select Tags'), 'user is displayed the tag-selection page');
+        server.inject(updateSelectedTags, reply => {
+          var orgId = reply.result.orgId;
+          var url2 = reply.headers.location;
+          t.equal(reply.statusCode, 302, 'user selects some tags and is redirected to org view');
+          t.equal(url2, `/orgs/${orgId}`, 'user is redirected to /orgs/{id} to add tags');
+          viewOrgDetails.url = url2;
+          server.inject(viewOrgDetails, reply => {
+            t.ok(reply.result.indexOf('GLOBAL PARTNER') > -1, 'challenge is displayed with Global Partners tag');
+            t.ok(reply.result.indexOf('USA') > -1, 'challenge is displayed with USA tag');
+            t.end();
+          });
         });
       });
     });

@@ -1,8 +1,11 @@
 var Hoek = require('hoek');
+var helpers = require('./helpers.js');
 
-module.exports = (request, reply) => {
-  request.redis.LINDEX('challenges', request.params.challengeId, (error, stringifiedChallenge) => {
-    Hoek.assert(!error, error);
+module.exports = (request, reply, source, joiErr) => {
+  var error = helpers.errorOptions(joiErr);
+
+  request.redis.LINDEX('challenges', request.params.challengeId, (redisErr, stringifiedChallenge) => {
+    Hoek.assert(!redisErr, error);
     var challenge = JSON.parse(stringifiedChallenge);
     var allTags = require('../../tags/tags.json');
     if (challenge.tags) {
@@ -12,7 +15,7 @@ module.exports = (request, reply) => {
       });
     }
     var permissions = require('./helpers.js').getPermissions(request.auth.credentials, 'scope', 'admin');
-    var options = Object.assign({ parent_tags: allTags }, permissions);
-    reply.view('tags', options);
+    var options = Object.assign({ parent_tags: allTags }, permissions, {error});
+    reply.view('tags', options).code(error ? 401 : 200);
   });
 };
