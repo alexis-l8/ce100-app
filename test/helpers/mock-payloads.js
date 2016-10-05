@@ -55,6 +55,11 @@ mockPayloads.loginPrimary = {
   password: 'Hello1'
 };
 
+mockPayloads.primary3Login = {
+  email: 'be@ma.co',
+  password: 'Hello1'
+};
+
 mockPayloads.editUserRemoveOrg = {
   first_name: 'Ben',
   last_name: 'Maynard',

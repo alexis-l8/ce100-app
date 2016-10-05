@@ -3,25 +3,37 @@ var helpers = require('./helpers.js');
 
 module.exports = (request, reply) => {
   var orgId = parseInt(request.params.id, 10);
-  var permissions = helpers.getPermissions(request.auth.credentials, 'organisation_id', orgId);
+  var loggedIn = request.auth.credentials;
+  var permissions = helpers.getPermissions(loggedIn, 'organisation_id', orgId);
   if (orgId === -1) {
-    return reply.redirect('/orgs');
+    return reply.redirect('/browse/orgs');
   }
-  request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
+  // get all orgs
+  request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
     Hoek.assert(!error, 'redis error');
+
     // TODO: catch for case where org at specified userId doesn't exist.
-    var organisation = JSON.parse(stringifiedOrg);
+    var orgs = helpers.parseArray(stringifiedOrgs);
+    var organisation = orgs[orgId];
     helpers.getTagNames(request.redis, organisation.tags, organisationTags => {
-      organisation.tags = organisationTags;
+      organisation.tagsData = organisationTags;
 
       // get all challenges
       request.redis.LRANGE('challenges', 0, -1, (error, challengesList) => {
         Hoek.assert(!error, 'redis error');
-        getChallenges(request.redis, challengesList, organisation.challenges, challenges => {
+        var allChallenges = helpers.parseArray(challengesList);
+        helpers.getChallenges(request.redis, allChallenges, organisation.challenges, challenges => {
+          var activeChallenges = helpers.filterActive(challenges);
+          // only add matches if primary user is logged in.
+          if (loggedIn.organisation_id === orgId) {
+            //  Filter inactive organisations, and users own org
+            var organisations = helpers.filterActive(removeUsersOrg(loggedIn, orgs));
+            activeChallenges = addMatchesToChallenges(organisations, activeChallenges);
+          }
 
           // if no primary user then reply
           if (organisation.primary_id === -1) {
-            var options = Object.assign({}, {challenges}, {organisation}, permissions);
+            var options = Object.assign({}, {activeChallenges}, {organisation}, permissions);
             return reply.view('organisations/details', options);
           }
 
@@ -29,7 +41,7 @@ module.exports = (request, reply) => {
           request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedUser) => {
             Hoek.assert(!error, 'redis error');
             var primary_user = getUserInfo(stringifiedUser);
-            var options = Object.assign({}, {primary_user}, {challenges}, {organisation}, permissions);
+            var options = Object.assign({}, {primary_user}, {activeChallenges}, {organisation}, permissions);
             return reply.view('organisations/details', options);
           });
         });
@@ -38,27 +50,49 @@ module.exports = (request, reply) => {
   });
 };
 
+function addMatchesToChallenges (allOrgs, allChallenges) {
+  return allChallenges.map(ch => {
+    var matches = getMatches(allOrgs, ch);
+    var filtered = filterZeroMatches(matches);
+    var sorted = topTen(sortByMatches(filtered));
+    return Object.assign({}, ch, {matches: sorted});
+  });
+}
+
+// returns 1 or 0 if challengeTag exists in orgTags
+function filterEachTag (challengeTag, orgTags) {
+  return orgTags.reduce((count, current) =>
+    challengeTag[0] === current[0] && challengeTag[1] === current[1] ? count + 1 : count
+  , 0);
+}
+
+// maps through orgs and adds number of matches with given challenge
+function getMatches (orgs, challenge) {
+  return orgs.map(org => {
+    // increase the count by one if there is a match with this org
+    var matches = challenge.tags.reduce((count, chalTag) => {
+      return count + filterEachTag(chalTag, org.tags);
+    }, 0);
+    return Object.assign({}, org, {matches});
+  });
+}
+
+function topTen (arr) {
+  return arr.slice(0, 10);
+}
+function filterZeroMatches (allOrgs) {
+  return allOrgs.filter((org) => org.matches > 0);
+}
+
+function sortByMatches (orgs) {
+  return helpers.cloneArray(orgs).sort((a, b) => b.matches - a.matches);
+}
+
 function getUserInfo (stringifiedUser) {
   var { first_name, last_name, email, phone, job_title } = JSON.parse(stringifiedUser);
   return {first_name, last_name, email, phone, job_title};
 }
 
-function getChallenges (redis, challengesList, organisationChallenges, callback) {
-  var Hoek = require('hoek');
-  redis.HGET('tags', 'tags', (error, response) => {
-    Hoek.assert(!error, error);
-    var allTags = JSON.parse(response);
-    var challengeArr = organisationChallenges.map((challengeId, index) => {
-      var challengeCard = JSON.parse(challengesList[challengeId]);
-      var tagsArray = challengeCard.tags && challengeCard.tags.map(tagId => {
-        return {
-          id: tagId,
-          name: allTags[tagId[0]].tags[tagId[1]].name
-        };
-      });
-      return Object.assign({}, challengeCard, {tags: tagsArray});
-    });
-    var activeChallenges = challengeArr.filter(challenge => challenge.active);
-    challengeArr.length === 0 ? callback(false) : callback(activeChallenges);
-  });
+function removeUsersOrg (loggedIn, allOrgs) {
+  return allOrgs.filter(org => loggedIn !== allOrgs.id);
 }

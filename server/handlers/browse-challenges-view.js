@@ -10,7 +10,7 @@ module.exports = (request, reply) => {
     request.redis.LRANGE('challenges', 0, -1, (error, allChallengesString) => {
       Hoek.assert(!error, 'redis error');
       // if logged in has an org, remove it from the list of orgs
-      var usefulOrgs = filterActive(removeUsersOrg(loggedIn, allOrgsString));
+      var usefulOrgs = helpers.filterActive(removeUsersOrg(loggedIn, allOrgsString));
       // build up array of all relevent challenge ids
       var challengeIds = allChallengeIds(usefulOrgs);
       // map through all challenge id's
@@ -20,7 +20,6 @@ module.exports = (request, reply) => {
       // TODO: filter by tags
       // sort by most recent
       var sorted = sortByDate(cloneArray(challenges));
-
       var options = Object.assign({}, {challenges: sorted}, permissions);
       reply.view('browse', options);
     });
@@ -58,10 +57,6 @@ function getTagNames (tagIds) {
     id: tagId,
     name: allTags[tagId[0]].tags[tagId[1]].name
   }));
-}
-
-function filterActive (arr) {
-  return arr.filter((el) => JSON.parse(el).active);
 }
 
 function filterArchived (arr) {

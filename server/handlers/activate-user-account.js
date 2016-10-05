@@ -25,7 +25,7 @@ module.exports = (request, reply) => {
           request.redis.HSET('sessions', session.jti, JSON.stringify(session), (error, res) => {
             Hoek.assert(!error, 'redis error');
             var token = jwt.sign(session, process.env.JWT_SECRET);
-            reply.redirect('/orgs').state('token', token);
+            reply.redirect('/browse/orgs').state('token', token);
           });
         });
       });

@@ -9,8 +9,8 @@
       <label class="form__label" for="description">Description</label>
       <input class="form__input" type="text" name="description" id="description" value="{{description}}">
 
-      {{#if tags}}
-        {{#each tags}}
+      {{#if tagsData}}
+        {{#each tagsData}}
           <span class="tag__label">{{name}}</span>
         {{/each}}
       {{else}}
