@@ -1,6 +1,4 @@
 var Hoek = require('hoek');
-var fs = require('fs');
-var path = require('path');
 
 module.exports = (request, reply) => {
   request.redis.LINDEX('organisations', request.params.id, (error, stringifiedOrg) => {
