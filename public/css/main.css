@@ -195,15 +195,16 @@ Light-teal:     #66d9e0;
         .navbar__link--checkbox {
           display: none;
         }
-        .navbar__link--checkbox:checked + .navbar__item--hidden {
+        .navbar__link--checkbox:checked ~ .navbar__hidden {
           display: block;
         }
-        .navbar__item--hidden {
+        .navbar__hidden {
           background-color: #40667e;
           width: 50%;
           position: absolute;
           bottom: 3.5em;
           right: 0;
+          display: none;
         }
           .navbar__link--toggle-menu {
             color: #ffffff;
@@ -211,6 +212,7 @@ Light-teal:     #66d9e0;
             display: block;
             padding: 1.5em 0;
             border-bottom: 1px solid #89a0ae;
+            text-decoration: none;
           }
 
   /*|||||||||||||||||||||||||||||||||||||||||||||
