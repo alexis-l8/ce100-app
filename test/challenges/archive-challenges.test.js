@@ -1,10 +1,12 @@
 var tape = require('tape');
 var jwt = require('jsonwebtoken');
+var fs = require('fs');
+var path = require('path');
 var client = require('redis').createClient();
 
 var server = require('../../server/server.js');
 var payloads = require('../helpers/mock-payloads.js');
-var allTags = require('../../tags/tags.json');
+var allTags = JSON.parse(fs.readFileSync(path.join(__dirname, '../../tags/tags.json'), 'utf8'));
 var setup = require('../helpers/set-up.js');
 var initialChallenges = require('../helpers/setup/challenges.js')['challenges'];
 
@@ -13,11 +15,7 @@ var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
 var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
 
 tape('set up: initialise db', t => {
-  setup.initialiseDB(() => {
-    require('../../tags/csv-to-json.js')(() => {
-      t.end();
-    });
-  });
+  setup.initialiseDB(() => t.end());
 });
 
 tape('testing archiving/unarchiving of challenges', t => {
@@ -43,6 +41,9 @@ tape('testing archiving/unarchiving of challenges', t => {
     t.equal(reply.statusCode, 200, 'route exists and replies 200');
     t.ok(reply.result.indexOf(challengeCardDetails.title) > -1, 'title has been pre-filled correctly');
     t.ok(reply.result.indexOf(challengeCardDetails.description) > -1, 'description has been pre-filled correctly');
+    // QUESTION FOR @JMURPHYWEB AND @NELSONIC --> we're reading in the json file (functionality that we've replaced with drawing data out from redis)
+    // Is it ok that we're still doing this here, just for testing purposes? Might we get unexpected effects (like that experienced with caching),
+    // and would it therefore be an _inaccurate_ test of what we're trying to achieve?
     tags.forEach(tag => {
       var tagName = allTags[tag[0]].tags[tag[1]].name;
       t.ok(reply.result.indexOf(tagName) > -1, 'existing tags are correctly displayed');

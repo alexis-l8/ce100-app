@@ -10,9 +10,7 @@ var setup = require('../helpers/set-up.js');
 // browse organisations view with same filters, browse organisations without filters;
 
 tape('set up: initialise db', t => {
-  setup.initialiseDB(() => {
-    require('../../tags/csv-to-json.js')(() => t.end());
-  });
+  setup.initialiseDB(() => t.end());
 });
 
 tape('browse challenges', t => {
@@ -23,7 +21,7 @@ tape('browse challenges', t => {
   });
   var browseChallenges = cookie => ({
     method: 'GET',
-    url: '/challenges',
+    url: '/browse/challenges',
     headers: { cookie }
   });
   var addChallenge = cookie => ({
@@ -63,13 +61,11 @@ tape('browse challenges', t => {
     })
     // browse challenges view
     .then(res => {
-      t.equal(res.statusCode, 200, '/challenges route returns 200');
+      t.equal(res.statusCode, 200, '/browse/challenges route returns 200');
       t.ok(res.payload.indexOf('Challenge Number 5') > -1, 'challenges created by other orgs show up');
       t.equal(res.payload.indexOf('Ice Bucket'), -1, 'archived challenges do not show up');
       t.equal(res.payload.indexOf('Challenge Number 1'), -1, 'archived challenges created by my org do not show up');
-      t.equal(res.payload.indexOf('Challenge Number 2'), -1, 'challenges created by my org do not show up');
-      t.equal(res.payload.indexOf('Challenge Number 3'), -1, 'challenges created by my org do not show up');
-      // next we can add filters to the browse
+      // TODO: Add some filters to search challenges by
       return server.inject(login(payloads.loginAdmin));
     })
     // admin login

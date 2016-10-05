@@ -7,7 +7,7 @@ module.exports = {
       creator_id: 2,
       title: 'Challenge Number 1',
       description: 'What can I...?',
-      active: true,
+      active: false,
       tags: []
     },
     {
@@ -17,7 +17,7 @@ module.exports = {
       creator_id: 2,
       title: 'Challenge Number 2',
       description: 'How can I...?',
-      active: false,
+      active: true,
       tags: [[0, 1]]
     },
     {
@@ -27,7 +27,7 @@ module.exports = {
       creator_id: 2,
       title: 'Challenge Number 3',
       description: 'Where can I...?',
-      active: false,
+      active: true,
       tags: [[3, 1], [10, 3], [8, 2]]
     },
     {
@@ -47,7 +47,7 @@ module.exports = {
       creator_id: 3,
       title: 'Challenge Number 5',
       description: 'How have...?',
-      active: false,
+      active: true,
       tags: []
     },
     {
@@ -57,7 +57,7 @@ module.exports = {
       creator_id: 4,
       title: 'Challenge Number 6',
       description: 'Is there a way to...?',
-      active: false,
+      active: true,
       tags: []
     },
     {
@@ -67,7 +67,7 @@ module.exports = {
       creator_id: 5,
       title: 'Challenge Number 7',
       description: 'Is it possible to...?',
-      active: false,
+      active: true,
       tags: [[6, 2]]
     },
     {
@@ -77,7 +77,7 @@ module.exports = {
       creator_id: 2,
       title: 'Ice Bucket',
       description: 'How much ice?',
-      archived: true,
+      active: false,
       tags: [[1, 1], [1, 3]]
     }
   ]

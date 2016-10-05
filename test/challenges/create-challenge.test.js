@@ -11,11 +11,7 @@ var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
 var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
 
 tape('set up: initialise db', t => {
-  setup.initialiseDB(() => {
-    require('../../tags/csv-to-json.js')(() => {
-      t.end();
-    });
-  });
+  setup.initialiseDB(() => t.end());
 });
 
 tape('/challenges/add load general view', t => {
@@ -164,7 +160,7 @@ tape('/challenges/add (POST) - submit new challenge as a primary_user with multi
 });
 
 tape('teardown', t => {
-  client.FLUSHDB();
+  // client.FLUSHDB();
   t.end();
 });
 

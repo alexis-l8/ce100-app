@@ -21,9 +21,9 @@
 
     </div>
 
-    {{#if organisation.tags}}
+    {{#if organisation.tagsData}}
       <div class="card">
-        {{#each organisation.tags}}
+        {{#each organisation.tagsData}}
           <span class="tag__label">{{name}}</span>
         {{/each}}
       </div>
@@ -43,12 +43,20 @@
     </div>
     {{/if}}
 
-    {{#if challenges}}
+    {{#if activeChallenges}}
       <div class="card card--header card--tall">
         <h2 class="title title--tall">Our Current Challenges</h2>
       </div>
-      {{#each challenges}}
+      {{#each activeChallenges}}
         {{>challenge permissions=../permissions}}
+        {{#if matches}}
+          <div class="card card--challenge card__suggested-matches">
+            <h2 class="card__data">Suggested Matches</h2>
+          {{#each matches}}
+            <a class="card__data anchor--suggested-matches text-decoration" href="/orgs/{{id}}">{{name}}</a>
+          {{/each}}
+          </div>
+        {{/if}}
       {{/each}}
     {{/if}}
 </div>

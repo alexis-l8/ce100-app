@@ -10,9 +10,10 @@ module.exports = (request, reply) => {
       reply.view('challenges/edit', challenge);
       return;
     }
-    var tags = { tags: helpers.getTagNames(challenge.tags) };
-    var permissions = helpers.getPermissions(request.auth.credentials, 'scope', 'admin');
-    var options = Object.assign({}, challenge, tags, permissions);
-    reply.view('challenges/edit', options);
+    helpers.getTagNames(request.redis, challenge.tags, tagsData => {
+      var permissions = helpers.getPermissions(request.auth.credentials, 'scope', 'admin');
+      var options = Object.assign({}, challenge, {tagsData}, permissions);
+      reply.view('challenges/edit', options);
+    });
   });
 };

@@ -1,0 +1,17 @@
+<label class="tag__title" for="{{@index}}">{{name}}</label>
+<input  type="checkbox"
+        class="tag__input"
+        id="{{@index}}">
+
+<div class="form__subsection">
+    {{#each tags}}
+        <!-- TODO change href depending on what we are searching. -->
+        {{#if ../view.challenges}}
+          <a class="text-decoration" href="/browse/challenges?filter={{id}}">
+        {{else if ../view.orgs}}
+          <a class="text-decoration" href="/browse/orgs?filter={{id}}">
+        {{/if}}
+            <span class="tag__label" value=[{{id}}]>{{name}}</span>
+          </a>
+    {{/each}}
+</div>

@@ -4,7 +4,7 @@ var routes = [
   {
     method: 'GET',
     path: '/',
-    handler: (request, reply) => reply.redirect('/orgs')
+    handler: (request, reply) => reply.redirect('/browse/orgs')
   },
   {
     method: 'GET',
@@ -105,7 +105,7 @@ var routes = [
   {
     method: 'GET',
     path: '/orgs/add',
-    handler: require('./handlers/serve-view.js')('add-organisation'),
+    handler: require('./handlers/serve-view.js')('organisations/add'),
     config: {
       auth: { scope: 'admin' }
     }
@@ -118,11 +118,6 @@ var routes = [
       auth: { scope: 'admin' },
       validate: require('./models/admin-add-org.js')
     }
-  },
-  {
-    method: 'GET',
-    path: '/orgs',
-    handler: require('./handlers/all-orgs-view.js')
   },
   {
     method: 'GET',
@@ -159,11 +154,6 @@ var routes = [
   },
 
   /*  ---  CHALLENGE ROUTES  ---  */
-  {
-    method: 'GET',
-    path: '/challenges',
-    handler: require('./handlers/browse-challenges-view.js')
-  },
   {
     method: 'GET',
     path: '/challenges/{challengeId}/tags',
@@ -210,6 +200,18 @@ var routes = [
     method: 'GET',
     path: '/challenges/{id}/toggle-archive',
     handler: require('./handlers/toggle-archive-challenge.js')
+  },
+  /*  ---  BROWSE ROUTES  ---  */
+  // TODO: ADD VALIDATION TO QUERY PARAMS & REACT TO NON EXISTING TAG
+  {
+    method: 'GET',
+    path: '/browse/{view}/tags',
+    handler: require('./handlers/browse-add-tags-view.js')
+  },
+  {
+    method: 'GET',
+    path: '/browse/{view}',
+    handler: require('./handlers/browse-view.js')
   }
 ];
 

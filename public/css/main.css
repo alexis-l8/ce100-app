@@ -109,6 +109,16 @@ Light-teal:     #66d9e0;
 .icon--profile {
     background-image: url("../assets/Profile.svg");
 }
+
+.icon--dropdown {
+  background-image: url("../assets/Dropdown.svg");
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+  -ms-transform: translate(-50%,-50%); /* IE 9 */
+}
 .icon--cancel {
     background-image: url("../assets/Cross.svg");
     position: absolute;
@@ -186,31 +196,20 @@ Light-teal:     #66d9e0;
   /*|||||||||||||||||||||||||||||||||||||||||||||
     Toggle Bar
   |||||||||||||||||||||||||||||||||||||||||||*/
-  .togglebar__item {
+  .togglebar__item, .togglebar__item:hover{
     background: #033352;
   }
-    .togglebar__item:hover {
-      background: #194462;
-    }
-  .togglebar__item--selected {
-    background: #ece9e9;
+  .togglebar__item--selected, .togglebar__item--selected:hover {
+    background: #002944;
   }
-  .togglebar__item--selected:hover {
-    background: #ece9e9;
-  }
-  .togglebar__link {
+  .togglebar__link, .togglebar__link:visited  {
     padding: 1.5rem;
-    color: #66d9e0;
+    color: #6F8B9D;
   }
-  .togglebar__link:visited {
-    color: #66d9e0;
+  .togglebar__link--selected, .togglebar__link--selected:visited {
+    color: #ffffff;
   }
-  .togglebar__link--selected {
-      color: #033352;
-  }
-    .togglebar__link--selected:visited {
-      color: #033352;
-    }
+
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Containers
   |||||||||||||||||||||||||||||||||||||||||||*/
@@ -255,6 +254,10 @@ Light-teal:     #66d9e0;
     vertical-align: middle;
     display: table-cell;
 }
+.title--link {
+    text-decoration: none;
+}
+
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Copy
@@ -473,6 +476,10 @@ Light-teal:     #66d9e0;
       -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
       -ms-transform: translate(30deg); /* IE 9 */
     }
+.card__suggested-matches {
+  background-color: #f8ffff;
+  text-align: center;
+}
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Forms
@@ -622,6 +629,9 @@ Light-teal:     #66d9e0;
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Anchors
   |||||||||||||||||||||||||||||||||||||||||||*/
+.anchor {
+  text-decoration: none;
+}
 
 .anchor:link {
     text-align: center;
@@ -645,6 +655,12 @@ Light-teal:     #66d9e0;
 }
 .anchor--danger:visited {
     color: #900000;
+}
+.anchor--suggested-matches {
+  display: inline-block;
+  width: 48%;
+  margin-top: 0.8rem;
+  color: #66d9e0;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -679,6 +695,10 @@ Light-teal:     #66d9e0;
   float: right
 }
 
+.text-decoration {
+  text-decoration: none;
+}
+
 .log-in-logo {
   width: 60%;
   max-width: 300px; /*Just a guess*/
@@ -691,6 +711,10 @@ Light-teal:     #66d9e0;
   margin: 2rem auto;
   border: 1px solid #618298;
   border-radius: 25px;
+}
+
+.daintree--blue {
+  background: #00233B;
 }
 
 /*-----------FEEDBACK WIDGET-------------*/
@@ -709,7 +733,6 @@ Light-teal:     #66d9e0;
   -ms-transform: rotate(270deg);
   transform: rotate(270deg);
 }
-
 
 /*-----------NAVBAR TOP-------------*/
 .navbar__top {
