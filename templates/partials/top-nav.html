@@ -9,18 +9,12 @@
       <li class="navbar__top__item">
         <a href="/people" class="navbar__top__link">Contacts</a></li>
     </ul>
-  {{else}}
-    <!-- <ul class="navbar__top__links">
-        {{#if alternate}}
-          {{#each alternate}}
-            {{>navbar-list}}
-          {{/each}}
-        {{else}}
-        <li class="navbar__top__item">
-          <a href="/orgs" class="navbar__top__link">Orgs</a></li>
-        <li class="navbar__top__item">
-          <a href="/people" class="navbar__top__link">People</a></li>
-          {{/if}}
-        </ul> -->
-    {{/if}}
+  {{else if permissions.admin}}
+    <ul class="navbar__top__links">
+      <li class="navbar__top__item">
+        <a href="/people/{{permissions.userId}}/edit" class="navbar__top__link">Settings</a></li>
+      <li class="navbar__top__item">
+        <a href="/people" class="navbar__top__link">Contacts</a></li>
+    </ul>
+  {{/if}}
 </nav>
