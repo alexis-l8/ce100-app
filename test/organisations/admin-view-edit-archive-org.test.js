@@ -150,6 +150,32 @@ tape('admin can view and edit an org which does not have a primary user attached
   });
 });
 
+
+
+tape('/orgs/{id}/edit (POST) fail validation', t => {
+  var failValidation = id => ({
+    url: `/orgs/${id}/edit`,
+    method: 'POST',
+    payload: {name: '', mission_statement: 'some new statement'},
+    headers: {cookie: `token=${admin_token}`}
+  });
+
+  server.inject(failValidation(0), res => {
+    // Test failing validation on an org with a primary user
+    t.equal(res.statusCode, 401, 'no name returns a 401 status code');
+    t.ok(res.payload.indexOf('name is not allowed to be empty') > -1, 'Admin leaves the organisation name empty, they get an error message');
+    server.inject(failValidation(5), res => {
+      console.log(res.result);
+      // Test failing validation on an org without a primary user
+      t.equal(res.statusCode, 401, 'no name returns a 401 status code');
+      t.ok(res.payload.indexOf('name is not allowed to be empty') > -1, 'Admin leaves the organisation name empty, they get an error message');
+      t.end();
+    });
+  });
+});
+
+
+
 tape('teardown', t => {
   client.FLUSHDB();
   t.end();

@@ -2,7 +2,6 @@ var Hoek = require('hoek');
 var Boom = require('boom');
 
 module.exports = (request, reply) => {
-  console.log(request.payload);
   var orgId = parseInt(request.params.id, 10);
   var loggedIn = request.auth.credentials;
   if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin') {

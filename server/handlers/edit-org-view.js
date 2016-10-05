@@ -16,8 +16,8 @@ module.exports = (request, reply, source, joiErr) => {
     helpers.getTagNames(request.redis, organisation.tags, organisationTags => {
       organisation.tags = organisationTags;
       if (organisation.primary_id === -1) {
-        var options = Object.assign({}, organisation, permissions);
-        reply.view('organisations/edit', options);
+        var options = Object.assign({}, organisation, permissions, {error});
+        reply.view('organisations/edit', options).code(error ? 401 : 200);
         return;
       }
       request.redis.LINDEX('people', organisation.primary_id, (redisErr, stringifiedPrimaryUser) => {
