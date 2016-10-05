@@ -180,6 +180,7 @@ Light-teal:     #66d9e0;
             color: #40667e; /* Denim */
             font-size: 1em;
             line-height: 2;
+            cursor: pointer;
         }
         .navbar__link:visited {
             color: #40667e; /* Denim */
@@ -191,7 +192,26 @@ Light-teal:     #66d9e0;
         .navbar__link--with-icon {
             font-size: 0.625rem;
         }
-
+        .navbar__link--checkbox {
+          display: none;
+        }
+        .navbar__link--checkbox:checked + .navbar__item--hidden {
+          display: block;
+        }
+        .navbar__item--hidden {
+          background-color: #40667e;
+          width: 50%;
+          position: absolute;
+          bottom: 3.5em;
+          right: 0;
+        }
+          .navbar__link--toggle-menu {
+            color: #ffffff;
+            text-align: center;
+            display: block;
+            padding: 1.5em 0;
+            border-bottom: 1px solid #89a0ae;
+          }
 
   /*|||||||||||||||||||||||||||||||||||||||||||||
     Toggle Bar
