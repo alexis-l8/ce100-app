@@ -155,6 +155,14 @@ helpers.filterActive = (arr) => {
 
 helpers.parseArray = (arr) => arr.map(el => JSON.parse(el));
 
+helpers.errorOptions = (err) =>
+  // if there is no error, return falsey
+  err && {
+    values: err.data._object,
+    message: err.data.details[0].message.split('"').join('').split('_').join(' ').split('-').join(' '),
+    [err.data.details[0].path]: 'form__input-error'
+  };
+
 module.exports = helpers;
 
 // Leaving these helpers in here but they are not currently used

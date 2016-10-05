@@ -81,8 +81,9 @@ tape('update challenge card: title, description and tags', t => {
             server.inject(viewUpdates, reply => {
               t.equal(reply.statusCode, 200, 'org details view displays');
               updateTags.payload = payloads.addTags;
-              server.inject(removeTitleAndDescription, reply => {
-                t.equal(reply.statusCode, 400, ' validator kicks in - invalid update');
+              server.inject(removeTitleAndDescription, reply => { // for when there are _no_ tags
+                t.equal(reply.statusCode, 401, ' validator kicks in - invalid update');
+                t.ok(reply.payload.indexOf('title is not allowed to be empty') > -1, 'No title, respond with message: "title is not allowed to be empty"');
                 server.inject(updateTags, reply => {
                   t.equal(reply.statusCode, 302, 'challenge card tags updated - page redirecting');
                   var url = reply.headers.location;
@@ -91,7 +92,11 @@ tape('update challenge card: title, description and tags', t => {
                     t.equal(reply.statusCode, 200, 'org details view displays');
                     t.ok(reply.result.indexOf('GLOBAL PARTNER') > -1, 'challenge displays with Global Partner tag');
                     t.ok(reply.result.indexOf('USA') > -1, 'challenge displays with USA tag');
-                    t.end();
+                    server.inject(removeTitleAndDescription, reply => { // for when there _are_ tags, makes sure it can throw error
+                      t.equal(reply.statusCode, 401, ' validator kicks in - invalid update');
+                      t.ok(reply.payload.indexOf('title is not allowed to be empty') > -1, 'No title, respond with message: "title is not allowed to be empty"');
+                      t.end();
+                    });
                   });
                 });
               });

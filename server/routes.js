@@ -178,7 +178,7 @@ var routes = [
     path: '/challenges/add',
     handler: require('./handlers/add-challenge.js'),
     config: {
-      validate: require('./models/add-edit-challenge.js'),
+      validate: require('./models/add-challenge.js'),
       auth: { scope: 'primary' }
     }
   },
@@ -192,7 +192,7 @@ var routes = [
     path: '/challenges/{id}/edit',
     handler: require('./handlers/edit-challenge.js'),
     config: {
-      validate: require('./models/add-edit-challenge.js'),
+      validate: require('./models/edit-challenge.js'),
       auth: { scope: 'primary' }
     }
   },

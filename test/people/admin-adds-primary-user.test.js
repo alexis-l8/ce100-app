@@ -47,6 +47,40 @@ tape('/people/add check auth', t => {
   });
 });
 
+tape('/people/add fail validation', t => {
+  var fail = (payload) => ({
+    method: 'POST',
+    url: '/people/add',
+    payload: payload,
+    headers: { cookie: `token=${admin_token}` }
+  });
+
+  // failing payloads
+  var noFirst = {first_name: ''};
+  var noLast = {first_name: 'Jaja', last_name: ''};
+  var noPhone = {first_name: 'Jaja', last_name: 'Bink', email: 'ja@ju.co', phone: '', organisation_id: '-1'};
+  var shortPhone = {first_name: 'Jaja', last_name: 'Bink', email: 'ja@ju.co', phone: '+442088377', organisation_id: '-1'};
+
+  server.inject(fail(noFirst), res => {
+    t.equal(res.statusCode, 401, 'no first name fails validation at /people/add');
+    t.ok(res.payload.indexOf('first name is not allowed to be empty') > -1, 'reply to user with following message: "first name is not allowed to be empty"');
+    server.inject(fail(noLast), res => {
+      t.equal(res.statusCode, 401, 'no last name fails validation at /people/add');
+      t.ok(res.payload.indexOf('last name is not allowed to be empty') > -1, 'reply to user with following message: "last name is not allowed to be empty"');
+      server.inject(fail(noPhone), res => {
+        t.equal(res.statusCode, 401, 'no phone number fails validation at /people/add');
+        t.ok(res.payload.indexOf('phone must be a number') > -1, 'reply to user with following message: "phone must be a number"');
+        server.inject(fail(shortPhone), res => {
+          t.equal(res.statusCode, 401, 'Too short phone number fails validation at /people/add');
+          t.ok(res.payload.indexOf('phone must be larger than or equal to') > -1, 'reply to user with following message: "phone must be at least"');
+          t.end();
+        });
+      });
+    });
+  });
+});
+
+
 tape('add and activate a new user and updates the linked organisation', t => {
   var addOrg = {
     method: 'POST',
@@ -65,36 +99,46 @@ tape('add and activate a new user and updates the linked organisation', t => {
     url: '/logout',
     headers: { cookie: `token=${admin_token}` }
   };
+  var activateUser = hashed => method => payload => ({
+    url: `/people/activate/${hashed}`,
+    method: method,
+    payload: payload
+  });
+
+  var shortPassword = {password: 'aaa', confirm_password: 'aaa'};
+  var unmatchingPasswords = {password: 'Hello1', confirm_password: 'Hello2'};
+  var goodPasswords = payloads.usersActivatePayload;
+
+
   server.inject(addOrg, res => {
-    t.equal(res.statusCode, 302, 'redirects');
+    t.equal(res.statusCode, 302, 'redirects 1');
     server.inject(addPerson, res => {
-      t.equal(res.statusCode, 302, 'redirects');
+      t.equal(res.statusCode, 302, 'redirects 2');
       var newUrl = res.headers.location;
       t.ok(newUrl === '/people', 'route redirects to /people');
       var userId = res.result.userId;
       Iron.seal(userId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, hashed) => {
-        var activateUser = {
-          method: 'POST',
-          url: `/people/activate/${hashed}`,
-          payload: JSON.stringify(payloads.usersActivatePayload)
-        };
-        var activateUserView = {
-          method: 'GET',
-          url: `/people/activate/${hashed}`,
-          payload: JSON.stringify(payloads.usersActivatePayload)
-        };
+
+        var activateUserView = activateUser(hashed)('GET')();
+        var activatePost = activateUser(hashed)('POST');
+
         server.inject(activateUserView, res => {
-          // TODO: Ask Nelson & Marie -> Why is this undefined?
-          // console.log(res.headers.location);
-          // t.equal(res.headers.location.indexOf('/activate') > -1, 'activate account view returned if user is not already activated');
           t.ok(res.raw.req.url.indexOf('/activate') > -1, 'activate account view returned if user is not already activated');
-          server.inject(activateUser, res => {
-            t.equal(res.headers.location, '/browse/orgs', 'completing activate user redirects to dashboard');
-            t.ok(res.headers['set-cookie'], 'cookie has been set');
-            server.inject(logout, res => {
-              server.inject(activateUserView, res => {
-                t.equal(res.headers.location, '/login', 'if user tries to click on activation link having already activated, redirect to login');
-                t.end();
+          server.inject(activatePost(shortPassword), res => {
+            t.equal(res.statusCode, 401, 'fail validation returns 401');
+            t.ok(res.payload.indexOf('password length must be at least 6 characters long') > -1, 'A short password replies with message: "password length must be at least 6 characters long"');
+            server.inject(activatePost(unmatchingPasswords), res => {
+              t.equal(res.statusCode, 401, 'fail validation returns 401');
+              t.ok(res.payload.indexOf('confirm password must match password') > -1, 'Unmatching passwords replies with message: "confirm password must match password"');
+              server.inject(activatePost(goodPasswords), res => {
+                t.equal(res.headers.location, '/browse/orgs', 'completing activate user redirects to dashboard');
+                t.ok(res.headers['set-cookie'], 'cookie has been set');
+                server.inject(logout, res => {
+                  server.inject(activateUserView, res => {
+                    t.equal(res.headers.location, '/login', 'if user tries to click on activation link having already activated, redirect to login');
+                    t.end();
+                  });
+                });
               });
             });
           });
