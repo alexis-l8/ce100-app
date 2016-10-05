@@ -19,7 +19,7 @@ module.exports = (request, reply, source, joiErr) => {
 
     if (organisation.primary_id === -1) {
       var options = Object.assign({}, organisation, permissions, {error});
-      return reply.view('organisations/edit', options);
+      return reply.view('organisations/edit', options).code(error ? 401 : 200);
     }
     request.redis.LINDEX('people', organisation.primary_id, (redisErr, stringifiedPrimaryUser) => {
       Hoek.assert(!redisErr, 'redis error');
@@ -28,7 +28,7 @@ module.exports = (request, reply, source, joiErr) => {
         primary_user_name: `${first_name} ${last_name}`,
         primary_user_id: id
       }, permissions, {error});
-      reply.view('organisations/edit', options);
+      reply.view('organisations/edit', options).code(error ? 401 : 200);
     });
   });
 };
