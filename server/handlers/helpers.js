@@ -80,9 +80,10 @@ helpers.initialiseEntry = (length, payload) => {
 helpers.addPrimaryToOrg = (user, org) => {
   var id = JSON.parse(user).id;
   var orgOld = JSON.parse(org);
+  orgOld.people.push(id);
   var additionalInfo = {
     primary_id: id,
-    people: orgOld.people.push(id)
+    people: orgOld.people
   };
   var orgUpdated = Object.assign({}, orgOld, additionalInfo);
   return JSON.stringify(orgUpdated);
