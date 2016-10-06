@@ -10,17 +10,16 @@ module.exports = (request, reply) => {
     request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
       Hoek.assert(!error, 'redis error');
       var allUsers = attachOrgsToUsers(stringifiedOrgs, stringifiedUsers);
-      var users = {
-        allUsers: loggedIn.scope === 'admin' ? allUsers : helpers.sortAlphabetically('first_name')(filterActiveAndAdmin(allUsers)),
-        links: [{
-          path: '/people',
-          name: 'Users'
-        }, {
-          path: '/browse/orgs',
-          name: 'Orgs'
-        }]
-      };
-      var options = Object.assign({}, users, permissions);
+      var users;
+      if (loggedIn.scope === 'admin') {
+        var admins = allUsers.filter(el => el.user_type === 'admin');
+        var nonAdmins = allUsers.filter(el => el.user_type !== 'admin');
+        var sortedNonAdmins = helpers.sortAlphabetically('first_name')(nonAdmins);
+        users = admins.concat(sortedNonAdmins);
+      } else {
+        users = helpers.sortAlphabetically('first_name')(filterActiveAndAdmin(allUsers));
+      }
+      var options = Object.assign({}, {allUsers: users}, permissions);
       reply.view('people/view', options);
     });
   });

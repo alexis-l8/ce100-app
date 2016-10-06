@@ -31,6 +31,7 @@ module.exports = (request, reply) => {
             activeChallenges = addMatchesToChallenges(organisations, activeChallenges);
           }
           var sorted = helpers.sortByDate(activeChallenges);
+
           // if no primary user then reply
           if (organisation.primary_id === -1) {
             var options = Object.assign({}, {activeChallenges: sorted}, {organisation}, permissions);

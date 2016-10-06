@@ -147,7 +147,7 @@ helpers.sortAlphabetically = (key) => (arr) =>
   });
 
 helpers.sortByDate = (arr) =>
-  helpers.cloneArray(arr).sort((ch1, ch2) => ch2.date - ch1.date);
+  arr && arr.length > 0 && helpers.cloneArray(arr).sort((ch1, ch2) => ch2.date - ch1.date);
 
 helpers.filterActive = (arr) => {
   return arr ? arr.filter((el) => el.active) : false;
