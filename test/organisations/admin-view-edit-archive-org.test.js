@@ -76,7 +76,6 @@ tape('admin can view an org, edit, archive and unarchive it', t => {
         t.equal(res.statusCode, 200, '/orgs/id/edit route exists');
         t.ok(res.payload.indexOf(orgName) > -1, 'server sends back the correct org');
         server.inject(adminEditOrgFailedSubmit, res => {
-          console.log(res.result);
           t.equal(res.statusCode, 401, ' validator kicks in - invalid update');
           t.ok(res.payload.indexOf('name is not allowed to be empty') > -1, 'No title, respond with message: "title is not allowed to be empty"');
           server.inject(adminEditOrgSubmit, res => {
@@ -165,7 +164,6 @@ tape('/orgs/{id}/edit (POST) fail validation', t => {
     t.equal(res.statusCode, 401, 'no name returns a 401 status code');
     t.ok(res.payload.indexOf('name is not allowed to be empty') > -1, 'Admin leaves the organisation name empty, they get an error message');
     server.inject(failValidation(5), res => {
-      console.log(res.result);
       // Test failing validation on an org without a primary user
       t.equal(res.statusCode, 401, 'no name returns a 401 status code');
       t.ok(res.payload.indexOf('name is not allowed to be empty') > -1, 'Admin leaves the organisation name empty, they get an error message');
