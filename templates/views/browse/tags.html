@@ -9,6 +9,15 @@
   {{#if parent_tags}}
     <form class="form form--tags" method="post">
         <div class="form__section">
+          <label class="tag__title">
+            {{#if view.orgs}}
+            <a class="anchor--danger text-decoration" href="/browse/orgs">Search all tags
+            {{else}}
+            <a class="anchor--danger text-decoration" href="/browse/challenges">Search all tags
+            {{/if}}
+            </a>
+          </label>
+          <!-- <span  type="checkbox" class="tag__input" id="all">All tags</span> -->
           {{#each parent_tags}}
             {{>filter-tag view=../view}}
           {{/each}}
