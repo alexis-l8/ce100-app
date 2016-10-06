@@ -69,10 +69,10 @@ tape('/people/add fail validation', t => {
       t.ok(res.payload.indexOf('last name is not allowed to be empty') > -1, 'reply to user with following message: "last name is not allowed to be empty"');
       server.inject(fail(noPhone), res => {
         t.equal(res.statusCode, 401, 'no phone number fails validation at /people/add');
-        t.ok(res.payload.indexOf('phone must be a number') > -1, 'reply to user with following message: "phone must be a number"');
+        t.ok(res.payload.indexOf('phone is not allowed to be empty') > -1, 'reply to user with following message: "phone must be a number"');
         server.inject(fail(shortPhone), res => {
           t.equal(res.statusCode, 401, 'Too short phone number fails validation at /people/add');
-          t.ok(res.payload.indexOf('phone must be larger than or equal to') > -1, 'reply to user with following message: "phone must be at least"');
+          t.ok(res.payload.indexOf('phone length must be at least 11 characters long') > -1, 'reply to user with following message: "phone must be at least"');
           t.end();
         });
       });
