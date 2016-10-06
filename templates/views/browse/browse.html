@@ -16,6 +16,7 @@
       </a>
     </div>
 
+    <!-- TODO MAKE THIS DIV A PARTIAL -->
     <div class="card card--header">
       <ul class="navbar__links">
         {{#if view.challenges}}
@@ -27,12 +28,26 @@
             {{/if}}
               Organisations
           </a></li>
+
           <li class="navbar__item togglebar__item--selected">
-            <a class="navbar__link togglebar__link togglebar__link--selected" href="/browse/challenges">Challenges</a></li>
+            {{#if filters}}
+            <a class="navbar__link togglebar__link togglebar__link--selected" href="/browse/challenges?filter={{filters.id}}">
+            {{else}}
+            <a class="navbar__link togglebar__link togglebar__link--selected" href="/browse/challenges">
+            {{/if}}
+              Challenges
+          </a></li>
 
         {{else if view.orgs}}
           <li class="navbar__item togglebar__item--selected">
-            <a class="navbar__link togglebar__link togglebar__link--selected" href="/browse/orgs">Organisations</a></li>
+            {{#if filters}}
+            <a class="navbar__link togglebar__link togglebar__link--selected" href="/browse/orgs?filter={{filters.id}}">
+              {{else}}
+              <a class="navbar__link togglebar__link togglebar__link--selected" href="/browse/orgs">
+                {{/if}}
+              Organisations
+          </a></li>
+
           <li class="navbar__item togglebar__item">
             {{#if filters}}
             <a class="navbar__link togglebar__link" href="/browse/challenges?filter={{filters.id}}">

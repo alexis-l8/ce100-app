@@ -44,7 +44,7 @@ module.exports = (request, reply) => {
       getFilterTagDetails(request.redis, filterTag, filters => {
         // filter challenges by tags
         var filtered = filterByTag(filterTag, sortedData);
-        var options = Object.assign({}, {data: filtered}, {view}, {alternate}, permissions);
+        var options = Object.assign({}, {data: filtered}, {filters}, {view}, {alternate}, permissions);
         reply.view('browse/browse', options);
       });
     }
