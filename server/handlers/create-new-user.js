@@ -12,24 +12,33 @@ module.exports = (request, reply) => {
     redis.RPUSH('people', userUpdated, (error, numberOfUsers) => {
       Hoek.assert(!error, 'redis error');
       var orgId = payload.organisation_id;
-      redis.LINDEX('organisations', orgId, (error, org) => {
-        Hoek.assert(!error, 'redis error');
-        var orgUpdated = helpers.addPrimaryToOrg(userUpdated, org);
-        redis.LSET('organisations', orgId, orgUpdated, (error, response) => {
+      if (orgId === -1) { // new admin account created
+        sendActivationEmail(length, payload, false, userId =>
+          reply({ userId: length }).redirect('/people'));
+      } else {
+        redis.LINDEX('organisations', orgId, (error, org) => {
           Hoek.assert(!error, 'redis error');
-          Iron.seal(length, process.env.COOKIE_PASSWORD, Iron.defaults, (error, hashed) => {
-            Hoek.assert(!error, 'Iron error');
-            var newUser = Object.assign({}, payload, {
-              organisation_name: JSON.parse(org).name,
-              hashedId: hashed
-            });
-            sendEmail.newUser(newUser, (error, response) => {
-              Hoek.assert(!error, 'Send Email error');
-              reply({ userId: length }).redirect('/people');
-            });
+          var orgUpdated = helpers.addPrimaryToOrg(userUpdated, org);
+          redis.LSET('organisations', orgId, orgUpdated, (error, response) => {
+            Hoek.assert(!error, 'redis error');
+            sendActivationEmail(length, payload, JSON.parse(org).name, userId =>
+              reply({ userId: length }).redirect('/people'));
           });
         });
-      });
+      }
     });
   });
 };
+
+function sendActivationEmail(id, user, organisation_name, callback) {
+  Iron.seal(id, process.env.COOKIE_PASSWORD, Iron.defaults, (error, hashedId) => {
+    Hoek.assert(!error, 'Iron error');
+    var newUser = organisation_name
+      ? Object.assign({}, user, { organisation_name }, { hashedId })
+      : Object.assign({}, user, { hashedId });
+    sendEmail.newUser(newUser, (error, response) => {
+      Hoek.assert(!error, 'Send Email error');
+      callback({ userId: id });
+    });
+  });
+}
