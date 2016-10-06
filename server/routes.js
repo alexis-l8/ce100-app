@@ -165,7 +165,6 @@ var routes = [
     handler: require('./handlers/select-tags.js'),
     config: {
       validate: require('./models/max-allowed-tags.js'),
-      auth: { scope: 'primary' }
     }
   },
   {
