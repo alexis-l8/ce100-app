@@ -193,7 +193,6 @@ var routes = [
     handler: require('./handlers/edit-challenge.js'),
     config: {
       validate: require('./models/edit-challenge.js'),
-      auth: { scope: 'primary' }
     }
   },
   {
