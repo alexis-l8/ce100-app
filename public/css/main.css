@@ -544,12 +544,13 @@ Light-teal:     #66d9e0;
     .form__input {
         margin-bottom: 1.25rem;
         line-height: 2.25;
+        font-family: inherit;
         width: 100%;
         color: #000000;
         border-radius: 3px;
         background-color: #f2f2f2;
         border: solid 1px #ebeced;
-        text-indent: 1rem;
+        padding: 0.2em 1em;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
