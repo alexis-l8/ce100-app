@@ -22,7 +22,7 @@
         <input class="form__input {{error.title}}" type="text" name="title" id="title" placeholder="Write Here..." value="{{error.values.title}}">
 
         <label class="form__label" for="description">Description</label>
-        <textarea class="form__input {{error.description}}" id="description" placeholder="Write Here..." rows="4" cols="50">{{#if error.values.description}}{{error.values.description}}{{/if}}</textarea>
+        <textarea class="form__input {{error.description}}" name="description" id="description" placeholder="Write Here..." rows="4" cols="50">{{#if error.values.description}}{{error.values.description}}{{/if}}</textarea>
       {{#if tags}}
         {{#each tags}}
           <span class="tag__label">{{name}}</span>
