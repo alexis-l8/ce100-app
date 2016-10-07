@@ -128,7 +128,7 @@ tape('update challenge card: title, description and tags', t => {
                   t.ok(url.indexOf('/orgs/0') > -1, 'redirects to org details view');
                   server.inject(viewUpdates, reply => {
                     t.equal(reply.statusCode, 200, 'org details view displays');
-                    t.ok(reply.result.indexOf('GLOBAL PARTNER') > -1, 'challenge displays with Global Partner tag');
+                    t.ok(reply.result.indexOf('Global Partner') > -1, 'challenge displays with Global Partner tag');
                     t.ok(reply.result.indexOf('USA') > -1, 'challenge displays with USA tag');
                     server.inject(removeTitleAndDescription, reply => { // for when there _are_ tags, makes sure it can throw error
                       t.equal(reply.statusCode, 401, ' validator kicks in - invalid update');
