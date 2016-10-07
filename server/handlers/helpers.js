@@ -32,7 +32,8 @@ helpers.orgsDropdown = (stringifiedOrgs, stringifiedUser) => {
       isSelected: user.organisation_id === org.id
     };
   });
-  return { allOrganisations: orgsArray };
+  var sortedOrgsArray = helpers.sortAlphabetically('display')(orgsArray);
+  return { allOrganisations: sortedOrgsArray };
 };
 
 helpers.userTypeRadios = (userString) => {
