@@ -12,6 +12,7 @@ module.exports = (request, reply) => {
       var org = JSON.parse(stringifiedOrg);
       request.redis.LLEN('challenges', (error, challengeId) => {
         Hoek.assert(!error, error);
+        // console.log(user);
         user.challenges.push(challengeId);
         org.challenges.push(challengeId);
         var challenge = Object.assign({}, payload, {
