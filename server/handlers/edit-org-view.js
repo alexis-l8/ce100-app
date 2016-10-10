@@ -17,8 +17,7 @@ module.exports = (request, reply, source, joiErr) => {
       organisation.tags = organisationTags;
       if (organisation.primary_id === -1) {
         var options = Object.assign({}, organisation, permissions, {error});
-        reply.view('organisations/edit', options).code(error ? 401 : 200);
-        return;
+        return reply.view('organisations/edit', options).code(error ? 401 : 200);
       }
       request.redis.LINDEX('people', organisation.primary_id, (redisErr, stringifiedPrimaryUser) => {
         Hoek.assert(!redisErr, 'redis error');
