@@ -15,7 +15,7 @@ tape('set up: initialise db', t => {
 
 var filteredBrowse = type => tagId => ({
   method: 'GET',
-  url: `/${type}?filter=${tagId}`,
+  url: `/${type}?tags=${tagId}`,
   headers: { cookie: `token=${primary_token}` }
 });
 

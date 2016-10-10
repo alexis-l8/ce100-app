@@ -22,7 +22,7 @@
         {{#if view.challenges}}
           <li class="navbar__item togglebar__item">
             {{#if filters}}
-            <a class="navbar__link togglebar__link" href="/orgs?filter={{filters.id}}">
+            <a class="navbar__link togglebar__link" href="/orgs?tags={{filters.id}}">
             {{else}}
             <a class="navbar__link togglebar__link" href="/orgs">
             {{/if}}
@@ -31,7 +31,7 @@
 
           <li class="navbar__item togglebar__item--selected">
             {{#if filters}}
-            <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges?filter={{filters.id}}">
+            <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges?tags={{filters.id}}">
             {{else}}
             <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges">
             {{/if}}
@@ -41,7 +41,7 @@
         {{else if view.orgs}}
           <li class="navbar__item togglebar__item--selected">
             {{#if filters}}
-            <a class="navbar__link togglebar__link togglebar__link--selected" href="/orgs?filter={{filters.id}}">
+            <a class="navbar__link togglebar__link togglebar__link--selected" href="/orgs?tags={{filters.id}}">
               {{else}}
               <a class="navbar__link togglebar__link togglebar__link--selected" href="/orgs">
                 {{/if}}
@@ -50,7 +50,7 @@
 
           <li class="navbar__item togglebar__item">
             {{#if filters}}
-            <a class="navbar__link togglebar__link" href="/challenges?filter={{filters.id}}">
+            <a class="navbar__link togglebar__link" href="/challenges?tags={{filters.id}}">
             {{else}}
             <a class="navbar__link togglebar__link" href="/challenges">
             {{/if}}

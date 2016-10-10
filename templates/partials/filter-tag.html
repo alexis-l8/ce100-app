@@ -6,9 +6,9 @@
 <div class="form__subsection">
     {{#each tags}}
         {{#if ../view.challenges}}
-          <a class="text-decoration" href="/challenges?filter={{id}}">
+          <a class="text-decoration" href="/challenges?tags={{id}}">
         {{else if ../view.orgs}}
-          <a class="text-decoration" href="/orgs?filter={{id}}">
+          <a class="text-decoration" href="/orgs?tags={{id}}">
         {{/if}}
             <span class="tag__label" value=[{{id}}]>{{name}}</span>
           </a>
