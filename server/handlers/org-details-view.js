@@ -27,7 +27,7 @@ module.exports = (request, reply) => {
           // only add matches if primary user is logged in.
           if (loggedIn.organisation_id === orgId) {
             //  Filter inactive organisations, and users own org
-            var organisations = helpers.filterActive(removeUsersOrg(loggedIn, orgs));
+            var organisations = helpers.filterActive(removeUsersOrg(loggedIn.organisation_id, orgs));
             activeChallenges = addMatchesToChallenges(organisations, activeChallenges);
           }
           var sorted = helpers.sortByDate(activeChallenges);
@@ -94,6 +94,6 @@ function getUserInfo (stringifiedUser) {
   return {first_name, last_name, email, phone, job_title};
 }
 
-function removeUsersOrg (loggedIn, allOrgs) {
-  return allOrgs.filter(org => loggedIn !== allOrgs.id);
+function removeUsersOrg (ownOrgId, allOrgs) {
+  return allOrgs.filter(org => ownOrgId !== org.id);
 }
