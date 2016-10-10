@@ -10,12 +10,14 @@ dbSetup.initialiseDB = (cb) => {
     client.RPUSH('people', stringified(people), (err, res1) => {
       client.RPUSH('organisations', stringified(orgs), (err, res2) => {
         client.RPUSH('challenges', stringified(challenges), (err, res3) => {
-          sessions.forEach((session, i) => {
-            client.HSET('sessions', session.jti, JSON.stringify(session), (err, res4) => {
-              if(i === sessions.length - 1) {
-                console.log(`DB initialised response from Redis: ${res1}, ${res2}, ${res3}`);
-                cb();
-              }
+          client.HSET('tags', 'tags', JSON.stringify(require('../../tags/tags.json')), (err, res4) => {
+            sessions.forEach((session, i) => {
+              client.HSET('sessions', session.jti, JSON.stringify(session), (err, session_res) => {
+                if(i === sessions.length - 1) {
+                  console.log(`DB initialised response from Redis: ${res1}, ${res2}, ${res3}, ${res4}`);
+                  cb();
+                }
+              });
             });
           });
         });

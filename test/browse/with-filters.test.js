@@ -10,9 +10,7 @@ var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
 var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
 
 tape('set up: initialise db', t => {
-  setup.initialiseDB(() => {
-    require('../../tags/csv-to-json.js')(() => t.end());
-  });
+  setup.initialiseDB(() => t.end());
 });
 
 var filteredBrowse = type => tagId => ({

@@ -7,6 +7,3 @@ npm-debug.log
 .env
 
 dump.rdb
-
-tags/.~lock.tags.csv#
-tags/tags.json

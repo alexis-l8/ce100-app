@@ -16,42 +16,70 @@ module.exports = (request, reply) => {
   // get all orgs
   request.redis.LRANGE('organisations', 0, -1, (error, allOrgsString) => {
     Hoek.assert(!error, 'redis error');
-    request.redis.LRANGE('challenges', 0, -1, (error, allChallengesString) => {
-      Hoek.assert(!error, 'redis error');
-      var orgs = helpers.parseArray(allOrgsString);
-      var challenges = helpers.parseArray(allChallengesString);
+    var orgs = helpers.parseArray(allOrgsString);
 
-      // Filter out unwanted orgs depending on permissions
-      var browsableOrgs = getBrowsable(loggedIn.scope, orgs);
-      // get tag we are filtering by
-      var filterTag = getFilterTag(request.query.filter);
-      // format the name of the current tag being filtered for the use of handlebars
-      var filters = helpers.getTagFromId(require('../../tags/tags.json'))(filterTag);
-      // provide handlebars view with information as to which view to render
-      var view = { [request.params.view]: true };
-      var sortedData;
-      // if browsing challenges:
-      if (view.challenges) {
-        // build up array of all relevent challenge ids
-        var challengeIds = allChallengeIds(browsableOrgs);
-        // map through all challenge id's
-        var allChallenges = challengesFromIds(challenges, challengeIds);
-        // remove any archived challenges and add the `shared_by` key
-        var active = addSharedBy(browsableOrgs, helpers.filterActive(allChallenges));
-        // sort by most recent
-        sortedData = helpers.sortByDate(active);
-      }
-      // if browsing orgs
-      else {
-        sortedData = helpers.sortAlphabetically('name')(browsableOrgs);
-      }
-      // filter challenges by tags
-      var filtered = filterByTag(filterTag, sortedData);
-      var options = Object.assign({}, {data: filtered}, {filters}, {view}, {alternate}, permissions);
-      reply.view('browse/browse', options);
-    });
+    // Filter out unwanted orgs depending on permissions
+    var browsableOrgs = getBrowsable(loggedIn.scope, orgs);
+    // get tag we are filtering by
+    var filterTag = request.query.filter ? getFilterTag(request.query.filter) : false;
+
+    // provide handlebars view with information as to which view to render
+    var view = { [request.params.view]: true };
+
+    // if browsing challenges:
+    if (view.challenges) {
+      getChallengesData(request.redis, browsableOrgs, sortedData => {
+        // TODO: FIGURE OUT A WAY TO REFACTOR LINES 34-39 and 44-49 AS THEY ARE THE SAME
+        // format the name of the current tag being filtered for the use of handlebars
+        getFilterTagDetails(request.redis, filterTag, filters => {
+          // filter challenges by tags
+          var filtered = filterByTag(filterTag, sortedData);
+          var options = Object.assign({}, {data: filtered}, {filters}, {view}, {alternate}, permissions);
+          reply.view('browse/browse', options);
+        });
+      });
+    // if browsing orgs:
+    } else {
+      var sortedData = helpers.sortAlphabetically('name')(browsableOrgs);
+      getFilterTagDetails(request.redis, filterTag, filters => {
+        // filter challenges by tags
+        var filtered = filterByTag(filterTag, sortedData);
+        var options = Object.assign({}, {data: filtered}, {view}, {alternate}, permissions);
+        reply.view('browse/browse', options);
+      });
+    }
   });
 };
+
+function getChallengesData (redis, browsableOrgs, callback) {
+  // build up array of all relevent challenge ids
+  redis.LRANGE('challenges', 0, -1, (error, allChallengesString) => {
+    Hoek.assert(!error, 'redis error');
+    var challenges = helpers.parseArray(allChallengesString);
+    var challengeIds = allChallengeIds(browsableOrgs);
+    // map through all challenge id's
+    helpers.getChallenges(redis, challenges, challengeIds, allChallenges => {
+      // remove any archived challenges and add the `shared_by` key
+      var active = addSharedBy(browsableOrgs, helpers.filterActive(allChallenges));
+      // sort by most recent
+      var sortedData = helpers.sortByDate(active);
+      callback(sortedData);
+    });
+  });
+}
+
+function getFilterTagDetails (redis, filterTag, callback) {
+  if (filterTag) {
+    redis.HGET('tags', 'tags', (error, response) => {
+      Hoek.assert(!error, error);
+      var allTags = JSON.parse(response);
+      var filters = helpers.getTagFromId(allTags)(filterTag);
+      callback(filters);
+    });
+  } else {
+    callback(false);
+  }
+}
 
 function getBrowsable (scope, orgs) {
   return scope === 'admin'
@@ -81,15 +109,6 @@ function addSharedBy (allOrgs, challenges) {
   return challenges.map(chal => {
     var shared_by = allOrgs[chal.org_id].name;
     return Object.assign({}, chal, {shared_by});
-  });
-}
-
-// TODO: refactor to reuse functions from org-details-view.js
-function challengesFromIds (challenges, ids) {
-  return ids.map(id => {
-    var challengeCard = challenges[id];
-    var tagsData = helpers.getTagNames(challengeCard.tags);
-    return Object.assign({}, challengeCard, {tagsData});
   });
 }
 
