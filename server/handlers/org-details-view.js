@@ -52,7 +52,7 @@ module.exports = (request, reply) => {
 };
 
 function addMatchesToChallenges (allOrgs, allChallenges) {
-  return allChallenges.map(ch => {
+  return allChallenges && allChallenges.map(ch => {
     var matches = getMatches(allOrgs, ch);
     var filtered = filterZeroMatches(matches);
     var sorted = topTen(sortByMatches(filtered));
