@@ -82,7 +82,8 @@ tape('update challenge card: title, description and tags', t => {
               t.equal(reply.statusCode, 200, 'org details view displays');
               updateTags.payload = payloads.addTags;
               server.inject(removeTitleAndDescription, reply => {
-                t.equal(reply.statusCode, 400, ' validator kicks in - invalid update');
+                t.equal(reply.statusCode, 401, ' validator kicks in - invalid update');
+                t.ok(reply.payload.indexOf('title is not allowed to be empty') > -1, 'No title, respond with message: "title is not allowed to be empty"');
                 server.inject(updateTags, reply => {
                   t.equal(reply.statusCode, 302, 'challenge card tags updated - page redirecting');
                   var url = reply.headers.location;

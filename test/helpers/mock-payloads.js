@@ -20,7 +20,7 @@ mockPayloads.newUserRepeatedName = {
 
 mockPayloads.usersActivatePayload = {
   password: 'Hello1',
-  confirmPassword: 'Hello1'
+  confirm_password: 'Hello1'
 };
 
 mockPayloads.orgsAddPayload = {

@@ -8,15 +8,21 @@
       <a class="icon icon--cancel" href="/orgs/{{permissions.organisation_id}}"></a>
     </div>
 
+    {{#if error}}
+    <div class="snackbar snackbar-error">
+      <h1 class="error">{{error.message}}</h1>
+    </div>
+    {{/if}}
+
     <form class="form" method="post">
 
       <div class="form__section">
 
         <label class="form__label" for="title">Title</label>
-        <input class="form__input" type="text" name="title" id="title" placeholder="Write Here...">
+        <input class="form__input {{error.title}}" type="text" name="title" id="title" placeholder="Write Here..." value="{{error.values.title}}">
 
         <label class="form__label" for="description">Description</label>
-        <input class="form__input" type="text" name="description" id="description" placeholder="Write Here...">
+        <input class="form__input {{error.description}}" type="text" name="description" id="description" placeholder="Write Here..." value="{{error.values.description}}">
 
       {{#if tags}}
         {{#each tags}}

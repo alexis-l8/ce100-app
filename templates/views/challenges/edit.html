@@ -3,14 +3,23 @@
 
 <!-- Main Content -->
 <div class="container">
-    <h1 class="title">Add A New Challenge</h1>
+  <div class="card card--header">
+    <h1 class="title">Edit Challenge</h1>
+    <a class="icon icon--cancel" href="/orgs/{{permissions.organisation_id}}"></a>
+  </div>
+
+  {{#if error}}
+  <div class="snackbar snackbar-error">
+    <h1 class="error">{{error.message}}</h1>
+  </div>
+  {{/if}}
 
     <form class="form" method="post">
       <label class="form__label" for="title">Title</label>
-      <input class="form__input" type="text" name="title" id="title" value="{{title}}">
+      <input class="form__input {{error.title}}" type="text" name="title" id="title" value="{{#if error}}{{error.values.title}}{{else}}{{title}}{{/if}}">
 
       <label class="form__label" for="description">Description</label>
-      <input class="form__input" type="text" name="description" id="description" value="{{description}}">
+      <input class="form__input {{error.description}}" type="text" name="description" id="description" value="{{#if error}}{{error.values.description}}{{else}}{{description}}{{/if}}">
 
       {{#if tagsData}}
         {{#each tagsData}}
@@ -23,9 +32,9 @@
     <!-- Show archive and primary user if admin is logged in -->
       <a class="anchor anchor--danger" href="/challenges/{{id}}/toggle-archive">
         {{#if active}}
-        Archive Organisation
+        Archive Challenge
         {{else}}
-        Unarchive Organisation
+        Unarchive Challenge
         {{/if}}
       </a>
 

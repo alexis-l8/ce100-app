@@ -12,6 +12,14 @@
       <a class="icon icon--cancel" href="/orgs/{{id}}"></a>
     </div>
 
+    <!-- Only an admin can fail validation -->
+    {{#if error}}
+    <div class="snackbar snackbar-error">
+      <h1 class="error">{{error.message}}</h1>
+    </div>
+    {{/if}}
+
+
     {{#if permissions.primary}}
     <div class="card card--header card--tall card--header--white">
       <img class="logo logo--with-title" src="/public/assets/Profile.svg" alt="{{organisation.name}} logo">
@@ -23,7 +31,7 @@
         <!-- Company name and image -->
         {{#if permissions.admin}}
         <label class="form__label" for="org_name">Organisation Name</label>
-        <input class="form__input" name="name" value="{{name}}" id="org_name">
+        <input class="form__input {{error.name}}" name="name" id="org_name" value="{{#if error}}{{error.values.name}}{{else}}{{name}}{{/if}}">
         {{/if}}
 
         <label class="form__label" for="mission_statement">
@@ -33,7 +41,7 @@
           Organisation's mission statement
           {{/if}}
         </label>
-        <input class="form__input" name="mission_statement" value="{{mission_statement}}" id="mission_statement">
+        <input class="form__input {{error.mission_statement}}" name="mission_statement" value="{{#if error}}{{error.values.mission_statement}}{{else}}{{mission_statement}}{{/if}}" id="mission_statement">
 
         {{#if organisation.tags}}
           {{#each organisation.tags}}
