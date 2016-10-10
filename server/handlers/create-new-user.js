@@ -12,9 +12,10 @@ module.exports = (request, reply) => {
     redis.RPUSH('people', userUpdated, (error, numberOfUsers) => {
       Hoek.assert(!error, 'redis error');
       var orgId = payload.organisation_id;
+      var replyData = { userId: length, organisation_id: orgId };
       if (orgId === -1) { // new admin account created
         sendActivationEmail(length, payload, false, userId =>
-          reply({ userId: length }).redirect('/people'));
+          reply(replyData).redirect('/people'));
       } else {
         redis.LINDEX('organisations', orgId, (error, org) => {
           Hoek.assert(!error, 'redis error');
@@ -22,7 +23,7 @@ module.exports = (request, reply) => {
           redis.LSET('organisations', orgId, orgUpdated, (error, response) => {
             Hoek.assert(!error, 'redis error');
             sendActivationEmail(length, payload, JSON.parse(org).name, userId =>
-              reply({ userId: length }).redirect('/people'));
+              reply(replyData).redirect('/people'));
           });
         });
       }
