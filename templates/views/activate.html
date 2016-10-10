@@ -1,18 +1,22 @@
 <!-- Main Content -->
-<div class="container log-in-layout">
+<div class="container container--login">
+  <img class="logo" src="../../public/assets/logo.png" alt="Welcome to the ce100 app" />
+  <p class="copy copy--login">A matchmaking app for the circular economy. Collaborate more, solve problems faster.</p>
 
-  {{#if error}}
-  <div class="snackbar snackbar-error">
-    <h1 class="error">{{error.message}}</h1>
-  </div>
-  {{/if}}
-
-  <form class="form" method="post">
-    <label class="form__label" for="password">Password</label>
-    <input class="form__input log-in-fields {{error.password}}" type="password" name="password">
-    <label class="form__label" for="name">Confirm Password</label>
-    <input class="form__input log-in-fields {{error.confirm_password}}" type="password" name="confirm_password">
-    <button class="button log-in-fields" type="submit">Login</button>
+  <form class="form form--login" method="post">
+    <input  class="form__input form__input--login"
+            type="password"
+            name="password"
+            placeholder="Enter password"
+            value="{{error.values.email}}">
+    <input  class="form__input form__input--login"
+            type="password"
+            name="confirm_password"
+            placeholder="Confirm password">
+    <button class="button button--login">Activate account</button>
+    <p class="error error--login">{{error.message}}</p>
   </form>
+
+  <!-- <a href="#" class="copy copy__text-link">Forgot password?</a> -->
 
 </div>
