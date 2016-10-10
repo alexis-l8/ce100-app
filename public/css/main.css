@@ -497,6 +497,10 @@ Light-teal:     #66d9e0;
         display: block;
         margin-bottom: 0.5rem;
     }
+    .card__data--link {
+      text-decoration: none;
+      color: inherit;
+    }
     .card__additional {
       color: #89a0ae;
       transform: translate(0%,100%);
