@@ -29,7 +29,7 @@ module.exports = (request, reply) => {
       var oldOrgId = user.organisation_id;
       // if org unchanged
       if (newOrgId === oldOrgId) {
-        return reply.redirect(`/orgs/${user.organisation_id}`);
+        return reply.redirect('/people');
       }
       // if old org is removed and no new org added -> update old org
       else if (newOrgId === -1) {
