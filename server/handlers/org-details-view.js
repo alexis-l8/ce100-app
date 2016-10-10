@@ -30,10 +30,11 @@ module.exports = (request, reply) => {
             var organisations = helpers.filterActive(removeUsersOrg(loggedIn, orgs));
             activeChallenges = addMatchesToChallenges(organisations, activeChallenges);
           }
+          var sorted = helpers.sortByDate(activeChallenges);
 
           // if no primary user then reply
           if (organisation.primary_id === -1) {
-            var options = Object.assign({}, {activeChallenges}, {organisation}, permissions);
+            var options = Object.assign({}, {activeChallenges: sorted}, {organisation}, permissions);
             return reply.view('organisations/details', options);
           }
 
@@ -41,7 +42,7 @@ module.exports = (request, reply) => {
           request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedUser) => {
             Hoek.assert(!error, 'redis error');
             var primary_user = getUserInfo(stringifiedUser);
-            var options = Object.assign({}, {primary_user}, {activeChallenges}, {organisation}, permissions);
+            var options = Object.assign({}, {primary_user}, {activeChallenges: sorted}, {organisation}, permissions);
             return reply.view('organisations/details', options);
           });
         });
