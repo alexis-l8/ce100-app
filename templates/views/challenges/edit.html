@@ -19,7 +19,7 @@
       <input class="form__input {{error.title}}" type="text" name="title" id="title" value="{{#if error}}{{error.values.title}}{{else}}{{title}}{{/if}}">
 
       <label class="form__label" for="description">Description</label>
-      <input class="form__input {{error.description}}" type="text" name="description" id="description" value="{{#if error}}{{error.values.description}}{{else}}{{description}}{{/if}}">
+      <textarea class="form__input {{error.description}}" name="description" id="description" placeholder="Write Here..." rows="4" cols="50">{{#if error.values.description}}{{error.values.description}}{{else}}{{description}}{{/if}}</textarea>
 
       {{#if tagsData}}
         {{#each tagsData}}

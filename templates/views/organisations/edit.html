@@ -36,12 +36,15 @@
 
         <label class="form__label" for="mission_statement">
           {{#if permissions.primary}}
-          Add your circular economy vision
+            Add your circular economy vision
           {{else}}
-          Organisation's mission statement
+            Organisation's mission statement
           {{/if}}
         </label>
-        <input class="form__input {{error.mission_statement}}" name="mission_statement" value="{{#if error}}{{error.values.mission_statement}}{{else}}{{mission_statement}}{{/if}}" id="mission_statement">
+        <textarea class="form__input {{error.mission_statement}}"
+                  id="mission_statement" 
+                  name="mission_statement"
+                  rows="2" cols="50">{{#if error}}{{error.values.mission_statement}}{{else}}{{mission_statement}}{{/if}}</textarea>
 
         {{#if organisation.tags}}
           {{#each organisation.tags}}
