@@ -5,12 +5,10 @@ module.exports = (request, reply) => {
     Hoek.assert(!error, error);
     var org = JSON.parse(stringifiedOrg);
     var allTags = require('../../tags/tags.json');
-    if (org.tags) {
-      org.tags.forEach((tag, index) => {
-        allTags[tag[0]].selected = true;
-        allTags[tag[0]].tags[tag[1]].selected = true;
-      });
-    }
+    org.tags.forEach((tag, index) => {
+      allTags[tag[0]].selected = true;
+      allTags[tag[0]].tags[tag[1]].selected = true;
+    });
     reply.view('tags', { parent_tags: allTags });
   });
 };

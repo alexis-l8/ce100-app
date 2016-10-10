@@ -13,16 +13,25 @@ tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
 });
 
+var addTagsView = (type) => ({
+  url: `/browse/${type}/tags`,
+  method: 'GET',
+  headers: { cookie: `token=${primary_token}` }
+});
+
 tape('add tags view', t => {
-  var addTagsView = {
-    url: '/browse/orgs/tags',
-    method: 'GET',
-    headers: { cookie: `token=${primary_token}` }
-  };
-  server.inject(addTagsView, res => {
+  server.inject(addTagsView('orgs'), res => {
     t.equal(res.statusCode, 200, '/browse/orgs/tags exists');
     t.ok(res.payload.indexOf('Select Tags') > -1, 'correct view is displayed');
-    t.end();
+    t.ok(res.payload.indexOf('ENERGY') > -1, 'ENERGY parent tag in payload for orgs');
+    t.ok(res.payload.indexOf('CORPORATE') > -1, 'corporate parent tag in payload for orgs');
+    server.inject(addTagsView('people'), res => {
+      t.equal(res.statusCode, 200, '/browse/challenges/tags exists');
+      t.ok(res.payload.indexOf('Select Tags') > -1, 'correct view is displayed');
+      t.ok(res.payload.indexOf('ENERGY') > -1, 'ENERGY parent tag in payload for challenges');
+      t.ok(res.payload.indexOf('CORPORATE') > -1, 'corporate parent tag in payload for challenges');
+      t.end();
+    });
   });
 });
 

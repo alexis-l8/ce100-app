@@ -100,14 +100,12 @@ helpers.addPasswordToUser = (hashed, user) => {
 
 helpers.getTagNames = (tagIds) => {
   var allTags = require('../../tags/tags.json');
-  return tagIds
-    ? tagIds.map(tagId => {
-      return {
-        id: tagId,
-        name: allTags[tagId[0]].tags[tagId[1]].name
-      };
-    })
-    : false;
+  return tagIds && tagIds.map(tagId => {
+    return {
+      id: tagId,
+      name: allTags[tagId[0]].tags[tagId[1]].name
+    };
+  });
 };
 
 helpers.cloneArray = (arr) => arr.map(el => Object.assign({}, el));
@@ -127,6 +125,9 @@ helpers.sortAlphabetically = (key) => (arr) =>
 
 helpers.sortByDate = (arr) =>
   helpers.cloneArray(arr).sort((ch1, ch2) => ch2.date - ch1.date);
+
+helpers.filterActive = (arr) => arr.filter((el) =>
+  typeof el === 'string' ? JSON.parse(el).active : el.active);
 
 module.exports = helpers;
 

@@ -476,6 +476,10 @@ Light-teal:     #66d9e0;
       -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
       -ms-transform: translate(30deg); /* IE 9 */
     }
+.card__suggested-matches {
+  background-color: #f8ffff;
+  text-align: center;
+}
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Forms
@@ -625,6 +629,9 @@ Light-teal:     #66d9e0;
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Anchors
   |||||||||||||||||||||||||||||||||||||||||||*/
+.anchor {
+  text-decoration: none;
+}
 
 .anchor:link {
     text-align: center;
@@ -648,6 +655,12 @@ Light-teal:     #66d9e0;
 }
 .anchor--danger:visited {
     color: #900000;
+}
+.anchor--suggested-matches {
+  display: inline-block;
+  width: 48%;
+  margin-top: 0.8rem;
+  color: #66d9e0;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -680,6 +693,10 @@ Light-teal:     #66d9e0;
   |||||||||||||||||||||||||||||||||||||||||||*/
 .float-right {
   float: right
+}
+
+.text-decoration {
+  text-decoration: none;
 }
 
 .log-in-logo {
