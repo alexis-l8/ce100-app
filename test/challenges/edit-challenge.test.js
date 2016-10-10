@@ -99,7 +99,6 @@ tape('update challenge card: title, description and tags', t => {
       t.ok(reply.result.indexOf(tagName) > -1, 'existing tags are correctly displayed');
     });
     server.inject(updateTitleAndDescription, reply => {
-      console.log(reply.result);
       t.equal(reply.statusCode, 302, 'challenge card title and description updated - page redirecting');
       // t.ok(reply.headers.location.indexOf(`/challenges/${challengeCardId}/tags`) > -1, 'redirected to tags selection page correctly');
       updateTags.payload = payloads.noTagsAdded;

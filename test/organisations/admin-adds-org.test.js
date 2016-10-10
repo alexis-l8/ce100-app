@@ -49,7 +49,7 @@ tape('orgs/add admin adds a new organisation', t => {
   };
   var options2 = {
     method: 'GET',
-    url: '/browse/orgs',
+    url: '/orgs',
     headers: { cookie: `token=${admin_token}` }
   };
   server.inject(noName, res => {
@@ -58,7 +58,7 @@ tape('orgs/add admin adds a new organisation', t => {
     server.inject(options, res => {
       t.equal(res.statusCode, 302, 'admin is redirected');
       var url = res.headers.location;
-      t.ok(url === ('/browse/orgs'), 'redirected to the new organisations view');
+      t.ok(url === ('/orgs'), 'redirected to the new organisations view');
       server.inject(options2, res => {
         t.ok(res.payload.indexOf(payloads.orgsAddPayload.name) > -1, 'mock organisation was added');
         t.end();

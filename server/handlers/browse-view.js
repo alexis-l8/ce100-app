@@ -21,10 +21,10 @@ module.exports = (request, reply) => {
     // Filter out unwanted orgs depending on permissions
     var browsableOrgs = getBrowsable(loggedIn.scope, orgs);
     // get tag we are filtering by
-    var filterTag = request.query.filter ? getFilterTag(request.query.filter) : false;
+    var filterTag = request.query.tags ? getFilterTag(request.query.tags) : false;
 
     // provide handlebars view with information as to which view to render
-    var view = { [request.params.view]: true };
+    var view = { [request.route.path.split('/')[1]]: true };
 
     // format the name of the current tag being filtered for the use of handlebars
     getFilterTagDetails(request.redis, filterTag, filters => {
