@@ -88,12 +88,12 @@ tape('add and activate a new user and updates the linked organisation', t => {
     payload: JSON.stringify(payloads.orgsAddPayload),
     headers: { cookie: `token=${admin_token}` }
   };
-  var addPerson = {
+  var addPerson = (orgId) => ({
     method: 'POST',
     url: '/people/add',
-    payload: JSON.stringify(payloads.usersAddPayload),
+    payload: payloads.usersAddPayload(orgId),
     headers: { cookie: `token=${admin_token}` }
-  };
+  });
   var logout = {
     method: 'GET',
     url: '/logout',
@@ -108,11 +108,12 @@ tape('add and activate a new user and updates the linked organisation', t => {
   var shortPassword = {password: 'aaa', confirm_password: 'aaa'};
   var unmatchingPasswords = {password: 'Hello1', confirm_password: 'Hello2'};
   var goodPasswords = payloads.usersActivatePayload;
-
+  var newOrganisationId;
 
   server.inject(addOrg, res => {
     t.equal(res.statusCode, 302, 'redirects 1');
-    server.inject(addPerson, res => {
+    newOrganisationId = res.result.organisation_id;
+    server.inject(addPerson(newOrganisationId), res => {
       t.equal(res.statusCode, 302, 'redirects 2');
       var newUrl = res.headers.location;
       t.ok(newUrl === '/people', 'route redirects to /people');
@@ -131,7 +132,7 @@ tape('add and activate a new user and updates the linked organisation', t => {
               t.equal(res.statusCode, 401, 'fail validation returns 401');
               t.ok(res.payload.indexOf('confirm password must match password') > -1, 'Unmatching passwords replies with message: "confirm password must match password"');
               server.inject(activatePost(goodPasswords), res => {
-                t.equal(res.headers.location, '/browse/orgs', 'completing activate user redirects to dashboard');
+                t.equal(res.headers.location, `/orgs/${newOrganisationId}`, 'completing activate user with organisation redirects to their organisation page');
                 t.ok(res.headers['set-cookie'], 'cookie has been set');
                 server.inject(logout, res => {
                   server.inject(activateUserView, res => {
@@ -143,6 +144,33 @@ tape('add and activate a new user and updates the linked organisation', t => {
             });
           });
         });
+      });
+    });
+  });
+});
+
+tape('add a new admin not attached to an organisation, activate admin, redirect to all orgs view', t => {
+  var addAdmin = {
+    method: 'POST',
+    url: '/people/add',
+    payload: payloads.adminAddPayload,
+    headers: { cookie: `token=${admin_token}` }
+  };
+  var activateUser = hashed => ({
+    url: `/people/activate/${hashed}`,
+    method: 'POST',
+    payload: payloads.usersActivatePayload
+  });
+
+  server.inject(addAdmin, res => {
+    t.equal(res.statusCode, 302, 'redirects 2');
+    t.equal(res.headers.location, '/people', 'route redirects to /people');
+    var newAdminId = res.result.userId;
+    Iron.seal(newAdminId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, hashed) => {
+      server.inject(activateUser(hashed), res => {
+        t.equal(res.headers.location, '/browse/orgs', 'completing activate user with organisation redirects to their organisation page');
+        t.ok(res.headers['set-cookie'], 'cookie has been set');
+        t.end();
       });
     });
   });
