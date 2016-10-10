@@ -9,6 +9,7 @@ module.exports = (request, reply, source, joiErr) => {
     var challenge = JSON.parse(stringifiedChallenge);
     request.redis.HGET('tags', 'tags', (redisErr, data) => {
       Hoek.assert(!redisErr, 'redis error');
+
       var allTags = JSON.parse(data);
       if (challenge.tags) {
         challenge.tags.forEach((tag, index) => {
