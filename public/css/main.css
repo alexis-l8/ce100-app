@@ -298,13 +298,16 @@ Light-teal:     #66d9e0;
         max-width: 16.25rem;
         color: #ffffff;
         text-align: center;
+        margin-bottom: 1rem;
     }
     .copy__text-link, .copy__text-link:link {
         font-size: 0.75rem;
         color: #89a0ae; /* bluey-grey */
     }
-        .copy__text-link:link
-
+    .copy--form {
+      color: #89a0ae;
+      margin-bottom: 1rem;
+    }
 
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -493,6 +496,10 @@ Light-teal:     #66d9e0;
     .card__data {
         display: block;
         margin-bottom: 0.5rem;
+    }
+    .card__data--link {
+      text-decoration: none;
+      color: inherit;
     }
     .card__additional {
       color: #89a0ae;
