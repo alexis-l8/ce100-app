@@ -4,7 +4,7 @@ var routes = [
   {
     method: 'GET',
     path: '/',
-    handler: (request, reply) => reply.redirect('/orgs')
+    handler: (request, reply) => reply.redirect('/browse/orgs')
   },
   {
     method: 'GET',
@@ -105,7 +105,7 @@ var routes = [
   {
     method: 'GET',
     path: '/orgs/add',
-    handler: require('./handlers/serve-view.js')('add-organisation'),
+    handler: require('./handlers/serve-view.js')('organisations/add'),
     config: {
       auth: { scope: 'admin' }
     }
@@ -121,7 +121,7 @@ var routes = [
   },
   {
     method: 'GET',
-    path: '/orgs',
+    path: '/browse/orgs',
     handler: require('./handlers/all-orgs-view.js')
   },
   {
@@ -161,7 +161,7 @@ var routes = [
   /*  ---  CHALLENGE ROUTES  ---  */
   {
     method: 'GET',
-    path: '/challenges',
+    path: '/browse/challenges',
     handler: require('./handlers/browse-challenges-view.js')
   },
   {
@@ -210,6 +210,13 @@ var routes = [
     method: 'GET',
     path: '/challenges/{id}/toggle-archive',
     handler: require('./handlers/toggle-archive-challenge.js')
+  },
+  /*  ---  BROWSE ROUTES  ---  */
+  // TODO: ADD VALIDATION TO QUERY PARAMS & REACT TO NON EXISTING TAG
+  {
+    method: 'GET',
+    path: '/browse/{type}/tags',
+    handler: require('./handlers/browse-add-tags-view.js')
   }
 ];
 

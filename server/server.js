@@ -7,7 +7,7 @@ var server = new Hapi.Server();
 
 server.connection({ port: process.env.PORT || 3000 });
 
-server.register([ // one plugin per line
+server.register([
   require('inert'),
   require('vision'),
   require('hapi-redis-connection'),

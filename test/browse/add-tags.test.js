@@ -1,25 +1,27 @@
 var tape = require('tape');
 var client = require('redis').createClient();
 var server = require('../../server/server.js');
+var payloads = require('../helpers/mock-payloads.js');
 var setup = require('../helpers/set-up.js');
 
 var jwt = require('jsonwebtoken');
 var sessions = require('../helpers/setup/sessions.js')['sessions'];
 var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
+var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
 
 tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
 });
 
-tape('root (dashboard) page loads', t => {
-  var options = {
+tape('add tags view', t => {
+  var addTagsView = {
+    url: '/browse/orgs/tags',
     method: 'GET',
-    url: '/',
-    headers: { cookie: `token=${admin_token}` }
+    headers: { cookie: `token=${primary_token}` }
   };
-  server.inject(options, reply => {
-    // TODO: CAN CHANGE WHEN WE MAKE A DASHBOARD
-    t.equal(reply.statusCode, 302, 'route redircts to /browse/orgs');
+  server.inject(addTagsView, res => {
+    t.equal(res.statusCode, 200, '/browse/orgs/tags exists');
+    t.ok(res.payload.indexOf('Select Tags') > -1, 'correct view is displayed');
     t.end();
   });
 });

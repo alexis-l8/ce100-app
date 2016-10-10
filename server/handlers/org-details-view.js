@@ -5,7 +5,7 @@ module.exports = (request, reply) => {
   var orgId = parseInt(request.params.id, 10);
   var permissions = helpers.getPermissions(request.auth.credentials, 'organisation_id', orgId);
   if (orgId === -1) {
-    return reply.redirect('/orgs');
+    return reply.redirect('/browse/orgs');
   }
   request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
     Hoek.assert(!error, 'redis error');

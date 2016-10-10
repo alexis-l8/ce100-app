@@ -16,6 +16,6 @@ module.exports = (request, reply) => {
       }]
     };
     var options = Object.assign({}, organisations, permissions);
-    reply.view('browse', options);
+    reply.view('browse/browse', options);
   });
 };
