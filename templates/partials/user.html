@@ -1,7 +1,7 @@
 <li class="list__item">
 
     {{#if permissions.admin}}
-    <a class="list__edit" href="/people/{{id}}/edit">
+    <a class="icon--edit" href="/people/{{id}}/edit">
       <img src="../../public/assets/Edit.svg" alt="Edit" />
     </a>
     {{/if}}
@@ -29,14 +29,15 @@
 
         <span class="list__data">{{phone}}</span>
 
-        <span class="list__data">{{user_type}}</span>
-
-        <span class="list__data">
-          {{#if active}}
-            Active
-          {{else}}
-            Inactive
-          {{/if}}
-        </span>
+        {{#if permissions.admin}}
+          <span class="list__data">{{user_type}}</span>
+          <span class="list__data">
+            {{#if active}}
+              Active
+            {{else}}
+              Inactive
+            {{/if}}
+          </span>
+        {{/if}}
     </div>
 </li>

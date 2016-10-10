@@ -8,22 +8,24 @@ module.exports = (request, reply) => {
   if (orgId === -1) {
     return reply.redirect('/browse/orgs');
   }
+  // get all orgs
   request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
     Hoek.assert(!error, 'redis error');
-    // TODO: catch for case where org at specified userId doesn't exist.
-    var organisation = JSON.parse(stringifiedOrgs[orgId]);
-    var organisationTags = organisation.tags && getTagNames(organisation.tags);
-    organisation.tags = organisationTags;
-
     // get all challenges
     request.redis.LRANGE('challenges', 0, -1, (error, challengesList) => {
       Hoek.assert(!error, 'redis error');
 
+      var orgs = helpers.parseArray(stringifiedOrgs);
+      var organisation = orgs[orgId];
+
+      var organisationTags = organisation.tags && helpers.getTagNames(organisation.tags);
+      organisation.tagsData = organisationTags;
+
       var challenges = getChallenges(challengesList, organisation.challenges);
       // only add matches if primary user is logged in.
       if (loggedIn.organisation_id === orgId) {
-        //  Filter inactive organisations, TODO: and users own org
-        var organisations = helpers.filterActive(stringifiedOrgs.map(el => JSON.parse(el)));
+        //  Filter inactive organisations, and users own org
+        var organisations = helpers.filterActive(removeUsersOrg(loggedIn, orgs));
         challenges = addMatchesToChallenges(organisations, challenges);
       }
       // if no primary user then reply
@@ -44,7 +46,6 @@ module.exports = (request, reply) => {
 };
 
 function addMatchesToChallenges (allOrgs, allChallenges) {
-  // TODO: ensure there are challenges to looop through
   return allChallenges.map(ch => {
     var matches = getMatches(allOrgs, ch);
     var filtered = filterZeroMatches(matches);
@@ -90,19 +91,13 @@ function getUserInfo (stringifiedUser) {
 function getChallenges (challengesList, organisationChallenges) {
   var challengeArr = organisationChallenges.map((challengeId, index) => {
     var challengeCard = JSON.parse(challengesList[challengeId]);
-    var tagsData = getTagNames(challengeCard.tags);
+    var tagsData = helpers.getTagNames(challengeCard.tags);
     return Object.assign({}, challengeCard, {tagsData});
   });
   var activeChallenges = challengeArr.filter(challenge => challenge.active);
   return challengeArr.length === 0 ? false : activeChallenges;
 }
 
-function getTagNames (tagIds) {
-  var allTags = require('../../tags/tags.json');
-  return tagIds.map(tagId => {
-    return {
-      id: tagId,
-      name: allTags[tagId[0]].tags[tagId[1]].name
-    };
-  });
+function removeUsersOrg (loggedIn, allOrgs) {
+  return allOrgs.filter(org => loggedIn !== allOrgs.id);
 }
