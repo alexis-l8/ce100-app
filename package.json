@@ -9,8 +9,7 @@
     "test": "istanbul cover tape ./test/*/*.test.js | node_modules/tap-spec/bin/cmd.js",
     "coverage": "istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
     "fast": "tape ./test/*/*.test.js",
-    "generate-tags": "node tags/storeTags.js",
-    "heroku-postbuild": "npm run generate-tags"
+    "generate-tags": "node tags/storeTags.js"
   },
   "repository": {
     "type": "git",

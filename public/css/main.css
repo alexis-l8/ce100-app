@@ -180,6 +180,7 @@ Light-teal:     #66d9e0;
             color: #40667e; /* Denim */
             font-size: 1em;
             line-height: 2;
+            cursor: pointer;
         }
         .navbar__link:visited {
             color: #40667e; /* Denim */
@@ -191,7 +192,28 @@ Light-teal:     #66d9e0;
         .navbar__link--with-icon {
             font-size: 0.625rem;
         }
-
+        .navbar__link--checkbox {
+          display: none;
+        }
+        .navbar__link--checkbox:checked ~ .navbar__hidden {
+          display: block;
+        }
+        .navbar__hidden {
+          background-color: #40667e;
+          width: 50%;
+          position: absolute;
+          bottom: 3.5em;
+          right: 0;
+          display: none;
+        }
+          .navbar__link--toggle-menu {
+            color: #ffffff;
+            text-align: center;
+            display: block;
+            padding: 1.5em 0;
+            border-bottom: 1px solid #89a0ae;
+            text-decoration: none;
+          }
 
   /*|||||||||||||||||||||||||||||||||||||||||||||
     Toggle Bar
@@ -257,7 +279,9 @@ Light-teal:     #66d9e0;
 .title--link {
     text-decoration: none;
 }
-
+.title-blue {
+    color: #00233B;
+}
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Copy
@@ -719,6 +743,23 @@ Light-teal:     #66d9e0;
 
 .daintree--blue {
   background: #00233B;
+}
+
+/*-----------FEEDBACK WIDGET-------------*/
+
+.widget__feedback {
+  font-size: 1em;
+  padding: 1em 1em 1em 4em;
+  color: #ffffff;
+  background-color: #003253;
+  position: fixed;
+  right: -3em;
+  bottom: 3em;
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg);
 }
 
 /*-----------NAVBAR TOP-------------*/

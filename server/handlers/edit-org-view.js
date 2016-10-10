@@ -10,7 +10,6 @@ module.exports = (request, reply, source, joiErr) => {
   if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin') {
     return reply(Boom.unauthorized('You do not have permission to edit that organisation.'));
   }
-
   request.redis.LINDEX('organisations', orgId, (redisErr, stringifiedOrg) => {
     Hoek.assert(!redisErr, 'redis error');
     var organisation = JSON.parse(stringifiedOrg);

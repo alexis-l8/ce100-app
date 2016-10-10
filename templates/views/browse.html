@@ -1,0 +1,44 @@
+<!-- Include Top Navbar -->
+{{>top-nav}}
+
+<!-- Main Content -->
+<div class="container">
+    <div class="card card--header">
+      <h1 class="title">Select tags</h1>
+    </div>
+
+    <div class="card card--header">
+      <ul class="navbar__links">
+        {{#if challenges}}
+          <li class="navbar__item togglebar__item">
+            <a class="navbar__link togglebar__link" href="/orgs">Organisations</a></li>
+          <li class="navbar__item togglebar__item--selected">
+            <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges">Challenges</a></li>
+        {{else if allOrganisations}}
+          <li class="navbar__item togglebar__item--selected">
+            <a class="navbar__link togglebar__link togglebar__link--selected" href="/orgs">Organisations</a></li>
+          <li class="navbar__item togglebar__item">
+            <a class="navbar__link togglebar__link" href="/challenges">Challenges</a></li>
+        {{/if}}
+      </ul>
+    </div>
+
+    {{#if challenges}}
+      {{#each challenges}}
+        {{>challenge}}
+      {{/each}}
+
+    {{else if allOrganisations}}
+      {{#each allOrganisations}}
+        {{>organisation}}
+      {{/each}}
+
+    {{else}}
+      <h3>Nothing meets your search criteria.</h3>
+    {{/if}}
+</div>
+
+<!-- Include Feedback Widget -->
+{{>feedback}}
+<!-- Include Navbar -->
+{{>navbar}}

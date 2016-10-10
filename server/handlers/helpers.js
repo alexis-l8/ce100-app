@@ -147,7 +147,6 @@ helpers.filterActive = (arr) => {
 
 helpers.parseArray = (arr) => arr.map(el => JSON.parse(el));
 
-
 // map through the inner function which takes a tag id, and returns named object for that tag
 helpers.getTagFromId = (allTags) => (id) =>
   id && allTags[id[0]] && allTags[id[0]].tags[id[1]] && {

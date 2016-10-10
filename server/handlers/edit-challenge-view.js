@@ -2,6 +2,7 @@ var Hoek = require('hoek');
 var helpers = require('./helpers');
 
 module.exports = (request, reply, source, joiErr) => {
+  var permissions = helpers.getPermissions(request.auth.credentials, 'scope', 'admin');
   var error = helpers.errorOptions(joiErr);
   var permissions = helpers.getPermissions(request.auth.credentials, 'scope', 'admin');
   var challengeId = request.params.id;
