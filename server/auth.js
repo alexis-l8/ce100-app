@@ -3,7 +3,8 @@ exports.register = (server, options, next) => {
 
   var tokenOptions = {
     isSecure: process.env.NODE_ENV !== 'development',
-    ttl: 1000 * 60 * 60 * 24 * 30
+    ttl: 1000 * 60 * 60 * 24 * 30,
+    path: '/'
   };
   server.state('token', tokenOptions);
   server.auth.strategy('jwt2', 'jwt', true, {

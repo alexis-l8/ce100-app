@@ -105,7 +105,7 @@ tape('/challenges/add (POST) - submit new challenge as a primary_user with one t
         t.equal(url2, `/orgs/${orgId}`, 'user is redirected to /orgs/{id} to add tags');
         viewOrgDetails.url = url2;
         server.inject(viewOrgDetails, reply => {
-          t.ok(reply.result.indexOf('GLOBAL PARTNER') > -1, 'challenge is displayed with Global Partners tag');
+          t.ok(reply.result.indexOf('Global Partner') > -1, 'challenge is displayed with Global Partners tag');
           t.ok(reply.result.indexOf('USA') === -1, 'challenge is _not_ displayed with USA tag');
           t.end();
         });
@@ -162,7 +162,7 @@ tape('/challenges/add (POST) - submit new challenge as a primary_user with multi
           t.equal(url2, `/orgs/${orgId}`, 'user is redirected to /orgs/{id} to add tags');
           viewOrgDetails.url = url2;
           server.inject(viewOrgDetails, reply => {
-            t.ok(reply.result.indexOf('GLOBAL PARTNER') > -1, 'challenge is displayed with Global Partners tag');
+            t.ok(reply.result.indexOf('Global Partner') > -1, 'challenge is displayed with Global Partners tag');
             t.ok(reply.result.indexOf('USA') > -1, 'challenge is displayed with USA tag');
             t.end();
           });

@@ -32,7 +32,8 @@ helpers.orgsDropdown = (stringifiedOrgs, stringifiedUser) => {
       isSelected: user.organisation_id === org.id
     };
   });
-  return { allOrganisations: orgsArray };
+  var sortedOrgsArray = helpers.sortAlphabetically('display')(orgsArray);
+  return { allOrganisations: sortedOrgsArray };
 };
 
 helpers.userTypeRadios = (userString) => {
@@ -71,7 +72,8 @@ helpers.deactivate = (stringifiedData) => {
 helpers.initialiseEntry = (length, payload) => {
   var additionalInfo = {
     id: length,
-    active: true
+    active: true,
+    challenges: []
   };
   var updatedUser = Object.assign(additionalInfo, payload);
   return JSON.stringify(updatedUser);

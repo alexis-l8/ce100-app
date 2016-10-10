@@ -1,3 +1,7 @@
-Hi {{name}}
+Hi {{first_name}} {{last_name}}
 
-Welcome to CE100
+Welcome to CE100!
+To access our log in page, please copy and paste the following link into your browser.
+https://staging-ce100-emf.herokuapp.com/people/activate/{{hashedId}}
+
+EMF
