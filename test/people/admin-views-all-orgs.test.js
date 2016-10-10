@@ -15,7 +15,7 @@ tape('set up: initialise db', t => {
 tape('/orgs load general view', t => {
   var options = {
     method: 'GET',
-    url: '/browse/orgs',
+    url: '/orgs',
     headers: { cookie: `token=${primary_token}` }
   };
   server.inject(options, reply => {
@@ -37,7 +37,7 @@ tape('/orgs load specific organisation page for org with primary user', t => {
   });
 });
 
-tape('/browse/orgs load specific organisation page for org _without_ primary user', t => {
+tape('/orgs load specific organisation page for org _without_ primary user', t => {
   var options = {
     method: 'GET',
     url: '/orgs/5',

@@ -24,7 +24,7 @@ module.exports = (request, reply) => {
     var filterTag = request.query.filter ? getFilterTag(request.query.filter) : false;
 
     // provide handlebars view with information as to which view to render
-    var view = { [request.params.view]: true };
+    var view = { [request.route.path.split('/')[1]]: true };
 
     // if browsing challenges:
     if (view.challenges) {

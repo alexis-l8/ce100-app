@@ -6,7 +6,7 @@ module.exports = (request, reply) => {
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'organisation_id', orgId);
   if (orgId === -1) {
-    return reply.redirect('/browse/orgs');
+    return reply.redirect('/orgs');
   }
   // get all orgs
   request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
