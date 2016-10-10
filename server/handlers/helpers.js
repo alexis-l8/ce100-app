@@ -156,10 +156,10 @@ helpers.filterActive = (arr) => {
 helpers.parseArray = (arr) => arr.map(el => JSON.parse(el));
 
 // add the names to all tagIds that this function receives
-helpers.getTagNames = (tagIds) => {
-  var allTags = require('../../tags/tags.json');
-  return tagIds.map(helpers.getTagFromId(allTags));
-}
+// helpers.getTagNames = (tagIds) => {
+//   var allTags = require('../../tags/tags.json');
+//   return tagIds.map(helpers.getTagFromId(allTags));
+// }
 
 // map through the inner function which takes a tag id, and returns named object for that tag
 helpers.getTagFromId = (allTags) => (id) =>
