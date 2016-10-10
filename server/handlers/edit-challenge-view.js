@@ -5,9 +5,10 @@ var helpers = require('./helpers');
 module.exports = (request, reply, source, joiErr) => {
   var loggedIn = request.auth.credentials;
   var error = helpers.errorOptions(joiErr);
+  var permissions = helpers.getPermissions(request.auth.credentials, 'scope', 'admin');
   var challengeId = request.params.id;
-  request.redis.LINDEX('challenges', challengeId, (err, stringifiedChallenge) => {
-    Hoek.assert(!err, 'redis error');
+  request.redis.LINDEX('challenges', challengeId, (redisErr, stringifiedChallenge) => {
+    Hoek.assert(!redisErr, 'redis error');
     var challenge = JSON.parse(stringifiedChallenge);
     var permissions = helpers.getPermissions(loggedIn, 'organisation_id', challenge.org_id);
     if (!permissions.permissions.editable)  {
