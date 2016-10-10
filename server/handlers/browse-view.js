@@ -60,7 +60,7 @@ function getChallengesData (redis, browsableOrgs, callback) {
     // map through all challenge id's
     helpers.getChallenges(redis, challenges, challengeIds, allChallenges => {
       // remove any archived challenges and add the `shared_by` key
-      var active = addSharedBy(browsableOrgs, helpers.filterActive(allChallenges));
+      var active = addSharedBy(challenges, helpers.filterActive(allChallenges));
       // sort by most recent
       var sortedData = helpers.sortByDate(active);
       callback(sortedData);
