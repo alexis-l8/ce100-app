@@ -35,8 +35,8 @@
       <h2 class="card__header">Contact</h2>
       <span class="card__data">{{primary_user.first_name}} {{primary_user.last_name}}</span>
       <span class="card__data">{{primary_user.job}}</span>
-      <span class="card__data">{{primary_user.phone}}</span>
-      <span class="card__data">{{primary_user.email}}</span>
+      <span class="card__data"><a href="tel:{{primary_user.phone}}" class="card__data--link">{{primary_user.phone}}</a></span>
+      <span class="card__data"><a href="mailto:{{primary_user.email}}" class="card__data--link">{{primary_user.email}}</a></span>
     </div>
     {{else}}
     <div class="card">
@@ -46,7 +46,7 @@
 
     {{#if activeChallenges}}
       <div class="card card--header card--tall">
-        <h2 class="title title--tall">Our Current Challenges</h2>
+        <h2 class="title title--tall">Our Challenges</h2>
       </div>
       {{#each activeChallenges}}
         {{>challenge permissions=../permissions}}
