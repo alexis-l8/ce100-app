@@ -12,9 +12,9 @@ dbSetup.initialiseDB = (cb) => {
         client.RPUSH('challenges', stringified(challenges), (err, res3) => {
           client.HSET('tags', 'tags', JSON.stringify(require('../../tags/tags.json')), (err, res4) => {
             sessions.forEach((session, i) => {
-              client.HSET('sessions', session.jti, JSON.stringify(session), (err, res4) => {
+              client.HSET('sessions', session.jti, JSON.stringify(session), (err, session_res) => {
                 if(i === sessions.length - 1) {
-                  console.log(`DB initialised response from Redis: ${res1}, ${res2}, ${res3}`);
+                  console.log(`DB initialised response from Redis: ${res1}, ${res2}, ${res3}, ${res4}`);
                   cb();
                 }
               });
