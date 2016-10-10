@@ -43,11 +43,11 @@
     </div>
     {{/if}}
 
-    {{#if challenges}}
+    {{#if activeChallenges}}
       <div class="card card--header card--tall">
         <h2 class="title title--tall">Our Current Challenges</h2>
       </div>
-      {{#each challenges}}
+      {{#each activeChallenges}}
         {{>challenge permissions=../permissions}}
         {{#if matches}}
           <div class="card card--challenge card__suggested-matches">

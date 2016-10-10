@@ -11,35 +11,40 @@ module.exports = (request, reply) => {
   // get all orgs
   request.redis.LRANGE('organisations', 0, -1, (error, stringifiedOrgs) => {
     Hoek.assert(!error, 'redis error');
-    // get all challenges
-    request.redis.LRANGE('challenges', 0, -1, (error, challengesList) => {
-      Hoek.assert(!error, 'redis error');
 
-      var orgs = helpers.parseArray(stringifiedOrgs);
-      var organisation = orgs[orgId];
-
-      var organisationTags = organisation.tags && helpers.getTagNames(organisation.tags);
+    // TODO: catch for case where org at specified userId doesn't exist.
+    var orgs = helpers.parseArray(stringifiedOrgs);
+    var organisation = orgs[orgId];
+    helpers.getTagNames(request.redis, organisation.tags, organisationTags => {
       organisation.tagsData = organisationTags;
 
-      var challenges = getChallenges(challengesList, organisation.challenges);
-      // only add matches if primary user is logged in.
-      if (loggedIn.organisation_id === orgId) {
-        //  Filter inactive organisations, and users own org
-        var organisations = helpers.filterActive(removeUsersOrg(loggedIn, orgs));
-        challenges = addMatchesToChallenges(organisations, challenges);
-      }
-      // if no primary user then reply
-      if (organisation.primary_id === -1) {
-        var options = Object.assign({}, {challenges}, {organisation}, permissions);
-        return reply.view('organisations/details', options);
-      }
-
-      // else get linked primary user and reply
-      request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedUser) => {
+      // get all challenges
+      request.redis.LRANGE('challenges', 0, -1, (error, challengesList) => {
         Hoek.assert(!error, 'redis error');
-        var primary_user = getUserInfo(stringifiedUser);
-        var options = Object.assign({}, {primary_user}, {challenges}, {organisation}, permissions);
-        return reply.view('organisations/details', options);
+        var allChallenges = helpers.parseArray(challengesList);
+        helpers.getChallenges(request.redis, allChallenges, organisation.challenges, challenges => {
+          var activeChallenges = helpers.filterActive(challenges);
+          // only add matches if primary user is logged in.
+          if (loggedIn.organisation_id === orgId) {
+            //  Filter inactive organisations, and users own org
+            var organisations = helpers.filterActive(removeUsersOrg(loggedIn, orgs));
+            activeChallenges = addMatchesToChallenges(organisations, activeChallenges);
+          }
+
+          // if no primary user then reply
+          if (organisation.primary_id === -1) {
+            var options = Object.assign({}, {activeChallenges}, {organisation}, permissions);
+            return reply.view('organisations/details', options);
+          }
+
+          // else get linked primary user and reply
+          request.redis.LINDEX('people', organisation.primary_id, (error, stringifiedUser) => {
+            Hoek.assert(!error, 'redis error');
+            var primary_user = getUserInfo(stringifiedUser);
+            var options = Object.assign({}, {primary_user}, {activeChallenges}, {organisation}, permissions);
+            return reply.view('organisations/details', options);
+          });
+        });
       });
     });
   });
@@ -86,16 +91,6 @@ function sortByMatches (orgs) {
 function getUserInfo (stringifiedUser) {
   var { first_name, last_name, email, phone, job_title } = JSON.parse(stringifiedUser);
   return {first_name, last_name, email, phone, job_title};
-}
-
-function getChallenges (challengesList, organisationChallenges) {
-  var challengeArr = organisationChallenges.map((challengeId, index) => {
-    var challengeCard = JSON.parse(challengesList[challengeId]);
-    var tagsData = helpers.getTagNames(challengeCard.tags);
-    return Object.assign({}, challengeCard, {tagsData});
-  });
-  var activeChallenges = challengeArr.filter(challenge => challenge.active);
-  return challengeArr.length === 0 ? false : activeChallenges;
 }
 
 function removeUsersOrg (loggedIn, allOrgs) {

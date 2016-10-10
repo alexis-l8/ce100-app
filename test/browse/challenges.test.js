@@ -10,9 +10,7 @@ var setup = require('../helpers/set-up.js');
 // browse organisations view with same filters, browse organisations without filters;
 
 tape('set up: initialise db', t => {
-  setup.initialiseDB(() => {
-    require('../../tags/csv-to-json.js')(() => t.end());
-  });
+  setup.initialiseDB(() => t.end());
 });
 
 tape('browse challenges', t => {
