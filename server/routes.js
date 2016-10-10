@@ -121,11 +121,6 @@ var routes = [
   },
   {
     method: 'GET',
-    path: '/browse/orgs',
-    handler: require('./handlers/all-orgs-view.js')
-  },
-  {
-    method: 'GET',
     path: '/orgs/{id}',
     handler: require('./handlers/org-details-view.js')
   },
@@ -159,11 +154,6 @@ var routes = [
   },
 
   /*  ---  CHALLENGE ROUTES  ---  */
-  {
-    method: 'GET',
-    path: '/browse/challenges',
-    handler: require('./handlers/browse-challenges-view.js')
-  },
   {
     method: 'GET',
     path: '/challenges/{challengeId}/tags',
@@ -215,8 +205,13 @@ var routes = [
   // TODO: ADD VALIDATION TO QUERY PARAMS & REACT TO NON EXISTING TAG
   {
     method: 'GET',
-    path: '/browse/{type}/tags',
+    path: '/browse/{view}/tags',
     handler: require('./handlers/browse-add-tags-view.js')
+  },
+  {
+    method: 'GET',
+    path: '/browse/{view}',
+    handler: require('./handlers/browse-view.js')
   }
 ];
 

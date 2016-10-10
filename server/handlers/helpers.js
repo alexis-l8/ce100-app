@@ -110,6 +110,24 @@ helpers.getTagNames = (tagIds) => {
     : false;
 };
 
+helpers.cloneArray = (arr) => arr.map(el => Object.assign({}, el));
+
+helpers.sortAlphabetically = (key) => (arr) =>
+  helpers.cloneArray(arr).sort((el1, el2) => {
+    var name1 = el1[key].toUpperCase();
+    var name2 = el2[key].toUpperCase();
+    if (name1 < name2) {
+      return -1;
+    }
+    if (name1 > name2) {
+      return 1;
+    }
+    return 0;
+  });
+
+helpers.sortByDate = (arr) =>
+  helpers.cloneArray(arr).sort((ch1, ch2) => ch2.date - ch1.date);
+
 module.exports = helpers;
 
 // Leaving these helpers in here but they are not currently used

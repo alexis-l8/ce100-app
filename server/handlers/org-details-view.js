@@ -44,8 +44,8 @@ function getUserInfo (stringifiedUser) {
 function getChallenges (challengesList, organisationChallenges) {
   var challengeArr = organisationChallenges.map((challengeId, index) => {
     var challengeCard = JSON.parse(challengesList[challengeId]);
-    var tagsArray = getTagNames(challengeCard.tags);
-    return Object.assign({}, challengeCard, {tags: tagsArray});
+    var tagsData = getTagNames(challengeCard.tags);
+    return Object.assign({}, challengeCard, {tagsData});
   });
   var activeChallenges = challengeArr.filter(challenge => challenge.active);
   return challengeArr.length === 0 ? false : activeChallenges;
