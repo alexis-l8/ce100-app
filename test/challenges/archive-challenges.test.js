@@ -19,7 +19,7 @@ tape('set up: initialise db', t => {
 });
 
 tape('testing archiving/unarchiving of challenges', t => {
-  var challengeCardId = 3;
+  var challengeCardId = 2;
   var challengeCardDetails = initialChallenges[challengeCardId];
   var orgId = challengeCardDetails.org_id;
   var tags = challengeCardDetails.tags;

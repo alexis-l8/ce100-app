@@ -1,6 +1,14 @@
 
 var mockPayloads = {};
 
+mockPayloads.adminAddPayload = {
+  first_name: 'Jessica',
+  last_name: 'Jones',
+  email: 'ce100.emf@gmail.com',
+  organisation_id: -1,
+  user_type: 'admin'
+};
+
 mockPayloads.usersAddPayload = {
   first_name: 'Anna',
   last_name: 'Ivanovic',
