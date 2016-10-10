@@ -90,7 +90,7 @@ tape('admin can view an org, edit, archive and unarchive it', t => {
                 server.inject(adminViewOrg, res => {
                   t.ok(res.payload.indexOf(payloads.adminEditOrg.name) > -1, 'the orgs name has been edited');
                   t.ok(res.payload.indexOf(payloads.adminEditOrg.mission_statement) > -1, 'the orgs mission_statement has been edited');
-                  t.ok(res.payload.indexOf('GLOBAL PARTNER') > -1, 'the Global Partners tag has been added');
+                  t.ok(res.payload.indexOf('Global Partner') > -1, 'the Global Partners tag has been added');
                   server.inject(adminToggleArchiveOrg, res => {
                     t.equal(res.statusCode, 302, '/orgs/id/toggle-archive route redirects');
                     t.equal(res.headers.location, '/browse/orgs', 'admin is sent orgs view after editing');

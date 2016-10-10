@@ -4,63 +4,63 @@
     "enabled": true,
     "tags": [{
         "id": [0, 0],
-        "name": "GLOBAL PARTNER",
+        "name": "Global Partner",
         "parent_id": 0,
         "enabled": true
     }, {
         "id": [0, 1],
-        "name": "CORPORATE",
+        "name": "Corporate",
         "parent_id": 0,
         "enabled": true
     }, {
         "id": [0, 2],
-        "name": "PIONEER UNIVERSITY",
+        "name": "Pioneer University",
         "parent_id": 0,
         "enabled": true
     }, {
         "id": [0, 3],
-        "name": "GOVERNMENT & CITIES",
+        "name": "Government & Cities",
         "parent_id": 0,
         "enabled": true
     }, {
         "id": [0, 4],
-        "name": "EMERGING INNOVATOR",
+        "name": "Emerging Innovator",
         "parent_id": 0,
         "enabled": true
     }, {
         "id": [0, 5],
-        "name": "AFFILIATE",
+        "name": "Affiliate",
         "parent_id": 0,
         "enabled": true
     }, {
         "id": [0, 6],
-        "name": "SME/MULTIPLIER",
+        "name": "SME/Multiplier",
         "parent_id": 0,
         "enabled": true
     }],
-    "type": "MEMBER TYPES"
+    "type": "Member types"
 }, {
     "id": 1,
     "name": "SECTOR/DEPARTMENT ",
     "enabled": true,
     "tags": [{
         "id": [1, 0],
-        "name": "AGRICULTURE",
+        "name": "Agriculture",
         "parent_id": 1,
         "enabled": true
     }, {
         "id": [1, 1],
-        "name": "AUTOMOTIVE AND TRANSPORT MANUFACTURING",
+        "name": "Automotive and Transport Manufacturing",
         "parent_id": 1,
         "enabled": true
     }, {
         "id": [1, 2],
-        "name": "BUILT ENVIRONMENT",
+        "name": "Built environment",
         "parent_id": 1,
         "enabled": true
     }, {
         "id": [1, 3],
-        "name": "CHEMICALS",
+        "name": "Chemicals",
         "parent_id": 1,
         "enabled": true
     }, {
@@ -70,12 +70,12 @@
         "enabled": true
     }, {
         "id": [1, 5],
-        "name": "ENERGY",
+        "name": "Energy",
         "parent_id": 1,
         "enabled": true
     }, {
         "id": [1, 6],
-        "name": "FINANCIAL SERVICES AND INVESTMENT",
+        "name": "Financial services and investment",
         "parent_id": 1,
         "enabled": true
     }, {
@@ -85,61 +85,61 @@
         "enabled": true
     }, {
         "id": [1, 8],
-        "name": "FURNITURE AND TEXTILE AND FLOORING",
+        "name": "Furniture and textile and flooring",
         "parent_id": 1,
         "enabled": true
     }, {
         "id": [1, 9],
-        "name": "RESEARCH AND PROFESSIONAL SERVICES",
+        "name": "Research and professional services",
         "parent_id": 1,
         "enabled": true
     }, {
         "id": [1, 10],
-        "name": "MANUFACTURING ",
+        "name": "Manufacturing ",
         "parent_id": 1,
         "enabled": true
     }, {
         "id": [1, 11],
-        "name": "SUSTAINABILITY",
+        "name": "Sustainability",
         "parent_id": 1,
         "enabled": true
     }, {
         "id": [1, 12],
-        "name": "EDUCATION",
+        "name": "Education",
         "parent_id": 1,
         "enabled": true
     }, {
         "id": [1, 13],
-        "name": "RETAIL",
+        "name": "Retail",
         "parent_id": 1,
         "enabled": true
     }, {
         "id": [1, 14],
-        "name": "TELECOMMUNICATIONS",
+        "name": "Telecommunications",
         "parent_id": 1,
         "enabled": true
     }, {
         "id": [1, 15],
-        "name": "PUBLIC ADMINISTRATION",
+        "name": "Public administration",
         "parent_id": 1,
         "enabled": true
     }, {
         "id": [1, 16],
-        "name": "NON PROFIT",
+        "name": "Non Profit",
         "parent_id": 1,
         "enabled": true
     }, {
         "id": [1, 17],
-        "name": "TRANSPORT AND LOGISTICS",
+        "name": "Transport and logistics",
         "parent_id": 1,
         "enabled": true
     }, {
         "id": [1, 18],
-        "name": "SOFTWARE & ONLINE SERVICES",
+        "name": "Software & online services",
         "parent_id": 1,
         "enabled": true
     }],
-    "type": "INDUSTRIES"
+    "type": "Industries"
 }, {
     "id": 2,
     "name": "HEADQUARTERS/LOCATION (USER & ORG)",
@@ -156,62 +156,62 @@
         "enabled": true
     }, {
         "id": [2, 2],
-        "name": "BRAZIL",
+        "name": "Brazil",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 3],
-        "name": "AUSTRALIA",
+        "name": "Australia",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 4],
-        "name": "NETHERLANDS",
+        "name": "Netherlands",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 5],
-        "name": "DENMARK",
+        "name": "Denmark",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 6],
-        "name": "FRANCE",
+        "name": "France",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 7],
-        "name": "SWITZERLAND",
+        "name": "Switzerland",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 8],
-        "name": "SWEDEN",
+        "name": "Sweden",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 9],
-        "name": "ITALY",
+        "name": "Italy",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 10],
-        "name": "SPAIN",
+        "name": "Spain",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 11],
-        "name": "LUXEMBOURG",
+        "name": "Luxembourg",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 12],
-        "name": "BELGIUM",
+        "name": "Belgium",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 13],
-        "name": "REPUBLIC OF IRELAND ",
+        "name": "Republic of Ireland ",
         "parent_id": 2,
         "enabled": true
     }, {
@@ -221,577 +221,577 @@
         "enabled": true
     }, {
         "id": [2, 15],
-        "name": "CHINA",
+        "name": "China",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 16],
-        "name": "TAIWAN",
+        "name": "Taiwan",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 17],
-        "name": "GERMANY",
+        "name": "Germany",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 18],
-        "name": "MEXICO",
+        "name": "Mexico",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 19],
-        "name": "ICELAND",
+        "name": "Iceland",
         "parent_id": 2,
         "enabled": true
     }, {
         "id": [2, 20],
-        "name": "GLOBAL",
+        "name": "Global",
         "parent_id": 2,
         "enabled": true
     }],
-    "type": "LOCATIONS"
+    "type": "Locations"
 }, {
     "id": 3,
     "name": "ENERGY ",
     "enabled": true,
     "tags": [{
         "id": [3, 0],
-        "name": "RENEWABLE ENERGY",
+        "name": "Renewable energy",
         "parent_id": 3,
         "enabled": true
     }, {
         "id": [3, 1],
-        "name": "WASTE TO ENERGY",
+        "name": "Waste to energy",
         "parent_id": 3,
         "enabled": true
     }, {
         "id": [3, 2],
-        "name": "BIOENERGY ",
+        "name": "Bioenergy ",
         "parent_id": 3,
         "enabled": true
     }],
-    "type": "TOPICS"
+    "type": "Topics"
 }, {
     "id": 4,
     "name": "BUSINESS ",
     "enabled": true,
     "tags": [{
         "id": [4, 0],
-        "name": "ENTREPRENEURSHIP",
+        "name": "Entrepreneurship",
         "parent_id": 4,
         "enabled": true
     }, {
         "id": [4, 1],
-        "name": "ACCESS OVER OWNERSHIP",
+        "name": "Access over ownership",
         "parent_id": 4,
         "enabled": true
     }, {
         "id": [4, 2],
-        "name": "EMERGING TRENDS",
+        "name": "Emerging trends",
         "parent_id": 4,
         "enabled": true
     }, {
         "id": [4, 3],
-        "name": "PRODUCT AS SERVICE",
+        "name": "Product as Service",
         "parent_id": 4,
         "enabled": true
     }, {
         "id": [4, 4],
-        "name": "INDUSTRIAL SYMBIOSIS",
+        "name": "Industrial symbiosis",
         "parent_id": 4,
         "enabled": true
     }, {
         "id": [4, 5],
-        "name": "INCENTIVE STRUCTURE",
+        "name": "Incentive structure",
         "parent_id": 4,
         "enabled": true
     }, {
         "id": [4, 6],
-        "name": "CHANGE MANAGEMENT",
+        "name": "Change management",
         "parent_id": 4,
         "enabled": true
     }, {
         "id": [4, 7],
-        "name": "NEW BUSINESS MODELS",
+        "name": "New business models",
         "parent_id": 4,
         "enabled": true
     }],
-    "type": "TOPICS"
+    "type": "Topics"
 }, {
     "id": 5,
     "name": "EDUCATION",
     "enabled": true,
     "tags": [{
         "id": [5, 0],
-        "name": "HIGHER EDUCATION",
+        "name": "Higher Education",
         "parent_id": 5,
         "enabled": true
     }, {
         "id": [5, 1],
-        "name": "SECONDARY EDUCATION",
+        "name": "Secondary education",
         "parent_id": 5,
         "enabled": true
     }, {
         "id": [5, 2],
-        "name": "PRIMARY EDUCATION",
+        "name": "Primary education",
         "parent_id": 5,
         "enabled": true
     }, {
         "id": [5, 3],
-        "name": "ONLINE LEARNING",
+        "name": "Online Learning",
         "parent_id": 5,
         "enabled": true
     }, {
         "id": [5, 4],
-        "name": "TRAINING",
+        "name": "Training",
         "parent_id": 5,
         "enabled": true
     }, {
         "id": [5, 5],
-        "name": "SYSTEMS THINKING",
+        "name": "Systems thinking",
         "parent_id": 5,
         "enabled": true
     }, {
         "id": [5, 6],
-        "name": "RESEARCH",
+        "name": "Research",
         "parent_id": 5,
         "enabled": true
     }, {
         "id": [5, 7],
-        "name": "CONSULTANCY",
+        "name": "Consultancy",
         "parent_id": 5,
         "enabled": true
     }],
-    "type": "TOPICS"
+    "type": "Topics"
 }, {
     "id": 6,
     "name": "DESIGN ",
     "enabled": true,
     "tags": [{
         "id": [6, 0],
-        "name": "PRODUCT LIFE EXTENSION",
+        "name": "Product life extension",
         "parent_id": 6,
         "enabled": true
     }, {
         "id": [6, 1],
-        "name": "CLOSED LOOP DESIGN",
+        "name": "Closed loop design",
         "parent_id": 6,
         "enabled": true
     }, {
         "id": [6, 2],
-        "name": "DESIGN FOR DISASSEMBLY",
+        "name": "Design for disassembly",
         "parent_id": 6,
         "enabled": true
     }, {
         "id": [6, 3],
-        "name": "BIOMIMICRY",
+        "name": "Biomimicry",
         "parent_id": 6,
         "enabled": true
     }, {
         "id": [6, 4],
-        "name": "CRADLE TO CRADLE",
+        "name": "Cradle to Cradle",
         "parent_id": 6,
         "enabled": true
     }, {
         "id": [6, 5],
-        "name": "SERVICE DESIGN",
+        "name": "Service design",
         "parent_id": 6,
         "enabled": true
     }, {
         "id": [6, 6],
-        "name": "LIFE CYCLE ASSESSMENT",
+        "name": "Life cycle assessment",
         "parent_id": 6,
         "enabled": true
     }, {
         "id": [6, 7],
-        "name": "STANDARDISATION",
+        "name": "Standardisation",
         "parent_id": 6,
         "enabled": true
     }, {
         "id": [6, 8],
-        "name": "CERTIFICATION ",
+        "name": "Certification ",
         "parent_id": 6,
         "enabled": true
     }, {
         "id": [6, 9],
-        "name": "PACKAGING ",
+        "name": "Packaging ",
         "parent_id": 6,
         "enabled": true
     }],
-    "type": "TOPICS"
+    "type": "Topics"
 }, {
     "id": 7,
     "name": "ECONOMICS ",
     "enabled": true,
     "tags": [{
         "id": [7, 0],
-        "name": "ECONOMIC SYSTEMS ",
+        "name": "Economic systems ",
         "parent_id": 7,
         "enabled": true
     }, {
         "id": [7, 1],
-        "name": "SOCIAL CAPITAL",
+        "name": "Social capital",
         "parent_id": 7,
         "enabled": true
     }, {
         "id": [7, 2],
-        "name": "EMPLOYMENT",
+        "name": "Employment",
         "parent_id": 7,
         "enabled": true
     }, {
         "id": [7, 3],
-        "name": "MEASUREMENT & KPI'S",
+        "name": "Measurement & KPI's",
         "parent_id": 7,
         "enabled": true
     }, {
         "id": [7, 4],
-        "name": "EMERGING MARKETS",
+        "name": "Emerging markets",
         "parent_id": 7,
         "enabled": true
     }, {
         "id": [7, 5],
-        "name": "PRICES & MARKETS",
+        "name": "Prices & markets",
         "parent_id": 7,
         "enabled": true
     }],
-    "type": "TOPICS"
+    "type": "Topics"
 }, {
     "id": 8,
     "name": "BIOLOGICAL CYCLE ",
     "enabled": true,
     "tags": [{
         "id": [8, 0],
-        "name": "NATURAL CAPITAL",
+        "name": "Natural capital",
         "parent_id": 8,
         "enabled": true
     }, {
         "id": [8, 1],
-        "name": "WATER",
+        "name": "Water",
         "parent_id": 8,
         "enabled": true
     }, {
         "id": [8, 2],
-        "name": "FERTILISER",
+        "name": "Fertiliser",
         "parent_id": 8,
         "enabled": true
     }, {
         "id": [8, 3],
-        "name": "LAND MANAGEMENT",
+        "name": "Land management",
         "parent_id": 8,
         "enabled": true
     }, {
         "id": [8, 4],
-        "name": "AGRICULTURE",
+        "name": "Agriculture",
         "parent_id": 8,
         "enabled": true
     }, {
         "id": [8, 5],
-        "name": "COMPOSTING",
+        "name": "Composting",
         "parent_id": 8,
         "enabled": true
     }, {
         "id": [8, 6],
-        "name": "ANAEROBIC DIGESTION",
+        "name": "Anaerobic digestion",
         "parent_id": 8,
         "enabled": true
     }, {
         "id": [8, 7],
-        "name": "FOOD & BEVERAGES",
+        "name": "Food & beverages",
         "parent_id": 8,
         "enabled": true
     }, {
         "id": [8, 8],
-        "name": "BIOCHEMICAL EXTRACTION",
+        "name": "Biochemical extraction",
         "parent_id": 8,
         "enabled": true
     }],
-    "type": "TOPICS"
+    "type": "Topics"
 }, {
     "id": 9,
     "name": "TECHNICAL CYCLE ",
     "enabled": true,
     "tags": [{
         "id": [9, 0],
-        "name": "REPAIR",
+        "name": "Repair",
         "parent_id": 9,
         "enabled": true
     }, {
         "id": [9, 1],
-        "name": "REUSE",
+        "name": "Reuse",
         "parent_id": 9,
         "enabled": true
     }, {
         "id": [9, 2],
-        "name": "REFURBISHMENT",
+        "name": "Refurbishment",
         "parent_id": 9,
         "enabled": true
     }, {
         "id": [9, 3],
-        "name": "RECYCLING",
+        "name": "Recycling",
         "parent_id": 9,
         "enabled": true
     }, {
         "id": [9, 4],
-        "name": "MAINTENANCE",
+        "name": "Maintenance",
         "parent_id": 9,
         "enabled": true
     }, {
         "id": [9, 5],
-        "name": "RESOURCE PRODUCTIVITY ",
+        "name": "Resource productivity ",
         "parent_id": 9,
         "enabled": true
     }, {
         "id": [9, 6],
-        "name": "LEASING",
+        "name": "Leasing",
         "parent_id": 9,
         "enabled": true
     }, {
         "id": [9, 7],
-        "name": "RECOVERY",
+        "name": "Recovery",
         "parent_id": 9,
         "enabled": true
     }, {
         "id": [9, 8],
-        "name": "SUPPLY CHAIN",
+        "name": "Supply chain",
         "parent_id": 9,
         "enabled": true
     }, {
         "id": [9, 9],
-        "name": "SORTING",
+        "name": "Sorting",
         "parent_id": 9,
         "enabled": true
     }],
-    "type": "TOPICS"
+    "type": "Topics"
 }, {
     "id": 10,
     "name": "CITIES",
     "enabled": true,
     "tags": [{
         "id": [10, 0],
-        "name": "BUILT ENVIRONMENT",
+        "name": "Built environment",
         "parent_id": 10,
         "enabled": true
     }, {
         "id": [10, 1],
-        "name": "MOBILITY",
+        "name": "Mobility",
         "parent_id": 10,
         "enabled": true
     }, {
         "id": [10, 2],
-        "name": "URBAN PLANNING",
+        "name": "Urban planning",
         "parent_id": 10,
         "enabled": true
     }, {
         "id": [10, 3],
-        "name": "BUILDINGS DESIGN",
+        "name": "Buildings design",
         "parent_id": 10,
         "enabled": true
     }],
-    "type": "TOPICS"
+    "type": "Topics"
 }, {
     "id": 11,
     "name": "MANUFACTURING & ENGINEERING",
     "enabled": true,
     "tags": [{
         "id": [11, 0],
-        "name": "REMANUFACTURING",
+        "name": "Remanufacturing",
         "parent_id": 11,
         "enabled": true
     }, {
         "id": [11, 1],
-        "name": "ADDITIVE MANUFACTURING",
+        "name": "Additive manufacturing",
         "parent_id": 11,
         "enabled": true
     }, {
         "id": [11, 2],
-        "name": "MANUFACTURING",
+        "name": "Manufacturing",
         "parent_id": 11,
         "enabled": true
     }, {
         "id": [11, 3],
-        "name": "ELECTRICAL ENGINEERING",
+        "name": "Electrical engineering",
         "parent_id": 11,
         "enabled": true
     }, {
         "id": [11, 4],
-        "name": "MECHANICAL ENGINEERING",
+        "name": "Mechanical engineering",
         "parent_id": 11,
         "enabled": true
     }, {
         "id": [11, 5],
-        "name": "CIVIL ENGINEERING",
+        "name": "Civil engineering",
         "parent_id": 11,
         "enabled": true
     }, {
         "id": [11, 6],
-        "name": "DISTRIBUTED MANUFACTURING",
+        "name": "Distributed manufacturing",
         "parent_id": 11,
         "enabled": true
     }],
-    "type": "TOPICS"
+    "type": "Topics"
 }, {
     "id": 12,
     "name": "FINANCE & LEGAL",
     "enabled": true,
     "tags": [{
         "id": [12, 0],
-        "name": "FUNDING",
+        "name": "Funding",
         "parent_id": 12,
         "enabled": true
     }, {
         "id": [12, 1],
-        "name": "FINANCIAL SOLUTIONS",
+        "name": "Financial solutions",
         "parent_id": 12,
         "enabled": true
     }, {
         "id": [12, 2],
-        "name": "MONEY",
+        "name": "Money",
         "parent_id": 12,
         "enabled": true
     }],
-    "type": "TOPICS"
+    "type": "Topics"
 }, {
     "id": 13,
     "name": "MATERIALS ",
     "enabled": true,
     "tags": [{
         "id": [13, 0],
-        "name": "MATERIAL REUTILISATION",
+        "name": "Material reutilisation",
         "parent_id": 13,
         "enabled": true
     }, {
         "id": [13, 1],
-        "name": "MATERIAL SCIENCE",
+        "name": "Material science",
         "parent_id": 13,
         "enabled": true
     }, {
         "id": [13, 2],
-        "name": "CHEMICALS",
+        "name": "Chemicals",
         "parent_id": 13,
         "enabled": true
     }, {
         "id": [13, 3],
-        "name": "METALS",
+        "name": "Metals",
         "parent_id": 13,
         "enabled": true
     }, {
         "id": [13, 4],
-        "name": "PLASTICS & POLYMERS",
+        "name": "Plastics & polymers",
         "parent_id": 13,
         "enabled": true
     }, {
         "id": [13, 5],
-        "name": "BIO-MATERIALS",
+        "name": "Bio-materials",
         "parent_id": 13,
         "enabled": true
     }, {
         "id": [13, 6],
-        "name": "RARE EARTH METALS",
+        "name": "Rare earth metals",
         "parent_id": 13,
         "enabled": true
     }, {
         "id": [13, 7],
-        "name": "FIBRES & TEXTILES",
+        "name": "Fibres & Textiles",
         "parent_id": 13,
         "enabled": true
     }],
-    "type": "TOPICS"
+    "type": "Topics"
 }, {
     "id": 14,
     "name": "TECHNOLOGY",
     "enabled": true,
     "tags": [{
         "id": [14, 0],
-        "name": "TELECOMMUNICATIONS",
+        "name": "Telecommunications",
         "parent_id": 14,
         "enabled": true
     }, {
         "id": [14, 1],
-        "name": "DATA",
+        "name": "Data",
         "parent_id": 14,
         "enabled": true
     }, {
         "id": [14, 2],
-        "name": "INTERNET OF THINGS",
+        "name": "Internet of Things",
         "parent_id": 14,
         "enabled": true
     }, {
         "id": [14, 3],
-        "name": "INFORMATION MANAGEMENT",
+        "name": "Information management",
         "parent_id": 14,
         "enabled": true
     }, {
         "id": [14, 4],
-        "name": "TAGGING & TRACKING ",
+        "name": "Tagging & tracking ",
         "parent_id": 14,
         "enabled": true
     }, {
         "id": [14, 5],
-        "name": "AUTOMATION",
+        "name": "Automation",
         "parent_id": 14,
         "enabled": true
     }, {
         "id": [14, 6],
-        "name": "ELECTRONICS",
+        "name": "Electronics",
         "parent_id": 14,
         "enabled": true
     }, {
         "id": [14, 7],
-        "name": "ENABLING TECHNOLOGY",
+        "name": "Enabling technology",
         "parent_id": 14,
         "enabled": true
     }],
-    "type": "TOPICS"
+    "type": "Topics"
 }, {
     "id": 15,
     "name": "GOVERNMENT",
     "enabled": true,
     "tags": [{
         "id": [15, 0],
-        "name": "REGULATORY FRAMEWORKS ",
+        "name": "Regulatory frameworks ",
         "parent_id": 15,
         "enabled": true
     }, {
         "id": [15, 1],
-        "name": "PUBLIC PROCUREMENT & INFRASTRUCTURE",
+        "name": "Public procurement & infrastructure",
         "parent_id": 15,
         "enabled": true
     }, {
         "id": [15, 2],
-        "name": "BUSINESS SUPPORT SCHEMES",
+        "name": "Business support schemes",
         "parent_id": 15,
         "enabled": true
     }, {
         "id": [15, 3],
-        "name": "FISCAL FRAMEWORKS",
+        "name": "Fiscal frameworks",
         "parent_id": 15,
         "enabled": true
     }, {
         "id": [15, 4],
-        "name": "COLLABORATION PLATFORMS",
+        "name": "Collaboration platforms",
         "parent_id": 15,
         "enabled": true
     }, {
         "id": [15, 5],
-        "name": "EDUCATION & PUBLIC AWARENESS",
+        "name": "Education & public awareness",
         "parent_id": 15,
         "enabled": true
     }, {
         "id": [15, 6],
-        "name": "RESOURCE MANAGEMENT",
+        "name": "Resource management",
         "parent_id": 15,
         "enabled": true
     }, {
         "id": [15, 7],
-        "name": "POLICY DEVELOPMENT",
+        "name": "Policy development",
         "parent_id": 15,
         "enabled": true
     }, {
         "id": [15, 8],
-        "name": "PEOPLE & SOCIETY",
+        "name": "People & Society",
         "parent_id": 15,
         "enabled": true
     }],
-    "type": "TOPICS"
+    "type": "Topics"
 }]

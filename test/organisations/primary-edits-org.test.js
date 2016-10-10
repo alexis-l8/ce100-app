@@ -75,7 +75,7 @@ tape('primary can log in, view and edit an org they are related to', t => {
             server.inject(primaryViewUpdates, res => {
               t.equal(res.statusCode, 200, 'primary user is redirected to org details view');
               t.ok(res.payload.indexOf('Ice cream for all!') > -1, 'primary user can successfuly edit their own organisations mission_statement');
-              t.ok(res.payload.indexOf('GLOBAL PARTNER') > -1, 'primary user has successfully added the Global Partner tag to their org');
+              t.ok(res.payload.indexOf('Global Partner') > -1, 'primary user has successfully added the Global Partner tag to their org');
               t.ok(res.payload.indexOf('USA') > -1, 'primary user has successfully added the USA tag to their org');
               primaryEditTags.payload = payloads.noTagsAdded;
               server.inject(primaryEditTags, res => {
