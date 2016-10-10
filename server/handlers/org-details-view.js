@@ -95,5 +95,5 @@ function getUserInfo (stringifiedUser) {
 }
 
 function removeUsersOrg (loggedIn, allOrgs) {
-  return allOrgs.filter(org => loggedIn !== allOrgs.id);
+  return allOrgs.filter(org => loggedIn.organisation_id !== org.id);
 }

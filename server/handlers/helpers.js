@@ -125,14 +125,6 @@ helpers.getChallenges = (redis, challenges, ids, callback) => {
   });
 };
 
-// map through the inner function which takes a tag id, and returns named object for that tag
-helpers.getTagFromId = (allTags) => (id) => {
-  return id && allTags[id[0]] && allTags[id[0]].tags[id[1]] && {
-    id: id,
-    name: allTags[id[0]].tags[id[1]].name
-  };
-};
-
 helpers.cloneArray = (arr) => arr.map(el => Object.assign({}, el));
 
 helpers.sortAlphabetically = (key) => (arr) =>
@@ -156,6 +148,13 @@ helpers.filterActive = (arr) => {
 };
 
 helpers.parseArray = (arr) => arr.map(el => JSON.parse(el));
+
+// map through the inner function which takes a tag id, and returns named object for that tag
+helpers.getTagFromId = (allTags) => (id) =>
+  id && allTags[id[0]] && allTags[id[0]].tags[id[1]] && {
+    id: id,
+    name: allTags[id[0]].tags[id[1]].name
+  };
 
 helpers.errorOptions = (err) =>
   // if there is no error, return falsey
