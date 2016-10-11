@@ -304,6 +304,15 @@ Light-teal:     #66d9e0;
         font-size: 0.75rem;
         color: #89a0ae; /* bluey-grey */
     }
+    .copy__inline {
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 1rem;
+        vertical-align: middle;
+        display: inline-block;
+        width: 45%;
+        margin: 12em 0.3em 2em 0.3em;
+    }
     .copy--form {
       color: #89a0ae;
       margin-bottom: 1rem;
