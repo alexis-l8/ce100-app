@@ -298,13 +298,16 @@ Light-teal:     #66d9e0;
         max-width: 16.25rem;
         color: #ffffff;
         text-align: center;
+        margin-bottom: 1rem;
     }
     .copy__text-link, .copy__text-link:link {
         font-size: 0.75rem;
         color: #89a0ae; /* bluey-grey */
     }
-        .copy__text-link:link
-
+    .copy--form {
+      color: #89a0ae;
+      margin-bottom: 1rem;
+    }
 
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -494,6 +497,10 @@ Light-teal:     #66d9e0;
         display: block;
         margin-bottom: 0.5rem;
     }
+    .card__data--link {
+      text-decoration: none;
+      color: inherit;
+    }
     .card__additional {
       color: #89a0ae;
       transform: translate(0%,100%);
@@ -544,12 +551,13 @@ Light-teal:     #66d9e0;
     .form__input {
         margin-bottom: 1.25rem;
         line-height: 2.25;
+        font-family: inherit;
         width: 100%;
         color: #000000;
         border-radius: 3px;
         background-color: #f2f2f2;
         border: solid 1px #ebeced;
-        text-indent: 1rem;
+        padding: 0.2em 1em;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
