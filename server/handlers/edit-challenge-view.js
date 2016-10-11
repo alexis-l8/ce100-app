@@ -13,6 +13,11 @@ module.exports = (request, reply, source, joiErr) => {
     if (!permissions.permissions.editable) {
       return reply(Boom.unauthorized('You do not have permission to edit that organisation.'));
     }
+    if (challenge.tags.length === 0) {
+      var options = Object.assign({}, challenge, permissions, {error});
+      reply.view('challenges/edit', options).code(error ? 401 : 200);
+      return;
+    }
     helpers.getTagNames(request.redis, challenge.tags, tagsData => {
       var options = Object.assign({}, challenge, {tagsData}, permissions, {error});
       reply.view('challenges/edit', options).code(error ? 401 : 200);
