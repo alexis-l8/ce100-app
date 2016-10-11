@@ -32,7 +32,8 @@ helpers.orgsDropdown = (stringifiedOrgs, stringifiedUser) => {
       isSelected: user.organisation_id === org.id
     };
   });
-  return { allOrganisations: orgsArray };
+  var sortedOrgsArray = helpers.sortAlphabetically('display')(orgsArray);
+  return { allOrganisations: sortedOrgsArray };
 };
 
 helpers.userTypeRadios = (userString) => {
@@ -97,7 +98,7 @@ helpers.addPasswordToUser = (hashed, user) => {
     last_login: Date.now()
   };
   var updatedUser = Object.assign(newDetails, userOld);
-  return JSON.stringify(updatedUser);
+  return updatedUser;
 };
 
 // add the names to all tagIds that this function receives
