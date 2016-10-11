@@ -9,13 +9,13 @@ mockPayloads.adminAddPayload = {
   user_type: 'admin'
 };
 
-mockPayloads.usersAddPayload = {
+mockPayloads.usersAddPayload = (orgId) => ({
   first_name: 'Anna',
   last_name: 'Ivanovic',
   email: 'ce100.emf@gmail.com',
-  organisation_id: 5,
+  organisation_id: orgId,
   user_type: 'primary'
-};
+});
 
 mockPayloads.newUserRepeatedName = {
   first_name: 'Ben',

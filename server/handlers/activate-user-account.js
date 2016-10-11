@@ -15,7 +15,7 @@ module.exports = (request, reply) => {
       request.redis.LINDEX('people', userId, (error, user) => {
         Hoek.assert(!error, 'redis error');
         var updatedUser = helpers.addPasswordToUser(hashedPassword, user);
-        request.redis.LSET('people', userId, updatedUser, (error, response) => {
+        request.redis.LSET('people', userId, JSON.stringify(updatedUser), (error, response) => {
           Hoek.assert(!error, 'redis error');
           var session = {
             userId: userId,
@@ -25,7 +25,10 @@ module.exports = (request, reply) => {
           request.redis.HSET('sessions', session.jti, JSON.stringify(session), (error, res) => {
             Hoek.assert(!error, 'redis error');
             var token = jwt.sign(session, process.env.JWT_SECRET);
-            reply.redirect('/browse/orgs').state('token', token);
+            // redirect a new user with an org to their org profile, else redirect to all orgs
+            return updatedUser.organisation_id > -1
+              ? reply.redirect(`/orgs/${updatedUser.organisation_id}`).state('token', token)
+              : reply.redirect('/browse/orgs').state('token', token);
           });
         });
       });
