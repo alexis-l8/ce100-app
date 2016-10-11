@@ -46,10 +46,10 @@ tape('orgs/add admin adds a new organisation', t => {
   server.inject(options, reply => {
     t.equal(reply.statusCode, 302, 'admin is redirected');
     var url = reply.headers.location;
-    t.equal(url, '/browse/orgs', 'redirected to the new organisations view');
+    t.equal(url, '/orgs', 'redirected to the new organisations view');
     var options2 = {
       method: 'GET',
-      url: '/browse/orgs',
+      url: '/orgs',
       headers: { cookie: `token=${admin_token}` }
     };
     server.inject(options2, reply => {

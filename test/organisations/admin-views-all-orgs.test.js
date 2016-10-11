@@ -14,10 +14,10 @@ tape('set up: initialise db', t => {
   setup.initialiseDB(t.end);
 });
 
-tape('/browse/orgs load general view', t => {
+tape('/orgs load general view', t => {
   var options = {
     method: 'GET',
-    url: '/browse/orgs',
+    url: '/orgs',
     headers: { cookie: `token=${primary_token}` }
   };
   server.inject(options, reply => {

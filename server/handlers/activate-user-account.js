@@ -28,7 +28,7 @@ module.exports = (request, reply) => {
             // redirect a new user with an org to their org profile, else redirect to all orgs
             return updatedUser.organisation_id > -1
               ? reply.redirect(`/orgs/${updatedUser.organisation_id}`).state('token', token)
-              : reply.redirect('/browse/orgs').state('token', token);
+              : reply.redirect('/orgs').state('token', token);
           });
         });
       });

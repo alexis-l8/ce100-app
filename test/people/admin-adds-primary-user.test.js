@@ -168,7 +168,7 @@ tape('add a new admin not attached to an organisation, activate admin, redirect 
     var newAdminId = res.result.userId;
     Iron.seal(newAdminId, process.env.COOKIE_PASSWORD, Iron.defaults, (err, hashed) => {
       server.inject(activateUser(hashed), res => {
-        t.equal(res.headers.location, '/browse/orgs', 'completing activate user with organisation redirects to their organisation page');
+        t.equal(res.headers.location, '/orgs', 'completing activate user with organisation redirects to their organisation page');
         t.ok(res.headers['set-cookie'], 'cookie has been set');
         t.end();
       });

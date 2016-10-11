@@ -14,20 +14,20 @@ tape('set up: initialise db', t => {
 });
 
 var addTagsView = (type) => ({
-  url: `/browse/${type}/tags`,
+  url: `/${type}/tags`,
   method: 'GET',
   headers: { cookie: `token=${primary_token}` }
 });
 
 tape('add tags view', t => {
   server.inject(addTagsView('orgs'), res => {
-    t.equal(res.statusCode, 200, '/browse/orgs/tags exists');
-    t.ok(res.payload.indexOf('Select Tags') > -1, 'correct view is displayed');
+    t.equal(res.statusCode, 200, '/orgs/tags exists');
+    t.ok(res.payload.indexOf('All tags') > -1, 'correct view is displayed');
     t.ok(res.payload.indexOf('ENERGY') > -1, 'ENERGY parent tag in payload for orgs');
     t.ok(res.payload.indexOf('Corporate') > -1, 'corporate child tag in payload for orgs');
-    server.inject(addTagsView('people'), res => {
-      t.equal(res.statusCode, 200, '/browse/challenges/tags exists');
-      t.ok(res.payload.indexOf('Select Tags') > -1, 'correct view is displayed');
+    server.inject(addTagsView('challenges'), res => {
+      t.equal(res.statusCode, 200, '/challenges/tags exists');
+      t.ok(res.payload.indexOf('All tags') > -1, 'correct view is displayed');
       t.ok(res.payload.indexOf('ENERGY') > -1, 'ENERGY parent tag in payload for challenges');
       t.ok(res.payload.indexOf('Corporate') > -1, 'corporate child tag in payload for orgs');
       t.end();

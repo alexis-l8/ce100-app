@@ -4,11 +4,6 @@ var server = require('../../server/server.js');
 var payloads = require('../helpers/mock-payloads.js');
 var setup = require('../helpers/set-up.js');
 
-// Login; add a challenge, check challenge has been added,
-// browse challenges view; check generic challenges are there, check that our new challenge isn't there;
-// add some filters to browse;
-// browse organisations view with same filters, browse organisations without filters;
-
 tape('set up: initialise db', t => {
   setup.initialiseDB(() => t.end());
 });
@@ -21,7 +16,7 @@ tape('browse challenges', t => {
   });
   var browseChallenges = cookie => ({
     method: 'GET',
-    url: '/browse/challenges',
+    url: '/challenges',
     headers: { cookie }
   });
   var addChallenge = cookie => ({
@@ -61,7 +56,7 @@ tape('browse challenges', t => {
     })
     // browse challenges view
     .then(res => {
-      t.equal(res.statusCode, 200, '/browse/challenges route returns 200');
+      t.equal(res.statusCode, 200, '/challenges route returns 200');
       t.ok(res.payload.indexOf('Challenge Number 5') > -1, 'challenges created by other orgs show up');
       t.equal(res.payload.indexOf('Ice Bucket'), -1, 'archived challenges do not show up');
       t.equal(res.payload.indexOf('Challenge Number 1'), -1, 'archived challenges created by my org do not show up');

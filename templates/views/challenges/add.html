@@ -18,21 +18,28 @@
 
       <div class="form__section">
 
-        <label class="form__label" for="title">Title</label>
+        <label class="form__label" for="title">Challenge title</label>
+        <p class="copy copy--form">Try to keep it short and memorable</p>
         <input class="form__input {{error.title}}" type="text" name="title" id="title" placeholder="Write Here..." value="{{error.values.title}}">
-
-        <label class="form__label" for="description">Description</label>
-        <input class="form__input {{error.description}}" type="text" name="description" id="description" placeholder="Write Here..." value="{{error.values.description}}">
-
+        <label class="form__label" for="description">Short description</label>
+        <textarea class="form__input {{error.description}}" name="description" id="description" placeholder="Write Here..." rows="4" cols="50">{{#if error.values.description}}{{error.values.description}}{{/if}}</textarea>
       {{#if tags}}
         {{#each tags}}
           <span class="tag__label">{{name}}</span>
         {{/each}}
+        <div class="copy copy--form">
+          <p>Add up to 5 tags on the next screen.</p>
+          <p>These tags will be searchable and will help people to find your Challenge.</p>
+        </div>
       {{else}}
-        <h3>Add tags on the next screen</h3>
+      <div class="copy copy--form">
+        <p>Add up to 5 tags on the next screen.</p>
+        <p>These tags will be searchable and will help people to find your Challenge.</p>
+      </div>
       {{/if}}
       </div>
 
+      <p>Clicking 'Next' will make your challenge public to the network</p>
       <button class="button button--margin" type="submit">Next</button>
 
     </form>
