@@ -19,7 +19,7 @@ tape('root (dashboard) page loads', t => {
   };
   server.inject(options, reply => {
     // TODO: CAN CHANGE WHEN WE MAKE A DASHBOARD
-    t.equal(reply.statusCode, 302, 'route redircts to /browse/orgs');
+    t.equal(reply.statusCode, 302, 'route redircts to /orgs');
     t.end();
   });
 });

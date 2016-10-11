@@ -5,10 +5,10 @@
 <div class="container">
     <div class="card card--header daintree--blue">
       {{#if view.challenges}}
-      <a class="title--link" href="/browse/challenges/tags"><h1 class="title">
+      <a class="title--link" href="/challenges/tags"><h1 class="title">
         {{#if filters}}{{filters.name}}{{else}}All tags{{/if}}
       {{else if view.orgs}}
-      <a class="title--link" href="/browse/orgs/tags"><h1 class="title">
+      <a class="title--link" href="/orgs/tags"><h1 class="title">
         {{#if filters}}{{filters.name}}{{else}}All tags{{/if}}
       {{/if}}
       </h1>
@@ -22,18 +22,18 @@
         {{#if view.challenges}}
           <li class="navbar__item togglebar__item">
             {{#if filters}}
-            <a class="navbar__link togglebar__link" href="/browse/orgs?filter={{filters.id}}">
+            <a class="navbar__link togglebar__link" href="/orgs?tags={{filters.id}}">
             {{else}}
-            <a class="navbar__link togglebar__link" href="/browse/orgs">
+            <a class="navbar__link togglebar__link" href="/orgs">
             {{/if}}
               Organisations
           </a></li>
 
           <li class="navbar__item togglebar__item--selected">
             {{#if filters}}
-            <a class="navbar__link togglebar__link togglebar__link--selected" href="/browse/challenges?filter={{filters.id}}">
+            <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges?tags={{filters.id}}">
             {{else}}
-            <a class="navbar__link togglebar__link togglebar__link--selected" href="/browse/challenges">
+            <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges">
             {{/if}}
               Challenges
           </a></li>
@@ -41,18 +41,18 @@
         {{else if view.orgs}}
           <li class="navbar__item togglebar__item--selected">
             {{#if filters}}
-            <a class="navbar__link togglebar__link togglebar__link--selected" href="/browse/orgs?filter={{filters.id}}">
+            <a class="navbar__link togglebar__link togglebar__link--selected" href="/orgs?tags={{filters.id}}">
               {{else}}
-              <a class="navbar__link togglebar__link togglebar__link--selected" href="/browse/orgs">
+              <a class="navbar__link togglebar__link togglebar__link--selected" href="/orgs">
                 {{/if}}
               Organisations
           </a></li>
 
           <li class="navbar__item togglebar__item">
             {{#if filters}}
-            <a class="navbar__link togglebar__link" href="/browse/challenges?filter={{filters.id}}">
+            <a class="navbar__link togglebar__link" href="/challenges?tags={{filters.id}}">
             {{else}}
-            <a class="navbar__link togglebar__link" href="/browse/challenges">
+            <a class="navbar__link togglebar__link" href="/challenges">
             {{/if}}
             Challenges
             </a></li>

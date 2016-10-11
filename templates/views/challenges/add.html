@@ -21,10 +21,8 @@
         <label class="form__label" for="title">Challenge title</label>
         <p class="copy copy--form">Try to keep it short and memorable</p>
         <input class="form__input {{error.title}}" type="text" name="title" id="title" placeholder="Write Here..." value="{{error.values.title}}">
-
         <label class="form__label" for="description">Short description</label>
-        <input class="form__input {{error.description}}" type="text" name="description" id="description" placeholder="Write Here..." value="{{error.values.description}}">
-
+        <textarea class="form__input {{error.description}}" name="description" id="description" placeholder="Write Here..." rows="4" cols="50">{{#if error.values.description}}{{error.values.description}}{{/if}}</textarea>
       {{#if tags}}
         {{#each tags}}
           <span class="tag__label">{{name}}</span>

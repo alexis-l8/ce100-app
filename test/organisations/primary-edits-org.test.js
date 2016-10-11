@@ -27,7 +27,7 @@ tape('primary can log in, view and edit an org they are related to', t => {
   };
 
   server.inject(primaryLogin, res => {
-    t.equal(res.headers.location, `/browse/orgs`, 'user gets redirected to browse view after login');
+    t.equal(res.headers.location, `/orgs`, 'user gets redirected to browse view after login');
     t.ok(res.headers['set-cookie'], 'cookie set upon primary login');
     var cookie = res.headers['set-cookie'][0].split(';')[0];
     var primaryEditOrgView = {

@@ -13,7 +13,7 @@ module.exports = (request, reply) => {
       // if user has no organisation attached to it, return here
       // if user is going from 'inactive' to 'active' -> do not change the organisation
       if (user.organisation_id === -1 || !user.active) {
-        return reply.redirect('/browse/orgs');
+        return reply.redirect('/orgs');
       }
       // otherwise user is being deactivated and has a linked org, so deactivate them
       request.redis.LINDEX('organisations', user.organisation_id, (error, orgString) => {
@@ -22,7 +22,7 @@ module.exports = (request, reply) => {
         var updatedOrg = helpers.removeUserFromOrg(orgString, userId);
         request.redis.LSET('organisations', user.organisation_id, updatedOrg, (error, response) => {
           Hoek.assert(!error, 'redis error');
-          return reply.redirect('/browse/orgs');
+          return reply.redirect('/orgs');
         });
       });
     });

@@ -9,7 +9,7 @@ module.exports = (request, reply) => {
     var orgUpdated = helpers.initialiseEntry(length, initialOrgInfo);
     redis.RPUSH('organisations', orgUpdated, (error, numberOfOrgs) => {
       Hoek.assert(!error, 'redis error');
-      reply({organisation_id: length}).redirect('/browse/orgs');
+      reply({organisation_id: length}).redirect('/orgs');
     });
   });
 };
