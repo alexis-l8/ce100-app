@@ -1,5 +1,4 @@
 module.exports = [
-  /*  ---  /people ROUTES  ---  */
   {
     method: 'GET',
     path: '/people',
