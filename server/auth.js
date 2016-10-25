@@ -2,7 +2,7 @@ exports.register = (server, options, next) => {
   server.register(require('hapi-auth-jwt2'));
 
   var tokenOptions = {
-    isSecure: process.env.NODE_ENV !== 'development',
+    isSecure: false, // CHANGE ONCE WE KNOW WHETHER THE WEBSITE WILL *DEFINITELY* BE HTTP OR HTTPS
     ttl: 1000 * 60 * 60 * 24 * 30,
     path: '/'
   };

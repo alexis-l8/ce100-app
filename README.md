@@ -39,10 +39,10 @@ git clone https://github.com/emfoundation/ce100-app.git
 Ensure you have the required `.env` file, then run:
 
 ```sh
-npm run csv-to-json
+npm i
+npm run generate-tags
 npm start
 ```
-
 
 ### Required Environment Variables
 
@@ -83,6 +83,10 @@ node test/auth/auth.test.js
 #### Adding/Updating Tags (Admin)
 
 Please refer to the [wiki](https://github.com/emfoundation/ce100-app/wiki/Add-Update-Tags) for information on how to do this.
+
+#### HTTP/HTTPS (Admin)
+
+Once the domain's HTTP/TCP protocol has been decided on, it might make sense to change ```isSecure: false``` on [line5 of server/auth.js](https://github.com/emfoundation/ce100-app/blob/master/server/auth.js#L5)
 
 ## Questions?
 
