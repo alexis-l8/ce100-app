@@ -44,12 +44,12 @@ mockPayloads.orgsAddDB = {
 };
 
 mockPayloads.loginAdmin = {
-  email: 'admin@mu.co',
+  email: 'ce100.emf@gmail.com',
   password: 'adminadmin'
 };
 
 mockPayloads.loginAdminIncorrect = {
-  email: 'admin@mu.co',
+  email: 'ce100.emf@gmail.com',
   password: 'Hello2'
 };
 
