@@ -5,7 +5,7 @@ module.exports = {
     {
       first_name: 'Alex',
       last_name: 'Wijns',
-      email: 'admin@mu.co',
+      email: 'ce100.emf@gmail.com',
       phone: '07111111111',
       job_title: 'Developer',
       user_type: 'admin',
