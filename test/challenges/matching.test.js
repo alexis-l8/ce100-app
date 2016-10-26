@@ -32,7 +32,7 @@ tape('get suggested matches (organisations) for challenge card 4', t => {
   server.inject(viewOrgDetails(`token=${primary_token}`), res => {
     t.equal(res.statusCode, 200, '/orgs/{id} route exists');
     t.equal(res.result.indexOf('EMF'), -1, 'No org suggested as a match to a primary that is not viewing their own org');
-    t.equal(res.result.indexOf('BP'), -1, 'No org suggested as a match to a primary that is not viewing their own org');
+    t.equal(res.result.indexOf('Co-op Group'), -1, 'No org suggested as a match to a primary that is not viewing their own org');
     t.equal(res.result.indexOf('Apple'), -1, 'No org not suggested as a match to a primary that is not viewing their own org');
     server.inject(primaryOfOrg1Login, res => {
       t.ok(res.headers['set-cookie'], 'cookie set upon login');
@@ -41,7 +41,7 @@ tape('get suggested matches (organisations) for challenge card 4', t => {
         t.equal(res.statusCode, 200, '/orgs/{id} route exists');
         t.ok(res.result.indexOf('EMF') > -1, 'correct organisation suggested as a match');
         t.equal(res.result.indexOf('Asda'), -1, 'inactive orgs do not show up for suggested as a match');
-        t.ok(res.result.indexOf('BP') > -1, 'correct organisation suggested as a match');
+        t.ok(res.result.indexOf('Co-op Group') > -1, 'correct organisation suggested as a match');
         t.ok(res.result.indexOf('Apple') === -1, 'incorrect organisation not suggested as a match');
         t.end();
       });
