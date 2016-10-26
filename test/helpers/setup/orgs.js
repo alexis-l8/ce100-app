@@ -42,7 +42,7 @@ module.exports = {
     },
     {
       id: 4,
-      name: 'BP',
+      name: 'Co-op Group',
       active: true,
       mission_statement: 'Anonymous',
       primary_id: 6,
