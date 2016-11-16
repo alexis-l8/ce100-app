@@ -38,9 +38,7 @@ function initServer (config, callback) {
 
     server.route(routes);
 
-    return server.start(function (error) {
-      return callback(error, server);
-    });
+    return callback(null, server);
   });
 }
 

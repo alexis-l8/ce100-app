@@ -1,11 +1,14 @@
 var tape = require('tape');
 var client = require('redis').createClient();
-var server = require('../../server/server.js');
 var payloads = require('../helpers/mock-payloads.js');
 var setup = require('../helpers/set-up.js');
+var server;
 
 tape('set up: initialise db', t => {
-  setup.initialiseDB(() => t.end());
+  setup.initialiseDB(function (initServer) {
+    server = initServer;
+    t.end();
+  });
 });
 
 tape('browse challenges', t => {

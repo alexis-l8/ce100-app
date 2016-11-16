@@ -4,7 +4,6 @@ var fs = require('fs');
 var path = require('path');
 var client = require('redis').createClient();
 
-var server = require('../../server/server.js');
 var payloads = require('../helpers/mock-payloads.js');
 var allTags = JSON.parse(fs.readFileSync(path.join(__dirname, '../../tags/tags.json'), 'utf8'));
 var setup = require('../helpers/set-up.js');
@@ -13,9 +12,13 @@ var initialChallenges = require('../helpers/setup/challenges.js')['challenges'];
 var sessions = require('../helpers/setup/sessions.js')['sessions'];
 var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
 var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
+var server;
 
 tape('set up: initialise db', t => {
-  setup.initialiseDB(() => t.end());
+  setup.initialiseDB(function (initServer) {
+    server = initServer;
+    t.end();
+  });
 });
 
 tape('testing archiving/unarchiving of challenges', t => {

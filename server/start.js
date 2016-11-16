@@ -12,5 +12,8 @@ require('../test/helpers/set-up.js').initialiseDB(function () {
 
 initServer(config, function (error, server) {
   Hoek.assert(!error, error);
-  process.stdout.write('server listening on port ' + server.info.uri + '\n');
+  return server.start(function (error) {
+    Hoek.assert(!error, error);
+    process.stdout.write('server listening on port ' + server.info.uri + '\n');
+  });
 });

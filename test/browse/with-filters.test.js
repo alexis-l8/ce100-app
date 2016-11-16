@@ -1,6 +1,5 @@
 var tape = require('tape');
 var client = require('redis').createClient();
-var server = require('../../server/server.js');
 var payloads = require('../helpers/mock-payloads.js');
 var setup = require('../helpers/set-up.js');
 
@@ -8,9 +7,13 @@ var jwt = require('jsonwebtoken');
 var sessions = require('../helpers/setup/sessions.js')['sessions'];
 var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
 var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
+var server;
 
 tape('set up: initialise db', t => {
-  setup.initialiseDB(() => t.end());
+  setup.initialiseDB(function (initServer) {
+    server = initServer;
+    t.end();
+  });
 });
 
 var filteredBrowse = type => tagId => ({
@@ -59,7 +62,7 @@ tape('filtered browse orgs', t => {
 
 tape('teardown', t => {
   client.FLUSHDB();
-  t.end();
+  server.stop(t.end);
 });
 
 tape.onFinish(() => {

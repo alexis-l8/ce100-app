@@ -1,15 +1,18 @@
 var tape = require('tape');
 var client = require('redis').createClient();
-var server = require('../../server/server.js');
 var setup = require('../helpers/set-up.js');
 var payloads = require('../helpers/mock-payloads.js');
 var jwt = require('jsonwebtoken');
 var sessions = require('../helpers/setup/sessions.js')['sessions'];
 var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
 var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
+var server;
 
 tape('set up: initialise db', t => {
-  setup.initialiseDB(t.end);
+  setup.initialiseDB(function (initServer) {
+    server = initServer;
+    t.end();
+  });
 });
 
 tape('/people quick contact list page loads for primary user', t => {

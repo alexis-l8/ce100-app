@@ -1,6 +1,5 @@
 var tape = require('tape');
 var client = require('redis').createClient();
-var server = require('../../server/server.js');
 var jwt = require('jsonwebtoken');
 
 var setup = require('../helpers/set-up.js');
@@ -8,10 +7,13 @@ var orgs = require('../helpers/setup/orgs.js')['orgs'];
 var sessions = require('../helpers/setup/sessions.js')['sessions'];
 var admin_token = jwt.sign(sessions[0], process.env.JWT_SECRET);
 var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
-
+var server;
 
 tape('set up: initialise db', t => {
-  setup.initialiseDB(t.end);
+  setup.initialiseDB(function (initServer) {
+    server = initServer;
+    t.end();
+  });
 });
 
 tape('/orgs load general view', t => {

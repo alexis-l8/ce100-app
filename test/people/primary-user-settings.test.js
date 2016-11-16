@@ -1,6 +1,5 @@
 var tape = require('tape');
 var client = require('redis').createClient();
-var server = require('../../server/server.js');
 var setup = require('../helpers/set-up.js');
 var payloads = require('../helpers/mock-payloads.js');
 
@@ -11,9 +10,13 @@ var orgs = require('../helpers/setup/orgs.js')['orgs'];
 var people = require('../helpers/setup/people.js')['people'];
 
 var primary_token = jwt.sign(sessions[2], process.env.JWT_SECRET);
+var server;
 
 tape('set up: initialise db', t => {
-  setup.initialiseDB(t.end);
+  setup.initialiseDB(function (initServer) {
+    server = initServer;
+    t.end();
+  });
 });
 
 tape('primary user cannot GET or POST to edit user for different user', t => {
