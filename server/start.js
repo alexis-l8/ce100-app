@@ -6,10 +6,11 @@ var config = { port: 3000 };
 
 require('env2')('.env');
 // set up db
-require('../test/helpers/set-up.js').initialiseDB();
+require('../test/helpers/set-up.js').initialiseDB(function () {
+  return '';
+});
 
 initServer(config, function (error, server) {
   Hoek.assert(!error, error);
   process.stdout.write('server listening on port ' + server.info.uri + '\n');
 });
-
