@@ -2,9 +2,8 @@
 
 var Hoek = require('hoek');
 var initServer = require('./server.js');
-var config = { port: 3000 };
+var config = require('./config.js');
 
-require('env2')('.env');
 // set up db
 require('../test/helpers/set-up.js').initialiseDB(function () {
   return '';
