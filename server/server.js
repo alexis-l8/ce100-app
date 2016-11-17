@@ -1,35 +1,45 @@
-require('env2')('.env');
+'use strict';
+
 var Hapi = require('hapi');
-var Hoek = require('hoek');
 var path = require('path');
+var inert = require('inert');
+var handlebars = require('handlebars');
+var vision = require('vision');
+var hapiRedisConnection = require('hapi-redis-connection');
+var hapiError = require('hapi-error');
+var auth = require('./auth.js');
+var routes = require('./routes.js');
 
-var server = new Hapi.Server();
+function initServer (config, callback) {
+  var server = new Hapi.Server();
 
-server.connection({ port: process.env.PORT || 3000 });
+  server.connection({ port: config.port || 3000 });
 
-server.register([
-  require('inert'),
-  require('vision'),
-  require('hapi-redis-connection'),
-  require('hapi-error'),
-  // custom plugins
-  require('./auth.js')
-], err => {
-  Hoek.assert(!err, err);
+  server.register([
+    inert,
+    vision,
+    hapiRedisConnection,
+    hapiError,
+    auth
+  ], function (err) {
+    if (err) {
+      return callback(err);
+    }
 
-  server.views({
-    engines: {
-      html: require('handlebars')
-    },
-    relativeTo: path.resolve(__dirname),
-    layout: 'default',
-    layoutPath: '../templates/layout',
-    path: '../templates/views',
-    partialsPath: '../templates/partials',
-    helpersPath: '../templates/helpers'
+    server.views({
+      engines: { html: handlebars },
+      relativeTo: path.resolve(__dirname),
+      layout: 'default',
+      layoutPath: '../templates/layout',
+      path: '../templates/views',
+      partialsPath: '../templates/partials',
+      helpersPath: '../templates/helpers'
+    });
+
+    server.route(routes);
+
+    return callback(null, server);
   });
-});
+}
 
-server.route(require('./routes.js'));
-
-module.exports = server;
+module.exports = initServer;

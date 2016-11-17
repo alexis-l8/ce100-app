@@ -1,5 +1,13 @@
 var tape = require('tape');
-var server = require('../../server/server.js');
+var setup = require('../helpers/set-up.js');
+var server;
+
+tape('set up: initialise db', t => {
+  setup.initialiseDB(function (initServer) {
+    server = initServer;
+    t.end();
+  });
+});
 
 tape('get css file', t => {
   var options = {
