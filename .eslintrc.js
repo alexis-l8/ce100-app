@@ -1,1 +1,0 @@
-/Users/jmurphy/web/ce100-app/node_modules/goodparts/.eslintrc.js
