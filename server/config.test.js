@@ -1,7 +1,7 @@
 require('env2')('.env');
 var url = require('url');
 
-var params = url.parse(process.env.DATABASE_URL);
+var params = url.parse(process.env.DATABASE_URL_TEST);
 var auth = params.auth.split(':');
 
 module.exports = {
@@ -13,6 +13,6 @@ module.exports = {
     host: params.hostname,
     port: params.port,
     max: 10,
-    idleTimeoutMillis: 30000
+    idleTimeoutMillis: 1
   }
 };

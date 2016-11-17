@@ -1,0 +1,797 @@
+[{
+    "id": 0,
+    "name": "MEMBER TYPE ",
+    "enabled": true,
+    "tags": [{
+        "id": [0, 0],
+        "name": "Global Partner",
+        "parent_id": 0,
+        "enabled": true
+    }, {
+        "id": [0, 1],
+        "name": "Corporate",
+        "parent_id": 0,
+        "enabled": true
+    }, {
+        "id": [0, 2],
+        "name": "Pioneer University",
+        "parent_id": 0,
+        "enabled": true
+    }, {
+        "id": [0, 3],
+        "name": "Government & Cities",
+        "parent_id": 0,
+        "enabled": true
+    }, {
+        "id": [0, 4],
+        "name": "Emerging Innovator",
+        "parent_id": 0,
+        "enabled": true
+    }, {
+        "id": [0, 5],
+        "name": "Affiliate",
+        "parent_id": 0,
+        "enabled": true
+    }, {
+        "id": [0, 6],
+        "name": "SME/Multiplier",
+        "parent_id": 0,
+        "enabled": true
+    }],
+    "type": "Member types"
+}, {
+    "id": 1,
+    "name": "SECTOR/DEPARTMENT ",
+    "enabled": true,
+    "tags": [{
+        "id": [1, 0],
+        "name": "Agriculture",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 1],
+        "name": "Automotive and Transport Manufacturing",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 2],
+        "name": "Built environment",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 3],
+        "name": "Chemicals",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 4],
+        "name": "EEE & ICT",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 5],
+        "name": "Energy",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 6],
+        "name": "Financial services and investment",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 7],
+        "name": "FMCG ",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 8],
+        "name": "Furniture and textile and flooring",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 9],
+        "name": "Research and professional services",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 10],
+        "name": "Manufacturing ",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 11],
+        "name": "Sustainability",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 12],
+        "name": "Education",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 13],
+        "name": "Retail",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 14],
+        "name": "Telecommunications",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 15],
+        "name": "Public administration",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 16],
+        "name": "Non Profit",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 17],
+        "name": "Transport and logistics",
+        "parent_id": 1,
+        "enabled": true
+    }, {
+        "id": [1, 18],
+        "name": "Software & online services",
+        "parent_id": 1,
+        "enabled": true
+    }],
+    "type": "Industries"
+}, {
+    "id": 2,
+    "name": "HEADQUARTERS/LOCATION (USER & ORG)",
+    "enabled": true,
+    "tags": [{
+        "id": [2, 0],
+        "name": "UK",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 1],
+        "name": "USA",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 2],
+        "name": "Brazil",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 3],
+        "name": "Australia",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 4],
+        "name": "Netherlands",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 5],
+        "name": "Denmark",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 6],
+        "name": "France",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 7],
+        "name": "Switzerland",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 8],
+        "name": "Sweden",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 9],
+        "name": "Italy",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 10],
+        "name": "Spain",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 11],
+        "name": "Luxembourg",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 12],
+        "name": "Belgium",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 13],
+        "name": "Republic of Ireland ",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 14],
+        "name": "UAE",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 15],
+        "name": "China",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 16],
+        "name": "Taiwan",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 17],
+        "name": "Germany",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 18],
+        "name": "Mexico",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 19],
+        "name": "Iceland",
+        "parent_id": 2,
+        "enabled": true
+    }, {
+        "id": [2, 20],
+        "name": "Global",
+        "parent_id": 2,
+        "enabled": true
+    }],
+    "type": "Locations"
+}, {
+    "id": 3,
+    "name": "ENERGY ",
+    "enabled": true,
+    "tags": [{
+        "id": [3, 0],
+        "name": "Renewable energy",
+        "parent_id": 3,
+        "enabled": true
+    }, {
+        "id": [3, 1],
+        "name": "Waste to energy",
+        "parent_id": 3,
+        "enabled": true
+    }, {
+        "id": [3, 2],
+        "name": "Bioenergy ",
+        "parent_id": 3,
+        "enabled": true
+    }],
+    "type": "Topics"
+}, {
+    "id": 4,
+    "name": "BUSINESS ",
+    "enabled": true,
+    "tags": [{
+        "id": [4, 0],
+        "name": "Entrepreneurship",
+        "parent_id": 4,
+        "enabled": true
+    }, {
+        "id": [4, 1],
+        "name": "Access over ownership",
+        "parent_id": 4,
+        "enabled": true
+    }, {
+        "id": [4, 2],
+        "name": "Emerging trends",
+        "parent_id": 4,
+        "enabled": true
+    }, {
+        "id": [4, 3],
+        "name": "Product as Service",
+        "parent_id": 4,
+        "enabled": true
+    }, {
+        "id": [4, 4],
+        "name": "Industrial symbiosis",
+        "parent_id": 4,
+        "enabled": true
+    }, {
+        "id": [4, 5],
+        "name": "Incentive structure",
+        "parent_id": 4,
+        "enabled": true
+    }, {
+        "id": [4, 6],
+        "name": "Change management",
+        "parent_id": 4,
+        "enabled": true
+    }, {
+        "id": [4, 7],
+        "name": "New business models",
+        "parent_id": 4,
+        "enabled": true
+    }],
+    "type": "Topics"
+}, {
+    "id": 5,
+    "name": "EDUCATION",
+    "enabled": true,
+    "tags": [{
+        "id": [5, 0],
+        "name": "Higher Education",
+        "parent_id": 5,
+        "enabled": true
+    }, {
+        "id": [5, 1],
+        "name": "Secondary education",
+        "parent_id": 5,
+        "enabled": true
+    }, {
+        "id": [5, 2],
+        "name": "Primary education",
+        "parent_id": 5,
+        "enabled": true
+    }, {
+        "id": [5, 3],
+        "name": "Online Learning",
+        "parent_id": 5,
+        "enabled": true
+    }, {
+        "id": [5, 4],
+        "name": "Training",
+        "parent_id": 5,
+        "enabled": true
+    }, {
+        "id": [5, 5],
+        "name": "Systems thinking",
+        "parent_id": 5,
+        "enabled": true
+    }, {
+        "id": [5, 6],
+        "name": "Research",
+        "parent_id": 5,
+        "enabled": true
+    }, {
+        "id": [5, 7],
+        "name": "Consultancy",
+        "parent_id": 5,
+        "enabled": true
+    }],
+    "type": "Topics"
+}, {
+    "id": 6,
+    "name": "DESIGN ",
+    "enabled": true,
+    "tags": [{
+        "id": [6, 0],
+        "name": "Product life extension",
+        "parent_id": 6,
+        "enabled": true
+    }, {
+        "id": [6, 1],
+        "name": "Closed loop design",
+        "parent_id": 6,
+        "enabled": true
+    }, {
+        "id": [6, 2],
+        "name": "Design for disassembly",
+        "parent_id": 6,
+        "enabled": true
+    }, {
+        "id": [6, 3],
+        "name": "Biomimicry",
+        "parent_id": 6,
+        "enabled": true
+    }, {
+        "id": [6, 4],
+        "name": "Cradle to Cradle",
+        "parent_id": 6,
+        "enabled": true
+    }, {
+        "id": [6, 5],
+        "name": "Service design",
+        "parent_id": 6,
+        "enabled": true
+    }, {
+        "id": [6, 6],
+        "name": "Life cycle assessment",
+        "parent_id": 6,
+        "enabled": true
+    }, {
+        "id": [6, 7],
+        "name": "Standardisation",
+        "parent_id": 6,
+        "enabled": true
+    }, {
+        "id": [6, 8],
+        "name": "Certification ",
+        "parent_id": 6,
+        "enabled": true
+    }, {
+        "id": [6, 9],
+        "name": "Packaging ",
+        "parent_id": 6,
+        "enabled": true
+    }],
+    "type": "Topics"
+}, {
+    "id": 7,
+    "name": "ECONOMICS ",
+    "enabled": true,
+    "tags": [{
+        "id": [7, 0],
+        "name": "Economic systems ",
+        "parent_id": 7,
+        "enabled": true
+    }, {
+        "id": [7, 1],
+        "name": "Social capital",
+        "parent_id": 7,
+        "enabled": true
+    }, {
+        "id": [7, 2],
+        "name": "Employment",
+        "parent_id": 7,
+        "enabled": true
+    }, {
+        "id": [7, 3],
+        "name": "Measurement & KPI's",
+        "parent_id": 7,
+        "enabled": true
+    }, {
+        "id": [7, 4],
+        "name": "Emerging markets",
+        "parent_id": 7,
+        "enabled": true
+    }, {
+        "id": [7, 5],
+        "name": "Prices & markets",
+        "parent_id": 7,
+        "enabled": true
+    }],
+    "type": "Topics"
+}, {
+    "id": 8,
+    "name": "BIOLOGICAL CYCLE ",
+    "enabled": true,
+    "tags": [{
+        "id": [8, 0],
+        "name": "Natural capital",
+        "parent_id": 8,
+        "enabled": true
+    }, {
+        "id": [8, 1],
+        "name": "Water",
+        "parent_id": 8,
+        "enabled": true
+    }, {
+        "id": [8, 2],
+        "name": "Fertiliser",
+        "parent_id": 8,
+        "enabled": true
+    }, {
+        "id": [8, 3],
+        "name": "Land management",
+        "parent_id": 8,
+        "enabled": true
+    }, {
+        "id": [8, 4],
+        "name": "Agriculture",
+        "parent_id": 8,
+        "enabled": true
+    }, {
+        "id": [8, 5],
+        "name": "Composting",
+        "parent_id": 8,
+        "enabled": true
+    }, {
+        "id": [8, 6],
+        "name": "Anaerobic digestion",
+        "parent_id": 8,
+        "enabled": true
+    }, {
+        "id": [8, 7],
+        "name": "Food & beverages",
+        "parent_id": 8,
+        "enabled": true
+    }, {
+        "id": [8, 8],
+        "name": "Biochemical extraction",
+        "parent_id": 8,
+        "enabled": true
+    }],
+    "type": "Topics"
+}, {
+    "id": 9,
+    "name": "TECHNICAL CYCLE ",
+    "enabled": true,
+    "tags": [{
+        "id": [9, 0],
+        "name": "Repair",
+        "parent_id": 9,
+        "enabled": true
+    }, {
+        "id": [9, 1],
+        "name": "Reuse",
+        "parent_id": 9,
+        "enabled": true
+    }, {
+        "id": [9, 2],
+        "name": "Refurbishment",
+        "parent_id": 9,
+        "enabled": true
+    }, {
+        "id": [9, 3],
+        "name": "Recycling",
+        "parent_id": 9,
+        "enabled": true
+    }, {
+        "id": [9, 4],
+        "name": "Maintenance",
+        "parent_id": 9,
+        "enabled": true
+    }, {
+        "id": [9, 5],
+        "name": "Resource productivity ",
+        "parent_id": 9,
+        "enabled": true
+    }, {
+        "id": [9, 6],
+        "name": "Leasing",
+        "parent_id": 9,
+        "enabled": true
+    }, {
+        "id": [9, 7],
+        "name": "Recovery",
+        "parent_id": 9,
+        "enabled": true
+    }, {
+        "id": [9, 8],
+        "name": "Supply chain",
+        "parent_id": 9,
+        "enabled": true
+    }, {
+        "id": [9, 9],
+        "name": "Sorting",
+        "parent_id": 9,
+        "enabled": true
+    }],
+    "type": "Topics"
+}, {
+    "id": 10,
+    "name": "CITIES",
+    "enabled": true,
+    "tags": [{
+        "id": [10, 0],
+        "name": "Built environment",
+        "parent_id": 10,
+        "enabled": true
+    }, {
+        "id": [10, 1],
+        "name": "Mobility",
+        "parent_id": 10,
+        "enabled": true
+    }, {
+        "id": [10, 2],
+        "name": "Urban planning",
+        "parent_id": 10,
+        "enabled": true
+    }, {
+        "id": [10, 3],
+        "name": "Buildings design",
+        "parent_id": 10,
+        "enabled": true
+    }],
+    "type": "Topics"
+}, {
+    "id": 11,
+    "name": "MANUFACTURING & ENGINEERING",
+    "enabled": true,
+    "tags": [{
+        "id": [11, 0],
+        "name": "Remanufacturing",
+        "parent_id": 11,
+        "enabled": true
+    }, {
+        "id": [11, 1],
+        "name": "Additive manufacturing",
+        "parent_id": 11,
+        "enabled": true
+    }, {
+        "id": [11, 2],
+        "name": "Manufacturing",
+        "parent_id": 11,
+        "enabled": true
+    }, {
+        "id": [11, 3],
+        "name": "Electrical engineering",
+        "parent_id": 11,
+        "enabled": true
+    }, {
+        "id": [11, 4],
+        "name": "Mechanical engineering",
+        "parent_id": 11,
+        "enabled": true
+    }, {
+        "id": [11, 5],
+        "name": "Civil engineering",
+        "parent_id": 11,
+        "enabled": true
+    }, {
+        "id": [11, 6],
+        "name": "Distributed manufacturing",
+        "parent_id": 11,
+        "enabled": true
+    }],
+    "type": "Topics"
+}, {
+    "id": 12,
+    "name": "FINANCE & LEGAL",
+    "enabled": true,
+    "tags": [{
+        "id": [12, 0],
+        "name": "Funding",
+        "parent_id": 12,
+        "enabled": true
+    }, {
+        "id": [12, 1],
+        "name": "Financial solutions",
+        "parent_id": 12,
+        "enabled": true
+    }, {
+        "id": [12, 2],
+        "name": "Money",
+        "parent_id": 12,
+        "enabled": true
+    }],
+    "type": "Topics"
+}, {
+    "id": 13,
+    "name": "MATERIALS ",
+    "enabled": true,
+    "tags": [{
+        "id": [13, 0],
+        "name": "Material reutilisation",
+        "parent_id": 13,
+        "enabled": true
+    }, {
+        "id": [13, 1],
+        "name": "Material science",
+        "parent_id": 13,
+        "enabled": true
+    }, {
+        "id": [13, 2],
+        "name": "Chemicals",
+        "parent_id": 13,
+        "enabled": true
+    }, {
+        "id": [13, 3],
+        "name": "Metals",
+        "parent_id": 13,
+        "enabled": true
+    }, {
+        "id": [13, 4],
+        "name": "Plastics & polymers",
+        "parent_id": 13,
+        "enabled": true
+    }, {
+        "id": [13, 5],
+        "name": "Bio-materials",
+        "parent_id": 13,
+        "enabled": true
+    }, {
+        "id": [13, 6],
+        "name": "Rare earth metals",
+        "parent_id": 13,
+        "enabled": true
+    }, {
+        "id": [13, 7],
+        "name": "Fibres & Textiles",
+        "parent_id": 13,
+        "enabled": true
+    }],
+    "type": "Topics"
+}, {
+    "id": 14,
+    "name": "TECHNOLOGY",
+    "enabled": true,
+    "tags": [{
+        "id": [14, 0],
+        "name": "Telecommunications",
+        "parent_id": 14,
+        "enabled": true
+    }, {
+        "id": [14, 1],
+        "name": "Data",
+        "parent_id": 14,
+        "enabled": true
+    }, {
+        "id": [14, 2],
+        "name": "Internet of Things",
+        "parent_id": 14,
+        "enabled": true
+    }, {
+        "id": [14, 3],
+        "name": "Information management",
+        "parent_id": 14,
+        "enabled": true
+    }, {
+        "id": [14, 4],
+        "name": "Tagging & tracking ",
+        "parent_id": 14,
+        "enabled": true
+    }, {
+        "id": [14, 5],
+        "name": "Automation",
+        "parent_id": 14,
+        "enabled": true
+    }, {
+        "id": [14, 6],
+        "name": "Electronics",
+        "parent_id": 14,
+        "enabled": true
+    }, {
+        "id": [14, 7],
+        "name": "Enabling technology",
+        "parent_id": 14,
+        "enabled": true
+    }],
+    "type": "Topics"
+}, {
+    "id": 15,
+    "name": "GOVERNMENT",
+    "enabled": true,
+    "tags": [{
+        "id": [15, 0],
+        "name": "Regulatory frameworks ",
+        "parent_id": 15,
+        "enabled": true
+    }, {
+        "id": [15, 1],
+        "name": "Public procurement & infrastructure",
+        "parent_id": 15,
+        "enabled": true
+    }, {
+        "id": [15, 2],
+        "name": "Business support schemes",
+        "parent_id": 15,
+        "enabled": true
+    }, {
+        "id": [15, 3],
+        "name": "Fiscal frameworks",
+        "parent_id": 15,
+        "enabled": true
+    }, {
+        "id": [15, 4],
+        "name": "Collaboration platforms",
+        "parent_id": 15,
+        "enabled": true
+    }, {
+        "id": [15, 5],
+        "name": "Education & public awareness",
+        "parent_id": 15,
+        "enabled": true
+    }, {
+        "id": [15, 6],
+        "name": "Resource management",
+        "parent_id": 15,
+        "enabled": true
+    }, {
+        "id": [15, 7],
+        "name": "Policy development",
+        "parent_id": 15,
+        "enabled": true
+    }, {
+        "id": [15, 8],
+        "name": "People & Society",
+        "parent_id": 15,
+        "enabled": true
+    }],
+    "type": "Topics"
+}]

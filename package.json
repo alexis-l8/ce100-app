@@ -38,10 +38,11 @@
     "iron": "^4.0.3",
     "joi": "^9.0.4",
     "jsonwebtoken": "^7.1.9",
+    "pg": "^6.1.0",
     "redis": "^2.6.2",
     "redis-connection": "^5.0.0",
     "sendemail": "^2.3.0",
-    "tags-system": "^1.0.0",
+    "tags-system": "^1.0.2",
     "vision": "^4.1.0"
   },
   "devDependencies": {
