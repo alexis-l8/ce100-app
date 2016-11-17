@@ -5,7 +5,7 @@ var path = require('path');
 var client = require('redis').createClient();
 
 var payloads = require('../helpers/mock-payloads.js');
-var allTags = JSON.parse(fs.readFileSync(path.join(__dirname, '../../tags/tags.json'), 'utf8'));
+var allTags = JSON.parse(fs.readFileSync(path.join(__dirname, '../../tags/ORIGINAL.json'), 'utf8'));
 var setup = require('../helpers/set-up.js');
 var initialChallenges = require('../helpers/setup/challenges.js')['challenges'];
 

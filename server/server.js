@@ -7,12 +7,16 @@ var handlebars = require('handlebars');
 var vision = require('vision');
 var hapiRedisConnection = require('hapi-redis-connection');
 var hapiError = require('hapi-error');
+var tags = require('tags-system');
+var tagsData = require('../tags/tags.json');
+var categoriesData = require('../tags/categories.json');
 var auth = require('./auth.js');
 var routes = require('./routes.js');
+var pg = require('pg');
 
 function initServer (config, callback) {
   var server = new Hapi.Server();
-
+  var pool = new pg.Pool(config.pg);
 
   server.connection({ port: config.port });
 
@@ -21,7 +25,15 @@ function initServer (config, callback) {
     vision,
     hapiRedisConnection,
     hapiError,
-    auth
+    auth,
+    {
+      register: tags,
+      options: {
+        tags: tagsData,
+        categories: categoriesData,
+        pool: pool
+      }
+    }
   ], function (err) {
     if (err) {
       return callback(err);
