@@ -17,10 +17,10 @@
             {{/if}}
             </a>
           </label>
-          <!-- <span  type="checkbox" class="tag__input" id="all">All tags</span> -->
-          {{#each parent_tags}}
-            {{>filter-tag view=../view}}
-          {{/each}}
+
+            {{#each parent_tags}}
+              {{>filter-tag view=../view}}
+            {{/each}}
         </div>
     </form>
   {{else}}
