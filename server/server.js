@@ -13,7 +13,8 @@ var routes = require('./routes.js');
 function initServer (config, callback) {
   var server = new Hapi.Server();
 
-  server.connection({ port: config.port || 3000 });
+
+  server.connection({ port: config.port });
 
   server.register([
     inert,
