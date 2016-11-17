@@ -1,6 +1,6 @@
 'use strict';
 
-var browseAddTagsView = require('../handlers/browse-add-tags-view.js');
+var browseAddTagsView = require('../handlers/orgs/browse-add-tags-view.js');
 
 module.exports = [
   {

@@ -7,7 +7,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/challenges/tags',
-    handler: require('../handlers/browse-add-tags-view.js')
+    handler: require('../handlers/challenges/browse-add-tags-view.js')
   },
   {
     method: 'GET',

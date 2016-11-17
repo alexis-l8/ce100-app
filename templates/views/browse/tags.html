@@ -10,12 +10,7 @@
     <form class="form form--tags" method="post">
         <div class="form__section">
           <label class="tag__title">
-            {{#if view.orgs}}
-            <a class="anchor--danger text-decoration" href="/orgs">Search all tags
-            {{else}}
-            <a class="anchor--danger text-decoration" href="/challenges">Search all tags
-            {{/if}}
-            </a>
+            <a class="anchor--danger text-decoration" href="/{{searchAll}}">Search all tags</a>
           </label>
 
             {{#each parent_tags}}
