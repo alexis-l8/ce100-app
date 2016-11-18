@@ -91,3 +91,6 @@ Once the domain's HTTP/TCP protocol has been decided on, it might make sense to 
 ## Questions?
 
 > If you have any questions, please raise an issue: https://github.com/emfoundation/ce100-app/issues
+
+## Endpoints
+
