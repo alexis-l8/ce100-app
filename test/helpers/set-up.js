@@ -10,7 +10,7 @@ var dbSetup = {};
 
 dbSetup.initialiseDB = (cb) => {
   console.log('initialising DB');
-  initServer(config, function (error, server) {
+  initServer(config, function (error, server, pool) {
     Hoek.assert(!error, error);
     process.stdout.write('server listening on port ' + server.info.uri + '\n');
     client.flushdb((err, res) => {
@@ -22,7 +22,7 @@ dbSetup.initialiseDB = (cb) => {
                 client.HSET('sessions', session.jti, JSON.stringify(session), (err, session_res) => {
                   if(i === sessions.length - 1) {
                     console.log(`DB initialised response from Redis: ${res1}, ${res2}, ${res3}, ${res4}`);
-                    cb(server);
+                    cb(server, pool);
                   }
                 });
               });

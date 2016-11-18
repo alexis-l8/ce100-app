@@ -51,7 +51,7 @@ function initServer (config, callback) {
 
     server.route(routes);
 
-    return callback(null, server);
+    return callback(null, server, pool);
   });
 }
 
