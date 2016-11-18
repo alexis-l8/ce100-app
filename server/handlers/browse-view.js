@@ -1,15 +1,6 @@
 var Hoek = require('hoek');
 var helpers = require('./helpers.js');
 
-// TODO: DELETE ONCE ADMIN NAV BAR IS BUILT #101
-var alternate = [{
-  path: '/orgs/add',
-  name: '+'
-}, {
-  path: '/people',
-  name: 'People'
-}];
-
 module.exports = (request, reply) => {
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
@@ -33,14 +24,14 @@ module.exports = (request, reply) => {
         getChallengesData(request.redis, browsableOrgs, sortedData => {
           // filter challenges by tags
           var filtered = filterByTag(filterTag, sortedData);
-          var options = Object.assign({}, {data: filtered}, {filters}, {view}, {alternate}, permissions);
+          var options = Object.assign({}, {data: filtered}, {filters}, {view}, permissions);
           reply.view('browse/browse', options);
         });
       } else {
         var sortedData = helpers.sortAlphabetically('name')(browsableOrgs);
         // filter challenges by tags
         var filtered = filterByTag(filterTag, sortedData);
-        var options = Object.assign({}, {data: filtered}, {filters}, {view}, {alternate}, permissions);
+        var options = Object.assign({}, {data: filtered}, {filters}, {view}, permissions);
         reply.view('browse/browse', options);
       }
     });
