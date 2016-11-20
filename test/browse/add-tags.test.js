@@ -25,7 +25,6 @@ var addTagsView = function (type){
 };
 
 tape('add tags view', t => {
-  console.log(addTagsView('orgs'));
   server.inject(addTagsView('orgs'), res => {
     t.equal(res.statusCode, 200, '/orgs/tags exists');
     t.ok(res.payload.indexOf('Search all tags') > -1, 'correct view is displayed');
