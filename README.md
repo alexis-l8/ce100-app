@@ -44,6 +44,11 @@ npm run generate-tags
 npm start
 ```
 
+Then, to populate the database with some mockdata, run:
+```sh
+npm run mockData
+```
+
 ### Required Environment Variables
 
 If you are unsure what an Environment Variable is, see: https://github.com/dwyl/learn-environment-variables
@@ -93,4 +98,3 @@ Once the domain's HTTP/TCP protocol has been decided on, it might make sense to 
 > If you have any questions, please raise an issue: https://github.com/emfoundation/ce100-app/issues
 
 ## Endpoints
-
