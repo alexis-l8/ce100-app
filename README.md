@@ -91,3 +91,30 @@ Once the domain's HTTP/TCP protocol has been decided on, it might make sense to 
 ## Questions?
 
 > If you have any questions, please raise an issue: https://github.com/emfoundation/ce100-app/issues
+
+## Features
+
+### Browse types of tag and tags
+- ```/orgs/tags```
+- ```/challenges/tags```
+
+Display all the tags by categories (or type of tags):
+![list-tags](doc/img/list-tags.png)
+
+Clicking on a category will display the list of tags linked to this category:
+![list-tags-2](doc/img/list-tags-2.png)
+
+Each tags is a link to the filter organisations or challenges pages
+
+### Filter organisation and challenges by selected tag
+- ```/orgs```
+- ```/challenges```
+- ```/orgs?tag=id_of_the_tag```
+- ```/challenges?tag=id_of_the_tag```
+
+Selecting one of the tags from the browse tag view will filter the organisations or challenges depending on the type of the page the user is on. The list of organisation (or challenges) are all the item where the tag selected is also linked on:
+![filter-orgs](doc/img/filter-orgs.png)
+
+If no organisations or challenges are linked to the selected tag the view will inform the user that no items have been found:
+![filter-orgs](doc/img/filter-no-result.png)
+

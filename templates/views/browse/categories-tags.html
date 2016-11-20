@@ -1,0 +1,22 @@
+<!-- Include Top Navbar -->
+{{>top-nav}}
+
+<!-- Main Content -->
+<div class="container">
+  <div class="card card--header">
+    <h1 class="title">Select Tags</h1>
+  </div>
+    <form class="form form--tags" method="post">
+        <div class="form__section">
+          <label class="tag__title">
+            <a class="anchor--danger text-decoration" href="/{{pageType}}">Search all tags</a>
+          </label>
+          {{#each allActive}}
+            {{>filter-tags-categories pageType=../pageType}}
+          {{/each}}
+        </div>
+    </form>
+</div>
+
+<!-- Include Navbar -->
+{{>navbar}}

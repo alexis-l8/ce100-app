@@ -1,3 +1,7 @@
+'use strict';
+
+var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
+
 module.exports = [
   {
     method: 'GET',
@@ -7,7 +11,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/orgs/tags',
-    handler: require('../handlers/browse-add-tags-view.js')
+    handler: browseAddTagsView('orgs')
   },
   {
     method: 'GET',

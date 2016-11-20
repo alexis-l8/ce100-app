@@ -16,21 +16,24 @@ tape('set up: initialise db', t => {
   });
 });
 
-var addTagsView = (type) => ({
-  url: `/${type}/tags`,
-  method: 'GET',
-  headers: { cookie: `token=${primary_token}` }
-});
+var addTagsView = function (type){
+  return {
+    url: `/${type}/tags`,
+    method: 'GET',
+    headers: { cookie: `token=${primary_token}` }
+  };
+};
 
 tape('add tags view', t => {
+  console.log(addTagsView('orgs'));
   server.inject(addTagsView('orgs'), res => {
     t.equal(res.statusCode, 200, '/orgs/tags exists');
-    t.ok(res.payload.indexOf('All tags') > -1, 'correct view is displayed');
+    t.ok(res.payload.indexOf('Search all tags') > -1, 'correct view is displayed');
     t.ok(res.payload.indexOf('ENERGY') > -1, 'ENERGY parent tag in payload for orgs');
     t.ok(res.payload.indexOf('Corporate') > -1, 'corporate child tag in payload for orgs');
     server.inject(addTagsView('challenges'), res => {
       t.equal(res.statusCode, 200, '/challenges/tags exists');
-      t.ok(res.payload.indexOf('All tags') > -1, 'correct view is displayed');
+      t.ok(res.payload.indexOf('Search all tags') > -1, 'correct view is displayed');
       t.ok(res.payload.indexOf('ENERGY') > -1, 'ENERGY parent tag in payload for challenges');
       t.ok(res.payload.indexOf('Corporate') > -1, 'corporate child tag in payload for orgs');
       t.end();

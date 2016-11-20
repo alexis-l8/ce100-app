@@ -1,0 +1,12 @@
+<label class="tag__title" for="{{id_at}}">{{name_cat}}</label>
+<input  type="checkbox"
+        class="tag__input"
+        id="{{id_at}}">
+
+<div class="form__subsection">
+  {{#each tags}}
+    <a class="text-decoration" href="/{{../pageType}}?tags={{@key}}">
+      <span class="tag__label">{{name_tag}}</span>
+    </a>
+  {{/each}}
+</div>
