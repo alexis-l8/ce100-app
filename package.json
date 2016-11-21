@@ -10,7 +10,7 @@
     "coverage": "istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
     "fast": "tape ./test/*/*.test.js",
     "populateDB": "node ./commands/populateDB.js",
-    "mockData": "node lib/fixtures/importMockChallenges.js"
+    "pgMockData": "node lib/fixtures/importMockData.js"
   },
   "repository": {
     "type": "git",
