@@ -44,6 +44,11 @@ npm run generate-tags
 npm start
 ```
 
+Then, to populate the database with some mockdata, run:
+```sh
+npm run mockData
+```
+
 ### Required Environment Variables
 
 If you are unsure what an Environment Variable is, see: https://github.com/dwyl/learn-environment-variables
@@ -118,3 +123,4 @@ Selecting one of the tags from the browse tag view will filter the organisations
 If no organisations or challenges are linked to the selected tag the view will inform the user that no items have been found:
 ![filter-orgs](doc/img/filter-no-result.png)
 
+>>>>>>> master
