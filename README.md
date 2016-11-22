@@ -46,7 +46,7 @@ npm start
 
 Then, to populate the database with some mockdata, run:
 ```sh
-npm run mockData
+npm run pgMockData
 ```
 
 ### Required Environment Variables
