@@ -42,7 +42,7 @@ var test = {
     host: paramsTest.hostname,
     port: paramsTest.port,
     max: 10,
-    idleTimeoutMillis: 30000
+    idleTimeoutMillis: 1
   },
   plugins: {
     tags: {
