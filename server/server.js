@@ -27,21 +27,21 @@ function initServer (config, callback) {
   var server = new Hapi.Server();
   var pool = new pg.Pool(config.pg);
   var optionsTags = {
-    reset: Boolean(process.env.RESET_TAGS),
+    reset: config.plugins.tags.reset,
     tags: tagsData,
     categories: categoriesData,
     pool: pool
   };
   var optionsPeople = {
     pool: pool,
-    reset: Boolean(process.env.RESET_PEOPLE),
+    reset: config.plugins.people.reset,
     people: peopleData,
     organisations: organisationsData,
     tags_organisations: tagsOrgsData
   };
   var optionsChallenges = {
     pool: pool,
-    reset: Boolean(process.env.RESET_CHALLENGES),
+    reset: config.plugins.challenges.reset,
     challenges: challengesData,
     tags_challenges: tagsChallengesData
   };

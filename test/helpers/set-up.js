@@ -5,7 +5,7 @@ var people = require('./setup/people.js')['people'];
 var orgs = require('./setup/orgs.js')['orgs'];
 var challenges = require('./setup/challenges.js')['challenges'];
 var sessions = require('./setup/sessions.js')['sessions'];
-var config = require('../../server/config.test.js');
+var config = require('../../server/config.js');
 var dbSetup = {};
 
 dbSetup.initialiseDB = (cb) => {
