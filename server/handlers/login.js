@@ -4,7 +4,6 @@ var aguid = require('aguid');
 var bcrypt = require('bcrypt');
 
 module.exports = (request, reply) => {
-  var redis = request.redis;
   var email = request.payload.email;
   var password = request.payload.password;
 
@@ -37,7 +36,7 @@ module.exports = (request, reply) => {
         jti: aguid(),   // random UUID
         iat: Date.now() // session creation time (start)
       };
-      redis.HSET('sessions', session.jti, JSON.stringify(session), (redisErr, res) => {
+      request.redis.HSET('sessions', session.jti, JSON.stringify(session), (redisErr, res) => {
         if (redisErr) {
           process.stdout.write('Redis error setting session on login');
           return reply.view('login', {error: { message: 'Sorry, something went wrong. Please try again.', values: request.payload } }).code(500);
