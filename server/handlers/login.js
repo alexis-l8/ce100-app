@@ -7,31 +7,43 @@ module.exports = (request, reply) => {
   var redis = request.redis;
   var email = request.payload.email;
   var password = request.payload.password;
-  redis.LRANGE('people', 0, -1, (error, allUsers) => {
-    Hoek.assert(!error, 'redis error');
-    var user = allUsers.filter(eachUser => JSON.parse(eachUser).email === email);
-    if (user.length === 0) {
+
+  request.pg.people.getByEmail(email, function (error, pgResponse) {
+    var person = pgResponse[0]
+    // handle error
+    if (error) {
+      process.stdout.write('Redis error setting session on login');
+      return reply.view('login', {error: { message: 'Sorry, something went wrong. Please try again.', values: request.payload } }).code(500);
+    }
+
+    // no results - > email wrong
+    if (!person) {
       return reply.view('login', {error: rejectLogin(request.payload)}).code(401);
     }
-    var userDetails = JSON.parse(user[0]);
-    bcrypt.compare(password, userDetails.password, function (error, isValid) {
-      Hoek.assert(!error, 'bcrypt failure');
-      if (error || !isValid) {
+    // account activated -> redirect
+    if (!person.account_activated) {
+      return reply.view('login', {error: { message: 'Please check your emails, you need to activate your account before logging in.', values: request.payload } });
+    }
+    // password check
+    bcrypt.compare(password, person.password, function (bcryptErr, isValid) {
+      if (bcryptErr) {
+        return reply.view('login', {error: { message: 'Sorry, something went wrong. Please try again.', values: request.payload } }).code(500);
+      }
+      if (!isValid) {
         return reply.view('login', {error: rejectLogin(request.payload)}).code(401);
       }
-      userDetails.last_login = Date.now();
-      redis.LSET('people', userDetails.id, JSON.stringify(userDetails), (error, response) => {
-        Hoek.assert(!error, 'redis error');
-        var session = {
-          userId: userDetails.id, // duh
-          jti: aguid(),   // random UUID
-          iat: Date.now() // session creation time (start)
-        };
-        redis.HSET('sessions', session.jti, JSON.stringify(session), (error, res) => {
-          Hoek.assert(!error, 'redis error');
-          var token = jwt.sign(session, process.env.JWT_SECRET);
-          return reply.redirect('/orgs').state('token', token);
-        });
+      var session = {
+        userId: person.id, // duh
+        jti: aguid(),   // random UUID
+        iat: Date.now() // session creation time (start)
+      };
+      redis.HSET('sessions', session.jti, JSON.stringify(session), (redisErr, res) => {
+        if (redisErr) {
+          process.stdout.write('Redis error setting session on login');
+          return reply.view('login', {error: { message: 'Sorry, something went wrong. Please try again.', values: request.payload } }).code(500);
+        }
+        var token = jwt.sign(session, process.env.JWT_SECRET);
+        return reply.redirect('/orgs').state('token', token);
       });
     });
   });
