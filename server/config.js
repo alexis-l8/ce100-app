@@ -7,7 +7,8 @@ var auth = params.auth.split(':');
 var paramsTest = url.parse(process.env.DATABASE_URL_TEST);
 var authTest = params.auth.split(':');
 
-var  dev = {
+var dev = {
+  env: 'dev',
   port: process.env.PORT || 3000,
   pg: {
     user: auth[0],
@@ -17,10 +18,22 @@ var  dev = {
     port: params.port,
     max: 10,
     idleTimeoutMillis: 30000
+  },
+  plugins: {
+    tags: {
+      reset: Boolean(process.env.RESET_TAGS),
+    },
+    people: {
+      reset: Boolean(process.env.RESET_PEOPLE),
+    },
+    challenges: {
+      reset: Boolean(process.env.RESET_CHALLENGES),
+    }
   }
 };
 
 var test = {
+  env: 'test',
   port: 0,
   pg: {
     user: authTest[0],
@@ -30,6 +43,17 @@ var test = {
     port: paramsTest.port,
     max: 10,
     idleTimeoutMillis: 30000
+  },
+  plugins: {
+    tags: {
+      reset: Boolean(process.env.RESET_TAGS_TEST) || true,
+    },
+    people: {
+      reset: Boolean(process.env.RESET_PEOPLE_TEST) || true,
+    },
+    challenges: {
+      reset: Boolean(process.env.RESET_CHALLENGES_TEST) || true,
+    }
   }
 };
 
