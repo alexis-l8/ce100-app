@@ -5,6 +5,7 @@ var initServer = require('../../server/server.js');
 var authPlugin = require('../../server/auth.js');
 var dir = __dirname.split('/')[__dirname.split('/').length - 1];
 var file = dir + __filename.replace(__dirname, '') + ' > ';
+var config = require('../../server/config.js');
 // var client = require('redis-connection')('temp');
 
 test(file + 'Attempt to register a wrong plugin', function (t) {
@@ -18,8 +19,10 @@ test(file + 'Attempt to register a wrong plugin', function (t) {
 
   authPlugin.register.attributes = { name: 'Fake plugin' };
 
-  initServer({ port: 0 }, function (error) {
+  initServer(config, function (error, server, pool) {
     t.equal(error.message, 'register error plugin failed', 'Handle registration of a failed plugin');
+    server.stop();
+    pool.end();
     t.end();
   });
 });

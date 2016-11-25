@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/start.js",
     "startmon": "nodemon server/start.js",
-    "test": "istanbul cover tape ./test/*/*.test.js | node_modules/tap-spec/bin/cmd.js",
+    "test": "NODE_ENV=test istanbul cover tape ./test/*/*.test.js | node_modules/tap-spec/bin/cmd.js",
     "coverage": "istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
     "fast": "tape ./test/*/*.test.js",
     "populateDB": "node ./commands/populateDB.js",
@@ -40,10 +40,12 @@
     "joi": "^9.0.4",
     "jsonwebtoken": "^7.1.9",
     "pg": "^6.1.0",
+    "pg-challenges": "0.0.1",
+    "pg-people": "0.0.2",
     "redis": "^2.6.2",
     "redis-connection": "^5.0.0",
     "sendemail": "^2.3.0",
-    "tags-system": "^1.0.5",
+    "tags-system": "^1.0.7",
     "vision": "^4.1.0"
   },
   "devDependencies": {
