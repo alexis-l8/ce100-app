@@ -5,10 +5,11 @@ module.exports = function (pageType) {
   return function (request, reply) {
     var loggedIn = request.auth.credentials;
     var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
-    var filterTag = (request.query && request.query.tags) || 2;
+    // set filter tag, integeger if one is given, and `false` if not.
+    var filterTag = (request.query && request.query.tags) || false;
 
-    if (view === 'challenges') {
-      request.getChallengesByTag(filterTag, function (pgErr, challenges) {
+    if (pageType === 'challenges') {
+      request.pg.challenges.getByTag(filterTag, function (pgErr, challenges) {
         Hoek.assert(!pgErr, 'error getting challenges by tag');
 
         var options = Object.assign(
