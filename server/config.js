@@ -1,5 +1,5 @@
 'use strict';
-
+/* eslint-disable */
 require('env2')('.env');
 var url = require('url');
 var params = url.parse(process.env.DATABASE_URL);
@@ -10,6 +10,7 @@ var authTest = params.auth.split(':');
 var dev = {
   env: 'dev',
   port: process.env.PORT || 3000,
+  jwt_secret: process.env.JWT_SECRET,
   pg: {
     user: auth[0],
     password: auth[1],
@@ -35,6 +36,7 @@ var dev = {
 var test = {
   env: 'test',
   port: 0,
+  jwt_secret: process.env.JWT_SECRET,
   pg: {
     user: authTest[0],
     password: authTest[1],

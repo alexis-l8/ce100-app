@@ -1,34 +1,49 @@
-exports.register = (server, options, next) => {
-  server.register(require('hapi-auth-jwt2'));
+'use strict';
 
-  var tokenOptions = {
-    isSecure: false, // CHANGE ONCE WE KNOW WHETHER THE WEBSITE WILL *DEFINITELY* BE HTTP OR HTTPS
-    ttl: 1000 * 60 * 60 * 24 * 30,
-    path: '/'
-  };
+var hapiAuthJwt = require('hapi-auth-jwt2');
+
+var tokenOptions = {
+  isSecure: false, // CHANGE ONCE WE KNOW WHETHER THE WEBSITE WILL *DEFINITELY* BE HTTP OR HTTPS
+  ttl: 1000 * 60 * 60 * 24 * 30,
+  path: '/'
+};
+
+exports.register = function (server, options, next) {
+  server.register(hapiAuthJwt);
+
   server.state('token', tokenOptions);
   server.auth.strategy('jwt2', 'jwt', true, {
     key: process.env.JWT_SECRET,
     verifyOptions: { algorithms: ['HS256'] },
-    validateFunc: (decoded, request, cb) => {
-      request.server.app.redis.HGET('sessions', decoded.jti, (err, session) => {
-        if(err || !session) {
+    validateFunc: function (decoded, request, cb) {
+      request.server.app.redis.HGET('sessions', decoded.jti, function (err, sessionStr) { // eslint-disable-line
+        var session;
+
+        if (err) {
           return cb(err, false);
         }
-        session = JSON.parse(session);
-        if (!session.exp) {
-          request.server.app.redis.LINDEX('people', session.userId, (err, userString) => {
-            if (err || !userString) {
-              return cb(err, false);
-            }
-            var user = JSON.parse(userString);
-            var override = Object.assign({ scope: user.user_type, organisation_id: user.organisation_id }, decoded);
-            return cb(null, true, override);
-          });
-        }
-        else {
+        if (!sessionStr) {
           return cb(null, false);
         }
+        session = JSON.parse(sessionStr);
+
+        // if session has been expired
+        if (session.exp) {
+          return cb(null, false);
+        }
+
+        return request.server.methods.pg.people.getBy('id', session.userId, function (pgErr, pgUser) { //eslint-disable-line
+          var user;
+
+          if (pgErr || pgUser.length === 0) {
+            return cb(err, false);
+          }
+          user = pgUser[0];
+
+          var override = Object.assign({ scope: user.user_type, organisation_id: user.organisation_id }, decoded); //eslint-disable-line
+
+          return cb(null, true, override);
+        });
       });
     }
   });
@@ -36,6 +51,4 @@ exports.register = (server, options, next) => {
   return next();
 };
 
-exports.register.attributes = {
-  name: 'auth-strategy'
-};
+exports.register.attributes = { name: 'auth-strategy' };

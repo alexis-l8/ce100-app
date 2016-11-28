@@ -48,7 +48,7 @@ function initServer (config, callback) {
   // initialise a redis connection
   server.app.redis = require('redis-connection')(); // eslint-disable-line
   server.on('stop', function () {
-    server.app.redis.end();
+    server.app.redis.end(true);
   });
 
   server.connection({ port: config.port });
