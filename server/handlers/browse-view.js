@@ -8,7 +8,6 @@ module.exports = (request, reply) => {
   request.server.app.redis.LRANGE('organisations', 0, -1, (error, allOrgsString) => {
     Hoek.assert(!error, 'redis error');
     var orgs = helpers.parseArray(allOrgsString);
-
     // Filter out unwanted orgs depending on permissions
     var browsableOrgs = getBrowsable(loggedIn.scope, orgs);
     // get tag we are filtering by
