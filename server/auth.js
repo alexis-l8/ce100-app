@@ -40,11 +40,6 @@ exports.register = function (server, options, next) {
           }
           user = pgUser[0];
 
-          // if the user has not activated account
-          if (!user.account_activated) {
-            return cb(null, false);
-          }
-
           var override = Object.assign({ scope: user.user_type, organisation_id: user.organisation_id }, decoded); //eslint-disable-line
 
           return cb(null, true, override);

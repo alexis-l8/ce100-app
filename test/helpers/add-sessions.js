@@ -33,15 +33,15 @@ sessions.tokens = function (secret) {
 
 sessions.addAll = function (cb) {
   var client = require('redis').createClient(); //eslint-disable-line
+  var finished = 0;
 
   client.flushdb(function (err) {
     Hoek.assert(!err, 'error flushing db');
-
-    sessions.data.forEach(function (session, i) {
+    sessions.data.forEach(function (session) {
       client.HSET('sessions', session.jti, JSON.stringify(session), function (err, session_res) { // eslint-disable-line
         Hoek.assert(!err, 'error adding to sessions');
-
-        if (i === sessions.data.length - 1) {
+        finished += 1;
+        if (finished === sessions.data.length - 1) {
           client.end(true);
 
           return cb();
