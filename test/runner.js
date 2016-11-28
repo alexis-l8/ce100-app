@@ -4,4 +4,4 @@
 require('./people/login.test.js');
 
 // server
-// require('./server/auth.test.js');
+require('./server/auth.test.js');
