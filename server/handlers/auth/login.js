@@ -8,7 +8,7 @@ module.exports = function (request, reply) {
   var email = request.payload.email;
   var password = request.payload.password;
 
-  request.server.methods.pg.people.getByEmail(email, function (error, pgResponse) {
+  request.server.methods.pg.people.getBy('email', email, function (error, pgResponse) {
     var person;
 
     // handle error

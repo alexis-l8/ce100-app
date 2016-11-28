@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/start.js",
     "startmon": "nodemon server/start.js",
-    "test": "NODE_ENV=test istanbul cover tape ./test/people/login.test.js | node_modules/tap-spec/bin/cmd.js",
+    "test": "NODE_ENV=test istanbul cover tape ./test/runner.js | node_modules/tap-spec/bin/cmd.js",
     "coverage": "istanbul check-coverage",
     "fast": "tape ./test/*/*.test.js",
     "populateDB": "node ./commands/populateDB.js",
