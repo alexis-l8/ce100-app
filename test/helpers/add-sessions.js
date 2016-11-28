@@ -33,22 +33,46 @@ sessions.tokens = function (secret) {
 
 sessions.addAll = function (cb) {
   var client = require('redis').createClient(); //eslint-disable-line
-  var finished = 0;
 
-  client.flushdb(function (err) {
-    Hoek.assert(!err, 'error flushing db');
-    sessions.data.forEach(function (session) {
-      client.HSET('sessions', session.jti, JSON.stringify(session), function (err, session_res) { // eslint-disable-line
-        Hoek.assert(!err, 'error adding to sessions');
-        finished += 1;
-        if (finished === sessions.data.length - 1) {
-          client.end(true);
+  flushSessions(client, function () { // eslint-disable-line
+    addSessions(client, cb); // eslint-disable-line
+  });
+};
 
+
+module.exports = sessions;
+
+
+function flushSessions (client, cb) {
+  var deleted = 0;
+
+  client.hgetall('sessions', function (er, ss) {
+    var keys = Object.keys(ss);
+
+    keys.forEach(function (s) {
+      client.hdel('sessions', s, function (err) { //eslint-disable-line
+        Hoek.assert(!err, 'error removing session: ' + s);
+        deleted += 1;
+        if (keys.length === deleted) {
           return cb();
         }
       });
     });
   });
-};
+}
 
-module.exports = sessions;
+function addSessions (client, cb) {
+  var added = 0;
+
+  sessions.data.forEach(function (session) {
+    client.HSET('sessions', session.jti, JSON.stringify(session), function (err, session_res) { // eslint-disable-line
+      Hoek.assert(!err, 'error adding session: ' + session);
+      added += 1;
+      if (added === sessions.data.length) {
+        client.end(true);
+
+        return cb();
+      }
+    });
+  });
+}
