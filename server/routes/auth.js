@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = [
   {
     method: 'GET',
@@ -10,7 +12,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/login',
-    handler: require('../handlers/login.js'),
+    handler: require('../handlers/auth/login.js'),
     config: {
       auth: false,
       validate: require('../models/login.js')
@@ -19,6 +21,6 @@ module.exports = [
   {
     method: 'GET',
     path: '/logout',
-    handler: require('../handlers/logout.js')
+    handler: require('../handlers/auth/logout.js')
   }
 ];

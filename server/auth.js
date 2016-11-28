@@ -11,13 +11,13 @@ exports.register = (server, options, next) => {
     key: process.env.JWT_SECRET,
     verifyOptions: { algorithms: ['HS256'] },
     validateFunc: (decoded, request, cb) => {
-      request.redis.HGET('sessions', decoded.jti, (err, session) => {
+      request.server.app.redis.HGET('sessions', decoded.jti, (err, session) => {
         if(err || !session) {
           return cb(err, false);
         }
         session = JSON.parse(session);
         if (!session.exp) {
-          request.redis.LINDEX('people', session.userId, (err, userString) => {
+          request.server.app.redis.LINDEX('people', session.userId, (err, userString) => {
             if (err || !userString) {
               return cb(err, false);
             }

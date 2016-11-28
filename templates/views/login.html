@@ -8,10 +8,12 @@
             type="email"
             name="email"
             placeholder="Email Address"
+            required
             value="{{error.values.email}}">
     <input  class="form__input form__input--login"
             type="password"
             name="password"
+            required
             placeholder="Password">
     <button class="button button--login">Log In</button>
     <p class="error error--login">{{error.message}}</p>
