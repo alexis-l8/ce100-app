@@ -7,7 +7,7 @@ module.exports = function (pageType) {
     var permissions = helpers.getPermissions(request.auth.credentials);
     var options = {};
 
-    request.pg.tags.getAllActive(function (error, allActive) {
+    request.server.methods.pg.tags.getAllActive(function (error, allActive) {
       options.pageType = pageType;
       options.allActive = allActive;
       options.permissions = permissions;
