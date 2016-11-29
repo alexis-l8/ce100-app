@@ -41,11 +41,11 @@
     "jsonwebtoken": "^7.1.9",
     "pg": "^6.1.0",
     "pg-challenges": "^0.0.1",
-    "pg-people": "^1.1.1",
+    "pg-people": "^0.0.6",
     "redis": "^2.6.2",
     "redis-connection": "^5.0.0",
     "sendemail": "^2.3.0",
-    "tags-system": "^1.0.7",
+    "tags-system": "^1.1.1",
     "vision": "^4.1.0"
   },
   "devDependencies": {
