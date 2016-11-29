@@ -5,10 +5,9 @@ module.exports = (request, reply) => {
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
   // get all orgs
-  request.redis.LRANGE('organisations', 0, -1, (error, allOrgsString) => {
+  request.server.app.redis.LRANGE('organisations', 0, -1, (error, allOrgsString) => {
     Hoek.assert(!error, 'redis error');
     var orgs = helpers.parseArray(allOrgsString);
-
     // Filter out unwanted orgs depending on permissions
     var browsableOrgs = getBrowsable(loggedIn.scope, orgs);
     // get tag we are filtering by
@@ -18,10 +17,10 @@ module.exports = (request, reply) => {
     var view = { [request.route.path.split('/')[1]]: true };
 
     // format the name of the current tag being filtered for the use of handlebars
-    getFilterTagDetails(request.redis, filterTag, filters => {
+    getFilterTagDetails(request.server.app.redis, filterTag, filters => {
       // if browsing challenges:
       if (view.challenges) {
-        getChallengesData(request.redis, browsableOrgs, sortedData => {
+        getChallengesData(request.server.app.redis, browsableOrgs, sortedData => {
           // filter challenges by tags
           var filtered = filterByTag(filterTag, sortedData);
           var options = Object.assign({}, {data: filtered}, {filters}, {view}, permissions);

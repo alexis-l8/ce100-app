@@ -3,7 +3,7 @@
     "first_name": "Alex",
     "last_name": "Wijns",
     "user_type": "admin",
-    "email": "ce",
+    "email": "ce100.emf@gmail.com",
     "phone": "07111111111",
     "password": "$2a$04$vpHUCZvW2OtSNdmRAQdDj.OJ5npx6ViFybJqtVbJm7.WrpYtWT1jm",
     "org_id": null,
@@ -76,7 +76,6 @@
     "last_login": 1480012514369,
     "active": true,
     "account_activated": true
-
   },
   {
     "first_name": "Maria",

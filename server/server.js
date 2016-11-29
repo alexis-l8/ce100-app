@@ -5,7 +5,6 @@ var path = require('path');
 var inert = require('inert');
 var handlebars = require('handlebars');
 var vision = require('vision');
-var hapiRedisConnection = require('hapi-redis-connection');
 var hapiError = require('hapi-error');
 var auth = require('./auth.js');
 var routes = require('./routes.js');
@@ -46,6 +45,12 @@ function initServer (config, callback) {
     tags_challenges: tagsChallengesData
   };
 
+  // initialise a redis connection
+  server.app.redis = require('redis-connection')(); // eslint-disable-line
+  server.on('stop', function () {
+    server.app.redis.end(true);
+  });
+
   server.connection({ port: config.port });
 
   // register the plugins in order to not break constraints on pg tables
@@ -55,7 +60,8 @@ function initServer (config, callback) {
     options: optionsTags
   }, function (errorTags) {
     if (errorTags) {
-      console.log('error tags');
+      console.log('error tags'); // eslint-disable-line
+
       return callback(errorTags, server, pool);
     }
 
@@ -64,7 +70,8 @@ function initServer (config, callback) {
       options: optionsPeople
     }, function (errorPeople) {
       if (errorPeople) {
-        console.log('error people');
+        console.log('error people'); // eslint-disable-line
+
         return callback(errorPeople, server, pool);
       }
 
@@ -73,14 +80,14 @@ function initServer (config, callback) {
         options: optionsChallenges
       }, function (errorChallenges) {
         if (errorChallenges) {
-          console.log('error challenges');
+          console.log('error challenges'); //eslint-disable-line
+
           return callback(errorChallenges, server, pool);
         }
 
         return server.register([
           inert,
           vision,
-          hapiRedisConnection,
           hapiError,
           auth
         ], function (err) {
@@ -100,7 +107,9 @@ function initServer (config, callback) {
 
           server.route(routes);
 
-          return callback(null, server, pool);
+          return server.start(function (errorStart) { // eslint-disable-line
+            return callback(errorStart, server, pool);
+          });
         });
       });
     });

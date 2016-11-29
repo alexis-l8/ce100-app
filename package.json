@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/start.js",
     "startmon": "nodemon server/start.js",
-    "test": "NODE_ENV=test istanbul cover tape ./test/*/*.test.js | node_modules/tap-spec/bin/cmd.js",
+    "test": "NODE_ENV=test istanbul cover tape ./test/runner.js | node_modules/tap-spec/bin/cmd.js",
     "coverage": "istanbul check-coverage",
     "fast": "tape ./test/*/*.test.js",
     "populateDB": "node ./commands/populateDB.js",
@@ -41,7 +41,7 @@
     "jsonwebtoken": "^7.1.9",
     "pg": "^6.1.0",
     "pg-challenges": "^0.0.1",
-    "pg-people": "^0.0.4",
+    "pg-people": "^0.0.6",
     "redis": "^2.6.2",
     "redis-connection": "^5.0.0",
     "sendemail": "^2.3.0",
