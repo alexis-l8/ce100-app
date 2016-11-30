@@ -7,12 +7,16 @@ var config = require('../../server/config.js');
 
 var adminToken = sessions.tokens(config.jwt_secret).admin;
 var primaryToken = sessions.tokens(config.jwt_secret).primary;
-var adFiltered, prFiltered;
+var adFiltered, prFiltered, filterRegex;
+var filterTag = {
+  id: 69,
+  name: 'Design for disassembly'
+};
 
 var browseAll = function (cookie, filter) {
   return {
     method: 'GET',
-    url: filter ? '/challenges' : '/challenges?tags' + filter,
+    url: filter ? '/challenges?tags=' + filter : '/challenges',
     headers: { cookie: 'token=' + cookie }
   };
 };
@@ -64,4 +68,27 @@ tape('access /challenges as a logged-in primary user', function (t) {
       });
     });
   });
+});
+
+// challenges are filtered correctly
+tape('access /challenges?tags=' + filterTag.id + ' as a logged-in admin',
+  function (t) {
+    sessions.addAll(function () {
+      init(config, function (error, server, pool) {
+        t.ok(!error, 'no initialising error');
+        server.inject(browseAll(adminToken, filterTag.id), function (adRes) {
+          adFiltered = adRes.payload;
+          server.inject(browseAll(primaryToken, filterTag.id), function (prRes) {
+            prFiltered = prRes.payload;
+            filterRegex = new RegExp('Design for disassembly', 'g');
+            t.deepEqual(adFiltered.match(filterRegex),
+              prFiltered.match(filterRegex),
+              'admin and primary have the same filtered view');
+            t.end();
+            server.stop();
+            pool.end();
+          });
+        });
+      });
+    });
 });
