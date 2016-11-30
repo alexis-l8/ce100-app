@@ -36,7 +36,7 @@ sessions.addAll = function (cb) {
 
   flushSessions(client, function () { // eslint-disable-line
     addSessions(client, function () { // eslint-disable-line
-      client.end();
+      client.end(true);
       cb();
     });
   });
@@ -49,20 +49,19 @@ function flushSessions (client, cb) {
   var deleted = 0;
 
   client.hgetall('sessions', function (er, ss) {
-    if (ss) {
-      keys = Object.keys(ss);
-      keys.forEach(function (s) {
-        client.hdel('sessions', s, function (err) { //eslint-disable-line
-          Hoek.assert(!err, 'error removing session: ' + s);
-          deleted += 1;
-          if (keys.length === deleted) {
-            return cb();
-          }
-        });
-      });
+    if (!ss) {
+      return cb();
     }
-
-    return cb();
+    keys = Object.keys(ss);
+    keys.forEach(function (s) {
+      client.hdel('sessions', s, function (err) { //eslint-disable-line
+        Hoek.assert(!err, 'error removing session: ' + s);
+        deleted += 1;
+        if (keys.length === deleted) {
+          return cb();
+        }
+      });
+    });
   });
 }
 
