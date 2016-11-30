@@ -1,13 +1,13 @@
 'use strict';
 
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
-var browseView = require('../handlers/shared/browse-view.js');
+var browseChallenges = require('../handlers/browse-challenges.js');
 
 module.exports = [
   {
     method: 'GET',
     path: '/challenges',
-    handler: browseView('challenges')
+    handler: browseChallenges()
   },
   {
     method: 'GET',

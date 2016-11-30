@@ -9,7 +9,7 @@ module.exports = function (pageType) {
     var filterTag = (request.query && request.query.tags) || false;
 
     if (pageType === 'challenges') {
-      request.pg.challenges.getByTag(filterTag, function (pgErr, challenges) {
+      request.server.methods.pg.challenges.getByTag(filterTag, function (pgErr, challenges) {
         Hoek.assert(!pgErr, 'error getting challenges by tag');
 
         var options = Object.assign(
@@ -25,7 +25,6 @@ module.exports = function (pageType) {
 
       })
     } else {
-
       return reply.view('orgs');
     }
   }

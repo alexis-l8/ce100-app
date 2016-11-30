@@ -1,98 +1,67 @@
+'use strict';
+
 var tape = require('tape');
-var client = require('redis').createClient();
-var payloads = require('../helpers/mock-payloads.js');
-var setup = require('../helpers/set-up.js');
-var server;
+var sessions = require('../helpers/add-sessions.js');
+var init = require('../../server/server.js');
+var config = require('../../server/config.js');
 
-tape('set up: initialise db', t => {
-  setup.initialiseDB(function (initServer) {
-    server = initServer;
-    t.end();
-  });
-});
+var adminToken = sessions.tokens(config.jwt_secret).admin;
+var primaryToken = sessions.tokens(config.jwt_secret).primary;
+var adFiltered, prFiltered;
 
-tape('browse challenges', t => {
-  var login = payload => ({
-    method: 'POST',
-    url: '/login',
-    payload: payload
-  });
-  var browseChallenges = cookie => ({
+var browseAll = function (cookie, filter) {
+  return {
     method: 'GET',
-    url: '/challenges',
-    headers: { cookie }
-  });
-  var addChallenge = cookie => ({
-    method: 'POST',
-    url: '/challenges/add',
-    payload: payloads.addChallenge3,
-    headers: { cookie }
-  });
-  var addTags = cookie => id => ({
-    method: 'POST',
-    url: `/challenges/${id}/tags`,
-    payload: payloads.addTags,
-    headers: { cookie }
-  });
+    url: filter ? '/challenges' : '/challenges?tags' + filter,
+    headers: { cookie: 'token=' + cookie }
+  };
+};
 
-  var primaryCookie;
-  var adminCookie;
+// all challenges length > filtered challenges
 
-  // primary user login
-  server.inject(login(payloads.loginPrimary))
-    .then(res => {
-      t.ok(res.headers['set-cookie'], 'cookie set upon login');
-      primaryCookie = res.headers['set-cookie'][0].split(';')[0];
-      return server.inject(addChallenge(primaryCookie));
-    })
-    // primary adds a new challenge
-    .then(res => {
-      var challengeId = res.result.challengeId;
-      t.equal(res.statusCode, 302, 'redirected');
-      t.equal(res.headers.location, `/challenges/${challengeId}/tags`);
-      return server.inject(addTags(primaryCookie)(challengeId));
-    })
-    .then(res => {
-      t.equal(res.statusCode, 302, 'redirected');
-      t.equal(res.headers.location, '/orgs/0');
-      return server.inject(browseChallenges(primaryCookie));
-    })
-    // browse challenges view
-    .then(res => {
-      t.equal(res.statusCode, 200, '/challenges route returns 200');
-      t.ok(res.payload.indexOf('Challenge Number 5') > -1, 'challenges created by other orgs show up');
-      t.equal(res.payload.indexOf('Ice Bucket'), -1, 'archived challenges do not show up');
-      t.equal(res.payload.indexOf('Challenge Number 1'), -1, 'archived challenges created by my org do not show up');
-      // TODO: Add some filters to search challenges by
-      return server.inject(login(payloads.loginAdmin));
-    })
-    // admin login
-    .then(res => {
-      t.ok(res.headers['set-cookie'], 'cookie set upon admin login');
-      adminCookie = res.headers['set-cookie'][0].split(';')[0];
-      return server.inject(browseChallenges(adminCookie));
-    })
-    // browse challenges view
-    .then(res => {
-      t.equal(res.payload.indexOf('Ice Bucket'), -1, 'archived challenges do not show up for admin');
-      t.ok(res.payload.indexOf('Challenge Number 2') > -1, 'challenges created by org 0 do show up for admin');
-      t.ok(res.payload.indexOf('How to extract oil') > -1, 'newly created challenge shows up');
-      var challengeCards = res.payload.split('<div class="card card--challenge">');
-      t.ok(challengeCards.length > 5, 'there are more than 4 challenges');
-      t.ok(challengeCards[1].indexOf('How to extract oil') > -1, 'newly added challenge card appears at the top');
-      t.end();
-    })
-    .catch(err => {
-      console.log('ERROR: ', err);
+// fail to access /challenges IF NOT LOGGED IN
+tape('/challenges endpoint unsuccessful when not logged in',
+  function (t) {
+    sessions.addAll(function () {
+      init(config, function (error, server, pool) {
+        t.ok(!error, 'No error on init server');
+        server.inject(browseAll(), function (res) {
+          t.equal(res.statusCode, 401,
+            'request an endpoint requiring auth get 401');
+          t.end();
+          server.stop();
+          pool.end();
+        });
+      });
     });
+  });
+
+// /challenges route accessible by admin
+tape('access /challenges as a logged-in admin', function (t) {
+  sessions.addAll(function () {
+    init(config, function (error, server, pool) {
+      t.ok(!error, 'no initialising error');
+      server.inject(browseAll(adminToken), function (res) {
+        t.equal(res.statusCode, 200, 'route accessible to admin');
+        t.end();
+        server.stop();
+        pool.end();
+      });
+    });
+  });
 });
 
-tape('teardown', t => {
-  client.FLUSHDB();
-  t.end();
-});
-
-tape.onFinish(() => {
-  client.end(true);
-  server.stop(() => {});
+// /challenges route accessible by primary
+tape('access /challenges as a logged-in primary user', function (t) {
+  sessions.addAll(function () {
+    init(config, function (error, server, pool) {
+      t.ok(!error, 'no initialising error');
+      server.inject(browseAll(primaryToken), function (res) {
+        t.equal(res.statusCode, 200, 'route accessible to admin');
+        t.end();
+        server.stop();
+        pool.end();
+      });
+    });
+  });
 });
