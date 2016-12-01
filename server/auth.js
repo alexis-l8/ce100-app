@@ -40,7 +40,7 @@ exports.register = function (server, options, next) {
           }
           user = pgUser[0];
 
-          var override = Object.assign({ scope: user.user_type, organisation_id: user.organisation_id }, decoded); //eslint-disable-line
+          var override = Object.assign({ scope: user.user_type, organisation_id: user.org_id }, decoded); //eslint-disable-line
 
           return cb(null, true, override);
         });

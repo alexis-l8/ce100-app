@@ -26,8 +26,8 @@ sessions.data = [
 
 sessions.tokens = function (secret) {
   return {
-    admin: jwt.sign(sessions.data[0], secret),
-    primary: jwt.sign(sessions.data[2], secret)
+    admin_1: jwt.sign(sessions.data[0], secret),
+    primary_3: jwt.sign(sessions.data[2], secret)
   };
 };
 
