@@ -9,18 +9,19 @@ module.exports = function () {
     var loggedIn = request.auth.credentials;
     var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
     // set filter tag, integer if one is given, and `false` if not.
-    // var filterTag = (request.query && request.query.tags) || false;
+    var filterTag = (request.query && request.query.tags) || false;
 
     // get all challenges, associated by a tag, from all active organisations
-    request.server.methods.pg.organisations.getActiveOrgs(
+    request.server.methods.pg.organisations.orgsGetByTag(
+      !permissions.permissions.admin, filterTag,
       function (pgErr, orgs) {
         Hoek.assert(!pgErr, 'error getting challenges by tag');
         options = Object.assign(
           {},
           // CURRENTLY DATA === RESPONSE i.e. `orgs`
           // NEED TO CHANGE PLUGIN TO ACCOMMODATE FILTERS
-          { data: orgs },
-          // { filters: challenges.filters },
+          { data: data.orgs },
+          { filters: data.filter_tag },
           permissions
         );
         return reply.view('browse/orgs', options);
