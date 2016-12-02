@@ -25,38 +25,49 @@
     {{/if}}
 
     <form class="form" method="post">
-        <!-- Company name and image -->
         {{#if permissions.admin}}
-        <label class="form__label" for="org_name">Organisation Name</label>
-        <input class="form__input {{error.name}}" name="name" id="org_name" value="{{#if error}}{{error.values.name}}{{else}}{{org.name}}{{/if}}">
+        <!-- Company name and image -->
+        <div class="form__section">
+          <label class="form__label" for="org_name">Organisation Name</label>
+          <input class="form__input {{error.name}}" name="name" id="org_name" value="{{#if error}}{{error.values.name}}{{else}}{{org.name}}{{/if}}">
+        </div>
         {{/if}}
 
-        <label class="form__label" for="mission_statement">
-          {{#if permissions.primary}}
-            Add your circular economy vision
-          {{else}}
-            Organisation's mission statement
-          {{/if}}
-        </label>
-        <textarea class="form__input {{error.mission_statement}}"
-                  id="mission_statement"
-                  name="mission_statement"
-                  rows="2" cols="50">{{#if error}}{{error.values.mission_statement}}{{else}}{{org.mission_statement}}{{/if}}</textarea>
 
-        <label class="form__label">
-        Our tags
-        </label>
+        <div class="form__section">
+          <label class="form__label" for="mission_statement">
+            {{#if permissions.primary}}
+              Add your circular economy vision
+            {{else}}
+              Organisation's mission statement
+            {{/if}}
+          </label>
+          <textarea class="form__input {{error.mission_statement}}"
+                    id="mission_statement"
+                    name="mission_statement"
+                    rows="2" cols="50">{{#if error}}{{error.values.mission_statement}}{{else}}{{org.mission_statement}}{{/if}}</textarea>
+        </div>
 
+
+
+        <div class="form__section">
         {{#if org.tags}}
+          <label class="form__label form__label--long">
+            Share your knowledge/experience (You will be matched based on these so don't include tags that you are not happy to be matched on)
+            You can edit your tags on the next page.
+          </label>
+
           {{#each org.tags}}
             <span class="tag__label">{{tag_name}}</span>
           {{/each}}
         {{else}}
-          <h3>Add tags on the next screen</h3>
+          <label class="form__label">Add tags on the next screen</label>
         {{/if}}
+        </div>
 
         {{#if permissions.admin}}
         <!-- Show archive and primary user if admin is logge in -->
+        <div class="form__section">
           <a class="anchor anchor--danger" href="/orgs/{{org.id}}/toggle-archive">
             {{#if org.active}}
             Disable Organisation
@@ -64,17 +75,22 @@
             Enable Organisation
             {{/if}}
           </a>
-          {{#hasPrimary primary.id}}
-          <!-- Only show primary section if primary user is linked to this org -->
+        </div>
+        {{#hasPrimary primary.id}}
+        <!-- Only show primary section if primary user is linked to this org -->
+        <div class="form__section">
           <label class="form__label" for="primary_user_name">Primary User</label>
           <div class="form__input" name="primary_user_name" id="primary_user_name">
             {{primary.first_name}} {{primary.last_name}}
             <a href="/people/{{primary.id}}/edit" class="button-small float-right">EDIT</a>
           </div>
-          {{/hasPrimary}}
+        </div>
+        {{/hasPrimary}}
         {{/if}}
 
-        <button class="button" type="submit">Next</button>
+        <div class="form__section form__section--last">
+          <button class="button" type="submit">Next</button>
+        </div>
 
     </form>
 </div>
