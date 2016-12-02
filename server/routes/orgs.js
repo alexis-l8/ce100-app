@@ -2,6 +2,7 @@
 
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
 var browseOrgs = require('../handlers/orgs/browse-orgs.js');
+var orgDetailsView = require('../handlers/orgs/details-view.js');
 
 module.exports = [
   {
@@ -34,7 +35,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/orgs/{id}',
-    handler: require('../handlers/org-details-view.js')
+    handler: orgDetailsView
   },
   {
     method: 'GET',

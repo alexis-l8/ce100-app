@@ -5,38 +5,38 @@
 <div class="container">
 
     <div class="card card--header card--tall">
-      <img class="logo logo--with-title" src="../public/assets/Profile.svg" alt="{{organisation.name}} logo">
-      <h1 class="title title--with-logo">{{organisation.name}}</h1>
+      <img class="logo logo--with-title" src="../public/assets/Profile.svg" alt="{{org.name}} logo">
+      <h1 class="title title--with-logo">{{org.name}}</h1>
     </div>
 
     <div class="card">
       <h2 class="card__header">Our circular economy vision</h2>
-      <p class="card__copy">{{organisation.mission_statement}}</p>
+      <p class="card__copy">{{org.mission_statement}}</p>
 
       {{#if permissions.editable}}
-        <a class="icon icon--edit" href="/orgs/{{organisation.id}}/edit">
+        <a class="icon icon--edit" href="/orgs/{{org.id}}/edit">
           <img src="../../../public/assets/Edit.svg" alt="Edit" />
         </a>
       {{/if}}
 
     </div>
 
-    {{#if organisation.tagsData}}
+    {{#if org.tags}}
       <div class="card">
         <h2 class="card__header">Our experience</h2>
-        {{#each organisation.tagsData}}
-          <span class="tag__label">{{name}}</span>
+        {{#each org.tags}}
+          <a href="/challenges/{{tag_id}}"><span class="tag__label">{{tag_name}}</span></a>
         {{/each}}
       </div>
     {{/if}}
 
-    {{#if primary_user}}
+    {{#if primary.id}}
     <div class="card">
       <h2 class="card__header">Contact</h2>
-      <span class="card__data">{{primary_user.first_name}} {{primary_user.last_name}}</span>
-      <span class="card__data">{{primary_user.job}}</span>
-      <span class="card__data"><a href="tel:{{primary_user.phone}}" class="card__data--link">{{primary_user.phone}}</a></span>
-      <span class="card__data"><a href="mailto:{{primary_user.email}}" class="card__data--link">{{primary_user.email}}</a></span>
+      <span class="card__data">{{primary.first_name}} {{primary.last_name}}</span>
+      <span class="card__data">{{primary.job_title}}</span>
+      <span class="card__data"><a href="tel:{{primary.phone}}" class="card__data--link">{{primary.phone}}</a></span>
+      <span class="card__data"><a href="mailto:{{primary.email}}" class="card__data--link">{{primary.email}}</a></span>
     </div>
     {{else}}
     <div class="card">
@@ -44,11 +44,11 @@
     </div>
     {{/if}}
 
-    {{#if activeChallenges}}
+    {{#if challenges}}
       <div class="card card--header card--tall">
         <h2 class="title title--tall">Our Challenges</h2>
       </div>
-      {{#each activeChallenges}}
+      {{#each challenges}}
         {{>challenge permissions=../permissions}}
         {{#if matches}}
           <div class="card card--challenge card__suggested-matches">

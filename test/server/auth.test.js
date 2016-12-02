@@ -132,7 +132,7 @@ tape('A valid JWT without a user in the database fails Auth', function (t) {
 tape('A primary user is forbidden access to an admin view', function (t) {
   sessions.addAll(function () {
     init(config, function (error, server, pool) {
-      var primaryToken = sessions.tokens(config.jwt_secret).primary;
+      var primaryToken = sessions.tokens(config.jwt_secret).primary_3;
       var options = {
         method: 'GET',
         url: '/people/add',
@@ -153,7 +153,7 @@ tape('A primary user is forbidden access to an admin view', function (t) {
 tape('hit an authed route with a valid cookie containing valid users information', function (t) {
   sessions.addAll(function () {
     init(config, function (error, server, pool) {
-      var adminToken = sessions.tokens(config.jwt_secret).admin;
+      var adminToken = sessions.tokens(config.jwt_secret).admin_1;
       var options = {
         method: 'GET',
         url: '/orgs/add',
