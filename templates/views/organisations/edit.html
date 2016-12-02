@@ -1,15 +1,12 @@
 <!-- Include Top Navbar -->
 {{>top-nav}}
 
-<!-- <a class="icon icon--edit" href="/challenges/{{id}}/edit">
-  <img src="../../../public/assets/Edit.svg" alt="Edit" />
-</a> -->
 
 <!-- Main Content -->
 <div class="container">
     <div class="card card--header">
       <h1 class="title">Edit Organisation Details</h1>
-      <a class="icon icon--cancel" href="/orgs/{{id}}"></a>
+      <a class="icon icon--cancel" href="/orgs/{{org.id}}"></a>
     </div>
 
     <!-- Only an admin can fail validation -->
@@ -22,8 +19,8 @@
 
     {{#if permissions.primary}}
     <div class="card card--header card--tall card--header--white">
-      <img class="logo logo--with-title" src="/public/assets/Profile.svg" alt="{{organisation.name}} logo">
-      <h1 class="title title--with-logo title--with-logo--blue">{{name}}</h1>
+      <img class="logo logo--with-title" src="/public/assets/Profile.svg" alt="{{org.name}} logo">
+      <h1 class="title title--with-logo title--with-logo--blue">{{org.name}}</h1>
     </div>
     {{/if}}
 
@@ -31,7 +28,7 @@
         <!-- Company name and image -->
         {{#if permissions.admin}}
         <label class="form__label" for="org_name">Organisation Name</label>
-        <input class="form__input {{error.name}}" name="name" id="org_name" value="{{#if error}}{{error.values.name}}{{else}}{{name}}{{/if}}">
+        <input class="form__input {{error.name}}" name="name" id="org_name" value="{{#if error}}{{error.values.name}}{{else}}{{org.name}}{{/if}}">
         {{/if}}
 
         <label class="form__label" for="mission_statement">
@@ -42,13 +39,17 @@
           {{/if}}
         </label>
         <textarea class="form__input {{error.mission_statement}}"
-                  id="mission_statement" 
+                  id="mission_statement"
                   name="mission_statement"
-                  rows="2" cols="50">{{#if error}}{{error.values.mission_statement}}{{else}}{{mission_statement}}{{/if}}</textarea>
+                  rows="2" cols="50">{{#if error}}{{error.values.mission_statement}}{{else}}{{org.mission_statement}}{{/if}}</textarea>
 
-        {{#if organisation.tags}}
-          {{#each organisation.tags}}
-            <span class="tag__label">{{organisation.name}}</span>
+        <label class="form__label">
+        Our tags
+        </label>
+
+        {{#if org.tags}}
+          {{#each org.tags}}
+            <span class="tag__label">{{tag_name}}</span>
           {{/each}}
         {{else}}
           <h3>Add tags on the next screen</h3>
@@ -56,19 +57,19 @@
 
         {{#if permissions.admin}}
         <!-- Show archive and primary user if admin is logge in -->
-          <a class="anchor anchor--danger" href="/orgs/{{id}}/toggle-archive">
-            {{#if active}}
-            Archive Organisation
+          <a class="anchor anchor--danger" href="/orgs/{{org.id}}/toggle-archive">
+            {{#if org.active}}
+            Disable Organisation
             {{else}}
-            Unarchive Organisation
+            Enable Organisation
             {{/if}}
           </a>
-          {{#hasPrimary primary_id}}
+          {{#hasPrimary primary.id}}
           <!-- Only show primary section if primary user is linked to this org -->
           <label class="form__label" for="primary_user_name">Primary User</label>
           <div class="form__input" name="primary_user_name" id="primary_user_name">
-            {{primary_user_name}}
-            <a href="/people/{{primary_user_id}}/edit" class="button-small float-right">EDIT</a>
+            {{primary.first_name}} {{primary.last_name}}
+            <a href="/people/{{primary.id}}/edit" class="button-small float-right">EDIT</a>
           </div>
           {{/hasPrimary}}
         {{/if}}
