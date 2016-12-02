@@ -13,28 +13,7 @@ module.exports = function (request, reply, source, joiErr) {
 
   request.server.methods.pg.organisations.getDetails(orgId, function (error, orgData) {
     var options = Object.assign({}, orgData, permissions, {error});
-    console.log(options);
-    reply.view('organisations/edit', options).code(error ? 401 : 200);
-  })
 
-  // request.redis.LINDEX('organisations', orgId, (redisErr, stringifiedOrg) => {
-  //   Hoek.assert(!redisErr, 'redis error');
-  //   var organisation = JSON.parse(stringifiedOrg);
-  //   helpers.getTagNames(request.redis, organisation.tags, organisationTags => {
-  //     organisation.tags = organisationTags;
-  //     if (organisation.primary_id === -1) {
-  //       var options = Object.assign({}, organisation, permissions, {error});
-  //       return reply.view('organisations/edit', options).code(error ? 401 : 200);
-  //     }
-  //     request.redis.LINDEX('people', organisation.primary_id, (redisErr, stringifiedPrimaryUser) => {
-  //       Hoek.assert(!redisErr, 'redis error');
-  //       var {first_name, last_name, id} = JSON.parse(stringifiedPrimaryUser);
-  //       var options = Object.assign({}, organisation, {
-  //         primary_user_name: `${first_name} ${last_name}`,
-  //         primary_user_id: id
-  //       }, permissions, {error});
-  //       reply.view('organisations/edit', options).code(error ? 401 : 200);
-  //     });
-  //   });
-  // });
+    return reply.view('organisations/edit', options).code(error ? 401 : 200);
+  });
 };
