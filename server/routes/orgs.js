@@ -3,11 +3,11 @@
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
 
 module.exports = [
-  {
-    method: 'GET',
-    path: '/orgs',
-    handler: require('../handlers/browse-view.js')
-  },
+  // {
+  //   method: 'GET',
+  //   path: '/orgs',
+  //  handler: require('../handlers/browse-view.js')
+  // },
   {
     method: 'GET',
     path: '/orgs/tags',
