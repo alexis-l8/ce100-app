@@ -1,13 +1,13 @@
 'use strict';
 
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
-var browseOrgs = require('../handlers/browse-orgs.js');
+var browseOrgs = require('../handlers/orgs/browse-orgs.js');
 
 module.exports = [
   {
     method: 'GET',
     path: '/orgs',
-    handler: browseOrgs()
+    handler: browseOrgs
   },
   {
     method: 'GET',
