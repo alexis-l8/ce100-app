@@ -76,16 +76,18 @@
             {{/if}}
           </a>
         </div>
-        {{#hasPrimary primary.id}}
-        <!-- Only show primary section if primary user is linked to this org -->
+
+        {{#if primary.id}}
+        <!-- If there is a linked primary user -->
         <div class="form__section">
           <label class="form__label" for="primary_user_name">Primary User</label>
           <div class="form__input" name="primary_user_name" id="primary_user_name">
+            {{primary.id}}
             {{primary.first_name}} {{primary.last_name}}
             <a href="/people/{{primary.id}}/edit" class="button-small float-right">EDIT</a>
           </div>
         </div>
-        {{/hasPrimary}}
+        {{/if}}
         {{/if}}
 
         <div class="form__section form__section--last">
