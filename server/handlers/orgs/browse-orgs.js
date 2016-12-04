@@ -18,7 +18,7 @@ module.exports = function (request, reply) {
       options = Object.assign(
         {},
         { data: data.orgs },
-        { filters: data.filter_tag },
+        { filter: data.filter },
         permissions
       );
       return reply.view('browse/orgs', options);

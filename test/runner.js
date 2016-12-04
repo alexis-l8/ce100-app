@@ -1,6 +1,7 @@
 'use strict';
 
 // orgs
+require('./organisations/browse-orgs.test.js');
 require('./organisations/org-details-view.test.js');
 
 // people
