@@ -8,8 +8,9 @@ module.exports = function (request, reply) {
   request.server.methods.pg.organisations.getDetails(orgId, function (error, orgData) {
     Hoek.assert(!error, 'Error retrieving organisation with id ' + orgId)
 
+    // If the organisation is not active, then only an admin can view
     if (loggedIn.scope !== 'admin' && !orgData.org.active) {
-      return reply.view('error_template', { errorMessage: 'That organisation does not exist' })
+      return reply(Boom.notFound('That organisation does not exist'));
     }
 
     var options = Object.assign({}, orgData, permissions);
