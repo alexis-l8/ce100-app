@@ -1,15 +1,12 @@
 <!-- Include Top Navbar -->
 {{>top-nav}}
 
-<!-- <a class="icon icon--edit" href="/challenges/{{id}}/edit">
-  <img src="../../../public/assets/Edit.svg" alt="Edit" />
-</a> -->
 
 <!-- Main Content -->
 <div class="container">
     <div class="card card--header">
       <h1 class="title">Edit Organisation Details</h1>
-      <a class="icon icon--cancel" href="/orgs/{{id}}"></a>
+      <a class="icon icon--cancel" href="/orgs/{{org.id}}"></a>
     </div>
 
     <!-- Only an admin can fail validation -->
@@ -22,58 +19,80 @@
 
     {{#if permissions.primary}}
     <div class="card card--header card--tall card--header--white">
-      <img class="logo logo--with-title" src="/public/assets/Profile.svg" alt="{{organisation.name}} logo">
-      <h1 class="title title--with-logo title--with-logo--blue">{{name}}</h1>
+      <img class="logo logo--with-title" src="/public/assets/Profile.svg" alt="{{org.name}} logo">
+      <h1 class="title title--with-logo title--with-logo--blue">{{org.name}}</h1>
     </div>
     {{/if}}
 
     <form class="form" method="post">
-        <!-- Company name and image -->
         {{#if permissions.admin}}
-        <label class="form__label" for="org_name">Organisation Name</label>
-        <input class="form__input {{error.name}}" name="name" id="org_name" value="{{#if error}}{{error.values.name}}{{else}}{{name}}{{/if}}">
+        <!-- Company name and image -->
+        <div class="form__section">
+          <label class="form__label" for="org_name">Organisation Name</label>
+          <input class="form__input {{error.name}}" name="name" id="org_name" value="{{#if error}}{{error.values.name}}{{else}}{{org.name}}{{/if}}">
+        </div>
         {{/if}}
 
-        <label class="form__label" for="mission_statement">
-          {{#if permissions.primary}}
-            Add your circular economy vision
-          {{else}}
-            Organisation's mission statement
-          {{/if}}
-        </label>
-        <textarea class="form__input {{error.mission_statement}}"
-                  id="mission_statement" 
-                  name="mission_statement"
-                  rows="2" cols="50">{{#if error}}{{error.values.mission_statement}}{{else}}{{mission_statement}}{{/if}}</textarea>
 
-        {{#if organisation.tags}}
-          {{#each organisation.tags}}
-            <span class="tag__label">{{organisation.name}}</span>
+        <div class="form__section">
+          <label class="form__label" for="mission_statement">
+            {{#if permissions.primary}}
+              Add your circular economy vision
+            {{else}}
+              Organisation's mission statement
+            {{/if}}
+          </label>
+          <textarea class="form__input {{error.mission_statement}}"
+                    id="mission_statement"
+                    name="mission_statement"
+                    rows="2" cols="50">{{#if error}}{{error.values.mission_statement}}{{else}}{{org.mission_statement}}{{/if}}</textarea>
+        </div>
+
+
+
+        <div class="form__section">
+        {{#if org.tags}}
+          <label class="form__label form__label--long">
+            Share your knowledge/experience (You will be matched based on these so don't include tags that you are not happy to be matched on)
+            You can edit your tags on the next page.
+          </label>
+
+          {{#each org.tags}}
+            <span class="tag__label">{{tag_name}}</span>
           {{/each}}
         {{else}}
-          <h3>Add tags on the next screen</h3>
+          <label class="form__label">Add tags on the next screen</label>
         {{/if}}
+        </div>
 
         {{#if permissions.admin}}
         <!-- Show archive and primary user if admin is logge in -->
-          <a class="anchor anchor--danger" href="/orgs/{{id}}/toggle-archive">
-            {{#if active}}
-            Archive Organisation
+        <div class="form__section">
+          <a class="anchor anchor--danger" href="/orgs/{{org.id}}/toggle-archive">
+            {{#if org.active}}
+            Disable Organisation
             {{else}}
-            Unarchive Organisation
+            Enable Organisation
             {{/if}}
           </a>
-          {{#hasPrimary primary_id}}
-          <!-- Only show primary section if primary user is linked to this org -->
+        </div>
+
+        {{#if primary.id}}
+        <!-- If there is a linked primary user -->
+        <div class="form__section">
           <label class="form__label" for="primary_user_name">Primary User</label>
           <div class="form__input" name="primary_user_name" id="primary_user_name">
-            {{primary_user_name}}
-            <a href="/people/{{primary_user_id}}/edit" class="button-small float-right">EDIT</a>
+            {{primary.id}}
+            {{primary.first_name}} {{primary.last_name}}
+            <a href="/people/{{primary.id}}/edit" class="button-small float-right">EDIT</a>
           </div>
-          {{/hasPrimary}}
+        </div>
+        {{/if}}
         {{/if}}
 
-        <button class="button" type="submit">Next</button>
+        <div class="form__section form__section--last">
+          <button class="button" type="submit">Next</button>
+        </div>
 
     </form>
 </div>

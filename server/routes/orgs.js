@@ -3,6 +3,7 @@
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
 var browseOrgs = require('../handlers/orgs/browse-orgs.js');
 var orgDetailsView = require('../handlers/orgs/details-view.js');
+var editView = require('../handlers/orgs/edit-org-view.js')
 
 module.exports = [
   {
@@ -40,7 +41,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/orgs/{id}/edit',
-    handler: require('../handlers/edit-org-view.js')
+    handler: editView
   },
   {
     method: 'POST',
