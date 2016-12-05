@@ -5,8 +5,8 @@ var sessions = require('../helpers/add-sessions.js');
 var init = require('../../server/server.js');
 var config = require('../../server/config.js');
 
-var adminToken = sessions.tokens(config.jwt_secret).admin;
-var primaryToken = sessions.tokens(config.jwt_secret).primary;
+var adminToken = sessions.tokens(config.jwt_secret).admin_1;
+var primaryToken = sessions.tokens(config.jwt_secret).primary_3;
 var adFiltered, prFiltered, filterRegex;
 var filterTag = {
   id: 69,

@@ -1,5 +1,6 @@
 <div class="card card--challenge">
-  {{#if permissions.editable}}
+  {{#if permissions.admin}}
+  {{else if permissions.editable}}
     <a class="icon icon--edit" href="/challenges/{{id}}/edit">
       <img src="../../../public/assets/Edit.svg" alt="Edit" />
     </a>

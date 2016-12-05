@@ -1,10 +1,13 @@
 'use strict';
 
 // challenges
-require('./browse/challenges.test.js');
+require('./challenges/browse.test.js');
+
+// organisations
+require('./organisations/org-details-view.test.js');
+require('./organisations/edit-org-view.test.js');
 
 // people
 require('./people/login.test.js');
 
-// server
 require('./server/auth.test.js');

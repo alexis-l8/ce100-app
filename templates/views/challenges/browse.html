@@ -6,7 +6,7 @@
     <div class="card card--header daintree--blue">
       <a class="title--link" href="/challenges/tags">
         <h1 class="title">
-          {{#if filters}}{{filters.name}}{{else}}All tags{{/if}}
+          {{#if filter}}{{filter.name}}{{else}}All tags{{/if}}
         </h1>
         <div class="icon icon--dropdown"></div>
       </a>
@@ -16,8 +16,8 @@
     <div class="card card--header">
       <ul class="navbar__links">
           <li class="navbar__item togglebar__item">
-            {{#if filters}}
-              <a class="navbar__link togglebar__link" href="/orgs?tags={{filters.id}}">
+            {{#if filter}}
+              <a class="navbar__link togglebar__link" href="/orgs?tags={{filter.id}}">
             {{else}}
               <a class="navbar__link togglebar__link" href="/orgs">
             {{/if}}
@@ -25,8 +25,8 @@
           </a></li>
 
           <li class="navbar__item togglebar__item--selected">
-            {{#if filters}}
-              <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges?tags={{filters.id}}">
+            {{#if filter}}
+              <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges?tags={{filter.id}}">
             {{else}}
               <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges">
             {{/if}}

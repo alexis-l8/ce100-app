@@ -17,10 +17,10 @@ module.exports = function (request, reply) {
       options = Object.assign(
         {},
         { data: challenges.challenges },
-        { filters: challenges.filters },
+        { filter: challenges.filters },
         permissions
       );
 
-      return reply.view('browse/challenges', options);
+      return reply.view('challenges/browse', options);
     });
 };

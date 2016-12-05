@@ -2,7 +2,9 @@
 <div class="container">
   <div class="error">
     <div class="card card--header">
-        <h1 class="title">{{statusCode}}</h1>
+        {{#if statusCode}}
+          <h1 class="title">{{statusCode}}</h1>
+        {{/if}}
     </div>
     <div class="card">
         <h2 class="card__copy">{{errorMessage}}</h2 class="card__copy">

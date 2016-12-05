@@ -1,7 +1,7 @@
 'use strict';
 
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
-var browseChallenges = require('../handlers/orgs/browse-challenges.js');
+var browseChallenges = require('../handlers/challenges/browse-challenges.js');
 
 module.exports = [
   {
