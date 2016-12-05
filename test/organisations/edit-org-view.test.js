@@ -30,7 +30,7 @@ tape(file + ': Differing permissions on edit org view', function (t) {
 
         t.ok(res.payload.indexOf('Organisation\'s mission statement') > -1, 'Admin is given custom label');
         t.ok(res.payload.indexOf('Share your knowledge/experience') > -1, 'Admin can see tags on the organisation');
-        t.ok(res.payload.indexOf('/toggle-archive') > -1, 'Admin can toggle archive an organisation');
+        t.ok(res.payload.indexOf('/toggle-active') > -1, 'Admin can toggle active an organisation');
         t.ok(res.payload.indexOf('id="primary_user_name"') > -1, 'Admin can see a primary user attached to an organisation');
 
 
@@ -45,8 +45,8 @@ tape(file + ': Differing permissions on edit org view', function (t) {
           t.ok(res.payload.indexOf('Add your circular economy vision') > -1, 'Primary user is given custom label for editing mission statement');
           t.ok(res.payload.indexOf('Share your knowledge/experience') > -1, 'Primary user can see tags on the organisation');
 
-          // Primary cannot archive their org
-          t.equal(res.payload.indexOf('/toggle-archive'), -1, 'Admin can toggle archive an organisation');
+          // Primary cannot active their org
+          t.equal(res.payload.indexOf('/toggle-active'), -1, 'Admin can toggle active an organisation');
           // Primary cannot see the link to themselves on this view
           t.equal(res.payload.indexOf('id="primary_user_name"'), -1, 'Admin can see a primary user attached to an organisation');
 
