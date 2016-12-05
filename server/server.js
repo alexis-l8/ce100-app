@@ -12,7 +12,7 @@ var pg = require('pg');
 // pg plugins
 var tags = require('tags-system');
 var challenges = require('pg-challenges');
-var people = require('pg-people');
+var people = require('../../postgres-plugins/people/lib/index.js');
 // pg tables data
 var tagsData = require('../data/tags.json');
 var categoriesData = require('../data/categories.json');
