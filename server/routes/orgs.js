@@ -2,7 +2,8 @@
 
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
 var orgDetailsView = require('../handlers/orgs/details-view.js');
-var editView = require('../handlers/orgs/edit-org-view.js')
+var editView = require('../handlers/orgs/edit-org-view.js');
+var edit = require('../handlers/orgs/edit-org.js');
 
 module.exports = [
   {
@@ -45,7 +46,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/orgs/{id}/edit',
-    handler: require('../handlers/edit-org.js'),
+    handler: edit,
     config: {
       validate: require('../models/admin-edit-org.js')
     }
