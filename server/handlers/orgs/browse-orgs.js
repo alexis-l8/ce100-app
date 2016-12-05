@@ -21,6 +21,6 @@ module.exports = function (request, reply) {
         { filter: data.filter },
         permissions
       );
-      return reply.view('browse/orgs', options);
+      return reply.view('organisations/browse', options);
     });
 };
