@@ -18,12 +18,12 @@ test('All active tags displayed', function (t) {
 
       server.inject({
         method: 'GET',
-        url: '/orgs/tags',
+        url: '/challenges/tags',
         headers: { cookie: 'token=' + primaryToken }
       }, function (res) {
         var unexpected = 'Please Login to view that page';
-        var expLink = '<a class="text-decoration" href="/orgs?tags=124">';
-        var expTag = '<span class="tag__label">Telecommunications</span>';
+        var expLink = 'href="/challenges?tags=124"';
+        var expTag = 'Telecommunications';
         t.equal(res.statusCode, 200, 'primary can view all active tags');
         t.equal(res.result.indexOf(unexpected), -1,
           'page does not ask you to log in to view the page');
