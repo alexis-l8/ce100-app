@@ -12,6 +12,8 @@ module.exports = function (request, reply, source, joiErr) {
   }
 
   request.server.methods.pg.organisations.getDetails(orgId, function (error, orgData) {
+    Hoek.assert(!error, 'db error');
+
     var options = Object.assign({}, orgData, permissions, {error});
 
     return reply.view('organisations/edit', options).code(error ? 401 : 200);
