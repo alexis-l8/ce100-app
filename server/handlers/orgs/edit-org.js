@@ -7,15 +7,9 @@ module.exports = function (request, reply) {
   if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin') {
     return reply(Boom.unauthorized('You do not have permission to edit that organisation.'));
   }
-  console.log(request.payload);
-  // request.redis.LINDEX('organisations', orgId, (error, stringifiedOrg) => {
-  //   Hoek.assert(!error, 'redis error');
-  //   Hoek.assert(stringifiedOrg, 'Organisation does not exist');
-  //   var oldOrg = JSON.parse(stringifiedOrg);
-  //   var orgUpdated = Object.assign({}, oldOrg, request.payload);
-  //   request.redis.LSET('organisations', orgId, JSON.stringify(orgUpdated), (error, response) => {
-  //     Hoek.assert(!error, 'redis error');
-  //     reply(orgUpdated).redirect(`/orgs/${orgId}/tags`);
-  //   });
-  // });
+
+  request.server.methods.pg.organisations.edit(orgId, request.payload, function (error, response) {
+    Hoek.assert(!error, 'database error');
+    return reply.redirect('/orgs/' + orgId + '/tags')
+  });
 };
