@@ -12,8 +12,9 @@ module.exports = function (request, reply, source, joiErr) {
   }
 
   request.server.methods.pg.organisations.getDetails(orgId, function (pgErr, orgData) {
-    Hoek.assert(!pgErr, 'database error');
     var options = Object.assign({}, orgData, permissions, {error});
+
+    Hoek.assert(!pgErr, 'database error');
 
     return reply.view('organisations/edit', options).code(error ? 401 : 200);
   });

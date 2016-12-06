@@ -1,15 +1,18 @@
 'use strict';
 
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
+var browseOrgs = require('../handlers/orgs/browse-orgs.js');
 var orgDetailsView = require('../handlers/orgs/details-view.js');
-var editView = require('../handlers/orgs/edit-org-view.js');
 var edit = require('../handlers/orgs/edit-org.js');
+var editView = require('../handlers/orgs/edit-org-view.js')
+var add = require('../handlers/orgs/add.js');
+
 
 module.exports = [
   {
     method: 'GET',
     path: '/orgs',
-    handler: require('../handlers/browse-view.js')
+    handler: browseOrgs
   },
   {
     method: 'GET',
@@ -27,7 +30,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/orgs/add',
-    handler: require('../handlers/create-new-org.js'),
+    handler: add,
     config: {
       auth: { scope: 'admin' },
       validate: require('../models/admin-add-org.js')
