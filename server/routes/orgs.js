@@ -3,9 +3,9 @@
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
 var browseOrgs = require('../handlers/orgs/browse-orgs.js');
 var orgDetailsView = require('../handlers/orgs/details-view.js');
+var toggleActive = require('../handlers/orgs/toggle-active.js');
 var editView = require('../handlers/orgs/edit-org-view.js')
 var add = require('../handlers/orgs/add.js');
-
 
 module.exports = [
   {
@@ -55,8 +55,11 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/orgs/{id}/toggle-archive',
-    handler: require('../handlers/toggle-archive-org.js')
+    path: '/orgs/{id}/toggle-active',
+    handler: toggleActive,
+    config: {
+      auth: { scope: 'admin' }
+    }
   },
   {
     method: 'GET',

@@ -1,6 +1,7 @@
 'use strict';
 
 
+require('./organisations/toggle-active.test.js');
 require('./organisations/add-org.test.js')
 require('./organisations/browse-orgs.test.js');
 require('./organisations/org-details-view.test.js');
