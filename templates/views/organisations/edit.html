@@ -66,9 +66,9 @@
         </div>
 
         {{#if permissions.admin}}
-        <!-- Show archive and primary user if admin is logge in -->
+        <!-- Show disable and primary user if admin is logge in -->
         <div class="form__section">
-          <a class="anchor anchor--danger" href="/orgs/{{org.id}}/toggle-archive">
+          <a class="anchor anchor--danger" href="/orgs/{{org.id}}/toggle-active">
             {{#if org.active}}
             Disable Organisation
             {{else}}
