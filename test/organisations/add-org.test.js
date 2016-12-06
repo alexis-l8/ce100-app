@@ -1,24 +1,28 @@
 var tape = require('tape');
-var dir = __dirname.split('/')[__dirname.split('/').length - 1];
-var file = dir + __filename.replace(__dirname, '') + ' > ';
 var config = require('../../server/config.js');
 var initServer = require('../../server/server.js');
 
 var sessions = require('../helpers/add-sessions.js');
 
+var adminCookie = { cookie: 'token=' + sessions.tokens(config.jwt_secret)['admin_1'] };
 
 // use this function to build requests to view different organisation details with different user types
 function addOrg (orgObj) {
   return {
     method: 'POST',
     url: '/orgs/add',
-    headers: { cookie: 'token=' + sessions.tokens(config.jwt_secret)['admin_1'] },
+    headers: adminCookie,
     payload: orgObj
   };
 }
 
+var browseOrgs = {
+  url: '/orgs',
+  headers: adminCookie
+}
+
 // test an admin successfuly adding an organisation
-tape(file + ': Admin can add an organisation', function (t) {
+tape('Admin can add an organisation: --> ' + __filename, function (t) {
   sessions.addAll(function () {
     initServer(config, function (error, server, pool) {
 
@@ -30,9 +34,14 @@ tape(file + ': Admin can add an organisation', function (t) {
         // Admin can add an organisation
         t.equal(res.statusCode, 302, 'Org added and admin is redirected');
 
-        t.end();
-        pool.end();
-        server.stop();
+        // check the org was actually added
+        server.inject(browseOrgs, function (res) {
+          t.ok(res.payload.indexOf('Experian') > -1, 'The organisation was added');
+
+          t.end();
+          pool.end();
+          server.stop();
+        })
       });
     });
   });
@@ -41,7 +50,7 @@ tape(file + ': Admin can add an organisation', function (t) {
 
 
 // test an admin successfuly adding an organisation
-tape(file + ': Admin fails validation on add org view', function (t) {
+tape('Admin fails validation on add org view: --> ' + __filename, function (t) {
   sessions.addAll(function () {
     initServer(config, function (error, server, pool) {
       var org = {

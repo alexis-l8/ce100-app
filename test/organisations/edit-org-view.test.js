@@ -1,8 +1,6 @@
 var tape = require('tape');
 var payloads = require('../helpers/mock-payloads.js');
 var initServer = require('../../server/server.js');
-var dir = __dirname.split('/')[__dirname.split('/').length - 1];
-var file = dir + __filename.replace(__dirname, '') + ' > ';
 var config = require('../../server/config.js');
 
 var sessions = require('../helpers/add-sessions.js');
@@ -17,7 +15,7 @@ function editOrgView (user, id) {
 }
 
 // test differing permissions when viewing edit organisation
-tape(file + ': Differing permissions on edit org view', function (t) {
+tape('Differing permissions on edit org view: --> ' + __filename, function (t) {
   sessions.addAll(function () {
     initServer(config, function (error, server, pool) {
 
@@ -66,7 +64,7 @@ tape(file + ': Differing permissions on edit org view', function (t) {
 });
 
 
-tape(file + ': admin can view edit org view when org does not have a primary user attached to it', t => {
+tape('admin can view edit org view when org does not have a primary user attached to it: --> ' + __filename, function (t) {
   sessions.addAll(function () {
     initServer(config, function (error, server, pool) {
       server.inject(editOrgView('admin_1', 6), function (res) {
