@@ -10,7 +10,7 @@ var auth = require('./auth.js');
 var routes = require('./routes.js');
 var pg = require('pg');
 // pg plugins
-var tags = require('tags-system');
+var tags = require('../../postgres-plugins/tags-system/lib/index.js');
 var challenges = require('pg-challenges');
 var people = require('pg-people');
 // pg tables data
