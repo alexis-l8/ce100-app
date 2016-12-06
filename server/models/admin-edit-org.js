@@ -1,11 +1,11 @@
 var Joi = require('joi');
 
 module.exports = {
-  payload: (value, options, next) => {
+  payload: function (value, options, next) {
     var scope = options.context.auth.credentials.scope;
     return Joi.validate(value, schema[scope], next);
   },
-  failAction: require('../handlers/edit-org-view.js')
+  failAction: require('../handlers/orgs/edit-org-view.js')
 };
 
 var schema = {
