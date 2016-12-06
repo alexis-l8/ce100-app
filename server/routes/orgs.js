@@ -5,7 +5,7 @@ var browseOrgs = require('../handlers/orgs/browse-orgs.js');
 var orgDetailsView = require('../handlers/orgs/details-view.js');
 var editView = require('../handlers/orgs/edit-org-view.js')
 var add = require('../handlers/orgs/add.js');
-
+var addTagsView = require('../handlers/orgs/add-tags-view.js');
 
 module.exports = [
   {
@@ -61,7 +61,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/orgs/{id}/tags',
-    handler: require('../handlers/org-select-tags-view.js')
+    handler: addTagsView
   },
   {
     method: 'POST',
