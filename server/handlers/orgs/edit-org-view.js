@@ -11,10 +11,10 @@ module.exports = function (request, reply, source, joiErr) {
     return reply(Boom.unauthorized('You do not have permission to edit that organisation.'));
   }
 
-  request.server.methods.pg.organisations.getDetails(orgId, function (error, orgData) {
-    Hoek.assert(!error, 'db error');
-
+  request.server.methods.pg.organisations.getDetails(orgId, function (pgError, orgData) {
     var options = Object.assign({}, orgData, permissions, {error});
+
+    Hoek.assert(!pgError, 'db error');
 
     return reply.view('organisations/edit', options).code(error ? 401 : 200);
   });
