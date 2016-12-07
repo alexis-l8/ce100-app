@@ -18,7 +18,7 @@ tape('Admin view add tags to org view: --> ' + __filename, function (t) {
     initServer(config, function (error, server, pool) {
       // admin view org with id 1
       server.inject(addTagsToOrg('admin_1', 1), function (res) {
-        console.log(res.result);
+
         // Check Category 3 is open and Tag id 27 is selected
         t.ok(res.payload.indexOf('id="cat_3" checked="checked"') > -1, 'The third category is open');
         t.ok(res.payload.indexOf('value="27" checked="checked">') > -1, 'The correct tag is already selected');
