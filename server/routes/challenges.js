@@ -1,6 +1,8 @@
 'use strict';
 
+var view = require('../handlers/serve-view.js');
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
+var add = require('../handlers/challenges/add.js');
 
 module.exports = [
   {
@@ -29,12 +31,12 @@ module.exports = [
   {
     method: 'GET',
     path: '/challenges/add',
-    handler: require('../handlers/add-challenge-view.js')
+    handler: view('challenges/add')
   },
   {
     method: 'POST',
     path: '/challenges/add',
-    handler: require('../handlers/add-challenge.js'),
+    handler: add,
     config: {
       validate: require('../models/add-challenge.js'),
       auth: { scope: 'primary' }
