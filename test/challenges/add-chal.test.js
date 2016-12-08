@@ -4,6 +4,7 @@ var tape = require('tape');
 var init = require('../../server/server.js');
 var config = require('../../server/config.js');
 var sessions = require('../helpers/add-sessions.js');
+var challenges = require('../../data/challenges.json');
 
 var adminToken = sessions.tokens(config.jwt_secret)['admin_1'];
 var primaryToken = sessions.tokens(config.jwt_secret)['primary_3'];
@@ -66,6 +67,7 @@ tape('admin cannot add a challenge', function (t) {
 });
 
 tape('primary can add a challenge', function (t) {
+  var chalId = challenges.length + 1;
   var chal = {
     title: 'Where can I source adamantium?',
     description: 'I want to be as strong as Wolverine!'
@@ -77,16 +79,13 @@ tape('primary can add a challenge', function (t) {
         t.equal(res.statusCode, 200, 'Primary can view add challenge view');
         server.inject(addChal(primaryToken, chal), function (res) {
           t.equal(res.statusCode, 302, 'Primary authorised to post a challenge');
-          // t.equal(res.headers.location, '/challenges/id/tags', 'Primary redirected to add tags to chal');
-          // server.inject(viewChals(primaryToken), function (res) {
-          //   console.log('>>>>>>>>>>>>>>>>>');
-          //   console.log(res.result);
-          //   console.log('>>>>>>>>>>>>>>>>>');
-          //   t.ok(res.result.indexOf(chal.title) > -1, 'Challenge added to database, thus displayed');
+          t.equal(res.headers.location, '/challenges/' + chalId + '/tags', 'Primary redirected to add tags to chal');
+          server.inject(viewChals(primaryToken), function (res) {
+            t.ok(res.result.indexOf(chal.title) > -1, 'Challenge added to database, thus displayed');
             t.end();
             pool.end();
             server.stop();
-          // });
+          });
         });
       });
     });
