@@ -40,12 +40,12 @@
     "joi": "^9.0.4",
     "jsonwebtoken": "^7.1.9",
     "pg": "^6.1.0",
-    "pg-challenges": "^2.0.4",
-    "pg-people": "^0.0.13",
+    "pg-challenges": "^2.0.9",
+    "pg-people": "^0.0.14",
     "redis": "^2.6.2",
     "redis-connection": "^5.0.0",
     "sendemail": "^2.3.0",
-    "tags-system": "^1.1.3",
+    "tags-system": "^1.1.6",
     "vision": "^4.1.0"
   },
   "devDependencies": {
