@@ -123,4 +123,10 @@ Selecting one of the tags from the browse tag view will filter the organisations
 If no organisations or challenges are linked to the selected tag the view will inform the user that no items have been found:
 ![filter-orgs](doc/img/filter-no-result.png)
 
->>>>>>> master
+### View all users
+- ```/people```
+
+Clicking on 'People' in the right side of the top-nav, will take you to a page where all users will be displayed.
+Both active and inactive users will be displayed for admin, but only active users will show for primary users.
+On the list, selected an individual user will toggle the user's contact details.
+![filter-orgs](doc/img/people-list.png)

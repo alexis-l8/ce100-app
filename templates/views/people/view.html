@@ -8,9 +8,9 @@
         <h1 class="title">Contact List</h1>
     </div>
 
-    {{#if allUsers}}
+    {{#if users}}
         <ul class="list">
-        {{#each allUsers}}
+        {{#each users}}
           {{>user permissions=../permissions}}
         {{/each}}
         </ul>
