@@ -1,8 +1,12 @@
+'use strict';
+
+var browsePeople = require('../handlers/people/browse-people.js');
+
 module.exports = [
   {
     method: 'GET',
     path: '/people',
-    handler: require('../handlers/all-users-view.js')
+    handler: browsePeople
   },
   {
     method: 'GET',
