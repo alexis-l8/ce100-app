@@ -12,7 +12,6 @@ require('./organisations/select-tags-browse-view.test.js');
 
 // people
 require('./people/browse.test.js');
-require('./organisations/select-tags-browse-view.test.js');
 require('./people/login.test.js');
 
 
