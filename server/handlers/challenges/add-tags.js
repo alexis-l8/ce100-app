@@ -5,17 +5,19 @@ module.exports = function (request, reply) {
   var challengeId = parseInt(request.params.challengeId, 10);
   var tagsPayload = request.payload.tags;
   var loggedIn = request.auth.credentials;
+  var userId = loggedIn.userId
   var tagsArray = getTagArray(tagsPayload);
 
-  //
-  // need a way of checking user has permission to edit a challenge
-  // if (loggedIn.organisation_id !== challengeId && loggedIn.scope !== 'admin') {
-  //   return reply(Boom.unauthorized('You do not have permission to edit that organisation.'));
-  // }
+  request.server.methods.pg.challenges.checkEditable(userId, challengeId, function (pgErr, editable) {
+    // check if user has permission to edit a challenge
+    if (!editable) {
+      return reply(Boom.unauthorized('You do not have permission to edit that organisation.'));
+    }
 
-  request.server.methods.pg.tags.addTags('challenges', challengeId, tagsArray, function (pgErr, res) {
-    Hoek.assert(!pgErr, 'database error');
-    return reply.redirect('/challenges/' + challengeId);
+    request.server.methods.pg.tags.addTags('challenges', challengeId, tagsArray, function (pgErr, res) {
+      Hoek.assert(!pgErr, 'database error');
+      return reply.redirect('/challenges/' + challengeId);
+    });
   });
 };
 
