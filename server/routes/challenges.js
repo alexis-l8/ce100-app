@@ -1,6 +1,7 @@
 'use strict';
 
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
+var addTags = require('../handlers/challenges/add-tags.js');
 
 module.exports = [
   {
@@ -21,7 +22,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/challenges/{challengeId}/tags',
-    handler: require('../handlers/select-tags.js'),
+    handler: addTags,
     config: {
       validate: require('../models/max-allowed-tags.js')
     }
