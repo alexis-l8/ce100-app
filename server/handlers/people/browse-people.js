@@ -7,12 +7,11 @@ module.exports = function (request, reply) {
   var options;
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
+  var activeOnly = !permissions.permissions.admin;
 
-  // get all challenges, associated by a tag, from all active organisations
-  request.server.methods.pg.people.getAllPeople(
-    permissions.permissions.primary,
+  request.server.methods.pg.people.getAllPeople(activeOnly,
     function (pgErr, users) {
-      Hoek.assert(!pgErr, 'error getting challenges by tag');
+      Hoek.assert(!pgErr, 'error getting all users');
       options = Object.assign(
         {},
         { users: users },
