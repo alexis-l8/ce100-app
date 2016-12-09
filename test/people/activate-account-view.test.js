@@ -41,15 +41,15 @@ tape('activate account view with nonsense user id', function (t) {
 });
 
 
-// tape('activate account view with unactivated user id', function (t) {
-//   init(config, function (error, server, pool) {
-//     t.ok(!error, 'No error on init server');
-//     server.inject(activateAccountView(10), function (res) {
-//       t.equal(res.statusCode, 200, 'correct user can see the view');
-//
-//       t.end();
-//       server.stop();
-//       pool.end();
-//     });
-//   });
-// });
+tape('activate account view with unactivated user id', function (t) {
+  init(config, function (error, server, pool) {
+    t.ok(!error, 'No error on init server');
+    server.inject(activateAccountView(8), function (res) {
+      t.equal(res.statusCode, 200, 'correct user can see the view');
+
+      t.end();
+      server.stop();
+      pool.end();
+    });
+  });
+});
