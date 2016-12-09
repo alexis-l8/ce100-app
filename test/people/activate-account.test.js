@@ -35,6 +35,7 @@ tape('activate account with not yet activated user, good password: --> ' + __fil
     t.ok(!err, 'No error on init server: ', err);
     server.inject(activateAccount(8, goodPassword), function (res) {
       t.equal(res.statusCode, 302, 'redirects');
+      t.ok(res.headers['set-cookie'], 'successful activation adds a session cookie');
       t.end();
       server.stop();
       pool.end();
