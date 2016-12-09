@@ -13,14 +13,11 @@ module.exports = function (request, reply) {
   var hashedId = request.params.hashedId;
 
   var userId = jwt.verify(hashedId, config.jwt_secret);
-
   // hash password
   bcrypt.hash(request.payload.password, 13, function (bcryptErr, hashedPassword) {
     Hoek.assert(!bcryptErr, 'bcrypt error');
-
     request.server.methods.pg.people.addPassword(userId, hashedPassword, function (pgErr, updatedUser) {
       Hoek.assert(!pgErr, 'database errror');
-
       // if no user was updated
       if (updatedUser.length === 0) {
         var error = {
@@ -34,7 +31,6 @@ module.exports = function (request, reply) {
         jti: aguid(),
         iat: Date.now()
       };
-
       request.server.app.redis.HSET('sessions', session.jti, JSON.stringify(session), function (redisErr, res) {
         Hoek.assert(!redisErr, 'redis error');
         var token = jwt.sign(session, config.jwt_secret);
