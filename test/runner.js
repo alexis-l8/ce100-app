@@ -13,3 +13,5 @@ require('./organisations/select-tags-browse-view.test.js');
 require('./people/login.test.js');
 
 require('./server/auth.test.js');
+
+require('./people/activate-account-view.test.js');
