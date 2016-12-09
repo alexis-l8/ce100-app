@@ -14,6 +14,7 @@ var activateAccount = function (userId, payload) {
   };
 };
 
+
 var goodPassword = {
   password: 'Hello1',
   confirm_password: 'Hello1'
