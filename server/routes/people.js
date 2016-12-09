@@ -1,6 +1,7 @@
 'use strict';
 
 var browsePeople = require('../handlers/people/browse-people.js');
+var activateAccountView = require('../handlers/people/activate-account-view.js');
 
 module.exports = [
   {
@@ -46,7 +47,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/people/activate/{hashedId}',
-    handler: require('../handlers/activate-account-view.js'),
+    handler: activateAccountView,
     config: {
       auth: false
     }
