@@ -26,56 +26,55 @@ function viewChals (token) {
   };
 }
 
-// tape('check /challenges/{id}/edit GET endpoint access',
-//   function (t) {
-//     var chalId = 2;
-//     sessions.addAll(function () {
-//       init(config, function (error, server, pool) {
-//         t.ok(!error, 'No error on init server');
-//         server.inject(editChal(), function (res) {
-//           t.equal(res.statusCode, 401,
-//             'request an endpoint requiring auth get 401');
-//           server.inject(editChal(adminToken, chalId), function (res) {
-//             t.equal(res.statusCode, 200, 'Admin can view edit challenge view');
-//             server.inject(editChal(primaryToken, chalId), function (res) {
-//               t.equal(res.statusCode, 200, 'Primary can view edit challenge view');
-//               t.end();
-//               server.stop();
-//               pool.end();
-//             });
-//           });
-//         });
-//       });
-//     });
-//   });
-//
-// tape('/challenges/{id}/edit GET endpoint displays prefilled forms correctly',
-//   function (t) {
-//     var chalId = 2;
-//     var unauthChalId = 6;
-//     sessions.addAll(function () {
-//       init(config, function (error, server, pool) {
-//         t.ok(!error, 'No error on init server');
-//         server.inject(editChal(adminToken, chalId), function (res) {
-//           t.equal(res.statusCode, 200, 'Admin can view edit challenge view');
-//           t.ok(res.result.indexOf('Challenge Number 2') > -1, 'active challenge title displays correctly for admin');
-//           t.ok(res.result.indexOf('How can I...?') > -1, 'active challenge description displays correctly for admin');
-//           server.inject(editChal(primaryToken, chalId), function (res) {
-//             t.equal(res.statusCode, 200, 'Primary can view edit challenge view');
-//             t.ok(res.result.indexOf('Challenge Number 2') > -1, 'active challenge title displays correctly for admin');
-//             t.ok(res.result.indexOf('How can I...?') > -1, 'active challenge description displays correctly for admin');
-//             server.inject(editChal(primaryToken, unauthChalId), function (res) {
-//               console.log(res.result);
-//               t.equal(res.statusCode, 401, 'Primary cannot view edit challenge view');
-//               t.end();
-//               server.stop();
-//               pool.end();
-//             });
-//           });
-//         });
-//       });
-//     });
-//   });
+tape('check /challenges/{id}/edit GET endpoint access',
+  function (t) {
+    var chalId = 2;
+    sessions.addAll(function () {
+      init(config, function (error, server, pool) {
+        t.ok(!error, 'No error on init server');
+        server.inject(editChal(), function (res) {
+          t.equal(res.statusCode, 401,
+            'request an endpoint requiring auth get 401');
+          server.inject(editChal(adminToken, chalId), function (res) {
+            t.equal(res.statusCode, 200, 'Admin can view edit challenge view');
+            server.inject(editChal(primaryToken, chalId), function (res) {
+              t.equal(res.statusCode, 200, 'Primary can view edit challenge view');
+              t.end();
+              server.stop();
+              pool.end();
+            });
+          });
+        });
+      });
+    });
+  });
+
+tape('/challenges/{id}/edit GET endpoint displays prefilled forms correctly',
+  function (t) {
+    var chalId = 2;
+    var unauthChalId = 6;
+    sessions.addAll(function () {
+      init(config, function (error, server, pool) {
+        t.ok(!error, 'No error on init server');
+        server.inject(editChal(adminToken, chalId), function (res) {
+          t.equal(res.statusCode, 200, 'Admin can view edit challenge view');
+          t.ok(res.result.indexOf('Challenge Number 2') > -1, 'active challenge title displays correctly for admin');
+          t.ok(res.result.indexOf('How can I...?') > -1, 'active challenge description displays correctly for admin');
+          server.inject(editChal(primaryToken, chalId), function (res) {
+            t.equal(res.statusCode, 200, 'Primary can view edit challenge view');
+            t.ok(res.result.indexOf('Challenge Number 2') > -1, 'active challenge title displays correctly for admin');
+            t.ok(res.result.indexOf('How can I...?') > -1, 'active challenge description displays correctly for admin');
+            server.inject(editChal(primaryToken, unauthChalId), function (res) {
+              t.equal(res.statusCode, 401, 'Primary cannot view edit challenge view');
+              t.end();
+              server.stop();
+              pool.end();
+            });
+          });
+        });
+      });
+    });
+  });
 
 tape('/challenges/{id}/edit POST endpoint updates existing info',
   function (t) {
@@ -94,7 +93,7 @@ tape('/challenges/{id}/edit POST endpoint updates existing info',
             t.equal(res.statusCode, 302, 'Primary can view edit challenge view');
             t.equal(res.headers.location, '/challenges/' + chalId + '/tags', 'Admin redirected to add tags view');
             server.inject(viewChals(primaryToken, chalId, updatedChal), function (res) {
-              console.log(res.result);
+              // THESE TESTS WILL FAIL WHILE PR#387 IS STILL OPEN
               t.ok(res.result.indexOf(updatedChal.title) > -1, 'active challenge title correctly updated');
               t.ok(res.result.indexOf(updatedChal.description) > -1, 'active challenge description correctly updated');
               t.end();
