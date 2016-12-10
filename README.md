@@ -129,4 +129,10 @@ If no organisations or challenges are linked to the selected tag the view will i
 Clicking on 'People' in the right side of the top-nav, will take you to a page where all users will be displayed.
 Both active and inactive users will be displayed for admin, but only active users will show for primary users.
 On the list, selected an individual user will toggle the user's contact details.
-![filter-orgs](doc/img/people-list.png)
+![people-list](doc/img/people-list.png)
+
+### Update Challenge (Title, Description)
+- ```/challenges/{id}/edit```
+
+The title and description of a challenge can be updated. You must however either be an admin, or the primary user of the organisation represented by the challenge. Primary users will have the option to edit any of the challenges on the organisation's profile. If you have editting rights, you will see a 'pencil icon' at the top right corner of each challenge card. Clicking this will allow you to view your current challenge details, but also edit and submit an update on the challenge title and description.
+![challenge-edit](doc/img/challenge-edit.png)
