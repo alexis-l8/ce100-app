@@ -116,8 +116,12 @@ Each tags is a link to the filter organisations or challenges pages
 - ```/orgs```
 - ```/challenges```
 
-Clicking on 'Browse' in the left side of the bottom-nav, will take you to a page where all orgs will be displayed.
-By clicking on the 'Challenges' option, you will then be taken to a page where all challenges will be displayed.
+Clicking on 'Browse' in the left side of the bottom-nav, will take you to a page where, by default, all orgs will be displayed.
+Both active and inactive orgs will be displayed to admin, but only active orgs will be displayed to primary users.
+This view displays only the organisation names; for more information, click on the name of an organisation, and you will be taken to their profile.
+![browse-orgs](doc/img/browse-orgs)
+
+To view and browse challenges instead, click on the 'Challenges' option; this will take you to a page where all challenges will be displayed.
 Only active challenges, from active organisations will be displayed to both admin and primary user.
 Challenges will list the title, full description and (if there are) any tags attached to the challenge.
 ![browse-chals](doc/img/browse-chals)
