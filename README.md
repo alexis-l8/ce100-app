@@ -111,11 +111,21 @@ Clicking on a category will display the list of tags linked to this category:
 
 Each tags is a link to the filter organisations or challenges pages
 
-### Filter organisation and challenges by selected tag
+
+### Browse organisations and challenges
 - ```/orgs```
 - ```/challenges```
-- ```/orgs?tag=id_of_the_tag```
-- ```/challenges?tag=id_of_the_tag```
+
+Clicking on 'Browse' in the left side of the bottom-nav, will take you to a page where all orgs will be displayed.
+By clicking on the 'Challenges' option, you will then be taken to a page where all challenges will be displayed.
+Only active challenges, from active organisations will be displayed to both admin and primary user.
+Challenges will list the title, full description and (if there are) any tags attached to the challenge.
+![browse-chals](doc/img/browse-chals)
+
+
+### Filter organisation and challenges by selected tag
+- ```/orgs?tag=id_of_the_filter_tag```
+- ```/challenges?tag=id_of_the_filter_tag```
 
 Selecting one of the tags from the browse tag view will filter the organisations or challenges depending on the type of the page the user is on. The list of organisation (or challenges) are all the item where the tag selected is also linked on:
 ![filter-orgs](doc/img/filter-orgs.png)
