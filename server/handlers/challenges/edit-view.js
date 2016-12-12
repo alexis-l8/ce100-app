@@ -22,7 +22,7 @@ module.exports = function (request, reply, source, joiErr) {
       return request.server.methods.pg.challenges.getById(cid,
         function (dbErr, chal) {
           Hoek.assert(!dbErr, 'database error');
-          options = Object.assign({}, chal, { error: error });
+          options = Object.assign(chal[0], { error: error });
 
           return reply.view('challenges/edit', options).code(error ? 401 : 200);
         });
