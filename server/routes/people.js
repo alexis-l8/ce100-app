@@ -1,6 +1,7 @@
 'use strict';
 
 var browsePeople = require('../handlers/people/browse-people.js');
+var addView = require('../handlers/people/add-view.js');
 
 module.exports = [
   {
@@ -11,7 +12,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/people/add',
-    handler: require('../handlers/create-user-view.js'),
+    handler: addView,
     config: {
       auth: { scope: 'admin' }
     }

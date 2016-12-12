@@ -32,18 +32,13 @@
       {{/each}}
 
       <label class="form__label" for="organisation_id">Organisation</label>
-      {{#if allOrganisations}}
       <select class="form__input" name="organisation_id">
         <option value=-1>Please Select</option>
-        {{#each allOrganisations}}
+        <option value='admin'>N/A (Admin)</option>
+        {{#each orgs}}
           {{>dropdown}}
         {{/each}}
       </select>
-      {{else}}
-      <select class="form__input" name="organisation_id">
-        <option value='admin'>N/A (Admin)</option>
-      </select>
-      {{/if}}
 
       <button class="button">Submit</button>
     </form>
