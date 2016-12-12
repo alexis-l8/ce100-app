@@ -18,9 +18,9 @@ require('./organisations/add-tags-to-org-view.test.js');
 // people
 require('./people/browse.test.js');
 require('./people/login.test.js');
+require('./people/activate-account-view.test.js');
 
 // tags
 require('./browse/select-tags-browse-view.test.js');
 
 require('./server/auth.test.js');
-
