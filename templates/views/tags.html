@@ -10,10 +10,10 @@
   </div>
   {{/if}}
 
-  {{#if parent_tags}}
+  {{#if tags}}
     <form class="form form--tags" method="post">
         <div class="form__section">
-          {{#each parent_tags}}
+          {{#each tags}}
             {{>tag}}
           {{/each}}
         </div>
