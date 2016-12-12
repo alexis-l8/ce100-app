@@ -2,6 +2,8 @@
 
 var browsePeople = require('../handlers/people/browse-people.js');
 var addView = require('../handlers/people/add-view.js');
+var activateAccountView = require('../handlers/people/activate-account-view.js');
+var activateAccount = require('../handlers/people/activate-account.js');
 
 module.exports = [
   {
@@ -13,9 +15,7 @@ module.exports = [
     method: 'GET',
     path: '/people/add',
     handler: addView,
-    config: {
-      auth: { scope: 'admin' }
-    }
+    config: { auth: { scope: 'admin' } }
   },
   {
     method: 'POST',
@@ -47,7 +47,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/people/activate/{hashedId}',
-    handler: require('../handlers/activate-account-view.js'),
+    handler: activateAccountView,
     config: {
       auth: false
     }
@@ -55,7 +55,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/people/activate/{hashedId}',
-    handler: require('../handlers/activate-user-account.js'),
+    handler: activateAccount,
     config: {
       validate: require('../models/confirm-password.js'),
       auth: false

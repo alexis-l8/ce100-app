@@ -141,8 +141,6 @@ Permissions: Only an admin and the primary user of the organisation can change t
 
 ![filter-orgs](doc/img/add-tags-org.png)
 
-
-
 ### View all users
 - ```/people```
 
@@ -150,7 +148,6 @@ Clicking on 'People' in the right side of the top-nav, will take you to a page w
 Both active and inactive users will be displayed for admin, but only active users will show for primary users.
 On the list, selected an individual user will toggle the user's contact details.
 ![filter-orgs](doc/img/people-list.png)
-
 
 ### Admin adds a user
 - ```/people/add```
@@ -160,6 +157,12 @@ We only have user types of primary and admin at the moment, and there can only b
 ![add-user1](doc/img/add-user1.png)
 ![add-user2](doc/img/add-user12.png)
 
+### Activate Account
+- ```/people/activate/{id}```
+
+After a user is created by an admin, they will be sent an email with a link to the account activation page where the user has to create a password.
+![activate-view](doc/img/activate-account.png)
+>>>>>>> master
 
 ### Add new challenge
 - ```/challenges/add```
