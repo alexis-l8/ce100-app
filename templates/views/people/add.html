@@ -14,33 +14,38 @@
     {{/if}}
 
     <form class="form" method="post">
-      <label class="form__label" for="first_name">First Name</label>
+      <label class="form__label" for="first_name">First name</label>
       <input class="form__input {{error.first_name}}" type="text" name="first_name" id="first_name" placeholder="Write Here..." value="{{error.values.first_name}}">
 
-      <label class="form__label" for="last_name">Last Name</label>
+      <label class="form__label" for="last_name">Last name</label>
       <input class="form__input {{error.last_name}}" type="text" name="last_name" id="last_name" placeholder="Write Here..." value="{{error.values.last_name}}">
+
+      <label class="form__label" for="job_title">Job title</label>
+      <input class="form__input {{error.job_title}}" type="text" name="job_title" id="job_title" placeholder="Write Here..." value="{{error.values.job_title}}">
 
       <label class="form__label" for="email">Email</label>
       <input class="form__input {{error.email}}" type="email" name="email" id="email" placeholder="Write Here..." value="{{error.values.email}}">
 
-      <label class="form__label" for="phone">Phone Number</label>
+      <label class="form__label" for="phone">Phone number</label>
       <input class="form__input {{error.phone}}" type="tel" name="phone" id="phone" placeholder="Write Here..." value="{{error.values.phone}}">
 
-      <span class="form__label">User Type</span>
+      <span class="form__label">User type</span>
       {{#each userTypes}}
         {{>radio}}
       {{/each}}
 
       <label class="form__label" for="organisation_id">Organisation</label>
       <select class="form__input" name="organisation_id">
-        <option value=-1>Please Select</option>
+        <option value=null>Please Select</option>
         <option value='admin'>N/A (Admin)</option>
         {{#each orgs}}
           {{>dropdown}}
         {{/each}}
       </select>
 
-      <button class="button">Submit</button>
+      <div class="form__section form__section--last">
+        <button class="button">Save</button>
+      </div>
     </form>
 </div>
 
