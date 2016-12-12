@@ -11,7 +11,7 @@ module.exports = function (request, reply) {
   request.server.methods.pg.challenges.checkEditable(userId, challengeId, function (pgErr, editable) {
     // check if user has permission to edit a challenge
     if (!editable) {
-      return reply(Boom.unauthorized('You do not have permission to edit that organisation.'));
+      return reply(Boom.unauthorized('You do not have permission to edit that challenge.'));
     }
 
     request.server.methods.pg.tags.addTags('challenges', challengeId, tagsArray, function (pgErr, res) {

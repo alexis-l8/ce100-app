@@ -4,3 +4,4 @@ npm-debug.log
 .env
 dump.rdb
 .eslintrc.js
+.eslintignore

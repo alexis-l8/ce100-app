@@ -44,11 +44,6 @@ npm run generate-tags
 npm start
 ```
 
-Then, to populate the database with some mockdata, run:
-```sh
-npm run pgMockData
-```
-
 ### Required Environment Variables
 
 If you are unsure what an Environment Variable is, see: https://github.com/dwyl/learn-environment-variables
@@ -111,17 +106,42 @@ Clicking on a category will display the list of tags linked to this category:
 
 Each tags is a link to the filter organisations or challenges pages
 
-### Filter organisation and challenges by selected tag
+
+### Browse organisations and challenges
 - ```/orgs```
 - ```/challenges```
-- ```/orgs?tag=id_of_the_tag```
-- ```/challenges?tag=id_of_the_tag```
+
+Clicking on 'Browse' in the left side of the bottom-nav, will take you to a page where, by default, all orgs will be displayed.
+Both active and inactive orgs will be displayed to admin, but only active orgs will be displayed to primary users.
+This view displays only the organisation names; for more information, click on the name of an organisation, and you will be taken to their profile.
+![browse-orgs](doc/img/browse-orgs.png)
+
+To view and browse challenges instead, click on the 'Challenges' option; this will take you to a page where all challenges will be displayed.
+Only active challenges, from active organisations will be displayed to both admin and primary user.
+Challenges will list the title, full description and (if there are) any tags attached to the challenge.
+![browse-chals](doc/img/browse-chals.png)
+
+
+### Filter organisation and challenges by selected tag
+- ```/orgs?tag=id_of_the_filter_tag```
+- ```/challenges?tag=id_of_the_filter_tag```
 
 Selecting one of the tags from the browse tag view will filter the organisations or challenges depending on the type of the page the user is on. The list of organisation (or challenges) are all the item where the tag selected is also linked on:
 ![filter-orgs](doc/img/filter-orgs.png)
 
 If no organisations or challenges are linked to the selected tag the view will inform the user that no items have been found:
 ![filter-orgs](doc/img/filter-no-result.png)
+
+### Edit tags linked to an organisations
+- ```/orgs/{idOrg}/tags```
+
+This view allow a user to change the tags linked to an organisation by selecting or unselecting them
+
+Permissions: Only an admin and the primary user of the organisation can change the tags linked to the organisation
+
+![filter-orgs](doc/img/add-tags-org.png)
+
+
 
 ### View all users
 - ```/people```
@@ -130,3 +150,12 @@ Clicking on 'People' in the right side of the top-nav, will take you to a page w
 Both active and inactive users will be displayed for admin, but only active users will show for primary users.
 On the list, selected an individual user will toggle the user's contact details.
 ![filter-orgs](doc/img/people-list.png)
+
+### Add new challenge
+- ```/challenges/add```
+
+A new challenge can be created on behalf of an existing organisation, by the primary user of that organisation.
+Admin do not have the permission to create a new challenge.
+On clicking the 'Add Challenge' button in the centre of the bottom nav, users will be directed to a page to write the title and description of the challenge. On clicking 'Next', the challenge will be saved, and made visible to the users.
+Users will then be redirected to add tags to the challenge, so that other users can find challenges more easily.
+![chal-add](doc/img/chal-add.png)
