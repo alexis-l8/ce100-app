@@ -1,3 +1,5 @@
+'use strict';
+
 var Hoek = require('hoek');
 var jwt = require('jsonwebtoken');
 var Boom = require('boom');
@@ -5,7 +7,7 @@ var Boom = require('boom');
 var helpers = require('../helpers.js');
 var config = require('../../config');
 
-module.exports = (request, reply, source, joiErr) => {
+module.exports = function (request, reply, source, joiErr) {
   var error = helpers.errorOptions(joiErr);
   var hashedId = request.params.hashedId;
 
@@ -16,7 +18,9 @@ module.exports = (request, reply, source, joiErr) => {
     Hoek.assert(!pgErr, 'database error');
     // if no user is found
     if (user.length === 0) {
-      return reply(Boom.notFound('Something went wrong - we could not find your details'));
+      return reply(
+        Boom.notFound('Something went wrong - we could not find your details')
+      );
     }
 
     // if user has already activated
@@ -24,6 +28,6 @@ module.exports = (request, reply, source, joiErr) => {
       return reply.redirect('/login');
     }
 
-    return reply.view('activate', {error}).code(error ? 401 : 200);
+    return reply.view('activate', { error: error }).code(error ? 401 : 200);
   });
 };
