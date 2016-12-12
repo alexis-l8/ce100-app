@@ -1,7 +1,9 @@
 'use strict';
 
 // challenges
+require('./challenges/add-chal.test.js');
 require('./challenges/browse.test.js');
+
 // orgs
 require('./organisations/add-tags-to-org.test.js');
 require('./organisations/toggle-active.test.js');
@@ -17,7 +19,9 @@ require('./organisations/add-tags-to-org-view.test.js');
 require('./people/browse.test.js');
 require('./people/login.test.js');
 
+// tags
+require('./browse/select-tags-browse-view.test.js');
+
 require('./server/auth.test.js');
 
 
-require('./browse/select-tags-browse-view.test.js');

@@ -150,3 +150,12 @@ Clicking on 'People' in the right side of the top-nav, will take you to a page w
 Both active and inactive users will be displayed for admin, but only active users will show for primary users.
 On the list, selected an individual user will toggle the user's contact details.
 ![filter-orgs](doc/img/people-list.png)
+
+### Add new challenge
+- ```/challenges/add```
+
+A new challenge can be created on behalf of an existing organisation, by the primary user of that organisation.
+Admin do not have the permission to create a new challenge.
+On clicking the 'Add Challenge' button in the centre of the bottom nav, users will be directed to a page to write the title and description of the challenge. On clicking 'Next', the challenge will be saved, and made visible to the users.
+Users will then be redirected to add tags to the challenge, so that other users can find challenges more easily.
+![chal-add](doc/img/chal-add.png)
