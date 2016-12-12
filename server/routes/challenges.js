@@ -2,6 +2,7 @@
 
 var view = require('../handlers/serve-view.js');
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
+var addTags = require('../handlers/challenges/add-tags.js');
 var add = require('../handlers/challenges/add.js');
 var browseChallenges = require('../handlers/challenges/browse-challenges.js');
 
@@ -24,7 +25,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/challenges/{challengeId}/tags',
-    handler: require('../handlers/select-tags.js'),
+    handler: addTags,
     config: {
       validate: require('../models/max-allowed-tags.js')
     }
