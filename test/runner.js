@@ -21,6 +21,7 @@ require('./people/browse.test.js');
 require('./people/login.test.js');
 require('./people/activate-account-view.test.js');
 require('./people/activate-account.test.js');
+require('./people/add-user-view.test.js');
 
 // tags
 require('./browse/select-tags-browse-view.test.js');
