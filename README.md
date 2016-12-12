@@ -130,3 +130,7 @@ Clicking on 'People' in the right side of the top-nav, will take you to a page w
 Both active and inactive users will be displayed for admin, but only active users will show for primary users.
 On the list, selected an individual user will toggle the user's contact details.
 ![filter-orgs](doc/img/people-list.png)
+
+
+### Enable/Disable challenges
+- ```/challenges/{id}/toggle-archive

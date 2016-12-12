@@ -1,6 +1,7 @@
 'use strict';
 
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
+var toggleActive = require('../handlers/challenges/toggleActive.js');
 
 module.exports = [
   {
@@ -56,6 +57,6 @@ module.exports = [
   {
     method: 'GET',
     path: '/challenges/{id}/toggle-archive',
-    handler: require('../handlers/toggle-archive-challenge.js')
+    handler: toggleActive
   }
 ];
