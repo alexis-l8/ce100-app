@@ -1,0 +1,47 @@
+<!-- Include Top Navbar -->
+{{>top-nav}}
+
+<!-- Main Content -->
+<div class="container">
+    <div class="card card--header daintree--blue">
+      <a class="title--link" href="/challenges/tags">
+        <h1 class="title">
+          {{#if filter}}{{filter.name}}{{else}}All tags{{/if}}
+        </h1>
+        <div class="icon icon--dropdown"></div>
+      </a>
+    </div>
+
+    <div class="card card--header">
+      <ul class="navbar__links">
+          <li class="navbar__item togglebar__item">
+            {{#if filter}}
+              <a class="navbar__link togglebar__link" href="/orgs?tags={{filter.id}}">
+            {{else}}
+              <a class="navbar__link togglebar__link" href="/orgs">
+            {{/if}}
+              Organisations
+          </a></li>
+
+          <li class="navbar__item togglebar__item--selected">
+            {{#if filter}}
+              <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges?tags={{filter.id}}">
+            {{else}}
+              <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges">
+            {{/if}}
+              Challenges
+          </a></li>
+      </ul>
+    </div>
+
+      {{#if data}}
+        {{#each data}}
+          {{>challenge}}
+        {{/each}}
+      {{else}}
+        <h3 class="title title-blue">No Challenges met your search criteria.</h3>
+      {{/if}}
+</div>
+
+<!-- Include Navbar -->
+{{>navbar}}

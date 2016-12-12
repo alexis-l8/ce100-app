@@ -8,9 +8,7 @@
     "startmon": "nodemon server/start.js",
     "test": "NODE_ENV=test istanbul cover tape ./test/runner.js | node_modules/tap-spec/bin/cmd.js",
     "coverage": "istanbul check-coverage",
-    "fast": "tape ./test/*/*.test.js",
-    "populateDB": "node ./commands/populateDB.js",
-    "pgMockData": "node lib/fixtures/importMockData.js"
+    "fast": "tape ./test/*/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -40,8 +38,8 @@
     "joi": "^9.0.4",
     "jsonwebtoken": "^7.1.9",
     "pg": "^6.1.0",
-    "pg-challenges": "^2.0.9",
-    "pg-people": "^0.0.14",
+    "pg-challenges": "^2.0.10",
+    "pg-people": "^0.0.16",
     "redis": "^2.6.2",
     "redis-connection": "^5.0.0",
     "sendemail": "^2.3.0",

@@ -1,6 +1,8 @@
 'use strict';
 
 var browsePeople = require('../handlers/people/browse-people.js');
+var activateAccountView = require('../handlers/people/activate-account-view.js');
+var activateAccount = require('../handlers/people/activate-account.js');
 
 module.exports = [
   {
@@ -46,7 +48,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/people/activate/{hashedId}',
-    handler: require('../handlers/activate-account-view.js'),
+    handler: activateAccountView,
     config: {
       auth: false
     }
@@ -54,7 +56,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/people/activate/{hashedId}',
-    handler: require('../handlers/activate-user-account.js'),
+    handler: activateAccount,
     config: {
       validate: require('../models/confirm-password.js'),
       auth: false

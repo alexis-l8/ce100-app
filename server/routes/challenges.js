@@ -1,6 +1,10 @@
 'use strict';
 
+var view = require('../handlers/serve-view.js');
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
+var addTags = require('../handlers/challenges/add-tags.js');
+var browseChallenges = require('../handlers/challenges/browse-challenges.js');
+var add = require('../handlers/challenges/add.js');
 var editView = require('../handlers/challenges/edit-view.js');
 var editSubmit = require('../handlers/challenges/edit.js');
 var editModel = require('../models/edit-challenge.js');
@@ -9,7 +13,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/challenges',
-    handler: require('../handlers/browse-view.js')
+    handler: browseChallenges
   },
   {
     method: 'GET',
@@ -24,7 +28,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/challenges/{challengeId}/tags',
-    handler: require('../handlers/select-tags.js'),
+    handler: addTags,
     config: {
       validate: require('../models/max-allowed-tags.js')
     }
@@ -32,12 +36,12 @@ module.exports = [
   {
     method: 'GET',
     path: '/challenges/add',
-    handler: require('../handlers/add-challenge-view.js')
+    handler: view('challenges/add')
   },
   {
     method: 'POST',
     path: '/challenges/add',
-    handler: require('../handlers/add-challenge.js'),
+    handler: add,
     config: {
       validate: require('../models/add-challenge.js'),
       auth: { scope: 'primary' }
