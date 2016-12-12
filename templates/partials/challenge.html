@@ -9,7 +9,9 @@
   <p class="card__copy">{{description}}</p>
   {{#if tags}}
     {{#each tags}}
-      <a href="/challenges/{{tag_id}}"><span class="tag__label">{{tag_name}}</span></a>
+      <a href="/challenges?tags={{tag_id}}">
+        <span class="tag__label">{{tag_name}}</span>
+      </a>
     {{/each}}
   {{/if}}
 
