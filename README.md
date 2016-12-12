@@ -151,6 +151,21 @@ Both active and inactive users will be displayed for admin, but only active user
 On the list, selected an individual user will toggle the user's contact details.
 ![filter-orgs](doc/img/people-list.png)
 
+### View all users
+- ```/people```
+
+Clicking on 'People' in the right side of the top-nav, will take you to a page where all users will be displayed.
+Both active and inactive users will be displayed for admin, but only active users will show for primary users.
+On the list, selected an individual user will toggle the user's contact details.
+![filter-orgs](doc/img/people-list.png)
+
+
+### Activate Account
+- ```/people/activate/{id}```
+
+After a user is created by an admin, they will be sent an email with a link to the account activation page where the user has to create a password.
+![activate-view](doc/img/activate-account.png)
+
 ### Add new challenge
 - ```/challenges/add```
 
