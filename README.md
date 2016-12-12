@@ -127,10 +127,21 @@ Challenges will list the title, full description and (if there are) any tags att
 - ```/challenges?tag=id_of_the_filter_tag```
 
 Selecting one of the tags from the browse tag view will filter the organisations or challenges depending on the type of the page the user is on. The list of organisation (or challenges) are all the item where the tag selected is also linked on:
-![filter-orgs](doc/img/filter-orgs.png.png)
+![filter-orgs](doc/img/filter-orgs.png)
 
 If no organisations or challenges are linked to the selected tag the view will inform the user that no items have been found:
-![filter-orgs](doc/img/filter-no-result.png.png)
+![filter-orgs](doc/img/filter-no-result.png)
+
+### Edit tags linked to an organisations
+- ```/orgs/{idOrg}/tags```
+
+This view allow a user to change the tags linked to an organisation by selecting or unselecting them
+
+Permissions: Only an admin and the primary user of the organisation can change the tags linked to the organisation
+
+![filter-orgs](doc/img/add-tags-org.png)
+
+
 
 ### View all users
 - ```/people```
@@ -138,4 +149,4 @@ If no organisations or challenges are linked to the selected tag the view will i
 Clicking on 'People' in the right side of the top-nav, will take you to a page where all users will be displayed.
 Both active and inactive users will be displayed for admin, but only active users will show for primary users.
 On the list, selected an individual user will toggle the user's contact details.
-![filter-orgs](doc/img/people-list.png.png)
+![filter-orgs](doc/img/people-list.png)

@@ -7,6 +7,8 @@ var edit = require('../handlers/orgs/edit-org.js');
 var editView = require('../handlers/orgs/edit-org-view.js')
 var toggleActive = require('../handlers/orgs/toggle-active.js');
 var add = require('../handlers/orgs/add.js');
+var addTagsView = require('../handlers/orgs/add-tags-view.js');
+
 
 module.exports = [
   {
@@ -65,7 +67,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/orgs/{id}/tags',
-    handler: require('../handlers/org-select-tags-view.js')
+    handler: addTagsView
   },
   {
     method: 'POST',
