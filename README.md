@@ -162,7 +162,6 @@ We only have user types of primary and admin at the moment, and there can only b
 
 After a user is created by an admin, they will be sent an email with a link to the account activation page where the user has to create a password.
 ![activate-view](doc/img/activate-account.png)
->>>>>>> master
 
 ### Add new challenge
 - ```/challenges/add```
