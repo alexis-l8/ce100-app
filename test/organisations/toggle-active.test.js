@@ -22,6 +22,7 @@ function editOrgView (id) {
 tape('Admin can disable an organisation: --> ' + __filename, function (t) {
   sessions.addAll(function () {
     initServer(config, function (error, server, pool) {
+      if (error) { console.log(error); }
 
       server.inject(toggleActiveOptions(1), function (res) {
         t.equal(res.statusCode, 302, 'admin is redirected after disabling an org');
@@ -43,10 +44,10 @@ tape('Admin can enable an organisation: --> ' + __filename, function (t) {
   sessions.addAll(function () {
     initServer(config, function (error, server, pool) {
 
-      server.inject(toggleActiveOptions(6), function (res) {
+      server.inject(toggleActiveOptions(7), function (res) {
         t.equal(res.statusCode, 302, 'admin is redirected after enabling an org');
 
-        server.inject(editOrgView(6), function (res) {
+        server.inject(editOrgView(7), function (res) {
           t.ok(res.payload.indexOf('Disable Organisation') > -1, 'Organisation was successfuly enabled')
           t.end();
           pool.end();

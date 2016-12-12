@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = [].concat(
   require('./routes/generic.js'),
   require('./routes/auth.js'),
