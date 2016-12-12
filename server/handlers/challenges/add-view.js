@@ -1,4 +1,4 @@
-var helpers = require('./helpers.js');
+var helpers = require('../helpers.js');
 
 module.exports = (request, reply, source, joiErr) => {
   var error = helpers.errorOptions(joiErr);
