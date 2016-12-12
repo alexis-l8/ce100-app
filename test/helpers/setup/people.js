@@ -12,7 +12,7 @@ module.exports = {
       organisation_id: -1,
       id: 0,
       active: true,
-      password: bcrypt.hashSync('adminadmin', 10),
+      password: bcrypt.hashSync('Hello1', 10),
       last_login: Date.now(),
       challenges: []
     },
