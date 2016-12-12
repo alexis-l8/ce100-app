@@ -15,7 +15,6 @@ module.exports = function (request, reply) {
     function (pgErr, challenges) {
       Hoek.assert(!pgErr, 'error getting challenges by tag');
       options = Object.assign(
-        {},
         { data: challenges.challenges },
         { filter: challenges.filters },
         permissions
