@@ -10,6 +10,8 @@ require('./organisations/browse-orgs.test.js');
 require('./organisations/org-details-view.test.js');
 require('./organisations/edit-org-view.test.js');
 require('./organisations/select-tags-browse-view.test.js');
+require('./organisations/add-tags-to-org.test.js');
+require('./organisations/add-tags-to-org-view.test.js');
 
 // people
 require('./people/browse.test.js');
