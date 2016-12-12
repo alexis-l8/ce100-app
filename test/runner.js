@@ -3,6 +3,7 @@
 // challenges
 require('./challenges/add-chal.test.js');
 require('./challenges/browse.test.js');
+require('./challenges/add-tags-to-challenge.test.js');
 
 // orgs
 require('./organisations/add-tags-to-org.test.js');
@@ -12,7 +13,6 @@ require('./organisations/browse-orgs.test.js');
 require('./organisations/org-details-view.test.js');
 require('./organisations/edit-org-view.test.js');
 require('./organisations/select-tags-browse-view.test.js');
-require('./organisations/add-tags-to-org.test.js');
 require('./organisations/add-tags-to-org-view.test.js');
 
 // people
@@ -23,5 +23,4 @@ require('./people/login.test.js');
 require('./browse/select-tags-browse-view.test.js');
 
 require('./server/auth.test.js');
-
 
