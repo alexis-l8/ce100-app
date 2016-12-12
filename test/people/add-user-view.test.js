@@ -43,7 +43,6 @@ tape('Correct fields in orgs/add view', function (t) {
         t.ok(res.payload.indexOf('Phone number') > -1, 'Phone number field is present');
         t.ok(res.payload.indexOf('User type') > -1, 'User type field is present');
         t.ok(res.payload.indexOf('Organisation') > -1, 'Organisation field is present');
-        console.log(res.result);
         t.end();
         server.stop();
         pool.end();
