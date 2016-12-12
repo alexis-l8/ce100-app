@@ -141,8 +141,6 @@ Permissions: Only an admin and the primary user of the organisation can change t
 
 ![filter-orgs](doc/img/add-tags-org.png)
 
-
-
 ### View all users
 - ```/people```
 
@@ -151,14 +149,13 @@ Both active and inactive users will be displayed for admin, but only active user
 On the list, selected an individual user will toggle the user's contact details.
 ![filter-orgs](doc/img/people-list.png)
 
-### View all users
-- ```/people```
+### Admin adds a user
+- ```/people/add```
 
-Clicking on 'People' in the right side of the top-nav, will take you to a page where all users will be displayed.
-Both active and inactive users will be displayed for admin, but only active users will show for primary users.
-On the list, selected an individual user will toggle the user's contact details.
-![filter-orgs](doc/img/people-list.png)
-
+Admin can add a new user by clicking on the `+` symbol. They can add some details about the new user, select the user type, and 'link' them to an organisation.
+We only have user types of primary and admin at the moment, and there can only be one admin per organisation for now, so only organisations that do not have a primary user will show up in the drop-down list.  With the introduction of secondary users, or more than one primary per organisation, this will have to change.
+![add-user1](doc/img/add-user1.png)
+![add-user2](doc/img/add-user12.png)
 
 ### Activate Account
 - ```/people/activate/{id}```
