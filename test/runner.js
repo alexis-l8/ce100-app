@@ -18,3 +18,6 @@ require('./people/browse.test.js');
 require('./people/login.test.js');
 
 require('./server/auth.test.js');
+
+
+require('./browse/select-tags-browse-view.test.js');
