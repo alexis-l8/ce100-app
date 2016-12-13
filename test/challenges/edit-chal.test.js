@@ -40,7 +40,7 @@ tape('check /challenges/{id}/edit GET endpoint access',
           t.equal(res.statusCode, 401,
             'request an endpoint requiring auth get 401');
           server.inject(editChal(adminToken, chalId), function (res) {
-            t.equal(res.statusCode, 200, 'Admin can view edit challenge view');
+            t.equal(res.statusCode, 401, 'Admin cannot view edit challenge view');
             server.inject(editChal(primaryToken, chalId), function (res) {
               t.equal(res.statusCode, 200, 'Primary can view edit challenge view');
               t.end();
@@ -48,22 +48,6 @@ tape('check /challenges/{id}/edit GET endpoint access',
               pool.end();
             });
           });
-        });
-      });
-    });
-  });
-
-tape('/challenges/{id}/edit GET endpoint displays prefilled forms correctly for admin',
-  function (t) {
-    sessions.addAll(function () {
-      init(config, function (error, server, pool) {
-        t.ok(!error, 'No error on init server');
-        server.inject(editChal(adminToken, chalId), function (res) {
-          t.ok(res.result.indexOf('Challenge Number 2') > -1, 'active challenge title displays correctly for admin');
-          t.ok(res.result.indexOf('How can I...?') > -1, 'active challenge description displays correctly for admin');
-          t.end();
-          server.stop();
-          pool.end();
         });
       });
     });
@@ -107,21 +91,14 @@ tape('/challenges/{id}/edit POST endpoint, admin can update existing info',
       init(config, function (error, server, pool) {
         t.ok(!error, 'No error on init server');
         server.inject(editChal(adminToken, chalId, updatedChal), function (res) {
-          t.equal(res.statusCode, 302, 'Admin can update existing challenge');
-          t.equal(res.headers.location, '/challenges/' + chalId + '/tags', 'Admin redirected to add tags view');
-          server.inject(viewChals(adminToken, chalId, updatedChal), function (res) {
-            // THESE TESTS WILL FAIL WHILE PR#387 IS STILL OPEN
-            t.ok(res.result.indexOf(updatedChal.title) > -1, 'active challenge title correctly updated');
-            t.ok(res.result.indexOf(updatedChal.description) > -1, 'active challenge description correctly updated');
-            t.end();
-            server.stop();
-            pool.end();
-          });
+          t.equal(res.statusCode, 401, 'Admin does not have permission to update existing challenge');
+          t.end();
+          server.stop();
+          pool.end();
         });
       });
     });
   });
-
 
 tape('/challenges/{id}/edit POST endpoint, primary user can update existing info',
   function (t) {
