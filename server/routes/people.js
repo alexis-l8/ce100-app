@@ -1,6 +1,7 @@
 'use strict';
 
 var browsePeople = require('../handlers/people/browse-people.js');
+var addView = require('../handlers/people/add-view.js');
 var activateAccountView = require('../handlers/people/activate-account-view.js');
 var activateAccount = require('../handlers/people/activate-account.js');
 
@@ -13,10 +14,8 @@ module.exports = [
   {
     method: 'GET',
     path: '/people/add',
-    handler: require('../handlers/create-user-view.js'),
-    config: {
-      auth: { scope: 'admin' }
-    }
+    handler: addView,
+    config: { auth: { scope: 'admin' } }
   },
   {
     method: 'POST',

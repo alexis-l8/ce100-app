@@ -4,8 +4,11 @@ var view = require('../handlers/serve-view.js');
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
 var toggleActive = require('../handlers/challenges/toggleActive.js');
 var addTags = require('../handlers/challenges/add-tags.js');
-var add = require('../handlers/challenges/add.js');
 var browseChallenges = require('../handlers/challenges/browse-challenges.js');
+var add = require('../handlers/challenges/add.js');
+var editView = require('../handlers/challenges/edit-view.js');
+var editSubmit = require('../handlers/challenges/edit.js');
+var editModel = require('../models/edit-challenge.js');
 
 module.exports = [
   {
@@ -48,15 +51,13 @@ module.exports = [
   {
     method: 'GET',
     path: '/challenges/{id}/edit',
-    handler: require('../handlers/edit-challenge-view.js')
+    handler: editView
   },
   {
     method: 'POST',
     path: '/challenges/{id}/edit',
-    handler: require('../handlers/edit-challenge.js'),
-    config: {
-      validate: require('../models/edit-challenge.js')
-    }
+    handler: editSubmit,
+    config: { validate: editModel }
   },
   {
     method: 'GET',
