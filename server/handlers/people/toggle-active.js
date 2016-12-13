@@ -9,7 +9,7 @@ module.exports = function (request, reply) {
   var message;
 
   if (loggedIn.scope !== 'admin') {
-    message = 'You do not have permission to edit this challenge.';
+    message = 'You do not have permission to edit the people.';
 
     return reply(Boom.unauthorized(message));
   }
