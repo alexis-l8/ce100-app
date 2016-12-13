@@ -1,11 +1,13 @@
 var Joi = require('joi');
 
+var editView = require('../handlers/people/edit-view.js');
+
 module.exports = {
   payload: (value, options, next) => {
     var scope = options.context.auth.credentials.scope;
     return Joi.validate(value, schema[scope], next);
   },
-  failAction: require('../handlers/edit-user-view.js')
+  failAction: editView
 };
 
 var schema = {

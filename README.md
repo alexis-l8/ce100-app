@@ -157,6 +157,17 @@ We only have user types of primary and admin at the moment, and there can only b
 ![add-user1](doc/img/add-user1.png)
 ![add-user2](doc/img/add-user12.png)
 
+### Edit a user
+- ```/people/{id}/edit```
+
+Primary users and admins have different scopes of editting permissions.
+Primary users can only edit their profile. Admins can edit any user's profile.
+Primary users can edit their `first name`, `last name`, `job title` and `phone`.
+Admin users can also edit `email`.
+![edit-user-primary](doc/img/edit-user-primary.png)
+![edit-user-admin1](doc/img/edit-user-admin1.png)
+![edit-user-admin2](doc/img/edit-user-admin2.png)
+
 ### Activate Account
 - ```/people/activate/{id}```
 
