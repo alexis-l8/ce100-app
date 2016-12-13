@@ -4,6 +4,7 @@ var browsePeople = require('../handlers/people/browse-people.js');
 var addView = require('../handlers/people/add-view.js');
 var activateAccountView = require('../handlers/people/activate-account-view.js');
 var activateAccount = require('../handlers/people/activate-account.js');
+var toggleActive = require('../handlers/people/toggle-active.js');
 
 module.exports = [
   {
@@ -40,9 +41,9 @@ module.exports = [
     }
   },
   {
-    method: 'GET',
-    path: '/people/{id}/toggle-archive',
-    handler: require('../handlers/toggle-archive-user.js')
+    method: 'POST',
+    path: '/people/{id}/toggle-active',
+    handler: toggleActive
   },
   {
     method: 'GET',
