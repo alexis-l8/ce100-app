@@ -25,7 +25,7 @@
       <div class="card">
         <h2 class="card__header">Our experience</h2>
         {{#each org.tags}}
-          <a href="/challenges/{{tag_id}}"><span class="tag__label">{{tag_name}}</span></a>
+          <a href="/challenges?tags={{tag_id}}"><span class="tag__label">{{tag_name}}</span></a>
         {{/each}}
       </div>
     {{/if}}

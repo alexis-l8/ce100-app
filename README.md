@@ -161,7 +161,8 @@ The title and description of a challenge can be updated. You must however be the
 Admin can add a new user by clicking on the `+` symbol. They can add some details about the new user, select the user type, and 'link' them to an organisation.
 We only have user types of primary and admin at the moment, and there can only be one admin per organisation for now, so only organisations that do not have a primary user will show up in the drop-down list.  With the introduction of secondary users, or more than one primary per organisation, this will have to change.
 ![add-user1](doc/img/add-user1.png)
-![add-user2](doc/img/add-user12.png)
+
+![add-user2](doc/img/add-user2.png)
 
 ### Edit a user
 - ```/people/{id}/edit```
@@ -173,6 +174,12 @@ Admin users can also edit `email`.
 ![edit-user-primary](doc/img/edit-user-primary.png)
 ![edit-user-admin1](doc/img/edit-user-admin1.png)
 ![edit-user-admin2](doc/img/edit-user-admin2.png)
+
+### Archive/Unarchive challenges
+- ```/challenges/{id}/toggle-archive```
+
+You can make a challenge visible/invisible to other members of this platform by clicking on 'Archive/Unarchive Challenge', on editting your challenge.
+
 
 ### Activate Account
 - ```/people/activate/{id}```

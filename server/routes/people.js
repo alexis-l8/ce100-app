@@ -2,11 +2,13 @@
 
 var browsePeople = require('../handlers/people/browse-people.js');
 var addView = require('../handlers/people/add-view.js');
+var add = require('../handlers/people/add.js');
 var activateAccountView = require('../handlers/people/activate-account-view.js');
 var activateAccount = require('../handlers/people/activate-account.js');
 var editView = require('../handlers/people/edit-view.js');
 var editSubmit = require('../handlers/people/edit-submit.js');
 var editModel = require('../models/edit-user.js');
+var toggleActive = require('../handlers/people/toggle-active.js');
 
 module.exports = [
   {
@@ -23,7 +25,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/people/add',
-    handler: require('../handlers/create-new-user.js'),
+    handler: add,
     config: {
       auth: { scope: 'admin' },
       validate: require('../models/admin-add-user.js')
@@ -38,22 +40,18 @@ module.exports = [
     method: 'POST',
     path: '/people/{id}/edit',
     handler: editSubmit,
-    config: {
-      validate: editModel
-    }
+    config: { validate: editModel }
   },
   {
-    method: 'GET',
-    path: '/people/{id}/toggle-archive',
-    handler: require('../handlers/toggle-archive-user.js')
+    method: 'POST',
+    path: '/people/{id}/toggle-active',
+    handler: toggleActive
   },
   {
     method: 'GET',
     path: '/people/activate/{hashedId}',
     handler: activateAccountView,
-    config: {
-      auth: false
-    }
+    config: { auth: false }
   },
   {
     method: 'POST',
