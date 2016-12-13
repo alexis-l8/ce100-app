@@ -34,10 +34,10 @@
         {{>radio}}
       {{/each}}
 
-      <label class="form__label" for="organisation_id">Organisation</label>
-      <select class="form__input" name="organisation_id">
-        <option value=null>Please Select</option>
-        <option value='admin'>N/A (Admin)</option>
+      <label class="form__label" for="org_id">Organisation</label>
+      <select class="form__input" name="org_id">
+        <option value=-1>Please Select</option>
+        <option value=-1>N/A (Admin)</option>
         {{#each orgs}}
           {{>dropdown}}
         {{/each}}

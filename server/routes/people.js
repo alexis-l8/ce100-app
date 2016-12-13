@@ -2,6 +2,7 @@
 
 var browsePeople = require('../handlers/people/browse-people.js');
 var addView = require('../handlers/people/add-view.js');
+var add = require('../handlers/people/add.js');
 var activateAccountView = require('../handlers/people/activate-account-view.js');
 var activateAccount = require('../handlers/people/activate-account.js');
 
@@ -20,7 +21,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/people/add',
-    handler: require('../handlers/create-new-user.js'),
+    handler: add,
     config: {
       auth: { scope: 'admin' },
       validate: require('../models/admin-add-user.js')
