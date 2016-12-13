@@ -25,48 +25,44 @@ function toggleActivity (token) {
   };
 }
 
-tape('Admin can enable/disable a challenge', function (t) {
+tape('Admin cannot unarchive/archive a challenge', function (t) {
   sessions.addAll(function () {
     init(config, function (error, server, pool) {
       if (error) { console.log(error); }
 
-      // server.inject(editChallenge(admin), function (res) {
-      //   t.ok(res.payload.indexOf('Enable Challenge') > -1, 'chal is disabled to begin with');
-        server.inject(toggleActivity(admin), function (enabled) {
-          console.log(enabled.result);
-          // t.equal(enabled.statusCode, 404, 'admin is redirected after enabling a chal');
-          t.end();
-          pool.end();
-          server.stop();
-        });
+      server.inject(toggleActivity(admin), function (res) {
+        t.equal(unarchived.statusCode, 401, 'admin does not have permission to unarchive/archive challenge');
+        t.end();
+        pool.end();
+        server.stop();
       });
-    // });
+    });
   });
 });
 
-// tape('Primary can enable/disable a challenge', function (t) {
-//   sessions.addAll(function () {
-//     init(config, function (error, server, pool) {
-//       if (error) { console.log(error); }
-//
-//       server.inject(editChallenge(primary), function (res) {
-//         t.ok(res.payload.indexOf('Enable Challenge') > -1, 'chal is disabled to begin with');
-//         server.inject(toggleActivity(primary), function (enabled) {
-//           t.equal(enabled.statusCode, 302, 'primary is redirected after enabling a chal');
-//           server.inject(editChallenge(primary), function (res) {
-//             t.ok(res.payload.indexOf('Disable Challenge') > -1, 'chal successfuly enabled');
-//             server.inject(toggleActivity(primary), function (disabled) {
-//               t.equal(disabled.statusCode, 302, 'primary is redirected after disabling a chal');
-//               server.inject(editChallenge(primary), function (res) {
-//                 t.ok(res.payload.indexOf('Enable Challenge') > -1, 'chal successfuly disabled');
-//                 t.end();
-//                 pool.end();
-//                 server.stop();
-//               });
-//             });
-//           });
-//         });
-//       });
-//     });
-//   });
-// });
+tape('Primary can unarchive/archive a challenge', function (t) {
+  sessions.addAll(function () {
+    init(config, function (error, server, pool) {
+      if (error) { console.log(error); }
+
+      server.inject(editChallenge(primary), function (res) {
+        t.ok(res.payload.indexOf('Unarchive Challenge') > -1, 'chal is archived to begin with');
+        server.inject(toggleActivity(primary), function (unarchived) {
+          t.equal(unarchived.statusCode, 302, 'primary is redirected after enabling a chal');
+          server.inject(editChallenge(primary), function (res) {
+            t.ok(res.payload.indexOf('Archive Challenge') > -1, 'chal successfuly unarchived');
+            server.inject(toggleActivity(primary), function (archived) {
+              t.equal(archived.statusCode, 302, 'primary is redirected after disabling a chal');
+              server.inject(editChallenge(primary), function (res) {
+                t.ok(res.payload.indexOf('Unarchive Challenge') > -1, 'chal successfuly archived');
+                t.end();
+                pool.end();
+                server.stop();
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+});
