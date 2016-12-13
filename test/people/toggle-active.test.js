@@ -33,7 +33,6 @@ tape('Admin can activate/deactivate a user account', function (t) {
       if (error) { console.log(error); }
 
       server.inject(toggleUser(admin, uid), function (res) {
-        console.log(res.result);
         t.equal(res.statusCode, 302, 'admin has permission to deactivate user account');
         server.inject(toggleUser(admin, unauthUid), function (res) {
           t.equal(res.statusCode, 302, 'admin has permission to activate user account');
