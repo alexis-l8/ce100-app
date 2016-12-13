@@ -11,9 +11,9 @@ module.exports = function (request, reply, source, joiErr) {
   var message, options;
 
   request.server.methods.pg.challenges.checkEditable(loggedIn.userId, cid,
-    function (editableErr, primary) {
+    function (editableErr, isEditable) {
       Hoek.assert(!editableErr, 'database error');
-      if (!primary) {
+      if (!isEditable) {
         message = 'You do not have permission to edit this challenge.';
 
         return reply(Boom.unauthorized(message));
