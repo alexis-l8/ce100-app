@@ -152,7 +152,7 @@ On the list, selected an individual user will toggle the user's contact details.
 ### Update Challenge (Title, Description)
 - ```/challenges/{id}/edit```
 
-The title and description of a challenge can be updated. You must however either be an admin, or the primary user of the organisation represented by the challenge. Primary users will have the option to edit any of the challenges on the organisation's profile. If you have editting rights, you will see a 'pencil icon' at the top right corner of each challenge card. Clicking this will allow you to view your current challenge details, but also edit and submit an update on the challenge title and description.
+The title and description of a challenge can be updated. You must however be the primary user of the organisation represented by the challenge (Admin are not allow to update challanges). If you have editting rights, you will see a 'pencil icon' at the top right corner of each challenge card. Clicking this will allow you to view your current challenge details, but also edit and submit an update on the challenge title and description.
 ![challenge-edit](doc/img/challenge-edit.png)
 
 ### Admin adds a user
