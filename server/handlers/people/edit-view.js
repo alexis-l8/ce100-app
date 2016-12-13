@@ -1,20 +1,28 @@
 'use strict';
 
 var Hoek = require('hoek');
+var Boom = require('boom');
 var helpers = require('../helpers.js');
 
 module.exports = function (request, reply, source, joiErr) {
   var error = helpers.errorOptions(joiErr);
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
-  var options;
+  var editId = request.params.id && JSON.parse(request.params.id);
+  var options, msg;
 
-  request.server.methods.pg.people.getBy('id', loggedIn.userId,
+  if (loggedIn.userId !== editId && loggedIn.scope !== 'admin') {
+    msg = 'You do not have the permissions to edit this user\'s settings';
+
+    return reply(Boom.badRequest(msg));
+  }
+
+  request.server.methods.pg.people.getBy('id', editId,
     function (pgErr, profile) {
       Hoek.assert(!pgErr, 'database error');
       options = Object.assign(
-        { user: profile },
         permissions,
+        { user: profile[0] },
         { error: error }
       );
 

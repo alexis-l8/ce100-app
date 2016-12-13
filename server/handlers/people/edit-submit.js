@@ -1,24 +1,23 @@
 'use strict';
 
 var Hoek = require('hoek');
-var helpers = require('../helpers.js');
+var Boom = require('boom');
 
 module.exports = function (request, reply) {
   var loggedIn = request.auth.credentials;
-  var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
-  var updatedProfile = request.payload;
-  var options;
+  var editId = request.params.id && JSON.parse(request.params.id);
+  var options, msg;
 
-  console.log(updatedProfile);
-  // request.server.methods.pg.people.getBy('id', loggedIn.userId,
-  //   function (pgErr, profile) {
-  //     Hoek.assert(!pgErr, 'database error');
-  //     options = Object.assign(
-  //       { user: profile },
-  //       permissions,
-  //       { error: error }
-  //     );
-  //
-  //     return reply.view('people/edit', options).code(error ? 401 : 200);
-  //   });
+  if (loggedIn.userId !== editId && loggedIn.scope !== 'admin') {
+    msg = 'You do not have the permissions to edit this user\'s settings';
+
+    return reply(Boom.badRequest(msg));
+  }
+
+  return request.server.methods.pg.people.edit(editId, request.payload,
+    function (pgErr, res) {
+      Hoek.assert(!pgErr, 'database error');
+
+      return reply.redirect('/orgs/' + loggedIn.userId);
+    });
 };
