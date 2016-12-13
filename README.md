@@ -147,7 +147,13 @@ Permissions: Only an admin and the primary user of the organisation can change t
 Clicking on 'People' in the right side of the top-nav, will take you to a page where all users will be displayed.
 Both active and inactive users will be displayed for admin, but only active users will show for primary users.
 On the list, selected an individual user will toggle the user's contact details.
-![filter-orgs](doc/img/people-list.png)
+![people-list](doc/img/people-list.png)
+
+### Update Challenge (Title, Description)
+- ```/challenges/{id}/edit```
+
+The title and description of a challenge can be updated. You must however be the primary user of the organisation represented by the challenge (Admin are not allow to update challanges). If you have editting rights, you will see a 'pencil icon' at the top right corner of each challenge card. Clicking this will allow you to view your current challenge details, but also edit and submit an update on the challenge title and description.
+![challenge-edit](doc/img/challenge-edit.png)
 
 ### Admin adds a user
 - ```/people/add```
@@ -156,6 +162,12 @@ Admin can add a new user by clicking on the `+` symbol. They can add some detail
 We only have user types of primary and admin at the moment, and there can only be one admin per organisation for now, so only organisations that do not have a primary user will show up in the drop-down list.  With the introduction of secondary users, or more than one primary per organisation, this will have to change.
 ![add-user1](doc/img/add-user1.png)
 ![add-user2](doc/img/add-user12.png)
+
+### Archive/Unarchive challenges
+- ```/challenges/{id}/toggle-archive```
+
+You can make a challenge visible/invisible to other members of this platform by clicking on 'Archive/Unarchive Challenge', on editting your challenge.
+![toggle-chal](doc/img/chal-toggle.png)
 
 ### Activate Account
 - ```/people/activate/{id}```
