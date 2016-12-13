@@ -31,7 +31,7 @@ tape('Admin cannot unarchive/archive a challenge', function (t) {
       if (error) { console.log(error); }
 
       server.inject(toggleActivity(admin), function (res) {
-        t.equal(unarchived.statusCode, 401, 'admin does not have permission to unarchive/archive challenge');
+        t.equal(res.statusCode, 401, 'admin does not have permission to unarchive/archive challenge');
         t.end();
         pool.end();
         server.stop();
@@ -47,8 +47,8 @@ tape('Primary can unarchive/archive a challenge', function (t) {
 
       server.inject(editChallenge(primary), function (res) {
         t.ok(res.payload.indexOf('Unarchive Challenge') > -1, 'chal is archived to begin with');
-        server.inject(toggleActivity(primary), function (unarchived) {
-          t.equal(unarchived.statusCode, 302, 'primary is redirected after enabling a chal');
+        server.inject(toggleActivity(primary), function (res) {
+          t.equal(res.statusCode, 302, 'primary is redirected after enabling a chal');
           server.inject(editChallenge(primary), function (res) {
             t.ok(res.payload.indexOf('Archive Challenge') > -1, 'chal successfuly unarchived');
             server.inject(toggleActivity(primary), function (archived) {

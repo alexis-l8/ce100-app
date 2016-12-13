@@ -163,10 +163,10 @@ We only have user types of primary and admin at the moment, and there can only b
 ![add-user1](doc/img/add-user1.png)
 ![add-user2](doc/img/add-user12.png)
 
-### Enable/Disable challenges
+### Archive/Unarchive challenges
 - ```/challenges/{id}/toggle-archive```
 
-You can make a challenge visible/invisible to other members of this platform by clicking on 'Disable Challenge', on editting your challenge.
+You can make a challenge visible/invisible to other members of this platform by clicking on 'Archive/Unarchive Challenge', on editting your challenge.
 ![toggle-chal](doc/img/chal-toggle.png)
 
 ### Activate Account

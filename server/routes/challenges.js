@@ -2,7 +2,7 @@
 
 var view = require('../handlers/serve-view.js');
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
-var toggleActive = require('../handlers/challenges/toggleActive.js');
+var toggleActive = require('../handlers/challenges/toggle-active.js');
 var addTags = require('../handlers/challenges/add-tags.js');
 var browseChallenges = require('../handlers/challenges/browse-challenges.js');
 var add = require('../handlers/challenges/add.js');
@@ -60,8 +60,8 @@ module.exports = [
     config: { validate: editModel }
   },
   {
-    method: 'GET',
-    path: '/challenges/{id}/toggle-archive',
+    method: 'POST',
+    path: '/challenges/{id}/toggle-active',
     handler: toggleActive
   }
 ];
