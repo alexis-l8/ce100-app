@@ -6,7 +6,7 @@ var Boom = require('boom');
 module.exports = function (request, reply) {
   var loggedIn = request.auth.credentials;
   var editId = request.params.id && JSON.parse(request.params.id);
-  var options, msg;
+  var msg;
 
   if (loggedIn.userId !== editId && loggedIn.scope !== 'admin') {
     msg = 'You do not have the permissions to edit this user\'s settings';
@@ -15,9 +15,9 @@ module.exports = function (request, reply) {
   }
 
   return request.server.methods.pg.people.edit(editId, request.payload,
-    function (pgErr, res) {
+    function (pgErr) {
       Hoek.assert(!pgErr, 'database error');
 
-      return reply.redirect('/orgs/' + loggedIn.userId);
+      return reply.redirect('/people');
     });
 };

@@ -9,6 +9,8 @@ module.exports = function (request, reply, source, joiErr) {
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
   var editId = request.params.id && JSON.parse(request.params.id);
+  var getBy = request.server.methods.pg.people.getBy;
+  var getActiveOrgs = request.server.methods.pg.organisations.getActive;
   var options, msg;
 
   if (loggedIn.userId !== editId && loggedIn.scope !== 'admin') {
@@ -17,15 +19,20 @@ module.exports = function (request, reply, source, joiErr) {
     return reply(Boom.badRequest(msg));
   }
 
-  request.server.methods.pg.people.getBy('id', editId,
-    function (pgErr, profile) {
-      Hoek.assert(!pgErr, 'database error');
+  return getBy('id', editId, function (pgErr, profile) {
+    Hoek.assert(!pgErr, 'database error');
+
+    getActiveOrgs(function (errorOrgs, orgs) {
+      Hoek.assert(!errorOrgs, 'database error');
       options = Object.assign(
         permissions,
         { user: profile[0] },
+        helpers.userTypeRadios(),
+        { orgs: orgs },
         { error: error }
       );
 
       return reply.view('people/edit', options).code(error ? 401 : 200);
     });
+  });
 };
