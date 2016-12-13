@@ -5,5 +5,5 @@ module.exports = {
     title: Joi.string().min(1).required(),
     description: Joi.string().min(1).required()
   },
-  failAction: require('../handlers/edit-challenge-view.js')
+  failAction: require('../handlers/challenges/edit.js')
 };
