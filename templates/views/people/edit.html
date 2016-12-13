@@ -35,7 +35,7 @@
       <input class="form__input {{error.phone}}" type="tel" name="phone" value="{{#if error}}{{error.values.phone}}{{else}}{{user.phone}}{{/if}}">
 
       {{#if permissions.admin}}
-      {{>admin-edit-user}}
+        {{>admin-edit-user}}
       {{/if}}
 
       <button class="button" type="submit">Submit</button>

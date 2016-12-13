@@ -4,6 +4,9 @@ var browsePeople = require('../handlers/people/browse-people.js');
 var addView = require('../handlers/people/add-view.js');
 var activateAccountView = require('../handlers/people/activate-account-view.js');
 var activateAccount = require('../handlers/people/activate-account.js');
+var editView = require('../handlers/people/edit-view.js');
+var editSubmit = require('../handlers/people/edit-submit.js');
+var editModel = require('../models/edit-user.js');
 
 module.exports = [
   {
@@ -29,14 +32,14 @@ module.exports = [
   {
     method: 'GET',
     path: '/people/{id}/edit',
-    handler: require('../handlers/edit-user-view.js')
+    handler: editView
   },
   {
     method: 'POST',
     path: '/people/{id}/edit',
-    handler: require('../handlers/edit-user.js'),
+    handler: editSubmit,
     config: {
-      validate: require('../models/edit-user.js')
+      validate: editModel
     }
   },
   {
