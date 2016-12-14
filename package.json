@@ -39,7 +39,7 @@
     "jsonwebtoken": "^7.1.9",
     "pg": "^6.1.0",
     "pg-challenges": "^2.0.14",
-    "pg-people": "^0.0.20",
+    "pg-people": "^0.0.22",
     "redis": "^2.6.2",
     "redis-connection": "^5.0.0",
     "sendemail": "^2.3.0",
