@@ -30,7 +30,8 @@ var dev = {
     challenges: {
       reset: Boolean(process.env.RESET_CHALLENGES),
     }
-  }
+  },
+  root_url: process.env.ROOT_URL
 };
 
 var test = {
@@ -56,7 +57,8 @@ var test = {
     challenges: {
       reset: Boolean(process.env.RESET_CHALLENGES_TEST) || true,
     }
-  }
+  },
+  root_url: process.env.ROOT_URL
 };
 
 // The default env is test
