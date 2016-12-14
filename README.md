@@ -57,6 +57,7 @@ SENDER_EMAIL_ADDRESS=
 AWS_REGION=eu-west-1
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
+ROOT_URL=
 ```
 _remember_ to add the appropriate _values_ to these keys.
 
