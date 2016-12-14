@@ -2,23 +2,18 @@
 {{#each userTypes}}
   {{>radio}}
 {{/each}}
-<label class="form__label" for="organisation_id">Organisation</label>
-{{#if allOrganisations}}
-  <select class="form__input" name="organisation_id">
+<label class="form__label" for="org_id">Organisation</label>
+<select class="form__input" name="org_id">
   <option value=-1>Please Select</option>
-  {{#each allOrganisations}}
+  <option value=-1>N/A (Admin)</option>
+  {{#each orgs}}
     {{>dropdown}}
   {{/each}}
-  </select>
-{{else}}
-<select class="form__input" name="organisation_id">
-  <option value='admin'>N/A (Admin)</option>
 </select>
-{{/if}}
-<a class="anchor anchor--danger" href="/people/{{user.id}}/toggle-archive">
+<a class="anchor anchor--danger" href="/people/{{user.id}}/toggle-active">
   {{#if user.active}}
-  Archive User
+    Archive User
   {{else}}
-  Unarchive User
+    Unarchive User
   {{/if}}
 </a>

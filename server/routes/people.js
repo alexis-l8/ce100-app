@@ -5,6 +5,9 @@ var addView = require('../handlers/people/add-view.js');
 var add = require('../handlers/people/add.js');
 var activateAccountView = require('../handlers/people/activate-account-view.js');
 var activateAccount = require('../handlers/people/activate-account.js');
+var editView = require('../handlers/people/edit-view.js');
+var editSubmit = require('../handlers/people/edit-submit.js');
+var editModel = require('../models/edit-user.js');
 var toggleActive = require('../handlers/people/toggle-active.js');
 
 module.exports = [
@@ -31,18 +34,16 @@ module.exports = [
   {
     method: 'GET',
     path: '/people/{id}/edit',
-    handler: require('../handlers/edit-user-view.js')
+    handler: editView
   },
   {
     method: 'POST',
     path: '/people/{id}/edit',
-    handler: require('../handlers/edit-user.js'),
-    config: {
-      validate: require('../models/edit-user.js')
-    }
+    handler: editSubmit,
+    config: { validate: editModel }
   },
   {
-    method: 'POST',
+    method: 'GET',
     path: '/people/{id}/toggle-active',
     handler: toggleActive
   },
@@ -50,9 +51,7 @@ module.exports = [
     method: 'GET',
     path: '/people/activate/{hashedId}',
     handler: activateAccountView,
-    config: {
-      auth: false
-    }
+    config: { auth: false }
   },
   {
     method: 'POST',
