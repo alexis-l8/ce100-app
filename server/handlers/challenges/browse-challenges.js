@@ -12,11 +12,11 @@ module.exports = function (request, reply) {
 
   // get all challenges, associated by a tag, from all active organisations
   request.server.methods.pg.challenges.getByTag(filterTag,
-    function (pgErr, challenges) {
+    function (pgErr, pgRes) {
       Hoek.assert(!pgErr, 'error getting challenges by tag');
       options = Object.assign(
-        { data: challenges.challenges },
-        { filter: challenges.filters },
+        { data: pgRes.challenges },
+        { filter: pgRes.filter },
         permissions
       );
 
