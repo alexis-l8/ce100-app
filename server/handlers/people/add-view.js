@@ -11,14 +11,13 @@ module.exports = function (request, reply, source, joiErr) {
   var error = helpers.errorOptions(joiErr);
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
-  var unlinkedActiveOrgs, options;
+  var options;
 
   request.server.methods.pg.organisations.getActive(function (pgErr, orgs) {
     Hoek.assert(!pgErr, 'database error');
 
-    unlinkedActiveOrgs = orgs.filter(removeLinked);
     options = Object.assign({},
-      { orgs: unlinkedActiveOrgs },
+      { orgs: helpers.removeLinkedOrgs(orgs) },
       helpers.userTypeRadios(),
       permissions,
       { error: error }
