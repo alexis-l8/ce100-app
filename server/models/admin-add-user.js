@@ -6,8 +6,8 @@ module.exports = {
     last_name: Joi.string().min(1).required(),
     email: Joi.string().email().required(),
     org_id: Joi.number().min(-1),
-    job_title: Joi.any(),
-    phone: Joi.string().regex(/[0-9]+/).min(11),
+    job_title: Joi.string().allow(''),
+    phone: Joi.string().regex(/[0-9]+/).min(11).allow(''),
     user_type: Joi.string().valid('admin', 'primary')
   },
   failAction: require('../handlers/people/add-view.js')

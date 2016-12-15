@@ -18,7 +18,6 @@ var addUser = function (userObj) {
 // failing payloads
 var noFirst = {first_name: ''};
 var noLast = {first_name: 'Jaja', last_name: ''};
-var noPhone = {first_name: 'Jaja', last_name: 'Bink', email: 'ja@ju.co', user_type: 'primary', phone: '', job_title: 'CEO', org_id: -1};
 var shortPhone = {first_name: 'Jaja', last_name: 'Bink', email: 'ja@ju.co', user_type: 'primary', phone: '+442088377', job_title: 'CEO', org_id: -1};
 
 tape('orgs/add failing validation test', function (t) {
@@ -30,17 +29,13 @@ tape('orgs/add failing validation test', function (t) {
         server.inject(addUser(noLast), function (res) {
           t.equal(res.statusCode, 401, 'no last name fails validation at /people/add');
           t.ok(res.payload.indexOf('last name is not allowed to be empty') > -1, 'reply to user with following message: "last name is not allowed to be empty"');
-          server.inject(addUser(noPhone), function (res) {
-            t.equal(res.statusCode, 401, 'no phone number fails validation at /people/add');
-            t.ok(res.payload.indexOf('phone is not allowed to be empty') > -1, 'reply to user with following message: "phone must be a number"');
-            server.inject(addUser(shortPhone), function (res) {
-              t.equal(res.statusCode, 401, 'Too short phone number fails validation at /people/add');
-              t.ok(res.payload.indexOf('phone length must be at least 11 characters long') > -1, 'reply to user with following message: "phone must be at least..."');
+          server.inject(addUser(shortPhone), function (res) {
+            t.equal(res.statusCode, 401, 'Too short phone number fails validation at /people/add');
+            t.ok(res.payload.indexOf('phone length must be at least 11 characters long') > -1, 'reply to user with following message: "phone must be at least..."');
 
-              t.end();
-              server.stop();
-              pool.end();
-            });
+            t.end();
+            server.stop();
+            pool.end();
           });
         });
       });
