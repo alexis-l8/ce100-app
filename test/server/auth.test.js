@@ -9,7 +9,7 @@ var sessions = require('../helpers/add-sessions.js');
 var init = require('../../server/server.js');
 var config = require('../../server/config.js');
 
-tape('hit an authed route without a cookie get 401', function (t) {
+tape('hit an authed route without a cookie get 302 to login page', function (t) {
   sessions.addAll(function () {
     init(config, function (error, server, pool) {
       var options = {
@@ -17,7 +17,11 @@ tape('hit an authed route without a cookie get 401', function (t) {
         url: '/people/add'
       };
       server.inject(options, function (res) {
-        t.equal(res.statusCode, 401, 'request an endpoint requiring auth get 401');
+        t.equal(
+          res.statusCode,
+          302,
+          'request an endpoint requiring auth get 302'
+        );
         t.end();
 
         server.stop();
@@ -38,7 +42,11 @@ tape('A valid JWT with invalid jti fails Auth', function (t) {
         headers: { cookie: 'token=' + validTokenNoSession }
       };
       server.inject(options, function (res) {
-        t.equal(res.statusCode, 401, 'invalid user fails auth');
+        t.equal(
+          res.statusCode,
+          302,
+          'invalid user fails auth'
+        );
         t.end();
 
         server.stop();
@@ -65,7 +73,7 @@ tape('A valid user with EXPIRED SESSION', function (t) {
         headers: { cookie: 'token=' + expired }
       };
       server.inject(options, function (res) {
-        t.equal(res.statusCode, 401, 'Expired Session fails auth');
+        t.equal(res.statusCode, 302, 'Expired Session fails auth');
         t.end();
 
         server.stop();
@@ -92,7 +100,7 @@ tape('A valid JWT.jti (session) without a valid user fails auth', function (t) {
         headers: { cookie: 'token=' + nouser }
       };
       server.inject(options, function (res) {
-        t.equal(res.statusCode, 401, 'invalid user fails auth');
+        t.equal(res.statusCode, 302, 'invalid user fails auth');
         t.end();
 
 
@@ -119,7 +127,7 @@ tape('A valid JWT without a user in the database fails Auth', function (t) {
       };
 
       server.inject(options, function (res) {
-        t.equal(res.statusCode, 401, 'invalid user fails auth');
+        t.equal(res.statusCode, 302, 'invalid user fails auth');
         t.end();
 
         server.stop();

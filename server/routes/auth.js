@@ -1,26 +1,29 @@
 'use strict';
 
+var loginView = require('../handlers/serve-view.js')('login');
+var login = require('../handlers/auth/login.js');
+var loginSchema = require('../models/login.js');
+var logout = require('../handlers/auth/logout.js');
+
 module.exports = [
   {
     method: 'GET',
     path: '/login',
-    handler: require('../handlers/serve-view.js')('login'),
-    config: {
-      auth: false
-    }
+    handler: loginView,
+    config: { auth: false }
   },
   {
     method: 'POST',
     path: '/login',
-    handler: require('../handlers/auth/login.js'),
+    handler: login,
     config: {
       auth: false,
-      validate: require('../models/login.js')
+      validate: loginSchema
     }
   },
   {
     method: 'GET',
     path: '/logout',
-    handler: require('../handlers/auth/logout.js')
+    handler: logout
   }
 ];

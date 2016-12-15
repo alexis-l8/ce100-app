@@ -40,7 +40,11 @@ tape('/people/{id}/edit GET endpoint for unauthed user',
       init(config, function (error, server, pool) {
         t.ok(!error, 'No error on init server');
         server.inject(editProfile(null, authId, null), function (res) {
-          t.equal(res.statusCode, 401, 'unauthed user: no access');
+          t.equal(
+            res.statusCode,
+            302,
+            'unauthed user: no access'
+          );
           t.end();
           server.stop();
           pool.end();
