@@ -1,7 +1,8 @@
 <li class="list__item list__item--big">
-
     <a class="list__data list__data--primary list__link" href="/orgs/{{id}}">
-        {{name}}
+      {{#if admin }}
+        {{>indicator isActive=active}}
+      {{/if}}
+      {{name}}
     </a>
-    
 </li>

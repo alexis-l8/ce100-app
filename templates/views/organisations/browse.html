@@ -36,11 +36,15 @@
     </div>
 
       {{#if data}}
-        {{#each data}}
-          {{>organisation}}
-        {{/each}}
+        <ul>
+          <p>
+          </p>
+          {{#each data}}
+            {{>organisation admin=../permissions.admin}}
+          {{/each}}
+        </ul>
       {{else}}
-      <h3 class="title title-blue">Nothing meets your search criteria.</h3>
+        <h3 class="title title-blue">Nothing meets your search criteria.</h3>
       {{/if}}
 </div>
 
