@@ -61,7 +61,7 @@ module.exports = [
     config: { validate: editModel }
   },
   {
-    method: 'POST',
+    method: 'GET',
     path: '/challenges/{id}/toggle-active',
     handler: toggleActive
   }

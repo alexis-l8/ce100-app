@@ -19,7 +19,7 @@ function editChallenge (token) {
 
 function toggleActivity (token) {
   return {
-    method: 'POST',
+    method: 'GET',
     url: '/challenges/' + challengeId + '/toggle-active',
     headers: token
   };
