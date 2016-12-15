@@ -115,3 +115,25 @@ tape('/people quick contact list page loads for admin', function (t) {
     });
   });
 });
+
+
+
+tape('/people quick contact list sort users correctly', function (t) {
+  sessions.addAll(function () {
+    init(config, function (error, server, pool) {
+      server.inject(browseAll(adminToken), function (res) {
+        var viewableUsers = res.payload.split('list__ellipsis');
+        var benInstances = [];
+        viewableUsers.forEach((el, i) => {
+          el.indexOf('Ben M') > -1 && benInstances.push(i);
+        });
+        t.equal(benInstances.length, 2, 'There are two users with the same name in contact list');
+        t.equal(benInstances[0] + 1, benInstances[1], 'The users called Ben are listed together, sorting alphabetically worked');
+
+        t.end();
+        server.stop();
+        pool.end();
+      });
+    });
+  });
+});
