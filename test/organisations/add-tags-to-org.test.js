@@ -25,7 +25,11 @@ tape('primary user cannot add tags to a different org: --> ' + __filename, funct
     initServer(config, function (error, server, pool) {
 
       server.inject(addTagsToOrg('primary_3', 2, '1'), function (res) {
-        t.equal(res.statusCode, 401, 'a primary cannot add tags to an org which is not theirs');
+        t.equal(
+          res.statusCode,
+          302,
+          'a primary cannot add tags to an org which is not theirs'
+        );
 
         t.end();
         pool.end();

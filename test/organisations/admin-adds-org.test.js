@@ -56,7 +56,10 @@ tape('orgs/add admin adds a new organisation', t => {
     headers: { cookie: `token=${admin_token}` }
   };
   server.inject(noName, res => {
-    t.equal(res.statusCode, 401, 'failing validation returns status code 401');
+    t.equal(
+      res.statusCode,
+      302,
+      'failing validation returns status code 302');
     t.ok(res.payload.indexOf('name is not allowed to be empty') > -1, 'if admin fails validation we show them appropriate message: "name is not allowed to be empty"');
     server.inject(options, res => {
       t.equal(res.statusCode, 302, 'admin is redirected');

@@ -18,6 +18,9 @@ module.exports = function (request, reply) {
     function (pgErr) {
       Hoek.assert(!pgErr, 'database error');
 
-      return reply.redirect('/people');
+      // if admin, redirect to /people, otherwise redirect to users profile
+      return loggedIn.scope === 'admin'
+        ? reply.redirect('/people')
+        : reply.redirect('/orgs/' + loggedIn.organisation_id)
     });
 };

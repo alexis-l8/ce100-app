@@ -7,13 +7,11 @@
   {{/if}}
   <p class="card__header card__header--challenge">{{title}}</p>
   <p class="card__copy">{{description}}</p>
-  {{#if tags}}
-    {{#each tags}}
-      <a href="/challenges?tags={{tag_id}}">
-        <span class="tag__label">{{tag_name}}</span>
-      </a>
-    {{/each}}
-  {{/if}}
+  {{#each tags}}
+    <a class="text-decoration" href="/challenges?tags={{tag_id}}">
+      <span class="tag__label">{{tag_name}}</span>
+    </a>
+  {{/each}}
 
   {{#if shared_by}}
     <h4 class="card__copy card__additional">Shared by {{shared_by}}</h4>

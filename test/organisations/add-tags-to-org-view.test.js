@@ -76,7 +76,11 @@ tape('Primary try to view add tags to a different org view: --> ' + __filename, 
     initServer(config, function (error, server, pool) {
       server.inject(addTagsToOrg('primary_3', 2), function (res) {
 
-        t.equal(res.statusCode, 401, 'a primary cannot add tags to an org which is not theirs')
+        t.equal(
+          res.statusCode,
+          302,
+          'a primary cannot add tags to an org which is not theirs'
+        );
 
         t.end();
         pool.end();

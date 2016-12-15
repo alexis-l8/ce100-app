@@ -25,13 +25,16 @@ function selectedTag (id) {
   return 'name="tags" value=' + id + ' checked="checked">';
 }
 
-tape('primary user cannot add tags to a different organisations challenge: --> ' + __filename, function (t) {
+tape('primary user cannot add tags to a different challenge: --> ' + __filename, function (t) {
   sessions.addAll(function () {
     initServer(config, function (error, server, pool) {
 
       server.inject(addTagsToChal(4, '1'), function (res) {
-        t.equal(res.statusCode, 401, 'a primary cannot add tags to an org which is not theirs');
-
+        t.equal(res.statusCode, 302, 'a primary cannot add tags to a challenge');
+        t.equal(
+          res.headers.location,
+          '/login?redirect=/challenges/4/tags',
+          'redirect to login page');
         t.end();
         pool.end();
         server.stop();

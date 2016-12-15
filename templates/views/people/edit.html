@@ -5,7 +5,11 @@
 <div class="container">
     <div class="card card--header">
       <h1 class="title">Edit User Details</h1>
-      <a class="icon icon--cancel" href="/orgs/{{user.organisation_id}}"></a>
+      {{#if permissions.admin}}
+        <a class="icon icon--cancel" href="/people"></a>
+      {{else}}
+        <a class="icon icon--cancel" href="/orgs{{#if permissions.organisation_id}}/{{permissions.organisation_id}}{{/if}}"></a>
+      {{/if}}
     </div>
 
     {{#if error}}
@@ -38,7 +42,7 @@
         {{>admin-edit-user}}
       {{/if}}
 
-      <button class="button" type="submit">Submit</button>
+      <button class="button" type="submit">Save</button>
     </form>
 </div>
 

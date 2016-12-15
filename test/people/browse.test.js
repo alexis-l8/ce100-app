@@ -23,8 +23,6 @@ var browseAll = function (cookie) {
   };
 };
 
-// all people length > filtered people
-
 // fail to access /people IF NOT LOGGED IN
 tape('/people endpoint unsuccessful when not logged in',
   function (t) {
@@ -32,8 +30,10 @@ tape('/people endpoint unsuccessful when not logged in',
       init(config, function (error, server, pool) {
         t.ok(!error, 'No error on init server');
         server.inject(browseAll(), function (res) {
-          t.equal(res.statusCode, 401,
-            'request an endpoint requiring auth get 401');
+          t.equal(
+            res.statusCode,
+            302,
+            'request an endpoint requiring auth get 302');
           t.end();
           server.stop();
           pool.end();

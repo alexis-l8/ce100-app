@@ -11,6 +11,21 @@ helpers.getPermissions = (loggedIn, key, identifier) => {
   };
 };
 
+helpers.removeLinkedOrgs = (orgs, userId) => {
+  return orgs.filter((org) => {
+    return org.active_primary_user === null || org.active_primary_user === userId;
+  })
+}
+
+// we want to `select` the org that the user is attached to
+helpers.editUserOrgDropdown = (orgs, user) => {
+  // first remove linked orgs
+  return helpers.removeLinkedOrgs(orgs, user.id)
+    .map(org => {
+      return Object.assign({ isSelected:  org.id === user.org_id }, org);
+    });
+}
+
 helpers.removeUserFromOrg = (orgString, userId) => {
   var org = JSON.parse(orgString);
   var newInfo = {
@@ -21,24 +36,10 @@ helpers.removeUserFromOrg = (orgString, userId) => {
   return JSON.stringify(updatedOrg);
 };
 
-helpers.orgsDropdown = (stringifiedOrgs, stringifiedUser) => {
-  var user = typeof stringifiedUser === 'string' ? JSON.parse(stringifiedUser) : false;
-  var orgsArray = stringifiedOrgs.map(orgString => {
-    var org = JSON.parse(orgString);
-    return {
-      value: org.id,
-      display: org.name,
-      isDisabled: org.primary_id > -1 && user.organisation_id !== org.id,
-      isSelected: user.organisation_id === org.id
-    };
-  });
-  var sortedOrgsArray = helpers.sortAlphabetically('display')(orgsArray);
-  return { allOrganisations: sortedOrgsArray };
-};
 
-helpers.userTypeRadios = (userString) => {
+helpers.userTypeRadios = (user_type) => {
   // default to primary
-  var checkedType = userString ? JSON.parse(userString).user_type : 'primary';
+  var checkedType = user_type || 'primary';
   var userTypes = ['admin', 'primary'];
   var userTypeArr = userTypes.map(type => {
     return {
@@ -69,62 +70,6 @@ helpers.deactivate = (stringifiedData) => {
   return JSON.stringify(updated);
 };
 
-helpers.initialiseEntry = (length, payload) => {
-  var additionalInfo = {
-    id: length,
-    active: true,
-    challenges: []
-  };
-  var updatedUser = Object.assign(additionalInfo, payload);
-  return JSON.stringify(updatedUser);
-};
-
-helpers.addPrimaryToOrg = (user, org) => {
-  var id = JSON.parse(user).id;
-  var orgOld = JSON.parse(org);
-  orgOld.people.push(id);
-  var additionalInfo = {
-    primary_id: id,
-    people: orgOld.people
-  };
-  var orgUpdated = Object.assign({}, orgOld, additionalInfo);
-  return JSON.stringify(orgUpdated);
-};
-
-helpers.addPasswordToUser = (hashed, user) => {
-  var userOld = JSON.parse(user);
-  var newDetails = {
-    password: hashed,
-    last_login: Date.now()
-  };
-  var updatedUser = Object.assign(newDetails, userOld);
-  return updatedUser;
-};
-
-// add the names to all tagIds that this function receives
-helpers.getTagNames = (redis, tagIds, callback) => {
-  var Hoek = require('hoek');
-  redis.HGET('tags', 'tags', (error, response) => {
-    Hoek.assert(!error, error);
-    var allTags = JSON.parse(response);
-    var tags = tagIds.map(helpers.getTagFromId(allTags));
-    callback(tags);
-  });
-};
-
-helpers.getChallenges = (redis, challenges, ids, callback) => {
-  var Hoek = require('hoek');
-  redis.HGET('tags', 'tags', (error, response) => {
-    Hoek.assert(!error, error);
-    var allTags = JSON.parse(response);
-    var challengeArr = ids.map(id => {
-      var challengeCard = challenges[id];
-      var tagsData = challengeCard.tags.map(helpers.getTagFromId(allTags));
-      return Object.assign({}, challengeCard, {tagsData});
-    });
-    challengeArr.length === 0 ? callback(false) : callback(challengeArr);
-  });
-};
 
 helpers.cloneArray = (arr) => arr.map(el => Object.assign({}, el));
 
@@ -166,78 +111,3 @@ helpers.errorOptions = (err) =>
   };
 
 module.exports = helpers;
-
-// Leaving these helpers in here but they are not currently used
-//
-// helpers.ironUnencrypt = (encrypted, callback) => {
-//   Iron.unseal(encrypted, process.env.COOKIE_PASSWORD, Iron.defaults,
-//     (error, unencrypted) => callback(error, unencrypted));
-// };
-//
-// helpers.hashPassword = (rawPassword, callback) => {
-//   bcrypt.hash(rawPassword, 13,
-//     (error, hashedPassword) => callback(error, hashedPassword));
-// };
-//
-// helpers.handleMultipleFunctions = (functions, callback) => {
-//   var errors = [];
-//   var responses = [];
-//
-//   var collectResponse = (i, next) => (error, response) => {
-//     // if (error) errors[i] = error;
-//     Hoek.assert(!error, error);
-//     responses[i] = response;
-//     next();
-//   };
-//
-//   functions.forEach((fn, index) => {
-//     fn(collectResponse(index, () => {
-//       if (index === functions.length - 1) callback(errors, responses);
-//     }));
-//   });
-// };
-//
-// // ~~~~~~~~~~~~~~~~~~~~REDIS FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~ //
-//
-// helpers.getAll = (listName, redis, callback) => {
-//   redis.LRANGE(listName, 0, -1, (error, items) => {
-//     var all = items.map(element => JSON.parse(element));
-//     callback(error, all);
-//   });
-// };
-//
-// helpers.getItem = (listName, itemId, returnSpecifics, redis, callback) => {
-//   redis.LINDEX(listName, itemId, (error, item) => {
-//     var itemObj = JSON.parse(item);
-//     if (returnSpecifics) {
-//       var requestedDetails = {};
-//       returnSpecifics.forEach((value, index) => {
-//         requestedDetails[value] = itemObj[value];
-//         if (index === returnSpecifics.length - 1) callback(error, requestedDetails);
-//       });
-//     } else {
-//       callback(error, itemObj);
-//     }
-//   });
-// };
-//
-// helpers.getListLength = (listName, redis, callback) => {
-//   redis.LLEN(listName, (error, response) => callback(error, response));
-// };
-//
-// helpers.addItem = (listName, object, redis, callback) => {
-//   redis.RPUSH(listName, object, (error, response) =>
-//     callback(error, response));
-// };
-//
-// helpers.setItem = (listName, itemId, object, redis, callback) => {
-//   redis.LSET(listName, itemId, object, (error, response) =>
-//     callback(error, response));
-// };
-//
-// helpers.setSession = (hashName, key, value, redis, callback) => {
-//   redis.HSET(hashName, key, value, (error, response) =>
-//     callback(error, response));
-// };
-//
-// module.exports = helpers;

@@ -529,6 +529,7 @@ Light-teal:     #66d9e0;
 .form {
     margin-top: 2rem;
     padding: 0 7%;
+    text-align: center;
 }
 .form--login {
     margin-top: 3rem;
@@ -555,6 +556,7 @@ Light-teal:     #66d9e0;
         }
     .form__label, .form__input {
         display: block;
+        text-align: left;
         font-size: 1rem;
     }
 
@@ -682,6 +684,20 @@ Light-teal:     #66d9e0;
     border-radius: 3rem;
 }
 
+.indicator {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50px;
+
+}
+
+  .indicator--active {
+      background-color: green;
+  }
+  .indicator--inactive {
+    background-color: #900000;
+  }
+
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Anchors
   |||||||||||||||||||||||||||||||||||||||||||*/
@@ -691,7 +707,7 @@ Light-teal:     #66d9e0;
 
 .anchor:link {
     text-align: center;
-    display: block;
+    display: inline-block;
     line-height: 2.75;
     color: #89a0ae;
 }

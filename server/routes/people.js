@@ -6,7 +6,7 @@ var add = require('../handlers/people/add.js');
 var activateAccountView = require('../handlers/people/activate-account-view.js');
 var activateAccount = require('../handlers/people/activate-account.js');
 var editView = require('../handlers/people/edit-view.js');
-var editSubmit = require('../handlers/people/edit-submit.js');
+var edit = require('../handlers/people/edit.js');
 var editModel = require('../models/edit-user.js');
 var toggleActive = require('../handlers/people/toggle-active.js');
 
@@ -39,7 +39,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/people/{id}/edit',
-    handler: editSubmit,
+    handler: edit,
     config: { validate: editModel }
   },
   {

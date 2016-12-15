@@ -1,15 +1,19 @@
+'use strict';
+
+var serveFile = require('../handlers/serve-file.js');
+
 module.exports = [
   {
     method: 'GET',
     path: '/',
-    handler: (request, reply) => reply.redirect('/orgs')
+    handler: function (request, reply) {
+      return reply.redirect('/orgs');
+    }
   },
   {
     method: 'GET',
     path: '/{path*}',
-    handler: require('../handlers/serve-file.js'),
-    config: {
-      auth: false
-    }
+    handler: serveFile,
+    config: { auth: false }
   }
 ];

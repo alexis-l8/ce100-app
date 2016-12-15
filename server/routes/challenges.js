@@ -1,12 +1,11 @@
 'use strict';
 
-var view = require('../handlers/serve-view.js');
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
 var toggleActive = require('../handlers/challenges/toggle-active.js');
 var addTagsView = require('../handlers/challenges/add-tags-view.js');
 var addTags = require('../handlers/challenges/add-tags.js');
 var addView = require('../handlers/challenges/add-view.js');
-var add = require('../handlers/challenges/add.js');
+var addSubmit = require('../handlers/challenges/add.js');
 var addModel = require('../models/add-challenge.js');
 var browseChallenges = require('../handlers/challenges/browse-challenges.js');
 var editView = require('../handlers/challenges/edit-view.js');
@@ -44,7 +43,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/challenges/add',
-    handler: add,
+    handler: addSubmit,
     config: {
       validate: addModel,
       auth: { scope: 'primary' }
@@ -62,7 +61,7 @@ module.exports = [
     config: { validate: editModel }
   },
   {
-    method: 'POST',
+    method: 'GET',
     path: '/challenges/{id}/toggle-active',
     handler: toggleActive
   }
