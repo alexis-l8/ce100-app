@@ -11,7 +11,7 @@ var users = require('../../data/people.json');
 
 function activeOnly () {
   return users.filter(function (userObj) {
-    return userObj.active === true;
+    return userObj.active === true && userObj.user_type !== 'admin';
   });
 }
 
@@ -72,6 +72,42 @@ tape('check only active users displayed', function (t) {
       server.inject(browseAll(primaryToken), function (res) {
         t.equal(res.statusCode, 200, 'route accessible to primary');
         t.equal(res.payload.match(regex).length, activeOnly().length, 'active users displayed');
+        t.end();
+        server.stop();
+        pool.end();
+      });
+    });
+  });
+});
+
+
+
+tape('/people quick contact list page loads for primary user', function (t) {
+  sessions.addAll(function () {
+    init(config, function (error, server, pool) {
+      server.inject(browseAll(primaryToken), function (res) {
+        t.equal(res.statusCode, 200, 'route exists and replies 200');
+        t.ok(res.payload.indexOf('Ben Matthews') > -1, 'route serves up list of users');
+        t.equal(res.payload.indexOf('Marie Kasai'), -1, 'primary user cannot view admins on quick contact list');
+        t.equal(res.payload.indexOf('Frank Goldsmith'), -1, 'primary user cannot view inactive primary users on quick contact list');
+        t.equal(res.payload.indexOf('/people/4/edit'), -1, 'primary user cannot see the edit button on quick contact list');
+        t.end();
+        server.stop();
+        pool.end();
+      });
+    });
+  });
+});
+
+tape('/people quick contact list page loads for admin', function (t) {
+  sessions.addAll(function () {
+    init(config, function (error, server, pool) {
+      server.inject(browseAll(adminToken), function (res) {
+        t.equal(res.statusCode, 200, 'route exists and replies 200');
+        t.ok(res.payload.indexOf('Ben Matthews') > -1, 'route serves up list of users');
+        t.ok(res.payload.indexOf('Marie Kasai') > -1, 'admin can view admins on quick contact list');
+        t.ok(res.payload.indexOf('Frank Goldsmith') > -1, 'admin can view inactive admins on quick contact list');
+        t.ok(res.payload.indexOf('/people/4/edit') > -1, 'admin can see the edit button on quick contact list');
         t.end();
         server.stop();
         pool.end();
