@@ -59,7 +59,7 @@ tape('admin cannot add a challenge', function (t) {
   sessions.addAll(function () {
     init(config, function (error, server, pool) {
       server.inject(addChal(adminToken), function (res) {
-        t.equal(res.statusCode, 401, 'Admin cannot view add challenge view');
+        t.equal(res.statusCode, 403, 'Admin cannot view add challenge view');
         server.inject(addChal(adminToken, chal), function (res) {
           t.equal(res.statusCode, 403, 'Admin unauthorised to post a challenge');
           server.inject(viewChals(adminToken), function (res) {
