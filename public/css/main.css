@@ -767,6 +767,14 @@ Light-teal:     #66d9e0;
         transform: translateY(-50%);
         right: 55%;
     }
+    .logo--with-title-default {
+    }
+    .logo--with-title-custom {
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: transparent;
+    }
+
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Helper classes
