@@ -25,11 +25,13 @@ module.exports = function (request, reply, source, joiErr) {
 
     getActiveOrgs(function (errorOrgs, orgs) {
       Hoek.assert(!errorOrgs, 'database error');
+
       options = Object.assign(
         permissions,
         { user: user },
         helpers.userTypeRadios(user.user_type),
-        { orgs: orgs },
+        // 1 primary per org for now. So filter out attached orgs
+        { orgs: helpers.editUserOrgDropdown(orgs, user) },
         { error: error }
       );
 
