@@ -88,12 +88,12 @@ tape('primary can add a challenge', function (t) {
         server.inject(addChal(primaryToken, chal), function (res) {
           t.equal(res.statusCode, 302, 'Primary authorised to post a challenge');
           t.equal(res.headers.location, '/challenges/' + chalId + '/tags', 'Primary redirected to add tags to chal');
-          // server.inject(viewChals(primaryToken), function (res) {
-          //   t.ok(res.result.indexOf(chal.title) > -1, 'Challenge added to database, thus displayed');
+          server.inject(viewChals(primaryToken), function (res) {
+            t.ok(res.result.indexOf(chal.title) > -1, 'Challenge added to database, thus displayed');
             t.end();
             pool.end();
             server.stop();
-          // });
+          });
         });
       });
     });
