@@ -117,7 +117,7 @@ Both active and inactive orgs will be displayed to admin, but only active orgs w
 This view displays only the organisation names; for more information, click on the name of an organisation, and you will be taken to their profile.
 ![browse-orgs](doc/img/browse-orgs.png)
 
-If the connected user is an admin the view displays on the right a green or red button which indicates if the organisation is active or inactive
+If the connected user is an admin the view displays on the left a green or red button which indicates if the organisation is active or inactive
 ![indicator-org](doc/img/indicator-org.png)
 
 To view and browse challenges instead, click on the 'Challenges' option; this will take you to a page where all challenges will be displayed.
