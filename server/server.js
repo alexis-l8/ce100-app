@@ -21,6 +21,7 @@ var organisationsData = require('../data/organisations.json');
 var tagsOrgsData = require('../data/tags_organisations.json');
 var challengesData = require('../data/challenges.json');
 var tagsChallengesData = require('../data/tags_challenges.json');
+var optionError = require('./hapi-error-config.js');
 
 function initServer (config, callback) {
   var server = new Hapi.Server();
@@ -88,7 +89,7 @@ function initServer (config, callback) {
         return server.register([
           inert,
           vision,
-          hapiError,
+          { register: hapiError, options: optionError },
           auth
         ], function (err) {
           if (err) {
