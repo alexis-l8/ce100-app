@@ -21,13 +21,14 @@ module.exports = function (request, reply, source, joiErr) {
 
   return getBy('id', editId, function (pgErr, profile) {
     Hoek.assert(!pgErr, 'database error');
+    var user = profile[0];
 
     getActiveOrgs(function (errorOrgs, orgs) {
       Hoek.assert(!errorOrgs, 'database error');
       options = Object.assign(
         permissions,
-        { user: profile[0] },
-        helpers.userTypeRadios(),
+        { user: user },
+        helpers.userTypeRadios(user.user_type),
         { orgs: orgs },
         { error: error }
       );

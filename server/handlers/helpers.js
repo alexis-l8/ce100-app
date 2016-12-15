@@ -36,9 +36,9 @@ helpers.orgsDropdown = (stringifiedOrgs, stringifiedUser) => {
   return { allOrganisations: sortedOrgsArray };
 };
 
-helpers.userTypeRadios = (userString) => {
+helpers.userTypeRadios = (user_type) => {
   // default to primary
-  var checkedType = userString ? JSON.parse(userString).user_type : 'primary';
+  var checkedType = user_type || 'primary';
   var userTypes = ['admin', 'primary'];
   var userTypeArr = userTypes.map(type => {
     return {
