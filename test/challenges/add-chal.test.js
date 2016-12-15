@@ -51,7 +51,7 @@ tape('admin cannot add a challenge', function (t) {
   sessions.addAll(function () {
     init(config, function (error, server, pool) {
       server.inject(addChal(adminToken), function (res) {
-        t.equal(res.statusCode, 200, 'Admin can view add challenge view');
+        t.equal(res.statusCode, 401, 'Admin cannot view add challenge view');
         server.inject(addChal(adminToken, chal), function (res) {
           t.equal(res.statusCode, 403, 'Admin unauthorised to post a challenge');
           server.inject(viewChals(adminToken), function (res) {
@@ -80,12 +80,12 @@ tape('primary can add a challenge', function (t) {
         server.inject(addChal(primaryToken, chal), function (res) {
           t.equal(res.statusCode, 302, 'Primary authorised to post a challenge');
           t.equal(res.headers.location, '/challenges/' + chalId + '/tags', 'Primary redirected to add tags to chal');
-          // server.inject(viewChals(primaryToken), function (res) {
-          //   t.ok(res.result.indexOf(chal.title) > -1, 'Challenge added to database, thus displayed');
+          server.inject(viewChals(primaryToken), function (res) {
+            t.ok(res.result.indexOf(chal.title) > -1, 'Challenge added to database, thus displayed');
             t.end();
             pool.end();
             server.stop();
-          // });
+          });
         });
       });
     });
