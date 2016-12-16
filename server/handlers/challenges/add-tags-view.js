@@ -26,6 +26,6 @@ module.exports = function (request, reply, source, joiErr) {
         { error: error }
        );
 
-      return reply.view('tags', options).code(error ? 401: 200);
+      return reply.view('tags', options).code(error ? 400 : 200);
     });
 };
