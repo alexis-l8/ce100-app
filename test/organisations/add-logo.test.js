@@ -1,7 +1,4 @@
 var tape = require('tape');
-var fs = require('fs');
-var path = require('path');
-var logo = fs.readFileSync(__dirname + '/../helpers/assets/foxy.png');
 var config = require('../../server/config.js');
 var initServer = require('../../server/server.js');
 
