@@ -3,24 +3,21 @@ var Boom = require('boom');
 var S3 = require('../../s3.js');
 
 module.exports = function (request, reply) {
-  console.log(request.payload);
+  console.log('payload', request.payload);
   var orgId = parseInt(request.params.id, 10);
   var loggedIn = request.auth.credentials;
   if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin') {
     return reply(Boom.unauthorized('You do not have permission to edit that organisation.'));
   }
 
-  console.log('before s3 upload');
   S3.upload(request.payload, function (err, data) {
     Hoek.assert(!err, 'Image upload error');
+    // we want to build up a new object that will be saved to the db
     var newOrg = preparePayload(request.payload, data);
-    console.log(newOrg, 'new org');
-
-
 
     request.server.methods.pg.organisations.edit(orgId, newOrg, function (error, response) {
       Hoek.assert(!error, 'database error');
-      return reply.redirect('/orgs/' + orgId + '/tags')
+      return reply.redirect('/orgs/' + orgId + '/tags');
     });
   });
 };

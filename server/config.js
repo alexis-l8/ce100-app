@@ -2,15 +2,17 @@
 /* eslint-disable */
 require('env2')('.env');
 var url = require('url');
-var params = url.parse(process.env.DATABASE_URL);
+var env = process.env
+var params = url.parse(env.DATABASE_URL);
 var auth = params.auth.split(':');
-var paramsTest = url.parse(process.env.DATABASE_URL_TEST);
+var paramsTest = url.parse(env.DATABASE_URL_TEST);
 var authTest = params.auth.split(':');
 
 var dev = {
   env: 'dev',
-  port: process.env.PORT || 3000,
-  jwt_secret: process.env.JWT_SECRET,
+  port: env.PORT || 3000,
+  jwt_secret: env.JWT_SECRET,
+
   pg: {
     user: auth[0],
     password: auth[1],
@@ -21,23 +23,22 @@ var dev = {
     idleTimeoutMillis: 30000
   },
   plugins: {
-    tags: {
-      reset: Boolean(process.env.RESET_TAGS),
-    },
-    people: {
-      reset: Boolean(process.env.RESET_PEOPLE),
-    },
-    challenges: {
-      reset: Boolean(process.env.RESET_CHALLENGES),
-    }
+    tags: { reset: Boolean(env.RESET_TAGS) },
+    people: { reset: Boolean(env.RESET_PEOPLE) },
+    challenges: { reset: Boolean(env.RESET_CHALLENGES) }
   },
-  root_url: process.env.ROOT_URL
+  s3: {
+    region: env.S3_REGION,
+    bucket: env.S3_BUCKET
+  },
+  root_url: env.ROOT_URL
 };
+
 
 var test = {
   env: 'test',
   port: 0,
-  jwt_secret: process.env.JWT_SECRET,
+  jwt_secret: env.JWT_SECRET,
   pg: {
     user: authTest[0],
     password: authTest[1],
@@ -49,21 +50,25 @@ var test = {
   },
   plugins: {
     tags: {
-      reset: Boolean(process.env.RESET_TAGS_TEST) || true,
+      reset: Boolean(env.RESET_TAGS_TEST) || true,
     },
     people: {
-      reset: Boolean(process.env.RESET_PEOPLE_TEST) || true,
+      reset: Boolean(env.RESET_PEOPLE_TEST) || true,
     },
     challenges: {
-      reset: Boolean(process.env.RESET_CHALLENGES_TEST) || true,
+      reset: Boolean(env.RESET_CHALLENGES_TEST) || true,
     }
   },
-  root_url: process.env.ROOT_URL
+  s3: {
+    region: env.S3_REGION,
+    bucket: env.S3_BUCKET
+  },
+  root_url: env.ROOT_URL
 };
 
 // The default env is test
 function setUpConfig () {
-  if (process.env.NODE_ENV === 'dev') {
+  if (env.NODE_ENV === 'dev') {
     return dev;
   }
 
