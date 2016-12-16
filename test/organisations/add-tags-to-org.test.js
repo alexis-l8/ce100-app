@@ -124,7 +124,7 @@ tape('primary user cannot add more than 10 tags to their org, and error message 
 
     initServer(config, function (error, server, pool) {
       server.inject(addTagsToOrg('primary_3', orgId, tagsArray), function (res) {
-        t.equal(res.statusCode, 401, 'a primary cannot add more than 10 tags to their own org');
+        t.equal(res.statusCode, 400, 'a primary cannot add more than 10 tags to their own org');
         // check error message displays correctly
         t.ok(res.payload.indexOf(expectedError) > -1, 'Error message correctly displayed');
         // check the old tags are still displaying

@@ -26,6 +26,6 @@ module.exports = function (request, reply, source, joiErr) {
 
       Hoek.assert(!pgErr, 'Database Error');
 
-      return reply.view('tags', options).code(error ? 401 : 200);
+      return reply.view('tags', options).code(error ? 400 : 200);
     });
 };

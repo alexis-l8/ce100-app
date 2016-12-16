@@ -119,7 +119,7 @@ tape('primary user cannot add more than 10 tags to their challenge, and error me
     var expectedError = 'tags a maximum of 10 tags can be chosen';
     initServer(config, function (error, server, pool) {
       server.inject(addTagsToChal(cid, tagsArray), function (res) {
-        t.equal(res.statusCode, 401, 'a primary cannot add more than 10 tags to their own challenge');
+        t.equal(res.statusCode, 400, 'a primary cannot add more than 10 tags to their own challenge');
         // check error message displays correctly
         t.ok(res.payload.indexOf(expectedError) > -1, 'Error message correctly displayed');
         // check the old tag still exists
