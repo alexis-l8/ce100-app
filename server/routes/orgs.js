@@ -12,6 +12,7 @@ var addSchema = require('../models/admin-add-org.js');
 var addTagsView = require('../handlers/orgs/add-tags-view.js');
 var addTags = require('../handlers/orgs/add-tags.js');
 var addView = require('../handlers/serve-view.js')('organisations/add');
+var maxAllowedTags = require('../models/max-allowed-tags.js');
 
 module.exports = [
   {
@@ -69,6 +70,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/orgs/{id}/tags',
-    handler: addTags
+    handler: addTags,
+    config: { validate: maxAllowedTags }
   }
 ];
