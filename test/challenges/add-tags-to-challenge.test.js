@@ -116,7 +116,6 @@ tape('primary user cannot add more than 10 tags to their challenge, and error me
   sessions.addAll(function () {
     var cid = 2;
     var tagsArray = ['5', '16', '18', '22', '32', '33', '49', '85', '105', '111', '112', '115'];
-    var fewerTags = ['3', '8', '68'];
     var expectedError = 'tags a maximum of 10 tags can be chosen';
     initServer(config, function (error, server, pool) {
       server.inject(addTagsToChal(cid, tagsArray), function (res) {
