@@ -24,7 +24,7 @@ tape('Differing permissions on edit org view: --> ' + __filename, function (t) {
         t.equal(res.statusCode, 200, '/orgs/id/edit route ok for admin');
 
         t.ok(res.payload.indexOf('value="Apple') > -1, 'Admin can edit the name of an organisation');
-        t.equal(res.payload.indexOf('>Apple AAAA</h1>'), -1, 'Admin cannot see the Org name title indicating that it is editable');
+        t.equal(res.payload.indexOf('>Apple</h1>'), -1, 'Admin cannot see the Org name title indicating that it is editable');
 
         t.ok(res.payload.indexOf('Organisation\'s mission statement') > -1, 'Admin is given custom label');
         t.ok(res.payload.indexOf('Share your knowledge/experience') > -1, 'Admin can see tags on the organisation');
@@ -35,10 +35,9 @@ tape('Differing permissions on edit org view: --> ' + __filename, function (t) {
         // primary id 3 viewing their own org with id 1
         server.inject(editOrgView('primary_3', 1), function (res) {
           t.equal(res.statusCode, 200, '/orgs/id/edit route ok for primary when viewing own organisation');
-
           // Primary cannot edit org name
           t.equal(res.payload.indexOf('value="Apple'), -1, 'Primary user cannot edit the name of an organisation');
-          t.ok(res.payload.indexOf('>Apple AAAA</h1>') > -1, 'Primary user can see the Org name title indicating that it is not editable');
+          t.ok(res.payload.indexOf('>Apple</h1>') > -1, 'Primary user can see the Org name title indicating that it is not editable');
 
           t.ok(res.payload.indexOf('Add your circular economy vision') > -1, 'Primary user is given custom label for editing mission statement');
           t.ok(res.payload.indexOf('Share your knowledge/experience') > -1, 'Primary user can see tags on the organisation');
