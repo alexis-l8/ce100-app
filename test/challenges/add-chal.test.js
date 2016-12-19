@@ -4,7 +4,7 @@ var tape = require('tape');
 var init = require('../../server/server.js');
 var config = require('../../server/config.js');
 var sessions = require('../helpers/add-sessions.js');
-var challenges = require('../../data/challenges.json');
+var challenges = require('ce100-mock-data').challenges;
 
 var adminToken = sessions.tokens(config.jwt_secret)['admin_1'];
 var primaryToken = sessions.tokens(config.jwt_secret)['primary_3'];
