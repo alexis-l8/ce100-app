@@ -41,7 +41,7 @@
               Organisation's mission statement
             {{/if}}
           </label>
-          <textarea class="form__input {{error.mission_statement}}"
+          <textarea class="form__input form__input--text-area {{error.mission_statement}}"
                     id="mission_statement"
                     name="mission_statement"
                     rows="2" cols="50">{{#if error}}{{error.values.mission_statement}}{{else}}{{org.mission_statement}}{{/if}}</textarea>

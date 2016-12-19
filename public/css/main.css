@@ -587,6 +587,10 @@ Light-teal:     #66d9e0;
         border: 1px solid #f5c7c7;
         background-color: #fff4f4;
       }
+      .form__input--text-area {
+        line-height: 1.5;
+        height: 8rem;
+      }
     /* Focus state styles */
         .form__input:focus {
             outline-offset: -0.5rem;
