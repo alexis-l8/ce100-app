@@ -9,18 +9,16 @@ var hapiError = require('hapi-error');
 var auth = require('./auth.js');
 var routes = require('./routes.js');
 var pg = require('pg');
+
 // pg plugins
 var tags = require('tags-system');
 var challenges = require('pg-challenges');
 var people = require('pg-people');
+
 // pg tables data
-var tagsData = require('../data/tags.json');
-var categoriesData = require('../data/categories.json');
-var peopleData = require('../data/people.json');
-var organisationsData = require('../data/organisations.json');
-var tagsOrgsData = require('../data/tags_organisations.json');
-var challengesData = require('../data/challenges.json');
-var tagsChallengesData = require('../data/tags_challenges.json');
+var mockData = require('ce100-mock-data');
+
+// plugin options
 var optionError = require('./hapi-error-config.js');
 
 function initServer (config, callback) {
@@ -28,22 +26,22 @@ function initServer (config, callback) {
   var pool = new pg.Pool(config.pg);
   var optionsTags = {
     reset: config.plugins.tags.reset,
-    tags: tagsData,
-    categories: categoriesData,
+    tags: mockData.tags,
+    categories: mockData.categories,
     pool: pool
   };
   var optionsPeople = {
     pool: pool,
     reset: config.plugins.people.reset,
-    people: peopleData,
-    organisations: organisationsData,
-    tags_organisations: tagsOrgsData
+    people: mockData.people,
+    organisations: mockData.organisations,
+    tags_organisations: mockData.tags_organisations
   };
   var optionsChallenges = {
     pool: pool,
     reset: config.plugins.challenges.reset,
-    challenges: challengesData,
-    tags_challenges: tagsChallengesData
+    challenges: mockData.challenges,
+    tags_challenges: mockData.tags_challenges
   };
 
   // initialise a redis connection

@@ -7,7 +7,7 @@ var config = require('../../server/config.js');
 
 var adminToken = sessions.tokens(config.jwt_secret).admin_1;
 var primaryToken = sessions.tokens(config.jwt_secret).primary_3;
-var users = require('../../data/people.json');
+var users = require('ce100-mock-data').people;
 
 function activeOnly () {
   return users.filter(function (userObj) {

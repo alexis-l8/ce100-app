@@ -48,7 +48,7 @@ tape('access all active&inactive orgs as a logged-in admin', function (t) {
       t.ok(!error, 'no initialising error');
       server.inject(browseAll(adminToken), function (res) {
         var expected = [
-          'Apple AAAA',
+          'Apple',
           'Asda',
           'Charcoal',
           'Coca Cola',
@@ -80,7 +80,7 @@ tape('access all active orgs as a logged-in primary', function (t) {
       t.ok(!error, 'no initialising error');
       server.inject(browseAll(primaryToken), function (res) {
         var expected = [
-          'Apple AAAA',
+          'Apple',
           // 'Asda', >> INACTIVE org
           'Charcoal',
           // 'Coca Cola', >> INACTIVE org
