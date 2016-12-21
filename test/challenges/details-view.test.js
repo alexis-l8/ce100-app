@@ -117,6 +117,7 @@ test('Challenge view - inactive challenge viewed by a primary: --> ' + __filenam
   });
 });
 
+// note these should be more or less the same as the first two tests but with a primary user logged in.
 // primary user belonging to the challenges org can view the challenge and suggested matches
 
 // primary user not belonging to the challenge's org can view the challenge, but not suggested matches
