@@ -29,6 +29,9 @@ var dev = {
     },
     challenges: {
       reset: Boolean(process.env.RESET_CHALLENGES),
+    },
+    insights: {
+      reset: Boolean(process.env.RESET_INSIGHTS),
     }
   },
   root_url: process.env.ROOT_URL
@@ -56,6 +59,9 @@ var test = {
     },
     challenges: {
       reset: Boolean(process.env.RESET_CHALLENGES_TEST) || true,
+    },
+    insights: {
+      reset: Boolean(process.env.RESET_INSIGHTS),
     }
   },
   root_url: process.env.ROOT_URL

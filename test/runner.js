@@ -1,6 +1,9 @@
 'use strict';
 
 // challenges
+require('./insights/browse.test.js');
+
+// challenges
 require('./challenges/add-chal.test.js');
 require('./challenges/edit-chal.test.js');
 require('./challenges/browse.test.js');
