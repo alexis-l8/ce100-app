@@ -1,6 +1,6 @@
 'use strict';
 
-// challenges
+// insights
 require('./insights/browse.test.js');
 
 // challenges

@@ -61,7 +61,7 @@ var test = {
       reset: Boolean(process.env.RESET_CHALLENGES_TEST) || true,
     },
     insights: {
-      reset: Boolean(process.env.RESET_INSIGHTS),
+      reset: Boolean(process.env.RESET_INSIGHTS) || true,
     }
   },
   root_url: process.env.ROOT_URL

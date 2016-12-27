@@ -6,20 +6,14 @@ var init = require('../../server/server.js');
 var config = require('../../server/config.js');
 
 var adminToken = sessions.tokens(config.jwt_secret).admin_1;
-var primaryToken = sessions.tokens(config.jwt_secret).primary_3;
-var adFiltered;
-var filterTag = {
-  id: 69,
-  name: 'Design for disassembly'
-};
 
-var browseAll = function (cookie) {
+function browseAll (cookie) {
   return {
     method: 'GET',
     url: '/insights',
     headers: { cookie: 'token=' + cookie }
   };
-};
+}
 
 // fail to access /insights IF NOT LOGGED IN
 tape('/insights endpoint unsuccessful when not logged in',

@@ -7,14 +7,15 @@ module.exports = function (request, reply, source, joiErr) {
   var error = helpers.errorOptions(joiErr);
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
-  var doctype = [
-    { id: '1', name: '.pdf' },
-    { id: '2', name: '.jpeg' },
-    { id: '3', name: '.txt' },
-    { id: '4', name: '.html' }
-  ];
+  var doctype = ['.pdf', '.jpeg', '.txt', '.html'];
+  var docDropdown = doctype.map(function (type) {
+    return {
+      id: type,
+      name: type
+    };
+  });
   var options = Object.assign(
-    { doctype: doctype },
+    { doctype: docDropdown },
     permissions,
     { error: error }
   );
