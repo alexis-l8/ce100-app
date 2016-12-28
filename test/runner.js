@@ -1,5 +1,8 @@
 'use strict';
 
+// insights
+require('./insights/add-tags-to-insight.test.js');
+
 // challenges
 require('./challenges/add-chal.test.js');
 require('./challenges/edit-chal.test.js');

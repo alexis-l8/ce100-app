@@ -99,11 +99,11 @@ tape('admin can add multiple tags to their insight and remove old tags: --> ' + 
   });
 });
 
-tape('primary user cannot add more than 10 tags to their challenge, and error message is flagged: --> ' + __filename, function (t) {
+tape('admin cannot add more than 10 tags to an insight, and error message is flagged: --> ' + __filename, function (t) {
   sessions.addAll(function () {
-    var insight = 2;
+    var insight = 1;
     var existing = ['1', '8', '22']; // tags currently attached to insight 1.
-    var tagsArray = ['5', '16', '18', '22', '32', '33', '49', '85', '105', '111', '112', '115'];
+    var tagsArray = ['5', '16', '18', '28', '32', '33', '49', '85', '105', '111', '112', '115'];
     var expectedError = 'tags a maximum of 10 tags can be chosen';
     initServer(config, function (error, server, pool) {
       server.inject(addTagsToInsight('POST', insight, tagsArray), function (res) {
@@ -111,7 +111,6 @@ tape('primary user cannot add more than 10 tags to their challenge, and error me
         // check error message displays correctly
         t.ok(res.payload.indexOf(expectedError) > -1, 'Error message correctly displayed');
         server.inject(addTagsToInsight('GET', insight, undefined), function (res) {
-          console.log(res.result)
           // check the old tags still exists
           t.ok(res.payload.indexOf(selectedTag(existing[0])) > -1, 'Old tag still exists');
           t.ok(res.payload.indexOf(selectedTag(existing[1])) > -1, 'Old tag still exists');
@@ -120,7 +119,7 @@ tape('primary user cannot add more than 10 tags to their challenge, and error me
           t.equal(res.payload.indexOf(selectedTag(5)), -1, 'Tag was not added');
           t.equal(res.payload.indexOf(selectedTag(16)), -1, 'Tag was not added');
           t.equal(res.payload.indexOf(selectedTag(18)), -1, 'Tag was not added');
-          t.equal(res.payload.indexOf(selectedTag(22)), -1, 'Tag was not added');
+          t.equal(res.payload.indexOf(selectedTag(28)), -1, 'Tag was not added');
           t.equal(res.payload.indexOf(selectedTag(32)), -1, 'Tag was not added');
           t.equal(res.payload.indexOf(selectedTag(33)), -1, 'Tag was not added');
           t.equal(res.payload.indexOf(selectedTag(49)), -1, 'Tag was not added');
