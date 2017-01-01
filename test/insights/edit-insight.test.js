@@ -90,7 +90,6 @@ tape('/insights/{id}/edit POST endpoint, admin can update existing info',
             'Admin is redirected to /insights as expected'
           );
           server.inject(viewInsights, function (res) {
-            console.log(res.result);
             t.ok(res.result.indexOf('Renewables Report (2015)') > -1, 'Insight\'s title displays correctly');
             t.ok(res.result.indexOf('http://www.ren21.net/wp-content/uploads/2015/07/REN12-GSR2015_Onlinebook_low1.pdf') > -1, 'Insight\'s url displays correctly');
             t.ok(res.result.indexOf('.pdf') > -1, 'Insight\'s filetype displays correctly');
