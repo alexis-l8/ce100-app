@@ -7,7 +7,7 @@ module.exports = function (request, reply, source, joiErr) {
   var error = helpers.errorOptions(joiErr);
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
-  var doctype = ['.pdf', '.jpeg', '.txt', '.html'];
+  var doctype = ['.pdf', '.jpeg', '.png'];
   var docDropdown = doctype.map(function (type) {
     return {
       id: type,
