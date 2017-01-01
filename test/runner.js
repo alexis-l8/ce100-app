@@ -1,5 +1,11 @@
 'use strict';
 
+// insights
+require('./insights/browse.test.js');
+require('./insights/add-insight.test.js');
+require('./insights/add-tags-to-insight.test.js');
+require('./insights/edit-insight.test.js');
+
 // challenges
 require('./challenges/add-chal.test.js');
 require('./challenges/edit-chal.test.js');
