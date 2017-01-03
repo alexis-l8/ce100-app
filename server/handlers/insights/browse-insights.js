@@ -10,8 +10,8 @@ module.exports = function (request, reply) {
   // set filter tag, integer if one is given, and `false` if not.
   var filterTag = (request.query && request.query.tags) || false;
 
-  request.server.methods.pg.insights.getAll(!permissions.permissions.admin,
-    function (pgErr, pgRes) {
+  request.server.methods.pg.insights.browse(
+    !permissions.permissions.admin, filterTag, function (pgErr, pgRes) {
       Hoek.assert(!pgErr, 'error getting insights by tag' + pgErr);
       options = Object.assign(
         { insights: pgRes.insights },
