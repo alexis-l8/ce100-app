@@ -147,7 +147,7 @@ test('Challenge view - active challenge viewed by a primary user with suggested 
 });
 
 // primary user not belonging to the challenge's org can view the challenge, but not suggested matches
-test('Challenge view - active challenge viewed by a primary user with no suggested matches: --> '
+test('Challenge view - challenge from a different org is viewable without suggested matches for a primary user: --> '
   + __filename, function (t) {
     sessions.addAll(function () {
       init(config, function (err, server, pool) {
