@@ -9,7 +9,7 @@ module.exports = function (request, reply) {
   }
 
   request.server.methods.pg.organisations.edit(orgId, request.payload, function (error, response) {
-    Hoek.assert(!error, 'database error');
+    Hoek.assert(!error, error);
     return reply.redirect('/orgs/' + orgId + '/tags')
   });
 };
