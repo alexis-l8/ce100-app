@@ -9,7 +9,7 @@ var hapiError = require('hapi-error');
 var auth = require('./auth.js');
 var routes = require('./routes.js');
 var pg = require('pg');
-
+var good = require('good');
 // pg plugins
 var tags = require('tags-system');
 var challenges = require('pg-challenges');
@@ -21,6 +21,7 @@ var mockData = require('ce100-mock-data');
 
 // plugin options
 var optionError = require('./hapi-error-config.js');
+var goodOptions = require('./good-console-options.js');
 
 function initServer (config, callback) {
   var server = new Hapi.Server();
@@ -105,7 +106,8 @@ function initServer (config, callback) {
             inert,
             vision,
             { register: hapiError, options: optionError },
-            auth
+            auth,
+            { register: good, options: goodOptions }
           ], function (err) {
             if (err) {
               return callback(err, server, pool);
