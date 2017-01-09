@@ -1,0 +1,17 @@
+<div class="card card--challenge">
+  {{#if permissions.admin}}
+    <a class="icon icon--edit" href="/insights/{{id}}/edit">
+      <img src="../../../public/assets/Edit.svg" alt="Edit" />
+    </a>
+  {{else}}
+  {{/if}}
+  <p class="card__header card__header--challenge">{{title}}</p>
+  <a href={{url}}>
+    <span class="card__copy">{{url}}</span>
+  </a>
+  {{#each tags}}
+    <a class="text-decoration" href="/insights?tags={{tag_id}}">
+      <span class="tag__label">{{tag_name}}</span>
+    </a>
+  {{/each}}
+</div>

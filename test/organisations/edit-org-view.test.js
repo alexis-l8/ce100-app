@@ -52,7 +52,7 @@ tape('Differing permissions on edit org view: --> ' + __filename, function (t) {
           server.inject(editOrgView('primary_3', 2), function (res) {
             t.equal(
               res.statusCode,
-              302,
+              403,
               'Primary user cannot view the edit org view for a different organisation'
             );
 
