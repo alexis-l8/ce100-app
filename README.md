@@ -58,6 +58,8 @@ AWS_REGION=eu-west-1
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 ROOT_URL=
+S3_REGION=
+S3_BUCKET=
 ```
 _remember_ to add the appropriate _values_ to these keys.
 
