@@ -29,7 +29,7 @@ module.exports = function (request, reply) {
   var newOrg;
 
   if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin') {
-    return reply(Boom.unauthorized('You do not have permission to edit that organisation.')); //eslint-disable-line
+    return reply(Boom.forbidden('You do not have permission to edit that organisation.'));
   }
 
   return S3.upload(request.payload, function (err, data) {
