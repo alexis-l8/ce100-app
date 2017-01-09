@@ -13,10 +13,11 @@ var viewOrg = {
 };
 
 // This function allows different user types to edit an organisation.
-function editOrg (user, orgObj) {
+function editOrg (user, orgObj, orgId) {
+  orgId = orgId || 1;
   return {
     method: 'POST',
-    url: '/orgs/1/edit',
+    url: '/orgs/' + orgId + '/edit',
     headers: { cookie: 'token=' + sessions.tokens(config.jwt_secret)[user] },
     payload: orgObj
   }
@@ -105,6 +106,25 @@ tape('Primary can edit org --> ' + __filename, function (t) {
           pool.end();
           server.stop();
         });
+      });
+    });
+  });
+});
+
+
+tape('Primary cannot edit an org that is not theirs', function (t) {
+  sessions.addAll(function () {
+    initServer(config, function (error, server, pool) {
+      var org = {
+        mission_statement: 'Work hard'
+      };
+
+      server.inject(editOrg('primary_3', org, 3), function (res) {
+        t.equal(res.statusCode, 403, 'primary cannot edit an org that is not theirs');
+
+        t.end();
+        pool.end();
+        server.stop();
       });
     });
   });

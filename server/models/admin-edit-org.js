@@ -11,7 +11,9 @@ module.exports = {
 var schema = {
   admin: {
     name: Joi.string().min(1).required(),
-    mission_statement: Joi.any().optional()
+    mission_statement: Joi.any().optional(),
+    file_name: Joi.any().optional(),
+    logo: Joi.any().optional()
   },
   primary: {
     mission_statement: Joi.any().optional()
