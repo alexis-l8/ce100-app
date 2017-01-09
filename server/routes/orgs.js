@@ -13,6 +13,7 @@ var addTagsView = require('../handlers/orgs/add-tags-view.js');
 var addTags = require('../handlers/orgs/add-tags.js');
 var addView = require('../handlers/serve-view.js')('organisations/add');
 var maxAllowedTags = require('../models/max-allowed-tags.js');
+var archivedChallengesView = require('../handlers/orgs/archived-challenges-view.js');
 
 module.exports = [
   {
@@ -72,5 +73,13 @@ module.exports = [
     path: '/orgs/{id}/tags',
     handler: addTags,
     config: { validate: maxAllowedTags }
+  },
+  {
+    method: 'GET',
+    path: '/orgs/{id}/archived-challenges',
+    handler: archivedChallengesView,
+    config: {
+      auth: { scope: 'primary' }
+    }
   }
 ];
