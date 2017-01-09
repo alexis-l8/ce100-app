@@ -12,6 +12,7 @@ var editView = require('../handlers/challenges/edit-view.js');
 var editSubmit = require('../handlers/challenges/edit.js');
 var editModel = require('../models/edit-challenge.js');
 var maxAllowedTags = require('../models/max-allowed-tags.js');
+var challengeView = require('../handlers/challenges/challenge-view.js');
 
 module.exports = [
   {
@@ -23,6 +24,11 @@ module.exports = [
     method: 'GET',
     path: '/challenges/tags',
     handler: browseAddTagsView('challenges')
+  },
+  {
+    method: 'GET',
+    path: '/challenges/{id}',
+    handler: challengeView
   },
   {
     method: 'GET',
