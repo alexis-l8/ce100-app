@@ -35,28 +35,23 @@
         <label class="form__label" for="url">URL</label>
         <input class="form__input {{error.url}}" type="url" name="url" id="url" placeholder="Write Here..." value="{{#if error.values.url}}{{error.values.url}}{{else}}{{url}}{{/if}}">
 
-        <label class="form__label" for="resource">Show in resources</label>
-        {{#if resource}}
-          <input class="form__input {{error.resource}}" type="checkbox" name="resource" id="resource" placeholder="Write Here..." value="{{#if error.values.resource}}{{error.values.resource}}{{else}}{{resource}}{{/if}}" checked>
-        {{else}}
-          <input class="form__input {{error.resource}}" type="checkbox" name="resource" id="resource" placeholder="Write Here..." value="{{#if error.values.resource}}{{error.values.resource}}{{else}}{{resource}}{{/if}}">
-        {{/if}}
-
-        {{#if tags}}
-          {{#each tags}}
-            <span class="tag__label">{{name}}</span>
-          {{/each}}
-        {{/if}}
-
-        <!-- Show archive and primary user if admin is logged in -->
-        <a class="anchor anchor--danger" href="/insights/{{id}}/toggle-active">
-          {{#if active}}
-            Archive Insight
+        <div class="form__section--radio">
+          {{#if resource}}
+            <input class="form__input form__input--radio {{error.resource}}" type="checkbox" name="resource" id="resource" value="error.values.resource" checked="checked">
           {{else}}
-            Unarchive Insight
+            <input class="form__input form__input--radio {{error.resource}}" type="checkbox" name="resource" id="resource" value="error.values.resource">
           {{/if}}
-        </a>
+          <label class="form__label form__label--radio" for="resource">Show in resources</label>
+        </div>
 
+        <div class="form__section--radio">
+          {{#if active}}
+            <input class="form__input form__input--radio" type="checkbox" name="active" id="active" checked="true">
+          {{else}}
+            <input class="form__input form__input--radio" type="checkbox" name="active" id="active">
+          {{/if}}
+          <label class="form__label form__label--radio" for="active">Enabled</label>
+        </div>
       </div>
 
 
