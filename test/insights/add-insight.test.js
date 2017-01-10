@@ -6,12 +6,13 @@ var init = require('../../server/server.js');
 var config = require('../../server/config.js');
 
 var adminToken = sessions.tokens(config.jwt_secret).admin_1;
+var primaryToken = sessions.tokens(config.jwt_secret).primary_3;
 
-function add (cookie, method, payload) {
+function add (user, method, payload) {
   return {
     method: method,
     url: '/insights/add',
-    headers: { cookie: 'token=' + cookie },
+    headers: { cookie: 'token=' + user},
     payload: payload
   };
 }
@@ -45,6 +46,49 @@ tape('/insights/add cannot be viewed unless logged in',
       });
     });
   });
+
+// primary user cannot add insights
+tape('/insights/add cannot be viewed by a primary user', function (t) {
+  var insight = {
+    title: 'Handbook',
+    url: 'http://www.scottrao.com/Rao-Barista.pdf',
+    author: 'P Diffy',
+    doctype: '.pdf',
+    resource: false
+  };
+
+  sessions.addAll(function () {
+    init(config, function (error, server, pool) {
+      t.ok(!error, 'No error on init server');
+      server.inject(add(primaryToken, 'GET'), function (res) {
+        t.equal(res.statusCode, 403, 'Primary users cannot see add insight view');
+
+        server.inject(add(primaryToken, 'POST', insight), function (res) {
+          t.equal(res.statusCode, 403, 'Primary users cannot see add insight POST');
+          t.end();
+          server.stop();
+          pool.end();
+        });
+      });
+    });
+  });
+});
+
+
+// /insights/add GET route accessible by admin
+tape('/insights/add: GET as admin', function (t) {
+  sessions.addAll(function () {
+    init(config, function (error, server, pool) {
+      t.ok(!error, 'no initialising error');
+      server.inject(add(adminToken, 'GET'), function (res) {
+        t.equal(res.statusCode, 200, 'add insight view is viewable by admin');
+        t.end();
+        server.stop();
+        pool.end();
+      });
+    });
+  });
+});
 
 // /insights/add route accessible by admin
 tape('/insights/add: add insight as admin', function (t) {

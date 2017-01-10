@@ -22,7 +22,7 @@ module.exports = function (request, reply, source, joiErr) {
 
       if (insight.length === 0) {
         // no insight by that ID found
-        return reply(Boom.forbidden());
+        return reply(Boom.notFound('That insight does not exist!'));
       }
 
       options = Object.assign(
