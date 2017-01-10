@@ -862,24 +862,30 @@ Light-teal:     #66d9e0;
     snackbar classes
   |||||||||||||||||||||||||||||||||||||||||||*/
 
-.error {
-  color: #e4164c;
-  text-align: center;
-  font-size: 0.8rem;
-}
-  .error::first-letter {
-    text-transform: capitalize;
-  }
 .snackbar {
   text-align: center;
   padding: 0.4rem 0;
 }
-  .snackbar-error {
+  .snackbar--error {
     background-color: #ffe2e2
   }
-  .snackbar-success {
-    background-color: #4bbf97;
+  .snackbar--success {
+    background-color: rgba(102, 216, 224, 0.14);
+    border-bottom: #66d9e0 1px solid;
   }
+.snackbar-content {
+  text-align: center;
+  font-size: 0.8rem;
+}
+  .snackbar-content::first-letter {
+    text-transform: capitalize;
+  }
+    .snackbar-content--error {
+      color: #e4164c;
+    }
+    .snackbar-content--success {
+      color: #40667e;
+    }
 .error--login {
   color: #ff5e5e;
 }
