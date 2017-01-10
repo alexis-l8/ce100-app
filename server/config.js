@@ -23,9 +23,18 @@ var dev = {
     idleTimeoutMillis: 30000
   },
   plugins: {
-    tags: { reset: Boolean(env.RESET_TAGS) },
-    people: { reset: Boolean(env.RESET_PEOPLE) },
-    challenges: { reset: Boolean(env.RESET_CHALLENGES) }
+    tags: {
+      reset: Boolean(process.env.RESET_TAGS),
+    },
+    people: {
+      reset: Boolean(process.env.RESET_PEOPLE),
+    },
+    challenges: {
+      reset: Boolean(process.env.RESET_CHALLENGES),
+    },
+    insights: {
+      reset: Boolean(process.env.RESET_INSIGHTS),
+    }
   },
   s3: {
     region: env.S3_REGION,
@@ -56,7 +65,10 @@ var test = {
       reset: Boolean(env.RESET_PEOPLE_TEST) || true,
     },
     challenges: {
-      reset: Boolean(env.RESET_CHALLENGES_TEST) || true,
+      reset: Boolean(process.env.RESET_CHALLENGES_TEST) || true,
+    },
+    insights: {
+      reset: Boolean(process.env.RESET_INSIGHTS_TEST) || true,
     }
   },
   s3: {

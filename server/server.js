@@ -14,6 +14,7 @@ var good = require('good');
 var tags = require('tags-system');
 var challenges = require('pg-challenges');
 var people = require('pg-people');
+var insights = require('pg-insights');
 
 // pg tables data
 var mockData = require('ce100-mock-data');
@@ -43,6 +44,12 @@ function initServer (config, callback) {
     reset: config.plugins.challenges.reset,
     challenges: mockData.challenges,
     tags_challenges: mockData.tags_challenges
+  };
+  var optionsInsights = {
+    pool: pool,
+    reset: config.plugins.insights.reset,
+    insights: mockData.insights,
+    tags_insights: mockData.tags_insights
   };
 
   // initialise a redis connection
@@ -85,31 +92,42 @@ function initServer (config, callback) {
           return callback(errorChallenges, server, pool);
         }
 
-        return server.register([
-          inert,
-          vision,
-          { register: hapiError, options: optionError },
-          auth,
-          { register: good, options: goodOptions }
-        ], function (err) {
-          if (err) {
-            return callback(err, server, pool);
+        return server.register({
+          register: insights,
+          options: optionsInsights
+        }, function (errorInsights) {
+          if (errorInsights) {
+            console.log('error insights'); //eslint-disable-line
+
+            return callback(errorInsights, server, pool);
           }
 
-          server.views({
-            engines: { html: handlebars },
-            relativeTo: path.resolve(__dirname),
-            layout: 'default',
-            layoutPath: '../templates/layout',
-            path: '../templates/views',
-            partialsPath: '../templates/partials',
-            helpersPath: '../templates/helpers'
-          });
+          return server.register([
+            inert,
+            vision,
+            { register: hapiError, options: optionError },
+            auth,
+            { register: good, options: goodOptions }
+          ], function (err) {
+            if (err) {
+              return callback(err, server, pool);
+            }
 
-          server.route(routes);
+            server.views({
+              engines: { html: handlebars },
+              relativeTo: path.resolve(__dirname),
+              layout: 'default',
+              layoutPath: '../templates/layout',
+              path: '../templates/views',
+              partialsPath: '../templates/partials',
+              helpersPath: '../templates/helpers'
+            });
 
-          return server.start(function (errorStart) { // eslint-disable-line
-            return callback(errorStart, server, pool);
+            server.route(routes);
+
+            return server.start(function (errorStart) { // eslint-disable-line
+              return callback(errorStart, server, pool);
+            });
           });
         });
       });
