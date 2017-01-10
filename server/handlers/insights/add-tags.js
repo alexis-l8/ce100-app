@@ -4,7 +4,6 @@ var Hoek = require('hoek');
 var Boom = require('boom');
 
 function getTagArray (payload) {
-  console.log(payload);
   // if no tags are added
   if (payload === undefined) {
     return [];
