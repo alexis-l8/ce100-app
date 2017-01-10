@@ -8,10 +8,6 @@ var config = require('../../server/config.js');
 var adminToken = sessions.tokens(config.jwt_secret).admin_1;
 var primaryToken = sessions.tokens(config.jwt_secret).primary_3;
 
-// tag names and tag ids of active insight - insight 1
-var tagNames = ['Agriculture', 'Global Partner', 'Telecommunications'];
-var tagId = [1, 8, 22];
-
 function browseAll (cookie, filterTag) {
   return {
     method: 'GET',
@@ -54,26 +50,9 @@ tape('view all insights on /insights as a logged-in admin', function (t) {
           res.result.indexOf('https://emf-packs.s3-eu-west-1.amazonaws.com/Growth%20Within%20-%20June%202015/EllenMacArthurFoundation_Growth%20Within_for%20print.pdf?AWSAccessKeyId&#x3D;AKIAITAQSOURJ2COPP2A&amp;Signature&#x3D;exc0fbGigjcG88LlqNibztPX%2F3k%3D&amp;Expires&#x3D;1498468767') > -1,
           'insight number 1 - url displayed'
         );
-        t.ok(
-          res.result.indexOf('Agriculture') > -1,
-          'insight number 1 - tag link displayed'
-        );
-        tagNames.forEach(function (name, index) {
-          var id = tagId[index];
-          t.ok(
-            res.result.indexOf(name) > -1,
-            'insight number 1 - tag name displayed'
-          );
-          t.ok(
-            res.result.indexOf('/insights?tags=' + id) > -1,
-            'insight number 1 - tag link displayed'
-          );
-          if (index === tagNames.length - 1) {
-            t.end();
-            server.stop();
-            pool.end();
-          }
-        });
+        t.end();
+        server.stop();
+        pool.end();
       });
     });
   });
@@ -94,26 +73,9 @@ tape('view all active insights on /insights as a logged-in primary', function (t
           res.result.indexOf('https://emf-packs.s3-eu-west-1.amazonaws.com/Growth%20Within%20-%20June%202015/EllenMacArthurFoundation_Growth%20Within_for%20print.pdf?AWSAccessKeyId&#x3D;AKIAITAQSOURJ2COPP2A&amp;Signature&#x3D;exc0fbGigjcG88LlqNibztPX%2F3k%3D&amp;Expires&#x3D;1498468767') > -1,
           'insight number 1 - url displayed'
         );
-        t.ok(
-          res.result.indexOf('Agriculture') > -1,
-          'insight number 1 - tag link displayed'
-        );
-        tagNames.forEach(function (name, index) {
-          var id = tagId[index];
-          t.ok(
-            res.result.indexOf(name) > -1,
-            'insight number 1 - tag name displayed'
-          );
-          t.ok(
-            res.result.indexOf('/insights?tags=' + id) > -1,
-            'insight number 1 - tag link displayed'
-          );
-          if (index === tagNames.length - 1) {
-            t.end();
-            server.stop();
-            pool.end();
-          }
-        });
+        t.end();
+        server.stop();
+        pool.end();
       });
     });
   });

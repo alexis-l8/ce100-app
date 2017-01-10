@@ -3,15 +3,8 @@
     <a class="icon icon--edit" href="/insights/{{id}}/edit">
       <img src="../../../public/assets/Edit.svg" alt="Edit" />
     </a>
-  {{else}}
   {{/if}}
-  <p class="card__header card__header--challenge">{{title}}</p>
-  <a href={{url}}>
-    <span class="card__copy">{{url}}</span>
-  </a>
-  {{#each tags}}
-    <a class="text-decoration" href="/insights?tags={{tag_id}}">
-      <span class="tag__label">{{tag_name}}</span>
-    </a>
-  {{/each}}
+  <a href={{url}} class="card__header card__header--challenge card__data--link">{{title}}</a>
+  <p class="card__copy card__additional">By {{author}}</p>
+  <p class="card__copy card__additional card__additional--small">{{type}}</p>
 </div>

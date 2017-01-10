@@ -492,7 +492,7 @@ Light-teal:     #66d9e0;
     height: 7.5rem; /* 120px */
 }
 .card--challenge {
-    padding: 1.25rem 1.875rem 2.25rem;
+    padding: 1.25rem 1.875rem 2rem;
     text-align: left;
 }
     .card__header {
@@ -506,16 +506,23 @@ Light-teal:     #66d9e0;
         display: block;
         margin-bottom: 0.5rem;
     }
-    .card__data--link {
-      text-decoration: none;
-      color: inherit;
-    }
+        .card__data--link {
+          text-decoration: none;
+          color: inherit;
+        }
     .card__additional {
       color: #89a0ae;
       transform: translate(0%,100%);
+      text-align: right;
       -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
       -ms-transform: translate(30deg); /* IE 9 */
     }
+        .card__additional--small {
+          font-size: 0.8rem;
+          transform: initial;
+          padding-top: 0.2rem;
+          margin-bottom: 0;
+        }
 .card__suggested-matches {
   background-color: #f8ffff;
   text-align: center;
