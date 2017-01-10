@@ -11,11 +11,28 @@ helpers.getPermissions = (loggedIn, key, identifier) => {
   };
 };
 
+helpers.editInsightDoctypeDropdown = function (doctype, selected) {
+  return doctype.map(function (type) {
+    if (type === selected) {
+      return {
+        isSelected: true,
+        id: type,
+        name: type
+      };
+    }
+
+    return {
+      id: type,
+      name: type
+    };
+  });
+};
+
 helpers.removeLinkedOrgs = (orgs, userId) => {
   return orgs.filter((org) => {
     return org.active_primary_user === null || org.active_primary_user === userId;
   })
-}
+};
 
 // we want to `select` the org that the user is attached to
 helpers.editUserOrgDropdown = (orgs, user) => {
@@ -24,7 +41,7 @@ helpers.editUserOrgDropdown = (orgs, user) => {
     .map(org => {
       return Object.assign({ isSelected:  org.id === user.org_id }, org);
     });
-}
+};
 
 helpers.removeUserFromOrg = (orgString, userId) => {
   var org = JSON.parse(orgString);
