@@ -9,7 +9,8 @@ module.exports = {
     url: Joi.string().min(1).required(),
     author: Joi.string().min(1).required(),
     doctype: Joi.string().valid('.pdf', '.jpeg', '.png').required(),
-    resource: Joi.any().optional()
+    resource: Joi.any().optional(),
+    active: Joi.boolean()
   },
   failAction: addInsightView
 };

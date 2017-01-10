@@ -17,7 +17,7 @@ module.exports = function (request, reply) {
   insight.doctype = rawData.doctype;
   insight.resource = Object.prototype.hasOwnProperty
     .call(rawData, 'resource');
-  insight.active = true; // true by default(?)
+  insight.active = rawData.active ? true : false;
 
   if (loggedIn.scope !== 'admin') {
     return reply(Boom.forbidden());
