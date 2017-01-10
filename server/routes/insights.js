@@ -1,5 +1,6 @@
 'use strict';
 
+var toggleActive = require('../handlers/insights/toggle-active.js');
 var addModel = require('../models/add-insight.js');
 var editView = require('../handlers/insights/edit-view.js');
 var editSubmit = require('../handlers/insights/edit.js');
@@ -12,6 +13,11 @@ var addSubmit = require('../handlers/insights/add.js');
 var addModel = require('../models/add-insight.js');
 
 module.exports = [
+  {
+    method: 'GET',
+    path: '/insights/{id}/toggle-active',
+    handler: toggleActive
+  },
   {
     method: 'GET',
     path: '/insights/{id}/edit',
