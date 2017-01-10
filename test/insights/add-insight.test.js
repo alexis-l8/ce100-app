@@ -75,6 +75,21 @@ tape('/insights/add cannot be viewed by a primary user', function (t) {
 });
 
 
+// /insights/add GET route accessible by admin
+tape('/insights/add: GET as admin', function (t) {
+  sessions.addAll(function () {
+    init(config, function (error, server, pool) {
+      t.ok(!error, 'no initialising error');
+      server.inject(add(adminToken, 'GET'), function (res) {
+        t.equal(res.statusCode, 200, 'add insight view is viewable by admin');
+        t.end();
+        server.stop();
+        pool.end();
+      });
+    });
+  });
+});
+
 // /insights/add route accessible by admin
 tape('/insights/add: add insight as admin', function (t) {
   var insight = {

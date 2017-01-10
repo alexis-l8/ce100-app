@@ -96,6 +96,7 @@ tape('admin can add zero tags to an insight and remove old tags: --> ' + __filen
   });
 });
 
+
 tape('admin can add multiple tags to their insight and remove old tags: --> ' + __filename, function (t) {
   sessions.addAll(function () {
     var insight = 3;
