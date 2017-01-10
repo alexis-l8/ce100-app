@@ -3,13 +3,13 @@ var initServer = require('../../server/server.js');
 var config = require('../../server/config.js');
 
 var sessions = require('../helpers/add-sessions.js');
-var adminToken = { cookie: 'token=' + sessions.tokens(config.jwt_secret).admin_1 };
 
-function addTagsToInsight (method, insightId, tags) {
+function addTagsToInsight (method, insightId, tags, user) {
+  user = user || 'admin_1';
   return {
     method: method,
     url: '/insights/' + insightId + '/tags',
-    headers: adminToken,
+    headers: { cookie: 'token=' + sessions.tokens(config.jwt_secret)[user] },
     payload: { tags: tags }
   };
 }
@@ -18,12 +18,30 @@ function selectedTag (id) {
   return 'name="tags" value=' + id + ' checked="checked">';
 }
 
+// Permissions of add tags GET and POST
+tape('Primary user cannot GET or POST add tags to insight', function (t) {
+  sessions.addAll(function () {
+    initServer(config, function (error, server, pool) {
+      server.inject(addTagsToInsight('GET', '1', undefined, 'primary_3'), function (res) {
+        t.equal(res.statusCode, 403, 'primary cannot can view add-tags-view');
+        server.inject(addTagsToInsight('POST', '1', undefined, 'primary_3'), function (res) {
+          t.equal(res.statusCode, 403, 'primary cannot can POST to add tags to insight');
+          t.end();
+          pool.end();
+          server.stop();
+        });
+      });
+    });
+  });
+});
+
+
 tape('admin can view add-tags view', function (t) {
   var existing = ['1', '8', '22']; // tags currently attached to insight 1.
 
   sessions.addAll(function () {
     initServer(config, function (error, server, pool) {
-      server.inject(addTagsToInsight('GET', '1', undefined), function (res) {
+      server.inject(addTagsToInsight('get', '1', undefined), function (res) {
         t.equal(res.statusCode, 200, 'admin can view add-tags-view');
         t.ok(res.payload.indexOf(selectedTag(existing[0])) > -1, 'insight originally has tag');
         t.ok(res.payload.indexOf(selectedTag(existing[1])) > -1, 'insight originally has tag');

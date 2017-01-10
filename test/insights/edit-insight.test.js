@@ -23,16 +23,34 @@ function editInsight (token, id, update) {
   };
 }
 
-tape('/insights/{id}/edit GET endpoint: primary user cannot access',
-  function (t) {
+// Test permissions on editing insights
+tape('/insights/{id}/edit endpoint: primary user cannot access', function (t) {
     sessions.addAll(function () {
       init(config, function (error, server, pool) {
         t.ok(!error, 'No error on init server');
         server.inject(editInsight(primaryToken, insightId), function (res) {
+          t.equal(res.statusCode, 403, 'Primary cannot access edit-insight view');
+          server.inject(editInsight(primaryToken, insightId, true), function (res) {
+            t.equal(res.statusCode, 403, 'Primary cannot access edit-insight POST route');
+            t.end();
+            server.stop();
+            pool.end();
+          });
+        });
+      });
+    });
+  });
+
+// cannot edit an insight that does not exist
+tape('/insights/{id}/edit view for non existent insight', function (t) {
+    sessions.addAll(function () {
+      init(config, function (error, server, pool) {
+        t.ok(!error, 'No error on init server');
+        server.inject(editInsight(adminToken, 100000), function (res) {
           t.equal(
             res.statusCode,
-            403,
-            'Primary cannot access edit-insight view'
+            404,
+            'Admin cannot access edit-insight view for an insight that doesnt exist'
           );
           t.end();
           server.stop();
