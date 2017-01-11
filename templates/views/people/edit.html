@@ -19,13 +19,13 @@
     {{/if}}
 
     <form class="form" method="post">
-      <label for="first_name">First Name</label>
+      <label class="form__label" for="first_name">First Name</label>
       <input class="form__input {{error.first_name}}" name="first_name" value="{{#if error}}{{error.values.first_name}}{{else}}{{user.first_name}}{{/if}}">
 
-      <label for="last_name">Last Name</label>
+      <label class="form__label" for="last_name">Last Name</label>
       <input class="form__input {{error.last_name}}" name="last_name" value="{{#if error}}{{error.values.last_name}}{{else}}{{user.last_name}}{{/if}}">
 
-      <label for="job_title">Job Title</label>
+      <label class="form__label" for="job_title">Job Title</label>
       <input class="form__input" name="job_title" value="{{#if error}}{{error.values.job_title}}{{else}}{{user.job_title}}{{/if}}">
 
       <label class="form__label" for="email">Email</label>
