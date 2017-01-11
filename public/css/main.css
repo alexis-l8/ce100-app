@@ -701,8 +701,10 @@ Light-teal:     #66d9e0;
 .indicator {
   width: 1rem;
   height: 1rem;
+  margin: 0.2rem;
   border-radius: 50px;
-
+  display: inline-block;
+  float: left;
 }
 
   .indicator--active {
