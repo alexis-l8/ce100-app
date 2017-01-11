@@ -27,7 +27,6 @@ module.exports = function (request, reply) {
     Hoek.assert(!err, 'database error');
     insightId = res[0].id;
 
-    return reply.redirect('/insights');
-    // return reply.redirect('/insights/' + insightId + '/tags');
+    return reply.redirect('/insights/' + insightId + '/tags');
   });
 };
