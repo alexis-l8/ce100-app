@@ -5,7 +5,10 @@
       <img src="../../../public/assets/Edit.svg" alt="Edit" />
     </a>
   {{/if}}
-  <p class="card__header card__header--challenge">{{title}}</p>
+  <a class="anchor" href="/challenges/{{id}}">
+    <p class="card__header card__header--challenge">{{title}}</p>
+  </a>
+
   <p class="card__copy">{{description}}</p>
   {{#each tags}}
     <a class="text-decoration" href="/challenges?tags={{tag_id}}">
