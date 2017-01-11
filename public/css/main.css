@@ -557,10 +557,13 @@ Light-teal:     #66d9e0;
         padding-top: 0.7rem;
         padding-bottom: 0.7rem;
       }
-        .form__subsection {
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
+      .form__section--radio {
+        text-align: left;
+      }
+  .form__subsection {
+      padding-left: 1rem;
+      padding-right: 1rem;
+  }
     .form__label, .form__input {
         display: block;
         text-align: left;
