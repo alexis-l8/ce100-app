@@ -14,7 +14,7 @@ module.exports = function (request, reply) {
   insight.title = rawData.title;
   insight.url = rawData.url;
   insight.author = rawData.author;
-  insight.doctype = rawData.doctype;
+  insight.type = rawData.type;
   insight.resource = Object.prototype.hasOwnProperty
     .call(rawData, 'resource');
   insight.active = rawData.active ? true : false;

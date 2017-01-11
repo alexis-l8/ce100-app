@@ -9,7 +9,6 @@ module.exports = function (request, reply, source, joiErr) {
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
   var iid = request.params.id;
-  var doctype = ['.pdf', '.jpeg', '.png'];
   var options;
 
   if (loggedIn.scope !== 'admin') {
@@ -19,7 +18,6 @@ module.exports = function (request, reply, source, joiErr) {
   return request.server.methods.pg.insights.getById(iid,
     function (dbErr, insight) {
       Hoek.assert(!dbErr, 'database error');
-
       if (insight.length === 0) {
         // no insight by that ID found
         return reply(Boom.notFound('That insight does not exist!'));
@@ -29,8 +27,8 @@ module.exports = function (request, reply, source, joiErr) {
         insight[0],
         permissions,
         {
-          doctype:
-            helpers.editInsightDoctypeDropdown(doctype, insight[0].doctype)
+          typeDropdown:
+            helpers.insightTypeDropdown(insight[0].type)
         },
         { error: error }
       );

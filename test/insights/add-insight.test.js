@@ -55,7 +55,7 @@ tape('/insights/add cannot be viewed by a primary user', function (t) {
     title: 'Handbook',
     url: 'http://www.scottrao.com/Rao-Barista.pdf',
     author: 'P Diffy',
-    doctype: '.pdf',
+    type: 'REPORT',
     resource: false,
     active: 'on'
   };
@@ -99,7 +99,7 @@ tape('/insights/add: add insight as admin', function (t) {
     title: 'Handbook',
     url: 'http://www.scottrao.com/Rao-Barista.pdf',
     author: 'P Diffy',
-    doctype: '.pdf',
+    type: 'REPORT',
     resource: false,
     active: 'on'
   };
@@ -130,7 +130,7 @@ tape('/insights/add: add an inactive insight as admin', function (t) {
     title: 'Handbook',
     url: 'http://www.scottrao.com/Rao-Barista.pdf',
     author: 'P Diffy',
-    doctype: '.pdf',
+    type: 'REPORT',
     resource: false
   };
 
@@ -159,7 +159,7 @@ tape('/insights/add: fail validation (no title)', function (t) {
   var insight = {
     url: 'http://www.scottrao.com/Rao-Barista.pdf',
     author: 'P Diffy',
-    doctype: '.pdf',
+    type: 'REPORT',
     resource: false,
     active: 'on'
   };

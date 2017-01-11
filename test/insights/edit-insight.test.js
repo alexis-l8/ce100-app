@@ -74,7 +74,7 @@ tape('/insights/{id}/edit GET endpoint displays prefilled forms correctly',
           t.ok(res.result.indexOf('Insight Number 1') > -1, 'Insight\'s title displays correctly');
           t.ok(res.result.indexOf('https://emf-packs.s3-eu-west-1.amazonaws.com/Growth%20Within%20-%20June%202015/EllenMacArthurFoundation_Growth%20Within_for%20print.pdf?AWSAccessKeyId&#x3D;AKIAITAQSOURJ2COPP2A&amp;Signature&#x3D;exc0fbGigjcG88LlqNibztPX%2F3k%3D&amp;Expires&#x3D;1498468767') > -1, 'Insight\'s url displays correctly');
           t.ok(res.result.indexOf('Kamala Khan') > -1, 'Insight\'s author displays correctly');
-          t.ok(res.result.indexOf('.pdf') > -1, 'Insight\'s filetype displays correctly');
+          t.ok(res.result.indexOf('REPORT') > -1, 'Insight\'s type displays correctly');
           t.end();
           server.stop();
           pool.end();
@@ -89,7 +89,7 @@ tape('/insights/{id}/edit POST endpoint, admin can update existing info',
       title: 'Renewables Report (2015)',
       url: 'http://www.ren21.net/wp-content/uploads/2015/07/REN12-GSR2015_Onlinebook_low1.pdf',
       author: 'REN21',
-      doctype: '.pdf',
+      type: 'REPORT',
       resource: true,
       active: 'on'
     };
@@ -109,9 +109,10 @@ tape('/insights/{id}/edit POST endpoint, admin can update existing info',
             'Admin is redirected to /insights as expected'
           );
           server.inject(viewInsights, function (res) {
+            console.log(res.result);
             t.ok(res.result.indexOf('Renewables Report (2015)') > -1, 'Insight\'s title displays correctly');
             t.ok(res.result.indexOf('http://www.ren21.net/wp-content/uploads/2015/07/REN12-GSR2015_Onlinebook_low1.pdf') > -1, 'Insight\'s url displays correctly');
-            t.ok(res.result.indexOf('.pdf') > -1, 'Insight\'s filetype displays correctly');
+            t.ok(res.result.indexOf('REPORT') > -1, 'Insight\'s type displays correctly');
             t.end();
             server.stop();
             pool.end();
