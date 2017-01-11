@@ -17,11 +17,13 @@ function add (user, method, payload) {
   };
 }
 
-var getAll = {
-  method: 'GET',
-  url: '/insights',
-  headers: { cookie: 'token=' + adminToken }
-};
+function getAll (user) {
+  return {
+    method: 'GET',
+    url: '/insights',
+    headers: { cookie: 'token=' + user }
+  };
+}
 
 // fail to access /insights/add IF NOT LOGGED IN
 tape('/insights/add cannot be viewed unless logged in',
@@ -54,7 +56,8 @@ tape('/insights/add cannot be viewed by a primary user', function (t) {
     url: 'http://www.scottrao.com/Rao-Barista.pdf',
     author: 'P Diffy',
     doctype: '.pdf',
-    resource: false
+    resource: false,
+    active: 'on'
   };
 
   sessions.addAll(function () {
@@ -97,7 +100,8 @@ tape('/insights/add: add insight as admin', function (t) {
     url: 'http://www.scottrao.com/Rao-Barista.pdf',
     author: 'P Diffy',
     doctype: '.pdf',
-    resource: false
+    resource: false,
+    active: 'on'
   };
 
   sessions.addAll(function () {
@@ -108,12 +112,42 @@ tape('/insights/add: add insight as admin', function (t) {
         // new url should be /insights/id/tags
         t.ok(res.headers.location.indexOf('/insights') > -1, 'page redirects to /insights');
         t.ok(res.headers.location.indexOf('/tags') > -1, 'page redirects to /insights/id/tags');
-        server.inject(getAll, function (res) {
+        server.inject(getAll(adminToken), function (res) {
           t.ok(res.result.indexOf(insight.title) > -1, 'insight title displayed on /insights');
           t.ok(res.result.indexOf(insight.url) > -1, 'insight url displayed on /insights');
           t.end();
           server.stop();
           pool.end();
+        });
+      });
+    });
+  });
+});
+
+// insights can be created inactive by admin
+tape('/insights/add: add an inactive insight as admin', function (t) {
+  var insight = {
+    title: 'Handbook',
+    url: 'http://www.scottrao.com/Rao-Barista.pdf',
+    author: 'P Diffy',
+    doctype: '.pdf',
+    resource: false
+  };
+
+  sessions.addAll(function () {
+    init(config, function (error, server, pool) {
+      t.ok(!error, 'no initialising error');
+      server.inject(add(adminToken, 'POST', insight), function (res) {
+        t.equal(res.statusCode, 302, 'insight added and user is redirected');
+        server.inject(getAll(adminToken), function (res) {
+          t.ok(res.result.indexOf(insight.title) > -1, 'insight was created and is viewable by admin');
+          server.inject(getAll(primaryToken), function (res) {
+            t.ok(res.result.indexOf(insight.title) === -1, 'insight is not viewable by primary');
+
+            t.end();
+            server.stop();
+            pool.end();
+          });
         });
       });
     });
@@ -126,7 +160,8 @@ tape('/insights/add: fail validation (no title)', function (t) {
     url: 'http://www.scottrao.com/Rao-Barista.pdf',
     author: 'P Diffy',
     doctype: '.pdf',
-    resource: false
+    resource: false,
+    active: 'on'
   };
 
   sessions.addAll(function () {
@@ -135,7 +170,7 @@ tape('/insights/add: fail validation (no title)', function (t) {
       server.inject(add(adminToken, 'POST', insight), function (res) {
         t.equal(res.statusCode, 401, 'error thrown - insight not added');
         t.ok(res.result.indexOf('title is required'), 'error message for title requirement is displayed');
-        server.inject(getAll, function (res) {
+        server.inject(getAll(adminToken), function (res) {
           t.ok(res.result.indexOf(insight.title) === -1, 'insight title is not displayed on /insights');
           t.ok(res.result.indexOf(insight.url) === -1, 'insight url is not displayed on /insights');
           t.end();

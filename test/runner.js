@@ -1,7 +1,7 @@
 'use strict';
 
 // insights
-require('./insights/toggle-active.test.js');
+// require('./insights/toggle-active.test.js');
 require('./insights/browse.test.js');
 require('./insights/add-insight.test.js');
 require('./insights/add-tags-to-insight.test.js');

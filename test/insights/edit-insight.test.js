@@ -90,7 +90,8 @@ tape('/insights/{id}/edit POST endpoint, admin can update existing info',
       url: 'http://www.ren21.net/wp-content/uploads/2015/07/REN12-GSR2015_Onlinebook_low1.pdf',
       author: 'REN21',
       doctype: '.pdf',
-      resource: true
+      resource: true,
+      active: 'on'
     };
 
     sessions.addAll(function () {

@@ -9,12 +9,12 @@
     </div>
 
     {{#if error}}
-    <div class="snackbar snackbar-error">
-      <h1 class="error">{{error.message}}</h1>
+    <div class="snackbar snackbar--error">
+      <h1 class="snackbar-content snackbar-content--error">{{error.message}}</h1>
     </div>
     {{else}}
-    <div class="snackbar snackbar-success">
-      <h1 class="error">Have you uploaded your asset? If not do it [here](ADD LINK)</h1>
+    <div class="snackbar snackbar--success">
+      <h1 class="snackbar-content snackbar-content--success">have you uploaded your asset? If not do it <a class="anchor anchor--teal" href="#">here</a></h1>
     </div>
     {{/if}}
 
@@ -39,14 +39,16 @@
         <label class="form__label" for="url">URL</label>
         <input class="form__input {{error.url}}" type="url" name="url" id="url" placeholder="Write Here..." value="{{error.values.url}}">
 
-        <label class="form__label" for="resource">Show in resources</label>
-        <input class="form__input {{error.resource}}" type="checkbox" name="resource" id="resource" placeholder="Write Here..." value="{{error.values.resource}}">
+        <div class="form__section--radio">
+          <input class="form__input form__input--radio {{error.resource}}" type="checkbox" name="resource" id="resource" value="{{error.values.resource}}">
+          <label class="form__label form__label--radio" for="resource">Show in resources</label>
+        </div>
 
-      {{#if tags}}
-        {{#each tags}}
-          <span class="tag__label">{{name}}</span>
-        {{/each}}
-      {{/if}}
+        <div class="form__section--radio">
+          <input class="form__input form__input--radio" type="checkbox" name="active" id="active" value="true" checked="checked">
+          <label class="form__label form__label--radio" for="active">Enabled</label>
+        </div>
+
       </div>
 
       <button class="button button--margin" type="submit">Add Tags</button>
