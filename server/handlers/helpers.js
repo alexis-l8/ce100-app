@@ -1,5 +1,9 @@
 var helpers = {};
 
+var INSIGHT_TYPES = [
+  'CASE STUDY', 'PAPER', 'PRESENTATION', 'REPORT', 'VIDEO', 'WORKSHOP SUMMARY'
+];
+
 helpers.getPermissions = (loggedIn, key, identifier) => {
   return loggedIn && {
     permissions: {
@@ -11,17 +15,10 @@ helpers.getPermissions = (loggedIn, key, identifier) => {
   };
 };
 
-helpers.editInsightDoctypeDropdown = function (doctype, selected) {
-  return doctype.map(function (type) {
-    if (type === selected) {
-      return {
-        isSelected: true,
-        id: type,
-        name: type
-      };
-    }
-
+helpers.insightTypeDropdown = function (selected) {
+  return INSIGHT_TYPES.map(function (type) {
     return {
+      isSelected: type === selected,
       id: type,
       name: type
     };
