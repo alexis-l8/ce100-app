@@ -109,7 +109,9 @@ tape('/insights/add: add insight as admin', function (t) {
       t.ok(!error, 'no initialising error');
       server.inject(add(adminToken, 'POST', insight), function (res) {
         t.equal(res.statusCode, 302, 'insight added and user is redirected');
-        t.equal(res.headers.location, '/insights', 'page redirects to /insights');
+        // new url should be /insights/id/tags
+        t.ok(res.headers.location.indexOf('/insights') > -1, 'page redirects to /insights');
+        t.ok(res.headers.location.indexOf('/tags') > -1, 'page redirects to /insights/id/tags');
         server.inject(getAll(adminToken), function (res) {
           t.ok(res.result.indexOf(insight.title) > -1, 'insight title displayed on /insights');
           t.ok(res.result.indexOf(insight.url) > -1, 'insight url displayed on /insights');
@@ -137,7 +139,6 @@ tape('/insights/add: add an inactive insight as admin', function (t) {
       t.ok(!error, 'no initialising error');
       server.inject(add(adminToken, 'POST', insight), function (res) {
         t.equal(res.statusCode, 302, 'insight added and user is redirected');
-        t.equal(res.headers.location, '/insights', 'page redirects to /insights');
         server.inject(getAll(adminToken), function (res) {
           t.ok(res.result.indexOf(insight.title) > -1, 'insight was created and is viewable by admin');
           server.inject(getAll(primaryToken), function (res) {
