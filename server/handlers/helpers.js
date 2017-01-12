@@ -31,6 +31,16 @@ helpers.removeLinkedOrgs = (orgs, userId) => {
   })
 };
 
+helpers.browseViewTabBar = function (pageType, filter) {
+  return {
+    id: filter && filter.id, // if not searching by a filter, filter = null
+    name: filter && filter.name,
+    url: filter ? '?tags=' + filter.id : '',
+    [pageType]: true,
+    pageType: pageType
+  };
+}
+
 // we want to `select` the org that the user is attached to
 helpers.editUserOrgDropdown = (orgs, user) => {
   // first remove linked orgs
