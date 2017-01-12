@@ -216,20 +216,24 @@ Light-teal:     #66d9e0;
           }
 
   /*|||||||||||||||||||||||||||||||||||||||||||||
-    Toggle Bar
+    Toggle Bar in browse view
   |||||||||||||||||||||||||||||||||||||||||||*/
+  .togglebar {
+    background: #eaeaea;
+  }
+
   .togglebar__item, .togglebar__item:hover{
-    background: #033352;
+    background: #eaeaea;
   }
   .togglebar__item--selected, .togglebar__item--selected:hover {
-    background: #002944;
+    background: #fafafa;
   }
   .togglebar__link, .togglebar__link:visited  {
-    padding: 1.5rem;
+    padding: 1.2rem 0;
     color: #6F8B9D;
   }
   .togglebar__link--selected, .togglebar__link--selected:visited {
-    color: #ffffff;
+    color: #66d9e0;
   }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -750,27 +754,27 @@ Light-teal:     #66d9e0;
     font-size: 0.9em;
 }
 
-.anchor--danger:link {
-    color: #900000;
-    margin: 1rem auto 0rem;
-    /*
-    I have no way to check how this will affect other views at the moment.
-    So I am leaving the old style here.
-    I hope that wrapping form__section around the different form sections,
-    including these danger anchors will have a similar effect
-    original style:
-    margin: 1rem auto 4rem;
-    */
-}
-.anchor--danger:visited {
-    color: #900000;
-}
-.anchor--suggested-matches {
-  display: inline-block;
-  width: 48%;
-  margin-top: 0.8rem;
-  color: #66d9e0;
-}
+    .anchor--danger:link {
+        color: #900000;
+        margin: 1rem auto 0rem;
+    }
+    .anchor--danger:visited {
+        color: #900000;
+    }
+
+    .anchor--teal {
+        color: #66d9e0;
+    }
+    .anchor--teal:link {
+        color: #66d9e0;
+    }
+
+    .anchor--suggested-matches {
+      display: inline-block;
+      width: 48%;
+      margin-top: 0.8rem;
+      color: #66d9e0;
+    }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Logo
