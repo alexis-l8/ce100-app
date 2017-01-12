@@ -1,18 +1,22 @@
 <li class="list__item">
+  {{#if permissions.admin}}
+    {{>indicator-left isActive=active}}
+  {{/if}}
+  <div class="list__subblock">
 
     {{#if permissions.admin}}
-    <a class="icon--edit" href="/people/{{id}}/edit">
+    <a class="icon--edit-list" href="/people/{{id}}/edit">
       <img src="../../public/assets/Edit.svg" alt="Edit" />
     </a>
     {{/if}}
 
     <span class="list__data list__data--primary">{{first_name}} {{last_name}}</span>
-    <span class="list__data list__data">
+    <span class="list__data">
       {{#if job_title}}
         {{#if org_name}}
-        {{job_title}} at {{org_name}}
+          {{job_title}} at {{org_name}}
         {{else}}
-        {{job_title}}
+          {{job_title}}
         {{/if}}
       {{else if org_name}}
         {{org_name}}
@@ -20,28 +24,25 @@
     </span>
 
 
-
-    <div class="list__ellipsis" tabindex="1">
-        <i class="circle"></i>
-        <i class="circle"></i>
-        <i class="circle"></i>
-    </div>
+    <label class="list__ellipsis" for={{id}}>
+      <i class="circle"></i>
+      <i class="circle"></i>
+      <i class="circle"></i>
+    </label>
+    <input  type="checkbox"
+            class="list__ellipsis--checked"
+            id="{{id}}">
 
     <div class="list__hidden-details">
-
+      <a href="mailto:{{email}}">
         <span class="list__data">{{email}}</span>
+      </a>
 
-        <span class="list__data">{{phone}}</span>
+      <span class="list__data">{{phone}}</span>
 
-        {{#if permissions.admin}}
-          <span class="list__data">{{user_type}}</span>
-          <span class="list__data">
-            {{#if active}}
-              Active
-            {{else}}
-              Inactive
-            {{/if}}
-          </span>
-        {{/if}}
+      {{#if permissions.admin}}
+        <span class="list__data">{{user_type}}</span>
+      {{/if}}
     </div>
+  </div>
 </li>
