@@ -3,49 +3,19 @@
 
 <!-- Main Content -->
 <div class="container">
-    <div class="card card--header daintree--blue">
-      <a class="title--link" href="/insights/tags">
-        <h1 class="title">
-          {{#if filter}}{{filter.name}}{{else}}All tags{{/if}}
-        </h1>
-        <div class="icon icon--dropdown"></div>
-      </a>
-    </div>
 
-    <!-- TODO MAKE THIS DIV A PARTIAL -->
-    <div class="card card--header">
-      <ul class="navbar__links">
-        <li class="navbar__item togglebar__item--selected">
-          {{#if filter}}
-            <a class="navbar__link togglebar__link togglebar__link--selected" href="/insights?tags={{filter.id}}">
-          {{else}}
-            <a class="navbar__link togglebar__link togglebar__link--selected" href="/insights">
-          {{/if}}
-            Insights
-        </a></li>
+  <!-- browse navigation tab bar -->
+  {{>browse-tab-navigation}}
 
-        <li class="navbar__item togglebar__item">
-          {{#if filter}}
-            <a class="navbar__link togglebar__link" href="/challenges?tags={{filter.id}}">
-          {{else}}
-            <a class="navbar__link togglebar__link" href="/challenges">
-          {{/if}}
-            Challenges
-          </a></li>
-      </ul>
-    </div>
-
-      {{#if insights}}
-        <ul>
-          <p>
-          </p>
-          {{#each insights}}
-            {{>insights permissions=../permissions}}
-          {{/each}}
-        </ul>
-      {{else}}
-        <h3 class="title title-blue">Nothing meets your search criteria.</h3>
-      {{/if}}
+  {{#if insights}}
+    <ul>
+      {{#each insights}}
+        {{>insights permissions=../permissions}}
+      {{/each}}
+    </ul>
+  {{else}}
+    <h3 class="title title-blue">Nothing meets your search criteria.</h3>
+  {{/if}}
 </div>
 
 <!-- Include Navbar -->
