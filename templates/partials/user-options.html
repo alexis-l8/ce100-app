@@ -1,0 +1,12 @@
+<span class="form__label">User type</span>
+{{#each userTypes}}
+  {{>radio}}
+{{/each}}
+
+<label class="form__label" for="org_id">Organisation</label>
+<select class="form__input" name="org_id">
+  <option value=-1>Please Select</option>
+  {{#each orgs}}
+    {{>dropdown}}
+  {{/each}}
+</select>

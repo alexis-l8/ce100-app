@@ -28,10 +28,10 @@
         <label class="form__label" for="author">Author</label>
         <input class="form__input {{error.author}}" type="text" name="author" id="author" placeholder="Write Here..." value="{{error.values.author}}">
 
-        <label class="form__label" for="doctype">Type</label>
-        <select class="form__input" name="doctype">
+        <label class="form__label" for="type">Type</label>
+        <select class="form__input" name="type">
           <option value=-1>Please Select</option>
-          {{#each doctype}}
+          {{#each typeDropdown}}
             {{>dropdown}}
           {{/each}}
         </select>

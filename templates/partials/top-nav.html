@@ -2,20 +2,13 @@
   <img class="navbar__top__logo" alt="" src="../../public/assets/logo.png"></img>
   <!-- <div class="navbar__top__hamburger" tabindex="1"></div> -->
 
-  {{#if permissions.primary}}
-    <ul class="navbar__top__links">
-      <li class="navbar__top__item">
-        <a href="/people/{{permissions.userId}}/edit" class="navbar__top__link">Settings</a></li>
-      <li class="navbar__top__item">
-        <a href="/people" class="navbar__top__link">People</a></li>
-    </ul>
+  <ul class="navbar__top__links">
+    <li class="navbar__top__item">
+      <a href="/people/{{permissions.userId}}/edit" class="navbar__top__link">Settings</a></li>
+    <li class="navbar__top__item">
+      <a href="/people" class="navbar__top__link">People</a></li>
+    <li class="navbar__top__item">
+      <a href="/insights" class="navbar__top__link">Insights</a></li>
+  </ul>
 
-  {{else if permissions.admin}}
-    <ul class="navbar__top__links">
-      <li class="navbar__top__item">
-        <a href="/people/{{permissions.userId}}/edit" class="navbar__top__link">Settings</a></li>
-      <li class="navbar__top__item">
-        <a href="/people" class="navbar__top__link">People</a></li>
-    </ul>
-  {{/if}}
 </nav>

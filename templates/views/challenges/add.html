@@ -22,18 +22,22 @@
         <p class="copy copy--form">Try to keep it short and memorable</p>
         <input class="form__input {{error.title}}" type="text" name="title" id="title" placeholder="Write Here..." value="{{error.values.title}}">
         <label class="form__label" for="description">Short description</label>
-        <textarea class="form__input {{error.description}}" name="description" id="description" placeholder="Write Here..." rows="4" cols="50">{{#if error.values.description}}{{error.values.description}}{{/if}}</textarea>
+        <textarea class="form__input form__input--text-area {{error.description}}"
+                  id="description"
+                  name="description"
+                  placeholder="Write Here..."
+                  rows="4" cols="50">{{#if error.values.description}}{{error.values.description}}{{/if}}</textarea>
       {{#if tags}}
         {{#each tags}}
           <span class="tag__label">{{name}}</span>
         {{/each}}
         <div class="copy copy--form">
-          <p>Add up to 5 tags on the next screen.</p>
+          <p>Add up to 10 tags on the next screen.</p>
           <p>These tags will be searchable and will help people to find your Challenge.</p>
         </div>
       {{else}}
       <div class="copy copy--form">
-        <p>Add up to 5 tags on the next screen.</p>
+        <p>Add up to 10 tags on the next screen.</p>
         <p>These tags will be searchable and will help people to find your Challenge.</p>
       </div>
       {{/if}}
