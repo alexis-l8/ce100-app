@@ -15,7 +15,7 @@ module.exports = function (request, reply) {
       Hoek.assert(!pgErr, 'error getting insights by tag' + pgErr);
       options = Object.assign(
         { insights: pgRes.insights },
-        { filter: pgRes.filter },
+        { filter: helpers.browseViewTabBar('insights', pgRes.filter) },
         permissions
       );
 

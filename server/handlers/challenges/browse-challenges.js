@@ -14,9 +14,10 @@ module.exports = function (request, reply) {
   request.server.methods.pg.challenges.getByTag(filterTag,
     function (pgErr, pgRes) {
       Hoek.assert(!pgErr, 'error getting challenges by tag');
+
       options = Object.assign(
         { data: pgRes.challenges },
-        { filter: pgRes.filter },
+        { filter: helpers.browseViewTabBar('challenges', pgRes.filter) },
         permissions
       );
 
