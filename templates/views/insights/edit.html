@@ -1,0 +1,66 @@
+<!-- Include Top Navbar -->
+{{>top-nav}}
+
+<!-- Main Content -->
+<div class="container">
+    <div class="card card--header">
+      <h1 class="title">Edit resource or insight</h1>
+      <a class="icon icon--cancel" href="/insights"></a>
+    </div>
+
+    {{#if error}}
+    <div class="snackbar snackbar--error">
+      <h1 class="snackbar-content snackbar-content--error">{{error.message}}</h1>
+    </div>
+    {{/if}}
+
+    <form class="form" method="post">
+
+      <div class="form__section">
+
+        <label class="form__label" for="title">Title</label>
+        <textarea class="form__input {{error.title}}" name="title" id="title" placeholder="Write Here..." rows="2" cols="50">{{#if error.values.title}}{{error.values.title}}{{else}}{{title}}{{/if}}</textarea>
+
+        <label class="form__label" for="author">Author</label>
+        <input class="form__input {{error.author}}" type="text" name="author" id="author" placeholder="Write Here..." value="{{#if error.values.author}}{{error.values.author}}{{else}}{{author}}{{/if}}">
+
+        <label class="form__label" for="type">Type</label>
+        <select class="form__input" name="type">
+          <option value=-1>Please Select</option>
+          {{#each typeDropdown}}
+            {{>dropdown}}
+          {{/each}}
+        </select>
+
+        <label class="form__label" for="url">URL</label>
+        <input class="form__input {{error.url}}" type="url" name="url" id="url" placeholder="Write Here..." value="{{#if error.values.url}}{{error.values.url}}{{else}}{{url}}{{/if}}">
+
+        <div class="form__section--radio">
+          {{#if resource}}
+            <input class="form__input form__input--radio {{error.resource}}" type="checkbox" name="resource" id="resource" value="error.values.resource" checked="checked">
+          {{else}}
+            <input class="form__input form__input--radio {{error.resource}}" type="checkbox" name="resource" id="resource" value="error.values.resource">
+          {{/if}}
+          <label class="form__label form__label--radio" for="resource">Show in resources</label>
+        </div>
+
+        <div class="form__section--radio">
+          {{#if active}}
+            <input class="form__input form__input--radio" type="checkbox" name="active" id="active" checked="true">
+          {{else}}
+            <input class="form__input form__input--radio" type="checkbox" name="active" id="active">
+          {{/if}}
+          <label class="form__label form__label--radio" for="active">Enabled</label>
+        </div>
+      </div>
+
+
+      <button class="button button--margin" type="submit">Edit Tags</button>
+
+    </form>
+</div>
+
+<!-- Include Feedback Widget -->
+{{>feedback}}
+<!-- Include Navbar -->
+{{>navbar}}

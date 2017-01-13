@@ -1,5 +1,9 @@
 var helpers = {};
 
+var INSIGHT_TYPES = [
+  'CASE STUDY', 'PAPER', 'PRESENTATION', 'REPORT', 'VIDEO', 'WORKSHOP SUMMARY'
+];
+
 helpers.getPermissions = (loggedIn, key, identifier) => {
   return loggedIn && {
     permissions: {
@@ -11,10 +15,30 @@ helpers.getPermissions = (loggedIn, key, identifier) => {
   };
 };
 
+helpers.insightTypeDropdown = function (selected) {
+  return INSIGHT_TYPES.map(function (type) {
+    return {
+      isSelected: type === selected,
+      id: type,
+      name: type
+    };
+  });
+};
+
 helpers.removeLinkedOrgs = (orgs, userId) => {
   return orgs.filter((org) => {
     return org.active_primary_user === null || org.active_primary_user === userId;
   })
+};
+
+helpers.browseViewTabBar = function (pageType, filter) {
+  return {
+    id: filter && filter.id, // if not searching by a filter, filter = null
+    name: filter && filter.name,
+    url: filter ? '?tags=' + filter.id : '',
+    [pageType]: true,
+    pageType: pageType
+  };
 }
 
 // we want to `select` the org that the user is attached to
@@ -24,7 +48,7 @@ helpers.editUserOrgDropdown = (orgs, user) => {
     .map(org => {
       return Object.assign({ isSelected:  org.id === user.org_id }, org);
     });
-}
+};
 
 helpers.removeUserFromOrg = (orgString, userId) => {
   var org = JSON.parse(orgString);

@@ -14,11 +14,12 @@ module.exports = function (request, reply) {
   request.server.methods.pg.organisations.orgsGetByTag(
     !permissions.permissions.admin, filterTag,
     function (pgErr, data) {
+      console.log(data.filter);
       Hoek.assert(!pgErr, 'error getting challenges by tag');
       options = Object.assign(
         {},
         { data: data.orgs },
-        { filter: data.filter },
+        { filter: helpers.browseViewTabBar('orgs', data.filter) },
         permissions
       );
 

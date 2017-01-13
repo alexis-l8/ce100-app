@@ -5,7 +5,11 @@
 <div class="container">
 
     <div class="card card--header card--tall">
-      <img class="logo logo--with-title" src="../public/assets/Profile.svg" alt="{{org.name}} logo">
+      {{#if org.logo_url}}
+      <img class="logo logo--with-title logo--with-title-custom" src="{{org.logo_url}}" alt="{{org.name}} logo">
+      {{else}}
+      <img class="logo logo--with-title logo--with-title-default" src="../public/assets/Profile.svg" alt="{{org.name}} logo">
+      {{/if}}
       <h1 class="title title--with-logo">{{org.name}}</h1>
     </div>
 
@@ -25,7 +29,7 @@
       <div class="card">
         <h2 class="card__header">Our experience</h2>
         {{#each org.tags}}
-          <a href="/challenges?tags={{tag_id}}"><span class="tag__label">{{tag_name}}</span></a>
+          <a href="/orgs?tags={{tag_id}}"><span class="tag__label">{{tag_name}}</span></a>
         {{/each}}
       </div>
     {{/if}}

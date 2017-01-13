@@ -3,50 +3,21 @@
 
 <!-- Main Content -->
 <div class="container">
-    <div class="card card--header daintree--blue">
-      <a class="title--link" href="/orgs/tags">
-        <h1 class="title">
-          {{#if filter}}{{filter.name}}{{else}}All tags{{/if}}
-        </h1>
-        <div class="icon icon--dropdown"></div>
-      </a>
-    </div>
+  <!-- browse navigation tab bar -->
+  {{>browse-tab-navigation}}
 
-    <!-- TODO MAKE THIS DIV A PARTIAL -->
-    <div class="card card--header">
-      <ul class="navbar__links">
-        <li class="navbar__item togglebar__item--selected">
-          {{#if filter}}
-            <a class="navbar__link togglebar__link togglebar__link--selected" href="/orgs?tags={{filter.id}}">
-          {{else}}
-            <a class="navbar__link togglebar__link togglebar__link--selected" href="/orgs">
-          {{/if}}
-            Organisations
-        </a></li>
-
-        <li class="navbar__item togglebar__item">
-          {{#if filter}}
-            <a class="navbar__link togglebar__link" href="/challenges?tags={{filter.id}}">
-          {{else}}
-            <a class="navbar__link togglebar__link" href="/challenges">
-          {{/if}}
-            Challenges
-          </a></li>
-      </ul>
-    </div>
-
-      {{#if data}}
-        <ul>
-          <p>
-          </p>
-          {{#each data}}
-            {{>organisation admin=../permissions.admin}}
-          {{/each}}
-        </ul>
-      {{else}}
-        <h3 class="title title-blue">Nothing meets your search criteria.</h3>
-      {{/if}}
+  {{#if data}}
+    <ul>
+      {{#each data}}
+        {{>organisation admin=../permissions.admin}}
+      {{/each}}
+    </ul>
+  {{else}}
+    <h3 class="title title-blue">Nothing meets your search criteria.</h3>
+  {{/if}}
 </div>
 
+<!-- Include Feedback Widget -->
+{{>feedback}}
 <!-- Include Navbar -->
 {{>navbar}}

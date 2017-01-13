@@ -8,8 +8,8 @@
     </div>
 
     {{#if error}}
-    <div class="snackbar snackbar-error">
-      <h1 class="error">{{error.message}}</h1>
+    <div class="snackbar snackbar--error">
+      <h1 class="snackbar-content snackbar-content--error">{{error.message}}</h1>
     </div>
     {{/if}}
 
@@ -29,19 +29,7 @@
       <label class="form__label" for="phone">Phone number</label>
       <input class="form__input {{error.phone}}" type="tel" name="phone" id="phone" placeholder="Write Here..." value="{{error.values.phone}}">
 
-      <span class="form__label">User type</span>
-      {{#each userTypes}}
-        {{>radio}}
-      {{/each}}
-
-      <label class="form__label" for="org_id">Organisation</label>
-      <select class="form__input" name="org_id">
-        <option value=-1>Please Select</option>
-        <option value=-1>N/A (Admin)</option>
-        {{#each orgs}}
-          {{>dropdown}}
-        {{/each}}
-      </select>
+      {{>user-options}}
 
       <div class="form__section form__section--last">
         <button class="button">Save</button>
