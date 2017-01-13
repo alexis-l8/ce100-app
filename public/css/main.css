@@ -363,12 +363,14 @@ Light-teal:     #66d9e0;
         .list__data {
             display: block;
             color: #89a0ae;
+            text-decoration: none;
         }
         .list__subblock {
             display: inline-block;
         }
         .list__data--primary {
             color: #40667e;
+            font-size: 1.2rem;
         }
         .list__data--secondary {
             color: #89a0ae;
@@ -726,19 +728,19 @@ Light-teal:     #66d9e0;
 }
 
 .indicator {
-  width: 0.7rem;
-  height: 0.7rem;
+  width: 0.5rem;
+  height: 0.5rem;
   margin: 0.2rem;
-  border-radius: 50px;
+  border-radius: 0.5rem;
   display: inline-block;
   float: right;
 }
 
   .indicator--active {
-      background-color: green;
+      background-color: #4bc097;
   }
   .indicator--inactive {
-    background-color: #900000;
+    background-color: #e33838;
   }
   .indicator--left {
     float: left;
