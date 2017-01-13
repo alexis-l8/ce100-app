@@ -13,7 +13,7 @@ module.exports = function (request, reply, source, joiErr) {
   var getActiveOrgs = request.server.methods.pg.organisations.getActive;
   var options, msg;
 
-  if (loggedIn.userId !== editId && loggedIn.scope !== 'admin') {
+  if (JSON.parse(loggedIn.userId) !== editId && loggedIn.scope !== 'admin') {
     msg = 'You do not have the permissions to edit this user\'s settings';
 
     return reply(Boom.badRequest(msg));
