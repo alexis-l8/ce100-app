@@ -5,18 +5,15 @@
       <img src="../../../public/assets/Edit.svg" alt="Edit" />
     </a>
   {{/if}}
-  <a class="anchor" href="/challenges/{{id}}">
-    <p class="card__header card__header--challenge">{{title}}</p>
+  <a class="anchor card__header" href="/challenges/{{id}}">
+    <p class="card__header">{{title}}</p>
   </a>
 
-  <p class="card__copy">{{description}}</p>
-  {{#each tags}}
-    <a class="text-decoration" href="/challenges?tags={{tag_id}}">
-      <span class="tag__label">{{tag_name}}</span>
-    </a>
-  {{/each}}
-
   {{#if shared_by}}
-    <h4 class="card__copy card__additional">Shared by {{shared_by}}</h4>
+    <h4 class="card__copy card__additional--small">Shared by
+      <a class="card__copy card__additional--small anchor" href="/orgs/{{org_id}}">
+        {{shared_by}}
+      </a>
+    </h4>
   {{/if}}
 </div>
