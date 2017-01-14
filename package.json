@@ -47,7 +47,7 @@
     "pg-people": "^0.0.24",
     "redis": "^2.6.2",
     "redis-connection": "^5.0.0",
-    "sendemail": "2.3.0",
+    "sendemail": "2.8.0",
     "tags-system": "^1.1.7",
     "vision": "^4.1.0"
   },

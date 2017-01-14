@@ -1,12 +1,12 @@
 'use strict';
 
-var email = require('sendemail');
-var sendEmail = {};
+var sendEmail = require('sendemail');
+var sender = {};
 
-email.set_template_directory('server/email-templates');
+sendEmail.set_template_directory('server/email-templates');
 
-sendEmail.newUser = function (recipient, callback) {
-  email('welcome', recipient, callback);
+sender.newUser = function (recipient, callback) {
+  sendEmail.email('welcome', recipient, callback);
 };
 
-module.exports = sendEmail;
+module.exports = sender;
