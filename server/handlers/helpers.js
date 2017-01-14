@@ -1,3 +1,6 @@
+'use strict';
+
+var url = require('url');
 var helpers = {};
 
 var INSIGHT_TYPES = [
@@ -133,5 +136,21 @@ helpers.errorOptions = (err) =>
     message: err.data.details[0].message.split('"').join('').split('_').join(' ').split('-').join(' '),
     [err.data.details[0].path]: 'form__input-error'
   };
+
+
+
+/* --------- view logic helpers ----------- */
+
+helpers.getCancelUrl = function (req) {
+  var defaultHomePage = req.auth.credentials.organisation_id
+    ? '/orgs/' + req.auth.credentials.organisation_id // non-admin default
+    : '/orgs'; // admin default
+  var previous = url.parse(req.info.referrer).path;
+  var current = req.path;
+
+  // if the previous path is same as current, redirect to the user's default
+  return current === previous ? defaultHomePage : previous;
+};
+
 
 module.exports = helpers;

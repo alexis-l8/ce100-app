@@ -41,4 +41,6 @@ require('./people/add-user.test.js');
 // tags
 require('./browse/select-tags-browse-view.test.js');
 
+require('./unit/getCancelUrl.js');
+
 require('./server/auth.test.js');
