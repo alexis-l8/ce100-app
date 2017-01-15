@@ -26,7 +26,12 @@ module.exports = function (request, reply) {
       return reply(Boom.forbidden('You are not allowed to view that challenge'));
     }
 
-    options = Object.assign({}, permissions, { challenge: challenge });
+    options = Object.assign(
+      {},
+      permissions,
+      { challenge: challenge },
+      { cancelUrl: helpers.getCancelUrl(request) }
+    );
     // if the logged in user does not belong to this challenges org or is not an
     // admin then they will not be able to see suggested matches
     if (!options.permissions.editable) {
