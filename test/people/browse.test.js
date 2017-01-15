@@ -122,7 +122,7 @@ tape('/people quick contact list sort users correctly', function (t) {
   sessions.addAll(function () {
     init(config, function (error, server, pool) {
       server.inject(browseAll(adminToken), function (res) {
-        var viewableUsers = res.payload.split('list__ellipsis');
+        var viewableUsers = res.payload.split('list__data--primary');
         var benInstances = [];
         viewableUsers.forEach((el, i) => {
           el.indexOf('Ben M') > -1 && benInstances.push(i);
