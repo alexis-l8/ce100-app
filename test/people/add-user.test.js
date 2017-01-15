@@ -5,7 +5,7 @@ var sessions = require('../helpers/add-sessions.js');
 var init = require('../../server/server.js');
 var config = require('../../server/config.js');
 var sinon = require('sinon');
-var sendEmail = require('../../server/email.js');
+var sendEmail = require('sendemail');
 
 var addUser = function (userObj) {
   return {
@@ -51,16 +51,16 @@ tape('orgs/add add user with no organisation', function (t) {
       var userObj = {
         first_name: 'Jaja',
         last_name: 'Bink',
-        email: 'jmurphy.web@gmail.com',
+        email: 'jaja@gmail.com',
         phone: '+44208837733',
         user_type: 'primary',
         job_title: 'CEO',
         org_id: -1
       };
 
-      // sinon will call the function we pass as the 3rd argument instead of sendEmail.newUser function.
+      // sinon will call the function we pass as the 3rd argument instead of sendemail.email function.
       // it will callback with no error.
-      var emailSender = sinon.stub(sendEmail, 'newUser', function ({}, cb) {
+      var emailSender = sinon.stub(sendEmail, 'email', function (str, user, cb) {
         cb(null); // We only check that there is no error in the handler
       });
       server.inject(addUser(userObj), function (res) {
