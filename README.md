@@ -100,6 +100,7 @@ Once the domain's HTTP/TCP protocol has been decided on, it might make sense to 
 ### Browse types of tag and tags
 - ```/orgs/tags```
 - ```/challenges/tags```
+- ```/insights/tags```
 
 Display all the tags by categories (or type of tags):
 ![list-tags](doc/img/list-tags.png)
@@ -110,33 +111,40 @@ Clicking on a category will display the list of tags linked to this category:
 Each tags is a link to the filter organisations or challenges pages
 
 
-### Browse organisations and challenges
+### Browse insights, organisations and challenges
 - ```/orgs```
 - ```/challenges```
+- ```/insights```
 
 Clicking on 'Browse' in the left side of the bottom-nav, will take you to a page where, by default, all orgs will be displayed.
 Both active and inactive orgs will be displayed to admin, but only active orgs will be displayed to primary users.
 This view displays only the organisation names; for more information, click on the name of an organisation, and you will be taken to their profile.
+
 ![browse-orgs](doc/img/browse-orgs.png)
 
 If the connected user is an admin the view displays on the left a green or red button which indicates if the organisation is active or inactive
-![indicator-org](doc/img/indicator-org.png)
+![indicator-org](doc/img/explore-orgs-no-filter-admin.png)
 
-To view and browse challenges instead, click on the 'Challenges' option; this will take you to a page where all challenges will be displayed.
+To view and browse challenges or insights instead, click on the 'Challenges' or 'insights' navigation option; this will take you to a page where all challenges/insights will be displayed.
 Only active challenges, from active organisations will be displayed to both admin and primary user.
-Challenges will list the title, full description and (if there are) any tags attached to the challenge.
-![browse-chals](doc/img/browse-chals.png)
+Challenges will list the title, full description and (if there are) any tags attached to the challenge. Clicking on a challenge title will take the user to that challenge's view.
+
+![browse-chals](doc/img/explore-challenges-no-filter-admin.png)
 
 
 ### Filter organisation and challenges by selected tag
 - ```/orgs?tag=id_of_the_filter_tag```
 - ```/challenges?tag=id_of_the_filter_tag```
+- ```/insights?tag=id_of_the_filter_tag```
+
 
 Selecting one of the tags from the browse tag view will filter the organisations or challenges depending on the type of the page the user is on. The list of organisation (or challenges) are all the item where the tag selected is also linked on:
-![filter-orgs](doc/img/filter-orgs.png)
+
+![filter-orgs](doc/img/explore-navigation-no-filter.png)
 
 If no organisations or challenges are linked to the selected tag the view will inform the user that no items have been found:
-![filter-orgs](doc/img/filter-no-result.png)
+
+![filter-orgs](doc/img/explore-navigation-with-filter.png)
 
 ### Edit tags linked to an organisations
 - ```/orgs/{idOrg}/tags```
