@@ -6,6 +6,7 @@ var init = require('../../server/server.js');
 var config = require('../../server/config.js');
 var sinon = require('sinon');
 var sendEmail = require('sendemail');
+var people = require('ce100-mock-data').people;
 
 var addUser = function (userObj) {
   return {
@@ -64,7 +65,7 @@ tape('orgs/add add user with no organisation', function (t) {
         cb(null); // We only check that there is no error in the handler
       });
       server.inject(addUser(userObj), function (res) {
-        var expected = { org_id: null, id: 12, org_name: null };
+        var expected = { org_id: null, id: people.length + 1, org_name: null };
 
         emailSender.restore(); // restore the send emails normal functionality
         t.deepEqual(res.result, expected, 'successful email returns with new user details');
