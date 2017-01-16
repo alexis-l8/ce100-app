@@ -5,6 +5,7 @@
 [![dependencies Status](https://david-dm.org/emfoundation/ce100-app/status.svg)](https://david-dm.org/emfoundation/ce100-app)
 [![devDependencies Status](https://david-dm.org/emfoundation/ce100-app/dev-status.svg)](https://david-dm.org/emfoundation/ce100-app?type=dev)
 
+**See [here](https://github.com/emfoundation/ce100-app/blob/master/technical.md) for the technical readme!**
 
 A networking, knowledge sharing and collaboration platform for the Circular Economy 100 network, an Ellen MacArthur Foundation programme.
 
