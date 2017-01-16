@@ -23,7 +23,11 @@
       </a>
     {{/each}}
 
-    <h4 class="card__copy card__additional">Shared by {{challenge.org_name}}</h4>
+    <h4 class="anchor card__copy card__additional">Shared by
+      <a class="anchor card__copy " href="/orgs/{{challenge.org_id}}">
+        {{challenge.org_name}}
+      </a>
+    </h4>
   </div>
   {{#if permissions.editable}}
     <div class="card card--challenge card__suggested-matches">

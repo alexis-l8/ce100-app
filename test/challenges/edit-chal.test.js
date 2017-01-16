@@ -124,7 +124,6 @@ tape('/challenges/{id}/edit POST endpoint, primary user can update existing info
           t.equal(res.headers.location, '/challenges/' + chalId + '/tags', 'Admin redirected to add tags view');
           server.inject(viewChals(primaryToken, chalId, updatedChal), function (res) {
             t.ok(res.result.indexOf(updatedChal.title) > -1, 'active challenge title correctly updated');
-            t.ok(res.result.indexOf(updatedChal.description) > -1, 'active challenge description correctly updated');
             t.end();
             server.stop();
             pool.end();

@@ -36,18 +36,14 @@ tape(file + ': Admin view org details view', function (t) {
         t.ok(res.payload.indexOf('sa@ro.co') > -1, 'Organisations primary user email is displayed');
 
         // Challenges
-        // We can check the correct challenge and tags are displayed
+        // We can check the correct challenge name is displayed
         // Admin cannot edit challenges
         t.equal(res.payload.indexOf('/challenges/3/edit'), -1, 'Admin cannot edit the organisations challenge');
         t.ok(res.payload.indexOf('Challenge Number 3') > -1, 'Correct challenge is displayed');
-        t.ok(res.payload.indexOf('Buildings design') > -1, 'Correct tag displayed');
-        t.ok(res.payload.indexOf('Fertiliser') > -1, 'Correct tag displayed');
-        t.ok(res.payload.indexOf('Waste to energy') > -1, 'Correct tag displayed');
 
         // Challenges
         t.equal(res.payload.indexOf('/challenges/2/edit'), -1, 'Admin cannot edit the organisations challenge');
         t.ok(res.payload.indexOf('Challenge Number 2') > -1, 'Correct challenge is displayed');
-        t.ok(res.payload.indexOf('Corporate') > -1, 'Correct tag displayed');
 
         t.end();
         pool.end();
@@ -111,13 +107,10 @@ tape(file + ': Primary user viewing a different organisation', function (t) {
 
 
         // Challenges
-        // We can check the correct challenge and tags are displayed for org 2
+        // We can check the correct challenge name is displayed for org 2
         // Primary cannot edit challenges
         t.equal(res.payload.indexOf('/challenges/4/edit'), -1, 'Primary user cannot edit a different organisations challenges');
         t.ok(res.payload.indexOf('Challenge Number 4') > -1, 'Correct challenge is displayed');
-        t.ok(res.payload.indexOf('Automotive and Transport Manufacturing') > -1, 'Correct tag displayed');
-        t.ok(res.payload.indexOf('Chemicals') > -1, 'Correct tag displayed');
-        t.ok(res.payload.indexOf('Secondary education') > -1, 'Correct tag displayed');
 
         // Challenge Number 5
         t.equal(res.payload.indexOf('/challenges/5/edit'), -1, 'Primary user cannot edit a different organisations challenges');

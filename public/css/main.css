@@ -770,9 +770,6 @@ Light-teal:     #66d9e0;
 .anchor:hover {
     text-decoration: none;
 }
-.anchor:active {
-    font-size: 0.9em;
-}
 
     .anchor--danger:link {
         color: #900000;
