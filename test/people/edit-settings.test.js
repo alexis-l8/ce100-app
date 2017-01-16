@@ -101,7 +101,7 @@ tape('/people/{id}/edit GET endpoint of primary user X as primary user Y',
       init(config, function (error, server, pool) {
         t.ok(!error, 'No error on init server');
         server.inject(editProfile(primaryToken, unauthId, null), function (res) {
-          t.equal(res.statusCode, 400, 'primary unauthorised to access settings view of another primary user');
+          t.equal(res.statusCode, 403, 'primary unauthorised to access settings view of another primary user');
           t.end();
           server.stop();
           pool.end();

@@ -11,12 +11,10 @@ module.exports = function (request, reply, source, joiErr) {
   var editId = request.params.id && JSON.parse(request.params.id);
   var getBy = request.server.methods.pg.people.getBy;
   var getActiveOrgs = request.server.methods.pg.organisations.getActive;
-  var options, msg;
+  var options;
 
-  if (JSON.parse(loggedIn.userId) !== editId && loggedIn.scope !== 'admin') {
-    msg = 'You do not have the permissions to edit this user\'s settings';
-
-    return reply(Boom.badRequest(msg));
+  if (parseInt(loggedIn.userId, 10) !== editId && loggedIn.scope !== 'admin') {
+    return reply(Boom.forbidden());
   }
 
   return getBy('id', editId, function (pgErr, profile) {
