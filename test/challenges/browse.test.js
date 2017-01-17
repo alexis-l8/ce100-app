@@ -5,19 +5,17 @@ var sessions = require('../helpers/add-sessions.js');
 var init = require('../../server/server.js');
 var config = require('../../server/config.js');
 
-var adminToken = sessions.tokens(config.jwt_secret).admin_1;
-var primaryToken = sessions.tokens(config.jwt_secret).primary_3;
 var adFiltered, prFiltered, filterRegex;
 var filterTag = {
   id: 69,
   name: 'Design for disassembly'
 };
 
-var browseAll = function (cookie, filter) {
+var browseAll = function (user, filter) {
   return {
     method: 'GET',
     url: filter ? '/challenges?tags=' + filter : '/challenges',
-    headers: { cookie: 'token=' + cookie }
+    headers: { cookie: 'token=' + sessions.tokens(config.jwt_secret)[user] }
   };
 };
 
@@ -47,7 +45,7 @@ tape('access /challenges as a logged-in admin', function (t) {
   sessions.addAll(function () {
     init(config, function (error, server, pool) {
       t.ok(!error, 'no initialising error');
-      server.inject(browseAll(adminToken), function (res) {
+      server.inject(browseAll('admin_1'), function (res) {
         t.equal(res.statusCode, 200, 'route accessible to admin');
         t.end();
         server.stop();
@@ -62,7 +60,7 @@ tape('access /challenges as a logged-in primary user', function (t) {
   sessions.addAll(function () {
     init(config, function (error, server, pool) {
       t.ok(!error, 'no initialising error');
-      server.inject(browseAll(primaryToken), function (res) {
+      server.inject(browseAll('primary_3'), function (res) {
         t.equal(res.statusCode, 200, 'route accessible to admin');
         t.end();
         server.stop();
@@ -72,23 +70,28 @@ tape('access /challenges as a logged-in primary user', function (t) {
   });
 });
 
-// challenges are filtered correctly
-tape('access /challenges?tags=' + filterTag.id + ' as a logged-in admin',
+//
+tape('/challenges?tags=' + filterTag.id + ' - challenges are filtered correctly for admin, primary and secondary: --> ' + __filename,
   function (t) {
     sessions.addAll(function () {
       init(config, function (error, server, pool) {
         t.ok(!error, 'no initialising error');
-        server.inject(browseAll(adminToken, filterTag.id), function (adRes) {
-          adFiltered = adRes.payload;
-          server.inject(browseAll(primaryToken, filterTag.id), function (prRes) {
-            prFiltered = prRes.payload;
-            filterRegex = new RegExp('Design for disassembly', 'g');
-            t.deepEqual(adFiltered.match(filterRegex),
-              prFiltered.match(filterRegex),
-              'admin and primary have the same filtered view');
-            t.end();
-            server.stop();
-            pool.end();
+        server.inject(browseAll('admin_1', filterTag.id), function (adminRes) {
+          server.inject(browseAll('primary_3', filterTag.id), function (primaryRes) {
+            server.inject(browseAll('secondary_12', filterTag.id), function (secondaryRes) {
+              // split at each challenge card
+              var admin = adminRes.payload.split('<div class="card card--challenge">');
+              var primary = primaryRes.payload.split('<div class="card card--challenge">');
+              var secondary = secondaryRes.payload.split('<div class="card card--challenge">');
+
+              // check that they each have equal number of challenges displayed
+              t.equal(admin.length, 3, 'admin can see correct number of challenges');
+              t.equal(primary.length, 3, 'primary can see correct number of challenges (same as admin)');
+              t.equal(secondary.length, 3, 'secondary can see correct number of challenges (same as admin and primary)');
+              t.end();
+              server.stop();
+              pool.end();
+            });
           });
         });
       });
