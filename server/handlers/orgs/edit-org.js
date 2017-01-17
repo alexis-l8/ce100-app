@@ -28,7 +28,7 @@ module.exports = function (request, reply) {
   var loggedIn = request.auth.credentials;
   var newOrg;
 
-  if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin') {
+  if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin' || loggedIn.scope === 'secondary') {
     return reply(Boom.forbidden('You do not have permission to edit that organisation.'));
   }
 

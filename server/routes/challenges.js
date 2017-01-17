@@ -33,18 +33,25 @@ module.exports = [
   {
     method: 'GET',
     path: '/challenges/{id}/tags',
-    handler: addTagsView
+    handler: addTagsView,
+    config: {
+      auth: { scope: 'primary' }
+    }
   },
   {
     method: 'POST',
     path: '/challenges/{id}/tags',
     handler: addTags,
-    config: { validate: maxAllowedTags }
+    config: {
+      validate: maxAllowedTags,
+      auth: { scope: 'primary' }
+    }
   },
   {
     method: 'GET',
     path: '/challenges/add',
-    handler: addView
+    handler: addView,
+    config: { auth: { scope: 'primary' } }
   },
   {
     method: 'POST',
@@ -58,17 +65,22 @@ module.exports = [
   {
     method: 'GET',
     path: '/challenges/{id}/edit',
-    handler: editView
+    handler: editView,
+    config: { auth: { scope: 'primary' } }
   },
   {
     method: 'POST',
     path: '/challenges/{id}/edit',
     handler: editSubmit,
-    config: { validate: editModel }
+    config: {
+      validate: editModel,
+      auth: { scope: 'primary' }
+    }
   },
   {
     method: 'GET',
     path: '/challenges/{id}/toggle-active',
-    handler: toggleActive
+    handler: toggleActive,
+    config: { auth: { scope: 'primary' } }
   }
 ];
