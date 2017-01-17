@@ -169,35 +169,35 @@ test/
 ## Endpoints
 
 ```js
-| *Endpoint* | *Methods* | *Auth/Permissions* |
-| -------| ------------- | --------------|
-| / | 'GET' | All |
-| /{path*} | 'GET' | All |
-| /login | 'GET', 'POST' | All |
-| /logout | 'GET' | All |
-| /challenges | 'GET' | All |
-| /challenges/tags | 'GET' | All |
-| /challenges/{id} | 'GET' | All |
-| /challenges/{id}/tags | 'GET', 'POST' | Editable (Primary) |
-| /challenges/add | 'GET', 'POST' | Editable (Primary) |
-| /challenges/{id}/edit | 'GET', 'POST' | Editable (Primary) |
-| /challenges/{id}/toggle-active | 'GET' | Editable (Primary) |
-| /insights | 'GET' | All |
-| /insights/tags | 'GET' | All |
-| /insights/add | 'GET', 'POST' | Admin |
-| /insights/{id}/tags | 'GET', 'POST' | Admin |
-| /insights/{id}/edit | 'GET', 'POST' | Admin |
-| /insights/{id}/toggle-active | 'GET' | Admin |
-| /orgs | 'GET' | All |
-| /orgs/tags | 'GET' | All |
-| /orgs/{id} | 'GET' | All |
-| /orgs/{id}/tags | 'GET', 'POST' | Editable (Admin, Primary) |
-| /orgs/add | 'GET', 'POST' | Admin |
-| /orgs/{id}/edit | 'GET', 'POST' | Editable (Admin, Primary) |
-| /orgs/{id}/toggle-active | 'GET' | Admin |
-| /people | 'GET' | All |
-| /people/add | 'GET', 'POST' | Admin |
-| /people/{id}/edit | 'GET', 'POST' | All |
-| /people/{id}/toggle-active | 'GET' | Admin |
-| /people/activate/{hashedId} | 'POST' | All |
+| *Endpoint*                      | *Methods*     | *Auth/Permissions*        |
+| ------------------------------- |:-------------:| -------------------------:|
+| /                               | 'GET'         | All                       |
+| /{path*}                        | 'GET'         | All                       |
+| /login                          | 'GET', 'POST' | All                       |
+| /logout                         | 'GET'         | All                       |
+| /challenges                     | 'GET'         | All                       |
+| /challenges/tags                | 'GET'         | All                       |
+| /challenges/{id}                | 'GET'         | All                       |
+| /challenges/{id}/tags           | 'GET', 'POST' | Editable (Primary)        |
+| /challenges/add                 | 'GET', 'POST' | Editable (Primary)        |
+| /challenges/{id}/edit           | 'GET', 'POST' | Editable (Primary)        |
+| /challenges/{id}/toggle-active  | 'GET'         | Editable (Primary)        |
+| /insights                       | 'GET'         | All                       |
+| /insights/tags                  | 'GET'         | All                       |
+| /insights/add                   | 'GET', 'POST' | Admin                     |
+| /insights/{id}/tags             | 'GET', 'POST' | Admin                     |
+| /insights/{id}/edit             | 'GET', 'POST' | Admin                     |
+| /insights/{id}/toggle-active    | 'GET'         | Admin                     |
+| /orgs                           | 'GET'         | All                       |
+| /orgs/tags                      | 'GET'         | All                       |
+| /orgs/{id}                      | 'GET'         | All                       |
+| /orgs/{id}/tags                 | 'GET', 'POST' | Editable (Admin, Primary) |
+| /orgs/add                       | 'GET', 'POST' | Admin                     |
+| /orgs/{id}/edit                 | 'GET', 'POST' | Editable (Admin, Primary) |
+| /orgs/{id}/toggle-active        | 'GET'         | Admin                     |
+| /people                         | 'GET'         | All                       |
+| /people/add                     | 'GET', 'POST' | Admin                     |
+| /people/{id}/edit               | 'GET', 'POST' | All                       |
+| /people/{id}/toggle-active      | 'GET'         | Admin                     |
+| /people/activate/{hashedId}     | 'POST'        | All                       |
 ```
