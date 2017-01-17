@@ -7,6 +7,24 @@ var INSIGHT_TYPES = [
   'CASE STUDY', 'PAPER', 'PRESENTATION', 'REPORT', 'VIDEO', 'WORKSHOP SUMMARY'
 ];
 
+helpers.removeDuplicates = function (orgs, cb) {
+  var newArr = [];
+  var orgNames = orgs.map(function (org) {
+    return org.name;
+  });
+  orgs.forEach(function (org, index) {
+    if (orgNames.indexOf(org.name) === index) {
+      newArr.push({
+        id: org.id,
+        name: org.name
+      });
+    }
+    if (index === orgNames.length - 1) {
+      return cb(newArr);
+    }
+  });
+};
+
 helpers.getPermissions = (loggedIn, key, identifier) => {
   return loggedIn && {
     permissions: {
@@ -28,12 +46,6 @@ helpers.insightTypeDropdown = function (selected) {
   });
 };
 
-helpers.removeLinkedOrgs = (orgs, userId) => {
-  return orgs.filter((org) => {
-    return org.active_primary_user === null || org.active_primary_user === userId;
-  })
-};
-
 helpers.browseViewTabBar = function (pageType, filter) {
   return {
     id: filter && filter.id, // if not searching by a filter, filter = null
@@ -46,11 +58,12 @@ helpers.browseViewTabBar = function (pageType, filter) {
 
 // we want to `select` the org that the user is attached to
 helpers.editUserOrgDropdown = (orgs, user) => {
-  // first remove linked orgs
-  return helpers.removeLinkedOrgs(orgs, user.id)
-    .map(org => {
-      return Object.assign({ isSelected:  org.id === user.org_id }, org);
-    });
+  return orgs.map(function (org) {
+    return Object.assign(
+      { isSelected: org.id === user.org_id },
+      org
+    );
+  });
 };
 
 helpers.removeUserFromOrg = (orgString, userId) => {
@@ -67,7 +80,7 @@ helpers.removeUserFromOrg = (orgString, userId) => {
 helpers.userTypeRadios = (user_type) => {
   // default to primary
   var checkedType = user_type || 'primary';
-  var userTypes = ['admin', 'primary'];
+  var userTypes = ['admin', 'primary', 'secondary'];
   var userTypeArr = userTypes.map(type => {
     return {
       name: 'user_type',
