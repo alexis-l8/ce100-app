@@ -9,11 +9,12 @@
   </div>
 
   <div class="card card--challenge">
-    {{#if permissions.admin}}
-    {{else if permissions.editable}}
-      <a class="icon icon--edit" href="/challenges/{{challenge.id}}/edit">
-        <img src="../../../public/assets/Edit.svg" alt="Edit" />
-      </a>
+    {{#if permissions.primary}}
+      {{#if permissions.editable}}
+        <a class="icon icon--edit" href="/challenges/{{challenge.id}}/edit">
+          <img src="../../../public/assets/Edit.svg" alt="Edit" />
+        </a>
+      {{/if}}
     {{/if}}
     <p class="card__header card__header--challenge">{{challenge.title}}</p>
     <p class="card__copy">{{challenge.description}}</p>
