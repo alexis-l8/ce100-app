@@ -210,11 +210,7 @@ tape('orgs/add add secondary user - fail: no org_id', function (t) {
       };
 
       server.inject(addUser(incorrectUserObj), function (res) {
-        t.ok(res.result,
-          'org id must be larger than or equal to 1',
-          'primary user cannot be added without being attached to an org'
-        );
-
+        t.ok(res.result.indexOf('org id must be larger than or equal to 1') > -1, 'primary user cannot be added without being attached to an org');
         t.end();
         server.stop();
         pool.end();
