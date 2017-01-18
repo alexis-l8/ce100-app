@@ -43,4 +43,6 @@ require('./browse/select-tags-browse-view.test.js');
 
 require('./unit/getCancelUrl.js');
 
+// server
 require('./server/auth.test.js');
+require('./server/permissions.test.js');

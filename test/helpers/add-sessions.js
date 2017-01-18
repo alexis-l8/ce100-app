@@ -21,13 +21,19 @@ sessions.data = [
     userId: 3, // primary user
     jti: aguid(),   // random UUID
     iat: Date.now()
+  },
+  {
+    userId: 12, // secondary user
+    jti: aguid(),   // random UUID
+    iat: Date.now()
   }
 ];
 
 sessions.tokens = function (secret) {
   return {
     admin_1: jwt.sign(sessions.data[0], secret),
-    primary_3: jwt.sign(sessions.data[2], secret)
+    primary_3: jwt.sign(sessions.data[2], secret),
+    secondary_12: jwt.sign(sessions.data[3], secret)
   };
 };
 
