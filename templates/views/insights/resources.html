@@ -1,0 +1,25 @@
+<!-- Include Top Navbar -->
+{{>top-nav}}
+
+<div class="card card--header">
+  <h1 class="title">Resources</h1>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+
+  {{#if resources}}
+    <ul>
+      {{#each resources}}
+        {{>resources}}
+      {{/each}}
+    </ul>
+  {{else}}
+    <h3 class="title title-blue">There are currently no resources.</h3>
+  {{/if}}
+</div>
+
+<!-- Include Feedback Widget -->
+{{>feedback}}
+<!-- Include Navbar -->
+{{>navbar}}

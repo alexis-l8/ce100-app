@@ -11,6 +11,7 @@ var browseInsights = require('../handlers/insights/browse-insights.js');
 var addView = require('../handlers/insights/add-view.js');
 var addSubmit = require('../handlers/insights/add.js');
 var browseAddTagsView = require('../handlers/shared/browse-add-tags-view.js');
+var browseResources = require('../handlers/insights/browse-resources.js');
 
 module.exports = [
   {
@@ -33,9 +34,7 @@ module.exports = [
     method: 'POST',
     path: '/insights/{id}/edit',
     handler: editSubmit,
-    config: {
-      auth: { scope: 'admin' }
-    }
+    config: { auth: { scope: 'admin' } }
   },
   {
     method: 'GET',
@@ -80,5 +79,10 @@ module.exports = [
     method: 'GET',
     path: '/insights/tags',
     handler: browseAddTagsView('insights')
+  },
+  {
+    method: 'GET',
+    path: '/resources',
+    handler: browseResources
   }
 ];
