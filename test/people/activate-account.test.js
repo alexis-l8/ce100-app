@@ -71,3 +71,15 @@ tape('unmatching passwords fails validation: --> ' + __filename, function (t) {
     });
   });
 });
+
+tape('activate account view with nonsense user id', function (t) {
+  init(config, function (error, server, pool) {
+    t.ok(!error, 'No error on init server');
+    server.inject(activateAccount(100000, goodPassword), function (res) {
+      t.equal(res.statusCode, 401, 'not found');
+      t.end();
+      server.stop();
+      pool.end();
+    });
+  });
+});
