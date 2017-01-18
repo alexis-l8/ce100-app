@@ -15,7 +15,7 @@ module.exports = function (request, reply, source, joiErr) {
     Hoek.assert(!pgErr, 'database error');
 
     options = Object.assign({},
-      { orgs: helpers.removeLinkedOrgs(orgs) },
+      { orgs: orgs },
       helpers.userTypeRadios(),
       permissions,
       { error: error }
