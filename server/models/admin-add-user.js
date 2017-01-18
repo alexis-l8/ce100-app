@@ -5,7 +5,11 @@ module.exports = {
     first_name: Joi.string().min(1).required(),
     last_name: Joi.string().min(1).required(),
     email: Joi.string().email().required(),
-    org_id: Joi.number().min(-1),
+    org_id: Joi.any().when('user_type', {
+      is: 'admin',
+      then: Joi.number().valid(-1),
+      otherwise: Joi.number().min(1).required()
+    }),
     job_title: Joi.string().allow(''),
     phone: Joi.string().regex(/[0-9]+/).min(11).allow(''),
     user_type: Joi.string().valid('admin', 'primary', 'secondary')
