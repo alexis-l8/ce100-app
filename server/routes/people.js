@@ -45,7 +45,8 @@ module.exports = [
   {
     method: 'GET',
     path: '/people/{id}/toggle-active',
-    handler: toggleActive
+    handler: toggleActive,
+    config: { auth: { scope: 'admin' } }
   },
   {
     method: 'GET',

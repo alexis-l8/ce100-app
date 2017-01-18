@@ -16,28 +16,43 @@ module.exports = [
   {
     method: 'GET',
     path: '/insights/{id}/toggle-active',
-    handler: toggleActive
+    handler: toggleActive,
+    config: {
+      auth: { scope: 'admin' }
+    }
   },
   {
     method: 'GET',
     path: '/insights/{id}/edit',
-    handler: editView
+    handler: editView,
+    config: {
+      auth: { scope: 'admin' }
+    }
   },
   {
     method: 'POST',
     path: '/insights/{id}/edit',
     handler: editSubmit,
+    config: {
+      auth: { scope: 'admin' }
+    }
   },
   {
     method: 'GET',
     path: '/insights/{id}/tags',
-    handler: addTagsView
+    handler: addTagsView,
+    config: {
+      auth: { scope: 'admin' }
+    }
   },
   {
     method: 'POST',
     path: '/insights/{id}/tags',
     handler: addTags,
-    config: { validate: maxAllowedTags }
+    config: {
+      auth: { scope: 'admin' },
+      validate: maxAllowedTags
+    }
   },
   {
     method: 'GET',
@@ -47,13 +62,19 @@ module.exports = [
   {
     method: 'GET',
     path: '/insights/add',
-    handler: addView
+    handler: addView,
+    config: {
+      auth: { scope: 'admin' }
+    }
   },
   {
     method: 'POST',
     path: '/insights/add',
     handler: addSubmit,
-    config: { validate: addModel }
+    config: {
+      auth: { scope: 'admin' },
+      validate: addModel
+    }
   },
   {
     method: 'GET',

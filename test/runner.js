@@ -6,7 +6,6 @@ require('./insights/browse.test.js');
 require('./insights/add-insight.test.js');
 require('./insights/add-tags-to-insight.test.js');
 require('./insights/edit-insight.test.js');
-require('./insights/add-tags-to-insight.test.js');
 require('./insights/browse.test.js');
 require('./insights/add-insight.test.js');
 
@@ -26,7 +25,6 @@ require('./organisations/browse-orgs.test.js');
 require('./organisations/org-details-view.test.js');
 require('./organisations/edit-org-view.test.js');
 require('./organisations/edit-org.test.js');
-require('./organisations/select-tags-browse-view.test.js');
 require('./organisations/add-logo.test.js');
 
 // people
@@ -40,6 +38,9 @@ require('./people/edit-settings.test.js');
 require('./people/add-user.test.js');
 
 // tags
-require('./browse/select-tags-browse-view.test.js');
+require('./browse/select-tags.test.js');
 require('./unit/getCancelUrl.js');
+
+// server
 require('./server/auth.test.js');
+require('./server/permissions.test.js');

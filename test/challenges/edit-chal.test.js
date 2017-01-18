@@ -45,7 +45,7 @@ tape('check /challenges/{id}/edit GET endpoint access',
           server.inject(editChal(adminToken, chalId), function (res) {
             t.equal(
               res.statusCode,
-              302,
+              403,
               'Admin cannot view edit challenge view'
             );
             server.inject(editChal(primaryToken, chalId), function (res) {
@@ -96,7 +96,7 @@ tape('/challenges/{id}/edit GET endpoint -will not- display prefilled form to pr
     });
   });
 
-tape('/challenges/{id}/edit POST endpoint, admin can\'t update existing info',
+tape('/challenges/{id}/edit POST endpoint, admin cant update existing info',
   function (t) {
     sessions.addAll(function () {
       init(config, function (error, server, pool) {
@@ -104,7 +104,7 @@ tape('/challenges/{id}/edit POST endpoint, admin can\'t update existing info',
         server.inject(editChal(adminToken, chalId, updatedChal), function (res) {
           t.equal(
             res.statusCode,
-            302,
+            403,
             'Admin does not have permission to update existing challenge');
           t.end();
           server.stop();

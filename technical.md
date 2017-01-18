@@ -4,12 +4,12 @@
 All of our data is managed by modules, which we have published as plugins. Below, we will list out the data and their types, contained per table, per plugin.
 
 ### List of Plugins:
-* [tags-system](###tags-system)
-* [pg-people](###pg-people)
-* [pg-challenges](###pg-challenges)
-* [pg-insights](###pg-insights)
+* [tags-system](#tags-system)
+* [pg-people](#pg-people)
+* [pg-challenges](#pg-challenges)
+* [pg-insights](#pg-insights)
 
-### [tags-system](npmjs.com/package/tags-system)
+### [tags-system](https://www.npmjs.com/package/tags-system)
 #### tags
 ```js
 id SERIAL PRIMARY KEY,
@@ -29,7 +29,7 @@ categories_id INTEGER REFERENCES categories (id),
 PRIMARY KEY (tags_id, categories_id)
 ```
 
-### [pg-people](npmjs.com/package/pg-people)
+### [pg-people](https://www.npmjs.com/package/pg-people)
 #### organisations
 ```js
 id SERIAL PRIMARY KEY,
@@ -61,7 +61,7 @@ tags_id INTEGER REFERENCES tags (id),
 organisations_id INTEGER REFERENCES organisations (id)
 ```
 
-### [pg-challenges](npmjs.com/package/pg-challenges)
+### [pg-challenges](https://www.npmjs.com/package/pg-challenges)
 
 #### challenges
 ```js
@@ -80,7 +80,7 @@ tags_id INTEGER REFERENCES tags (id),
 challenges_id INTEGER REFERENCES challenges (id)
 ```
 
-### [pg-insights](npmjs.com/package/pg-insights)
+### [pg-insights](https://www.npmjs.com/package/pg-insights)
 
 #### insights
 ```js
@@ -165,4 +165,39 @@ test/
   server/
   unit/
   runner.js
+```
+## Endpoints
+
+```js
+| *Endpoint*                      | *Methods*     | *Auth/Permissions*        |
+| ------------------------------- |:-------------:| -------------------------:|
+| /                               | 'GET'         | All                       |
+| /{path*}                        | 'GET'         | All                       |
+| /login                          | 'GET', 'POST' | All                       |
+| /logout                         | 'GET'         | All                       |
+| /challenges                     | 'GET'         | All                       |
+| /challenges/tags                | 'GET'         | All                       |
+| /challenges/{id}                | 'GET'         | All                       |
+| /challenges/{id}/tags           | 'GET', 'POST' | Editable (Primary)        |
+| /challenges/add                 | 'GET', 'POST' | Editable (Primary)        |
+| /challenges/{id}/edit           | 'GET', 'POST' | Editable (Primary)        |
+| /challenges/{id}/toggle-active  | 'GET'         | Editable (Primary)        |
+| /insights                       | 'GET'         | All                       |
+| /insights/tags                  | 'GET'         | All                       |
+| /insights/add                   | 'GET', 'POST' | Admin                     |
+| /insights/{id}/tags             | 'GET', 'POST' | Admin                     |
+| /insights/{id}/edit             | 'GET', 'POST' | Admin                     |
+| /insights/{id}/toggle-active    | 'GET'         | Admin                     |
+| /orgs                           | 'GET'         | All                       |
+| /orgs/tags                      | 'GET'         | All                       |
+| /orgs/{id}                      | 'GET'         | All                       |
+| /orgs/{id}/tags                 | 'GET', 'POST' | Editable (Admin, Primary) |
+| /orgs/add                       | 'GET', 'POST' | Admin                     |
+| /orgs/{id}/edit                 | 'GET', 'POST' | Editable (Admin, Primary) |
+| /orgs/{id}/toggle-active        | 'GET'         | Admin                     |
+| /people                         | 'GET'         | All                       |
+| /people/add                     | 'GET', 'POST' | Admin                     |
+| /people/{id}/edit               | 'GET', 'POST' | All                       |
+| /people/{id}/toggle-active      | 'GET'         | Admin                     |
+| /people/activate/{hashedId}     | 'POST'        | All                       |
 ```

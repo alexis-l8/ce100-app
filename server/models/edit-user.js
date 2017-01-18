@@ -10,6 +10,13 @@ module.exports = {
   failAction: editView
 };
 
+var non_admin = {
+  first_name: Joi.string().min(1).required(),
+  last_name: Joi.string().min(1).required(),
+  job_title: Joi.string().allow(''),
+  phone: Joi.string().regex(/[0-9]+/).min(11).allow('')
+}
+
 var schema = {
   admin: {
     first_name: Joi.string().min(1).required(),
@@ -20,10 +27,6 @@ var schema = {
     org_id: Joi.number().min(-1).required(),
     user_type: Joi.string().valid('admin', 'primary', 'secondary').required()
   },
-  primary: {
-    first_name: Joi.string().min(1).required(),
-    last_name: Joi.string().min(1).required(),
-    job_title: Joi.string().allow(''),
-    phone: Joi.string().regex(/[0-9]+/).min(11).allow('')
-  }
+  primary: non_admin,
+  secondary: non_admin
 };

@@ -7,7 +7,7 @@ module.exports = function (request, reply) {
   var loggedIn = request.auth.credentials;
   var tagsArray = getTagArray(tagsPayload);
 
-  if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin') {
+  if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin' || loggedIn.scope === 'secondary') {
     return reply(Boom.unauthorized('You do not have permission to edit that organisation.'));
   }
 

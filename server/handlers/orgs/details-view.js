@@ -1,5 +1,6 @@
 var Hoek = require('hoek');
 var helpers = require('../helpers.js');
+var Boom = require('boom');
 
 module.exports = function (request, reply) {
   var orgId = parseInt(request.params.id, 10);
@@ -10,7 +11,7 @@ module.exports = function (request, reply) {
 
     // If the organisation is not active, then only an admin can view
     if (loggedIn.scope !== 'admin' && !orgData.org.active) {
-      return reply(Boom.notFound('That organisation does not exist'));
+      return reply(Boom.forbidden('You cannot access that organisation'));
     }
 
     var options = Object.assign({}, orgData, permissions);
