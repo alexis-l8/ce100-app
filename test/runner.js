@@ -44,3 +44,4 @@ require('./unit/getCancelUrl.js');
 // server
 require('./server/auth.test.js');
 require('./server/permissions.test.js');
+require('./server/file-server.test.js');
