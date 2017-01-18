@@ -1,25 +1,22 @@
+'use strict';
+
+var Hoek = require('hoek');
 var tape = require('tape');
-var setup = require('../helpers/set-up.js');
-var server;
+var sessions = require('../helpers/add-sessions.js');
+var config = require('../../server/config.js');
+var initServer = require('../../server/server.js');
 
-tape('set up: initialise db', t => {
-  setup.initialiseDB(function (initServer) {
-    server = initServer;
-    t.end();
+
+tape('serve file function - get css file: --> ' + __filename, function (t) {
+  sessions.addAll(function () {
+    initServer(config, function (err, server, pool) {
+      t.ok(!err, 'Error initialising server: ' + err);
+      server.inject({ url: '/public/css/main.css' }, function (res) {
+        t.equal(res.statusCode, 200, 'resource handler returns 200');
+        t.end();
+        server.stop();
+        pool.end();
+      });
+    });
   });
-});
-
-tape('get css file', t => {
-  var options = {
-    method: 'GET',
-    url: '/public/css/main.css'
-  };
-  server.inject(options, res => {
-    t.equal(res.statusCode, 200, 'request a endpoint requiring auth get 401');
-    t.end();
-  });
-});
-
-tape.onFinish(() => {
-  server.stop(() => {});
 });
