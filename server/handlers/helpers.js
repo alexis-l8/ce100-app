@@ -7,24 +7,6 @@ var INSIGHT_TYPES = [
   'CASE STUDY', 'PAPER', 'PRESENTATION', 'REPORT', 'VIDEO', 'WORKSHOP SUMMARY'
 ];
 
-helpers.removeDuplicates = function (orgs, cb) {
-  var newArr = [];
-  var orgNames = orgs.map(function (org) {
-    return org.name;
-  });
-  orgs.forEach(function (org, index) {
-    if (orgNames.indexOf(org.name) === index) {
-      newArr.push({
-        id: org.id,
-        name: org.name
-      });
-    }
-    if (index === orgNames.length - 1) {
-      return cb(newArr);
-    }
-  });
-};
-
 helpers.getPermissions = (loggedIn, key, identifier) => {
   return loggedIn && {
     permissions: {

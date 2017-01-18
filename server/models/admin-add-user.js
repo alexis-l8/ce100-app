@@ -7,7 +7,7 @@ module.exports = {
     email: Joi.string().email().required(),
     org_id: Joi.any().when('user_type', {
       is: 'admin',
-      then: Joi.number().valid(-1),
+      then: Joi.number().valid(-1).required().options({ language: { any: { allowOnly: 'Admins cannot be attached to an organisation' } } }),
       otherwise: Joi.number().min(1).required()
     }),
     job_title: Joi.string().allow(''),

@@ -95,10 +95,7 @@ tape('orgs/add add new admin - fail: org_id', function (t) {
       };
 
       server.inject(addUser(userObj), function (res) {
-        t.ok(res.result,
-          'org id must be one of [ 1]', // need to make this '-1'
-          'primary user cannot be added without being attached to an org'
-        );
+        t.ok(res.payload.indexOf('Admins cannot be attached to an organisation') > -1, 'admin cannot be attached to an organisation');
         t.end();
         server.stop();
         pool.end();
@@ -123,12 +120,12 @@ tape('orgs/add add primary - success', function (t) {
       };
 
       var emailSender = sinon.stub(sendEmail, 'email', function (str, user, cb) {
-        cb(null); // We only check that there is no error in the handler
+        cb(null);
       });
       server.inject(addUser(userObj), function (res) {
         var expected = { org_id: 6, id: people.length + 1, org_name: 'Asda' };
 
-        emailSender.restore(); // restore the send emails normal functionality
+        emailSender.restore();
         t.deepEqual(res.result, expected, 'successful email returns with new user details');
         t.end();
         server.stop();
@@ -154,9 +151,8 @@ tape('orgs/add add primary with no organisation', function (t) {
       };
 
       server.inject(addUser(userObj), function (res) {
-        t.ok(res.result,
-          'org id must be larger than or equal to 1',
-          'primary user cannot be added without being attached to an org'
+        t.ok(res.payload.indexOf('org id must be larger than or equal to 1') > -1,
+          'snack bar appears with correct message: primary user must be linked to an org'
         );
         t.end();
         server.stop();
@@ -181,15 +177,13 @@ tape('orgs/add add new secondary user', function (t) {
         org_id: 6
       };
 
-      // sinon will call the function we pass as the 3rd argument instead of sendemail.email function.
-      // it will callback with no error.
       var emailSender = sinon.stub(sendEmail, 'email', function (str, user, cb) {
-        cb(null); // We only check that there is no error in the handler
+        cb(null);
       });
       server.inject(addUser(userObj), function (res) {
         var expected = { org_id: 6, id: people.length + 1, org_name: 'Asda' };
 
-        emailSender.restore(); // restore the send emails normal functionality
+        emailSender.restore();
         t.deepEqual(res.result, expected, 'successful email returns with new user details');
         t.equal(res.statusCode, 302, 'admin is redirected after successful new user');
 

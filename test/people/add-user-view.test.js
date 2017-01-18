@@ -30,7 +30,7 @@ tape('orgs/add primary cannot view', function (t) {
 
 tape('Correct fields in orgs/add view', function (t) {
   var userTypes = ['admin', 'primary', 'secondary'];
-  var activeOrgIds = [
+  var activeOrgs = [
     { name: 'Apple', id: 1 },
     { name: 'Asda', id: 6 },
     { name: 'Charcoal', id: 3 },
@@ -52,18 +52,13 @@ tape('Correct fields in orgs/add view', function (t) {
         t.ok(res.payload.indexOf('Phone number') > -1, 'Phone number field is present');
         t.ok(res.payload.indexOf('User type') > -1, 'User type field is present');
         userTypes.forEach(function (radio, index) {
-          var html = 'type="radio" name="user_type" value="' + radio + '"';
-          t.ok(res.payload.indexOf(html), radio + ' radio is present');
+          var html = 'type="radio" name=user_type value=' + radio;
+          t.ok(res.payload.indexOf(html) > -1, radio + ' radio is present');
           if (index === userTypes.length - 1) {
-            t.ok(
-              res.payload.indexOf('Organisation') > -1,
-              'Organisation field is present'
-            );
-            activeOrgIds.forEach(function (radio, index) {
-              var html = 'value="' + activeOrgIds.id + '">' + activeOrgIds.name;
-              t.ok(res.payload.indexOf(html),
-                activeOrgIds.name + ' organisation is present'
-              );
+            t.ok(res.payload.indexOf('Organisation') > -1, 'Organisation field is present');
+            activeOrgs.forEach(function (radio, index) {
+              var html = 'value="' + radio.id + '">' + radio.name;
+              t.ok(res.payload.indexOf(html) > -1, radio.name + ' organisation is present');
               if (index === userTypes.length - 1) {
                 t.end();
                 server.stop();

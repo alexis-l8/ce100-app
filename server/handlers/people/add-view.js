@@ -18,15 +18,13 @@ module.exports = function (request, reply, source, joiErr) {
   return getActiveOrgs(function (pgErr, orgs) {
     Hoek.assert(!pgErr, 'database error');
 
-    helpers.removeDuplicates(orgs, function (filteredOrgs) {
-      options = Object.assign({},
-        { orgs: filteredOrgs },
-        helpers.userTypeRadios(),
-        permissions,
-        { error: error }
-      );
+    options = Object.assign({},
+      { orgs: orgs },
+      helpers.userTypeRadios(),
+      permissions,
+      { error: error }
+    );
 
-      return reply.view('people/add', options).code(error ? 401 : 200);
-    });
+    return reply.view('people/add', options).code(error ? 401 : 200);
   });
 };
