@@ -9,7 +9,7 @@ All of our data is managed by modules, which we have published as plugins. Below
 * [pg-challenges](#pg-challenges)
 * [pg-insights](#pg-insights)
 
-### [tags-system](npmjs.com/package/tags-system)
+### [tags-system](https://www.npmjs.com/package/tags-system)
 #### tags
 ```js
 id SERIAL PRIMARY KEY,
@@ -29,7 +29,7 @@ categories_id INTEGER REFERENCES categories (id),
 PRIMARY KEY (tags_id, categories_id)
 ```
 
-### [pg-people](npmjs.com/package/pg-people)
+### [pg-people](https://www.npmjs.com/package/pg-people)
 #### organisations
 ```js
 id SERIAL PRIMARY KEY,
@@ -61,7 +61,7 @@ tags_id INTEGER REFERENCES tags (id),
 organisations_id INTEGER REFERENCES organisations (id)
 ```
 
-### [pg-challenges](npmjs.com/package/pg-challenges)
+### [pg-challenges](https://www.npmjs.com/package/pg-challenges)
 
 #### challenges
 ```js
@@ -80,7 +80,7 @@ tags_id INTEGER REFERENCES tags (id),
 challenges_id INTEGER REFERENCES challenges (id)
 ```
 
-### [pg-insights](npmjs.com/package/pg-insights)
+### [pg-insights](https://www.npmjs.com/package/pg-insights)
 
 #### insights
 ```js
