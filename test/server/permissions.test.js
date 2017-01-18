@@ -5,7 +5,7 @@ var tape = require('tape');
 var sessions = require('../helpers/add-sessions.js');
 var config = require('../../server/config.js');
 var initServer = require('../../server/server.js');
-var people = require('../../../mock-data/index.js').people;
+var people = require('ce100-mock-data').people;
 var sinon = require('sinon');
 
 var endpoints = [
@@ -190,7 +190,7 @@ function getOptions (endpoint) {
 
 
 endpoints.forEach(function (endpoint) {
-  tape(endpoint.url + ' (' + (endpoint.method || 'GET') + ') secondary permissions tests', function (t) {
+  tape(endpoint.url + ' (' + (endpoint.method || 'GET ') + ') secondary permissions tests', function (t) {
     sessions.addAll(function () {
       initServer(config, function (err, server, pool) {
         Hoek.assert(!err, 'Error initialising server');
