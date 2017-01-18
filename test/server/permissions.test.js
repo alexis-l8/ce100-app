@@ -8,7 +8,6 @@ var initServer = require('../../server/server.js');
 var people = require('../../../mock-data/index.js').people;
 var sinon = require('sinon');
 
-var secondaryToken = sessions.tokens.secondary_12;
 var endpoints = [
   // people
   {
@@ -180,7 +179,7 @@ var endpoints = [
 
 function getOptions (endpoint) {
   return {
-    method: endpoint.method,
+    method: endpoint.method || 'GET',
     url: endpoint.url,
     payload: endpoint.payload,
     headers: {
@@ -192,7 +191,6 @@ function getOptions (endpoint) {
 
 endpoints.forEach(function (endpoint) {
   tape(endpoint.url + ' (' + (endpoint.method || 'GET') + ') secondary permissions tests', function (t) {
-
     sessions.addAll(function () {
       initServer(config, function (err, server, pool) {
         Hoek.assert(!err, 'Error initialising server');
@@ -200,7 +198,7 @@ endpoints.forEach(function (endpoint) {
           t.equal(
             res.statusCode,
             endpoint.expectedStatusCode,
-            endpoint.url + ' (' + (endpoint.method || 'GET') + ') status code is as expected (' + res.statusCode  + ')'
+            endpoint.url + ' (' + (endpoint.method || 'GET') + ') status code is as expected (' + endpoint.expectedStatusCode  + ')'
           );
 
           t.end();
