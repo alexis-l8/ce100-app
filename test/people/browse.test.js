@@ -4,7 +4,7 @@ var tape = require('tape');
 var sessions = require('../helpers/add-sessions.js');
 var init = require('../../server/server.js');
 var config = require('../../server/config.js');
-var people = require('../../../mock-data/index.js').people;
+var people = require('ce100-mock-data').people;
 
 var activeOnly = people.filter(function (userObj) {
   return userObj.active === true && userObj.user_type !== 'admin';
