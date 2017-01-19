@@ -37,9 +37,9 @@
 
         <div class="form__section--radio">
           {{#if resource}}
-            <input class="form__input form__input--radio {{error.resource}}" type="checkbox" name="resource" id="resource" value="error.values.resource" checked="checked">
+            <input class="form__input form__input--radio {{error.resource}}" type="checkbox" name="resource" id="resource" checked="checked">
           {{else}}
-            <input class="form__input form__input--radio {{error.resource}}" type="checkbox" name="resource" id="resource" value="error.values.resource">
+            <input class="form__input form__input--radio {{error.resource}}" type="checkbox" name="resource" id="resource">
           {{/if}}
           <label class="form__label form__label--radio" for="resource">Show in resources</label>
         </div>

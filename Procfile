@@ -1,1 +1,1 @@
-web: npm run start && node tags/storeTags.js
+web: npm run start
