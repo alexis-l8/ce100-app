@@ -258,6 +258,10 @@ Light-teal:     #66d9e0;
         background: #003253;
         background: radial-gradient(14rem at 50% 10rem, rgb(53, 91, 116), rgb(0, 50, 83));
     }
+    .container--landing {
+        height: 100vh;
+        background: #002c49;
+    }
 
 
 
@@ -532,6 +536,9 @@ Light-teal:     #66d9e0;
         margin-bottom: 1rem;
         font-size: 1.125rem;
     }
+        .card__header--extra-large {
+            font-size: 3rem;
+        }
     .card__copy {
         margin-bottom: 1.5rem;
     }
@@ -556,6 +563,10 @@ Light-teal:     #66d9e0;
           padding-top: 0.2rem;
           margin-bottom: 0;
         }
+        .card__additional--centered {
+          text-align: center;
+        }
+
 .card__suggested-matches {
   background-color: #f8ffff;
   text-align: center;
