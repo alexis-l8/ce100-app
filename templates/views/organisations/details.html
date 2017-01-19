@@ -16,7 +16,7 @@
     <div class="card">
       <h2 class="card__header">Our circular economy vision</h2>
       <p class="card__copy">{{org.mission_statement}}</p>
-      
+
       {{#if permissions.secondary}}
       {{else if permissions.editable}}
         <a class="icon icon--edit" href="/orgs/{{org.id}}/edit">
@@ -64,6 +64,13 @@
           </div>
         {{/if}}
       {{/each}}
+    {{/if}}
+    {{#if permissions.primary}}
+      {{#if permissions.editable}}
+        <div class="card card--header">
+          <a class="anchor anchor--teal title title--tall" href="/orgs/{{org.id}}/archived-challenges">Go to archived challenges</a>
+        </div>
+      {{/if}}
     {{/if}}
 </div>
 

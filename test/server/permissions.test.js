@@ -86,6 +86,10 @@ var endpoints = [
     payload: {},
     expectedStatusCode: 403
   },
+  {
+    url: '/orgs/1/archived-challenges',
+    expectedStatusCode: 403
+  },
 
   // challenges
   {

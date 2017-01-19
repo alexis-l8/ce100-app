@@ -785,6 +785,9 @@ Light-teal:     #66d9e0;
     .anchor--teal:link {
         color: #66d9e0;
     }
+    .anchor--teal:visited {
+      color: #66d9e0;
+    }
 
     .anchor--suggested-matches {
       display: inline-block;
