@@ -42,7 +42,7 @@
     "joi": "^9.0.4",
     "jsonwebtoken": "^7.1.9",
     "pg": "^6.1.0",
-    "pg-insights": "0.0.10",
+    "pg-insights": "0.0.12",
     "pg-challenges": "^2.0.18",
     "pg-people": "^0.0.27",
     "redis": "^2.6.2",
