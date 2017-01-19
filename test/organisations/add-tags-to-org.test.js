@@ -14,7 +14,7 @@ function addTagsToOrg (user, orgId, tags) {
 }
 
 function selectedTag (id) {
-  return '<a href="/challenges?tags=' + id + '">';
+  return '<a href="/orgs?tags=' + id + '">';
 }
 
 var getOrgDetails = {

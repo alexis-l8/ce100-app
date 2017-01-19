@@ -49,13 +49,17 @@ module.exports = [
   {
     method: 'GET',
     path: '/orgs/{id}/edit',
-    handler: editView
+    handler: editView,
+    config: { auth: { scope: ['admin', 'primary'] } }
   },
   {
     method: 'POST',
     path: '/orgs/{id}/edit',
     handler: edit,
-    config: { validate: editSchema }
+    config: {
+      validate: editSchema,
+      auth: { scope: ['admin', 'primary'] }
+    }
   },
   {
     method: 'GET',
@@ -66,20 +70,22 @@ module.exports = [
   {
     method: 'GET',
     path: '/orgs/{id}/tags',
-    handler: addTagsView
+    handler: addTagsView,
+    config: { auth: { scope: ['admin', 'primary'] } }
   },
   {
     method: 'POST',
     path: '/orgs/{id}/tags',
     handler: addTags,
-    config: { validate: maxAllowedTags }
+    config: {
+      auth: { scope: ['admin', 'primary'] },
+      validate: maxAllowedTags
+    }
   },
   {
     method: 'GET',
     path: '/orgs/{id}/archived-challenges',
     handler: archivedChallengesView,
-    config: {
-      auth: { scope: 'primary' }
-    }
+    config: { auth: { scope: 'primary' } }
   }
 ];

@@ -18,7 +18,7 @@ module.exports = function (request, reply) {
       options = Object.assign(
         {},
         { data: data.orgs },
-        { filter: data.filter },
+        { filter: helpers.browseViewTabBar('orgs', data.filter) },
         permissions
       );
 

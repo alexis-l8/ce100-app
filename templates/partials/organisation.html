@@ -1,8 +1,13 @@
-<li class="list__item list__item--big">
-    <a class="list__data list__data--primary list__link" href="/orgs/{{id}}">
-      {{#if admin }}
-        {{>indicator isActive=active}}
-      {{/if}}
-      {{name}}
-    </a>
-</li>
+<a class="list__data list__data--primary list__link" href="/orgs/{{id}}">
+  <li class="list__item list__item--big">
+    {{#if logo_url}}
+    <img class="list__logo" src="{{logo_url}}" alt="{{name}} logo">
+    {{else}}
+    <img class="list__logo" src="../public/assets/Profile.svg" alt="{{name}} logo">
+    {{/if}}
+    {{name}}
+    {{#if admin }}
+      {{>indicator isActive=active}}
+    {{/if}}
+  </li>
+</a>

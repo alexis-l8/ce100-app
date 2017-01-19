@@ -1,4 +1,11 @@
+'use strict';
+
+var url = require('url');
 var helpers = {};
+
+var INSIGHT_TYPES = [
+  'CASE STUDY', 'PAPER', 'PRESENTATION', 'REPORT', 'VIDEO', 'WORKSHOP SUMMARY'
+];
 
 helpers.getPermissions = (loggedIn, key, identifier) => {
   return loggedIn && {
@@ -11,36 +18,41 @@ helpers.getPermissions = (loggedIn, key, identifier) => {
   };
 };
 
-helpers.removeLinkedOrgs = (orgs, userId) => {
-  return orgs.filter((org) => {
-    return org.active_primary_user === null || org.active_primary_user === userId;
-  })
+helpers.insightTypeDropdown = function (selected) {
+  return INSIGHT_TYPES.map(function (type) {
+    return {
+      isSelected: type === selected,
+      id: type,
+      name: type
+    };
+  });
+};
+
+helpers.browseViewTabBar = function (pageType, filter) {
+  return {
+    id: filter && filter.id, // if not searching by a filter, filter = null
+    name: filter && filter.name,
+    url: filter ? '?tags=' + filter.id : '',
+    [pageType]: true,
+    pageType: pageType
+  };
 }
 
 // we want to `select` the org that the user is attached to
 helpers.editUserOrgDropdown = (orgs, user) => {
-  // first remove linked orgs
-  return helpers.removeLinkedOrgs(orgs, user.id)
-    .map(org => {
-      return Object.assign({ isSelected:  org.id === user.org_id }, org);
-    });
-}
-
-helpers.removeUserFromOrg = (orgString, userId) => {
-  var org = JSON.parse(orgString);
-  var newInfo = {
-    primary_id: -1,
-    people: org.people.filter(u => u.id !== userId)
-  };
-  var updatedOrg = Object.assign({}, org, newInfo);
-  return JSON.stringify(updatedOrg);
+  return orgs.map(function (org) {
+    return Object.assign(
+      { isSelected: org.id === user.org_id },
+      org
+    );
+  });
 };
 
 
 helpers.userTypeRadios = (user_type) => {
   // default to primary
   var checkedType = user_type || 'primary';
-  var userTypes = ['admin', 'primary'];
+  var userTypes = ['admin', 'primary', 'secondary'];
   var userTypeArr = userTypes.map(type => {
     return {
       name: 'user_type',
@@ -50,24 +62,6 @@ helpers.userTypeRadios = (user_type) => {
     };
   });
   return { userTypes: userTypeArr };
-};
-
-helpers.toggleActivate = (stringifiedData) => {
-  var data = JSON.parse(stringifiedData);
-  var updated = Object.assign({}, data, { active: !data.active });
-  return JSON.stringify(updated);
-};
-
-helpers.toggleActivateUser = (stringifiedData) => {
-  var data = JSON.parse(stringifiedData);
-  var updated = Object.assign({}, data, { active: !data.active, organisation_id: -1 });
-  return JSON.stringify(updated);
-};
-
-helpers.deactivate = (stringifiedData) => {
-  var data = JSON.parse(stringifiedData);
-  var updated = Object.assign({}, data, { active: !data.active });
-  return JSON.stringify(updated);
 };
 
 
@@ -86,21 +80,6 @@ helpers.sortAlphabetically = (key) => (arr) =>
     return 0;
   });
 
-helpers.sortByDate = (arr) =>
-  arr && arr.length > 0 && helpers.cloneArray(arr).sort((ch1, ch2) => ch2.date - ch1.date);
-
-helpers.filterActive = (arr) => {
-  return arr ? arr.filter((el) => el.active) : false;
-};
-
-helpers.parseArray = (arr) => arr.map(el => JSON.parse(el));
-
-// map through the inner function which takes a tag id, and returns named object for that tag
-helpers.getTagFromId = (allTags) => (id) =>
-  id && allTags[id[0]] && allTags[id[0]].tags[id[1]] && {
-    id: id,
-    name: allTags[id[0]].tags[id[1]].name
-  };
 
 helpers.errorOptions = (err) =>
   // if there is no error, return falsey
@@ -109,5 +88,21 @@ helpers.errorOptions = (err) =>
     message: err.data.details[0].message.split('"').join('').split('_').join(' ').split('-').join(' '),
     [err.data.details[0].path]: 'form__input-error'
   };
+
+
+
+/* --------- view logic helpers ----------- */
+
+helpers.getCancelUrl = function (req) {
+  var defaultHomePage = req.auth.credentials.organisation_id
+    ? '/orgs/' + req.auth.credentials.organisation_id // non-admin default
+    : '/orgs'; // admin default
+  var previous = url.parse(req.info.referrer).path;
+  var current = req.path;
+
+  // if the previous path is same as current, redirect to the user's default
+  return current === previous ? defaultHomePage : previous;
+};
+
 
 module.exports = helpers;

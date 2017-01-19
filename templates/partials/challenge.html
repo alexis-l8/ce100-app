@@ -1,19 +1,20 @@
 <div class="card card--challenge">
-  {{#if permissions.admin}}
-  {{else if permissions.editable}}
-    <a class="icon icon--edit" href="/challenges/{{id}}/edit">
-      <img src="../../../public/assets/Edit.svg" alt="Edit" />
-    </a>
+  {{#if permissions.primary}}
+    {{#if permissions.editable}}
+      <a class="icon icon--edit" href="/challenges/{{id}}/edit">
+        <img src="../../../public/assets/Edit.svg" alt="Edit" />
+      </a>
+    {{/if}}
   {{/if}}
-  <p class="card__header card__header--challenge">{{title}}</p>
-  <p class="card__copy">{{description}}</p>
-  {{#each tags}}
-    <a class="text-decoration" href="/challenges?tags={{tag_id}}">
-      <span class="tag__label">{{tag_name}}</span>
-    </a>
-  {{/each}}
+  <a class="anchor" href="/challenges/{{id}}">
+    <p class="card__header anchor">{{title}}</p>
+  </a>
 
   {{#if shared_by}}
-    <h4 class="card__copy card__additional">Shared by {{shared_by}}</h4>
+    <h4 class="anchor card__copy card__additional">Shared by
+      <a class="anchor card__copy" href="/orgs/{{org_id}}">
+        {{shared_by}}
+      </a>
+    </h4>
   {{/if}}
 </div>

@@ -8,7 +8,7 @@ module.exports = function (request, reply, source, joiErr) {
   var loggedIn = request.auth.credentials;
   var msg;
 
-  if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin') {
+  if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin' || loggedIn.scope === 'secondary') {
     msg = 'You do not have permission to edit that organisation.';
 
     return reply(Boom.unauthorized(msg));

@@ -1,0 +1,49 @@
+<!-- Change filter tag link (dropdown) -->
+<div class="card card--header daintree--blue">
+  <a class="title--link" href="/{{filter.pageType}}/tags">
+    <h1 class="title anchor--teal">
+      {{#if filter.name}}{{filter.name}}{{else}}All tags{{/if}}
+    </h1>
+    <div class="icon icon--dropdown"></div>
+  </a>
+</div>
+
+
+<!-- Tab navigation -->
+<div class="card card--header">
+  <ul class="navbar__links togglebar">
+    {{#if filter.orgs}}
+      <li class="navbar__item togglebar__item--selected">
+        <a class="navbar__link togglebar__link togglebar__link--selected" href="/orgs{{filter.url}}">
+    {{else}}
+      <li class="navbar__item togglebar__item">
+        <a class="navbar__link togglebar__link" href="/orgs{{filter.url}}">
+    {{/if}}
+          Organisations
+        </a>
+      </li>
+
+    {{#if filter.challenges}}
+      <li class="navbar__item togglebar__item--selected">
+        <a class="navbar__link togglebar__link togglebar__link--selected" href="/challenges{{filter.url}}">
+    {{else}}
+      <li class="navbar__item togglebar__item">
+        <a class="navbar__link togglebar__link" href="/challenges{{filter.url}}">
+    {{/if}}
+        Challenges
+      </a>
+    </li>
+
+    {{#if filter.insights}}
+      <li class="navbar__item togglebar__item--selected">
+        <a class="navbar__link togglebar__link togglebar__link--selected" href="/insights{{filter.url}}">
+    {{else}}
+      <li class="navbar__item togglebar__item">
+        <a class="navbar__link togglebar__link" href="/insights{{filter.url}}">
+    {{/if}}
+        Insights
+      </a>
+    </li>
+
+  </ul>
+</div>

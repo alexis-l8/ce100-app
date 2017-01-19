@@ -7,8 +7,8 @@ module.exports = function (request, reply, source, joiErr) {
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'organisation_id', orgId);
   var error = helpers.errorOptions(joiErr);
-  if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin') {
-    return reply(Boom.unauthorized('You do not have permission to edit that organisation.'));
+  if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin' || loggedIn.scope === 'secondary') {
+    return reply(Boom.forbidden('You do not have permission to edit that organisation.'));
   }
 
   request.server.methods.pg.organisations.getDetails(orgId, function (pgError, orgData) {

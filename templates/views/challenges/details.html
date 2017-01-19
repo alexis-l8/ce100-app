@@ -1,0 +1,51 @@
+<!-- Include Top Navbar -->
+{{>top-nav}}
+
+<!-- Main Content -->
+<div class="container">
+  <div class="card card--header">
+    <h1 class="title">Challenge</h1>
+    <a class="icon icon--cancel" href="{{cancelUrl}}"></a>
+  </div>
+
+  <div class="card card--challenge">
+    {{#if permissions.primary}}
+      {{#if permissions.editable}}
+        <a class="icon icon--edit" href="/challenges/{{challenge.id}}/edit">
+          <img src="../../../public/assets/Edit.svg" alt="Edit" />
+        </a>
+      {{/if}}
+    {{/if}}
+    <p class="card__header card__header--challenge">{{challenge.title}}</p>
+    <p class="card__copy">{{challenge.description}}</p>
+    {{#each challenge.tags}}
+      <a class="text-decoration" href="/challenges?tags={{id}}">
+        <span class="tag__label">{{name}}</span>
+      </a>
+    {{/each}}
+
+    <h4 class="anchor card__copy card__additional">Shared by
+      <a class="anchor card__copy " href="/orgs/{{challenge.org_id}}">
+        {{challenge.org_name}}
+      </a>
+    </h4>
+  </div>
+  {{#if permissions.editable}}
+    <div class="card card--challenge card__suggested-matches">
+      <h2 class="card__data">Suggested Matches</h2>
+      {{#if suggested_matches}}
+      {{#each suggested_matches}}
+        <a class="card__data anchor--suggested-matches text-decoration" href="/orgs/{{id}}">{{name}}</a>
+      {{/each}}
+      {{else}}
+        <p>No organisations match this challenge</p>
+      {{/if}}
+    </div>
+  {{/if}}
+    </form>
+</div>
+
+<!-- Include Feedback Widget -->
+{{>feedback}}
+<!-- Include Navbar -->
+{{>navbar}}
