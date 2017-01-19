@@ -31,7 +31,7 @@
       <label class="form__label" for="email">Email</label>
       {{#if permissions.admin}}
         <input class="form__input {{error.email}}" type="email" name="email" value="{{#if error}}{{error.values.email}}{{else}}{{user.email}}{{/if}}">
-      {{else if permissions.primary}}
+      {{else}}
         <span class="form__input form__input--non-editable">{{user.email}}</span>
       {{/if}}
 

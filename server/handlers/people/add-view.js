@@ -11,15 +11,11 @@ module.exports = function (request, reply, source, joiErr) {
   var getActiveOrgs = request.server.methods.pg.organisations.getActive;
   var options;
 
-  if (loggedIn.scope !== 'admin') {
-    return reply(Boom.forbidden());
-  }
-
   return getActiveOrgs(function (pgErr, orgs) {
     Hoek.assert(!pgErr, 'database error');
 
     options = Object.assign({},
-      { orgs: helpers.removeLinkedOrgs(orgs) },
+      { orgs: orgs },
       helpers.userTypeRadios(),
       permissions,
       { error: error }

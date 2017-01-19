@@ -15,8 +15,7 @@ function challengeView (user, ch_id) {
 }
 
 // admin view active challenge, no suggested matches.
-test('Challenge view - active challenge viewed by an admin with no suggested matches: --> '
-  + __filename, function (t) {
+test('Challenge view - active challenge viewed by an admin with no suggested matches: --> ' + __filename, function (t) {
     sessions.addAll(function () {
       init(config, function (err, server, pool) {
         t.ok(!err, 'error starting server' + err);
@@ -116,64 +115,81 @@ test('Challenge view - inactive challenge viewed by a primary: --> ' + __filenam
   });
 });
 
-// primary user belonging to the challenge's org can view the challenge and suggested matches
-test('Challenge view - active challenge viewed by a primary user with suggested matches: --> '
-  + __filename, function (t) {
-    sessions.addAll(function () {
-      init(config, function (err, server, pool) {
-        t.ok(!err, 'error starting server' + err);
+var users = ['primary_3', 'secondary_12'];
 
-        server.inject(challengeView('primary_3', 3), function (res) {
-          var html = res.payload;
-          // primary can see the challenge details, and 'no organisations match these tags'
-          t.ok(html.indexOf('Challenge Number 3') > -1, 'Challenge title is displayed');
-          t.ok(html.indexOf('Where can I...?') > -1, 'Challenge description is displayed');
-          t.ok(html.indexOf('Apple') > -1, 'Org that created the challenge is displayed');
+// test different types of users belonging to the challenge's org can view the challenge and suggested matches
+users.forEach(function (user) {
+  var userType = user.split('_')[0];
 
-          // tags attached to this challenge
-          t.ok(html.indexOf('Buildings design') > -1, 'Tag associated with the challenge is displayed');
-          t.ok(html.indexOf('Fertiliser') > -1, 'Tag associated with the challenge is displayed');
-          t.ok(html.indexOf('Waste to energy') > -1, 'Tag associated with the challenge is displayed');
+  test('/challenges/{id} - ' + userType + ' challenge details view - user is' +
+    ' member of active challenge with suggested matches: --> ' + __filename, function (t) {
+      sessions.addAll(function () {
+        init(config, function (err, server, pool) {
+          t.ok(!err, 'error starting server' + err);
 
-          // suggested matches
-          t.ok(html.indexOf('Co-op Group') > -1, 'Correct org suggested as a match for this challenge');
+          server.inject(challengeView(user, 3), function (res) {
+            var html = res.payload;
 
-          t.end();
-          pool.end();
-          server.stop();
+            // Check that the edit icon only shows for primary users
+            userType === 'primary' && t.ok(html.indexOf('/challenges/3/edit') > -1, 'primary user can see the edit icon when viewing their own challenge');
+            userType === 'secondary' && t.ok(html.indexOf('/challenges/3/edit') === -1, 'secondary user cannot see the edit icon when viewing their own challenge');
+
+            // primary can see the challenge details, and 'no organisations match these tags'
+            t.ok(html.indexOf('Challenge Number 3') > -1, 'Challenge title is displayed');
+            t.ok(html.indexOf('Where can I...?') > -1, 'Challenge description is displayed');
+            t.ok(html.indexOf('Apple') > -1, 'Org that created the challenge is displayed');
+
+            // tags attached to this challenge
+            t.ok(html.indexOf('Buildings design') > -1, 'Tag associated with the challenge is displayed');
+            t.ok(html.indexOf('Fertiliser') > -1, 'Tag associated with the challenge is displayed');
+            t.ok(html.indexOf('Waste to energy') > -1, 'Tag associated with the challenge is displayed');
+
+            // suggested matches
+            t.ok(html.indexOf('Suggested Matches') > -1, 'Suggested matches shows for ' + userType);
+            t.ok(html.indexOf('Co-op Group') > -1, 'Correct org suggested as a match for this challenge');
+
+            t.end();
+            pool.end();
+            server.stop();
+          });
         });
       });
     });
 });
 
-// primary user not belonging to the challenge's org can view the challenge, but not suggested matches
-test('Challenge view - challenge from a different org is viewable without suggested matches for a primary user: --> '
-  + __filename, function (t) {
-    sessions.addAll(function () {
-      init(config, function (err, server, pool) {
-        t.ok(!err, 'error starting server' + err);
+// test different types of users not belonging to the challenge's org can view the challenge but not suggested matches
+users.forEach(function (user) {
+  var userType = user.split('_')[0];
 
-        server.inject(challengeView('primary_3', 4), function (res) {
-          var html = res.payload;
+  test('/challenges/{id} - ' + userType + ' viewing challenge details view - challenge from ' +
+    'a different org is viewable without suggested matches for a primary user: --> ' + __filename, function (t) {
+      sessions.addAll(function () {
+        init(config, function (err, server, pool) {
+          t.ok(!err, 'error starting server' + err);
 
-          t.equal(res.statusCode, 200, 'primary can view an active challenge');
+          server.inject(challengeView(user, 4), function (res) {
+            var html = res.payload;
 
-          // admin can see the challenge details, and 'no organisations match these tags'
-          t.ok(html.indexOf('/challenges/4/edit') === -1, 'Primary user cannot edit a challenge');
-          t.ok(html.indexOf('Challenge Number 4') > -1, 'Challenge title is displayed');
-          t.ok(html.indexOf('Who should I...?') > -1, 'Challenge description is displayed');
-          t.ok(html.indexOf('dwyl') > -1, 'Org that created the challenge is displayed');
-          t.ok(html.indexOf('Automotive and Transport Manufacturing') > -1, 'Tag associated with the challenge is displayed');
-          t.ok(html.indexOf('Chemicals') > -1, 'Tag associated with the challenge is displayed');
-          t.ok(html.indexOf('Design for disassembly') > -1, 'Tag associated with the challenge is displayed');
-          t.ok(html.indexOf('Secondary education') > -1, 'Tag associated with the challenge is displayed');
-          t.ok(html.indexOf('Suggested Matches') === -1,
-            'No suggested matches for this challenge are displayed');
+            t.equal(res.statusCode, 200, userType + ' can view an active challenge');
 
-          t.end();
-          pool.end();
-          server.stop();
+            // check permissions
+            t.ok(html.indexOf('/challenges/4/edit') === -1, userType + ' user cannot edit a challenge not created by their org');
+            t.ok(html.indexOf('Suggested Matches') === -1, 'No suggested matches for this challenge are displayed');
+
+            // check challenge details content
+            t.ok(html.indexOf('Challenge Number 4') > -1, 'Challenge title is displayed');
+            t.ok(html.indexOf('Who should I...?') > -1, 'Challenge description is displayed');
+            t.ok(html.indexOf('dwyl') > -1, 'Org that created the challenge is displayed');
+            t.ok(html.indexOf('Automotive and Transport Manufacturing') > -1, 'Tag associated with the challenge is displayed');
+            t.ok(html.indexOf('Chemicals') > -1, 'Tag associated with the challenge is displayed');
+            t.ok(html.indexOf('Design for disassembly') > -1, 'Tag associated with the challenge is displayed');
+            t.ok(html.indexOf('Secondary education') > -1, 'Tag associated with the challenge is displayed');
+
+            t.end();
+            pool.end();
+            server.stop();
+          });
         });
       });
-    });
+  });
 });
