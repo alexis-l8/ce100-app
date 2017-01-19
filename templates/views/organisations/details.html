@@ -65,9 +65,13 @@
         {{/if}}
       {{/each}}
     {{/if}}
-    <div class="card card--header card--tall">
-      <a class="anchor title title--tall" href="/orgs/{{org.id}}/archived-challenges">Go to archived challenges</a>
-    </div>
+    {{#if permissions.primary}}
+      {{#if permissions.editable}}
+        <div class="card card--header card--tall">
+          <a class="anchor title title--tall" href="/orgs/{{org.id}}/archived-challenges">Go to archived challenges</a>
+        </div>
+      {{/if}}
+    {{/if}}
 </div>
 
 <!-- Include Feedback Widget -->
