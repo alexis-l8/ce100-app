@@ -41,7 +41,7 @@ module.exports = function (request, reply) {
         tagsArray, function (pgErr2) {
           Hoek.assert(!pgErr2, 'database error');
 
-          return reply.redirect('/challenges/' + challengeId);
+          return reply.redirect('/orgs/' + loggedIn.organisation_id);
         });
     });
 };
