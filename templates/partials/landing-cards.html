@@ -1,8 +1,12 @@
-<div class="card card--landing">
-  <p class="card__header--extra-large">{{title}}</p>
-  <p class="card__copy card__additional card__additional--small card__additional--centered">{{description}}</p>
-  {{#if link}}
-    <a href={{link.url}} class="card__header card__header--challenge card__data--link">{{link.text}}</a>
-  {{/if}}
-  <img src="../../../public/assets/Arrow-circle-down.svg" class="icon__scroller--down">
-</div>
+<li class="landing-card">
+  <div id={{@index}} class="landing-card__content">
+      <p class="landing-card__header--extra-large">{{title}}</p>
+      <p class="landing-card__description">{{description}}</p>
+      {{#if link}}
+        <a href={{link.url}} class="landing-card__description">{{link.text}}</a>
+      {{/if}}
+        <a href="#{{scroll}}" class="icon--scroll">
+          <img src="../../../public/assets/Arrow-circle-down.svg">
+        </a>
+  </div>
+</li>
