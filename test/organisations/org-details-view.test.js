@@ -1,5 +1,4 @@
 var tape = require('tape');
-var payloads = require('../helpers/mock-payloads.js');
 var initServer = require('../../server/server.js');
 var config = require('../../server/config.js');
 

@@ -1,19 +1,23 @@
 var Hoek = require('hoek');
 var helpers = require('../helpers.js');
+var Boom = require('boom');
 
 module.exports = function (request, reply) {
   var orgId = parseInt(request.params.id, 10);
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'organisation_id', orgId);
-  request.server.methods.pg.challenges.getDetails(orgId, function (error, orgData) {
+
+  if (loggedIn.organisation_id !== orgId) {
+    return reply(Boom.forbidden());
+  }
+
+  request.server.methods.pg.challenges.getArchived(orgId, function (error, challenges) {
     Hoek.assert(!error, 'Error retrieving organisation with id ' + orgId)
-
-    // If the organisation is not active, then only an admin can view
-    if (loggedIn.scope !== 'admin' && !orgData.org.active) {
-      return reply(Boom.notFound('That organisation does not exist'));
-    }
-
-    var options = Object.assign({}, orgData, permissions);
-    return reply.view('organisations/details', options);
+    var options = Object.assign(
+      {},
+      { challenges: challenges },
+      permissions
+    );
+    return reply.view('organisations/archived-challenges', options);
   });
 };
