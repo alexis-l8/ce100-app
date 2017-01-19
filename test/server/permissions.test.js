@@ -5,7 +5,7 @@ var tape = require('tape');
 var sessions = require('../helpers/add-sessions.js');
 var config = require('../../server/config.js');
 var initServer = require('../../server/server.js');
-var people = require('../../../mock-data/index.js').people;
+var people = require('ce100-mock-data').people;
 var sinon = require('sinon');
 
 var secondaryToken = sessions.tokens.secondary_12;
