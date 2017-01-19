@@ -1,14 +1,13 @@
 'use strict';
 
 var serveFile = require('../handlers/serve-file.js');
+var landing = require('../handlers/landing.js');
 
 module.exports = [
   {
     method: 'GET',
     path: '/',
-    handler: function (request, reply) {
-      return reply.redirect('/orgs');
-    }
+    handler: landing
   },
   {
     method: 'GET',
