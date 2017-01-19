@@ -21,7 +21,9 @@
       </div>
     </div>
   </nav>
-{{else if permissions.primary}}
+{{/if}}
+
+{{#if permissions.primary}}
   <nav class="navbar">
     <ul class="navbar__links">
       <li class="navbar__item">
@@ -44,7 +46,9 @@
       </li>
     </ul>
   </nav>
-{{else if permissions.secondary}}
+{{/if}}
+
+{{#if permissions.secondary}}
   <nav class="navbar">
     <ul class="navbar__links">
       <li class="navbar__item">
@@ -61,5 +65,4 @@
       </li>
     </ul>
   </nav>
-{{else}}
 {{/if}}
