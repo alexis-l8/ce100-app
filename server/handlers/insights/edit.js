@@ -12,11 +12,10 @@ module.exports = function (request, reply) {
     return reply(Boom.forbidden());
   }
 
-  updates.active = updates.active ? true : false;
+  updates.active = Boolean(updates.active);
   updates.creator_id = loggedIn.userId;
   updates.org_id = loggedIn.organisation_id;
-  updates.resource = Object.prototype.hasOwnProperty
-    .call(request.payload, 'resources');
+  updates.resource = Boolean(updates.resource);
 
   return request.server.methods.pg.insights.edit(iid, updates,
     function (err) {

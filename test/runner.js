@@ -26,6 +26,8 @@ require('./organisations/org-details-view.test.js');
 require('./organisations/edit-org-view.test.js');
 require('./organisations/edit-org.test.js');
 require('./organisations/add-logo.test.js');
+require('./organisations/archived-challenges.test.js');
+
 
 // people
 require('./people/browse.test.js');

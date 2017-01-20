@@ -48,6 +48,8 @@ tape('view all insights on /insights as a logged-in admin', function (t) {
           res.result.indexOf('https://emf-packs.s3-eu-west-1.amazonaws.com/Growth%20Within%20-%20June%202015/EllenMacArthurFoundation_Growth%20Within_for%20print.pdf?AWSAccessKeyId&#x3D;AKIAITAQSOURJ2COPP2A&amp;Signature&#x3D;exc0fbGigjcG88LlqNibztPX%2F3k%3D&amp;Expires&#x3D;1498468767') > -1,
           'insight number 1 - url displayed'
         );
+        t.ok(res.result.indexOf('REPORT') > -1, 'insight type is displayed');
+
         t.end();
         server.stop();
         pool.end();
@@ -125,6 +127,10 @@ tape('access /insights?tags=filterTagId as a logged-in admin', function (t) {
         t.ok( res.result.indexOf('Insight Number 1') > -1, 'insight number 1 - title is displayed' );
         t.ok( res.result.indexOf('Insight Number 2') === -1, 'insight number 2 - title is not displayed' );
         t.ok( res.result.indexOf('Insight Number 3') === -1, 'insight number 3 - title is not displayed' );
+
+        // check that the insight type is displayed
+        t.ok( res.result.indexOf('REPORT') > -1, 'insight type is displayed');
+
         t.end();
         server.stop();
         pool.end();
