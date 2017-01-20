@@ -1,12 +1,9 @@
 <li class="landing-card">
-  <div id={{@index}} class="landing-card__content">
-      <p class="landing-card__header--extra-large">{{title}}</p>
-      <p class="landing-card__description">{{description}}</p>
-      {{#if link}}
-        <a href={{link.url}} class="landing-card__description">{{link.text}}</a>
-      {{/if}}
-        <a href="#{{scroll}}" class="icon--scroll">
-          <img src="../../../public/assets/Arrow-circle-down.svg">
-        </a>
+  <div class="landing-card__content">
+    <p class="landing-card__header--extra-large">{{title}}</p>
+    <p class="landing-card__description">{{description}}</p>
+    {{#if link}}
+      <a href={{link.url}} class="button--landing">{{link.text}}</a>
+    {{/if}}
   </div>
 </li>

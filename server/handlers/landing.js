@@ -8,7 +8,7 @@ module.exports = function (request, reply) {
   var permissions = helpers.getPermissions(loggedIn);
   var userId = permissions.permissions.userId;
   var options = {};
-  var section;
+  var sections;
 
   if (loggedIn.scope === 'admin') {
     return reply.redirect('/orgs');
@@ -18,27 +18,55 @@ module.exports = function (request, reply) {
     function (pgErr, profile) {
       Hoek.assert(!pgErr, 'Database Error');
 
-      section = [
+      sections = [
+        { title: 'Welcome ' + profile[0].first_name },
         {
-          firstcard: true,
-          title: 'Hi ' + profile[0].first_name,
-          description: 'What do you want to do today?'
+          title: 'Tell us about you',
+          description:
+            'What are the circular economy visions and '
+            + 'areas of knowledge of your organisation?',
+          link: {
+            text: 'Fill in your profile',
+            url: '/people/' + profile[0].id + '/edit'
+          }
         },
         {
-          title: 'Solve a challenge',
-          description: 'Some text explaining what you can do',
+          title: 'Get to know the network',
+          description:
+            'Who are the members, their areas of experience '
+            + 'and their challenges?',
           link: {
-            text: 'Share your challenge now',
+            text: 'Explore now',
+            url: '/orgs'
+          }
+        },
+        {
+          title: 'Share a challenge',
+          description:
+            'And find out who has the relevant experience to learn from, '
+            + 'to help you solve it.',
+          link: {
+            text: 'Share a challenge now',
             url: '/challenges/add'
+          }
+        },
+        {
+          title: 'Find the latest insights',
+          description:
+            'Explore circular economy insights related to your topic '
+            + 'of interest.',
+          link: {
+            text: 'Find insights',
+            url: '/insights'
           }
         }
       ];
 
-      options.section = section.map(function (card, index) {
-        card.scroll = index + 1;
-
-        return card;
-      });
+      options = Object.assign(
+        { section: sections },
+        { permissions: permissions.permissions }
+      );
+      console.log(options);
 
       return reply.view('landing', options);
     });

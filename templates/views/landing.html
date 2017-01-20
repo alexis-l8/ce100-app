@@ -4,11 +4,17 @@
 <!-- Main Content -->
 <div class="container container--landing">
 
-  <ul>
+  <ul href="top">
     {{#each section}}
       {{>landing-cards}}
     {{/each}}
   </ul>
+
+  <a href="#top" class="landing-card__link">
+    <img class="icon--scroll-up" src="../../public/assets/Arrow-up.svg" />
+    Back to top
+  </a>
+
 </div>
 
 <!-- Include Feedback Widget -->
