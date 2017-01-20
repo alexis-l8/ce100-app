@@ -35,8 +35,9 @@ tape('Correct fields displayed on /orgs/add: --> ' + __filename, function (t) {
   sessions.addAll(function () {
     initServer(config, function (error, server, pool) {
       server.inject(addOrgView(), function (res) {
-        t.equal(res.payload.split('form__section').length - 1, 2, 'Expected number of fields in the form');
-        t,ok(res.payload.indexOf('Organisation Name'), 'Field for Org Name exists');
+        // form__section includes 'submit button' too; hence .length-2
+        t.equal(res.payload.split('"form__section').length - 2, 2, 'Expected number of fields in the form');
+        t.ok(res.payload.indexOf('Organisation Name'), 'Field for Org Name exists');
         t.ok(res.payload.indexOf('Organisation Logo'), 'Field for Org Logo exists');
         t.end();
         pool.end();
