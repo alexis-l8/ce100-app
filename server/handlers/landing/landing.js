@@ -26,7 +26,6 @@ module.exports = function (request, reply) {
           return Boolean(card.primaryOnly) === false;
         });
       }
-      console.log(sections);
 
       options = Object.assign(
         { section: sections },
