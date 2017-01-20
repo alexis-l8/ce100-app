@@ -1,7 +1,7 @@
 'use strict';
 
 var serveFile = require('../handlers/serve-file.js');
-var landing = require('../handlers/landing.js');
+var landing = require('../handlers/landing/landing.js');
 
 module.exports = [
   {
