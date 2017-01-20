@@ -1,0 +1,7 @@
+Hi {{first_name}} {{last_name}},
+
+We have received a reset password request. To reset your password, please copy and paste the following link into your browser.
+{{url}}/people/password-reset/{{hashedId}}
+
+
+EMF
