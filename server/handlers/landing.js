@@ -41,16 +41,6 @@ module.exports = function (request, reply) {
           }
         },
         {
-          title: 'Share a challenge',
-          description:
-            'And find out who has the relevant experience to learn from, '
-            + 'to help you solve it.',
-          link: {
-            text: 'Share a challenge now',
-            url: '/challenges/add'
-          }
-        },
-        {
           title: 'Find the latest insights',
           description:
             'Explore circular economy insights related to your topic '
@@ -62,11 +52,23 @@ module.exports = function (request, reply) {
         }
       ];
 
+      if (loggedIn.scope === 'primary') {
+        sections.splice(-1, 0, {
+          title: 'Share a challenge',
+          description:
+            'And find out who has the relevant experience to learn from, '
+            + 'to help you solve it.',
+          link: {
+            text: 'Share a challenge now',
+            url: '/challenges/add'
+          }
+        });
+      }
+
       options = Object.assign(
         { section: sections },
         { permissions: permissions.permissions }
       );
-      console.log(options);
 
       return reply.view('landing', options);
     });

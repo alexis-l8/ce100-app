@@ -28,7 +28,6 @@ require('./organisations/edit-org.test.js');
 require('./organisations/add-logo.test.js');
 require('./organisations/archived-challenges.test.js');
 
-
 // people
 require('./people/browse.test.js');
 require('./people/login.test.js');
@@ -47,3 +46,6 @@ require('./unit/getCancelUrl.js');
 require('./server/auth.test.js');
 require('./server/permissions.test.js');
 require('./server/file-server.test.js');
+
+// generic
+require('./browse/landing.test.js');
