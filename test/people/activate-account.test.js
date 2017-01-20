@@ -9,7 +9,7 @@ var config = require('../../server/config.js');
 var activateAccount = function (userId, payload) {
   return {
     method: 'POST',
-    url: '/people/activate/' + jwt.sign(userId, config.jwt_secret),
+    url: '/people/activate/' + jwt.sign({ id: userId }, config.jwt_secret),
     payload: payload
   };
 };
