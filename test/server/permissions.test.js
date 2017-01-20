@@ -178,6 +178,11 @@ var endpoints = [
     method: 'POST',
     url: '/insights/add',
     expectedStatusCode: 403
+  },
+  {
+    method: 'GET',
+    url: '/resources',
+    expectedStatusCode: 200
   }
 ]
 

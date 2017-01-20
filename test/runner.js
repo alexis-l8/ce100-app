@@ -8,6 +8,7 @@ require('./insights/add-tags-to-insight.test.js');
 require('./insights/edit-insight.test.js');
 require('./insights/browse.test.js');
 require('./insights/add-insight.test.js');
+require('./insights/admin-adds-resource.test.js');
 
 // challenges
 require('./challenges/add-chal.test.js');
