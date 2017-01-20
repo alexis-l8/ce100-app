@@ -104,9 +104,11 @@ Once the domain's HTTP/TCP protocol has been decided on, it might make sense to 
 - ```/insights/tags```
 
 Display all the tags by categories (or type of tags):
+
 ![list-tags](doc/img/list-tags.png)
 
 Clicking on a category will display the list of tags linked to this category:
+
 ![list-tags-2](doc/img/list-tags-2.png)
 
 Each tags is a link to the filter organisations or challenges pages
@@ -124,6 +126,7 @@ This view displays only the organisation names; for more information, click on t
 ![browse-orgs](doc/img/browse-orgs.png)
 
 If the connected user is an admin the view displays on the left a green or red button which indicates if the organisation is active or inactive
+
 ![indicator-org](doc/img/explore-orgs-no-filter-admin.png)
 
 To view and browse challenges or insights instead, click on the 'Challenges' or 'insights' navigation option; this will take you to a page where all challenges/insights will be displayed.
@@ -162,12 +165,14 @@ Permissions: Only an admin and the primary user of the organisation can change t
 Clicking on 'People' in the right side of the top-nav, will take you to a page where all users will be displayed.
 Both active and inactive users will be displayed for admin, but only active users will show for primary users.
 On the list, selected an individual user will toggle the user's contact details.
+
 ![people-list](doc/img/people-list.png)
 
 ### Update Challenge (Title, Description)
 - ```/challenges/{id}/edit```
 
 The title and description of a challenge can be updated. You must however be the primary user of the organisation represented by the challenge (Admin are not allow to update challanges). If you have editting rights, you will see a 'pencil icon' at the top right corner of each challenge card. Clicking this will allow you to view your current challenge details, but also edit and submit an update on the challenge title and description.
+
 ![challenge-edit](doc/img/challenge-edit.png)
 
 ### Admin adds a user
@@ -175,6 +180,7 @@ The title and description of a challenge can be updated. You must however be the
 
 Admin can add a new user by clicking on the `+` symbol. They can add some details about the new user, select the user type, and 'link' them to an organisation.
 We only have user types of primary and admin at the moment, and there can only be one admin per organisation for now, so only organisations that do not have a primary user will show up in the drop-down list.  With the introduction of secondary users, or more than one primary per organisation, this will have to change.
+
 ![add-user1](doc/img/add-user1.png)
 
 ![add-user2](doc/img/add-user2.png)
@@ -186,20 +192,42 @@ Primary users and admins have different scopes of editting permissions.
 Primary users can only edit their profile. Admins can edit any user's profile.
 Primary users can edit their `first name`, `last name`, `job title` and `phone`.
 Admin users can also edit `email`.
+
 ![edit-user-primary](doc/img/edit-user-primary.png)
+
 ![edit-user-admin1](doc/img/edit-user-admin1.png)
+
 ![edit-user-admin2](doc/img/edit-user-admin2.png)
 
 ### Archive/Unarchive challenges
 - ```/challenges/{id}/toggle-archive```
 
-You can make a challenge visible/invisible to other members of this platform by clicking on 'Archive/Unarchive Challenge', on editting your challenge.
+You can make a challenge visible/invisible to other members of this platform by clicking on 'Archive/Unarchive Challenge', on editing your challenge.
+
+### Archived challenges
+- ```/orgs/{id}/archived-challenges```
+
+Primary users can navigate to their organisation's archived challenges from their organisation's profile view:
+
+![archived-challenges-navigation](doc/img/archived-challenges-navigation.png)
+
+Archived challenges are displayed in case the primary user wants to unarchive and make them accessible to other members:
+
+![edit-user-admin2](doc/img/archived-challenge.png)
+
+If there are no archived challenges:
+
+![edit-user-admin2](doc/img/no-archived-challenges.png)
+
 
 
 ### Activate Account
 - ```/people/activate/{id}```
 
+
+
 After a user is created by an admin, they will be sent an email with a link to the account activation page where the user has to create a password.
+
 ![activate-view](doc/img/activate-account.png)
 
 ### Add new challenge
@@ -209,4 +237,5 @@ A new challenge can be created on behalf of an existing organisation, by the pri
 Admin do not have the permission to create a new challenge.
 On clicking the 'Add Challenge' button in the centre of the bottom nav, users will be directed to a page to write the title and description of the challenge. On clicking 'Next', the challenge will be saved, and made visible to the users.
 Users will then be redirected to add tags to the challenge, so that other users can find challenges more easily.
+
 ![chal-add](doc/img/chal-add.png)

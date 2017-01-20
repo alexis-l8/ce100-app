@@ -48,16 +48,6 @@ helpers.editUserOrgDropdown = (orgs, user) => {
   });
 };
 
-helpers.removeUserFromOrg = (orgString, userId) => {
-  var org = JSON.parse(orgString);
-  var newInfo = {
-    primary_id: -1,
-    people: org.people.filter(u => u.id !== userId)
-  };
-  var updatedOrg = Object.assign({}, org, newInfo);
-  return JSON.stringify(updatedOrg);
-};
-
 
 helpers.userTypeRadios = (user_type) => {
   // default to primary
@@ -72,24 +62,6 @@ helpers.userTypeRadios = (user_type) => {
     };
   });
   return { userTypes: userTypeArr };
-};
-
-helpers.toggleActivate = (stringifiedData) => {
-  var data = JSON.parse(stringifiedData);
-  var updated = Object.assign({}, data, { active: !data.active });
-  return JSON.stringify(updated);
-};
-
-helpers.toggleActivateUser = (stringifiedData) => {
-  var data = JSON.parse(stringifiedData);
-  var updated = Object.assign({}, data, { active: !data.active, organisation_id: -1 });
-  return JSON.stringify(updated);
-};
-
-helpers.deactivate = (stringifiedData) => {
-  var data = JSON.parse(stringifiedData);
-  var updated = Object.assign({}, data, { active: !data.active });
-  return JSON.stringify(updated);
 };
 
 
@@ -108,21 +80,6 @@ helpers.sortAlphabetically = (key) => (arr) =>
     return 0;
   });
 
-helpers.sortByDate = (arr) =>
-  arr && arr.length > 0 && helpers.cloneArray(arr).sort((ch1, ch2) => ch2.date - ch1.date);
-
-helpers.filterActive = (arr) => {
-  return arr ? arr.filter((el) => el.active) : false;
-};
-
-helpers.parseArray = (arr) => arr.map(el => JSON.parse(el));
-
-// map through the inner function which takes a tag id, and returns named object for that tag
-helpers.getTagFromId = (allTags) => (id) =>
-  id && allTags[id[0]] && allTags[id[0]].tags[id[1]] && {
-    id: id,
-    name: allTags[id[0]].tags[id[1]].name
-  };
 
 helpers.errorOptions = (err) =>
   // if there is no error, return falsey

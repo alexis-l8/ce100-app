@@ -1,3 +1,28 @@
+{{#if permissions.admin}}
+  <nav class="navbar">
+    <div class="navbar__links">
+      <div class="navbar__item">
+        <a href="/orgs" class="navbar__link">
+          <i class="navbar__icon icon icon--spyglass"></i>
+          <span class="navbar__link navbar__link--with-icon">Explore</span>
+        </a>
+      </div>
+      <div class="navbar__item navbar__item--toggle">
+        <label class="navbar__link" for="add-more">
+          <i class="navbar__icon icon icon--plus"></i>
+          <span class="navbar__link navbar__link--with-icon">Add</span>
+        </label>
+        <input class="navbar__link--checkbox" type="checkbox" id="add-more" />
+        <div class="navbar__hidden">
+          <a href="/orgs/add" class="navbar__link--toggle-menu">Organisation</a>
+          <a href="/people/add" class="navbar__link--toggle-menu">User</a>
+          <a href="/insights/add" class="navbar__link--toggle-menu">Insight</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+{{/if}}
+
 {{#if permissions.primary}}
   <nav class="navbar">
     <ul class="navbar__links">
@@ -21,28 +46,23 @@
       </li>
     </ul>
   </nav>
-{{else if permissions.admin}}
+{{/if}}
+
+{{#if permissions.secondary}}
   <nav class="navbar">
-    <div class="navbar__links">
-      <div class="navbar__item">
+    <ul class="navbar__links">
+      <li class="navbar__item">
         <a href="/orgs" class="navbar__link">
           <i class="navbar__icon icon icon--spyglass"></i>
           <span class="navbar__link navbar__link--with-icon">Explore</span>
         </a>
-      </div>
-      <div class="navbar__item navbar__item--toggle">
-        <label class="navbar__link" for="add-more">
-          <i class="navbar__icon icon icon--plus"></i>
-          <span class="navbar__link navbar__link--with-icon">Add</span>
-        </label>
-        <input class="navbar__link--checkbox" type="checkbox" id="add-more" />
-        <div class="navbar__hidden">
-          <a href="/orgs/add" class="navbar__link--toggle-menu">Organisation</a>
-          <a href="/people/add" class="navbar__link--toggle-menu">User</a>
-          <a href="/insights/add" class="navbar__link--toggle-menu">Insight</a>
-        </div>
-      </div>
-    </div>
+      </li>
+      <li class="navbar__item">
+        <a href="/orgs/{{permissions.organisation_id}}" class="navbar__link">
+          <i class="navbar__icon icon icon--profile"></i>
+          <span class="navbar__link navbar__link--with-icon">Profile</span>
+        </a>
+      </li>
+    </ul>
   </nav>
-{{else}}
 {{/if}}

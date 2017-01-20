@@ -1,5 +1,4 @@
 var tape = require('tape');
-var payloads = require('../helpers/mock-payloads.js');
 var initServer = require('../../server/server.js');
 var config = require('../../server/config.js');
 
@@ -42,6 +41,7 @@ tape('/orgs/id (GET) - Admin view org details view: --> ' + __filename, function
         // Challenges
         t.equal(res.payload.indexOf('/challenges/2/edit'), -1, 'Admin cannot edit the organisations challenge');
         t.ok(res.payload.indexOf('Challenge Number 2') > -1, 'Correct challenge is displayed');
+        t.ok(res.payload.indexOf('Go to archived challenges') === -1, 'Admin cannot see archived challenges navigation');
 
         t.end();
         pool.end();
@@ -82,12 +82,18 @@ users.forEach(function (user) {
           t.ok(res.payload.indexOf('Challenge Number 3') > -1, 'active challenges do show up on org profile');
 
           // primary users can edit challenges
-          userType === 'primary' && t.ok(res.payload.indexOf('/challenges/2/edit') > -1, 'Primary user can edit their organisations challenges');
-          userType === 'primary' && t.ok(res.payload.indexOf('/challenges/3/edit') > -1, 'Primary user can edit their organisations challenges');
+          if (userType === 'primary') {
+            t.ok(res.payload.indexOf('/challenges/2/edit') > -1, 'Primary user can edit their organisations challenges');
+            t.ok(res.payload.indexOf('/challenges/3/edit') > -1, 'Primary user can edit their organisations challenges');
+            t.ok(res.payload.indexOf('Go to archived challenges') > -1, 'Primary user can see archived challenges navigation of own org');
+          }
 
           // secondary users cannot edit challenges
-          userType === 'secondary' && t.ok(res.payload.indexOf('/challenges/2/edit') === -1, 'secondary user cannot edit their organisations challenges');
-          userType === 'secondary' && t.ok(res.payload.indexOf('/challenges/3/edit') === -1, 'secondary user cannot edit their organisations challenges');
+          if (userType === 'secondary') {
+            t.ok(res.payload.indexOf('/challenges/2/edit') === -1, 'secondary user cannot edit their organisations challenges');
+            t.ok(res.payload.indexOf('/challenges/3/edit') === -1, 'secondary user cannot edit their organisations challenges');
+            t.ok(res.payload.indexOf('Go to archived challenges') === -1, 'secondary cannot see archived challenges navigation');
+          }
 
           t.end();
           pool.end();
@@ -127,6 +133,9 @@ users.forEach(function (user) {
           // Challenge Number 5
           t.equal(res.payload.indexOf('/challenges/5/edit'), -1, userType + ' user cannot edit a different organisations challenges');
           t.ok(res.payload.indexOf('Challenge Number 5') > -1, 'Correct challenge with id 5 is displayed');
+
+          // users cannot navigate to archived challengs of a different org
+          t.ok(res.payload.indexOf('Go to archived challenges') === -1, 'users cannot see archived challenges navigation in different org');
 
           t.end();
           pool.end();

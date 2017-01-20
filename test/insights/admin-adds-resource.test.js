@@ -31,12 +31,9 @@ tape('/resources accessible by all users', function (t) {
         t.equal(res.statusCode, 200, 'admin can access /resources endpoint');
         server.inject(getAll('primary_3'), function (res) {
           t.equal(res.statusCode, 200, 'primary can access /resources endpoint');
-          server.inject(getAll('secondary_12'), function (res) {
-            t.equal(res.statusCode, 200, 'secondary can access /resources endpoint');
-            t.end();
-            server.stop();
-            pool.end();
-          });
+          t.end();
+          server.stop();
+          pool.end();
         });
       });
     });

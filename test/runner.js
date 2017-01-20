@@ -27,6 +27,8 @@ require('./organisations/org-details-view.test.js');
 require('./organisations/edit-org-view.test.js');
 require('./organisations/edit-org.test.js');
 require('./organisations/add-logo.test.js');
+require('./organisations/archived-challenges.test.js');
+
 
 // people
 require('./people/browse.test.js');
@@ -45,3 +47,4 @@ require('./unit/getCancelUrl.js');
 // server
 require('./server/auth.test.js');
 require('./server/permissions.test.js');
+require('./server/file-server.test.js');
