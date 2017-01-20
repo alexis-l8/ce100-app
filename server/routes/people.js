@@ -51,12 +51,27 @@ module.exports = [
   {
     method: 'GET',
     path: '/people/activate/{hashedId}',
-    handler: activateAccountView,
+    handler: activateAccountView('activate'),
     config: { auth: false }
   },
   {
     method: 'POST',
     path: '/people/activate/{hashedId}',
+    handler: activateAccount,
+    config: {
+      validate: require('../models/confirm-password.js'),
+      auth: false
+    }
+  },
+  {
+    method: 'GET',
+    path: '/people/password-reset/{hashedId}',
+    handler: activateAccountView('reset'),
+    config: { auth: false }
+  },
+  {
+    method: 'POST',
+    path: '/people/password-reset/{hashedId}',
     handler: activateAccount,
     config: {
       validate: require('../models/confirm-password.js'),
