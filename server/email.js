@@ -12,17 +12,17 @@ var subjects = {
 }
 
 function send (emailType, user, callback) {
-  console.log('--------' + jwt.verify('eyJhbGciOiJIUzI1NiJ9.am11cnBoeS53ZWJAZ21haWwuY29t.qfXM9oCRSWGroO8YSTCZz9amZ4EniCQJGM3T3IYbBMY', config.jwt_secret));
-  // console.log(emailType, user);
+  var expiresIn = emailType === 'reset' && { expiresIn: 60*5 }
+
   var emailOptions = {
-    hashedId: jwt.sign(user.id, config.jwt_secret),
+    hashedId: jwt.sign({id: user.id}, config.jwt_secret, expiresIn),
     subject: subjects[emailType],
     url: config.root_url,
     email: user.email,
     first_name: user.first_name,
     last_name: user.last_name
-  }
-console.log(emailOptions);
+  };
+
   sendEmail.email(emailType, emailOptions, callback)
 }
 
