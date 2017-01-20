@@ -525,15 +525,18 @@ Light-teal:     #66d9e0;
     height: 7.5rem; /* 120px */
 }
 .card--challenge {
-    padding: 1.25rem 1.875rem 2rem;
+    padding: 1.25rem 1.875rem 1.2rem;
     text-align: left;
 }
     .card__header {
         margin-bottom: 1rem;
         font-size: 1.125rem;
     }
+        .card__header--challenge {
+            font-size: 1.125rem;
+        }
     .card__copy {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
     .card__data {
         display: block;

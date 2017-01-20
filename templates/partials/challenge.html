@@ -6,15 +6,15 @@
       </a>
     {{/if}}
   {{/if}}
-  <a class="anchor" href="/challenges/{{id}}">
-    <p class="card__header anchor">{{title}}</p>
-  </a>
+
+  <a href="/challenges/{{id}}" target="_blank"
+    class="card__header--challenge card__data--link">{{title}}</a>
 
   {{#if shared_by}}
-    <h4 class="anchor card__copy card__additional">Shared by
-      <a class="anchor card__copy" href="/orgs/{{org_id}}">
-        {{shared_by}}
-      </a>
-    </h4>
+  <p class="card__copy card__additional">Shared by
+    <a href="/orgs/{{org_id}}" class="card__data--link">
+      {{shared_by}}
+    </a>
+  </p>
   {{/if}}
 </div>
