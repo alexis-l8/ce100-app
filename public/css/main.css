@@ -263,13 +263,13 @@ Light-teal:     #66d9e0;
         background: radial-gradient(14rem at 50% 10rem, rgb(53, 91, 116), rgb(0, 50, 83));
     }
     .container--landing {
-        max-width: 100rem; /* 768 px */
         width: 100%;
         z-index: -100;
         background: #002c49;
         position: absolute;
         top: 0;
         margin: 0 auto;
+        padding-bottom: 3rem;
     }
 
 
