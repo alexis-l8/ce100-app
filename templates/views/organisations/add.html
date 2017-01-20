@@ -6,16 +6,27 @@
     <div class="card card--header">
         <h1 class="title">Add Organisation</h1>
     </div>
+
     {{#if error}}
     <div class="snackbar snackbar--error">
       <h1 class="snackbar-content snackbar-content--error">{{error.message}}</h1>
     </div>
     {{/if}}
-    <form class="form" method="post">
-      <label class="form__label" for="name">Organisation Name</label>
-      <input class="form__input {{error.name}}" type="text" name="name" value="{{error.values.name}}">
 
-      <button class="button">Submit</button>
+    <form class="form" id="add-org-form">
+      <div class="form__section">
+        <label class="form__label" for="name">Organisation Name</label>
+        <input class="form__input {{error.name}}" name="name" id="name" value="{{error.values.name}}">
+      </div>
+
+      <div class="form__section">
+        <label class="form__label form__label--file" for="logo">Organisation Logo</label>
+        <input class="form__input form__input--file" type="file" name="logo" value="" id="logo" onchange="logoSaver.saveFile(this.files)">
+      </div>
+
+      <div class="form__section form__section--last">
+        <button class="button" type="button" id="submit-edit-org" onclick="logoSaver.submitForm({{org.id}})">Save</button>
+      </div>
     </form>
 
 </div>

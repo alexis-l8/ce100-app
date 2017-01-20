@@ -1,9 +1,17 @@
 var Hoek = require('hoek');
+var S3 = require('../../s3.js');
+var helpers = require('../helpers.js');
 
-module.exports = (request, reply) => {
-  request.server.methods.pg.organisations.add(request.payload, function (err, result) {
-    Hoek.assert(!err, 'database error');
+module.exports = function (request, reply) {
+  var newOrg;
 
-    return reply.redirect('/orgs');
+  return S3.upload(request.payload, function (err, data) {
+    Hoek.assert(!err, 'Image upload error');
+    newOrg = helpers.preparePayload(request.payload, data);
+
+    request.server.methods.pg.organisations.add(newOrg,
+      function (pgErr) {
+        return reply();
+      });
   });
 };

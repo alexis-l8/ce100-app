@@ -7,6 +7,28 @@ var INSIGHT_TYPES = [
   'CASE STUDY', 'PAPER', 'PRESENTATION', 'REPORT', 'VIDEO', 'WORKSHOP SUMMARY'
 ];
 
+///// *** S3 Image Upload *** /////
+
+// remove an array of keys that may or may not be present from an object
+helpers.dissocAll = function (arr, obj) {
+  return Object.keys(obj).reduce(function (newOb, key) {
+    arr.indexOf(key) > -1 ? newOb : newOb[key] = obj[key]; //eslint-disable-line
+
+    return newOb;
+  }, {});
+};
+
+// remove logoand file_name, add logo_url to payload obj
+helpers.preparePayload = function (payload, data) {
+  var logo_url = data && data.Location;
+  var strippedPayload = helpers.dissocAll(['logo', 'file_name'], payload);
+
+  return logo_url
+    ? Object.assign({}, strippedPayload, { logo_url: logo_url })
+    : strippedPayload;
+};
+///////////////////////////////////
+
 helpers.getPermissions = (loggedIn, key, identifier) => {
   return loggedIn && {
     permissions: {
