@@ -55,6 +55,11 @@ var endpoints = [
   {
     method: 'POST',
     url: '/orgs/add',
+    expectedStatusCode: 403
+  },
+  {
+    method: 'POST',
+    url: '/orgs/add',
     payload: {},
     expectedStatusCode: 403
   },

@@ -11,6 +11,8 @@ module.exports = function (request, reply) {
 
     request.server.methods.pg.organisations.add(newOrg,
       function (pgErr) {
+        Hoek.assert(!pgErr, 'Database error');
+
         return reply();
       });
   });
