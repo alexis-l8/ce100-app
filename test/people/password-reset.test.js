@@ -18,7 +18,7 @@ function passwordReset (email) {
 }
 
 
-tape('password reset view', function (t) {
+tape('/password-reset (GET) - password reset view: --> ' + __filename, function (t) {
   init(config, function (error, server, pool) {
     t.ok(!error, 'No error on init server: ' + error);
     server.inject({ url: '/password-reset' }, function (res) {
@@ -33,7 +33,7 @@ tape('password reset view', function (t) {
 });
 
 
-tape('password reset good email', function (t) {
+tape('/password-reset (POST) - password reset good email: --> ' + __filename, function (t) {
   var expectedUser = {
     subject: 'CE100 password reset requested',
     url: 'http://localhost:3000',
@@ -67,7 +67,7 @@ tape('password reset good email', function (t) {
 });
 
 
-tape('password reset with bad email', function (t) {
+tape('/password-reset (POST) - password reset with bad email: --> ' + __filename, function (t) {
   init(config, function (error, server, pool) {
     t.ok(!error, 'No error on init server');
     server.inject(passwordReset('non@recognised.email'), function (res) {
