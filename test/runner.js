@@ -39,6 +39,8 @@ require('./people/add-user-view.test.js');
 require('./people/add-user.test.js');
 require('./people/edit-settings.test.js');
 require('./people/add-user.test.js');
+require('./people/request-password-reset.test.js');
+
 
 // tags
 require('./browse/select-tags.test.js');
