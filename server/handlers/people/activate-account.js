@@ -22,7 +22,7 @@ module.exports = function (request, reply) {
       var errorMessage =
         err.name === 'TokenExpiredError' ? timeOutMessage : err.message
 
-      return reply.view('request-password-reset', { error: { message: errorMessage } });
+      return reply.view('request-password-reset', { error: { message: errorMessage } }).code(400);
     }
 
     var userId = user.id;
@@ -36,7 +36,7 @@ module.exports = function (request, reply) {
           var error = {
             message: 'There was a problem activating your account'
           }
-          return reply.view('activate', {error}).code(401);
+          return reply.view('activate', {error}).code(400);
         }
 
         var session = {

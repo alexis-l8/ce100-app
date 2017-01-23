@@ -24,7 +24,7 @@ module.exports = function (userFlow) {
           ? timeOutMessage
           : err.message
 
-        return reply.view('request-password-reset', { error: { message: errorMessage } });
+        return reply.view('request-password-reset', { error: { message: errorMessage } }).code(400);
       }
 
       var userId = user.id;
@@ -44,7 +44,7 @@ module.exports = function (userFlow) {
           return reply.redirect('/login');
         }
 
-        return reply.view('activate', { [userFlow]: true, error: error }).code(error ? 401 : 200);
+        return reply.view('activate', { [userFlow]: true, error: error }).code(error ? 400 : 200);
       });
     });
   };
