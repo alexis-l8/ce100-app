@@ -10,6 +10,7 @@ var INSIGHT_TYPES = [
 helpers.getPermissions = (loggedIn, key, identifier) => {
   return loggedIn && {
     permissions: {
+      isMember: loggedIn[key] === identifier,
       editable: loggedIn[key] === identifier || loggedIn.scope === 'admin',
       [loggedIn.scope]: true,
       userId: loggedIn.userId,

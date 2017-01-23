@@ -38,8 +38,16 @@
       <label class="form__label" for="phone">Phone Number</label>
       <input class="form__input {{error.phone}}" type="tel" name="phone" value="{{#if error}}{{error.values.phone}}{{else}}{{user.phone}}{{/if}}">
 
+
       {{#if permissions.admin}}
         {{>admin-edit-user}}
+      {{/if}}
+
+      {{#if permissions.isMember}}
+      <div class="form__section">
+        <label class="form__label">Password Reset</label>
+        <a class="anchor anchor--teal" href="/password-reset">Request a password reset email</a>
+      </div>
       {{/if}}
 
       <div class="form__section form__section--last">
