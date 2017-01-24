@@ -19,7 +19,7 @@ function addOrg (orgObj) {
 var browseOrgs = {
   url: '/orgs',
   headers: adminCookie
-}
+};
 
 // test an admin successfuly adding an organisation
 tape('Admin can add an organisation: --> ' + __filename, function (t) {
@@ -28,11 +28,11 @@ tape('Admin can add an organisation: --> ' + __filename, function (t) {
 
       var org = {
         name: 'Experian',
-        logo_url: 'www.experian-image.co.uk'
+        logo: 'www.experian-image.co.uk'
       };
       server.inject(addOrg(org), function (res) {
         // Admin can add an organisation
-        t.equal(res.statusCode, 302, 'Org added and admin is redirected');
+        t.equal(res.statusCode, 200, 'Org added and admin is redirected');
 
         // check the org was actually added
         server.inject(browseOrgs, function (res) {

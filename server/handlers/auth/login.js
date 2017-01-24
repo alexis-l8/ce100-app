@@ -46,7 +46,7 @@ module.exports = function (request, reply) {
           return reply.view('login', {error: { message: 'Sorry, something went wrong. Please try again.', values: request.payload } }).code(500);
         }
         var token = jwt.sign(session, process.env.JWT_SECRET);
-        return reply.redirect('/orgs').state('token', token);
+        return reply.redirect('/').state('token', token);
       });
     });
   });
