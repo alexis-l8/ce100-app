@@ -183,8 +183,15 @@ var endpoints = [
     method: 'GET',
     url: '/resources',
     expectedStatusCode: 200
+  },
+
+  // generic
+  {
+    method: 'GET',
+    url: '/',
+    expectedStatusCode: 200
   }
-]
+];
 
 function getOptions (endpoint) {
   return {
@@ -196,7 +203,6 @@ function getOptions (endpoint) {
     }
   };
 }
-
 
 endpoints.forEach(function (endpoint) {
   tape(endpoint.url + ' (' + (endpoint.method || 'GET ') + ') secondary permissions tests', function (t) {
