@@ -230,6 +230,14 @@ After a user is created by an admin, they will be sent an email with a link to t
 
 ![activate-view](doc/img/activate-account.png)
 
+### Request password reset email
+- `/password-reset`
+
+From login or user settings, a user can request to change their password. They need to enter their email and will be sent a link to the reset password view. The link will only remain active for 5 minutes.
+
+![request-password-reset](doc/img/request-password-reset.png)
+
+
 ### Add new challenge
 - ```/challenges/add```
 

@@ -1007,6 +1007,9 @@ Light-teal:     #66d9e0;
     .snackbar-content--success {
       color: #40667e;
     }
-.error--login {
+.login-response--error {
   color: #ff5e5e;
+}
+.login-response--success {
+  color: #5db4c0;
 }
