@@ -80,8 +80,9 @@ tape('/people/password-reset/{hashedId} (POST) - password reset success: --> ' +
 
     // Change users password from Hello1 to Hello2
     server.inject(resetPassword('POST', 1, goodPasswords), function (res) {
+      console.log(res.result);
       t.equal(res.statusCode, 302, 'reset password success should redirect user');
-      t.equal(res.headers.location, '/orgs', 'user is now logged in and redirected');
+      t.equal(res.headers.location, '/', 'user is now logged in and redirected');
       t.ok(res.headers['set-cookie'], 'cookie has been set');
 
       function login (password) {
@@ -101,8 +102,9 @@ tape('/people/password-reset/{hashedId} (POST) - password reset success: --> ' +
 
         // now log in with new password
         server.inject(login(goodPasswords.password), function (res) {
+          console.log(res.result);
           t.equal(res.statusCode, 302, 'user is logged in and redirected and password has been changed');
-          t.equal(res.headers.location, '/orgs', 'user is now logged in and redirected');
+          t.equal(res.headers.location, '/', 'user is now logged in and redirected');
           t.ok(res.headers['set-cookie'], 'cookie has been set');
 
           t.end();

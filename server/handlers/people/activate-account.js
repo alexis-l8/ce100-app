@@ -49,8 +49,8 @@ module.exports = function (request, reply) {
           var token = jwt.sign(session, config.jwt_secret);
           // redirect a new user with an org to their org profile, else redirect to all orgs
           return updatedUser.org_id === null
-          ? reply.redirect('/orgs/' + updatedUser.org_id).state('token', token)
-          : reply.redirect('/orgs').state('token', token);
+          ? reply.redirect('/orgs').state('token', token)
+          : reply.redirect('/').state('token', token);
         });
       });
     });

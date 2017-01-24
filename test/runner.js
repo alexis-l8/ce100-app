@@ -21,6 +21,7 @@ require('./challenges/add-tags-to-challenge.test.js');
 require('./organisations/add-tags-to-org-view.test.js');
 require('./organisations/add-tags-to-org.test.js');
 require('./organisations/toggle-active.test.js');
+require('./organisations/add-org-view.test.js');
 require('./organisations/add-org.test.js');
 require('./organisations/browse-orgs.test.js');
 require('./organisations/org-details-view.test.js');
@@ -28,7 +29,6 @@ require('./organisations/edit-org-view.test.js');
 require('./organisations/edit-org.test.js');
 require('./organisations/add-logo.test.js');
 require('./organisations/archived-challenges.test.js');
-
 
 // people
 require('./people/browse.test.js');
@@ -50,3 +50,6 @@ require('./unit/getCancelUrl.js');
 require('./server/auth.test.js');
 require('./server/permissions.test.js');
 require('./server/file-server.test.js');
+
+// generic
+require('./browse/landing.test.js');
