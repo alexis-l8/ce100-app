@@ -110,6 +110,13 @@ Light-teal:     #66d9e0;
     background-image: url("../assets/Profile.svg");
 }
 
+.icon--burger {
+    background-image: url("../assets/Burger.svg");
+    width: 1.4rem;
+}
+.icon--logo {
+    background-image: url("../assets/logo.png");
+}
 .icon--dropdown {
   background-image: url("../assets/Dropdown.svg");
   position: absolute;
@@ -979,6 +986,29 @@ Light-teal:     #66d9e0;
     padding-right: 0.6rem;
     padding-top: 0.9rem;
 }
+
+
+.navbar-top {
+  background-color: #003253;
+  height: 3.4rem;
+  display: table;
+  width: 100%;
+}
+.navbar-top__item {
+  display: table-cell;
+  vertical-align: middle;
+}
+    .navbar-top__logo {
+      width: 2.6rem;
+      height: 2rem;
+      float: left;
+      margin-left: 1rem;
+    }
+    .navbar-top__burger {
+      float: right;
+      margin-right: 1.3rem;
+    }
+
 /*|||||||||||||||||||||||||||||||||||||||||||||
     snackbar classes
   |||||||||||||||||||||||||||||||||||||||||||*/
