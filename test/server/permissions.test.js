@@ -55,6 +55,11 @@ var endpoints = [
   {
     method: 'POST',
     url: '/orgs/add',
+    expectedStatusCode: 403
+  },
+  {
+    method: 'POST',
+    url: '/orgs/add',
     payload: {},
     expectedStatusCode: 403
   },
@@ -183,8 +188,15 @@ var endpoints = [
     method: 'GET',
     url: '/resources',
     expectedStatusCode: 200
+  },
+
+  // generic
+  {
+    method: 'GET',
+    url: '/',
+    expectedStatusCode: 200
   }
-]
+];
 
 function getOptions (endpoint) {
   return {
@@ -196,7 +208,6 @@ function getOptions (endpoint) {
     }
   };
 }
-
 
 endpoints.forEach(function (endpoint) {
   tape(endpoint.url + ' (' + (endpoint.method || 'GET ') + ') secondary permissions tests', function (t) {
