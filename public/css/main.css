@@ -103,13 +103,21 @@ Light-teal:     #66d9e0;
 .icon--spyglass {
     background-image: url("../assets/Browse.svg");
 }
+.icon--spyglass-white {
+    background-image: url("../assets/Browse-white.svg");
+}
 .icon--plus {
     background-image: url("../assets/Plus.svg");
+}
+.icon--plus-white {
+    background-image: url("../assets/Plus-white.svg");
 }
 .icon--profile {
     background-image: url("../assets/Profile.svg");
 }
-
+.icon--profile-white {
+    background-image: url("../assets/Profile-white.svg");
+}
 .icon--burger {
     background-image: url("../assets/Burger.svg");
     width: 1.4rem;
