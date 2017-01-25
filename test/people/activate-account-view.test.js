@@ -10,7 +10,7 @@ var config = require('../../server/config.js');
 var activateAccountView = function (userId) {
   return {
     method: 'GET',
-    url: '/people/activate/' + jwt.sign(userId, config.jwt_secret)
+    url: '/people/activate/' + jwt.sign({ id: userId }, config.jwt_secret)
   };
 };
 

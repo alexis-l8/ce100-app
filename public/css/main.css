@@ -1087,9 +1087,13 @@ Light-teal:     #66d9e0;
     .snackbar-content--success {
       color: #40667e;
     }
-.error--login {
-  color: #ff5e5e;
-}
+    .login-response--error {
+      color: #ff5e5e;
+    }
+    .login-response--success {
+      color: #5db4c0;
+
+    }
 
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -1123,5 +1127,4 @@ Light-teal:     #66d9e0;
     padding-left: 0.4rem;
     float: inherit;
   }
-
 }

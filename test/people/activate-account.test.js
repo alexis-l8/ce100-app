@@ -9,7 +9,7 @@ var config = require('../../server/config.js');
 var activateAccount = function (userId, payload) {
   return {
     method: 'POST',
-    url: '/people/activate/' + jwt.sign(userId, config.jwt_secret),
+    url: '/people/activate/' + jwt.sign({ id: userId }, config.jwt_secret),
     payload: payload
   };
 };
@@ -49,7 +49,7 @@ tape('short password fails validation: --> ' + __filename, function (t) {
   init(config, function (err, server, pool) {
     t.ok(!err, 'No error on init server: ', err);
     server.inject(activateAccount(8, shortPassword), function (res) {
-      t.equal(res.statusCode, 401, 'error');
+      t.equal(res.statusCode, 400, 'bad passwords returns error');
       t.ok(res.payload.indexOf('password length must be at least 6 characters long') > -1, 'correct message is displayed');
       t.end();
       server.stop();
@@ -63,7 +63,7 @@ tape('unmatching passwords fails validation: --> ' + __filename, function (t) {
   init(config, function (err, server, pool) {
     t.ok(!err, 'No error on init server: ', err);
     server.inject(activateAccount(8, unmatchingPasswords), function (res) {
-      t.equal(res.statusCode, 401, 'error');
+      t.equal(res.statusCode, 400, 'bad passwords returns error');
       t.ok(res.payload.indexOf('confirm password must match password') > -1, 'correct message is displayed');
       t.end();
       server.stop();
@@ -76,7 +76,7 @@ tape('activate account view with nonsense user id', function (t) {
   init(config, function (error, server, pool) {
     t.ok(!error, 'No error on init server');
     server.inject(activateAccount(100000, goodPassword), function (res) {
-      t.equal(res.statusCode, 401, 'not found');
+      t.equal(res.statusCode, 400, 'user not found');
       t.end();
       server.stop();
       pool.end();

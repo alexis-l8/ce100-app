@@ -7,8 +7,8 @@ var helpers = require('../helpers.js');
 module.exports = function (request, reply, source, joiErr) {
   var error = helpers.errorOptions(joiErr);
   var loggedIn = request.auth.credentials;
-  var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
-  var editId = request.params.id && JSON.parse(request.params.id);
+  var editId = request.params.id && parseInt(request.params.id);
+  var permissions = helpers.getPermissions(loggedIn, 'userId', editId);
   var getBy = request.server.methods.pg.people.getBy;
   var getActiveOrgs = request.server.methods.pg.organisations.getActive;
   var options;

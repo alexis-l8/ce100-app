@@ -8,13 +8,20 @@
             type="password"
             name="password"
             placeholder="Enter password"
-            value="{{error.values.email}}">
+            value="{{error.values.password}}">
     <input  class="form__input form__input--login"
             type="password"
             name="confirm_password"
-            placeholder="Confirm password">
-    <button class="button button--login">Activate account</button>
-    <p class="error error--login">{{error.message}}</p>
+            placeholder="Confirm password"
+            value="{{error.values.confirm_password}}">
+    <button class="button button--login">
+      {{#if userFlow.activate}}
+        Activate account
+      {{else}}
+        Reset password
+      {{/if}}
+    </button>
+    <p class="login-response--error">{{error.message}}</p>
   </form>
 
   <!-- <a href="#" class="copy copy__text-link">Forgot password?</a> -->
