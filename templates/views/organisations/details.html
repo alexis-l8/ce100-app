@@ -55,14 +55,6 @@
       </div>
       {{#each challenges}}
         {{>challenge permissions=../permissions}}
-        {{#if matches}}
-          <div class="card card--challenge card__suggested-matches">
-            <h2 class="card__data">Suggested Matches</h2>
-          {{#each matches}}
-            <a class="card__data anchor--suggested-matches text-decoration" href="/orgs/{{id}}">{{name}}</a>
-          {{/each}}
-          </div>
-        {{/if}}
       {{/each}}
     {{/if}}
     {{#if permissions.primary}}
