@@ -1117,6 +1117,10 @@ Light-teal:     #66d9e0;
   .navbar-top__item--desktop:hover {
     background-color: #002C4A;
   }
+  .navbar-top__logo {
+    width: 5rem;
+    height: 3rem;
+  }
 
   .navbar__icon--desktop {
     display: inline-block;
