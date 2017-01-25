@@ -1,16 +1,19 @@
-<nav class="navbar__top">
-  <a href="/">
-    <img class="navbar__top__logo" alt="" src="../../public/assets/logo.png">
-  </a>
-  <!-- <div class="navbar__top__hamburger" tabindex="1"></div> -->
+<nav class="mobile navbar-top">
+  <div class="navbar-top__item">
+    <a href="#">
+      <i class="icon icon--logo navbar-top__logo"></i>
+    </a>
+  </div>
 
-  <ul class="navbar__top__links">
-    <li class="navbar__top__item">
-      <a href="/people/{{permissions.userId}}/edit" class="navbar__top__link">Settings</a></li>
-    <li class="navbar__top__item">
-      <a href="/people" class="navbar__top__link">People</a></li>
-    <li class="navbar__top__item">
-      <a href="/resources" class="navbar__top__link">Resources</a></li>
-  </ul>
-
+  <div class="navbar-top__item navbar__item--toggle">
+    <label class="navbar__link" for="burger">
+      <i class="icon icon--burger navbar-top__burger"></i>
+    </label>
+  </div>
+    <input class="navbar-top__burger--checkbox" type="checkbox" id="burger" />
+    <div class="toggle-menu toggle-menu__top toggle-menu__top--burger">
+      <a href="/people/{{permissions.userId}}/edit" class="toggle-menu__link toggle-menu__link--burger">Settings</a>
+      <a href="/people" class="toggle-menu__link toggle-menu__link--burger">People</a>
+      <a href="/resources" class="toggle-menu__link toggle-menu__link--burger">Resources</a>
+    </div>
 </nav>
