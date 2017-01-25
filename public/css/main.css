@@ -88,6 +88,16 @@ Light-teal:     #66d9e0;
 
 */
 
+
+
+.desktop {
+  display: none;
+}
+.mobile {
+  display: block;
+}
+
+
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Icons
   |||||||||||||||||||||||||||||||||||||||||||*/
@@ -1079,4 +1089,39 @@ Light-teal:     #66d9e0;
     }
 .error--login {
   color: #ff5e5e;
+}
+
+
+/*|||||||||||||||||||||||||||||||||||||||||||||
+    Desktop media queries
+  |||||||||||||||||||||||||||||||||||||||||||*/
+
+@media (min-width: 600px) {
+  .mobile {
+    display: none;
+  }
+  .desktop {
+    display: block;
+  }
+  .navbar-top--desktop {
+    height: 4rem;
+  }
+  .navbar-top__item--desktop {
+    padding: 0 0.7rem;
+    line-height: 4rem;
+  }
+  .navbar-top__item--desktop:hover {
+    background-color: #002C4A;
+  }
+
+  .navbar__icon--desktop {
+    display: inline-block;
+    transform: translateY(0.2rem);
+  }
+  .navbar-top__link--desktop {
+    font-size: 0.9rem;
+    padding-left: 0.4rem;
+    float: inherit;
+  }
+
 }
