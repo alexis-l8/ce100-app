@@ -89,15 +89,6 @@ Light-teal:     #66d9e0;
 */
 
 
-
-.desktop {
-  display: none;
-}
-.mobile {
-  display: block;
-}
-
-
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Icons
   |||||||||||||||||||||||||||||||||||||||||||*/
@@ -127,6 +118,12 @@ Light-teal:     #66d9e0;
 }
 .icon--profile-white {
     background-image: url("../assets/Profile-white.svg");
+}
+.icon--explore {
+  background-image: url("../assets/Explore-icon.svg");
+}
+.icon--profile-white--new {
+  background-image: url("../assets/Profile-icon.svg");
 }
 .icon--burger {
     background-image: url("../assets/Burger.svg");
@@ -1055,7 +1052,12 @@ Light-teal:     #66d9e0;
         .navbar-top__burger--checkbox {
           display: none;
         }
-
+/*.display {
+  display:none;
+}
+        .burger-checkbox-desktop:checked ~ .display {
+            display: block;
+        }*/
         .navbar-top__burger--checkbox:checked ~ .toggle-menu__top--burger {
             display: block;
         }
@@ -1099,15 +1101,16 @@ Light-teal:     #66d9e0;
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Desktop media queries
   |||||||||||||||||||||||||||||||||||||||||||*/
+  .navbar-top--desktop {
+    display: none;
+  }
 
 @media (min-width: 600px) {
   .mobile {
     display: none;
   }
-  .desktop {
-    display: block;
-  }
   .navbar-top--desktop {
+    display: table;
     height: 4rem;
   }
   .navbar-top__item--desktop {
@@ -1116,6 +1119,9 @@ Light-teal:     #66d9e0;
   }
   .navbar-top__item--desktop:hover {
     background-color: #002C4A;
+  }
+  .navbar-top__item--burger:hover {
+    background-color: #003253;
   }
   .navbar-top__logo {
     width: 5rem;
@@ -1130,5 +1136,11 @@ Light-teal:     #66d9e0;
     font-size: 0.9rem;
     padding-left: 0.4rem;
     float: inherit;
+  }
+  .navbar-top__links {
+    float: right;
+  }
+  .toggle-menu__top {
+    top: 4rem;
   }
 }
