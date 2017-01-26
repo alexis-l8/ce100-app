@@ -9,9 +9,13 @@
   {{>browse-tab-navigation}}
 
     {{#if data}}
-      {{#each data}}
-        {{>challenge}}
-      {{/each}}
+        {{#each data}}
+          <div class="card--desktop--padded">
+            {{>challenge}}
+          </div>
+          <hr>
+        {{/each}}
+
     {{else}}
       <h3 class="title title-blue">No Challenges met your search criteria.</h3>
     {{/if}}
