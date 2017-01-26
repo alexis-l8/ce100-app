@@ -50,10 +50,11 @@
       {{/if}}
     </div>
 
-    <div class="card--standalone card--standalone-no-padding card--responsive-large">
-        <div class="card card--header card--tall card--responsive-header">
-          <h2 class="title title--tall title--responsive card--responsive-header-bottom-border">Our Challenges</h2>
+    <div class="card card--responsive-large card--standalone">
+        <div class="card card--header card--tall mobile">
+          <h2 class="title title--tall">Our Challenges</h2>
         </div>
+        <h2 class="card card__header card--responsive-header-bottom-border desktop--inline">Our Challenges</h2>
 
         {{#if challenges}}
             {{#each challenges}}
@@ -81,12 +82,8 @@
         {{#if permissions.primary}}
           {{#if permissions.editable}}
           <div class="desktop card__data--link-extra-padding-bottom">
-            <a href="/challenges/add" class="card__copy card__additional float-left card__data--link">
-              Add challenge
-            </a>
-            <a href="/orgs/{{org.id}}/archived-challenges" class="card__copy card__additional float-right card__data--link">
-              Go to archived challenges
-            </a>
+            <a href="/challenges/add" class="card__copy card__additional float-left card__data--link">Add challenge</a>
+            <a href="/orgs/{{org.id}}/archived-challenges" class="card__copy card__additional float-right card__data--link">Go to archived challenges</a>
           </div>
           {{/if}}
         {{/if}}

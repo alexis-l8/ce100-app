@@ -1110,7 +1110,7 @@ Light-teal:     #66d9e0;
   }
 
   .card--responsive-large {
-    width: 58%;
+    width: 56%;
     display: inline-block;
     vertical-align: top;
     margin: 0 auto;
@@ -1123,7 +1123,7 @@ Light-teal:     #66d9e0;
   }
 
   .card--responsive-header-bottom-border {
-    padding-bottom: 1rem;
+    padding: 0 0rem 1rem 0rem;
     margin-bottom: 1.2rem;
     border: #f2f2f2;
     border-bottom-style: solid;
@@ -1143,12 +1143,12 @@ Light-teal:     #66d9e0;
   }
 
   .card--list-item-narrow {
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 0rem;
     border-bottom: 0;
   }
 
   .card__data--link-extra-padding-bottom {
-    padding: 0 1.5rem 1.5rem 1.5rem;
+    padding: 0 0 1.5rem 0;
     margin-bottom: 2rem;
   }
 
