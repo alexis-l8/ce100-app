@@ -309,8 +309,8 @@ Light-teal:     #66d9e0;
     padding-bottom: 3rem;
 }
     .container--login {
-        height: 100vh;
-        padding: 6rem 1.25rem 3rem;
+        min-height: 100vh;
+        padding: 0.1rem 1.25rem 3.1rem;
         background: #003253;
         background: radial-gradient(14rem at 50% 10rem, rgb(53, 91, 116), rgb(0, 50, 83));
     }
@@ -842,7 +842,7 @@ Light-teal:     #66d9e0;
     margin: 0 0 2rem;
     width: 100%;
     text-indent: 0;
-    height: 3rem;
+    min-height: 3rem;
 }
 .button--margin {
     margin-bottom: 2rem;
@@ -943,6 +943,9 @@ Light-teal:     #66d9e0;
     display: block;
     margin: 0 auto 2rem;
     width: 9rem; /* 144px */
+}
+.logo--login {
+    padding-top: 6rem;
 }
     .logo--with-title {
         display: table-cell;
