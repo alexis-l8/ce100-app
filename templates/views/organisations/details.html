@@ -74,26 +74,20 @@
                   You haven't shared a challenge yet.
                 </p>
               </div>
-              {{else}}
-              <div class="card card--challenge card--list-item-narrow">
-                <p class="card__header--challenge card__data--link">
-                  No challenges have been shared yet.
-                </p>
-              </div>
               {{/if}}
             {{/if}}
         {{/if}}
 
         {{#if permissions.primary}}
           {{#if permissions.editable}}
-            <div class="desktop card__data--link-extra-padding-bottom">
-              <a href="/challenges/add" class="card__copy card__additional float-left card__data--link">
-                Add challenge
-              </a>
-              <a href="/orgs/{{org.id}}/archived-challenges" class="card__copy card__additional float-right card__data--link">
-                Go to archived challenges
-              </a>
-            </div>
+          <div class="desktop card__data--link-extra-padding-bottom">
+            <a href="/challenges/add" class="card__copy card__additional float-left card__data--link">
+              Add challenge
+            </a>
+            <a href="/orgs/{{org.id}}/archived-challenges" class="card__copy card__additional float-right card__data--link">
+              Go to archived challenges
+            </a>
+          </div>
           {{/if}}
         {{/if}}
     </div>
