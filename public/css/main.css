@@ -110,6 +110,13 @@ Light-teal:     #66d9e0;
     background-image: url("../assets/Profile.svg");
 }
 
+.icon--burger {
+    background-image: url("../assets/Burger.svg");
+    width: 1.4rem;
+}
+.icon--logo {
+    background-image: url("../assets/logo.png");
+}
 .icon--dropdown {
   background-image: url("../assets/Dropdown.svg");
   position: absolute;
@@ -206,25 +213,49 @@ Light-teal:     #66d9e0;
         .navbar__link--checkbox {
           display: none;
         }
-        .navbar__link--checkbox:checked ~ .navbar__hidden {
+        .navbar__link--checkbox:checked ~ .toggle-menu__bottom {
           display: block;
         }
-        .navbar__hidden {
-          background-color: #40667e;
-          width: 50%;
-          position: absolute;
-          bottom: 3.5em;
-          right: 0;
+
+/* For a nav menu that toggles (eg burger) */
+.toggle-menu {
+  z-index: 99;
+  position: absolute;
+  right: 0;
+}
+
+    .toggle-menu__bottom {
+      background-color: #40667e;
+      width: 50%;
+      bottom: 3.5em;
+      display: none;
+    }
+
+    .toggle-menu__top {
+      background-color: #002944;
+      top: 3.4rem;
+    }
+        .toggle-menu__top--burger {
+          bottom: 0;
+          padding-top: 4rem;
+          width: 100%;
           display: none;
         }
-          .navbar__link--toggle-menu {
-            color: #ffffff;
-            text-align: center;
-            display: block;
-            padding: 1.5em 0;
-            border-bottom: 1px solid #89a0ae;
-            text-decoration: none;
-          }
+
+    .toggle-menu__link {
+      color: #ffffff;
+      text-align: center;
+      display: block;
+      text-decoration: none;
+    }
+        .toggle-menu__link--burger {
+          padding: 2.5rem 0;
+          font-size: 1.3rem;
+        }
+        .toggle-menu__link--bottom-nav {
+          padding: 1.5em 0;
+          border-bottom: 1px solid #89a0ae;
+        }
 
   /*|||||||||||||||||||||||||||||||||||||||||||||
     Toggle Bar in browse view
@@ -979,6 +1010,37 @@ Light-teal:     #66d9e0;
     padding-right: 0.6rem;
     padding-top: 0.9rem;
 }
+
+
+.navbar-top {
+  background-color: #003253;
+  height: 3.4rem;
+  display: table;
+  width: 100%;
+}
+.navbar-top__item {
+  display: table-cell;
+  vertical-align: middle;
+}
+    .navbar-top__logo {
+      width: 2.6rem;
+      height: 2rem;
+      float: left;
+      margin-left: 1rem;
+    }
+    .navbar-top__burger {
+      float: right;
+      margin-right: 1.3rem;
+    }
+
+
+        .navbar-top__burger--checkbox {
+          display: none;
+        }
+
+        .navbar-top__burger--checkbox:checked ~ .toggle-menu__top--burger {
+            display: block;
+        }
 /*|||||||||||||||||||||||||||||||||||||||||||||
     snackbar classes
   |||||||||||||||||||||||||||||||||||||||||||*/
