@@ -13,6 +13,7 @@
         <span class="navbar__top__link navbar-top__link--desktop">Explore</span>
       </a>
     </div>
+    {{#if permissions.primary}}
     <div class="navbar-top__item navbar-top__item--desktop">
       <a href="/challenges/add" class="navbar__top__link navbar-top__link--desktop">
         <i class="navbar__icon icon navbar__icon--desktop icon--plus-white"></i>
@@ -26,6 +27,7 @@
         <span class="navbar__top__link navbar-top__link--desktop">Update Profile</span>
       </a>
     </div>
+    {{/if}}
     <div class="navbar-top__item navbar-top__item--desktop navbar-top__item--burger navbar__item--toggle">
       <label class="navbar__link" for="burger-desktop">
         <i class="icon icon--burger navbar-top__burger"></i>
