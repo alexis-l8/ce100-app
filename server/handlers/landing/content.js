@@ -2,13 +2,14 @@ module.exports = function(profile) {
   return [
     { title: 'Welcome ' + profile.first_name },
     {
+      primaryOnly: true,
       title: 'Tell us about you',
       description:
       'What are the circular economy visions and '
       + 'areas of knowledge of your organisation?',
       link: {
         text: 'Fill in your profile',
-        url: '/people/' + profile.id + '/edit'
+        url: '/orgs/' + profile.org_id + '/edit'
       }
     },
     {

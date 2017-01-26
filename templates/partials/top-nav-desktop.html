@@ -1,0 +1,66 @@
+<nav class="navbar-top navbar-top--desktop">
+  <div class="navbar-top__item">
+    <a href="/">
+      <i class="icon icon--logo navbar-top__logo"></i>
+    </a>
+  </div>
+
+  <div class="navbar-top__links">
+
+    <div class="navbar-top__item navbar-top__item--desktop">
+      <a href="/orgs" class="navbar__top__link navbar-top__link--desktop">
+        <i class="navbar__icon icon navbar__icon--desktop icon--explore"></i>
+        <span class="navbar__top__link navbar-top__link--desktop">Explore</span>
+      </a>
+    </div>
+    {{#if permissions.primary}}
+      <div class="navbar-top__item navbar-top__item--desktop">
+        <a href="/challenges/add" class="navbar__top__link navbar-top__link--desktop">
+          <i class="navbar__icon icon navbar__icon--desktop icon--plus-white"></i>
+          <span class="navbar__top__link navbar-top__link--desktop">Add</span>
+        </a>
+      </div>
+
+      <div class="navbar-top__item navbar-top__item--desktop">
+        <a href="/orgs/{{permissions.organisation_id}}/edit" class="navbar__top__link navbar-top__link--desktop">
+          <i class="navbar__icon icon navbar__icon--desktop icon--profile-white--new"></i>
+          <span class="navbar__top__link navbar-top__link--desktop">Update Profile</span>
+        </a>
+      </div>
+    {{else if permissions.admin}}
+
+      <div class="navbar-top__item navbar-top__item--desktop navbar-top__item--burger navbar__item--toggle">
+        <label class="navbar__link" for="add-desktop">
+          <i class="navbar__icon icon navbar__icon--desktop icon--plus-white"></i>
+            <span class="navbar__top__link navbar-top__link--desktop">Add</span>
+        </label>
+      </div>
+      <input class="navbar-top__add--checkbox" type="checkbox" id="add-desktop" />
+    {{else if permissions.secondary}}
+      <div class="navbar-top__item navbar-top__item--desktop">
+        <a href="/orgs/{{permissions.organisation_id}}" class="navbar__top__link navbar-top__link--desktop">
+          <i class="navbar__icon icon navbar__icon--desktop icon--profile-white--new"></i>
+          <span class="navbar__top__link navbar-top__link--desktop">Profile</span>
+        </a>
+      </div>
+    {{/if}}
+
+    <div class="navbar-top__item navbar-top__item--desktop navbar-top__item--burger navbar__item--toggle">
+      <label class="navbar__link" for="burger-desktop">
+        <i class="icon icon--burger navbar-top__burger"></i>
+      </label>
+    </div>
+    <input class="navbar-top__burger--checkbox" type="checkbox" id="burger-desktop" />
+    <div class="toggle-menu toggle-menu__top toggle-menu__top--burger">
+      <a href="/people/{{permissions.userId}}/edit" class="toggle-menu__link toggle-menu__link--burger">Settings</a>
+      <a href="/people" class="toggle-menu__link toggle-menu__link--burger">People</a>
+      <a href="/resources" class="toggle-menu__link toggle-menu__link--burger">Resources</a>
+    </div>
+    <div class="toggle-menu toggle-menu__top toggle-menu__top--add">
+      <a href="/orgs/add" class="toggle-menu__link toggle-menu__link--add">Organisation</a>
+      <a href="/people/add" class="toggle-menu__link toggle-menu__link--add">User</a>
+      <a href="/insights/add" class="toggle-menu__link toggle-menu__link--add">Insight</a>
+    </div>
+  </div>
+
+</nav>
