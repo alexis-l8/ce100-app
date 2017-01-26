@@ -381,13 +381,21 @@ Light-teal:     #66d9e0;
         color: #89a0ae; /* bluey-grey */
     }
     .copy--login__options {
-        color: #ffffff;
+        color: #89a0ae; /* bluey-grey */
         text-align: center;
         margin-bottom: 1rem;
         vertical-align: middle;
         display: inline-block;
+        margin: 1rem 0.3rem 1rem 0.3rem;
+        text-decoration: none;
+        font-size: 0.8rem;
         width: 45%;
-        margin: 10rem 0.3rem 2rem 0.3rem;
+    }
+
+    /*This class is just used in login screen and will be removed once the
+    remember me feature is added*/
+    .copy--login__options--block {
+      display: block;
     }
     .copy--form {
       color: #89a0ae;
