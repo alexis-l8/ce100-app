@@ -1169,61 +1169,19 @@ Light-teal:     #66d9e0;
   .toggle-menu__link--add {
     padding: rem 0;
   }
-}
-
-/*|||||||||||||||||||||||||||||||||||||||||||||
-    Desktop Views
-  |||||||||||||||||||||||||||||||||||||||||||*/
-
-@media (min-width: 600px) {
-  .mobile {
-    display: none;
-  }
-
-  .desktop {
-    display: block;
-  }
 
   .container--desktop {
     background-color: #f2f2f2;
     height: 100%;
     text-align: center;
-    padding-bottom: 9rem;
+    padding-bottom: 1rem;
   }
 
   .card {
     text-align: left;
   }
 
-  .card--responsive-small {
-    width: 38%;
-    display: inline-block;
-    vertical-align: top;
-    margin: 0 auto;
-  }
-
-  .card--responsive-large {
-    width: 56%;
-    display: inline-block;
-    vertical-align: top;
-    margin: 0 auto;
-  }
-
-  .card--responsive-header {
-    height: auto;
-    display: inline-block;
-    background: none;
-  }
-
-  .card--responsive-header-bottom-border {
-    padding: 0 0rem 1rem 0rem;
-    margin-bottom: 1.2rem;
-    border: #f2f2f2;
-    border-bottom-style: solid;
-    border-bottom-width: thin;
-  }
-
-  .card--standalone {
+  .card--desktop {
     height: auto;
     padding: 1.5rem;
     margin: 0.5rem;
@@ -1231,8 +1189,40 @@ Light-teal:     #66d9e0;
     border: none;
   }
 
-  .card--standalone-no-padding {
+  .card--desktop-small {
+    width: 38%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 auto;
+  }
+
+  .card--desktop-large {
+    width: 56%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 auto;
+  }
+
+  .card--desktop-header {
+    height: auto;
+    display: inline-block;
+    background: none;
+  }
+
+      .card--desktop-header-bottom-border {
+        padding: 0 0rem 1rem 0rem;
+        margin-bottom: 1.2rem;
+        border: #f2f2f2;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+      }
+
+  .card--desktop-no-padding {
     padding: 0;
+  }
+
+  .card--desktop--padded {
+    padding: 0.8rem 1.5rem;
   }
 
   .card--list-item-narrow {
@@ -1240,12 +1230,7 @@ Light-teal:     #66d9e0;
     border-bottom: 0;
   }
 
-  .card__data--link-extra-padding-bottom {
-    padding: 0 0 1.5rem 0;
-    margin-bottom: 2rem;
-  }
-
-  .title--responsive {
+  .title--desktop {
     display: inline-block;
     text-align: left;
     color: #40667e;
@@ -1255,7 +1240,7 @@ Light-teal:     #66d9e0;
     width: 90%;
   }
 
-  .icon--responsive {
+  .icon--desktop {
     padding-top: 0.5rem;
     width: 2rem;
   }
