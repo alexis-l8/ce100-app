@@ -164,10 +164,6 @@ Light-teal:     #66d9e0;
     width: auto;
 }
 
-.icon--scroll-up {
-    background-color: #ffffff;*/
-}
-
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Nav Bar
   |||||||||||||||||||||||||||||||||||||||||||*/
@@ -400,6 +396,18 @@ Light-teal:     #66d9e0;
     .copy--form {
       color: #89a0ae;
       margin-bottom: 1rem;
+    }
+    .copy--landing {
+      display: inline-block;
+      padding: 0 1rem;
+    }
+    .copy--landing-link {
+      font-size: 0.8rem;
+      color: #66d9e0;
+      text-align: center;
+      display: block;
+      margin-bottom: 2rem;
+      text-decoration: none;
     }
 
 
@@ -676,14 +684,6 @@ Light-teal:     #66d9e0;
   display: block;
   text-align: center;
   color: #89a0ae;
-}
-
-.landing-card__link {
-  font-size: 0.8rem;
-  color: #66d9e0;
-  text-align: center;
-  display: block;
-  margin-bottom: 2rem;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
