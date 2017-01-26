@@ -256,7 +256,10 @@ Light-teal:     #66d9e0;
           width: 100%;
           display: none;
         }
-
+        .toggle-menu__top--add {
+          width: 20rem;
+          display: none;
+        }
     .toggle-menu__link {
       color: #ffffff;
       text-align: center;
@@ -266,6 +269,9 @@ Light-teal:     #66d9e0;
         .toggle-menu__link--burger {
           padding: 2.5rem 0;
           font-size: 1.3rem;
+        }
+        .toggle-menu__link--add {
+          padding: 2.5rem 0;
         }
         .toggle-menu__link--bottom-nav {
           padding: 1.5em 0;
@@ -1052,15 +1058,30 @@ Light-teal:     #66d9e0;
         .navbar-top__burger--checkbox {
           display: none;
         }
-/*.display {
-  display:none;
-}
-        .burger-checkbox-desktop:checked ~ .display {
+        .navbar-top__add--checkbox {
+          display: none;
+        }
+
+        /*.burger-checkbox-desktop:checked ~ .toggle-menu__top--add {
+            display: block;
+        }
+
+        .burger-checkbox-desktop:checked ~ .toggle-menu__top--add {
             display: block;
         }*/
+
         .navbar-top__burger--checkbox:checked ~ .toggle-menu__top--burger {
             display: block;
         }
+        /*.navbar-top__burger--checkbox:checked ~ .toggle-menu__top--add {
+            display: none;
+        }*/
+        .navbar-top__add--checkbox:checked ~ .toggle-menu__top--add {
+            display: block;
+        }
+        /*.navbar-top__add--checkbox:checked ~ .toggle-menu__top--burger {
+            display: none;
+        }*/
 /*|||||||||||||||||||||||||||||||||||||||||||||
     snackbar classes
   |||||||||||||||||||||||||||||||||||||||||||*/
@@ -1142,5 +1163,8 @@ Light-teal:     #66d9e0;
   }
   .toggle-menu__top {
     top: 4rem;
+  }
+  .toggle-menu__link--add {
+    padding: rem 0;
   }
 }
