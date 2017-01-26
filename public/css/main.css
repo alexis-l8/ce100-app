@@ -1130,11 +1130,14 @@ Light-teal:     #66d9e0;
       color: #5db4c0;
 
     }
-
-
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Desktop media queries
   |||||||||||||||||||||||||||||||||||||||||||*/
+
+  .desktop {
+    display: none;
+  }
+
   .navbar-top--desktop {
     display: none;
   }
@@ -1142,6 +1145,9 @@ Light-teal:     #66d9e0;
 @media (min-width: 600px) {
   .mobile {
     display: none;
+  }
+  .desktop {
+    display: block;
   }
   .navbar-top--desktop {
     display: table;
@@ -1220,13 +1226,13 @@ Light-teal:     #66d9e0;
     background: none;
   }
 
-      .card--desktop-header-bottom-border {
-        padding: 0 0rem 1rem 0rem;
-        margin-bottom: 1.2rem;
-        border: #f2f2f2;
-        border-bottom-style: solid;
-        border-bottom-width: thin;
-      }
+  .card--desktop-header-bottom-border {
+    padding: 0 0rem 1rem 0rem;
+    margin-bottom: 1.2rem;
+    border: #f2f2f2;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+  }
 
   .card--desktop-no-padding {
     padding: 0;
