@@ -198,6 +198,9 @@ Light-teal:     #66d9e0;
         width: 50%;
         text-align: center;
     }
+    .navbar__item--toggled {
+        background-color: #66d9e0;
+    }
     .navbar__item:hover {
         background-color: #f2f2f2;
     }

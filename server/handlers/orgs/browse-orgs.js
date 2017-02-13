@@ -16,9 +16,9 @@ module.exports = function (request, reply) {
     function (pgErr, data) {
       Hoek.assert(!pgErr, 'error getting challenges by tag');
       options = Object.assign(
-        {},
         { data: data.orgs },
         { filter: helpers.browseViewTabBar('orgs', data.filter) },
+        helpers.getView(request.path),
         permissions
       );
 
