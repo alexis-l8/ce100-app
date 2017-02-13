@@ -193,7 +193,6 @@ Light-teal:     #66d9e0;
     width: 100%;
     height: 100%;
     table-layout: fixed;
-    max-width: 54.857142857rem;
     margin: auto;
 }
     .navbar__item {
@@ -303,7 +302,6 @@ Light-teal:     #66d9e0;
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .container {
-    max-width: 48rem; /* 768 px */
     margin: 0 auto;
     padding-bottom: 3rem;
 }
@@ -649,7 +647,6 @@ Light-teal:     #66d9e0;
           padding-top: 0.2rem;
           margin-bottom: 0;
         }
-
 .card__suggested-matches {
   background-color: #f8ffff;
   text-align: center;
@@ -986,6 +983,10 @@ Light-teal:     #66d9e0;
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Helper classes
   |||||||||||||||||||||||||||||||||||||||||||*/
+.float-left {
+  float: left
+}
+
 .float-right {
   float: right
 }
@@ -1140,11 +1141,14 @@ Light-teal:     #66d9e0;
       color: #5db4c0;
 
     }
-
-
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Desktop media queries
   |||||||||||||||||||||||||||||||||||||||||||*/
+
+  .desktop {
+    display: none;
+  }
+
   .navbar-top--desktop {
     display: none;
   }
@@ -1152,6 +1156,9 @@ Light-teal:     #66d9e0;
 @media (min-width: 600px) {
   .mobile {
     display: none;
+  }
+  .desktop {
+    display: block;
   }
   .navbar-top--desktop {
     display: table;
@@ -1189,5 +1196,80 @@ Light-teal:     #66d9e0;
   }
   .toggle-menu__link--add {
     padding: rem 0;
+  }
+
+  .container--desktop {
+    background-color: #f2f2f2;
+    height: 100%;
+    text-align: center;
+    padding-bottom: 1rem;
+  }
+
+  .card {
+    text-align: left;
+  }
+
+  .card--desktop-small {
+    width: 38%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 auto;
+  }
+
+  .card--desktop-large {
+    width: 56%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 auto;
+  }
+
+  .card--desktop-header {
+    height: auto;
+    display: inline-block;
+    background: none;
+  }
+
+  .card--desktop-header-bottom-border {
+    padding: 0 0rem 1rem 0rem;
+    margin-bottom: 1.2rem;
+    border: #f2f2f2;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+  }
+
+  .card--desktop-no-padding {
+    padding: 0;
+  }
+
+  .card--desktop--padded {
+    padding: 0.8rem 1.5rem;
+  }
+
+  .card--desktop {
+    height: auto;
+    padding: 1.5rem;
+    margin: 0.5rem;
+    background-color: #ffffff;
+    border: none;
+  }
+
+  .card--list-item-narrow {
+    padding: 0.5rem 0rem;
+    border-bottom: 0;
+  }
+
+  .title--desktop {
+    display: inline-block;
+    text-align: left;
+    color: #40667e;
+    padding: 0.5rem 0 1rem 0;
+    margin: 1rem 1.5rem;
+    font-size: 1.125rem;
+    width: 90%;
+  }
+
+  .icon--desktop {
+    padding-top: 0.5rem;
+    width: 2rem;
   }
 }
