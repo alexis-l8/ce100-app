@@ -7,26 +7,27 @@
     <input  class="form__input form__input--login"
             type="email"
             name="email"
-            placeholder="Email Address"
+            placeholder="Enter email"
             required
             value="{{error.values.email}}">
     <input  class="form__input form__input--login"
             type="password"
             name="password"
             required
-            placeholder="Password">
-    <button class="button button--login">Log In</button>
+            placeholder="Enter password">
+    <button class="button button--login">Login</button>
     <p class="login-response--error">{{error.message}}</p>
   </form>
-  <a href="/password-reset" class="copy copy--login__options copy--login__options--block">Forgot password?</a>
-
-
-  <p class="copy copy--login__options anchor--teal">Don't have an account?
-    <a class="anchor anchor--teal" href="mailto:ce100.emf@gmail.com">Contact Us</a>
+  <p class="copy copy--login">
+    <a href="/password-reset" class="copy--login__options copy--login__options--white">Forgot password?</a>
   </p>
 
-  <p class="copy copy--login__options anchor--teal">Looking for our mobile app for events?
-    <a  class="anchor anchor--teal"href="https://ce100events.zerista.com">Click here</a>
+  <p class="copy--login__options anchor--teal">Don't have an account?
+    <a class="anchor anchor--teal" href="mailto:ce100.emf@gmail.com">Contact us</a>
   </p>
+
+  <a class="copy--login__options anchor anchor--teal"href="https://ce100events.zerista.com">
+    Looking for our mobile app for events?
+  </a>
 
 </div>
