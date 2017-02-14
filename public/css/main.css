@@ -643,6 +643,10 @@ Light-teal:     #66d9e0;
           padding-top: 0.2rem;
           margin-bottom: 0;
         }
+        .card__section--bottom {
+          margin: 2rem auto auto auto;
+        }
+
 .card__suggested-matches {
   background-color: #f8ffff;
   text-align: center;

@@ -25,16 +25,17 @@
             <img src="../../../public/assets/Edit.svg" alt="Edit" />
           </a>
         {{/if}}
-      </div>
 
-      {{#if org.tags}}
-        <div class="card card--desktop">
-          <h2 class="card__header card--desktop-header-bottom-border">Our experience</h2>
-            {{#each org.tags}}
-            <a href="/orgs?tags={{tag_id}}"><span class="tag__label">{{tag_name}}</span></a>
+        {{#if org.tags}}
+        <div class="card__section--bottom">
+          {{#each org.tags}}
+          <a href="/orgs?tags={{tag_id}}"><span class="tag__label">{{tag_name}}</span></a>
           {{/each}}
         </div>
-      {{/if}}
+        {{/if}}
+
+      </div>
+
 
       {{#if primary.id}}
       <div class="card card--desktop">
