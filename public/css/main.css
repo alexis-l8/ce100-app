@@ -838,7 +838,7 @@ Light-teal:     #66d9e0;
     text-shadow: 0 1px 0 #003152;
 }
 .button--login:hover {
-  background: #4DC0C7;
+  background: #4DC0C7; /*  10% darker than #66d9e0 */
 }
 .button--margin {
     margin-bottom: 2rem;
