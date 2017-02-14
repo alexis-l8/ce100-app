@@ -20,7 +20,7 @@
     <p class="card__header card__header--challenge">{{challenge.title}}</p>
     <p class="card__copy">{{challenge.description}}</p>
     {{#each challenge.tags}}
-      <a class="text-decoration" href="/challenges?tags={{id}}">
+      <a class="text-decoration--none" href="/challenges?tags={{id}}">
         <span class="tag__label">{{name}}</span>
       </a>
     {{/each}}
@@ -36,7 +36,7 @@
       <h2 class="card__data">Suggested Matches</h2>
       {{#if suggested_matches}}
       {{#each suggested_matches}}
-        <a class="card__data anchor--suggested-matches text-decoration" href="/orgs/{{id}}">{{name}}</a>
+        <a class="card__data anchor--suggested-matches text-decoration--none" href="/orgs/{{id}}">{{name}}</a>
       {{/each}}
       {{else}}
         <p>No organisations match this challenge</p>

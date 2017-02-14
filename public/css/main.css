@@ -973,7 +973,7 @@ Light-teal:     #66d9e0;
   float: right
 }
 
-.text-decoration {
+.text-decoration--none {
   text-decoration: none;
 }
 
