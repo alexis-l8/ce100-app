@@ -325,9 +325,9 @@ Light-teal:     #66d9e0;
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .title {
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     margin: 0;
-
+    line-height: 1.35;
     text-align: center;
     text-transform: capitalize;
     font-size: 1rem;
@@ -575,10 +575,10 @@ Light-teal:     #66d9e0;
 
 
 .card {
-    padding: 4.25rem 1.75rem; /* 68px x 28px */
+    padding: 2.75rem 1.55rem;
     text-align: center;
     color: #40667e;
-    border-bottom: 1px solid #89a0ae;
+    border-bottom: 1px solid rgba(64, 101, 126, 0.1);
     line-height: 1.5;
     position: relative;
 }
@@ -604,7 +604,11 @@ Light-teal:     #66d9e0;
     height: 7.5rem; /* 120px */
 }
 .card--challenge {
-    padding: 1.25rem 1.875rem 1.2rem;
+    padding: 1.5rem 1.2rem;
+    text-align: left;
+}
+.card--details {
+    padding: 1.5rem 1.2rem 0.1rem;
     text-align: left;
 }
     .card__header {
@@ -612,9 +616,18 @@ Light-teal:     #66d9e0;
         font-size: 1.125rem;
     }
         .card__header--challenge {
-            font-size: 1.125rem;
+            font-size: 1.2rem;
+            line-height: 1.3;
+        }
+        .card__header--suggested-matches {
+            font-size: 1rem;
+            color: #40667e;
+            text-align: center;
+            opacity: 0.5;
         }
     .card__copy {
+        font-size: 0.8rem; /* Need to revisit this once we have access to fonts */
+        line-height: 1.7; /* Revisit once we have access to fonts */
         margin-bottom: 1rem;
     }
     .card__data {
@@ -645,8 +658,8 @@ Light-teal:     #66d9e0;
           margin-bottom: 0;
         }
 .card__suggested-matches {
-  background-color: #f8ffff;
-  text-align: center;
+  text-align: left;
+  padding: 1rem;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -926,10 +939,17 @@ Light-teal:     #66d9e0;
     }
 
     .anchor--suggested-matches {
+      font-size: 1.1rem;
       display: inline-block;
       width: 48%;
-      margin-top: 0.8rem;
-      color: #66d9e0;
+      color: #40667e;
+    }
+
+    .anchor--shared-by {
+      font-size: 0.8rem;
+      text-align: right;
+      line-height: 1;
+      margin: 0;
     }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
