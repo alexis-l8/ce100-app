@@ -3,14 +3,14 @@
     <div class="navbar__links">
       <div class="navbar__item {{#if explore}}navbar__item--toggled{{/if}}">
         <a href="/orgs" class="navbar__link">
-          <i class="navbar__icon icon icon--spyglass"></i>
-          <span class="navbar__link navbar__link--with-icon">Explore</span>
+          <i class="navbar__icon icon icon--large {{#if explore}}icon--explore-white{{else}}icon--explore{{/if}}"></i>
+          <span class="navbar__link {{#if explore}}navbar__link--toggled{{/if}}">Explore</span>
         </a>
       </div>
       <div class="navbar__item navbar__item--toggle">
         <label class="navbar__link" for="add-more">
-          <i class="navbar__icon icon icon--plus"></i>
-          <span class="navbar__link navbar__link--with-icon">Add</span>
+          <i class="navbar__icon icon icon--plus icon--large"></i>
+          <span class="navbar__link">Add</span>
         </label>
         <input class="navbar__link--checkbox" type="checkbox" id="add-more" />
         <div class="toggle-menu toggle-menu__bottom">
@@ -26,20 +26,20 @@
     <ul class="navbar__links">
       <li class="navbar__item {{#if explore}}navbar__item--toggled{{/if}}">
         <a href="/orgs" class="navbar__link">
-          <i class="navbar__icon icon icon--spyglass"></i>
-          <span class="navbar__link navbar__link--with-icon">Explore</span>
+          <i class="navbar__icon icon icon--large {{#if explore}}icon--explore-white{{else}}icon--explore{{/if}}"></i>
+          <span class="navbar__link {{#if explore}}navbar__link--toggled{{/if}}">Explore</span>
         </a>
       </li>
       <li class="navbar__item {{#if add-chal}}navbar__item--toggled{{/if}}">
         <a href="/challenges/add" class="navbar__link">
-          <i class="navbar__icon icon icon--plus"></i>
-          <span class="navbar__link navbar__link--with-icon">Add Challenge</span>
+          <i class="navbar__icon icon  icon--large {{#if add-chal}}icon--plus-white{{else}}icon--plus{{/if}}"></i>
+          <span class="navbar__link {{#if add-chal}}navbar__link--toggled{{/if}}">Add Challenge</span>
         </a>
       </li>
       <li class="navbar__item {{#if profile}}navbar__item--toggled{{/if}}">
         <a href="/orgs/{{permissions.organisation_id}}" class="navbar__link">
-          <i class="navbar__icon icon icon--profile"></i>
-          <span class="navbar__link navbar__link--with-icon">Profile</span>
+          <i class="navbar__icon icon icon--large {{#if profile}}icon--profile-white{{else}}icon--profile{{/if}}"></i>
+          <span class="navbar__link {{#if profile}}navbar__link--toggled{{/if}}">Profile</span>
         </a>
       </li>
     </ul>
@@ -49,14 +49,14 @@
     <ul class="navbar__links">
       <li class="navbar__item {{#if explore}}navbar__item--toggled{{/if}}">
         <a href="/orgs" class="navbar__link">
-          <i class="navbar__icon icon icon--spyglass"></i>
-          <span class="navbar__link navbar__link--with-icon">Explore</span>
+          <i class="navbar__icon icon icon--large {{#if explore}}icon--explore-white{{else}}icon--explore{{/if}}"></i>
+          <span class="navbar__link {{#if explore}}navbar__link--toggled{{/if}}">Explore</span>
         </a>
       </li>
       <li class="navbar__item {{#if profile}}navbar__item--toggled{{/if}}">
         <a href="/orgs/{{permissions.organisation_id}}" class="navbar__link">
-          <i class="navbar__icon icon icon--profile"></i>
-          <span class="navbar__link navbar__link--with-icon">Profile</span>
+          <i class="navbar__icon icon icon--large {{#if profile}}icon--profile-white{{else}}icon--profile{{/if}}"></i>
+          <span class="navbar__link {{#if profile}}navbar__link--toggled{{/if}}">Profile</span>
         </a>
       </li>
     </ul>

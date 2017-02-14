@@ -101,11 +101,17 @@ Light-teal:     #66d9e0;
     background-size: contain;
     background-repeat: no-repeat;
 }
-.icon--spyglass {
-    background-image: url("../assets/Browse.svg");
+
+.icon--large {
+  width: 1.5rem;
+  height: 1.5rem;
 }
-.icon--spyglass-white {
-    background-image: url("../assets/Browse-white.svg");
+
+.icon--explore {
+    background-image: url("../assets/Explore.svg");
+}
+.icon--explore-white {
+    background-image: url("../assets/Explore-white.svg");
 }
 .icon--plus {
     background-image: url("../assets/Plus.svg");
@@ -118,12 +124,6 @@ Light-teal:     #66d9e0;
 }
 .icon--profile-white {
     background-image: url("../assets/Profile-white.svg");
-}
-.icon--explore {
-  background-image: url("../assets/Explore-icon.svg");
-}
-.icon--profile-white--new {
-  background-image: url("../assets/Profile-icon.svg");
 }
 .icon--burger {
     background-image: url("../assets/Burger.svg");
@@ -169,7 +169,7 @@ Light-teal:     #66d9e0;
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .navbar {
-    height: 3rem; /* 48px */
+    height: 3.5rem;
     width: 100%;
     background-color: #ffffff;
     position: fixed;
@@ -191,10 +191,11 @@ Light-teal:     #66d9e0;
     height: 100%;
     table-layout: fixed;
     margin: auto;
+    opacity: 0.5;
 }
     .navbar__item {
         display: table-cell;
-        vertical-align: middle;
+        vertical-align: bottom;
         width: 50%;
         text-align: center;
     }
@@ -210,7 +211,6 @@ Light-teal:     #66d9e0;
             text-decoration: none;
             color: #40667e; /* Denim */
             font-size: 1em;
-            line-height: 2;
             cursor: pointer;
         }
         .navbar__link:visited {
@@ -219,7 +219,9 @@ Light-teal:     #66d9e0;
         .navbar__link:hover {
             text-decoration: none;
         }
-        .navbar__link:active {}
+        .navbar__link--toggled {
+          color: #ffffff;
+        }
         .navbar__link--with-icon {
             font-size: 0.625rem;
         }
