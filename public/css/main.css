@@ -335,9 +335,8 @@ Light-teal:     #66d9e0;
     color: #ffffff;
 }
 .title--with-logo {
-    display: table-cell;
-    text-align: left;
-    vertical-align: middle;
+  padding: 0rem;
+  margin-bottom: 1.7rem;
 }
 .title--with-logo--blue {
     color: #40667e;
@@ -939,31 +938,22 @@ Light-teal:     #66d9e0;
 .logo {
     display: block;
     margin: 0 auto 2rem;
-    width: 9rem; /* 144px */
+    width: 2.9rem; /* 46px */
 }
 .logo--login {
     padding-top: 6rem;
 }
     .logo--with-title {
-        display: table-cell;
-        background-color: #ffffff;
-        border-radius: 50%;
-        margin: 0;
-        max-width: 2.5rem;
-        position: absolute;
-        top: 50%;
-        -webkit-transform: translateY(-50%);
-        -moz-transform: translateY(-50%);
-        -o-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-        right: 55%;
+      margin: 1.7rem auto 0.5rem;
+      background-color: #ffffff;
+      border-radius: 50%;
+      max-width: 2.9rem;
     }
     .logo--with-title-default {
     }
     .logo--with-title-custom {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2.9rem;
+        height: 2.9rem;
         background-color: transparent;
     }
 
