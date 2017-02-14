@@ -1,4 +1,9 @@
+{{#if view.profile}}
+<div class="card card--challenge card--list-item-narrow card--blue">
+{{else}}
 <div class="card card--challenge card--list-item-narrow">
+{{/if}}
+
   {{#if permissions.primary}}
     {{#if permissions.editable}}
       <a class="icon icon--edit icon--desktop" href="/challenges/{{id}}/edit">

@@ -351,6 +351,10 @@ Light-teal:     #66d9e0;
 .title-blue {
     color: #00233B;
 }
+/* used for titles with smaller font than standard (eg archived challenges title card in org profile view)*/
+.title--secondary {
+  font-size: 0.8rem;
+}
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Copy
@@ -577,7 +581,7 @@ Light-teal:     #66d9e0;
     padding: 2.75rem 1.55rem;
     text-align: center;
     color: #40667e;
-    border-bottom: 1px solid #89a0ae;
+    border-bottom:  solid 1px rgba(64, 101, 126, 0.1);
     line-height: 1.5;
     position: relative;
 }
@@ -589,11 +593,10 @@ Light-teal:     #66d9e0;
     padding: 0;
     color: initial;
     border: none;
-    background: #002944;
-    background: -webkit-linear-gradient(#002944, #1b4664);
-    background: -o-linear-gradient(#002944, #1b4664);
-    background: -moz-linear-gradient(#002944, #1b4664);
-    background: linear-gradient(#002944, #1b4664);
+    background: #003253;
+}
+.card--header--with-logo {
+  background: radial-gradient(circle at 50% 57%, rgba(9, 51, 81, 0.84), #002944);
 }
 .card--header--white {
     background: #fafafa;
@@ -605,6 +608,11 @@ Light-teal:     #66d9e0;
 .card--challenge {
     padding: 1.25rem 1.875rem 1.2rem;
     text-align: left;
+}
+.card--blue {
+    background-color: #003253;
+    color: #ffffff;
+    border: none;
 }
     .card__header {
         margin-bottom: 1rem;
@@ -946,6 +954,7 @@ Light-teal:     #66d9e0;
 }
 .logo--login {
     padding-top: 6rem;
+    width: 9rem;
 }
     .logo--with-title {
       margin: 1.7rem auto 0.5rem;
@@ -1238,6 +1247,11 @@ Light-teal:     #66d9e0;
   .card--list-item-narrow {
     padding: 0.5rem 0rem;
     border-bottom: 0;
+  }
+  .card--blue {
+      background-color: inherit;
+      color: #40667e;
+      border: inherit;
   }
 
   .title--desktop {
