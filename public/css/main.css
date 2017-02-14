@@ -940,7 +940,7 @@ Light-teal:     #66d9e0;
 
     .anchor--suggested-matches {
       font-size: 1.1rem;
-      display: inline-block;
+      display: block;
       width: 48%;
       color: #40667e;
     }
