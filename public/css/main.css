@@ -132,6 +132,11 @@ Light-teal:     #66d9e0;
 .icon--logo {
     background-image: url("../assets/logo.png");
 }
+.icon--open-modal {
+  background-image: url("../assets/open-modal.svg");
+  display: inline-block;
+  margin-left: 0.4rem;
+}
 .icon--dropdown {
   background-image: url("../assets/Dropdown.svg");
   position: absolute;
@@ -325,15 +330,15 @@ Light-teal:     #66d9e0;
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .title {
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     margin: 0;
-
+    line-height: 1.35;
     text-align: center;
     text-transform: capitalize;
     font-size: 1rem;
     font-weight: normal;
     color: #ffffff;
-}
+ }
 .title--with-logo {
     display: table-cell;
     text-align: left;
@@ -575,10 +580,10 @@ Light-teal:     #66d9e0;
 
 
 .card {
-    padding: 4.25rem 1.75rem; /* 68px x 28px */
+    padding: 2.75rem 1.55rem;
     text-align: center;
     color: #40667e;
-    border-bottom: 1px solid #89a0ae;
+    border-bottom: 1px solid rgba(64, 101, 126, 0.1);
     line-height: 1.5;
     position: relative;
 }
@@ -604,7 +609,7 @@ Light-teal:     #66d9e0;
     height: 7.5rem; /* 120px */
 }
 .card--challenge {
-    padding: 1.25rem 1.875rem 1.2rem;
+    padding: 1.5rem 1.2rem;
     text-align: left;
 }
     .card__header {
