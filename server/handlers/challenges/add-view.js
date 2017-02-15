@@ -8,7 +8,7 @@ module.exports = function (request, reply, source, joiErr) {
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
   var options = Object.assign(
-    helpers.getView(request.path),
+    { view: helpers.getView(request.path) },
     permissions,
     { error: error }
   );

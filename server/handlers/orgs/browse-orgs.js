@@ -18,7 +18,7 @@ module.exports = function (request, reply) {
       options = Object.assign(
         { data: data.orgs },
         { filter: helpers.browseViewTabBar('orgs', data.filter) },
-        helpers.getView(request.path),
+        { view: helpers.getView(request.path) },
         permissions
       );
 

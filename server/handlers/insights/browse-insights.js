@@ -16,7 +16,7 @@ module.exports = function (request, reply) {
       options = Object.assign(
         { insights: pgRes.insights },
         { filter: helpers.browseViewTabBar('insights', pgRes.filter) },
-        helpers.getView(request.path),
+        { view: helpers.getView(request.path) },
         permissions
       );
 

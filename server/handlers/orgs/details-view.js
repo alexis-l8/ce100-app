@@ -13,10 +13,9 @@ module.exports = function (request, reply) {
     if (loggedIn.scope !== 'admin' && !orgData.org.active) {
       return reply(Boom.forbidden('You cannot access that organisation'));
     }
-
     var options = Object.assign(
       orgData,
-      helpers.getView(request.path),
+      { view: helpers.getView(request.path) },
       permissions
     );
     return reply.view('organisations/details', options);
