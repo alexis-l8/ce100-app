@@ -17,7 +17,9 @@
         </a>
       {{/if}}
     {{/if}}
-    <p class="card__header card__header--challenge">{{challenge.title}}</p>
+    <p class="card__header card__header--challenge {{#if permissions.primary}}{{#if permissions.editable}}card__header--editable{{/if}}{{/if}}">
+      {{challenge.title}}
+    </p>
     <p class="card__copy">{{challenge.description}}</p>
     {{#each challenge.tags}}
       <a class="text-decoration" href="/challenges?tags={{id}}">

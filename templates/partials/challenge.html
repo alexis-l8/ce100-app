@@ -7,7 +7,7 @@
     {{/if}}
   {{/if}}
 
-  <a href="/challenges/{{id}}" class="card__header--challenge card__data--link">
+  <a href="/challenges/{{id}}" class="card__header--challenge card__data--link {{#if permissions.primary}}{{#if permissions.editable}}card__header--editable{{/if}}{{/if}}">
     {{title}}
   </a>
 

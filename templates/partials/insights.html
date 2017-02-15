@@ -4,7 +4,7 @@
       <img src="../../../public/assets/Edit.svg" alt="Edit" />
     </a>
   {{/if}}
-  <a href={{url}} target="_blank" class="card__header card__header--challenge card__data--link">{{title}}</a>
+  <a href={{url}} target="_blank" class="card__header card__header--challenge card__data--link {{#if permissions.admin}}card__header--editable{{/if}}">{{title}}</a>
   <p class="card__copy card__additional">By {{author}}</p>
   <p class="card__copy card__additional card__additional--small">{{type}}</p>
 </div>

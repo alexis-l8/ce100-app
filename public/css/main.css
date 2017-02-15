@@ -619,6 +619,10 @@ Light-teal:     #66d9e0;
             font-size: 1.1rem;
             line-height: 1.3;
         }
+        .card__header--editable {
+            display: inline-block;
+            width: 95%;
+        }
         .card__header--suggested-matches {
             font-size: 0.9rem;
             color: #40667e;
