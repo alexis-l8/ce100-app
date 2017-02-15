@@ -366,25 +366,25 @@ Light-teal:     #66d9e0;
     .copy--login {
         color: #ffffff;
         text-align: center;
+        padding: 0 1.2rem;
+        margin: 0.8rem auto;
     }
     .copy__text-link, .copy__text-link:link {
-        font-size: 0.75rem;
-        color: #89a0ae; /* bluey-grey */
-    }
-    .copy--login__options {
-        color: #89a0ae; /* bluey-grey */
-        text-align: center;
-        display: inline-block;
-        margin: 0.8rem 0.35rem;
+        display: table;
+        font-size: 0.9rem;
+        color: #ffffff;
         text-decoration: none;
-        font-size: 0.8rem;
-        width: 45%;
-        line-height: 1.5;
+        width: 100%;
+    }
+    .copy__text-link--extra-padding {
+        margin-bottom: 5rem;
+    }
+    .copy__text-link > div {
+        width: 50%;
+        display: table-cell;
+        text-align: center;
     }
 
-    .copy--login__options--white {
-      color: #ffffff;
-    }
     .copy--form {
       color: #89a0ae;
       margin-bottom: 1rem;
@@ -830,7 +830,7 @@ Light-teal:     #66d9e0;
 }
 .button--login {
     background: #66d9e0;
-    margin: 2rem 0 2rem;
+    margin: 2rem 0;
     width: 100%;
     text-indent: 0;
     height: 2.5rem;
