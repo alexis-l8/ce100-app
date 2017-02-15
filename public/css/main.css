@@ -60,7 +60,6 @@ html {
 }
 
 body {
-    min-height: 100vh;
     line-height: 1.5rem;
     background-color: #fafafa;
     font-size: 0.875rem; /* 14px */
@@ -402,14 +401,7 @@ Light-teal:     #66d9e0;
       display: inline-block;
       padding: 0 1rem;
     }
-    .copy--landing-link {
-      font-size: 0.8rem;
-      color: #66d9e0;
-      text-align: center;
-      display: block;
-      margin-bottom: 2rem;
-      text-decoration: none;
-    }
+
 
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -658,18 +650,14 @@ Light-teal:     #66d9e0;
 
 .landing-card {
     display: table;
-    height: 100vh;
+    min-height: 33rem;
     width: 100%;
     position: relative;
 }
-    .landing-card:first-child {
-       padding-top: -3rem;
-    }
 
 .landing-card__content {
-    display: table-cell;
-    vertical-align: middle;
     color: #ffffff;
+    margin: 3rem auto 5rem;
 }
 
 .landing-card__header--extra-large {
@@ -692,7 +680,15 @@ Light-teal:     #66d9e0;
   transform: translateX(-50%);
   position: absolute;
   left: 50%;
-  bottom: 7rem;
+  bottom: 6.5rem;
+}
+.landing-card__icon--with-text {
+  font-size: 0.8rem;
+  color: #66d9e0;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  width: 8rem;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -867,16 +863,14 @@ Light-teal:     #66d9e0;
 
 .button--landing {
     font-size: 0.8rem;
-    color: #ffffff;
-    text-align: center;
-    text-decoration: none;
+    text-transform: none;
     padding: 0.5rem 1.5rem;
     background-color: #66d9e0;
-    border-radius: 3rem;
-    text-decoration: none;
-    display: block;
-    margin: 3rem auto;
     width: 9rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10rem;
 }
 
 .indicator {
