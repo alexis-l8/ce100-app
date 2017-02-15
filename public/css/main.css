@@ -191,8 +191,10 @@ Light-teal:     #66d9e0;
     height: 100%;
     table-layout: fixed;
     margin: auto;
-    opacity: 0.5;
 }
+    .navbar__links--opaque {
+      opacity: 0.5;
+    }
     .navbar__item {
         display: table-cell;
         vertical-align: bottom;
