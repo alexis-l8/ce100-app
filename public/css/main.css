@@ -650,9 +650,11 @@ Light-teal:     #66d9e0;
 
 .landing-card {
     display: table;
-    min-height: 33rem;
+    height: 33rem;
     width: 100%;
     position: relative;
+    color: white;
+    padding-top: 3rem;
 }
 
 .landing-card__content {
@@ -867,10 +869,7 @@ Light-teal:     #66d9e0;
     padding: 0.5rem 1.5rem;
     background-color: #66d9e0;
     width: 9rem;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 10rem;
+    margin-top: 2rem;
 }
 
 .indicator {

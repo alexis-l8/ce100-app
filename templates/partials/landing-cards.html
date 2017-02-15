@@ -1,19 +1,17 @@
 <li class="landing-card" id="landing-card-{{@index}}">
-  <div class="landing-card__content">
-    <p class="landing-card__header--extra-large">{{title}}</p>
-    <p class="landing-card__description">{{description}}</p>
-    {{#if link}}
-      <a href={{link.url}} class="button button--landing">{{link.text}}</a>
-    {{/if}}
-    {{#if lastCard}}
-    <a href="#landing-card-0" class="landing-card__icon landing-card__icon--with-text">
-      <img src="../../public/assets/arrow-up-icon.svg"/>
-      <span class="copy copy--landing">Back to top</span>
+  <p class="landing-card__header--extra-large">{{title}}</p>
+  <p class="landing-card__description">{{description}}</p>
+  {{#if link}}
+    <a href={{link.url}} class="button button--landing">{{link.text}}</a>
+  {{/if}}
+  {{#if lastCard}}
+  <a href="#landing-card-0" class="landing-card__icon landing-card__icon--with-text">
+    <img src="../../public/assets/arrow-up-icon.svg"/>
+    <span class="copy copy--landing">Back to top</span>
+  </a>
+  {{else}}
+    <a href="#landing-card-{{nextCardIndex}}">
+      <i class="icon icon--arrow-up-blue landing-card__icon"></i>
     </a>
-    {{else}}
-      <a href="#landing-card-{{nextCardIndex}}">
-        <i class="icon icon--arrow-up-blue landing-card__icon"></i>
-      </a>
-    {{/if}}
-  </div>
+  {{/if}}
 </li>
