@@ -132,8 +132,8 @@ Light-teal:     #66d9e0;
 .icon--logo {
     background-image: url("../assets/logo.png");
 }
-.icon--open-modal {
-  background-image: url("../assets/open-modal.svg");
+.icon--open-link {
+  background-image: url("../assets/open-link.svg");
   display: inline-block;
   margin-left: 0.4rem;
 }
