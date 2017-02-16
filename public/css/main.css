@@ -926,11 +926,12 @@ Light-teal:     #66d9e0;
 
 .logo {
     display: block;
-    margin: 0 auto 4rem;
+    margin: 0 auto 2rem;
     width: 9rem; /* 144px */
 }
 .logo--login {
     padding-top: 6rem;
+    margin: 0 auto 4rem;
 }
     .logo--with-title {
         display: table-cell;
