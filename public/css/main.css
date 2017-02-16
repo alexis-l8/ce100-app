@@ -642,9 +642,6 @@ Light-teal:     #66d9e0;
       -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
       -ms-transform: translate(30deg); /* IE 9 */
     }
-        .card__additional--aqua {
-          color: #66d9e0;
-        }
         .card__additional--small {
           font-size: 0.8rem;
           transform: initial;
@@ -922,16 +919,6 @@ Light-teal:     #66d9e0;
         color: #900000;
     }
 
-    .anchor--teal {
-        color: #66d9e0;
-    }
-    .anchor--teal:link {
-        color: #66d9e0;
-    }
-    .anchor--teal:visited {
-      color: #66d9e0;
-    }
-
     .anchor--suggested-matches {
       display: inline-block;
       width: 48%;
@@ -1006,6 +993,16 @@ Light-teal:     #66d9e0;
 
 .daintree--blue {
   background: #00233B;
+}
+
+.u-teal {
+    color: #66d9e0;
+}
+.u-teal:link {
+    color: #66d9e0;
+}
+.u-teal:visited {
+  color: #66d9e0;
 }
 
 /*-----------FEEDBACK WIDGET-------------*/
