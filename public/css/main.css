@@ -71,7 +71,6 @@ body {
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 /*
-
 Marine-blue :   #003253;
 
 Navy:           #002944;
@@ -86,6 +85,11 @@ Danger-red:     #900000;
 
 Light-teal:     #66d9e0;
 
+Light-grey:     #f8f8f8;
+(for togglebar navigation)
+
+Darker-grey:    #9cafbb;
+(un-selected font colour in togglebar navigation)
 */
 
 
@@ -289,11 +293,10 @@ Light-teal:     #66d9e0;
   }
   .togglebar__link, .togglebar__link:visited  {
     padding: 1.2rem 0;
-    color: #40667e;
-    opacity: 0.5;
+    color: #9cafbb;
   }
   .togglebar__link--selected, .togglebar__link--selected:visited {
-    opacity: 1;
+    color: #40667e;
   }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
