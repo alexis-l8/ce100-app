@@ -28,8 +28,8 @@ function initServer (config, callback) {
   var pool = new pg.Pool(config.pg);
   var optionsTags = {
     reset: config.plugins.tags.reset,
-    tags: mockData.tags,
-    categories: mockData.categories,
+    tags: config.data.tags,
+    categories: config.data.categories,
     pool: pool
   };
   var optionsPeople = {
