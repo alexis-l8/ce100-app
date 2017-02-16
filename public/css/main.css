@@ -363,28 +363,18 @@ Light-teal:     #66d9e0;
     text-align: left;
     line-height: 1.5;
 }
-    .copy--login {
+    .copy__login {
         color: #ffffff;
         text-align: center;
         padding: 0 1.2rem;
         margin: 0.8rem auto;
     }
-    .copy__text-link, .copy__text-link:link {
-        display: table;
+    .copy__login--small, .copy__login--small:link {
         font-size: 0.9rem;
-        color: #ffffff;
-        text-decoration: none;
-        width: 100%;
     }
-    .copy__text-link--extra-padding {
+    .copy__login--extra-padding {
         margin-bottom: 5rem;
     }
-    .copy__text-link > div {
-        width: 50%;
-        display: table-cell;
-        text-align: center;
-    }
-
     .copy--form {
       color: #89a0ae;
       margin-bottom: 1rem;
@@ -997,6 +987,16 @@ Light-teal:     #66d9e0;
 
 .daintree--blue {
   background: #00233B;
+}
+
+.u-table {
+  display: table;
+  width: 100%;
+}
+.u-table--half-width {
+  width: 50%;
+  display: table-cell;
+  text-align: center;
 }
 
 /*-----------FEEDBACK WIDGET-------------*/
