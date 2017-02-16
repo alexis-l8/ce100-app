@@ -422,7 +422,7 @@ Light-teal:     #66d9e0;
         position: relative;
         padding: 1rem 8%;
         list-style: none;
-        border-bottom: #89a0ae 1px solid;
+        border-bottom: 1px solid rgba(64, 101, 126, 0.1);
     }
     .list__item--medium {
         padding: 1rem 1.5rem;
@@ -620,6 +620,7 @@ Light-teal:     #66d9e0;
     }
         .card__header--challenge {
             font-size: 1.125rem;
+            line-height: 1.4;
         }
     .card__copy {
         margin-bottom: 1rem;
