@@ -113,6 +113,22 @@ helpers.errorOptions = (err) =>
   };
 
 
+// move the category with name `location` to the end of the list as requested
+helpers.locationCategoryToEnd = function (categories) {
+    var ind; // location of the LOCATION category in the categories array
+    categories.forEach(function (category, index) {
+      if (category.category_name === 'LOCATION') {
+        ind = index;
+      }
+    });
+
+    // if this list of categories contains one with name location, then shift it to the bottom
+    return ind
+      ? categories.slice(0, ind).concat(categories.slice(ind + 1)).concat(categories[ind])
+      : categories
+
+  }
+
 
 /* --------- view logic helpers ----------- */
 
