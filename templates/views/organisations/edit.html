@@ -88,9 +88,12 @@
         <!-- If there is a linked primary user -->
         <div class="form__section">
           <label class="form__label" for="primary_user_name">Primary User</label>
-          <div class="form__input" name="primary_user_name" id="primary_user_name">
+          <div class="form__input form__input--non-editable" name="primary_user_name" id="primary_user_name">
             {{primary.first_name}} {{primary.last_name}}
-            <a href="/people/{{primary.id}}/edit" class="button-small float-right">EDIT</a>
+
+            <a href="/people/{{primary.id}}/edit">
+              <i class="icon icon--edit icon--edit-blue"></i>
+            </a>
           </div>
         </div>
         {{/if}}

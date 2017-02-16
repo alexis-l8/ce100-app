@@ -829,6 +829,7 @@ Light-teal:     #66d9e0;
 
     }
     .form__input--non-editable {
+      position: relative;
       background-color: #fafafa;
       border: none;
     }
