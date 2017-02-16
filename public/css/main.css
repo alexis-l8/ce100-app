@@ -990,11 +990,11 @@ Light-teal:     #66d9e0;
   background: #00233B;
 }
 
-.u-table {
+.table {
   display: table;
   width: 100%;
 }
-.u-table--half-width {
+.table__half-width {
   width: 50%;
   display: table-cell;
   text-align: center;
