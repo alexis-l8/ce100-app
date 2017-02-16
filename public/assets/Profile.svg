@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="15px" height="10px" viewBox="0 0 15 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
-    <title>Profile</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M6.5,5.16304348 C8.04616705,5.16304348 9.31121281,4.00747283 9.31121281,2.5951087 C9.31121281,1.18274457 8.04616705,0.027173913 6.5,0.027173913 C4.95383295,0.027173913 3.68878719,1.18274457 3.68878719,2.5951087 C3.68878719,4.00747283 4.95383295,5.16304348 6.5,5.16304348 L6.5,5.16304348 Z" id="path-1"></path>
-        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="5.62242563" height="5.13586957" fill="#40667e">
-            <use xlink:href="#path-1"></use>
-        </mask>
-    </defs>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="#40667e" fill-rule="evenodd">
-        <g id="Profile" transform="translate(1.000000, 0.000000)" stroke="#40667e">
-            <path d="M12.9256293,9.56521739 L0.0743707094,9.56521739 C0.0743707094,7.58423913 4.33135011,6.63043478 6.5,6.63043478 C8.66864989,6.63043478 12.9256293,7.58423913 12.9256293,9.56521739 Z" id="Combined-Shape" stroke-width="0.763263559"></path>
-            <use id="Shape" mask="url(#mask-2)" stroke-width="1.52652712" xlink:href="#path-1"></use>
-        </g>
-    </g>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+  <title>Artboard 3</title>
+  <g id="Symbols" stroke="#50667e" stroke-width="0.1" fill="#40667e">
+    <path d="M6.94,3A1.65,1.65,0,1,1,5.29,4.65,1.65,1.65,0,0,1,6.94,3m0-1A2.65,2.65,0,1,0,9.59,4.65,2.65,2.65,0,0,0,6.94,2Z"/>
+    <path d="M7,9c3,0,5,.91,5.68,2H1.32C2,9.89,4,9,7,9M7,8c-4.81,0-7,2.08-7,4H14c0-2-2.17-4-7-4Z"/>
+  </g>
 </svg>
