@@ -363,16 +363,16 @@ Light-teal:     #66d9e0;
     text-align: left;
     line-height: 1.5;
 }
-    .copy__login {
+    .copy--login {
         color: #ffffff;
         text-align: center;
         padding: 0 1.2rem;
         margin: 0.8rem auto;
     }
-    .copy__login--small, .copy__login--small:link {
+    .copy--small, .copy--small:link {
         font-size: 0.9rem;
     }
-    .copy__login--extra-padding {
+    .copy--extra-padding {
         margin-bottom: 5rem;
     }
     .copy--form {
