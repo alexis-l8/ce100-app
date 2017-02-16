@@ -1,0 +1,1162 @@
+[
+  {
+    "id": 1,
+    "name": "Agriculture",
+    "active": true,
+    "categories": [
+      1
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Anaerobic digestion",
+    "active": true,
+    "categories": [
+      1
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Biochemical extraction",
+    "active": true,
+    "categories": [
+      1
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Biodiversity",
+    "active": true,
+    "categories": [
+      1
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Cascade",
+    "active": true,
+    "categories": [
+      1
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Composting",
+    "active": true,
+    "categories": [
+      1
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Fertiliser",
+    "active": true,
+    "categories": [
+      1
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Food",
+    "active": true,
+    "categories": [
+      1
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Land management",
+    "active": true,
+    "categories": [
+      1
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Nutrients",
+    "active": true,
+    "categories": [
+      1
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Regenerative systems",
+    "active": true,
+    "categories": [
+      1
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Water",
+    "active": true,
+    "categories": [
+      1
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Access over ownership",
+    "active": true,
+    "categories": [
+      2
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Business models",
+    "active": true,
+    "categories": [
+      2
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Change management",
+    "active": true,
+    "categories": [
+      2
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Emerging trends",
+    "active": true,
+    "categories": [
+      2
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Entrepreneurship",
+    "active": true,
+    "categories": [
+      2
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Incentive structure",
+    "active": true,
+    "categories": [
+      2
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Industrial symbiosis",
+    "active": true,
+    "categories": [
+      2
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Management",
+    "active": true,
+    "categories": [
+      2
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Product service systems",
+    "active": true,
+    "categories": [
+      2
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Retail",
+    "active": true,
+    "categories": [
+      2
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Reverse logistics",
+    "active": true,
+    "categories": [
+      2
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Sharing economy",
+    "active": true,
+    "categories": [
+      2
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Supply chain",
+    "active": true,
+    "categories": [
+      2
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Buildings",
+    "active": true,
+    "categories": [
+      3
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Cities",
+    "active": true,
+    "categories": [
+      3
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Infrastructure",
+    "active": true,
+    "categories": [
+      3
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Regions",
+    "active": true,
+    "categories": [
+      3
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Transport",
+    "active": true,
+    "categories": [
+      3
+    ]
+  },
+  {
+    "id": 31,
+    "name": "Urban farming",
+    "active": true,
+    "categories": [
+      3
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Urban planning",
+    "active": true,
+    "categories": [
+      3
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Biomimicry",
+    "active": true,
+    "categories": [
+      4
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Certification",
+    "active": true,
+    "categories": [
+      4
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Cradle to cradle",
+    "active": true,
+    "categories": [
+      4
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Design for disassembly",
+    "active": true,
+    "categories": [
+      4
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Life cycle assessment",
+    "active": true,
+    "categories": [
+      4
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Packaging",
+    "active": true,
+    "categories": [
+      4
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Product design & innovation",
+    "active": true,
+    "categories": [
+      4
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Product life extension",
+    "active": true,
+    "categories": [
+      4
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Service design",
+    "active": true,
+    "categories": [
+      4
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Standardisation",
+    "active": true,
+    "categories": [
+      4
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Diversity",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Economic systems",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Emerging markets",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Employment",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Enablers and system conditions",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 48,
+    "name": "Financial capital",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Income & expenditure",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Informal economy",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 51,
+    "name": "Macro economics",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 52,
+    "name": "Micro economics",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 53,
+    "name": "\"Money",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 54,
+    "name": "Natural capital",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 55,
+    "name": "Prices & markets",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 56,
+    "name": "Resilience",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 57,
+    "name": "Social capital",
+    "active": true,
+    "categories": [
+      5
+    ]
+  },
+  {
+    "id": 58,
+    "name": "Consultancy",
+    "active": true,
+    "categories": [
+      6
+    ]
+  },
+  {
+    "id": 59,
+    "name": "Continuing education",
+    "active": true,
+    "categories": [
+      6
+    ]
+  },
+  {
+    "id": 60,
+    "name": "Creativity",
+    "active": true,
+    "categories": [
+      6
+    ]
+  },
+  {
+    "id": 61,
+    "name": "Higher education",
+    "active": true,
+    "categories": [
+      6
+    ]
+  },
+  {
+    "id": 62,
+    "name": "Online learning",
+    "active": true,
+    "categories": [
+      6
+    ]
+  },
+  {
+    "id": 63,
+    "name": "Primary education",
+    "active": true,
+    "categories": [
+      6
+    ]
+  },
+  {
+    "id": 64,
+    "name": "Research",
+    "active": true,
+    "categories": [
+      6
+    ]
+  },
+  {
+    "id": 65,
+    "name": "Secondary education",
+    "active": true,
+    "categories": [
+      6
+    ]
+  },
+  {
+    "id": 66,
+    "name": "Systems thinking",
+    "active": true,
+    "categories": [
+      6
+    ]
+  },
+  {
+    "id": 67,
+    "name": "Training",
+    "active": true,
+    "categories": [
+      6
+    ]
+  },
+  {
+    "id": 68,
+    "name": " debt & banks\"",
+    "active": true,
+    "categories": [
+      6
+    ]
+  },
+  {
+    "id": 69,
+    "name": "Bioenergy",
+    "active": true,
+    "categories": [
+      7
+    ]
+  },
+  {
+    "id": 70,
+    "name": "Carbon",
+    "active": true,
+    "categories": [
+      7
+    ]
+  },
+  {
+    "id": 71,
+    "name": "Energy systems",
+    "active": true,
+    "categories": [
+      7
+    ]
+  },
+  {
+    "id": 72,
+    "name": "Fossil fuels",
+    "active": true,
+    "categories": [
+      7
+    ]
+  },
+  {
+    "id": 73,
+    "name": "Solar power",
+    "active": true,
+    "categories": [
+      7
+    ]
+  },
+  {
+    "id": 74,
+    "name": "Waste to energy",
+    "active": true,
+    "categories": [
+      7
+    ]
+  },
+  {
+    "id": 75,
+    "name": "Wind power",
+    "active": true,
+    "categories": [
+      7
+    ]
+  },
+  {
+    "id": 76,
+    "name": "Complementary currencies",
+    "active": true,
+    "categories": [
+      8
+    ]
+  },
+  {
+    "id": 77,
+    "name": "Financial solutions",
+    "active": true,
+    "categories": [
+      8
+    ]
+  },
+  {
+    "id": 78,
+    "name": "Funding",
+    "active": true,
+    "categories": [
+      8
+    ]
+  },
+  {
+    "id": 79,
+    "name": "Investment",
+    "active": true,
+    "categories": [
+      8
+    ]
+  },
+  {
+    "id": 80,
+    "name": "Business support schemes",
+    "active": true,
+    "categories": [
+      9
+    ]
+  },
+  {
+    "id": 81,
+    "name": "Education & public awareness",
+    "active": true,
+    "categories": [
+      9
+    ]
+  },
+  {
+    "id": 82,
+    "name": "Fiscal frameworks",
+    "active": true,
+    "categories": [
+      9
+    ]
+  },
+  {
+    "id": 83,
+    "name": "People & society",
+    "active": true,
+    "categories": [
+      9
+    ]
+  },
+  {
+    "id": 84,
+    "name": "Policy",
+    "active": true,
+    "categories": [
+      9
+    ]
+  },
+  {
+    "id": 85,
+    "name": "Public procurement",
+    "active": true,
+    "categories": [
+      9
+    ]
+  },
+  {
+    "id": 86,
+    "name": "Regulatory frameworks",
+    "active": true,
+    "categories": [
+      9
+    ]
+  },
+  {
+    "id": 87,
+    "name": "Resource management",
+    "active": true,
+    "categories": [
+      9
+    ]
+  },
+  {
+    "id": 88,
+    "name": "Additive manufacturing",
+    "active": true,
+    "categories": [
+      10
+    ]
+  },
+  {
+    "id": 89,
+    "name": "Civil engineering",
+    "active": true,
+    "categories": [
+      10
+    ]
+  },
+  {
+    "id": 90,
+    "name": "Distributed manufacturing",
+    "active": true,
+    "categories": [
+      10
+    ]
+  },
+  {
+    "id": 91,
+    "name": "Electrical engineering",
+    "active": true,
+    "categories": [
+      10
+    ]
+  },
+  {
+    "id": 92,
+    "name": "Manufacturing",
+    "active": true,
+    "categories": [
+      10
+    ]
+  },
+  {
+    "id": 93,
+    "name": "Mechanical engineering",
+    "active": true,
+    "categories": [
+      10
+    ]
+  },
+  {
+    "id": 94,
+    "name": "Remanufacturing",
+    "active": true,
+    "categories": [
+      10
+    ]
+  },
+  {
+    "id": 95,
+    "name": "Bio-materials",
+    "active": true,
+    "categories": [
+      11
+    ]
+  },
+  {
+    "id": 96,
+    "name": "Chemicals",
+    "active": true,
+    "categories": [
+      11
+    ]
+  },
+  {
+    "id": 97,
+    "name": "Fibres & textiles",
+    "active": true,
+    "categories": [
+      11
+    ]
+  },
+  {
+    "id": 98,
+    "name": "Material health",
+    "active": true,
+    "categories": [
+      11
+    ]
+  },
+  {
+    "id": 99,
+    "name": "Material reutilisation",
+    "active": true,
+    "categories": [
+      11
+    ]
+  },
+  {
+    "id": 100,
+    "name": "Material science",
+    "active": true,
+    "categories": [
+      11
+    ]
+  },
+  {
+    "id": 101,
+    "name": "Metals",
+    "active": true,
+    "categories": [
+      11
+    ]
+  },
+  {
+    "id": 102,
+    "name": "Plastics & polymers",
+    "active": true,
+    "categories": [
+      11
+    ]
+  },
+  {
+    "id": 103,
+    "name": "Rare earth metals",
+    "active": true,
+    "categories": [
+      11
+    ]
+  },
+  {
+    "id": 104,
+    "name": "Leasing",
+    "active": true,
+    "categories": [
+      12
+    ]
+  },
+  {
+    "id": 105,
+    "name": "Maintenance",
+    "active": true,
+    "categories": [
+      12
+    ]
+  },
+  {
+    "id": 106,
+    "name": "Recovery",
+    "active": true,
+    "categories": [
+      12
+    ]
+  },
+  {
+    "id": 107,
+    "name": "Recycling",
+    "active": true,
+    "categories": [
+      12
+    ]
+  },
+  {
+    "id": 108,
+    "name": "Refurbishment",
+    "active": true,
+    "categories": [
+      12
+    ]
+  },
+  {
+    "id": 109,
+    "name": "Repair",
+    "active": true,
+    "categories": [
+      12
+    ]
+  },
+  {
+    "id": 110,
+    "name": "Resource efficiency",
+    "active": true,
+    "categories": [
+      12
+    ]
+  },
+  {
+    "id": 111,
+    "name": "Resource productivity",
+    "active": true,
+    "categories": [
+      12
+    ]
+  },
+  {
+    "id": 112,
+    "name": "Reuse",
+    "active": true,
+    "categories": [
+      12
+    ]
+  },
+  {
+    "id": 113,
+    "name": "Sorting",
+    "active": true,
+    "categories": [
+      12
+    ]
+  },
+  {
+    "id": 114,
+    "name": "Artificial intelligence",
+    "active": true,
+    "categories": [
+      13
+    ]
+  },
+  {
+    "id": 115,
+    "name": "Automation",
+    "active": true,
+    "categories": [
+      13
+    ]
+  },
+  {
+    "id": 116,
+    "name": "Data",
+    "active": true,
+    "categories": [
+      13
+    ]
+  },
+  {
+    "id": 117,
+    "name": "Electronics",
+    "active": true,
+    "categories": [
+      13
+    ]
+  },
+  {
+    "id": 118,
+    "name": "Enabling technology",
+    "active": true,
+    "categories": [
+      13
+    ]
+  },
+  {
+    "id": 119,
+    "name": "Information management",
+    "active": true,
+    "categories": [
+      13
+    ]
+  },
+  {
+    "id": 120,
+    "name": "Internet of things",
+    "active": true,
+    "categories": [
+      13
+    ]
+  },
+  {
+    "id": 121,
+    "name": "Platforms",
+    "active": true,
+    "categories": [
+      13
+    ]
+  },
+  {
+    "id": 122,
+    "name": "Tagging and tracking",
+    "active": true,
+    "categories": [
+      13
+    ]
+  },
+  {
+    "id": 123,
+    "name": "Telecommunications",
+    "active": true,
+    "categories": [
+      13
+    ]
+  },
+  {
+    "id": 124,
+    "name": "Australia",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 125,
+    "name": "Belgium",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 126,
+    "name": "Brazil",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 127,
+    "name": "China",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 128,
+    "name": "Denmark",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 129,
+    "name": "France",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 130,
+    "name": "Germany",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 131,
+    "name": "Hungary",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 132,
+    "name": "Iceland",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 133,
+    "name": "Italy",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 134,
+    "name": "Mexico",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 135,
+    "name": "Netherlands",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 136,
+    "name": "Republic of Ireland",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 137,
+    "name": "Slovenia",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 138,
+    "name": "Spain",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 139,
+    "name": "Sweden",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 140,
+    "name": "Switzerland",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 141,
+    "name": "Sydney",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 142,
+    "name": "Taiwan",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 143,
+    "name": "UAE",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 144,
+    "name": "United Kingdom",
+    "active": true,
+    "categories": [
+      14
+    ]
+  },
+  {
+    "id": 145,
+    "name": "USA",
+    "active": true,
+    "categories": [
+      14
+    ]
+  }
+]
