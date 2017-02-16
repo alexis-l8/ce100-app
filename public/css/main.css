@@ -626,10 +626,6 @@ Light-teal:     #66d9e0;
           text-decoration: none;
           color: inherit;
         }
-        .card__data--underline {
-          text-decoration: underline;
-          color: inherit;
-        }
         .card__data--linked-button {
           font-size: 1.5rem;
           text-align: center;
