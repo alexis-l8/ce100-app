@@ -1,21 +1,23 @@
-<div class="card card--challenge card--list-item-narrow">
-  {{#if permissions.primary}}
-    {{#if permissions.editable}}
-      <a class="icon icon--edit icon--desktop" href="/challenges/{{id}}/edit">
-        <img src="../../../public/assets/Edit.svg" alt="Edit" />
-      </a>
+<li class="list__item list__item--medium">
+  <div class="list__subblock">
+    {{#if permissions.primary}}
+      {{#if permissions.editable}}
+        <a class="icon icon--edit icon--desktop" href="/challenges/{{id}}/edit">
+          <img src="../../../public/assets/Edit.svg" alt="Edit" />
+        </a>
+      {{/if}}
     {{/if}}
-  {{/if}}
 
-  <a href="/challenges/{{id}}" class="card__header--challenge card__data--link">
-    {{title}}
-  </a>
-
-  {{#if shared_by}}
-  <p class="card__copy card__additional u-teal">Shared by
-    <a href="/orgs/{{org_id}}" class="u-teal">
-      {{shared_by}}
+    <a href="/challenges/{{id}}" class="card__header--challenge card__data--link">
+      {{title}}
     </a>
-  </p>
-  {{/if}}
-</div>
+
+    {{#if shared_by}}
+    <p class="card__copy card__additional u-teal">Shared by
+      <a href="/orgs/{{org_id}}" class="u-teal">
+        {{shared_by}}
+      </a>
+    </p>
+    {{/if}}
+  </div>
+</li>

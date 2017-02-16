@@ -418,10 +418,15 @@ Light-teal:     #66d9e0;
 }
 
     .list__item {
+        color: #40667e;
         position: relative;
         padding: 1rem 8%;
         list-style: none;
         border-bottom: #89a0ae 1px solid;
+    }
+    .list__item--medium {
+        padding: 1rem 1.5rem;
+        line-height: 1.4;
     }
     .list__item--big {
         padding: 2rem 8%;
@@ -450,6 +455,7 @@ Light-teal:     #66d9e0;
         }
         .list__subblock {
             display: inline-block;
+            width: 90%;
         }
         .list__data--primary {
             color: #40667e;
@@ -612,6 +618,7 @@ Light-teal:     #66d9e0;
         font-size: 1.125rem;
     }
         .card__header--challenge {
+            color: #40667e;
             font-size: 1.125rem;
             line-height: 1.4;
         }
@@ -634,7 +641,7 @@ Light-teal:     #66d9e0;
         }
     .card__additional {
       color: #89a0ae;
-      transform: translate(0%,100%);
+      transform: translate(0%,50%);
       -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
       -ms-transform: translate(30deg); /* IE 9 */
     }
@@ -884,7 +891,7 @@ Light-teal:     #66d9e0;
   }
   .indicator--left {
     float: left;
-    margin: 1rem 2rem 0 0;
+    margin: 0.5rem -1rem;
   }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
