@@ -8,6 +8,20 @@ var auth = params.auth.split(':');
 var paramsTest = url.parse(env.DATABASE_URL_TEST);
 var authTest = params.auth.split(':');
 
+// DATA
+var mockData = require('ce100-mock-data');
+var productionTags = require('../tags/tags.json');
+var productionCategories = require('../tags/categories.json');
+
+
+var prod = {
+  env: 'production',
+  data: {
+    tags: productionTags,
+    categories: productionCategories
+  }
+};
+
 var dev = {
   env: 'dev',
   port: env.PORT || 3000,
@@ -40,14 +54,18 @@ var dev = {
     region: env.S3_REGION,
     bucket: env.S3_BUCKET
   },
-  root_url: env.ROOT_URL
+  root_url: env.ROOT_URL,
+  data: {
+    tags: mockData.tags,
+    categories: mockData.categories
+  }
 };
+
 
 
 var test = {
   env: 'test',
   port: 0,
-  jwt_secret: env.JWT_SECRET,
   pg: {
     user: authTest[0],
     password: authTest[1],
@@ -70,21 +88,18 @@ var test = {
     insights: {
       reset: Boolean(process.env.RESET_INSIGHTS_TEST) || true,
     }
-  },
-  s3: {
-    region: env.S3_REGION,
-    bucket: env.S3_BUCKET
-  },
-  root_url: env.ROOT_URL
+  }
 };
 
 // The default env is test
 function setUpConfig () {
   if (env.NODE_ENV === 'dev') {
     return dev;
+  } else if (env.NODE_ENV === 'production') {
+    return Object.assign({}, dev, prod)
   }
 
-  return test;
+  return Object.assign({}, dev, test);
 }
 
 module.exports = setUpConfig();
