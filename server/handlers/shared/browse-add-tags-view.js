@@ -9,7 +9,7 @@ module.exports = function (pageType) {
 
     request.server.methods.pg.tags.getAllActive(function (error, allActive) {
       options.pageType = pageType;
-      options.allActive = allActive;
+      options.allActive = helpers.locationCategoryToEnd(allActive);
       options.permissions = permissions.permissions;
       if (Object.keys(options.allActive).length === 0) {
         return reply.view('browse/no-tags', options);

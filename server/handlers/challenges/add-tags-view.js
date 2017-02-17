@@ -23,7 +23,7 @@ module.exports = function (request, reply, source, joiErr) {
       options = Object.assign(
         { view: helpers.getView(request.path) },
         permissions,
-        { tags: tags },
+        { tags: helpers.locationCategoryToEnd(tags) },
         { error: error }
        );
 

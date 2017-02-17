@@ -20,7 +20,7 @@ module.exports = function (request, reply, source, joiErr) {
         orgId);
       var options = Object.assign(
         permissions,
-        { tags: tags },
+        { tags: helpers.locationCategoryToEnd(tags) },
         { error: error }
       );
 

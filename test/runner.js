@@ -53,6 +53,7 @@ require('./server/file-server.test.js');
 // generic
 require('./browse/landing.test.js');
 
-// unit tests
+// unit
 require('./unit/getCancelUrl.test.js');
 require('./unit/getView.test.js');
+require('./unit/moveLocationToEnd.test.js');
