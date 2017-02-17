@@ -368,9 +368,7 @@ Light-teal:     #66d9e0;
         text-align: center;
         padding: 0 1.2rem;
         margin: 0.8rem auto;
-    }
-    .copy--small, .copy--small:link {
-        font-size: 0.9rem;
+        text-decoration: none;
     }
     .copy--extra-padding {
         margin-bottom: 5rem;
@@ -824,7 +822,7 @@ Light-teal:     #66d9e0;
     width: 100%;
     text-indent: 0;
     height: 2.5rem;
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     text-shadow: 0 1px 0 #003152;
 }
 .button--login:hover {
