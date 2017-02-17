@@ -304,7 +304,7 @@ Light-teal:     #66d9e0;
 }
     .container--login {
         min-height: 100vh;
-        padding: 0.1rem 1.25rem 3.1rem;
+        padding: 0.1rem 1.25rem 1rem;
         background: #003253;
         background: radial-gradient(14rem at 50% 10rem, rgb(53, 91, 116), rgb(0, 50, 83));
     }
@@ -362,34 +362,16 @@ Light-teal:     #66d9e0;
     margin: auto;
     text-align: left;
     line-height: 1.5;
-    letter-spacing: 0.2px;
 }
     .copy--login {
-        max-width: 16.25rem;
         color: #ffffff;
         text-align: center;
-        margin-bottom: 1rem;
-    }
-    .copy__text-link, .copy__text-link:link {
-        font-size: 0.75rem;
-        color: #89a0ae; /* bluey-grey */
-    }
-    .copy--login__options {
-        color: #89a0ae; /* bluey-grey */
-        text-align: center;
-        margin-bottom: 1rem;
-        vertical-align: middle;
-        display: inline-block;
-        margin: 1rem 0.3rem 1rem 0.3rem;
+        padding: 0 1.2rem;
+        margin: 0.8rem auto;
         text-decoration: none;
-        font-size: 0.8rem;
-        width: 45%;
     }
-
-    /*This class is just used in login screen and will be removed once the
-    remember me feature is added*/
-    .copy--login__options--block {
-      display: block;
+    .copy--extra-padding {
+        margin-bottom: 5rem;
     }
     .copy--form {
       color: #89a0ae;
@@ -722,7 +704,7 @@ Light-teal:     #66d9e0;
     .form__label, .form__input {
         display: block;
         text-align: left;
-        font-size: 1rem;
+        font-size: 0.8rem;
     }
 
     .form__label {
@@ -777,7 +759,7 @@ Light-teal:     #66d9e0;
         }
     .form__input--login {
         width: 100%;
-        height: 3rem;
+        height: 2.5rem;
         margin: 0 0 0.875rem;
         padding: 0;
         background-color: #184460; /* teal colour */
@@ -835,11 +817,16 @@ Light-teal:     #66d9e0;
     border-radius: 3rem;
 }
 .button--login {
-    border: solid 1px #ffffff;
-    margin: 0 0 2rem;
+    background: #66d9e0;
+    margin: 2rem 0;
     width: 100%;
     text-indent: 0;
-    min-height: 3rem;
+    height: 2.5rem;
+    font-size: 0.875rem;
+    text-shadow: 0 1px 0 #003152;
+}
+.button--login:hover {
+  background: #4DC0C7; /*  10% darker than #66d9e0 */
 }
 .button--margin {
     margin-bottom: 2rem;
@@ -897,7 +884,6 @@ Light-teal:     #66d9e0;
 .anchor:link {
     text-align: center;
     display: inline-block;
-    line-height: 2.75;
     color: #89a0ae;
 }
 .anchor:visited {
@@ -943,6 +929,7 @@ Light-teal:     #66d9e0;
 }
 .logo--login {
     padding-top: 6rem;
+    margin: 0 auto 4rem;
 }
     .logo--with-title {
         display: table-cell;
@@ -999,6 +986,16 @@ Light-teal:     #66d9e0;
 
 .daintree--blue {
   background: #00233B;
+}
+
+.table {
+  display: table;
+  width: 100%;
+}
+.table__half-width {
+  width: 50%;
+  display: table-cell;
+  text-align: center;
 }
 
 /*-----------FEEDBACK WIDGET-------------*/
