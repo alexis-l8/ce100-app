@@ -734,8 +734,17 @@ Light-teal:     #66d9e0;
         background-color: #fff4f4;
       }
       .form__input--text-area {
-        line-height: 1.5;
         height: 8rem;
+        box-shadow: inset 0 0.0625rem 0.0625rem 0 #89a0ae;
+        border: none;
+        line-height: 1.5rem;
+        color: rgba(64, 102, 126, 0.5);
+      }
+      .form__input--text {
+        box-shadow: inset 0 0.0625rem 0.0625rem 0 #89a0ae;
+        border: none;
+        line-height: 1.5rem;
+        color: rgba(64, 102, 126, 0.5);
       }
     /* Focus state styles */
         .form__input:focus {

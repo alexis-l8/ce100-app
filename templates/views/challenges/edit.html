@@ -17,10 +17,10 @@
 
     <form class="form" method="post">
       <label class="form__label" for="title">Title</label>
-      <input class="form__input {{error.title}}" type="text" name="title" id="title" value="{{#if error}}{{error.values.title}}{{else}}{{title}}{{/if}}">
+      <input class="form__input form__input--text {{error.title}}" type="text" name="title" id="title" value="{{#if error}}{{error.values.title}}{{else}}{{title}}{{/if}}">
 
       <label class="form__label" for="description">Description</label>
-      <textarea class="form__input {{error.description}}" name="description" id="description" placeholder="Write Here..." rows="4" cols="50">{{#if error.values.description}}{{error.values.description}}{{else}}{{description}}{{/if}}</textarea>
+      <textarea class="form__input form__input--text-area {{error.description}}" name="description" id="description" placeholder="Write Here..." rows="4" cols="50">{{#if error.values.description}}{{error.values.description}}{{else}}{{description}}{{/if}}</textarea>
 
       {{#if tagsData}}
         {{#each tagsData}}

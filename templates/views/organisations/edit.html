@@ -30,7 +30,7 @@
         <!-- Company name and image -->
         <div class="form__section">
           <label class="form__label" for="org_name">Organisation Name</label>
-          <input class="form__input {{error.name}}" name="name" id="org_name" value="{{#if error}}{{error.values.name}}{{else}}{{org.name}}{{/if}}">
+          <input class="form__input form__input--text {{error.name}}" name="name" id="org_name" value="{{#if error}}{{error.values.name}}{{else}}{{org.name}}{{/if}}">
         </div>
 
         <div class="form__section">
