@@ -1,12 +1,12 @@
 ## ADMINS: Editing/deactivating tags and challenges
 
 Contents of this guide:
-- How to edit a file on github
-- How to save your changes
-- How to update a challenge
-- How to update a tag
-- How to create a new challenge
-- How to create a new tag
+- (How to edit a file on github)[How-to-edit-a-file]
+- (How to save your changes)[Save-(commit)-the-changes]
+- (How to update a category)[Updating-Categories]
+- (How to update a tag)[Updating-Tag]
+- (How to create a new category)[Adding-a-new-category]
+- (How to create a new tag)[Adding-a-new-tag]
 
 ### How to edit a file
 
@@ -28,7 +28,7 @@ __________________
 ## Updating an existing tag or category
 
 
-### Categories
+### Updating Categories
 Here are the first 3 categories at the time of writing:
 
 ```js
@@ -64,7 +64,7 @@ So if I wanted to disable all the category called `BUSINESS` and all the tags as
 },
 ```
 
-### tags
+### Updateing Tags
 
 At the time of writing, the first 25 lines of the [`tags/tags.json`](https://github.com/emfoundation/ce100-app/tags/tags.json) file looks like this:
 
