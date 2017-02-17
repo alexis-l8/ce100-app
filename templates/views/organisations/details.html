@@ -78,15 +78,21 @@
             {{/if}}
         {{/if}}
 
+        <!-- Archived challenges -->
         {{#if permissions.primary}}
             {{#if permissions.editable}}
+              <!-- mobile -->
               <div class="card card--header mobile">
                 <a class="text-decoration--none title title--tall title--secondary" href="/orgs/{{org.id}}/archived-challenges">
                   Archived challenges
                 </a>
               </div>
+              <!-- Desktop -->
+              <a href="/challenges/add" class="card__copy card__additional float-left card__data--link desktop">Add challenge</a>
+              <a href="/orgs/{{org.id}}/archived-challenges" class="card__copy card__additional float-right card__data--link desktop">Archived challenges</a>
             {{/if}}
           {{/if}}
+
 
     </div>
 
