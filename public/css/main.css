@@ -1116,17 +1116,17 @@ Light-teal:     #66d9e0;
     background-color: rgba(102, 216, 224, 0.14);
     border-bottom: #66d9e0 1px solid;
   }
-.snackbar-content {
+.snackbar__content {
   text-align: center;
   font-size: 0.8rem;
 }
-  .snackbar-content::first-letter {
+  .snackbar__content::first-letter {
     text-transform: capitalize;
   }
-    .snackbar-content--error {
+    .snackbar__content--error {
       color: #e4164c;
     }
-    .snackbar-content--success {
+    .snackbar__content--success {
       color: #40667e;
     }
     .login-response--error {
