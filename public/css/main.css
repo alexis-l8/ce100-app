@@ -657,12 +657,7 @@ Light-teal:     #66d9e0;
     padding-top: 3rem;
 }
 
-.landing-card__content {
-    color: #ffffff;
-    margin: 3rem auto 5rem;
-}
-
-.landing-card__header--extra-large {
+.landing-card__header {
   font-size: 3rem;
   text-align: center;
   padding: 2rem;
