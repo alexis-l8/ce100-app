@@ -22,7 +22,7 @@ module.exports = function (request, reply, source, joiErr) {
       Hoek.assert(!pgErr, 'Database Error');
       options = Object.assign(
         permissions,
-        { tags: tags },
+        { tags: helpers.locationCategoryToEnd(tags) },
         { error: error }
        );
 
