@@ -86,7 +86,7 @@ node test/auth/auth.test.js
 
 #### Adding/Updating Tags (Admin)
 
-Please refer to the [wiki](https://github.com/emfoundation/ce100-app/wiki/Add-Update-Tags) for information on how to do this.
+Please refer to the [admin guide](https://github.com/emfoundation/ce100-app/tags/admin-guide-add-edit-tags.md) for information on how add or update tags/categories.
 
 #### HTTP/HTTPS (Admin)
 
