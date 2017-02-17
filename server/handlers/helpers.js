@@ -115,15 +115,13 @@ helpers.errorOptions = (err) =>
 
 // move the category with name `location` to the end of the list as requested
 helpers.locationCategoryToEnd = function (categories) {
-    var ind; // location of the LOCATION category in the categories array
-    categories.forEach(function (category, index) {
-      if (category.category_name === 'LOCATION') {
-        ind = index;
-      }
-    });
+    // location of the LOCATION category in the categories array
+    var ind = categories.map(function (cat) {
+      return cat.category_name.toUpperCase();
+    }).indexOf("LOCATION");
 
     // if this list of categories contains one with name location, then shift it to the bottom
-    return ind
+    return ind > -1
       ? categories.slice(0, ind).concat(categories.slice(ind + 1)).concat(categories[ind])
       : categories
 
