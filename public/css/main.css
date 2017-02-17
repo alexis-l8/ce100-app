@@ -291,8 +291,8 @@ Darker-grey:    #9cafbb;
   .togglebar__item--selected, .togglebar__item--selected:hover {
     background: #ffffff;
   }
-  .togglebar__link, .togglebar__link:visited  {
-    padding: 1.2rem 0;
+    .togglebar__link, .togglebar__link:visited {
+    padding: 1.125rem 0;
     color: #9cafbb;
   }
   .togglebar__link--selected, .togglebar__link--selected:visited {
