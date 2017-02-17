@@ -54,5 +54,5 @@ require('./server/file-server.test.js');
 require('./browse/landing.test.js');
 
 // unit
-require('./unit/getCancelUrl.js');
-require('./unit/moveLocationToEnd.js');
+require('./unit/getCancelUrl.test.js');
+require('./unit/moveLocationToEnd.test.js');

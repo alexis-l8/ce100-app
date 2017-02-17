@@ -64,7 +64,7 @@ So if I wanted to disable all the category called `BUSINESS` and all the tags as
 },
 ```
 
-### Updateing Tags
+### Updating Tags
 
 At the time of writing, the first 25 lines of the [`tags/tags.json`](https://github.com/emfoundation/ce100-app/tags/tags.json) file looks like this:
 
@@ -98,7 +98,7 @@ At the time of writing, the first 25 lines of the [`tags/tags.json`](https://git
 
 The above snippet represents 3 different active tags (Agriculture, Anaerobic digestion and Biochemical extraction) all belonging to the same category with `id` of `1` (the BIOCYCLE category).
 
-### Again the main thing to know is you should not touch the `"id"` field
+##### Again the main thing to know is you should not touch the `"id"` field
 
 You may change:
 - The name of the tag (rename/fix-spelling/change capitalisation)
