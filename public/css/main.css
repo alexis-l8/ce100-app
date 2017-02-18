@@ -551,7 +551,7 @@ Light-teal:     #66d9e0;
   text-transform: capitalize;
 }
 .tag__input:checked + .tag__label {
-    background-color: #89a0ae;
+    background-color: #40667e;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
