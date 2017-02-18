@@ -44,7 +44,6 @@ require('./people/password-reset.test.js');
 
 // tags
 require('./browse/select-tags.test.js');
-require('./unit/getCancelUrl.js');
 
 // server
 require('./server/auth.test.js');
@@ -53,3 +52,7 @@ require('./server/file-server.test.js');
 
 // generic
 require('./browse/landing.test.js');
+
+// unit
+require('./unit/getCancelUrl.test.js');
+require('./unit/moveLocationToEnd.test.js');
