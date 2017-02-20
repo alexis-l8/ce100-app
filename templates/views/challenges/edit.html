@@ -18,6 +18,7 @@
     <form class="form" method="post">
       <label class="form__label" for="title">Title</label>
       <input class="form__input form__input--text {{error.title}}" type="text" name="title" id="title" value="{{#if error}}{{error.values.title}}{{else}}{{title}}{{/if}}">
+      <div class="form__section form__section--main">
 
       <label class="form__label" for="description">Description</label>
       <textarea class="form__input form__input--text-area {{error.description}}" name="description" id="description" placeholder="Write Here..." rows="4" cols="50">{{#if error.values.description}}{{error.values.description}}{{else}}{{description}}{{/if}}</textarea>
@@ -30,7 +31,15 @@
         <h3>Add tags on the next screen</h3>
       {{/if}}
 
+        {{#if tags}}
+        <div class="form__section">
+
+          {{#each tags}}
+            <span class="tag__label">{{name}}</span>
+          {{/each}}
+        </div>
         {{/if}}
+      </div>
 
       <button class="button" type="submit">Save & edit tags</button>
 
