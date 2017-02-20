@@ -329,7 +329,6 @@ Light-teal:     #66d9e0;
     margin: 0;
 
     text-align: center;
-    text-transform: capitalize;
     font-size: 1rem;
     font-weight: normal;
     color: #ffffff;
@@ -706,7 +705,6 @@ Light-teal:     #66d9e0;
     }
 
     .form__label {
-        text-transform: capitalize;
         margin-bottom: 0.8125rem; /* 13px */
         /*space between the bottom of a form input and the top of the next label is 37px*/
         /*This is calculated with 28px margin bottom of a form input, and 9px padding-top of a form label*/
@@ -714,12 +712,24 @@ Light-teal:     #66d9e0;
         color: #40667e;
         font-size: 1rem;
     }
-      .form__label--long {
-        text-transform: none;
-      }
-      .form__label--additional {
-        /*Gives the user additional information on filling out a specific input*/
-      }
+        .form__label--long {
+          text-transform: none;
+        }
+        .form__label--additional {
+          /*Gives the user additional information on filling out a specific input*/
+        }
+
+        .form__label--radio, .form__input--radio {
+            display: inline-block;
+            width: auto;
+        }
+        .form__label--radio {
+
+        }
+        .form__label--no-input {
+            margin-bottom: 2.5rem; /* 40px */
+        }
+
     .form__input {
         margin-bottom: 1.75rem; /* 28px */
         font-family: inherit;
@@ -769,18 +779,24 @@ Light-teal:     #66d9e0;
           color: #89a0ae;
           opacity: 1;
         }
-    .form__input--login {
-        width: 100%;
-        height: 2.5rem;
-        margin: 0 0 0.875rem;
-        padding: 0;
-        background-color: #184460; /* teal colour */
-        border: none;
-        border-radius: 25px;
-        color: #ffffff;
-        text-indent: 1.25rem;
-    }
-    /* Placeholder styles */
+
+        .form__input--non-editable {
+          background-color: #fafafa;
+          border: none;
+          padding: 0.625rem 0 0.375rem;
+        }
+        .form__input--login {
+            width: 100%;
+            height: 2.5rem;
+            margin: 0 0 0.875rem;
+            padding: 0;
+            background-color: #184460; /* teal colour */
+            border: none;
+            border-radius: 25px;
+            color: #ffffff;
+            text-indent: 1.25rem;
+        }
+        /* Placeholder styles */
         .form__input--login::-webkit-input-placeholder { /* Chrome/Opera/Safari */
           color: #89a0ae;
         }
@@ -795,17 +811,8 @@ Light-teal:     #66d9e0;
           color: #89a0ae;
           opacity: 1;
             }
-    .form__label--radio, .form__input--radio {
-        display: inline-block;
-        width: auto;
-    }
-    .form__label--radio {
 
-    }
-    .form__input--non-editable {
-      background-color: #fafafa;
-      border: none;
-    }
+
     .form__copy {
       font-size: 0.875rem; /* 14px */
       text-align: center;
@@ -834,9 +841,9 @@ Light-teal:     #66d9e0;
 .button {
     display: block;
     margin: auto;
-    padding:  0.9375rem 1.375rem; /* 15px 22px */
+    padding:  0.625rem 1.375rem; /* 10px 22px */
     min-width: 10.13rem; /* 162 px */
-    line-height: 1.7;
+    line-height: 1.5;
     cursor: pointer;
     font-size:  0.875rem; /* 14px */
     color: rgb(255, 255, 255);
