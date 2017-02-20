@@ -373,15 +373,7 @@ Light-teal:     #66d9e0;
     .copy--extra-padding {
         margin-bottom: 5rem;
     }
-    .copy--form {
-      /*color: #89a0ae;
-      margin-bottom: 1rem;*/
 
-      font-size: 0.875rem;
-      text-align: center;
-      color: #40667e;
-      margin-bottom: 1.438rem;
-    }
     .copy--landing {
       display: inline-block;
       padding: 0 1rem;
