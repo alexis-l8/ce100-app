@@ -590,7 +590,7 @@ Light-teal:     #66d9e0;
     border: none;
     background: #003253;
 }
-.card--header--with-logo {
+.card--header-with-logo {
   background: radial-gradient(circle at 50% 57%, rgba(9, 51, 81, 0.84), #002944);
 }
 .card--header--white {
