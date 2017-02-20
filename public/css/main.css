@@ -82,7 +82,7 @@ Bluey-grey:     #89a0ae;
 
 White:          #ffffff;
 
-Danger-red:     #900000;
+anchor-red:     #900000;
 
 Light-teal:     #66d9e0;
 
@@ -809,6 +809,25 @@ Light-teal:     #66d9e0;
       background-color: #fafafa;
       border: none;
     }
+    .form__copy {
+      font-size: 0.875rem; /* 14px */
+      text-align: center;
+      color: #40667e;
+      margin-bottom: 1.438rem;
+    }
+
+
+    .form__anchor {
+        color: #66d9e0;
+        text-decoration: none;
+    }
+        .form__anchor--danger:visited {
+            color: #66d9e0;
+        }
+        .form__anchor--danger:link {
+            margin: 2.625rem auto 2.625rem; /* 42px = 2.625rem */
+            display: block;
+        }
 
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -907,12 +926,7 @@ Light-teal:     #66d9e0;
 .anchor:hover {
     text-decoration: none;
 }
-
-    .anchor--danger:link {
-        color: #900000;
-        margin: 1rem auto 0rem;
-    }
-    .anchor--danger:visited {
+    .anchor--red:link {
         color: #900000;
     }
 
