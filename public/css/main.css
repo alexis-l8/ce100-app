@@ -217,7 +217,7 @@ Light-teal:     #66d9e0;
             display: block;
             text-decoration: none;
             color: #40667e; /* Denim */
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             cursor: pointer;
         }
         .navbar__link:visited {
