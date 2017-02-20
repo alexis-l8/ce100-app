@@ -717,7 +717,9 @@ Light-teal:     #66d9e0;
       .form__label--long {
         text-transform: none;
       }
-
+      .form__label--additional {
+        /*Gives the user additional information on filling out a specific input*/
+      }
     .form__input {
         margin-bottom: 1.75rem; /* 28px */
         font-family: inherit;
