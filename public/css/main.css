@@ -762,9 +762,10 @@ Light-teal:     #66d9e0;
           opacity: 1;
         }
     .form__input--login {
-        width: 100%;
         height: 2.5rem;
-        margin: 0 0 0.875rem;
+        margin: 1rem auto;
+        width: 100%;
+        max-width: 21.0625rem;
         padding: 0;
         background-color: #184460; /* teal colour */
         border: none;
@@ -822,8 +823,9 @@ Light-teal:     #66d9e0;
 }
 .button--login {
     background: #66d9e0;
-    margin: 2rem 0;
+    margin: 2rem auto 0;
     width: 100%;
+    max-width: 21.0625rem;
     text-indent: 0;
     height: 2.5rem;
     font-size: 0.875rem;
@@ -905,6 +907,17 @@ Light-teal:     #66d9e0;
         color: #900000;
     }
 
+    .anchor--login {
+      color: white;
+      margin: 2.1875rem auto; /* 35px */
+      width: 100%;
+      font-size: 0.875rem; /* 14px */
+      display: block;
+    }
+    .anchor--login:visited, .anchor--login:link {
+      color: white;
+      display: block;
+    }
     .anchor--teal {
         color: #66d9e0;
     }
@@ -1261,4 +1274,15 @@ Light-teal:     #66d9e0;
     padding-top: 0.5rem;
     width: 2rem;
   }
+
+  .copy--login {
+    font-size: 1.3125rem; /* 21px */
+    max-width: 21.0625rem; /* 337px */
+  }
+
+  .anchor--login {
+    font-size: 1rem;
+    margin: 1.8rem auto 0.1rem;
+  }
+
 }
