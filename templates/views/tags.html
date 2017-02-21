@@ -1,3 +1,7 @@
+<!-- Include Top Navbar -->
+{{>top-nav}}
+{{>top-nav-desktop}}
+
 <!-- Main Content -->
 <div class="container">
   <div class="card card--header">
@@ -6,11 +10,16 @@
 
   {{#if error}}
   <div class="snackbar snackbar--error">
-    <h1 class="snackbar-content snackbar-content--error">{{error.message}}</h1>
+    <h1 class="snackbar__content snackbar__content--error">{{error.message}}</h1>
   </div>
   {{/if}}
 
   {{#if tags}}
+    <div class="snackbar snackbar--success">
+      <h1 class="snackbar__content snackbar__content--success">
+        Selecting tags will help people to find you and make sure that you receive suggested matches. We recommend adding up to 5 tags.
+      </h1>
+    </div>
     <form class="form form--tags" method="post">
         <div class="form__section">
           {{#each tags}}
