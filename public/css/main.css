@@ -71,7 +71,6 @@ body {
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 /*
-
 Marine-blue :   #003253;
 
 Navy:           #002944;
@@ -86,6 +85,11 @@ anchor-red:     #900000;
 
 Light-teal:     #66d9e0;
 
+Light-grey:     #f8f8f8;
+(for togglebar navigation)
+
+Darker-grey:    #9cafbb;
+(un-selected font colour in togglebar navigation)
 */
 
 
@@ -131,6 +135,11 @@ Light-teal:     #66d9e0;
 }
 .icon--logo {
     background-image: url("../assets/logo.png");
+}
+.icon--open-link {
+  background-image: url("../assets/open-link.svg");
+  display: inline-block;
+  margin-left: 0.4rem;
 }
 .icon--dropdown {
   background-image: url("../assets/Dropdown.svg");
@@ -277,21 +286,22 @@ Light-teal:     #66d9e0;
     Toggle Bar in browse view
   |||||||||||||||||||||||||||||||||||||||||||*/
   .togglebar {
-    background: #eaeaea;
+    background: #f8f8f8;
+    box-shadow: 0 2px 4px 0 rgba(64, 101, 126, 0.25);
   }
 
   .togglebar__item, .togglebar__item:hover{
-    background: #eaeaea;
+    background: #f8f8f8;
   }
   .togglebar__item--selected, .togglebar__item--selected:hover {
-    background: #fafafa;
+    background: #ffffff;
   }
-  .togglebar__link, .togglebar__link:visited  {
-    padding: 1.2rem 0;
-    color: #6F8B9D;
+    .togglebar__link, .togglebar__link:visited {
+    padding: 1.125rem 0;
+    color: #9cafbb;
   }
   .togglebar__link--selected, .togglebar__link--selected:visited {
-    color: #66d9e0;
+    color: #40667e;
   }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -325,14 +335,14 @@ Light-teal:     #66d9e0;
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .title {
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     margin: 0;
-
+    line-height: 1.35;
     text-align: center;
     font-size: 1rem;
     font-weight: normal;
     color: #ffffff;
-}
+ }
 .title--with-logo {
     display: table-cell;
     text-align: left;
@@ -529,8 +539,7 @@ Light-teal:     #66d9e0;
   text-transform: capitalize;
 }
 .tag__input:checked + .tag__label {
-    background-color: #89a0ae;
-    border: solid 1px #002944;
+    background-color: #40667e;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -552,10 +561,10 @@ Light-teal:     #66d9e0;
 
 
 .card {
-    padding: 4.25rem 1.75rem; /* 68px x 28px */
+    padding: 2.75rem 1.55rem;
     text-align: center;
     color: #40667e;
-    border-bottom: 1px solid #89a0ae;
+    border-bottom: 1px solid rgba(64, 101, 126, 0.1);
     line-height: 1.5;
     position: relative;
 }
@@ -581,7 +590,7 @@ Light-teal:     #66d9e0;
     height: 7.5rem; /* 120px */
 }
 .card--challenge {
-    padding: 1.25rem 1.875rem 1.2rem;
+    padding: 1.5rem 1.2rem;
     text-align: left;
 }
     .card__header {
