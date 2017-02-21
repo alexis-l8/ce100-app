@@ -412,7 +412,7 @@ Light-teal:     #66d9e0;
         border-bottom: #89a0ae 1px solid;
     }
     .list__item--medium {
-        padding: 1rem 1.5rem;
+        padding: 1.75rem 1.5rem;
         line-height: 1.4;
     }
     .list__item--big {
@@ -624,18 +624,6 @@ Light-teal:     #66d9e0;
           text-align: center;
           text-decoration: none;
           color: inherit;
-        }
-    .card__additional {
-      color: #89a0ae;
-      transform: translate(0%,50%);
-      -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
-      -ms-transform: translate(30deg); /* IE 9 */
-    }
-        .card__additional--small {
-          font-size: 0.8rem;
-          transform: initial;
-          padding-top: 0.2rem;
-          margin-bottom: 0;
         }
 .card__suggested-matches {
   background-color: #f8ffff;
@@ -919,6 +907,25 @@ Light-teal:     #66d9e0;
       color: #66d9e0;
     }
 
+.anchor__shared-by, .anchor__shared-by:link, .anchor__shared-by:visited {
+    font-size: 0.875rem;
+    text-align: right;
+    line-height: 1;
+    margin: 0 0 0.5rem 0;
+}
+
+.anchor__shared-by--left, .anchor__shared-by--left:link, .anchor__shared-by--left:visited {
+    color: rgba(64, 102, 126, 0.5);
+    text-align: left;
+    padding: 0.4rem 0 0 0;
+    margin: 0;
+}
+
+.anchor__shared-by--small, .anchor__shared-by--small:link, .anchor__shared-by--small:visited {
+    font-size: 0.75rem;
+}
+
+
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Logo
   |||||||||||||||||||||||||||||||||||||||||||*/
@@ -959,11 +966,11 @@ Light-teal:     #66d9e0;
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Helper classes
   |||||||||||||||||||||||||||||||||||||||||||*/
-.float-left {
+.u-float-left {
   float: left
 }
 
-.float-right {
+.u-float-right {
   float: right
 }
 
