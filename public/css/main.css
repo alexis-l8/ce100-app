@@ -80,7 +80,7 @@ Bluey-grey:     #89a0ae;
 
 White:          #ffffff;
 
-Danger-red:     #900000;
+anchor-red:     #900000;
 
 Light-teal:     #66d9e0;
 
@@ -395,10 +395,7 @@ Darker-grey:    #9cafbb;
     .copy--extra-padding {
         margin-bottom: 5rem;
     }
-    .copy--form {
-      color: #89a0ae;
-      margin-bottom: 1rem;
-    }
+
     .copy--landing {
       display: inline-block;
       padding: 0 1rem;
@@ -728,10 +725,16 @@ Darker-grey:    #9cafbb;
     padding: 0;
 }
     .form__section {
-        border-bottom: solid 1px rgba(0, 49, 83, 0.1);
-        margin-bottom: 1.125rem;
-        padding-bottom: 1.125rem;
+        margin-bottom: 1.75rem; /*28 px*/
     }
+      .form__section--main {
+        border-bottom: solid 1px rgba(0, 49, 83, 0.1);
+      }
+      .form__section--tags-block {
+          margin-bottom: 0;
+          padding: 0 1rem;
+      }
+
       /*Section containing the submit button of the form*/
       .form__section--last {
         border-bottom: none;
@@ -741,10 +744,6 @@ Darker-grey:    #9cafbb;
       .form__section--radio {
         text-align: left;
       }
-  .form__subsection {
-      padding-left: 1rem;
-      padding-right: 1rem;
-  }
     .form__label, .form__input {
         display: block;
         text-align: left;
@@ -753,23 +752,29 @@ Darker-grey:    #9cafbb;
 
     .form__label {
         text-transform: capitalize;
-        margin-bottom: 1rem;
-        color: #89a0ae;
+        margin-bottom: 0.8125rem; /* 13px */
+        /*space between the bottom of a form input and the top of the next label is 37px*/
+        /*This is calculated with 28px margin bottom of a form input, and 9px padding-top of a form label*/
+        padding-top: 0.5625rem; /* 9px */
+        color: #40667e;
+        font-size: 1rem;
     }
       .form__label--long {
         text-transform: none;
       }
-
+      .form__label--additional {
+        /*Gives the user additional information on filling out a specific input*/
+      }
     .form__input {
-        margin-bottom: 1.25rem;
-        line-height: 2.25;
+        margin-bottom: 1.75rem; /* 28px */
         font-family: inherit;
+        font-size: 0.875rem; /* 14px */
         width: 100%;
-        color: #000000;
+        color: #40667e;
         border-radius: 3px;
         background-color: #f2f2f2;
         border: solid 1px #ebeced;
-        padding: 0.2em 1em;
+        padding: 0.5625rem 0.875rem; /* 9px 14px */
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
@@ -779,8 +784,16 @@ Darker-grey:    #9cafbb;
         background-color: #fff4f4;
       }
       .form__input--text-area {
-        line-height: 1.5;
-        height: 8rem;
+        min-height: 4.438rem; /* 71px */
+        box-shadow: inset 0 0.0625rem 0.0625rem 0 #89a0ae;
+        border: none;
+        line-height: 1.3rem;
+      }
+      .form__input--text {
+        box-shadow: inset 0 0.0625rem 0.0625rem 0 #89a0ae;
+        border: none;
+        min-height: 2.438rem; /* 39px */
+        /*line-height: 1.5rem;*/
       }
     /* Focus state styles */
         .form__input:focus {
@@ -838,6 +851,25 @@ Darker-grey:    #9cafbb;
       background-color: #fafafa;
       border: none;
     }
+    .form__copy {
+      font-size: 0.875rem; /* 14px */
+      text-align: center;
+      color: #40667e;
+      margin-bottom: 1.438rem;
+    }
+
+
+    .form__anchor {
+        color: #66d9e0;
+        text-decoration: none;
+    }
+        .form__anchor--danger:visited {
+            color: #66d9e0;
+        }
+        .form__anchor--danger:link {
+            margin: 2.625rem auto 2.625rem; /* 42px = 2.625rem */
+            display: block;
+        }
 
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -847,14 +879,14 @@ Darker-grey:    #9cafbb;
 .button {
     display: block;
     margin: auto;
-    padding: 0.625rem 5rem;
-    line-height: 1.5rem;
+    padding:  0.9375rem 1.375rem; /* 15px 22px */
+    min-width: 10.13rem; /* 162 px */
+    line-height: 1.7;
     cursor: pointer;
-    font-size: 1rem;
+    font-size:  0.875rem; /* 14px */
     color: rgb(255, 255, 255);
     text-align: center;
     text-decoration: none;
-    text-transform: capitalize;
     letter-spacing: 0.5px;
     background-color: rgb(0, 50, 83);
     border: none;
@@ -931,12 +963,7 @@ Darker-grey:    #9cafbb;
 .anchor:hover {
     text-decoration: none;
 }
-
-    .anchor--danger:link {
-        color: #900000;
-        margin: 1rem auto 0rem;
-    }
-    .anchor--danger:visited {
+    .anchor--red:link {
         color: #900000;
     }
 
