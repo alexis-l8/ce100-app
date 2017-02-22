@@ -22,10 +22,14 @@ module.exports = function (request, reply, source, joiErr) {
 
       return request.server.methods.pg.challenges.getById(cid,
         function (dbErr, chal) {
+          var challenge = chal[0];
+
           Hoek.assert(!dbErr, 'database error');
           options = Object.assign(
             permissions,
-            chal[0],
+            challenge,
+            helpers.getPermissions(
+              loggedIn, 'organisation_id', challenge.org_id),
             { error: error }
           );
 

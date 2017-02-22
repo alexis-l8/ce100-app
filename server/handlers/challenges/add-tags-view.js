@@ -26,6 +26,7 @@ module.exports = function (request, reply, source, joiErr) {
         cancel: oid ? '/orgs/' + oid : '/orgs'
       };
       options = Object.assign(
+        { view: helpers.getView(request.path) },
         permissions,
         { tags: helpers.locationCategoryToEnd(tags) },
         { views: views },
