@@ -83,7 +83,10 @@ White:          #ffffff;
 
 anchor-red:     #900000;
 
-Light-teal:     #66d9e0;
+Teal:     #66d9e0;
+
+Light-teal:     #B4ECEF;
+Used for a disabled (unclickable) tag
 
 Light-grey:     #f8f8f8;
 (for togglebar navigation)
@@ -538,6 +541,10 @@ Darker-grey:    #9cafbb;
   text-align: center;
   text-transform: capitalize;
 }
+     .tag__label--disabled {
+       background-color: #B4ECEF;
+       cursor: default;
+     }
 .tag__input:checked + .tag__label {
     background-color: #40667e;
 }
