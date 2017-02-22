@@ -598,7 +598,16 @@ Darker-grey:    #9cafbb;
     padding: 1.8rem 0.9rem;
     text-align: left;
 }
+.card--details {
+    padding: 1.5rem 1.2rem 0.1rem;
+    text-align: left;
+}
+.card--suggested-matches {
+  text-align: left;
+  padding: 1rem 1rem 0;
+}
     .card__header {
+        display: block;
         margin-bottom: 1rem;
         font-size: 1.125rem;
     }
@@ -607,13 +616,26 @@ Darker-grey:    #9cafbb;
             font-size: 1.125rem;
             line-height: 1.4;
         }
-    .card__copy {
-        margin-bottom: 1rem;
-    }
-    .card__data {
-        display: block;
-        margin-bottom: 0.5rem;
-    }
+        .card__header--suggested-matches {
+            font-size: 0.875rem;
+            color: #40667e;
+            text-align: center;
+            opacity: 0.5;
+            margin-bottom: 1rem;
+        }
+.card__editable {
+  display: inline-block;
+  width: 95%;
+}
+.card__copy {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+.card__data {
+    display: block;
+    margin-bottom: 0.5rem;
+}
         .card__data--link {
           text-decoration: none;
           color: inherit;
@@ -636,10 +658,6 @@ Darker-grey:    #9cafbb;
           padding-top: 0.5rem;
           margin-bottom: 0;
         }
-.card__suggested-matches {
-  background-color: #f8ffff;
-  text-align: center;
-}
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Landing Page - Site Navigation
@@ -961,33 +979,44 @@ Darker-grey:    #9cafbb;
         color: #900000;
     }
 
-    .anchor--suggested-matches {
-      display: inline-block;
-      width: 48%;
-      margin-top: 0.8rem;
+    .anchor--teal {
+        color: #66d9e0;
+    }
+    .anchor--teal:link {
+        color: #66d9e0;
+    }
+    .anchor--teal:visited {
       color: #66d9e0;
     }
+    .anchor--suggested-matches, .anchor--suggested-matches:link {
+      font-size: 1rem;
+      display: block;
+      text-align: left;
+      width: 100%;
+      color: #40667e;
+      margin: 0 0 1.1875rem 0;
+    }
 
-.anchor--shared-by, .anchor--shared-by:link, .anchor--shared-by:visited {
-    font-size: 0.875rem;
-    line-height: 1;
-}
+    .anchor--shared-by, .anchor--shared-by:link, .anchor--shared-by:visited {
+        font-size: 0.875rem;
+        line-height: 1;
+    }
 
-.anchor--left, .anchor--left:link, .anchor--left:visited {
-    color: rgba(64, 102, 126, 0.5);
-    text-align: left;
-    padding: 0.4rem 0 0 0;
-    margin: 0;
-}
+    .anchor--left, .anchor--left:link, .anchor--left:visited {
+        color: rgba(64, 102, 126, 0.5);
+        text-align: left;
+        padding: 0.4rem 0 0 0;
+        margin: 0;
+    }
 
-.anchor--right, .anchor--right:link, .anchor--right:visited {
-    text-align: right;
-    margin: 0 0 0.5rem 0;
-}
+    .anchor--right, .anchor--right:link, .anchor--right:visited {
+        text-align: right;
+        margin: 0 0 0.5rem 0;
+    }
 
-.anchor__shared-by--small, .anchor__shared-by--small:link, .anchor__shared-by--small:visited {
-    font-size: 0.75rem;
-}
+    .anchor__shared-by--small, .anchor__shared-by--small:link, .anchor__shared-by--small:visited {
+        font-size: 0.75rem;
+    }
 
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -1075,6 +1104,10 @@ Darker-grey:    #9cafbb;
   word-wrap: break-word;
   line-height: 1;
   padding: 0.2rem 0;
+}
+
+.u-no-margin {
+  margin: 0;
 }
 
 .table {

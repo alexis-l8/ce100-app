@@ -9,7 +9,7 @@
     <a class="icon icon--cancel" href="{{cancelUrl}}"></a>
   </div>
 
-  <div class="card card--challenge">
+  <div class="card card--details">
     {{#if permissions.primary}}
       {{#if permissions.editable}}
         <a class="icon icon--edit" href="/challenges/{{challenge.id}}/edit">
@@ -17,7 +17,9 @@
         </a>
       {{/if}}
     {{/if}}
-    <p class="card__header card__header--challenge">{{challenge.title}}</p>
+    <p class="card__header card__header--challenge {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}">
+      {{challenge.title}}
+    </p>
     <p class="card__copy">{{challenge.description}}</p>
     {{#each challenge.tags}}
       <a class="text-decoration" href="/challenges?tags={{id}}">
@@ -25,21 +27,21 @@
       </a>
     {{/each}}
 
-    <h4 class="anchor card__copy card__copy--additional">Shared by
-      <a class="anchor card__copy " href="/orgs/{{challenge.org_id}}">
+    <h4 class="card__copy anchor anchor--shared-by anchor--right">Shared by
+      <a class="card__copy anchor anchor--shared-by anchor--right" href="/orgs/{{challenge.org_id}}">
         {{challenge.org_name}}
       </a>
     </h4>
   </div>
   {{#if permissions.editable}}
-    <div class="card card--challenge card__suggested-matches">
-      <h2 class="card__data">Suggested Matches</h2>
+    <div class="card card--suggested-matches">
+      <h2 class="card__header card__header--suggested-matches">MATCHED WITH</h2>
       {{#if suggested_matches}}
       {{#each suggested_matches}}
-        <a class="card__data anchor--suggested-matches text-decoration" href="/orgs/{{id}}">{{name}}</a>
+        <a class="anchor anchor--suggested-matches" href="/orgs/{{id}}">{{name}}</a>
       {{/each}}
       {{else}}
-        <p>No organisations match this challenge</p>
+        <p class="card__copy">No organisations match this challenge</p>
       {{/if}}
     </div>
   {{/if}}

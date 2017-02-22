@@ -11,7 +11,7 @@
   {{/if}}
 
   <div class="list__subblock">
-    <a href={{url}} target="_blank" class="card__header card__header--challenge card__data--link">{{title}}</a>
+    <a href={{url}} target="_blank" class="card__header card__header--challenge card__data--link {{#if permissions.admin}}card__editable{{/if}} u-no-margin">{{title}}</a>
     <p class="anchor anchor--left">By {{author}}</p>
     <p class="anchor anchor--left anchor--small">{{type}}</p>
   </div>
