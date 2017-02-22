@@ -1,10 +1,19 @@
-<div class="card card--challenge">
+<li class="list__item list__item--medium">
+
   {{#if permissions.admin}}
-    <a class="icon icon--edit" href="/insights/{{id}}/edit">
-      <img src="../../../public/assets/Edit.svg" alt="Edit" />
-    </a>
+    {{>indicator-left isActive=active}}
   {{/if}}
-  <a href={{url}} target="_blank" class="card__header card__header--challenge card__data--link">{{title}}</a>
-  <p class="card__copy card__additional">By {{author}}</p>
-  <p class="card__copy card__additional card__additional--small">{{type}}</p>
-</div>
+
+  {{#if permissions.admin}}
+  <a class="icon icon--edit" href="/insights/{{id}}/edit">
+    <img src="../../../public/assets/Edit.svg" alt="Edit" />
+  </a>
+  {{/if}}
+
+  <div class="list__subblock">
+    <a href={{url}} target="_blank" class="card__header card__header--challenge card__data--link">{{title}}</a>
+    <p class="card__copy card__additional">By {{author}}</p>
+    <p class="card__copy card__additional card__additional--small">{{type}}</p>
+  </div>
+
+</li>

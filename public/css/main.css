@@ -415,10 +415,15 @@ Darker-grey:    #9cafbb;
 }
 
     .list__item {
+        color: #40667e;
         position: relative;
         padding: 1rem 8%;
         list-style: none;
-        border-bottom: #89a0ae 1px solid;
+        border-bottom: 1px solid rgba(64, 101, 126, 0.1);
+    }
+    .list__item--medium {
+        padding: 1rem 1.5rem;
+        line-height: 1.4;
     }
     .list__item--big {
         padding: 2rem 8%;
@@ -444,9 +449,11 @@ Darker-grey:    #9cafbb;
             display: block;
             color: #89a0ae;
             text-decoration: none;
+            width: 90%;
         }
         .list__subblock {
             display: inline-block;
+            width: 90%;
         }
         .list__data--primary {
             color: #40667e;
@@ -574,7 +581,7 @@ Darker-grey:    #9cafbb;
     text-align: center;
     color: #40667e;
     border-bottom: 1px solid rgba(64, 101, 126, 0.1);
-    line-height: 1.5;
+    line-height: 1;
     position: relative;
 }
 .card--header {
@@ -599,7 +606,7 @@ Darker-grey:    #9cafbb;
     height: 7.5rem; /* 120px */
 }
 .card--challenge {
-    padding: 1.5rem 1.2rem;
+    padding: 1.8rem 0.9rem;
     text-align: left;
 }
     .card__header {
@@ -608,6 +615,7 @@ Darker-grey:    #9cafbb;
     }
         .card__header--challenge {
             font-size: 1.125rem;
+            line-height: 1.4;
         }
     .card__copy {
         margin-bottom: 1rem;
@@ -628,15 +636,14 @@ Darker-grey:    #9cafbb;
         }
     .card__additional {
       color: #89a0ae;
-      transform: translate(0%,100%);
-      text-align: right;
+      transform: translate(0%,50%);
       -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
       -ms-transform: translate(30deg); /* IE 9 */
     }
         .card__additional--small {
           font-size: 0.8rem;
           transform: initial;
-          padding-top: 0.2rem;
+          padding-top: 0.5rem;
           margin-bottom: 0;
         }
 .card__suggested-matches {
@@ -903,7 +910,7 @@ Darker-grey:    #9cafbb;
   }
   .indicator--left {
     float: left;
-    margin: 1rem 2rem 0 0;
+    margin: 0.5rem -1rem;
   }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -1018,6 +1025,18 @@ Darker-grey:    #9cafbb;
 
 .daintree--blue {
   background: #00233B;
+}
+
+.u-teal {
+  color: #66d9e0;
+}
+
+.u-teal:link {
+  color: #66d9e0;
+}
+
+.u-teal:visited {
+  color: #66d9e0;
 }
 
 .table {
