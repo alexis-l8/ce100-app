@@ -21,8 +21,13 @@ module.exports = function (request, reply, source, joiErr) {
 
       return request.server.methods.pg.challenges.getById(cid,
         function (dbErr, chal) {
+          var challenge = chal[0];
+
           Hoek.assert(!dbErr, 'database error');
-          options = Object.assign(chal[0], { error: error });
+          options = Object.assign(
+            challenge,
+            helpers.getPermissions(loggedIn, 'organisation_id', challenge.org_id),
+            { error: error });
 
           return reply.view('challenges/edit', options).code(error ? 401 : 200);
         });

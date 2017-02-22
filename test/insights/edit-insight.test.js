@@ -9,14 +9,19 @@ var adminToken = sessions.tokens(config.jwt_secret)['admin_1'];
 var primaryToken = sessions.tokens(config.jwt_secret)['primary_3'];
 
 var insightId = 1;
-var viewInsights = {
-  url: '/insights',
-  headers: { cookie: 'token=' + adminToken }
-};
-var viewResources = {
-  url: '/resources',
-  headers: { cookie: 'token=' + adminToken }
-};
+function viewInsights (user) {
+  return {
+    url: '/insights',
+    headers: { cookie: 'token=' + user }
+  };
+}
+
+function viewResources (user) {
+  return {
+    url: '/resources',
+    headers: { cookie: 'token=' + user }
+  };
+}
 
 function editInsight (token, id, update) {
   return {
@@ -112,15 +117,19 @@ tape('/insights/{id}/edit POST endpoint, admin can update existing info',
             '/insights/' + insightId + '/tags',
             'Admin is redirected to /insights as expected'
           );
-          server.inject(viewInsights, function (res) {
+          server.inject(viewInsights(primaryToken), function (res) {
             t.ok(res.result.indexOf('Renewables Report (2015)') > -1, 'Insight\'s title displays correctly');
             t.ok(res.result.indexOf('http://www.ren21.net/wp-content/uploads/2015/07/REN12-GSR2015_Onlinebook_low1.pdf') > -1, 'Insight\'s url displays correctly');
             t.ok(res.result.indexOf('REPORT') > -1, 'Insight\'s type displays correctly');
-            server.inject(viewResources, function (res) {
-              t.ok(res.result.indexOf('There are currently no resources') > -1, 'No resource is displayed, as insight has been editted and removed from resources');
-              t.end();
-              server.stop();
-              pool.end();
+            server.inject(viewResources(primaryToken), function (res) {
+              t.ok(res.result.indexOf('There are currently no resources') > -1, 'Resource has now been marked as inactive, and is not displayed to Primary Users');
+              server.inject(viewResources(adminToken), function (res) {
+                t.ok(res.result.indexOf('indicator--inactive') > -1, 'A resource is marked as inactive');
+                t.ok(res.result.indexOf('Insight Number 2') > -1, 'The resource deactivated is displayed for admin');
+                t.end();
+                server.stop();
+                pool.end();
+              });
             });
           });
         });

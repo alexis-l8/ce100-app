@@ -24,10 +24,10 @@
       <div class="form__section">
 
         <label class="form__label" for="title">Title</label>
-        <textarea class="form__input {{error.title}}" name="title" id="title" placeholder="Write Here..." rows="2" cols="50">{{#if error.values.title}}{{error.values.title}}{{/if}}</textarea>
+        <textarea class="form__input form__input--text-area {{error.title}}" name="title" id="title" placeholder="Write Here..." rows="2" cols="50">{{#if error.values.title}}{{error.values.title}}{{/if}}</textarea>
 
         <label class="form__label" for="author">Author</label>
-        <input class="form__input {{error.author}}" type="text" name="author" id="author" placeholder="Write Here..." value="{{error.values.author}}">
+        <input class="form__input form__input--text {{error.author}}" type="text" name="author" id="author" placeholder="Write Here..." value="{{error.values.author}}">
 
         <label class="form__label" for="type">Type</label>
         <select class="form__input" name="type">
@@ -38,7 +38,7 @@
         </select>
 
         <label class="form__label" for="url">URL</label>
-        <input class="form__input {{error.url}}" type="url" name="url" id="url" placeholder="Write Here..." value="{{error.values.url}}">
+        <input class="form__input form__input--text {{error.url}}" type="url" name="url" id="url" placeholder="Write Here..." value="{{error.values.url}}">
 
         <div class="form__section--radio">
           <input class="form__input form__input--radio {{error.resource}}" type="checkbox" name="resource" id="resource" value="{{error.values.resource}}">

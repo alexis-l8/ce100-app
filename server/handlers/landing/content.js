@@ -1,6 +1,10 @@
 module.exports = function(profile) {
   return [
-    { title: 'Welcome ' + profile.first_name },
+    {
+      title: 'Welcome ' + profile.first_name,
+      description: 'What are the circular economy vision and areas of knowledge'
+      + ' of your organisation?'
+    },
     {
       primaryOnly: true,
       title: 'Tell us about you',
@@ -33,6 +37,7 @@ module.exports = function(profile) {
       }
     },
     {
+      lastCard: true,
       title: 'Find the latest insights',
       description:
       'Explore circular economy insights related to your topic of interest.',
