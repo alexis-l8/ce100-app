@@ -911,18 +911,21 @@ Darker-grey:    #9cafbb;
       color: #66d9e0;
     }
 
-.anchor__shared-by, .anchor__shared-by:link, .anchor__shared-by:visited {
+.anchor--shared-by, .anchor--shared-by:link, .anchor--shared-by:visited {
     font-size: 0.875rem;
-    text-align: right;
     line-height: 1;
-    margin: 0 0 0.5rem 0;
 }
 
-.anchor__shared-by--left, .anchor__shared-by--left:link, .anchor__shared-by--left:visited {
+.anchor--left, .anchor--left:link, .anchor--left:visited {
     color: rgba(64, 102, 126, 0.5);
     text-align: left;
     padding: 0.4rem 0 0 0;
     margin: 0;
+}
+
+.anchor--right, .anchor--right:link, .anchor--right:visited {
+    text-align: right;
+    margin: 0 0 0.5rem 0;
 }
 
 .anchor__shared-by--small, .anchor__shared-by--small:link, .anchor__shared-by--small:visited {
