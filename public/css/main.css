@@ -939,9 +939,8 @@ Darker-grey:    #9cafbb;
 
 .button--clear {
     color: #66d9e0;
-    border-color: #66d9e0;
     background-color: transparent;
-    border: solid 1px;
+    border: solid 1px #66d9e0;
 }
 
 .indicator {
