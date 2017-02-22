@@ -7,9 +7,9 @@
     <div class="card card--header">
       <h1 class="title">Edit User Details</h1>
       {{#if permissions.admin}}
-        <a class="icon icon__cancel" href="/people"></a>
+        <a class="icon icon--cancel" href="/people"></a>
       {{else}}
-        <a class="icon icon__cancel" href="/orgs{{#if permissions.organisation_id}}/{{permissions.organisation_id}}{{/if}}"></a>
+        <a class="icon icon--cancel" href="/orgs{{#if permissions.organisation_id}}/{{permissions.organisation_id}}{{/if}}"></a>
       {{/if}}
     </div>
 

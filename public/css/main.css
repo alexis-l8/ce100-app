@@ -164,7 +164,7 @@ Darker-grey:    #9cafbb;
     -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
     -ms-transform: translate(30deg); /* IE 9 */
 }
-.icon__cancel {
+.icon--cancel {
     background-image: url("../assets/Cross.svg");
     position: absolute;
     top: 50%;
@@ -1364,10 +1364,6 @@ Darker-grey:    #9cafbb;
   .icon--desktop {
     padding-top: 0.5rem;
     width: 2rem;
-  }
-
-  .icon__cancel--desktop {
-      display: none;
   }
 
   .form__section--tags {
