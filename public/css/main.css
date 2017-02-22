@@ -1093,8 +1093,8 @@ Darker-grey:    #9cafbb;
   color: #66d9e0;
 }
 
-.u-no-padding {
-  padding: 0;
+.u-no-margin {
+  margin: 0;
 }
 
 .table {
