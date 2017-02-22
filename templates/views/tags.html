@@ -7,7 +7,7 @@
   <div class="card card--header">
     <a class="icon icon--back" href={{views.referer}}></a>
     <h1 class="title">Select Tags</h1>
-    <a class="icon icon--cancel" href={{views.cancel}}></a>
+    <a class="icon icon__cancel icon__cancel--desktop" href={{views.cancel}}></a>
   </div>
 
   {{#if error}}
@@ -23,12 +23,15 @@
       </h1>
     </div>
     <form class="form form--tags" method="post">
-        <div class="form__section">
+        <div class="form__section form__section--tags">
           {{#each tags}}
             {{>tag}}
           {{/each}}
         </div>
-        <button class="button button--margin" type="submit">Done</button>
+        <div class="button-group button-group--desktop">
+          <button class="button button--margin button--desktop" type="submit">Done</button>
+          <a class="button button--margin button--desktop desktop" href={{views.cancel}}>Cancel</a>
+        </div>
     </form>
   {{else}}
     <h3>Sorry! No tags were found</h3>

@@ -155,7 +155,7 @@ Light-teal:     #66d9e0;
     -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
     -ms-transform: translate(30deg); /* IE 9 */
 }
-.icon--cancel {
+.icon__cancel {
     background-image: url("../assets/Cross.svg");
     position: absolute;
     top: 50%;
@@ -816,7 +816,7 @@ Light-teal:     #66d9e0;
 .button {
     display: block;
     margin: auto;
-    padding: 0.625rem 5rem;
+    padding: 0.875rem 3.875rem;
     line-height: 1.5rem;
     cursor: pointer;
     font-size: 1rem;
@@ -844,7 +844,6 @@ Light-teal:     #66d9e0;
 .button--margin {
     margin-bottom: 2rem;
 }
-
 .button--small {
     padding: 0.2rem 1rem;
     font-size: 0.8rem;
@@ -1198,11 +1197,6 @@ Light-teal:     #66d9e0;
     padding: rem 0;
   }
 
-  .form__subsection--desktop {
-    text-align: center;
-    padding: 0 15rem;
-  }
-
   .container--desktop {
     background-color: #f2f2f2;
     height: 100%;
@@ -1277,4 +1271,32 @@ Light-teal:     #66d9e0;
     padding-top: 0.5rem;
     width: 2rem;
   }
+
+  .icon__cancel--desktop {
+      display: none;
+  }
+
+  .form__section--tags {
+    padding-bottom: 0;
+  }
+
+  .form__subsection--desktop {
+      padding: 1rem 15rem;
+  }
+
+  .tag__title--desktop {
+      text-align: left;
+      padding: 1rem 15rem;
+  }
+
+  .button-group--desktop {
+      text-align: left;
+      padding: 0 15rem;
+  }
+
+  .button--desktop {
+      display: inline-block;
+      margin-right: 1.5rem;
+  }
+
 }
