@@ -11,8 +11,8 @@
     </defs>
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="edit">
-            <use id="Rectangle-5-Copy" stroke="#40667E" mask="url(#mask-2)" stroke-width="2" xlink:href="#path-1"></use>
-            <path d="M10.5853659,16.4756098 L7,17.5 L8.02439024,13.9146341 L10.5853659,16.4756098 Z M17.5,9.56097561 L10.5853659,16.4756098 L8.02439024,13.9146341 L14.9390244,7 L17.5,9.56097561 Z" id="Combined-Shape-Copy" fill="#40667E"></path>
+            <use id="Rectangle-5-Copy" stroke="rgba(64, 102, 126, 0.25)" mask="url(#mask-2)" stroke-width="2" xlink:href="#path-1"></use>
+            <path d="M10.5853659,16.4756098 L7,17.5 L8.02439024,13.9146341 L10.5853659,16.4756098 Z M17.5,9.56097561 L10.5853659,16.4756098 L8.02439024,13.9146341 L14.9390244,7 L17.5,9.56097561 Z" id="Combined-Shape-Copy" fill="rgba(64, 102, 126, 0.25)"></path>
         </g>
     </g>
 </svg>

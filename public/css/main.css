@@ -173,9 +173,9 @@ Darker-grey:    #9cafbb;
 
 .icon--edit-list {
     position: absolute;
-    top: 15%;
-    right: 5.5%;
-    width: auto;
+    right: 1.2rem;
+    width: 1.25rem;
+    height: 1.25rem;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -418,39 +418,20 @@ Darker-grey:    #9cafbb;
         list-style: none;
         border-bottom: 1px solid rgba(64, 101, 126, 0.1);
     }
-    .list__item--medium {
-        padding: 1rem 1.5rem;
-        line-height: 1.4;
-    }
-    .list__item--medium {
-        padding: 1.75rem 1.5rem;
-        line-height: 1.4;
-    }
     .list__item--big {
-        padding: 2rem 8%;
-        font-size: 1.15em;
+        padding: 1.2rem 8%;
+        font-size: 1.125rem;
         text-transform: capitalize;
         /* Note inheritance and conditional fontsize */
     }
 
-        .list__link:link {
-            text-decoration: none;
-        }
-        .list__link:visited {
-            color: ;
-        }
-        .list__link:hover {
-
-        }
-        .list__link:active {
-
-        }
-
         .list__data {
             display: block;
-            color: #89a0ae;
+            color: #40667e;
             text-decoration: none;
-            width: 90%;
+            text-transform: none;
+            padding: 0.3rem 0 0 0;
+            font-size: 0.875rem;
         }
         .list__subblock {
             display: inline-block;
@@ -459,6 +440,7 @@ Darker-grey:    #9cafbb;
         .list__data--primary {
             color: #40667e;
             font-size: 1.2rem;
+            padding: 0;
         }
         .list__data--secondary {
             color: #89a0ae;
@@ -471,10 +453,16 @@ Darker-grey:    #9cafbb;
             display: none;
         }
 
+        .list__hidden-details > .list__data{
+            padding: 0;
+            line-height: 1.4rem;
+        }
+
         .list__ellipsis {
           position: absolute;
-          right: 5%;
-          bottom: 3%;
+          width: 1.3rem;
+          right: 0.7rem;
+          bottom: 0.7rem;
           padding: 0.5rem;
           cursor: pointer;
           margin: 0;
@@ -565,9 +553,9 @@ Darker-grey:    #9cafbb;
 
 .circle {
     display: inline-block;
-    background-color: #89a0ae;
-    width: 4px;
-    height: 4px;
+    background-color: rgba(64, 102, 126, 0.25);
+    width: 3px;
+    height: 3px;
     border-radius: 50%;
 }
 
@@ -937,6 +925,7 @@ Darker-grey:    #9cafbb;
   border-radius: 0.5rem;
   display: inline-block;
   float: right;
+  margin: 0.5rem 0;
 }
 
   .indicator--active {
@@ -1080,6 +1069,12 @@ Darker-grey:    #9cafbb;
 
 .u-teal:visited {
   color: #66d9e0;
+}
+
+.u-text-wrap {
+  word-wrap: break-word;
+  line-height: 1;
+  padding: 0.2rem 0;
 }
 
 .table {
