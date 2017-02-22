@@ -28,10 +28,17 @@ module.exports = function (request, reply) {
       }
 
       options = Object.assign(
-        { section: sections },
+        { section: addLinkToValue(sections) },
         { permissions: permissions.permissions }
       );
 
       return reply.view('landing', options);
     });
 };
+
+// add the index of the next element for the down arrow Navigation in handlebars
+function addLinkToValue (arr) {
+  return arr.map(function (card, index) {
+    return Object.assign({ nextCardIndex: index + 1 }, card);
+  })
+}
