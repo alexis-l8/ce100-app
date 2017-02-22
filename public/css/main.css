@@ -690,6 +690,9 @@ Darker-grey:    #9cafbb;
     .form__section {
         margin-bottom: 1.75rem; /*28 px*/
     }
+      .form__section--left-align {
+        text-align: left;
+      }
       .form__section--main {
         border-bottom: solid 1px rgba(0, 49, 83, 0.1);
       }
@@ -726,6 +729,10 @@ Darker-grey:    #9cafbb;
         }
         .form__label--additional {
           /*Gives the user additional information on filling out a specific input*/
+          color: rgba(64,102,126, 0.5);
+          font-size: 0.875rem;
+          padding-top: 0;
+          margin-top: -0.5rem;
         }
 
         .form__label--radio, .form__input--radio {
@@ -849,7 +856,7 @@ Darker-grey:    #9cafbb;
 
 .button {
     display: block;
-    margin: auto;
+    margin: 0 auto 2rem auto;
     padding:  0.625rem 1.375rem; /* 10px 22px */
     min-width: 10.13rem; /* 162 px */
     line-height: 1.5;

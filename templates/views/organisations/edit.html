@@ -18,14 +18,13 @@
 
 
     {{#if permissions.primary}}
-    <div class="card card--header card--tall card--header-white">
+    <div class="card card--header card--tall card--header--white">
       <img class="logo logo--with-title" src="/public/assets/Profile.svg" alt="{{org.name}} logo">
       <h1 class="title title--with-logo title--with-logo--blue">{{org.name}}</h1>
     </div>
     {{/if}}
 
    <form class="form" id="edit-org-form">
-   <!-- <form class="form" method="post">  -->
         {{#if permissions.admin}}
         <!-- Company name and image -->
         <div class="form__section">
@@ -41,36 +40,54 @@
         {{/if}}
 
 
-        <div class="form__section">
+        <div class="form__section form__section--main">
           <label class="form__label" for="mission_statement">
             {{#if permissions.primary}}
-              Add your circular economy vision
+              Circular economy vision
             {{else}}
               Organisation's mission statement
             {{/if}}
           </label>
+
+          <p class="form__label form__label--additional">
+            Describe your circular economy vision and highlight how your organisation is working towards it.
+          </p>
+
           <textarea class="form__input form__input--text-area {{error.mission_statement}}"
                     id="mission_statement"
                     name="mission_statement"
-                    rows="2" cols="50">{{#if error}}{{error.values.mission_statement}}{{else}}{{org.mission_statement}}{{/if}}</textarea>
+                    rows="2" cols="50"
+                    >{{#if error}}{{error.values.mission_statement}}{{else}}{{org.mission_statement}}{{/if}}
+          </textarea>
+
+
+
+          <div class="form__section form__section--left-align">
+          {{#if org.tags}}
+            {{#each org.tags}}
+              <span class="tag__label">{{tag_name}}</span>
+            {{/each}}
+          {{else}}
+            <label class="form__label">Add tags on the next screen</label>
+          {{/if}}
+          </div>
+
+
+          {{#if permissions.admin}}
+          {{#if primary.id}}
+          <!-- If there is a linked primary user -->
+          <div class="form__section">
+            <label class="form__label" for="primary_user_name">Primary User</label>
+            <div class="form__input" name="primary_user_name" id="primary_user_name">
+              {{primary.first_name}} {{primary.last_name}}
+              <a href="/people/{{primary.id}}/edit" class="button-small float-right">EDIT</a>
+            </div>
+          </div>
+          {{/if}}
+          {{/if}}
         </div>
 
-
-
-        <div class="form__section">
-        {{#if org.tags}}
-          <label class="form__label form__label--long">
-            Share your knowledge/experience (You will be matched based on these so don't include tags that you are not happy to be matched on)
-            You can edit your tags on the next page.
-          </label>
-
-          {{#each org.tags}}
-            <span class="tag__label">{{tag_name}}</span>
-          {{/each}}
-        {{else}}
-          <label class="form__label">Add tags on the next screen</label>
-        {{/if}}
-        </div>
+        <button class="button" type="button" id="submit-edit-org" onclick="logoSaver.submitForm({{org.id}})">Save</button>
 
         {{#if permissions.admin}}
         <!-- Show disable and primary user if admin is logge in -->
@@ -83,24 +100,7 @@
             {{/if}}
           </a>
         </div>
-
-        {{#if primary.id}}
-        <!-- If there is a linked primary user -->
-        <div class="form__section">
-          <label class="form__label" for="primary_user_name">Primary User</label>
-          <div class="form__input" name="primary_user_name" id="primary_user_name">
-            {{primary.first_name}} {{primary.last_name}}
-            <a href="/people/{{primary.id}}/edit" class="button-small float-right">EDIT</a>
-          </div>
-        </div>
         {{/if}}
-        {{/if}}
-
-        <div class="form__section form__section--last">
-         <button class="button" type="button" id="submit-edit-org" onclick="logoSaver.submitForm({{org.id}})">Save</button>
-         <!-- <button class="button" type="input" type="submit">Next</button> -->
-        </div>
-
     </form>
 </div>
 
