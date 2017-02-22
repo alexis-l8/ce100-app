@@ -6,7 +6,7 @@
   <input  type="checkbox" class="tag__input" id="cat_{{category_id}}">
 {{/if}}
 
-<div class="form__subsection">
+<div class="form__subsection form__subsection--desktop">
     {{#each tags}}
         {{#if selected}}
           <input  type="checkbox" class="tag__input" id="tag_{{tag_id}}" name="tags" value={{tag_id}} checked="checked">

@@ -1,0 +1,18 @@
+<svg width="11" height="15" xmlns="http://www.w3.org/2000/svg">
+ <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+
+ <title>Arrow-up</title>
+ <desc>Created with Sketch.</desc>
+ <g>
+  <title>background</title>
+  <rect x="-1" y="-1" width="13" height="17" id="canvas_background" fill="none"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g stroke="null" id="Symbols" fill="none" fill-rule="evenodd">
+   <g stroke="#ffffff" stroke-width="1" id="Arrow-left">
+    <polyline stroke="null" id="Path-2" points="10.410479702055454,14.518974304199219 0.7341551557183266,7.513340950012207 10.399834789335728,0.4999840557575226 "/>
+   </g>
+  </g>
+ </g>
+</svg>

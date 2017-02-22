@@ -6,10 +6,10 @@ var helpers = require('../helpers.js');
 
 module.exports = function (request, reply, source, joiErr) {
   var error = helpers.errorOptions(joiErr);
-  var iid = parseInt(request.params.id, 10);
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
-  var options;
+  var iid = parseInt(request.params.id, 10);
+  var options, views;
 
   if (loggedIn.scope !== 'admin') {
     return reply(Boom.forbidden());
@@ -18,8 +18,13 @@ module.exports = function (request, reply, source, joiErr) {
   return request.server.methods.pg.tags.getTagsForEdit('insights', iid,
     function (pgErr, tags) {
       Hoek.assert(!pgErr, 'Database Error');
+      views = {
+        referer: iid ? '/insights/' + iid + '/edit' : '/insights/add',
+        cancel: '/orgs'
+      };
       options = Object.assign(
         permissions,
+        { views: views },
         { tags: tags },
         { error: error }
        );

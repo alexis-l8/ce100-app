@@ -146,6 +146,15 @@ Light-teal:     #66d9e0;
   -webkit-transform: translate(-50%,-50%); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
   -ms-transform: translate(-50%,-50%); /* IE 9 */
 }
+.icon--back {
+    background-image: url("../assets/Arrow-left.svg");
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(100%, -50%);
+    -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+    -ms-transform: translate(30deg); /* IE 9 */
+}
 .icon--cancel {
     background-image: url("../assets/Cross.svg");
     position: absolute;
@@ -1187,6 +1196,11 @@ Light-teal:     #66d9e0;
   }
   .toggle-menu__link--add {
     padding: rem 0;
+  }
+
+  .form__subsection--desktop {
+    text-align: center;
+    padding: 0 15rem;
   }
 
   .container--desktop {
