@@ -104,11 +104,17 @@ Darker-grey:    #9cafbb;
     background-size: contain;
     background-repeat: no-repeat;
 }
-.icon--spyglass {
-    background-image: url("../assets/Browse.svg");
+
+.icon--large {
+  width: 1.5rem;
+  height: 1.5rem;
 }
-.icon--spyglass-white {
-    background-image: url("../assets/Browse-white.svg");
+
+.icon--explore {
+    background-image: url("../assets/Explore.svg");
+}
+.icon--explore-white {
+    background-image: url("../assets/Explore-white.svg");
 }
 .icon--plus {
     background-image: url("../assets/Plus.svg");
@@ -121,12 +127,6 @@ Darker-grey:    #9cafbb;
 }
 .icon--profile-white {
     background-image: url("../assets/Profile-white.svg");
-}
-.icon--explore {
-  background-image: url("../assets/Explore-icon.svg");
-}
-.icon--profile-white--new {
-  background-image: url("../assets/Profile-icon.svg");
 }
 .icon--burger {
     background-image: url("../assets/Burger.svg");
@@ -183,7 +183,7 @@ Darker-grey:    #9cafbb;
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .navbar {
-    height: 3rem; /* 48px */
+    height: 3.5rem;
     width: 100%;
     background-color: #ffffff;
     position: fixed;
@@ -206,11 +206,17 @@ Darker-grey:    #9cafbb;
     table-layout: fixed;
     margin: auto;
 }
+    .navbar__links--opaque {
+      opacity: 0.5;
+    }
     .navbar__item {
         display: table-cell;
-        vertical-align: middle;
+        vertical-align: bottom;
         width: 50%;
         text-align: center;
+    }
+    .navbar__item--toggled {
+        background-color: #66d9e0;
     }
     .navbar__item:hover {
         background-color: #f2f2f2;
@@ -220,8 +226,7 @@ Darker-grey:    #9cafbb;
             display: block;
             text-decoration: none;
             color: #40667e; /* Denim */
-            font-size: 1em;
-            line-height: 2;
+            font-size: 0.75rem;
             cursor: pointer;
         }
         .navbar__link:visited {
@@ -230,7 +235,9 @@ Darker-grey:    #9cafbb;
         .navbar__link:hover {
             text-decoration: none;
         }
-        .navbar__link:active {}
+        .navbar__link--toggled {
+          color: #ffffff;
+        }
         .navbar__link--with-icon {
             font-size: 0.625rem;
         }
