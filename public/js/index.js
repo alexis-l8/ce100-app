@@ -50,3 +50,14 @@ var logoSaver = (function () {
     submitForm: submitForm
   };
 })();
+
+
+// Dynamically adjust the height of the landing cards on the dashboard route #660
+(function () {
+  var viewportHeight = window.outerHeight;
+  var cards = document.querySelectorAll('.landing-card');
+
+  [].forEach.call(cards, function (card) {
+    card.style.height = viewportHeight + 'px';
+  });
+})();

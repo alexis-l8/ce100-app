@@ -21,6 +21,7 @@ module.exports = function (request, reply, source, joiErr) {
     function (pgErr, tags) {
       Hoek.assert(!pgErr, 'Database Error');
       options = Object.assign(
+        { view: helpers.getView(request.path) },
         permissions,
         { tags: helpers.locationCategoryToEnd(tags) },
         { error: error }

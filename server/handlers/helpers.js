@@ -141,5 +141,22 @@ helpers.getCancelUrl = function (req) {
   return current === previous ? defaultHomePage : previous;
 };
 
+helpers.getView = function (url) {
+  var numbers = /[0-9]+/g;
+  var path = url.match(numbers) ? url.replace(numbers, '*') : url;
+  switch (path) {
+    case '/orgs':
+    case '/insights':
+    case '/challenges':
+      return { explore: true };
+    case '/challenges/add':
+    case '/challenges/*/tags':
+      return { 'add-chal': true };
+    case '/orgs/*':
+      return { 'profile': true };
+    default:
+      return {};
+  }
+};
 
 module.exports = helpers;
