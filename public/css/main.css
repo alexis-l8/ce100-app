@@ -866,6 +866,13 @@ Light-teal:     #66d9e0;
     width: 9rem;
 }
 
+.button--clear {
+    color: #66d9e0;
+    border-color: #66d9e0;
+    background-color: transparent;
+    border: solid 1px;
+}
+
 .indicator {
   width: 0.5rem;
   height: 0.5rem;
@@ -1291,7 +1298,7 @@ Light-teal:     #66d9e0;
 
   .button-group--desktop {
       text-align: left;
-      padding: 0 15rem;
+      padding: 0 10rem 0 15rem;
   }
 
   .button--desktop {
