@@ -17,10 +17,9 @@ module.exports = function (request, reply) {
     var options = Object.assign(
       {},
       orgData,
-      permissions,
-      { view: helpers.getView(request.path) }
+      { view: helpers.getView(request.path) },
+      permissions
     );
-
     return reply.view('organisations/details', options);
   });
 };

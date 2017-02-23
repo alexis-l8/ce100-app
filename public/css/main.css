@@ -60,7 +60,6 @@ html {
 }
 
 body {
-    min-height: 100vh;
     line-height: 1.5rem;
     background-color: #fafafa;
     font-size: 0.875rem; /* 14px */
@@ -105,11 +104,17 @@ Darker-grey:    #9cafbb;
     background-size: contain;
     background-repeat: no-repeat;
 }
-.icon--spyglass {
-    background-image: url("../assets/Browse.svg");
+
+.icon--large {
+  width: 1.5rem;
+  height: 1.5rem;
 }
-.icon--spyglass-white {
-    background-image: url("../assets/Browse-white.svg");
+
+.icon--explore {
+    background-image: url("../assets/Explore.svg");
+}
+.icon--explore-white {
+    background-image: url("../assets/Explore-white.svg");
 }
 .icon--plus {
     background-image: url("../assets/Plus.svg");
@@ -123,11 +128,8 @@ Darker-grey:    #9cafbb;
 .icon--profile-white {
     background-image: url("../assets/Profile-white.svg");
 }
-.icon--explore {
-  background-image: url("../assets/Explore-icon.svg");
-}
-.icon--profile-white--new {
-  background-image: url("../assets/Profile-icon.svg");
+.icon--profile-blue {
+    background-image: url("../assets/Profile-blue.svg");
 }
 .icon--burger {
     background-image: url("../assets/Burger.svg");
@@ -135,6 +137,12 @@ Darker-grey:    #9cafbb;
 }
 .icon--logo {
     background-image: url("../assets/logo.png");
+}
+.icon--arrow-up {
+    background-image: url("../assets/arrow-up-icon.svg");
+}
+.icon--arrow-down {
+    background-image: url("../assets/arrow-down-icon.svg");
 }
 .icon--open-link {
   background-image: url("../assets/open-link.svg");
@@ -187,7 +195,7 @@ Darker-grey:    #9cafbb;
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .navbar {
-    height: 3rem; /* 48px */
+    height: 3.5rem;
     width: 100%;
     background-color: #ffffff;
     position: fixed;
@@ -210,11 +218,17 @@ Darker-grey:    #9cafbb;
     table-layout: fixed;
     margin: auto;
 }
+    .navbar__links--opaque {
+      opacity: 0.5;
+    }
     .navbar__item {
         display: table-cell;
-        vertical-align: middle;
+        vertical-align: bottom;
         width: 50%;
         text-align: center;
+    }
+    .navbar__item--toggled {
+        background-color: #66d9e0;
     }
     .navbar__item:hover {
         background-color: #f2f2f2;
@@ -224,8 +238,7 @@ Darker-grey:    #9cafbb;
             display: block;
             text-decoration: none;
             color: #40667e; /* Denim */
-            font-size: 1em;
-            line-height: 2;
+            font-size: 0.75rem;
             cursor: pointer;
         }
         .navbar__link:visited {
@@ -234,7 +247,9 @@ Darker-grey:    #9cafbb;
         .navbar__link:hover {
             text-decoration: none;
         }
-        .navbar__link:active {}
+        .navbar__link--toggled {
+          color: #ffffff;
+        }
         .navbar__link--with-icon {
             font-size: 0.625rem;
         }
@@ -403,14 +418,7 @@ Darker-grey:    #9cafbb;
       display: inline-block;
       padding: 0 1rem;
     }
-    .copy--landing-link {
-      font-size: 0.8rem;
-      color: #66d9e0;
-      text-align: center;
-      display: block;
-      margin-bottom: 2rem;
-      text-decoration: none;
-    }
+
 
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -651,7 +659,7 @@ Darker-grey:    #9cafbb;
           margin-bottom: 0;
         }
         .card__section--bottom {
-          margin: 2rem auto auto auto;
+          margin: 1.75rem auto auto auto;
         }
 
 .card__suggested-matches {
@@ -665,20 +673,14 @@ Darker-grey:    #9cafbb;
 
 .landing-card {
     display: table;
-    height: 100vh;
+    height: 33rem;
     width: 100%;
-}
-    .landing-card:first-child {
-       padding-top: -3rem;
-    }
-
-.landing-card__content {
-    display: table-cell;
-    vertical-align: middle;
-    color: #ffffff;
+    position: relative;
+    color: white;
+    padding-top: 3rem;
 }
 
-.landing-card__header--extra-large {
+.landing-card__header {
   font-size: 3rem;
   text-align: center;
   padding: 2rem;
@@ -690,7 +692,37 @@ Darker-grey:    #9cafbb;
   padding: 0rem 2rem;
   display: block;
   text-align: center;
-  color: #89a0ae;
+  color: #ffffff;
+}
+.icon__landing-card {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.icon__landing-card--with-text {
+  display: inline-block;
+  vertical-align: middle;
+}
+.landing-card__icon-container {
+  width: 2rem;
+  height: 1.2rem;
+  transform: translateX(-50%);
+  position: absolute;
+  left: 50%;
+  bottom: 7.5rem;
+}
+.landing-card__icon-container--with-text {
+  font-size: 0.8rem;
+  color: #66d9e0;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  width: 8rem;
+}
+.landing-card__icon--with-text {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1.1rem;
+  height: 0.8rem;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -871,16 +903,11 @@ Darker-grey:    #9cafbb;
 
 .button--landing {
     font-size: 0.8rem;
-    color: #ffffff;
-    text-align: center;
-    text-decoration: none;
+    text-transform: none;
     padding: 0.5rem 1.5rem;
     background-color: #66d9e0;
-    border-radius: 3rem;
-    text-decoration: none;
-    display: block;
-    margin: 3rem auto;
     width: 9rem;
+    margin-top: 2rem;
 }
 
 .indicator {
@@ -968,6 +995,8 @@ Darker-grey:    #9cafbb;
       max-width: 2.9rem;
     }
     .logo--with-title-default {
+        background-color: transparent;
+        border-radius: 0;
     }
     .logo--with-title-custom {
         width: 2.9rem;
@@ -1286,5 +1315,14 @@ Darker-grey:    #9cafbb;
   .icon--edit-challenge-on-profile {
       /*ensure icon is blue when in desktop (on a challenge card in org details view)*/
       background-image: url("../assets/Edit.svg");
+  }
+  .landing-card__header {
+    padding: 6rem 3rem 3rem;
+  }
+  .landing-card__icon-container {
+    bottom: 12.5rem;
+  }
+  .button--landing {
+    margin-top: 4rem;
   }
 }
