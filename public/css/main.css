@@ -197,11 +197,12 @@ Darker-grey:    #9cafbb;
     /*used specifically for the challenge with a blue background on mobile, but white on desktop*/
     background-image: url("../assets/Edit-white.svg");
 }
-.icon--edit-challenge-on-profile {
-    /*used specifically for the challenge with a blue background on mobile, but white on desktop*/
-    background-image: url("../assets/Edit-white.svg");
-}
 
+.icon--float-right {
+  height: 1.3rem;
+  width: 1.3rem;
+  float: right; 
+}
 
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -899,6 +900,7 @@ Darker-grey:    #9cafbb;
           background-color: #fafafa;
           border: none;
           padding: 0.625rem 0 0.375rem;
+          display: inline-block;
         }
         .form__input--login {
             width: 100%;
@@ -927,11 +929,6 @@ Darker-grey:    #9cafbb;
           opacity: 1;
             }
 
-    }
-    .form__input--non-editable {
-      position: relative;
-      background-color: #fafafa;
-      border: none;
     }
     .form__copy {
       font-size: 0.875rem; /* 14px */
