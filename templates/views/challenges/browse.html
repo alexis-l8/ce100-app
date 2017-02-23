@@ -8,14 +8,15 @@
   <!-- browse navigation tab bar -->
   {{>browse-tab-navigation}}
 
-    {{#if data}}
-        {{#each data}}
-          {{>challenge}}
-        {{/each}}
-
-    {{else}}
-      <h3 class="title title-blue">No Challenges met your search criteria.</h3>
-    {{/if}}
+  {{#if data}}
+    <ul>
+      {{#each data}}
+        {{>challenge}}
+      {{/each}}
+    </ul>
+  {{else}}
+    <h3 class="title title-blue">No Challenges met your search criteria.</h3>
+  {{/if}}
 </div>
 
 <!-- Include Feedback Widget -->
