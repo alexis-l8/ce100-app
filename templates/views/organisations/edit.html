@@ -19,7 +19,11 @@
 
     {{#if permissions.primary}}
     <div class="card card--header card--tall card--header--white">
-      <img class="logo logo--with-title" src="/public/assets/Profile.svg" alt="{{org.name}} logo">
+      {{#if org.logo_url}}
+      <img class="logo logo--with-title logo--with-title-custom" src="{{org.logo_url}}" alt="{{org.name}} logo">
+      {{else}}
+      <img class="logo logo--with-title logo--with-title--blue logo--with-title-default" src="../../../public/assets/Profile-blue.svg" alt="{{org.name}} logo">
+      {{/if}}
       <h1 class="title title--with-logo title--with-logo--blue">{{org.name}}</h1>
     </div>
     {{/if}}
@@ -88,9 +92,11 @@
         <!-- If there is a linked primary user -->
         <div class="form__section">
           <label class="form__label" for="primary_user_name">Primary User</label>
-          <div class="form__input" name="primary_user_name" id="primary_user_name">
+          <div class="form__input form__input--non-editable" name="primary_user_name" id="primary_user_name">
             {{primary.first_name}} {{primary.last_name}}
-            <a href="/people/{{primary.id}}/edit" class="button-small u-float-right">EDIT</a>
+            <a href="/people/{{primary.id}}/edit">
+              <i class="icon icon--edit icon--edit-blue"></i>
+            </a>
           </div>
         </div>
         {{/if}}

@@ -1,14 +1,19 @@
-<li class="list__item list__item--medium">
+{{#if view.profile}}
+  <li class="list__item list__item--blue">
+{{else}}
+  <li class="list__item list__item--medium">
+{{/if}}
+
   {{#if permissions.primary}}
     {{#if permissions.editable}}
-      <a class="icon icon--edit icon--desktop" href="/challenges/{{id}}/edit">
-        <img src="../../../public/assets/Edit.svg" alt="Edit" />
+      <a href="/challenges/{{id}}/edit">
+        <i class="icon icon--edit icon--edit-challenge-on-profile icon--desktop"></i>
       </a>
   {{/if}}
   {{/if}}
 
   <div class="list__subblock">
-    <a href="/challenges/{{id}}" class="card__header--challenge card__data--link">
+    <a href="/challenges/{{id}}" class="card__header--challenge card__data--link {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}">
       {{title}}
       <i class="navbar__icon icon icon--open-link"></i>
     </a>
