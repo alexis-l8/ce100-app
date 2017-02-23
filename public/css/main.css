@@ -1231,6 +1231,11 @@ Darker-grey:    #9cafbb;
   text-align: center;
 }
 
+.panels {
+    display: block;
+    overflow: hidden;
+}
+
 /*-----------FEEDBACK WIDGET-------------*/
 
 .widget__feedback {
@@ -1429,7 +1434,7 @@ Darker-grey:    #9cafbb;
   }
   .list__item--desktop {
     font-size: 1rem;
-    padding: 1.5rem 1.5rem;
+    padding: 1.5rem 2rem;
   }
   .list__logo {
     width: 2.875rem;
@@ -1439,6 +1444,9 @@ Darker-grey:    #9cafbb;
     background-color: inherit;
     color: #40667e;
     text-align: left;
+  }
+  .indicator--left {
+    margin: 0.5rem -1.2rem;
   }
 
   .title--desktop {
@@ -1529,13 +1537,24 @@ Darker-grey:    #9cafbb;
     padding: 0;
     font-size: 1rem;
   }
+  .anchor--small {
+    font-size: 1rem;
+  }
   .icon--desktop {
     padding-top: 0.5rem;
-    width: 2rem;
+    width: 1.4rem;
   }
   .icon--edit-challenge-on-profile {
       /*ensure icon is blue when in desktop (on a challenge card in org details view)*/
       background-image: url("../assets/Edit.svg");
+  }
+  .icon--dropdown {
+    position: relative;
+    transform: none;
+  }
+  .icon--inline {
+    display: inline-block;
+    margin: 0 0 0 1rem;
   }
   .landing-card__header {
     padding: 6rem 3rem 3rem;
@@ -1567,5 +1586,31 @@ Darker-grey:    #9cafbb;
   .button--desktop {
       display: inline-block;
       margin-right: 1.5rem;
+  }
+
+/* ---------------------------------------------- */
+/* ------------- DESKTOP HELPERS ---------------- */
+/* ---------------------------------------------- */
+
+  .u-table--quarter {
+      display: inline-block;
+      width: 25%;
+      word-wrap: break-word;
+  }
+  .u-table--half {
+      display: inline-block;
+      width: 50%;
+      word-wrap: break-word;
+  }
+  .u-table--fluid {
+    display: inline-block;
+    width: auto;
+    word-wrap: break-word;
+  }
+  .u-float-left--desktop {
+    float: left;
+  }
+  .u-float-right--desktop {
+    float: right;
   }
 }
