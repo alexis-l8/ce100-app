@@ -16,7 +16,7 @@
 
     {{#if error}}
     <div class="snackbar snackbar--error">
-      <h1 class="snackbar-content snackbar-content--error">{{error.message}}</h1>
+      <h1 class="snackbar__content snackbar__content--error">{{error.message}}</h1>
     </div>
     {{/if}}
 
@@ -56,7 +56,7 @@
       {{/if}}
       </div>
 
-      <button class="button">Save & edit tags</button>
+      <button class="button">Save</button>
 
       {{#if permissions.isMember}}
       <!-- Logout -->
