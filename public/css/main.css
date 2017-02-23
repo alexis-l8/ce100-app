@@ -381,6 +381,10 @@ Darker-grey:    #9cafbb;
     font-size: 1rem;
     font-weight: normal;
     color: #ffffff;
+    text-transform: lowercase;
+ }
+ .title::first-letter {
+   text-transform: uppercase;
  }
 .title--with-logo {
   padding: 0rem;
