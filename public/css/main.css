@@ -664,6 +664,7 @@ Darker-grey:    #9cafbb;
             color: #40667e;
             font-size: 1.125rem;
             line-height: 1.375rem;
+            margin-bottom: 0.2rem;
         }
         .card__header--suggested-matches {
             font-size: 0.875rem;
@@ -688,6 +689,7 @@ Darker-grey:    #9cafbb;
         .card__data--link {
           text-decoration: none;
           color: inherit;
+          margin: 0;
         }
         .card__data--linked-button {
           font-size: 1.5rem;
