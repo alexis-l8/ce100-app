@@ -12,14 +12,18 @@
 
     {{#if error}}
     <div class="snackbar snackbar--error">
-      <h1 class="snackbar-content snackbar-content--error">{{error.message}}</h1>
+      <h1 class="snackbar__content snackbar__content--error">{{error.message}}</h1>
     </div>
     {{/if}}
 
 
     {{#if permissions.primary}}
     <div class="card card--header card--tall card--header--white">
-      <img class="logo logo--with-title" src="/public/assets/Profile.svg" alt="{{org.name}} logo">
+      {{#if org.logo_url}}
+      <img class="logo logo--with-title logo--with-title-custom" src="{{org.logo_url}}" alt="{{org.name}} logo">
+      {{else}}
+      <img class="logo logo--with-title logo--with-title--blue logo--with-title-default" src="../../../public/assets/Profile-blue.svg" alt="{{org.name}} logo">
+      {{/if}}
       <h1 class="title title--with-logo title--with-logo--blue">{{org.name}}</h1>
     </div>
     {{/if}}
@@ -30,7 +34,7 @@
         <!-- Company name and image -->
         <div class="form__section">
           <label class="form__label" for="org_name">Organisation Name</label>
-          <input class="form__input {{error.name}}" name="name" id="org_name" value="{{#if error}}{{error.values.name}}{{else}}{{org.name}}{{/if}}">
+          <input class="form__input form__input--text {{error.name}}" name="name" id="org_name" value="{{#if error}}{{error.values.name}}{{else}}{{org.name}}{{/if}}">
         </div>
 
         <div class="form__section">
@@ -75,7 +79,7 @@
         {{#if permissions.admin}}
         <!-- Show disable and primary user if admin is logge in -->
         <div class="form__section">
-          <a class="anchor anchor--danger" href="/orgs/{{org.id}}/toggle-active">
+          <a class="form__anchor form__anchor--danger" href="/orgs/{{org.id}}/toggle-active">
             {{#if org.active}}
             Disable Organisation
             {{else}}
@@ -88,9 +92,12 @@
         <!-- If there is a linked primary user -->
         <div class="form__section">
           <label class="form__label" for="primary_user_name">Primary User</label>
-          <div class="form__input" name="primary_user_name" id="primary_user_name">
+          <div class="form__input form__input--non-editable" name="primary_user_name" id="primary_user_name">
             {{primary.first_name}} {{primary.last_name}}
-            <a href="/people/{{primary.id}}/edit" class="button-small float-right">EDIT</a>
+
+            <a href="/people/{{primary.id}}/edit">
+              <i class="icon icon--edit icon--edit-blue"></i>
+            </a>
           </div>
         </div>
         {{/if}}

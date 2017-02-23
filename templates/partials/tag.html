@@ -1,4 +1,4 @@
-<label class="tag__title" for="cat_{{category_id}}">{{category_name}}</label>
+<label class="tag__title tag__title--desktop" for="cat_{{category_id}}">{{category_name}}</label>
 
 {{#if selected}}
   <input  type="checkbox" class="tag__input" id="cat_{{category_id}}" checked="checked">
@@ -6,7 +6,7 @@
   <input  type="checkbox" class="tag__input" id="cat_{{category_id}}">
 {{/if}}
 
-<div class="form__subsection">
+<div class="form__subsection form__subsection--desktop">
     {{#each tags}}
         {{#if selected}}
           <input  type="checkbox" class="tag__input" id="tag_{{tag_id}}" name="tags" value={{tag_id}} checked="checked">

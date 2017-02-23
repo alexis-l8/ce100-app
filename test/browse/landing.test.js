@@ -53,10 +53,10 @@ tape('/ (GET) - options displayed correctly for primary and secondary: --> ' + _
     init(config, function (error, server, pool) {
       t.ok(!error, 'No error on init server');
       server.inject(landingPage('primary_3'), function (res) {
-        t.equal(res.payload.split('<li class="landing-card">').length - 1, 5, 'primary offered the correct number of activities/options');
+        t.equal(res.payload.split('<li class="landing-card"').length - 1, 5, 'primary offered the correct number of activities/options');
         t.ok(res.payload.indexOf('Share a challenge') > -1, 'primary is offered the option to share a challenge');
         server.inject(landingPage('secondary_12'), function (res) {
-          t.equal(res.payload.split('<li class="landing-card">').length - 1, 3, 'secondary offered the correct number of activities/options');
+          t.equal(res.payload.split('<li class="landing-card"').length - 1, 3, 'secondary offered the correct number of activities/options');
           t.ok(res.payload.indexOf('Share a challenge') === -1, 'secondary is not offered the option to share a challenge');
           t.end();
           server.stop();

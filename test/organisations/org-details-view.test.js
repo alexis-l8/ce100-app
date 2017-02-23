@@ -85,7 +85,7 @@ users.forEach(function (user) {
           if (userType === 'primary') {
             t.ok(res.payload.indexOf('/challenges/2/edit') > -1, 'Primary user can edit their organisations challenges');
             t.ok(res.payload.indexOf('/challenges/3/edit') > -1, 'Primary user can edit their organisations challenges');
-            t.ok(res.payload.indexOf('Go to archived challenges') > -1, 'Primary user can see archived challenges navigation of own org');
+            t.ok(res.payload.indexOf('Archived challenges') > -1, 'Primary user can see archived challenges navigation of own org');
           }
 
           // secondary users cannot edit challenges

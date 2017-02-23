@@ -55,4 +55,5 @@ require('./browse/landing.test.js');
 
 // unit
 require('./unit/getCancelUrl.test.js');
+require('./unit/getView.test.js');
 require('./unit/moveLocationToEnd.test.js');

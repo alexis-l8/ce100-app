@@ -7,6 +7,7 @@ var helpers = require('../helpers.js');
 module.exports = function (request, reply, source, joiErr) {
   var error = helpers.errorOptions(joiErr);
   var loggedIn = request.auth.credentials;
+  var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
   var cid = request.params.id;
   var message, options;
 
@@ -21,8 +22,16 @@ module.exports = function (request, reply, source, joiErr) {
 
       return request.server.methods.pg.challenges.getById(cid,
         function (dbErr, chal) {
+          var challenge = chal[0];
+
           Hoek.assert(!dbErr, 'database error');
-          options = Object.assign(chal[0], { error: error });
+          options = Object.assign(
+            permissions,
+            challenge,
+            helpers.getPermissions(
+              loggedIn, 'organisation_id', challenge.org_id),
+            { error: error }
+          );
 
           return reply.view('challenges/edit', options).code(error ? 401 : 200);
         });

@@ -6,9 +6,10 @@ module.exports = function (request, reply, source, joiErr) {
   var error = helpers.errorOptions(joiErr);
   var orgId = parseInt(request.params.id, 10);
   var loggedIn = request.auth.credentials;
-  var msg;
+  var msg, permissions, views, options;
 
-  if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin' || loggedIn.scope === 'secondary') {
+  if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin'
+      || loggedIn.scope === 'secondary') {
     msg = 'You do not have permission to edit that organisation.';
 
     return reply(Boom.unauthorized(msg));
@@ -16,10 +17,15 @@ module.exports = function (request, reply, source, joiErr) {
 
   return request.server.methods.pg.tags.getTagsForEdit('organisations', orgId,
     function (pgErr, tags) {
-      var permissions = helpers.getPermissions(loggedIn, 'organisation_id',
+      permissions = helpers.getPermissions(loggedIn, 'organisation_id',
         orgId);
-      var options = Object.assign(
+      views = {
+        referer: '/orgs/' + orgId + '/edit',
+        cancel: '/orgs'
+      };
+      options = Object.assign(
         permissions,
+        { views: views },
         { tags: helpers.locationCategoryToEnd(tags) },
         { error: error }
       );

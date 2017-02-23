@@ -58,7 +58,7 @@ tape('/people/{id}/edit GET own endpoint as admin', function (t) {
         t.ok(adminRes.payload.indexOf('Alex') > -1, 'correct fname displayed');
         t.ok(adminRes.payload.indexOf('Wijns') > -1, 'correct lname displayed');
         t.ok(adminRes.payload.indexOf('>ce100.emf@gmail.com</span>') === -1, 'email edittable because admin');
-        t.ok(adminRes.payload.indexOf('Password Reset') > -1, 'admin can reset their own password');
+        t.ok(adminRes.payload.indexOf('Reset password') > -1, 'admin can reset their own password');
         t.end();
         server.stop();
         pool.end();
@@ -76,13 +76,13 @@ tape('/people/{id}/edit GET different primary users settings endpoints as admin'
         t.ok(authRes.payload.indexOf('Sally') > -1, 'correct fname displayed');
         t.ok(authRes.payload.indexOf('Robbins') > -1, 'correct lname displayed');
         t.ok(authRes.payload.indexOf('>sa@ro.co</span>') === -1, 'email edittable because admin');
-        t.ok(authRes.payload.indexOf('Password Reset') === -1, 'admin cannot reset other users passwords');
+        t.ok(authRes.payload.indexOf('Reset password') === -1, 'admin cannot reset other users passwords');
         server.inject(editProfile('admin_1', unauthId, null), function (unauthRes) {
           t.equal(unauthRes.statusCode, 200, 'admin authorised to access settings view of any user');
           t.ok(unauthRes.payload.indexOf('Gale') > -1, 'correct fname displayed');
           t.ok(unauthRes.payload.indexOf('Simon') > -1, 'correct lname displayed');
           t.ok(unauthRes.payload.indexOf('>ga@si.co</span>') === -1, 'email edittable because admin');
-          t.ok(unauthRes.payload.indexOf('Password Reset') === -1, 'admin cannot reset other users passwords');
+          t.ok(unauthRes.payload.indexOf('Reset password') === -1, 'admin cannot reset other users passwords');
 
           t.end();
           server.stop();
@@ -156,7 +156,7 @@ nonAdminUsers.forEach(function (user) {
           t.ok(res.payload.indexOf(userObj.first_name) > -1, 'correct fname displayed');
           t.ok(res.payload.indexOf(userObj.last_name) > -1, 'correct lname displayed');
           t.ok(res.payload.indexOf('>' + userObj.email + '</span>') > -1, 'email is not edittable because not admin');
-          t.ok(res.payload.indexOf('Password Reset') > -1, 'user can reset their passwords');
+          t.ok(res.payload.indexOf('Reset password') > -1, 'user can reset their passwords');
 
           t.end();
           server.stop();
