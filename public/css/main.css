@@ -479,7 +479,7 @@ Darker-grey:    #9cafbb;
             font-size: 0.875rem;
         }
         .list__subblock {
-            display: inline-block;
+            display: block;
             line-height: 1.4;
         }
         .list__subblock--full-width {
@@ -536,8 +536,10 @@ Darker-grey:    #9cafbb;
           float: left;
           background-color: transparent;
           margin: 0.5rem 1.5rem 0 0;
-          width: 3.125rem;
-          max-height: 2.875rem;
+          width: 2.625rem;
+          max-height: 2.625rem;
+          border-radius: 50%;
+          border: solid 1px #f5f8f9;
           -webkit-transform: translateY(-50%);
           -moz-transform: translateY(-50%);
           -o-transform: translateY(-50%);
@@ -994,6 +996,7 @@ Darker-grey:    #9cafbb;
     width: 100%;
     text-indent: 0;
     line-height: 1;
+    height: 2.5rem;
     font-size: 0.875rem;
     text-shadow: 0 1px 0 #003152;
 }
