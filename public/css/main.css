@@ -334,7 +334,7 @@ Darker-grey:    #9cafbb;
 
 .container {
     margin: 0 auto;
-    padding-bottom: 3rem;
+    padding-bottom: 3.5rem;
 }
     .container--login {
         min-height: 100vh;
@@ -359,9 +359,9 @@ Darker-grey:    #9cafbb;
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .title {
-    padding: 1rem 0;
+    padding: 1.3125rem 0;
     margin: 0;
-    line-height: 1.35;
+    line-height: 1.375rem;
     text-align: center;
     text-transform: capitalize;
     font-size: 1rem;
@@ -371,6 +371,7 @@ Darker-grey:    #9cafbb;
 .title--with-logo {
   padding: 0rem;
   margin-bottom: 1.7rem;
+  font-size: 0.875rem;
 }
 .title--with-logo--blue {
     color: #40667e;
@@ -387,7 +388,8 @@ Darker-grey:    #9cafbb;
 }
 /* used for titles with smaller font than standard (eg archived challenges title card in org profile view)*/
 .title--secondary {
-  font-size: 0.8rem;
+  font-size: 0.875rem;
+  line-height: 1.375rem;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -585,7 +587,7 @@ Darker-grey:    #9cafbb;
 
 
 .card {
-    padding: 2.75rem 1.55rem;
+    padding: 2.75rem 1.55rem 1.75rem;
     text-align: center;
     color: #40667e;
     border-bottom: 1px solid rgba(64, 101, 126, 0.1);
@@ -601,6 +603,7 @@ Darker-grey:    #9cafbb;
     color: initial;
     border: none;
     background: #003253;
+    min-height: 4rem;
 }
 .card--header-with-logo {
   background: radial-gradient(circle at 50% 57%, rgba(9, 51, 81, 0.84), #002944);
@@ -613,7 +616,7 @@ Darker-grey:    #9cafbb;
     height: 7.5rem; /* 120px */
 }
 .card--challenge {
-    padding: 1.5rem 1.2rem;
+    padding: 1.25rem 2.25rem 1.25rem 1.25rem;
     text-align: left;
 }
 .card--blue {
@@ -623,10 +626,11 @@ Darker-grey:    #9cafbb;
 }
     .card__header {
         margin-bottom: 1rem;
-        font-size: 1.125rem;
+        font-size: 0.875rem;
     }
         .card__header--challenge {
-            font-size: 1.125rem;
+          font-size: 1.125rem;
+          line-height: 1.375rem;
         }
     .card__copy {
         margin-bottom: 1rem;
