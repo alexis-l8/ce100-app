@@ -1565,16 +1565,7 @@ Darker-grey:    #9cafbb;
   .button--landing {
     margin-top: 4rem;
   }
-  .form__section--tags {
-    padding-bottom: 0;
-  }
-
   .form__subsection--desktop {
-      padding: 1rem 15rem;
-  }
-
-  .tag__title--desktop {
-      text-align: left;
       padding: 1rem 15rem;
   }
 
@@ -1586,6 +1577,23 @@ Darker-grey:    #9cafbb;
   .button--desktop {
       display: inline-block;
       margin-right: 1.5rem;
+  }
+
+  /* ---------------------------------------------- */
+  /* ------------------- TAGS --------------------- */
+  /* ---------------------------------------------- */
+
+  .form__section--tags-block {
+    padding: 0;
+    margin: 0 15rem;
+    text-align: left;
+  }
+  .form__section--tags {
+    padding-bottom: 0;
+  }
+  .tag__title--desktop {
+      text-align: left;
+      padding: 1rem 15rem;
   }
 
 /* ---------------------------------------------- */
