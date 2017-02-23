@@ -7,7 +7,11 @@ module.exports = function (request, reply, source, joiErr) {
   var error = helpers.errorOptions(joiErr);
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
-  var options = Object.assign(permissions, { error: error });
+  var options = Object.assign(
+    { view: helpers.getView(request.path) },
+    permissions,
+    { error: error }
+  );
 
   if (loggedIn.scope !== 'primary') {
     return reply(Boom.forbidden());
