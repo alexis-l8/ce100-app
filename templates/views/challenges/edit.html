@@ -11,36 +11,50 @@
 
   {{#if error}}
   <div class="snackbar snackbar--error">
-    <h1 class="snackbar-content snackbar-content--error">{{error.message}}</h1>
+    <h1 class="snackbar__content snackbar__content--error">{{error.message}}</h1>
   </div>
   {{/if}}
 
     <form class="form" method="post">
-      <label class="form__label" for="title">Title</label>
-      <input class="form__input {{error.title}}" type="text" name="title" id="title" value="{{#if error}}{{error.values.title}}{{else}}{{title}}{{/if}}">
+      <div class="form__section form__section--main">
 
-      <label class="form__label" for="description">Description</label>
-      <textarea class="form__input {{error.description}}" name="description" id="description" placeholder="Write Here..." rows="4" cols="50">{{#if error.values.description}}{{error.values.description}}{{else}}{{description}}{{/if}}</textarea>
+        <label class="form__label" for="title">Title</label>
+        <input class="form__input form__input--text {{error.title}}" type="text" name="title" id="title" value="{{#if error}}{{error.values.title}}{{else}}{{title}}{{/if}}">
 
-      {{#if tagsData}}
-        {{#each tagsData}}
-          <span class="tag__label">{{name}}</span>
-        {{/each}}
-      {{else}}
-        <h3>Add tags on the next screen</h3>
-      {{/if}}
+        <label class="form__label" for="description">Description</label>
+        <textarea class="form__input form__input--text-area {{error.description}}" name="description" id="description" placeholder="Write Here..." rows="" cols="50">
+          {{#if error.values.description}}{{error.values.description}}{{else}}{{description}}{{/if}}
+        </textarea>
 
-    <!-- Show archive and primary user if admin is logged in -->
-      <a class="anchor anchor--danger" href="/challenges/{{id}}/toggle-active">
-        {{#if active}}
-          Archive Challenge
-        {{else}}
-          Unarchive Challenge
+        {{#if tags}}
+        <div class="form__section">
+
+          {{#each tags}}
+            <span class="tag__label">{{name}}</span>
+          {{/each}}
+        </div>
         {{/if}}
-      </a>
+      </div>
 
-      <button class="button" type="submit">Next</button>
+      <p class="copy form__copy">Clicking 'Next' will make your challenge public to the network</p>
+
+
+      <button class="button" type="submit">Save & edit tags</button>
+
+      <!-- Show archive and primary user if admin is logged in -->
+        <div class="form__section">
+
+          <a class="form__anchor form__anchor--danger" href="/challenges/{{id}}/toggle-active">
+            {{#if active}}
+              Archive Challenge
+            {{else}}
+              Unarchive Challenge
+            {{/if}}
+          </a>
+        </div>
+
     </form>
+
 </div>
 
 <!-- Include Feedback Widget -->

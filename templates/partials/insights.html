@@ -1,10 +1,17 @@
-<div class="card card--challenge">
+<li class="list__item list__item--medium">
+
   {{#if permissions.admin}}
     <a href="/insights/{{id}}/edit">
       <i class="icon icon--edit icon--edit-blue icon--desktop"></i>
     </a>
+    {{>indicator-left isActive=active}}
   {{/if}}
-  <a href={{url}} target="_blank" class="card__header card__header--challenge card__data--link">{{title}}</a>
-  <p class="card__copy card__additional">By {{author}}</p>
-  <p class="card__copy card__additional card__additional--small">{{type}}</p>
-</div>
+
+
+  <div class="list__subblock">
+    <a href={{url}} target="_blank" class="card__header card__header--challenge card__data--link {{#if permissions.admin}}card__editable{{/if}} u-no-margin">{{title}}</a>
+    <p class="card__copy card__additional">By {{author}}</p>
+    <p class="card__copy card__additional card__additional--small">{{type}}</p>
+  </div>
+
+</li>

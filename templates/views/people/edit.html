@@ -15,29 +15,29 @@
 
     {{#if error}}
     <div class="snackbar snackbar--error">
-      <h1 class="snackbar-content snackbar-content--error">{{error.message}}</h1>
+      <h1 class="snackbar__content snackbar__content--error">{{error.message}}</h1>
     </div>
     {{/if}}
 
     <form class="form" method="post">
       <label class="form__label" for="first_name">First Name</label>
-      <input class="form__input {{error.first_name}}" name="first_name" value="{{#if error}}{{error.values.first_name}}{{else}}{{user.first_name}}{{/if}}">
+      <input class="form__input form__input--text {{error.first_name}}" name="first_name" value="{{#if error}}{{error.values.first_name}}{{else}}{{user.first_name}}{{/if}}">
 
       <label class="form__label" for="last_name">Last Name</label>
-      <input class="form__input {{error.last_name}}" name="last_name" value="{{#if error}}{{error.values.last_name}}{{else}}{{user.last_name}}{{/if}}">
+      <input class="form__input form__input--text {{error.last_name}}" name="last_name" value="{{#if error}}{{error.values.last_name}}{{else}}{{user.last_name}}{{/if}}">
 
       <label class="form__label" for="job_title">Job Title</label>
-      <input class="form__input" name="job_title" value="{{#if error}}{{error.values.job_title}}{{else}}{{user.job_title}}{{/if}}">
+      <input class="form__input form__input--text" name="job_title" value="{{#if error}}{{error.values.job_title}}{{else}}{{user.job_title}}{{/if}}">
 
       <label class="form__label" for="email">Email</label>
       {{#if permissions.admin}}
-        <input class="form__input {{error.email}}" type="email" name="email" value="{{#if error}}{{error.values.email}}{{else}}{{user.email}}{{/if}}">
+        <input class="form__input form__input--text {{error.email}}" type="email" name="email" value="{{#if error}}{{error.values.email}}{{else}}{{user.email}}{{/if}}">
       {{else}}
         <span class="form__input form__input--non-editable">{{user.email}}</span>
       {{/if}}
 
       <label class="form__label" for="phone">Phone Number</label>
-      <input class="form__input {{error.phone}}" type="tel" name="phone" value="{{#if error}}{{error.values.phone}}{{else}}{{user.phone}}{{/if}}">
+      <input class="form__input form__input--text {{error.phone}}" type="tel" name="phone" value="{{#if error}}{{error.values.phone}}{{else}}{{user.phone}}{{/if}}">
 
 
       {{#if permissions.admin}}
