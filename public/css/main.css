@@ -166,8 +166,8 @@ Darker-grey:    #9cafbb;
 }
 .icon--edit {
     position: absolute;
-    top: 3%;
-    right: 3.5%;
+    top: 1rem;
+    right: 1rem;
     width: auto;
 }
 
@@ -414,15 +414,16 @@ Darker-grey:    #9cafbb;
     .list__item {
         color: #40667e;
         position: relative;
-        padding: 1rem 8%;
+        font-size: 1.125rem;
+        padding: 1.5rem;
         list-style: none;
         border-bottom: 1px solid rgba(64, 101, 126, 0.1);
+        line-height: 1;
+        text-transform: capitalize;
     }
     .list__item--big {
-        padding: 1.2rem 8%;
-        font-size: 1.125rem;
-        text-transform: capitalize;
-        /* Note inheritance and conditional fontsize */
+        padding: 1.7rem 1.5rem;
+        text-transform: none;
     }
 
         .list__data {
@@ -436,6 +437,10 @@ Darker-grey:    #9cafbb;
         .list__subblock {
             display: inline-block;
             width: 90%;
+            line-height: 1.4;
+        }
+        .list__subblock--full-width {
+            width: 100%;
         }
         .list__data--primary {
             color: #40667e;
@@ -487,10 +492,9 @@ Darker-grey:    #9cafbb;
         .list__logo {
           float: left;
           background-color: transparent;
-          border-radius: 50%;
-          margin: 0.7rem 1.5rem 0 0;
-          width: 2.5rem;
-          max-height: 2.5rem;
+          margin: 0.5rem 1.5rem 0 0;
+          width: 3.125rem;
+          max-height: 2.875rem;
           -webkit-transform: translateY(-50%);
           -moz-transform: translateY(-50%);
           -o-transform: translateY(-50%);
@@ -625,7 +629,7 @@ Darker-grey:    #9cafbb;
         }
 .card__editable {
   display: inline-block;
-  width: 95%;
+  width: 90%;
 }
 .card__copy {
     font-size: 0.85rem;
@@ -939,7 +943,7 @@ Darker-grey:    #9cafbb;
 .indicator {
   width: 0.5rem;
   height: 0.5rem;
-  margin: 0.2rem;
+  margin: 0.3rem 0rem;
   border-radius: 0.5rem;
   display: inline-block;
   float: right;
@@ -961,7 +965,6 @@ Darker-grey:    #9cafbb;
     Anchors
   |||||||||||||||||||||||||||||||||||||||||||*/
 .anchor {
-  text-decoration: none;
 }
 
 .anchor:link {
@@ -1014,8 +1017,8 @@ Darker-grey:    #9cafbb;
         margin: 0 0 0.5rem 0;
     }
 
-    .anchor__shared-by--small, .anchor__shared-by--small:link, .anchor__shared-by--small:visited {
-        font-size: 0.75rem;
+    .anchor--small, .anchor--small:link, .anchor--small:visited {
+        font-size: 0.875rem;
     }
 
 
@@ -1330,13 +1333,7 @@ Darker-grey:    #9cafbb;
     margin: 0 auto;
   }
 
-  .card--desktop-header {
-    height: auto;
-    display: inline-block;
-    background: none;
-  }
-
-  .card--desktop-header-bottom-border {
+  .card__header--bottom-border {
     padding: 0 0rem 1rem 0rem;
     margin-bottom: 1.2rem;
     border: #f2f2f2;
@@ -1387,5 +1384,13 @@ Darker-grey:    #9cafbb;
   }
   .button--landing {
     margin-top: 4rem;
+  }
+  .list__item--desktop {
+    padding: 1rem 1.5rem;
+  }
+  .anchor--desktop {
+    display: inline-block;
+    float: right;
+    padding: 0;
   }
 }

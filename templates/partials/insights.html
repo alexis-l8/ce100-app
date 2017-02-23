@@ -1,4 +1,4 @@
-<li class="list__item">
+<li class="list__item list__item--desktop">
 
   {{#if permissions.admin}}
     {{>indicator-left isActive=active}}
@@ -12,7 +12,7 @@
 
   <div class="list__subblock">
     <a href={{url}} target="_blank" class="card__header card__header--challenge card__data--link {{#if permissions.admin}}card__editable{{/if}} u-no-margin">{{title}}</a>
-    <p class="anchor anchor--left">By {{author}}</p>
+    <p class="anchor anchor--left anchor--small">By {{author}}</p>
     <p class="anchor anchor--left anchor--small">{{type}}</p>
   </div>
 
