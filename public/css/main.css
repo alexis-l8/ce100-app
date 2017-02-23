@@ -82,7 +82,10 @@ White:          #ffffff;
 
 anchor-red:     #900000;
 
-Light-teal:     #66d9e0;
+Teal:     #66d9e0;
+
+Light-teal:     #B4ECEF;
+Used for a disabled (unclickable) tag
 
 Light-grey:     #f8f8f8;
 (for togglebar navigation)
@@ -201,7 +204,7 @@ Darker-grey:    #9cafbb;
 .icon--float-right {
   height: 1.3rem;
   width: 1.3rem;
-  float: right; 
+  float: right;
 }
 
 
@@ -384,6 +387,10 @@ Darker-grey:    #9cafbb;
     font-size: 1rem;
     font-weight: normal;
     color: #ffffff;
+    text-transform: lowercase;
+ }
+ .title::first-letter {
+   text-transform: uppercase;
  }
 .title--with-logo {
   padding: 0rem;
@@ -405,6 +412,7 @@ Darker-grey:    #9cafbb;
 }
 /* used for titles with smaller font than standard (eg archived challenges title card in org profile view)*/
 .title--secondary {
+  text-transform: none;
   font-size: 0.875rem;
   line-height: 1.375rem;
 }
@@ -422,7 +430,6 @@ Darker-grey:    #9cafbb;
     .copy--login {
         color: #ffffff;
         text-align: center;
-        padding: 0 1.2rem;
         margin: 0.8rem auto;
         text-decoration: none;
     }
@@ -457,8 +464,8 @@ Darker-grey:    #9cafbb;
         line-height: 1.4;
     }
     .list__item--big {
-        padding: 2rem 8%;
-        font-size: 1.15em;
+        padding: 1.25rem 8%;
+        font-size: 1.125rem;
         text-transform: capitalize;
         /* Note inheritance and conditional fontsize */
     }
@@ -535,9 +542,10 @@ Darker-grey:    #9cafbb;
           float: left;
           background-color: transparent;
           border-radius: 50%;
+          border: solid 0.0625rem #f5f8f9;
           margin: 0.7rem 1.5rem 0 0;
-          width: 2.5rem;
-          max-height: 2.5rem;
+          width: 2.625rem;
+          max-height: 2.625rem;
           -webkit-transform: translateY(-50%);
           -moz-transform: translateY(-50%);
           -o-transform: translateY(-50%);
@@ -590,6 +598,10 @@ Darker-grey:    #9cafbb;
   text-transform: capitalize;
   text-shadow: 0 1px 0 rgba(0, 49, 83, 0.07);
 }
+     .tag__label--disabled {
+       background-color: #B4ECEF;
+       cursor: default;
+     }
 .tag__input:checked + .tag__label {
     background-color: #40667e;
     text-shadow: 0 1px 0 rgba(0, 49, 83, 0.07);
@@ -665,7 +677,7 @@ Darker-grey:    #9cafbb;
             color: #40667e;
             font-size: 1.125rem;
             line-height: 1.375rem;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.3rem;
         }
         .card__header--suggested-matches {
             font-size: 0.875rem;
@@ -679,7 +691,7 @@ Darker-grey:    #9cafbb;
   width: 95%;
 }
 .card__copy {
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     line-height: 1.6;
     margin-bottom: 1rem;
 }
@@ -783,7 +795,8 @@ Darker-grey:    #9cafbb;
     text-align: center;
 }
 .form--login {
-    margin-top: 3rem;
+    max-width: 22rem;
+    margin: 3rem auto 0;
     padding: 0;
 }
 .form--tags {
@@ -793,6 +806,9 @@ Darker-grey:    #9cafbb;
     .form__section {
         margin-bottom: 1.75rem; /*28 px*/
     }
+      .form__section--left-align {
+        text-align: left;
+      }
       .form__section--main {
         border-bottom: solid 1px rgba(0, 49, 83, 0.1);
       }
@@ -833,6 +849,10 @@ Darker-grey:    #9cafbb;
         }
         .form__label--additional {
           /*Gives the user additional information on filling out a specific input*/
+          color: rgba(64,102,126, 0.5);
+          font-size: 0.875rem;
+          padding-top: 0;
+          margin-top: -0.5rem;
         }
 
         .form__label--radio, .form__input--radio {
@@ -874,7 +894,6 @@ Darker-grey:    #9cafbb;
         box-shadow: inset 0 0.0625rem 0.0625rem 0 #89a0ae;
         border: none;
         min-height: 2.438rem; /* 39px */
-        /*line-height: 1.5rem;*/
       }
     /* Focus state styles */
         .form__input:focus {
@@ -895,7 +914,6 @@ Darker-grey:    #9cafbb;
           color: #89a0ae;
           opacity: 1;
         }
-
         .form__input--non-editable {
           background-color: #fafafa;
           border: none;
@@ -903,9 +921,8 @@ Darker-grey:    #9cafbb;
           display: inline-block;
         }
         .form__input--login {
-            width: 100%;
             height: 2.5rem;
-            margin: 0 0 0.875rem;
+            margin: 1rem auto;
             padding: 0;
             background-color: #184460; /* teal colour */
             border: none;
@@ -914,6 +931,11 @@ Darker-grey:    #9cafbb;
             text-indent: 1.25rem;
         }
         /* Placeholder styles */
+        .form__input--non-editable {
+          background-color: #fafafa;
+          border: none;
+          padding: 0.625rem 0 0.375rem;
+        }
         .form__input--login::-webkit-input-placeholder { /* Chrome/Opera/Safari */
           color: #89a0ae;
         }
@@ -957,7 +979,7 @@ Darker-grey:    #9cafbb;
 
 .button {
     display: block;
-    margin: auto;
+    margin: 0 auto 2rem auto;
     padding:  0.625rem 1.375rem; /* 10px 22px */
     min-width: 10.13rem; /* 162 px */
     line-height: 1.5rem;
@@ -973,7 +995,7 @@ Darker-grey:    #9cafbb;
 }
 .button--login {
     background: #66d9e0;
-    margin: 2rem 0;
+    margin: 2rem auto 0;
     width: 100%;
     text-indent: 0;
     height: 2.5rem;
@@ -1050,6 +1072,13 @@ Darker-grey:    #9cafbb;
         color: #900000;
     }
 
+    .anchor--login, .anchor--login:visited, .anchor--login:link {
+      color: white;
+      margin: 2.1875rem auto; /* 35px */
+      width: 100%;
+      font-size: 0.875rem; /* 14px */
+      display: block;
+    }
     .anchor--suggested-matches, .anchor--suggested-matches:link {
       font-size: 1rem;
       display: block;
@@ -1059,14 +1088,6 @@ Darker-grey:    #9cafbb;
       margin: 0 0 1.1875rem 0;
       text-decoration: none;
     }
-
-    .anchor--shared-by {
-      font-size: 0.8rem;
-      text-align: right;
-      line-height: 1;
-      margin: 0.5rem 0 0;
-    }
-
 .anchor--shared-by, .anchor--shared-by:link, .anchor--shared-by:visited {
     font-size: 0.875rem;
     line-height: 1;
@@ -1081,13 +1102,11 @@ Darker-grey:    #9cafbb;
 
 .anchor--right, .anchor--right:link, .anchor--right:visited {
     text-align: right;
-    margin: 0 0 0.5rem 0;
 }
 
 .anchor__shared-by--small, .anchor__shared-by--small:link, .anchor__shared-by--small:visited {
     font-size: 0.75rem;
 }
-
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Logo
@@ -1174,6 +1193,7 @@ Darker-grey:    #9cafbb;
 }
 .table__half-width {
   width: 50%;
+  padding: 0 0.5rem;
   display: table-cell;
   text-align: center;
 }
@@ -1450,6 +1470,17 @@ Darker-grey:    #9cafbb;
     padding-top: 0.5rem;
     width: 2rem;
   }
+
+  .copy--login {
+    font-size: 1.3125rem; /* 21px */
+    max-width: 21.0625rem; /* 337px */
+  }
+
+  .anchor--login {
+    font-size: 1rem;
+    margin: 1.8rem auto 0.1rem;
+  }
+
   .icon--edit-challenge-on-profile {
       /*ensure icon is blue when in desktop (on a challenge card in org details view)*/
       background-image: url("../assets/Edit.svg");

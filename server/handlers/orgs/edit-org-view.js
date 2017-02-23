@@ -7,6 +7,8 @@ module.exports = function (request, reply, source, joiErr) {
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'organisation_id', orgId);
   var error = helpers.errorOptions(joiErr);
+  var template;
+
   if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin' || loggedIn.scope === 'secondary') {
     return reply(Boom.forbidden('You do not have permission to edit that organisation.'));
   }
@@ -16,6 +18,7 @@ module.exports = function (request, reply, source, joiErr) {
 
     Hoek.assert(!pgError, 'db error');
 
-    return reply.view('organisations/edit', options).code(error ? 401 : 200);
+    template = 'organisations/edit-' + loggedIn.scope;
+    return reply.view(template, options).code(error ? 401 : 200);
   });
 };
