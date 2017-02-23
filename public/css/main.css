@@ -128,6 +128,9 @@ Darker-grey:    #9cafbb;
 .icon--profile-white {
     background-image: url("../assets/Profile-white.svg");
 }
+.icon--profile-blue {
+    background-image: url("../assets/Profile-blue.svg");
+}
 .icon--burger {
     background-image: url("../assets/Burger.svg");
     width: 1.4rem;
@@ -174,18 +177,27 @@ Darker-grey:    #9cafbb;
     -ms-transform: translate(30deg); /* IE 9 */
 }
 .icon--edit {
-    position: absolute;
-    top: 3%;
-    right: 3.5%;
-    width: auto;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  height: 1.3rem;
+  width: 1.3rem;
+}
+    .icon--edit--list {
+      top: 1.1rem;
+      right: 1.7rem;
+    }
+.icon--edit-blue {
+    background-image: url("../assets/Edit.svg");
+}
+.icon--edit-white {
+    background-image: url("../assets/Edit-white.svg");
+}
+.icon--edit-challenge-on-profile {
+    /*used specifically for the challenge with a blue background on mobile, but white on desktop*/
+    background-image: url("../assets/Edit-white.svg");
 }
 
-.icon--edit-list {
-    position: absolute;
-    top: 15%;
-    right: 5.5%;
-    width: auto;
-}
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Nav Bar
@@ -309,6 +321,8 @@ Darker-grey:    #9cafbb;
   .togglebar {
     background: #f8f8f8;
     box-shadow: 0 2px 4px 0 rgba(64, 101, 126, 0.25);
+    line-height: 1.75rem;
+    height: 4rem;
   }
 
   .togglebar__item, .togglebar__item:hover{
@@ -320,6 +334,7 @@ Darker-grey:    #9cafbb;
     .togglebar__link, .togglebar__link:visited {
     padding: 1.125rem 0;
     color: #9cafbb;
+    font-size: 0.875rem;
   }
   .togglebar__link--selected, .togglebar__link--selected:visited {
     color: #40667e;
@@ -331,7 +346,7 @@ Darker-grey:    #9cafbb;
 
 .container {
     margin: 0 auto;
-    padding-bottom: 3rem;
+    padding-bottom: 3.5rem;
 }
     .container--login {
         min-height: 100vh;
@@ -356,9 +371,9 @@ Darker-grey:    #9cafbb;
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .title {
-    padding: 1rem 0;
+    padding: 1.3125rem 0;
     margin: 0;
-    line-height: 1.35;
+    line-height: 1.375rem;
     text-align: center;
     text-transform: capitalize;
     font-size: 1rem;
@@ -366,9 +381,9 @@ Darker-grey:    #9cafbb;
     color: #ffffff;
  }
 .title--with-logo {
-    display: table-cell;
-    text-align: left;
-    vertical-align: middle;
+  padding: 0rem;
+  margin-bottom: 1.7rem;
+  font-size: 0.875rem;
 }
 .title--with-logo--blue {
     color: #40667e;
@@ -382,6 +397,11 @@ Darker-grey:    #9cafbb;
 }
 .title-blue {
     color: #00233B;
+}
+/* used for titles with smaller font than standard (eg archived challenges title card in org profile view)*/
+.title--secondary {
+  font-size: 0.875rem;
+  line-height: 1.375rem;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -583,7 +603,7 @@ Darker-grey:    #9cafbb;
 
 
 .card {
-    padding: 2.75rem 1.55rem;
+    padding: 2.75rem 1.55rem 1.75rem;
     text-align: center;
     color: #40667e;
     border-bottom: 1px solid rgba(64, 101, 126, 0.1);
@@ -598,11 +618,11 @@ Darker-grey:    #9cafbb;
     padding: 0;
     color: initial;
     border: none;
-    background: #002944;
-    background: -webkit-linear-gradient(#002944, #1b4664);
-    background: -o-linear-gradient(#002944, #1b4664);
-    background: -moz-linear-gradient(#002944, #1b4664);
-    background: linear-gradient(#002944, #1b4664);
+    background: #003253;
+    min-height: 4rem;
+}
+.card--header-with-logo {
+  background: radial-gradient(circle at 50% 57%, rgba(9, 51, 81, 0.84), #002944);
 }
 .card--header--white {
     background: #fafafa;
@@ -612,8 +632,17 @@ Darker-grey:    #9cafbb;
     height: 7.5rem; /* 120px */
 }
 .card--challenge {
-    padding: 1.8rem 0.9rem;
+/*<<<<<<< HEAD*/
+    padding: 1.25rem 2.25rem 1.25rem 1.25rem;
     text-align: left;
+}
+.card--blue {
+    background-color: #003253;
+    color: #ffffff;
+    border: none;
+/*=======*/
+    /*padding: 1.8rem 0.9rem;
+    text-align: left;*/
 }
 .card--details {
     padding: 1.5rem 1.2rem 0.1rem;
@@ -622,15 +651,16 @@ Darker-grey:    #9cafbb;
 .card--suggested-matches {
   text-align: left;
   padding: 1rem 1rem 0;
+/*>>>>>>> master*/
 }
     .card__header {
         display: block;
         margin-bottom: 1rem;
-        font-size: 1.125rem;
+        font-size: 0.875rem;
     }
         .card__header--challenge {
-            font-size: 1.125rem;
-            line-height: 1.4;
+          font-size: 1.125rem;
+          line-height: 1.375rem;
         }
         .card__header--suggested-matches {
             font-size: 0.875rem;
@@ -674,6 +704,14 @@ Darker-grey:    #9cafbb;
           padding-top: 0.5rem;
           margin-bottom: 0;
         }
+        .card__section--bottom {
+          margin: 1.75rem auto auto auto;
+        }
+
+.card__suggested-matches {
+  background-color: #f8ffff;
+  text-align: center;
+}
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Landing Page - Site Navigation
@@ -879,6 +917,7 @@ Darker-grey:    #9cafbb;
 
     }
     .form__input--non-editable {
+      position: relative;
       background-color: #fafafa;
       border: none;
     }
@@ -1035,32 +1074,26 @@ Darker-grey:    #9cafbb;
 .logo {
     display: block;
     margin: 0 auto 2rem;
-    width: 9rem; /* 144px */
+    width: 2.9rem; /* 46px */
 }
 .logo--login {
     padding-top: 6rem;
+    width: 9rem;
     margin: 0 auto 4rem;
 }
     .logo--with-title {
-        display: table-cell;
-        background-color: #ffffff;
-        border-radius: 50%;
-        margin: 0;
-        max-width: 2.5rem;
-        position: absolute;
-        top: 50%;
-        -webkit-transform: translateY(-50%);
-        -moz-transform: translateY(-50%);
-        -o-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-        right: 55%;
+      margin: 1.7rem auto 0.5rem;
+      background-color: #ffffff;
+      border-radius: 50%;
+      max-width: 2.9rem;
     }
     .logo--with-title-default {
+        background-color: transparent;
+        border-radius: 0;
     }
     .logo--with-title-custom {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2.9rem;
+        height: 2.9rem;
         background-color: transparent;
     }
 
@@ -1076,7 +1109,7 @@ Darker-grey:    #9cafbb;
   float: right
 }
 
-.text-decoration {
+.text-decoration--none {
   text-decoration: none;
 }
 
@@ -1370,6 +1403,11 @@ Darker-grey:    #9cafbb;
     padding: 0.5rem 0rem;
     border-bottom: 0;
   }
+  .card--blue {
+      background-color: inherit;
+      color: #40667e;
+      border: inherit;
+  }
 
   .title--desktop {
     display: inline-block;
@@ -1381,6 +1419,14 @@ Darker-grey:    #9cafbb;
     width: 90%;
   }
 
+  .icon--desktop {
+    padding-top: 0.5rem;
+    width: 2rem;
+  }
+  .icon--edit-challenge-on-profile {
+      /*ensure icon is blue when in desktop (on a challenge card in org details view)*/
+      background-image: url("../assets/Edit.svg");
+  }
   .landing-card__header {
     padding: 6rem 3rem 3rem;
   }
