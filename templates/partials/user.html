@@ -1,11 +1,11 @@
-<li class="list__item list__item--big">
+<li class="list__item list__item--medium">
   {{#if permissions.admin}}
     {{>indicator-left isActive=active}}
   {{/if}}
 
   {{#if permissions.admin}}
   <a href="/people/{{id}}/edit">
-    <i class="icon icon--edit icon--edit-blue icon--edit--list icon--desktop"></i>
+    <i class="icon icon--edit-blue list__icon list__icon--padded" ></i>
   </a>
   {{/if}}
 
