@@ -5,7 +5,7 @@
 <!-- Main Content -->
 <div class="container container--desktop">
 
-    <div class="card card--header card--tall">
+    <div class="card card--header card--header-with-logo">
       {{#if org.logo_url}}
       <img class="logo logo--with-title logo--with-title-custom" src="{{org.logo_url}}" alt="{{org.name}} logo">
       {{else}}
@@ -14,83 +14,81 @@
       <h1 class="title title--with-logo">{{org.name}}</h1>
     </div>
 
-    <div class="card--desktop-small">
       <div class="card card--desktop">
-        <h2 class="card__header card__header--desktop">Our circular economy vision</h2>
-        <p class="card__copy">{{org.mission_statement}}</p>
+        <!-- <h2 class="card__header card--desktop-header-bottom-border">OUR CIRCULAR ECONOMY VISION</h2> -->
+        <h2 class="card__header card__header--desktop">OUR CIRCULAR ECONOMY VISION</h2>
+        <p class="card__copy card__copy--extra-margin">{{org.mission_statement}}</p>
 
         {{#if permissions.secondary}}
         {{else if permissions.editable}}
-          <a class="icon icon--edit icon--desktop" href="/orgs/{{org.id}}/edit">
-            <img src="../../../public/assets/Edit.svg" alt="Edit" />
+          <a href="/orgs/{{org.id}}/edit">
+            <i class="icon icon--edit icon--edit-blue icon--desktop"></i>
           </a>
         {{/if}}
+
+        {{#if org.tags}}
+            {{#each org.tags}}
+              <a href="/orgs?tags={{tag_id}}"><span class="tag__label">{{tag_name}}</span></a>
+            {{/each}}
+        {{/if}}
+
       </div>
 
-      {{#if org.tags}}
-        <div class="card card--desktop">
-          <h2 class="card__header card__header--desktop">Our experience</h2>
-            {{#each org.tags}}
-            <a href="/orgs?tags={{tag_id}}"><span class="tag__label">{{tag_name}}</span></a>
-          {{/each}}
-        </div>
-      {{/if}}
 
       {{#if primary.id}}
-      <div class="card card--desktop">
-        <h2 class="card__header card__header--desktop">Contact</h2>
-        <span class="card__data">{{primary.first_name}} {{primary.last_name}}</span>
-        <span class="card__data">{{primary.job_title}}</span>
-        <span class="card__data"><a href="tel:{{primary.phone}}" class="card__data--link">{{primary.phone}}</a></span>
-        <span class="card__data"><a href="mailto:{{primary.email}}" class="card__data--link">{{primary.email}}</a></span>
-      </div>
-      {{else}}
-      <div class="card card--desktop">
-        <h2 class="card__header card__header--desktop">Contact</h2>
-        <span class="card__data">No Primary User Yet</span>
-      </div>
-      {{/if}}
-    </div>
-
-    <div class="card--desktop-large card--desktop">
-        <div class="card card--header card--tall mobile">
-          <h2 class="title title--tall">Our Challenges</h2>
+        <div class="card card--desktop">
+          <h2 class="card__header card__header--desktop">GET IN TOUCH</h2>
+          <span class="card__data">{{primary.first_name}} {{primary.last_name}}</span>
+          <span class="card__data">{{primary.job_title}}</span>
+          <span class="card__data"><a href="tel:{{primary.phone}}" class="card__data--link">{{primary.phone}}</a></span>
+          <span class="card__data u-teal"><a href="mailto:{{primary.email}}" class="card__data--link">{{primary.email}}</a></span>
         </div>
-        <h2 class="desktop card card__header card__header--desktop">Our Challenges</h2>
+      {{else}}
+        <div class="card card--desktop">
+          <h2 class="card__header card__header--desktop">Contact</h2>
+          <span class="card__data">No Primary User Yet</span>
+        </div>
+      {{/if}}
 
-        {{#if challenges}}
-            {{#each challenges}}
-              {{>challenge permissions=../permissions}}
-            {{/each}}
-          {{#if permissions.primary}}
-            {{#if permissions.editable}}
-              <div class="card card--header mobile">
-                <a class="anchor u-teal title title--tall" href="/orgs/{{org.id}}/archived-challenges">Go to archived challenges</a>
-              </div>
-            {{/if}}
+      <div class="card--desktop-large card--desktop">
+          <div class="card card--header mobile">
+            <h2 class="title title--secondary">CHALLENGES</h2>
+          </div>
+          <h2 class="desktop card card__header card__header--desktop">Our Challenges</h2>
+
+          {{#if challenges}}
+              {{#each challenges}}
+                {{>challenge permissions=../permissions view=../view}}
+              {{/each}}
+
+          {{else}}
+            {{#if permissions.primary}}
+              {{#if permissions.editable}}
+                <div class="card card--details card--narrow">
+                  <p class="card__header--challenge card__data--link">
+                    You haven't shared a challenge yet.
+                  </p>
+                </div>
+                {{/if}}
+              {{/if}}
           {{/if}}
-        {{else}}
+
+          <!-- Archived challenges -->
           {{#if permissions.primary}}
-            {{#if permissions.editable}}
-              <div class="card card--challenge card--list-item-narrow">
-                <p class="card__header--challenge card__data--link">
-                  You haven't shared a challenge yet.
-                </p>
-              </div>
+              {{#if permissions.editable}}
+                <!-- mobile -->
+                <div class="card card--header mobile">
+                  <a class="text-decoration--none title title--tall title--secondary" href="/orgs/{{org.id}}/archived-challenges">
+                    Archived challenges
+                  </a>
+                </div>
+                <!-- Desktop -->
+                <a href="/challenges/add" class="anchor anchor--left u-float-left text-decoration--none">Add challenge</a>
+                <a href="/orgs/{{org.id}}/archived-challenges" class="anchor anchor--left u-float-right text-decoration--none">Archived challenges</a>
               {{/if}}
             {{/if}}
-        {{/if}}
-
-        {{#if permissions.primary}}
-          {{#if permissions.editable}}
-             <a href="/challenges/add" class="anchor anchor--left u-float-left">Add challenge</a>
-             <a href="/orgs/{{org.id}}/archived-challenges" class="anchor anchor--left u-float-right">Go to archived challenges</a>
-          {{/if}}
-        {{/if}}
-    </div>
-
-
-  </div>
+      </div>
+</div>
 
 <!-- Include Feedback Widget -->
 {{>feedback}}

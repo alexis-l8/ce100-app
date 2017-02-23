@@ -12,17 +12,17 @@
   <div class="card card--details">
     {{#if permissions.primary}}
       {{#if permissions.editable}}
-        <a class="icon icon--edit" href="/challenges/{{challenge.id}}/edit">
-          <img src="../../../public/assets/Edit.svg" alt="Edit" />
+        <a href="/challenges/{{challenge.id}}/edit">
+          <i class="icon icon--edit icon--edit-blue icon--desktop"></i>
         </a>
       {{/if}}
     {{/if}}
-    <p class="card__header card__header--challenge {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}">
+    <p class="card__header card__header--challenge card__header--extra-margin {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}">
       {{challenge.title}}
     </p>
     <p class="card__copy">{{challenge.description}}</p>
     {{#each challenge.tags}}
-      <a class="text-decoration" href="/challenges?tags={{id}}">
+      <a class="text-decoration--none" href="/challenges?tags={{id}}">
         <span class="tag__label">{{name}}</span>
       </a>
     {{/each}}

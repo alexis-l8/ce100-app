@@ -6,7 +6,7 @@
 <!-- Main Content -->
 <div class="container">
     <div class="card card--header">
-      <h1 class="title">Edit Organisation Details</h1>
+      <h1 class="title">Edit organisation profile</h1>
       <a class="icon icon--cancel" href="/orgs/{{org.id}}"></a>
     </div>
 
@@ -19,7 +19,11 @@
 
     {{#if permissions.primary}}
     <div class="card card--header card--tall card--header--white">
-      <img class="logo logo--with-title" src="/public/assets/Profile.svg" alt="{{org.name}} logo">
+      {{#if org.logo_url}}
+      <img class="logo logo--with-title logo--with-title-custom" src="{{org.logo_url}}" alt="{{org.name}} logo">
+      {{else}}
+      <img class="logo logo--with-title logo--with-title--blue logo--with-title-default" src="../../../public/assets/Profile-blue.svg" alt="{{org.name}} logo">
+      {{/if}}
       <h1 class="title title--with-logo title--with-logo--blue">{{org.name}}</h1>
     </div>
     {{/if}}
@@ -73,27 +77,31 @@
         </div>
 
         {{#if permissions.admin}}
-        <!-- Show disable and primary user if admin is logge in -->
-        <div class="form__section">
-          <a class="form__anchor form__anchor--danger" href="/orgs/{{org.id}}/toggle-active">
-            {{#if org.active}}
-            Disable Organisation
-            {{else}}
-            Enable Organisation
-            {{/if}}
-          </a>
-        </div>
-
-        {{#if primary.id}}
-        <!-- If there is a linked primary user -->
-        <div class="form__section">
-          <label class="form__label" for="primary_user_name">Primary User</label>
-          <div class="form__input" name="primary_user_name" id="primary_user_name">
-            {{primary.first_name}} {{primary.last_name}}
-            <a href="/people/{{primary.id}}/edit" class="button-small u-float-right">EDIT</a>
+          <!-- Show disable and primary user if admin is logged in -->
+          <div class="form__section">
+            <a class="form__anchor form__anchor--danger" href="/orgs/{{org.id}}/toggle-active">
+              {{#if org.active}}
+              Disable Organisation
+              {{else}}
+              Enable Organisation
+              {{/if}}
+            </a>
           </div>
-        </div>
-        {{/if}}
+
+          {{#if primary.id}}
+          <!-- If there is a linked primary user -->
+          <div class="form__section">
+            <label class="form__label" for="primary_user_name">Primary User</label>
+            <div class="form__input form__input--non-editable" name="primary_user_name" id="primary_user_name">
+              {{primary.first_name}} {{primary.last_name}}
+
+              <a href="/people/{{primary.id}}/edit">
+                <i class="icon icon--float-right icon--edit-blue"></i>
+              </a>
+            </div>
+          </div>
+          {{/if}}
+
         {{/if}}
 
         <div class="form__section form__section--last">
