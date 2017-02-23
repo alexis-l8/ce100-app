@@ -1,22 +1,29 @@
-<div class="card card--challenge card--list-item-narrow">
+{{#if view.profile}}
+  <li class="list__item list__item--blue">
+{{else}}
+  <li class="list__item list__item--medium">
+{{/if}}
+
   {{#if permissions.primary}}
     {{#if permissions.editable}}
-      <a class="icon icon--edit icon--desktop" href="/challenges/{{id}}/edit">
-        <img src="../../../public/assets/Edit.svg" alt="Edit" />
+      <a href="/challenges/{{id}}/edit">
+        <i class="icon icon--edit icon--edit-challenge-on-profile icon--desktop"></i>
       </a>
-    {{/if}}
+  {{/if}}
   {{/if}}
 
-  <a href="/challenges/{{id}}" class="card__header--challenge card__data--link">
-    {{title}}
-    <i class="navbar__icon icon icon--open-link"></i>
+  <div class="list__subblock">
+    <a href="/challenges/{{id}}" class="card__header--challenge card__data--link {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}">
+      {{title}}
+      <i class="navbar__icon icon icon--open-link"></i>
   </a>
 
-  {{#if shared_by}}
-  <p class="card__copy card__additional">Shared by
-    <a href="/orgs/{{org_id}}" class="card__data--link">
-      {{shared_by}}
-    </a>
-  </p>
-  {{/if}}
-</div>
+    {{#if shared_by}}
+    <p class="anchor anchor--shared-by anchor--left u-teal">Shared by
+      <a href="/orgs/{{org_id}}" class="anchor anchor--shared-by anchor--left u-teal">
+        {{shared_by}}
+      </a>
+    </p>
+    {{/if}}
+  </div>
+</li>

@@ -5,28 +5,31 @@
 <!-- Main Content -->
 <div class="container">
     <div class="card card--header">
-      <h1 class="title">Edit User Details</h1>
       {{#if permissions.admin}}
+      <h1 class="title">Edit User Details</h1>
         <a class="icon icon--cancel" href="/people"></a>
       {{else}}
+      <h1 class="title">Edit settings</h1>
         <a class="icon icon--cancel" href="/orgs{{#if permissions.organisation_id}}/{{permissions.organisation_id}}{{/if}}"></a>
       {{/if}}
     </div>
 
     {{#if error}}
     <div class="snackbar snackbar--error">
-      <h1 class="snackbar-content snackbar-content--error">{{error.message}}</h1>
+      <h1 class="snackbar__content snackbar__content--error">{{error.message}}</h1>
     </div>
     {{/if}}
 
     <form class="form" method="post">
-      <label class="form__label" for="first_name">First Name</label>
+      <div class="form__section form__section--main">
+
+      <label class="form__label" for="first_name">First name</label>
       <input class="form__input form__input--text {{error.first_name}}" name="first_name" value="{{#if error}}{{error.values.first_name}}{{else}}{{user.first_name}}{{/if}}">
 
-      <label class="form__label" for="last_name">Last Name</label>
+      <label class="form__label" for="last_name">Last name</label>
       <input class="form__input form__input--text {{error.last_name}}" name="last_name" value="{{#if error}}{{error.values.last_name}}{{else}}{{user.last_name}}{{/if}}">
 
-      <label class="form__label" for="job_title">Job Title</label>
+      <label class="form__label" for="job_title">Job title</label>
       <input class="form__input form__input--text" name="job_title" value="{{#if error}}{{error.values.job_title}}{{else}}{{user.job_title}}{{/if}}">
 
       <label class="form__label" for="email">Email</label>
@@ -36,7 +39,7 @@
         <span class="form__input form__input--non-editable">{{user.email}}</span>
       {{/if}}
 
-      <label class="form__label" for="phone">Phone Number</label>
+      <label class="form__label" for="phone">Phone number</label>
       <input class="form__input form__input--text {{error.phone}}" type="tel" name="phone" value="{{#if error}}{{error.values.phone}}{{else}}{{user.phone}}{{/if}}">
 
 
@@ -45,15 +48,25 @@
       {{/if}}
 
       {{#if permissions.isMember}}
-      <div class="form__section">
-        <label class="form__label">Password Reset</label>
-        <a class="anchor anchor--teal" href="/password-reset">Request a password reset email</a>
+        <label class="form__label form__label--no-input">
+          <a class="anchor anchor--teal" href="/password-reset">
+            Reset password
+          </a>
+        </label>
+      {{/if}}
       </div>
+
+      <button class="button">Save</button>
+
+      {{#if permissions.isMember}}
+      <!-- Logout -->
+        <a class="form__anchor form__anchor--danger" href="/logout">
+            LOG OUT
+        </a>
       {{/if}}
 
-      <div class="form__section form__section--last">
-        <button class="button">Save</button>
       </div>
+
     </form>
 </div>
 
