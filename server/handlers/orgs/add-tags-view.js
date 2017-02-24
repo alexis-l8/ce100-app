@@ -17,6 +17,8 @@ module.exports = function (request, reply, source, joiErr) {
 
   return request.server.methods.pg.tags.getTagsForEdit('organisations', orgId,
     function (pgErr, tags) {
+      Hoek.assert(!pgErr, 'Database Error');
+
       permissions = helpers.getPermissions(loggedIn, 'organisation_id',
         orgId);
       views = {
@@ -30,7 +32,6 @@ module.exports = function (request, reply, source, joiErr) {
         { error: error }
       );
 
-      Hoek.assert(!pgErr, 'Database Error');
 
       return reply.view('tags', options).code(error ? 400 : 200);
     });

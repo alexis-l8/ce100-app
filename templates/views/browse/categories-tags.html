@@ -5,11 +5,12 @@
 <!-- Main Content -->
 <div class="container">
   <div class="card card--header">
+    <a class="icon icon--back" href={{views.referer}}></a>
     <h1 class="title">Select Tags</h1>
   </div>
     <form class="form form--tags" method="post">
         <div class="form__section">
-          <label class="tag__title">
+          <label class="tag__title tag__title--desktop">
             <a class="anchor--red text-decoration--none" href="/{{pageType}}">Search all tags</a>
           </label>
           {{#each allActive}}
