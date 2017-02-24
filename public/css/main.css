@@ -1404,6 +1404,10 @@ Darker-grey:    #9cafbb;
     text-align: center;
     padding-bottom: 1rem;
   }
+  .d-card--centered {
+    max-width: 35rem;
+    margin: auto;
+  }
 
   .card {
     text-align: left;
@@ -1461,6 +1465,16 @@ Darker-grey:    #9cafbb;
       background-color: inherit;
       color: #40667e;
       border: inherit;
+  }
+  .card__copy--challenge {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+
+  }
+  .card__header--challenge {
+    margin-bottom: 1.5rem;
+    font-size: 1.3125rem;
+    margin-top: 0.5rem;
   }
 
   .list__item--blue {
