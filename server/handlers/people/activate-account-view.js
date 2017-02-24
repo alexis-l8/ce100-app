@@ -15,9 +15,7 @@ module.exports = function (userFlow) {
     var error = helpers.errorOptions(joiErr);
     var hashedId = request.params.hashedId;
 
-    // change the following line as we need to encrypt an object with {id: id}
     jwt.verify(hashedId, config.jwt_secret, function (err, user) {
-
       // if the token has expired, send the user back to the request-password-reset view
       if (err) {
         var errorMessage = err.name === 'TokenExpiredError'
@@ -44,7 +42,7 @@ module.exports = function (userFlow) {
           return reply.redirect('/login');
         }
 
-        return reply.view('activate', { [userFlow]: true, error: error }).code(error ? 400 : 200);
+        return reply.view('activate', { userFlow: { [userFlow]: true }, error: error }).code(error ? 400 : 200);
       });
     });
   };
