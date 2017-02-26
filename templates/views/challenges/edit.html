@@ -22,8 +22,13 @@
         <input class="form__input form__input--text {{error.title}}" type="text" name="title" id="title" value="{{#if error}}{{error.values.title}}{{else}}{{title}}{{/if}}">
 
         <label class="form__label" for="description">Description</label>
-        <textarea class="form__input form__input--text-area {{error.description}}" name="description" id="description" placeholder="Write Here..." rows="" cols="50">
-          {{#if error.values.description}}{{error.values.description}}{{else}}{{description}}{{/if}}
+        <textarea
+          class="form__input form__input--text-area {{error.description}}"
+          name="description"
+          id="description"
+          placeholder="Write Here..."
+          rows="" cols="50"
+          >{{#if error.values.description}}{{error.values.description}}{{else}}{{description}}{{/if}}
         </textarea>
 
         {{#if tags}}
@@ -36,10 +41,10 @@
         {{/if}}
       </div>
 
-      <p class="copy form__copy">Clicking 'Next' will make your challenge public to the network</p>
+      <p class="copy form__copy">Clicking 'Save' will make your challenge public to the network</p>
 
 
-      <button class="button" type="submit">Save & edit tags</button>
+      <button class="button" type="submit">Save & edit tags<i class="icon icon--arrow-right icon--arrow-inside-button"></i></button>
 
       <!-- Show archive and primary user if admin is logged in -->
         <div class="form__section">
