@@ -469,7 +469,7 @@ Darker-grey:    #9cafbb;
     }
     .list__item--tall {
         padding: 1.75rem 1.5rem;
-        line-height: 1.4;
+        line-height: 1.375rem;
     }
     .list__item--blue {
       padding: 1.25rem;
@@ -487,7 +487,7 @@ Darker-grey:    #9cafbb;
         }
         .list__subblock {
             display: block;
-            line-height: 1.4;
+            line-height: 1.375rem;
         }
         .list__subblock--full-width {
             width: 100%;
@@ -1114,8 +1114,6 @@ Darker-grey:    #9cafbb;
     .anchor--shared-by, .anchor--shared-by:link, .anchor--shared-by:visited {
         font-size: 0.875rem;
         line-height: 1;
-      /*text-align: right;*/
-      /*margin: 0.5rem 0 0;*/
     }
     .anchor--left, .anchor--left:link, .anchor--left:visited {
         color: rgba(64, 102, 126, 0.5);
