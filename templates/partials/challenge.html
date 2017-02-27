@@ -1,7 +1,7 @@
 {{#if view.profile}}
-  <li class="list__item list__item--blue list__item--desktop">
+  <li class="list__item list__item--blue du-no-padding">
 {{else}}
-  <li class="list__item list__item--tall list__item--desktop">
+  <li class="list__item list__item--tall du-no-padding">
 {{/if}}
 
   {{#if permissions.primary}}
@@ -19,7 +19,8 @@
               card__header--desktop
               card__header--inline
               card__data--link
-              {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}"
+              {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}
+              {{#if view.profile}}card__header--desktop-large{{/if}}"
               >
       {{title}}
       {{#if view.profile}}
