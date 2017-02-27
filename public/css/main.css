@@ -1244,8 +1244,8 @@ Darker-grey:    #9cafbb;
   color: #ffffff;
   background-color: #003253;
   position: fixed;
-  right: -3em;
-  bottom: 3em;
+  right: -2.5rem;
+  bottom: 3.5rem;
   -webkit-transform: rotate(270deg);
   -moz-transform: rotate(270deg);
   -o-transform: rotate(270deg);
@@ -1371,7 +1371,7 @@ Darker-grey:    #9cafbb;
   |||||||||||||||||||||||||||||||||||||||||||*/
 
   .desktop {
-    display: none;
+    display: none !important;
   }
 
   .navbar-top--desktop {
@@ -1595,30 +1595,34 @@ Darker-grey:    #9cafbb;
       text-align: left;
       padding: 1rem 15rem;
   }
+  .widget__feedback {
+      bottom: 0rem;
+  }
 
 /* ---------------------------------------------- */
 /* ------------- DESKTOP HELPERS ---------------- */
 /* ---------------------------------------------- */
 
-  .u-table--quarter {
+  .du-table--quarter {
       display: inline-block;
       width: 25%;
       word-wrap: break-word;
   }
-  .u-table--half {
+  .du-table--half {
       display: inline-block;
       width: 50%;
       word-wrap: break-word;
   }
-  .u-table--fluid {
+  .du-table--fluid {
     display: inline-block;
     width: auto;
     word-wrap: break-word;
   }
-  .u-float-left--desktop {
+  .du-float-left--desktop {
     float: left;
   }
-  .u-float-right--desktop {
+  .du-float-right--desktop {
     float: right;
   }
+
 }
