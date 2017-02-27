@@ -970,9 +970,9 @@ Darker-grey:    #9cafbb;
         .form__input--login:-moz-placeholder { /* Firefox 18- */
           color: #89a0ae;
           opacity: 1;
-            }
+        }
 
-    }
+
     .form__copy {
       font-size: 0.875rem; /* 14px */
       text-align: center;
