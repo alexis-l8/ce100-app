@@ -1489,7 +1489,7 @@ Darker-grey:    #9cafbb;
   .card--desktop {
     height: auto;
     padding: 1.5rem;
-    margin: 0.5rem;
+    margin: 0.75rem 0;
     background-color: #ffffff;
     border: none;
   }
@@ -1500,10 +1500,7 @@ Darker-grey:    #9cafbb;
     margin: 0 auto;
   }
   .card--desktop-large {
-    width: 56%;
-    display: inline-block;
-    vertical-align: top;
-    margin: 0 auto;
+    min-width: 60%;
   }
   .card--desktop-no-padding {
     padding: 0;
@@ -1519,6 +1516,9 @@ Darker-grey:    #9cafbb;
       background-color: inherit;
       color: #40667e;
       border: inherit;
+  }
+  .card--translate {
+      transform: translate(0, -99%);
   }
   .card__header--desktop {
       font-size: 1rem;
@@ -1625,6 +1625,10 @@ Darker-grey:    #9cafbb;
       bottom: 0rem;
   }
 
+  .panels--fixed-width {
+      width: 95%;
+      margin: 0 auto;
+  }
 /* ---------------------------------------------- */
 /* ------------- DESKTOP HELPERS ---------------- */
 /* ---------------------------------------------- */
