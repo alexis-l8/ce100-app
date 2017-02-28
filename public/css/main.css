@@ -73,13 +73,13 @@ body {
 Marine-blue :   #003253;
 (copy main color)
 
-Additional copy color: #688597;
 
 Navy:           #002944;
 
 Denim:          #40667e;
 
 Bluey-grey:     #89a0ae;
+additional copy/link color
 
 White:          #ffffff;
 
@@ -428,7 +428,7 @@ Darker-grey:    #9cafbb;
     line-height: 1.5;
 }
     .copy--additional {
-        color: #688597;
+        color: #89a0ae;
     }
     .copy--login {
         color: #ffffff;
@@ -492,6 +492,7 @@ Darker-grey:    #9cafbb;
             color: #003253;
             font-size: 1.2rem;
             padding: 0;
+            text-decoration: none;
         }
         .list__data--secondary {
             color: #89a0ae;
@@ -680,6 +681,7 @@ Darker-grey:    #9cafbb;
         display: block;
         margin-bottom: 1rem;
         font-size: 0.875rem;
+        text-decoration: none;
     }
         .card__header--challenge {
             color: #003253;
@@ -710,7 +712,7 @@ Darker-grey:    #9cafbb;
         .card__data--link {
           /*text-decoration: none;*/
           color: inherit;
-          /*margin: 0;*/ 
+          /*margin: 0;*/
         }
         .card__data--linked-button {
           font-size: 1.5rem;
@@ -719,7 +721,7 @@ Darker-grey:    #9cafbb;
           color: inherit;
         }
     .card__additional {
-      color: #688597;
+      color: #89a0ae;
       transform: translate(0%,50%);
       -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
       -ms-transform: translate(30deg); /* IE 9 */
@@ -858,7 +860,7 @@ Darker-grey:    #9cafbb;
         }
         .form__label--additional {
           /*Gives the user additional information on filling out a specific input*/
-          color: #688597;
+          color: #89a0ae;
           font-size: 0.875rem;
           padding-top: 0;
           margin-top: -0.5rem;
@@ -1082,7 +1084,7 @@ Darker-grey:    #9cafbb;
     color: #66d9e0;
 }
 .anchor--additional, .anchor--additional:link, .anchor--additional:visited, .anchor--additional:hover  {
-    color: #688597;
+    color: #89a0ae;
 }
 .anchor--additional:active {
     color: #003253;
