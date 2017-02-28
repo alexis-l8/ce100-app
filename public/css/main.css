@@ -776,10 +776,11 @@ Darker-grey:    #9cafbb;
   text-align: center;
   color: #ffffff;
 }
-.icon__landing-card {
+.ing-card {
   width: 1.2rem;
   height: 1.2rem;
 }
+
 .icon__landing-card--with-text {
   display: inline-block;
   vertical-align: middle;
@@ -1561,6 +1562,11 @@ Darker-grey:    #9cafbb;
   .anchor--small {
     font-size: 1rem;
   }
+  .icon__landing-card {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
   .icon--desktop {
     padding-top: 0.5rem;
     width: 1.4rem;
