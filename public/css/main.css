@@ -1295,6 +1295,7 @@ Darker-grey:    #9cafbb;
 
         .navbar-top__burger--checkbox:checked ~ .toggle-menu__top--burger {
             display: block;
+            position: fixed;
         }
         /*.navbar-top__burger--checkbox:checked ~ .toggle-menu__top--add {
             display: none;
@@ -1364,6 +1365,7 @@ Darker-grey:    #9cafbb;
   .navbar-top--desktop {
     display: table;
     height: 4rem;
+    position: fixed;
   }
   .navbar-top__item--desktop {
     padding: 0 0.7rem;
@@ -1393,7 +1395,7 @@ Darker-grey:    #9cafbb;
     float: right;
   }
   .toggle-menu__top {
-    top: 4rem;
+    top: 3.8rem;
   }
   .toggle-menu__link--add {
     padding: rem 0;
