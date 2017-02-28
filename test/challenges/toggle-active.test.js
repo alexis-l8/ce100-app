@@ -25,13 +25,13 @@ function toggleActivity (token) {
   };
 }
 
-tape('Admin cannot unarchive/archive a challenge', function (t) {
+tape('Admin cannot unarchive/archive a challenge - ' + __filename, function (t) {
   sessions.addAll(function () {
     init(config, function (error, server, pool) {
       if (error) { console.log(error); }
 
       server.inject(toggleActivity(admin), function (res) {
-        t.equal(res.statusCode, 401, 'admin does not have permission to unarchive/archive challenge');
+        t.equal(res.statusCode, 403, 'admin does not have permission to unarchive/archive challenge');
         t.end();
         pool.end();
         server.stop();

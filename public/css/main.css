@@ -150,6 +150,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 .icon--arrow-down {
     background-image: url("../assets/arrow-down-icon.svg");
 }
+.icon--arrow-right {
+    background-image: url("../assets/arrow-right.svg");
+}
 .icon--open-link {
   background-image: url("../assets/open-link.svg");
   display: inline-block;
@@ -189,7 +192,13 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   height: 1.3rem;
   width: 1.3rem;
 }
-
+.icon--arrow-inside-button {
+  display: inline-block;
+  width: 1rem;
+  height: 1.2rem;
+  margin-left: 0.125rem;
+  transform: translate(25%, 33%);
+}
 .icon--edit-blue {
     background-image: url("../assets/Edit.svg");
 }
@@ -765,10 +774,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   text-align: center;
   color: #ffffff;
 }
-.icon__landing-card {
+.ing-card {
   width: 1.2rem;
   height: 1.2rem;
 }
+
 .icon__landing-card--with-text {
   display: inline-block;
   vertical-align: middle;
@@ -1492,6 +1502,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   .icon--desktop {
     padding-top: 0.5rem;
     width: 2rem;
+  }
+  .icon__landing-card {
+    width: 1.6rem;
+    height: 1.6rem;
   }
 
   .copy--login {
