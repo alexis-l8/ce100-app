@@ -932,6 +932,9 @@ Darker-grey:    #9cafbb;
             color: #ffffff;
             text-indent: 1.25rem;
         }
+        .form__input--login:focus {
+            border: solid 1px rgba(102, 216, 224, 0.5);
+        }
         /* Placeholder styles */
         .form__input--non-editable {
           background-color: #fafafa;
