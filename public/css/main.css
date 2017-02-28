@@ -434,7 +434,6 @@ Darker-grey:    #9cafbb;
         color: #ffffff;
         text-align: center;
         margin: 0.8rem auto;
-        /*text-decoration: none;*/
     }
     .copy--extra-padding {
         margin-bottom: 5rem;
@@ -480,7 +479,6 @@ Darker-grey:    #9cafbb;
         .list__data {
             display: block;
             color: #003253;
-            /*text-decoration: none;*/
             padding: 0.3rem 0 0 0;
             font-size: 0.875rem;
         }
@@ -710,9 +708,7 @@ Darker-grey:    #9cafbb;
     margin-bottom: 0.5rem;
 }
         .card__data--link {
-          /*text-decoration: none;*/
           color: inherit;
-          /*margin: 0;*/
         }
         .card__data--linked-button {
           font-size: 1.5rem;
@@ -785,7 +781,6 @@ Darker-grey:    #9cafbb;
   color: #66d9e0;
   text-align: center;
   display: block;
-  /*text-decoration: none;*/
   width: 8rem;
 }
 .landing-card__icon--with-text {
@@ -973,7 +968,6 @@ Darker-grey:    #9cafbb;
 
     .form__anchor {
         color: #66d9e0;
-        /*text-decoration: none;*/
     }
         .form__anchor--danger:visited {
             color: #66d9e0;
@@ -1107,7 +1101,6 @@ Darker-grey:    #9cafbb;
       width: 100%;
       color: #003253;
       margin: 0 0 1.1875rem 0;
-      /*text-decoration: none;*/
     }
 .anchor--shared-by, .anchor--shared-by:link, .anchor--shared-by:visited {
     font-size: 0.875rem;
@@ -1175,7 +1168,6 @@ Darker-grey:    #9cafbb;
 }
 
 .text-decoration--none {
-  /*text-decoration: none;*/
 }
 
 .log-in-logo {
