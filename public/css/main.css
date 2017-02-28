@@ -1512,8 +1512,12 @@ Darker-grey:    #9cafbb;
       /*ensure icon is blue when in desktop (on a challenge card in org details view)*/
       background-image: url("../assets/Edit.svg");
   }
+  .landing-card__description {
+    font-size: 1.2rem;
+    padding: 0rem 6rem;
+  }
   .landing-card__header {
-    padding: 6rem 3rem 3rem;
+    padding: 9rem 3rem 3rem;
   }
   .landing-card__icon-container {
     bottom: 12.5rem;
