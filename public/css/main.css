@@ -73,6 +73,8 @@ body {
 Marine-blue :   #003253;
 (copy main color)
 
+Additional copy color: #688597;
+
 Navy:           #002944;
 
 Denim:          #40667e;
@@ -253,12 +255,12 @@ Darker-grey:    #9cafbb;
         .navbar__link {
             display: block;
             text-decoration: none;
-            color: #40667e; /* Denim */
+            color: #003253;
             font-size: 0.75rem;
             cursor: pointer;
         }
         .navbar__link:visited {
-            color: #40667e; /* Denim */
+            color: #003253;
         }
         .navbar__link:hover {
             text-decoration: none;
@@ -284,14 +286,14 @@ Darker-grey:    #9cafbb;
 }
 
     .toggle-menu__bottom {
-      background-color: #40667e;
+      background-color: #003253;
       width: 50%;
       bottom: 3.5em;
       display: none;
     }
 
     .toggle-menu__top {
-      background-color: #002944;
+      background-color: #003253;
       top: 3.4rem;
     }
         .toggle-menu__top--burger {
@@ -344,7 +346,7 @@ Darker-grey:    #9cafbb;
     font-size: 0.875rem;
   }
   .togglebar__link--selected, .togglebar__link--selected:visited {
-    color: #40667e;
+    color: #003253;
   }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -396,7 +398,7 @@ Darker-grey:    #9cafbb;
   font-size: 0.875rem;
 }
 .title--with-logo--blue {
-    color: #40667e;
+    color: #003253;
 }
 .title--tall {
     vertical-align: middle;
@@ -425,11 +427,14 @@ Darker-grey:    #9cafbb;
     text-align: left;
     line-height: 1.5;
 }
+    .copy--additional {
+        color: #688597;
+    }
     .copy--login {
         color: #ffffff;
         text-align: center;
         margin: 0.8rem auto;
-        text-decoration: none;
+        /*text-decoration: none;*/
     }
     .copy--extra-padding {
         margin-bottom: 5rem;
@@ -451,7 +456,7 @@ Darker-grey:    #9cafbb;
 }
 
     .list__item {
-        color: #40667e;
+        color: #003253;
         position: relative;
         padding: 1rem 8%;
         list-style: none;
@@ -474,8 +479,8 @@ Darker-grey:    #9cafbb;
 
         .list__data {
             display: block;
-            color: #40667e;
-            text-decoration: none;
+            color: #003253;
+            /*text-decoration: none;*/
             padding: 0.3rem 0 0 0;
             font-size: 0.875rem;
         }
@@ -484,7 +489,7 @@ Darker-grey:    #9cafbb;
             width: 90%;
         }
         .list__data--primary {
-            color: #40667e;
+            color: #003253;
             font-size: 1.2rem;
             padding: 0;
         }
@@ -677,14 +682,14 @@ Darker-grey:    #9cafbb;
         font-size: 0.875rem;
     }
         .card__header--challenge {
-            color: #40667e;
+            color: #003253;
             font-size: 1.125rem;
             line-height: 1.375rem;
             margin-bottom: 0.35rem;
         }
         .card__header--suggested-matches {
             font-size: 0.875rem;
-            color: #40667e;
+            color: #003253;
             text-align: center;
             opacity: 0.5;
             margin-bottom: 1rem;
@@ -703,9 +708,9 @@ Darker-grey:    #9cafbb;
     margin-bottom: 0.5rem;
 }
         .card__data--link {
-          text-decoration: none;
+          /*text-decoration: none;*/
           color: inherit;
-          margin: 0;
+          /*margin: 0;*/ 
         }
         .card__data--linked-button {
           font-size: 1.5rem;
@@ -714,7 +719,7 @@ Darker-grey:    #9cafbb;
           color: inherit;
         }
     .card__additional {
-      color: #89a0ae;
+      color: #688597;
       transform: translate(0%,50%);
       -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
       -ms-transform: translate(30deg); /* IE 9 */
@@ -777,7 +782,7 @@ Darker-grey:    #9cafbb;
   color: #66d9e0;
   text-align: center;
   display: block;
-  text-decoration: none;
+  /*text-decoration: none;*/
   width: 8rem;
 }
 .landing-card__icon--with-text {
@@ -844,7 +849,7 @@ Darker-grey:    #9cafbb;
         /*space between the bottom of a form input and the top of the next label is 37px*/
         /*This is calculated with 28px margin bottom of a form input, and 9px padding-top of a form label*/
         padding-top: 0.5625rem; /* 9px */
-        color: #40667e;
+        color: #003253;
         font-size: 1rem;
     }
         .form__label--long {
@@ -852,7 +857,7 @@ Darker-grey:    #9cafbb;
         }
         .form__label--additional {
           /*Gives the user additional information on filling out a specific input*/
-          color: rgba(64,102,126, 0.5);
+          color: #688597;
           font-size: 0.875rem;
           padding-top: 0;
           margin-top: -0.5rem;
@@ -874,7 +879,7 @@ Darker-grey:    #9cafbb;
         font-family: inherit;
         font-size: 0.875rem; /* 14px */
         width: 100%;
-        color: #40667e;
+        color: #003253;
         border-radius: 3px;
         background-color: #f2f2f2;
         border: solid 1px #ebeced;
@@ -958,14 +963,14 @@ Darker-grey:    #9cafbb;
     .form__copy {
       font-size: 0.875rem; /* 14px */
       text-align: center;
-      color: #40667e;
+      color: #003253;
       margin-bottom: 1.438rem;
     }
 
 
     .form__anchor {
         color: #66d9e0;
-        text-decoration: none;
+        /*text-decoration: none;*/
     }
         .form__anchor--danger:visited {
             color: #66d9e0;
@@ -1059,20 +1064,29 @@ Darker-grey:    #9cafbb;
     Anchors
   |||||||||||||||||||||||||||||||||||||||||||*/
 .anchor {
+  color: #003253;
 }
 
 .anchor:link {
     text-align: center;
     display: inline-block;
-    color: #89a0ae;
+    color: #003253;
 }
 .anchor:visited {
-    color: #40667e;
+    color: #003253;
 }
 .anchor:hover {
-    text-decoration: none;
 }
-    .anchor--red:link {
+.anchor:active {
+    color: #66d9e0;
+}
+.anchor--additional, .anchor--additional:link, .anchor--additional:visited, .anchor--additional:hover  {
+    color: #688597;
+}
+.anchor--additional:active {
+    color: #003253;
+}
+    .anchor--red:link, .anchor--red:hover, .anchor--red:visited {
         color: #900000;
     }
 
@@ -1088,9 +1102,9 @@ Darker-grey:    #9cafbb;
       display: block;
       text-align: left;
       width: 100%;
-      color: #40667e;
+      color: #003253;
       margin: 0 0 1.1875rem 0;
-      text-decoration: none;
+      /*text-decoration: none;*/
     }
 .anchor--shared-by, .anchor--shared-by:link, .anchor--shared-by:visited {
     font-size: 0.875rem;
@@ -1098,7 +1112,6 @@ Darker-grey:    #9cafbb;
 }
 
 .anchor--left, .anchor--left:link, .anchor--left:visited {
-    color: rgba(64, 102, 126, 0.5);
     text-align: left;
     padding: 0.4rem 0 0 0;
     margin: 0;
@@ -1159,7 +1172,7 @@ Darker-grey:    #9cafbb;
 }
 
 .text-decoration--none {
-  text-decoration: none;
+  /*text-decoration: none;*/
 }
 
 .log-in-logo {
@@ -1458,22 +1471,16 @@ Darker-grey:    #9cafbb;
     padding: 0.5rem 0rem;
     border-bottom: 0;
   }
-  .card--blue {
-      background-color: inherit;
-      color: #40667e;
-      border: inherit;
-  }
-
   .list__item--blue {
       background-color: inherit;
-      color: #40667e;
+      color: #003253;
       text-align: left;
   }
 
   .title--desktop {
     display: inline-block;
     text-align: left;
-    color: #40667e;
+    color: #003253;
     padding: 0.5rem 0 1rem 0;
     margin: 1rem 1.5rem;
     font-size: 1.125rem;
