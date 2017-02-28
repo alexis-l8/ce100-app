@@ -147,6 +147,9 @@ Darker-grey:    #9cafbb;
 .icon--arrow-down {
     background-image: url("../assets/arrow-down-icon.svg");
 }
+.icon--arrow-right {
+    background-image: url("../assets/arrow-right.svg");
+}
 .icon--open-link {
   background-image: url("../assets/open-link.svg");
   display: inline-block;
@@ -186,7 +189,13 @@ Darker-grey:    #9cafbb;
   height: 1.3rem;
   width: 1.3rem;
 }
-
+.icon--arrow-inside-button {
+  display: inline-block;
+  width: 1rem;
+  height: 1.2rem;
+  margin-left: 0.125rem;
+  transform: translate(25%, 33%);
+}
 .icon--edit-blue {
     background-image: url("../assets/Edit.svg");
 }
