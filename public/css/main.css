@@ -57,12 +57,14 @@ table {
 html {
     font-size: 16px; /* for REM size declarations */
     font-family: proxima-nova, 'Karla', Helvetica, Ariel, sans-serif;
+    height: 100%;
 }
 
 body {
     line-height: 1.5rem;
     background-color: #fafafa;
     font-size: 0.875rem; /* 14px */
+    height: inherit;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -1435,9 +1437,9 @@ Darker-grey:    #9cafbb;
 
   .container--desktop {
     background-color: #f2f2f2;
-    height: 100%;
+    min-height: 90%;
     text-align: center;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
     overflow-y: hidden;
   }
   .logo--desktop {
