@@ -21,7 +21,7 @@ module.exports = function (request, reply) {
         function (err, res) {
           Hoek.assert(!err, 'database error');
 
-          return reply.redirect('/challenges');
+          return reply.redirect('/orgs/' + loggedIn.organisation_id);
         });
     });
 };
