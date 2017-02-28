@@ -1007,7 +1007,6 @@ Darker-grey:    #9cafbb;
   border: solid 1px #66d9e0;
 }
     .button--secondary:active {
-      color: white;
       border: solid 1px #66d9e0;
       background-color: transparent;
       color: #66d9e0;
