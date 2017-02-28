@@ -991,21 +991,32 @@ Darker-grey:    #9cafbb;
     text-align: center;
     text-decoration: none;
     letter-spacing: 0.5px;
-    background-color: rgb(0, 50, 83);
+    background-color: #003253;
     border: none;
     border-radius: 3rem;
 }
+    .button:active {
+      background-color: #66d9e0;
+    }
+.button--secondary {
+  background-color: transparent;
+  color: white;
+  border: solid 1px #66d9e0;
+}
+    .button--secondary:active {
+      color: white;
+      border: solid 1px #66d9e0;
+      background-color: transparent;
+      color: #66d9e0;
+    }
 .button--login {
-    background: #66d9e0;
     margin: 2rem auto 0;
     width: 100%;
     text-indent: 0;
-    height: 2.5rem;
     font-size: 0.875rem;
     text-shadow: 0 1px 0 #003152;
 }
 .button--login:hover {
-  background: #4DC0C7; /*  10% darker than #66d9e0 */
 }
 .button--margin {
     margin-bottom: 2rem;
@@ -1336,6 +1347,7 @@ Darker-grey:    #9cafbb;
     }
     .login-response--error {
       color: #ff5e5e;
+      padding-top: 1rem;
     }
     .login-response--success {
       color: #5db4c0;
