@@ -753,7 +753,7 @@ Darker-grey:    #9cafbb;
 .landing-card__header {
   font-size: 3rem;
   text-align: center;
-  padding: 2rem;
+  padding: 2rem 1rem;
   line-height: 3rem;
 }
 
@@ -763,6 +763,7 @@ Darker-grey:    #9cafbb;
   display: block;
   text-align: center;
   color: #ffffff;
+  min-height: 3rem;
 }
 .ing-card {
   width: 1.2rem;
