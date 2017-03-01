@@ -147,6 +147,9 @@ Darker-grey:    #9cafbb;
 .icon--arrow-down {
     background-image: url("../assets/arrow-down-icon.svg");
 }
+.icon--arrow-right {
+    background-image: url("../assets/arrow-right.svg");
+}
 .icon--open-link {
   background-image: url("../assets/open-link.svg");
   display: inline-block;
@@ -191,7 +194,13 @@ Darker-grey:    #9cafbb;
     height: 1.3rem;
     width: 1.3rem;
 }
-
+.icon--arrow-inside-button {
+  display: inline-block;
+  width: 1rem;
+  height: 1.2rem;
+  margin-left: 0.125rem;
+  transform: translate(25%, 33%);
+}
 .icon--edit-blue {
     background-image: url("../assets/Edit.svg");
 }
@@ -763,7 +772,7 @@ Darker-grey:    #9cafbb;
 .landing-card__header {
   font-size: 3rem;
   text-align: center;
-  padding: 2rem;
+  padding: 2rem 1rem;
   line-height: 3rem;
 }
 
@@ -773,11 +782,13 @@ Darker-grey:    #9cafbb;
   display: block;
   text-align: center;
   color: #ffffff;
+  min-height: 3rem;
 }
-.icon__landing-card {
+.ing-card {
   width: 1.2rem;
   height: 1.2rem;
 }
+
 .icon__landing-card--with-text {
   display: inline-block;
   vertical-align: middle;
@@ -970,9 +981,9 @@ Darker-grey:    #9cafbb;
         .form__input--login:-moz-placeholder { /* Firefox 18- */
           color: #89a0ae;
           opacity: 1;
-            }
+        }
 
-    }
+
     .form__copy {
       font-size: 0.875rem; /* 14px */
       text-align: center;
@@ -1519,6 +1530,10 @@ Darker-grey:    #9cafbb;
   .card__header--inline {
       display: inline-block;
   }
+  .icon__landing-card {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
 
   .copy--login {
     font-size: 1.3125rem; /* 21px */
@@ -1554,8 +1569,12 @@ Darker-grey:    #9cafbb;
     display: inline-block;
     margin: 0 0 0 1rem;
   }
+  .landing-card__description {
+    font-size: 1.2rem;
+    padding: 0rem 6rem;
+  }
   .landing-card__header {
-    padding: 6rem 3rem 3rem;
+    padding: 9rem 3rem 3rem;
   }
   .landing-card__icon-container {
     bottom: 12.5rem;
