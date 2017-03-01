@@ -371,11 +371,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .container {
-    margin: 3.8rem auto;
+    margin: 0 auto;
     padding-bottom: 3.5rem;
 }
     .container--login {
-        margin: 0 auto;
         min-height: 100vh;
         padding: 0.1rem 1.25rem 1rem;
         background: #003253;
@@ -1428,7 +1427,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     height: 4rem;
     position: fixed;
     top: 0;
-    z-index: 1000;
+    z-index: 10;
   }
   .navbar-top__item--desktop {
     padding: 0 0.7rem;
@@ -1467,6 +1466,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     font-size: 1rem;
   }
 
+  .container {
+    margin: 3.8rem auto;
+  }
+  .container--login {
+    margin: 0 auto;
+  }
   .container--desktop {
     background-color: #f2f2f2;
     min-height: 90%;
