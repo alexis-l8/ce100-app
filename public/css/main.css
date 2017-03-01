@@ -96,6 +96,9 @@ Darker-grey:    #9cafbb;
 (un-selected font colour in togglebar navigation)
 */
 
+/*New tag color: #003253;
+Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
+
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Icons
@@ -614,23 +617,30 @@ Darker-grey:    #9cafbb;
 .tag__label {
   display: inline-block;
   margin: 0 0.125rem 0.425rem 0;
-  padding: 0.5625rem 0.8rem; /* 9px 12.8px */
-  line-height: 1rem;
-  background-color: #66d9e0;
+  padding: 0.6875rem 0.5rem; /* 11px 8px */
+  font-size: 0.875rem; /* 14px */
+  line-height: 0.875rem;
+  background-color: transparent;
   border-radius: 0.375rem;
-  color: #ffffff;
+  color: #003253;
   cursor: pointer;
   text-align: center;
   text-transform: capitalize;
-  text-shadow: 0 1px 0 rgba(0, 49, 83, 0.07);
+  border: solid 1px #003253;
 }
-     .tag__label--disabled {
-       background-color: #B4ECEF;
+.tag__label:active {
+  background-color: #003253;
+  color: white;
+}
+     .tag__label--disabled, .tag__label--disabled:active {
+       background-color: transparent;
+       color: rgba(0,50,83, 0.5);
+       border-color: rgba(0,50,83, 0.5);
        cursor: default;
      }
 .tag__input:checked + .tag__label {
-    background-color: #40667e;
-    text-shadow: 0 1px 0 rgba(0, 49, 83, 0.07);
+  background-color: #003253;
+  color: white;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
