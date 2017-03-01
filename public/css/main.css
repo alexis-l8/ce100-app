@@ -1069,6 +1069,11 @@ Darker-grey:    #9cafbb;
     border: solid 1px #66d9e0;
 }
 
+.button--dark-blue {
+    color: #40667e;
+    border: solid 1px #40667e;
+}
+
 .indicator {
   width: 0.5rem;
   height: 0.5rem;
