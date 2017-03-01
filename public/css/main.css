@@ -1528,9 +1528,6 @@ Darker-grey:    #9cafbb;
       color: #40667e;
       border: inherit;
   }
-  .card--translate {
-      transform: translate(0, -99%);
-  }
   .card__header--desktop {
       font-size: 1rem;
   }
