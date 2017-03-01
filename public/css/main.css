@@ -252,17 +252,18 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     table-layout: fixed;
     margin: auto;
 }
-    .navbar__links--opaque {
-      opacity: 0.5;
-    }
     .navbar__item {
         display: table-cell;
         vertical-align: bottom;
         width: 50%;
         text-align: center;
     }
+    .navbar__item--opaque {
+      opacity: 0.5;
+    }
     .navbar__item--toggled {
         background-color: #66d9e0;
+        opacity: 1;
     }
     .navbar__item:hover {
         background-color: #f2f2f2;
@@ -590,7 +591,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 .tag__title {
     cursor: pointer;
     text-align: center;
-    font-size: 1em;
+    font-size: 0.875rem;
     display: block;
     margin: 0;
     padding: 1rem;
@@ -683,6 +684,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 .card--header-with-logo {
   background: radial-gradient(circle at 50% 57%, rgba(9, 51, 81, 0.84), #002944);
+}
+.card--header-tags {
+  background-image: radial-gradient(circle at 50% 50%, rgba(0, 49, 83, 0.89), #002944);
 }
 .card--header--white {
     background: #fafafa;
@@ -1045,7 +1049,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     line-height: 1;
     height: 2.5rem;
     font-size: 0.875rem;
-    text-shadow: 0 1px 0 #003152;
+    text-shadow: 0 1px 0 rgba(0, 49, 83, 0.07);
 }
 .button--login:hover {
   background: #4DC0C7; /*  10% darker than #66d9e0 */
@@ -1077,6 +1081,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     color: #66d9e0;
     background-color: transparent;
     border: solid 1px #66d9e0;
+}
+
+.button--dark-blue {
+    color: #40667e;
+    border: solid 1px #40667e;
 }
 
 .indicator {
@@ -1346,6 +1355,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
         .navbar-top__burger--checkbox:checked ~ .toggle-menu__top--burger {
             display: block;
+            position: fixed;
         }
         /*.navbar-top__burger--checkbox:checked ~ .toggle-menu__top--add {
             display: none;
@@ -1415,6 +1425,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   .navbar-top--desktop {
     display: table;
     height: 4rem;
+    position: fixed;
+    top: 0;
+    z-index: 10;
   }
   .navbar-top__item--desktop {
     padding: 0 0.7rem;
@@ -1444,7 +1457,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     float: right;
   }
   .toggle-menu__top {
-    top: 4rem;
+    top: 3.8rem;
   }
   .toggle-menu__link--add {
     padding: 2rem 0;
@@ -1453,6 +1466,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     font-size: 1rem;
   }
 
+  .container {
+    margin: 3.8rem auto;
+  }
+  .container--login {
+    margin: 0 auto;
+  }
   .container--desktop {
     background-color: #f2f2f2;
     min-height: 90%;
@@ -1665,6 +1684,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     padding-bottom: 0;
   }
   .tag__title--desktop {
+      font-size: 1rem;
       text-align: left;
       padding: 1rem 15rem;
   }
