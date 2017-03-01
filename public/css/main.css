@@ -590,7 +590,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 .tag__title {
     cursor: pointer;
     text-align: center;
-    font-size: 1em;
+    font-size: 0.875rem;
     display: block;
     margin: 0;
     padding: 1rem;
@@ -683,6 +683,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 .card--header-with-logo {
   background: radial-gradient(circle at 50% 57%, rgba(9, 51, 81, 0.84), #002944);
+}
+.card--header-tags {
+  background-image: radial-gradient(circle at 50% 50%, rgba(0, 49, 83, 0.89), #002944);
 }
 .card--header--white {
     background: #fafafa;
@@ -1647,6 +1650,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     padding-bottom: 0;
   }
   .tag__title--desktop {
+      font-size: 1rem;
       text-align: left;
       padding: 1rem 15rem;
   }
