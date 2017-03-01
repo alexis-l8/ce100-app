@@ -1447,7 +1447,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     top: 4rem;
   }
   .toggle-menu__link--add {
-    padding: rem 0;
+    padding: 2rem 0;
   }
   .togglebar__link--desktop, .togglebar__link--desktop:link, .togglebar__link--desktop:visited {
     font-size: 1rem;
