@@ -26,7 +26,9 @@
                   id="description"
                   name="description"
                   placeholder="Write Here..."
-                  rows="" cols="50">{{#if error.values.description}}{{error.values.description}}{{/if}}</textarea>
+                  rows="" cols="50"
+                  >{{#if error.values.description}}{{error.values.description}}{{/if}}</textarea>
+
       {{#if tags}}
         {{#each tags}}
           <span class="tag__label tag__label--inactive-link">{{name}}</span>
@@ -34,8 +36,8 @@
       {{/if}}
       </div>
 
-      <p class="copy form__copy">Clicking 'Next' will make your challenge public to the network</p>
-      <button class="button button--margin" type="submit">Next</button>
+      <p class="copy form__copy">Clicking 'Save' will make your challenge public to the network</p>
+      <button class="button" type="submit">Save & add tags<i class="icon icon--arrow-right icon--arrow-inside-button"></i></button>
 
     </form>
 </div>

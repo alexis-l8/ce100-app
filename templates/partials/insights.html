@@ -8,10 +8,15 @@
   {{/if}}
 
 
-  <div class="list__subblock">
-    <a href={{url}} target="_blank" class="card__header card__header--challenge card__data--link text-decoration--none {{#if permissions.admin}}card__editable{{/if}}">{{title}}</a>
-    <p class="anchor anchor--left">{{author}}</p>
-    <p class="anchor anchor--left anchor--small">{{type}}</p>
+  <div class="list__subblock panels">
+    <a href={{url}} target="_blank"
+     class="card__header card__header--challenge
+            card__header--desktop du-float-left desktop-grid desktop-grid--half
+            text-decoration--none card__data--link
+            {{#if permissions.admin}}card__editable{{/if}}"
+      >{{title}}</a>
+    <p class="anchor anchor--left anchor--small du-float-right desktop-grid desktop-grid--quarter">{{author}}</p>
+    <p class="anchor anchor--left anchor--small desktop-grid desktop-grid--fluid">{{type}}</p>
   </div>
 
 </li>

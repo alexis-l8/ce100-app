@@ -1,11 +1,13 @@
 <a class="list__data list__data--primary list__link" href="/orgs/{{id}}">
-  <li class="list__item list__item--medium u-capitalise">
+  <li class="list__item list__item--medium u-capitalise list__item--desktop">
     {{#if logo_url}}
-    <img class="list__logo" src="{{logo_url}}" alt="{{name}} logo">
+      <img class="list__logo" src="{{logo_url}}" alt="{{name}} logo">
     {{else}}
-    <img class="list__logo" src="../public/assets/Profile.svg" alt="{{name}} logo">
+      <img class="list__logo" src="../public/assets/Profile.svg" alt="{{name}} logo">
     {{/if}}
+
     {{name}}
+
     {{#if admin }}
       {{>indicator isActive=active}}
     {{/if}}
