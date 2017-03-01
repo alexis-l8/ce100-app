@@ -1671,10 +1671,10 @@ Darker-grey:    #9cafbb;
       width: auto;
   }
 
-  .du-float-left--desktop {
+  .du-float-left {
       float: left;
   }
-  .du-float-right--desktop {
+  .du-float-right {
       float: right;
   }
   .du-no-padding {
