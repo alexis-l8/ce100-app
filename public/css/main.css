@@ -585,7 +585,7 @@ Darker-grey:    #9cafbb;
 .tag__title {
     cursor: pointer;
     text-align: center;
-    font-size: 1rem;
+    font-size: 0.875rem;
     display: block;
     margin: 0;
     padding: 1rem;
@@ -1611,6 +1611,7 @@ Darker-grey:    #9cafbb;
     padding-bottom: 0;
   }
   .tag__title--desktop {
+      font-size: 1rem;
       text-align: left;
       padding: 1rem 15rem;
   }
