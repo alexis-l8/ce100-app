@@ -57,14 +57,12 @@ table {
 html {
     font-size: 16px; /* for REM size declarations */
     font-family: proxima-nova, 'Karla', Helvetica, Ariel, sans-serif;
-    height: 100%;
 }
 
 body {
     line-height: 1.5rem;
     background-color: #fafafa;
     font-size: 0.875rem; /* 14px */
-    height: inherit;
 }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -1467,12 +1465,13 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   }
 
   .container {
-    margin: 3.8rem auto;
+    margin: 3.8rem auto 0;
   }
   .container--login {
     margin: 0 auto;
   }
   .container--desktop {
+    box-shadow: 0 20rem 0 rgb(242, 242, 242);
     background-color: #f2f2f2;
     min-height: 90%;
     text-align: center;
