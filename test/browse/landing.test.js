@@ -38,7 +38,7 @@ tape('/ (GET) - primary correctly greeted: --> ' + __filename, function (t) {
     init(config, function (error, server, pool) {
       t.ok(!error, 'No error on init server');
       server.inject(landingPage('primary_3'), function (res) {
-        t.ok(res.payload.indexOf('Welcome Sally') > -1, 'name is correctly displayed');
+        t.ok(res.payload.indexOf('Sally, ') > -1, 'name is correctly displayed');
         t.end();
         server.stop();
         pool.end();

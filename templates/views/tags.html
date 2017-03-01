@@ -4,9 +4,9 @@
 
 <!-- Main Content -->
 <div class="container">
-  <div class="card card--header">
+  <div class="card card--header card--header-tags">
     <a class="icon icon--back" href={{views.referer}}></a>
-    <h1 class="title">Select Tags</h1>
+    <h1 class="title title--extra-large">Select Tags</h1>
     <a class="icon icon--cancel mobile" href={{views.cancel}}></a>
   </div>
 
@@ -30,7 +30,7 @@
         </div>
         <div class="button-group button-group--desktop">
           <button class="button button--margin button--desktop" type="submit">Save</button>
-          <a class="button button--margin button--desktop button--clear desktop" href={{views.cancel}}>Cancel</a>
+          <a class="button button--short button--margin button--desktop button--clear desktop" href={{views.cancel}}>Cancel</a>
         </div>
     </form>
   {{else}}

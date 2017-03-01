@@ -1,27 +1,25 @@
 module.exports = function(profile) {
   return [
     {
-      title: 'Welcome ' + profile.first_name,
-      description: 'What are the circular economy vision and areas of knowledge'
-      + ' of your organisation?'
+      title: profile.first_name + ', innovation begins with collaboration.',
+      description: 'Get connected to the people making the circular economy happen.'
     },
     {
       primaryOnly: true,
       title: 'Tell us about you',
       description:
-      'What are the circular economy visions and '
-      + 'areas of knowledge of your organisation?',
+        'Share your circular economy vision, expertise and challenges.',
       link: {
-        text: 'Fill in your profile',
+        text: 'Update profile',
         url: '/orgs/' + profile.org_id + '/edit'
       }
     },
     {
       title: 'Get to know the network',
       description:
-      'Who are the members, their areas of experience and their challenges?',
+        'Find out what other member’s are working on and get in touch.',
       link: {
-        text: 'Explore now',
+        text: 'See organisations',
         url: '/orgs'
       }
     },
@@ -29,10 +27,9 @@ module.exports = function(profile) {
       primaryOnly: true,
       title: 'Share a challenge',
       description:
-        'And find out who has the relevant experience to learn from, '
-        + 'to help you solve it.',
+        'And find the people who can help you solve it.',
       link: {
-        text: 'Share a challenge now',
+        text: 'Add challenge',
         url: '/challenges/add'
       }
     },
@@ -40,9 +37,9 @@ module.exports = function(profile) {
       lastCard: true,
       title: 'Find the latest insights',
       description:
-      'Explore circular economy insights related to your topic of interest.',
+        'Get access to circular economy content on the topics you’re interested in.',
       link: {
-        text: 'Find insights',
+        text: 'Explore insights',
         url: '/insights'
       }
     }

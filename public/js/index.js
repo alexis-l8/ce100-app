@@ -54,7 +54,7 @@ var logoSaver = (function () {
 
 // Dynamically adjust the height of the landing cards on the dashboard route #660
 (function () {
-  var viewportHeight = window.outerHeight;
+  var viewportHeight = window.innerHeight;
   var cards = document.querySelectorAll('.landing-card');
 
   [].forEach.call(cards, function (card) {

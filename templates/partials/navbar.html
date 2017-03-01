@@ -1,13 +1,13 @@
 <nav class="mobile navbar">
 {{#if permissions.admin}}
-    <div class="navbar__links navbar__links--opaque">
-      <div class="navbar__item {{#if view.explore}}navbar__item--toggled{{/if}}">
+    <div class="navbar__links">
+      <div class="navbar__item navbar__item--opaque {{#if view.explore}}navbar__item--toggled{{/if}}">
         <a href="/orgs" class="navbar__link">
           <i class="navbar__icon icon icon--large {{#if view.explore}}icon--explore-white{{else}}icon--explore{{/if}}"></i>
           <span class="navbar__link {{#if view.explore}}navbar__link--toggled{{/if}}">Explore</span>
         </a>
       </div>
-      <div class="navbar__item navbar__item--toggle">
+      <div class="navbar__item navbar__item--opaque navbar__item--toggle">
         <label class="navbar__link" for="add-more">
           <i class="navbar__icon icon icon--plus icon--large"></i>
           <span class="navbar__link">Add</span>
@@ -23,20 +23,20 @@
 {{/if}}
 
 {{#if permissions.primary}}
-    <ul class="navbar__links navbar__links--opaque">
-      <li class="navbar__item {{#if view.explore}}navbar__item--toggled{{/if}}">
+    <ul class="navbar__links">
+      <li class="navbar__item navbar__item--opaque {{#if view.explore}}navbar__item--toggled{{/if}}">
         <a href="/orgs" class="navbar__link">
           <i class="navbar__icon icon icon--large {{#if view.explore}}icon--explore-white{{else}}icon--explore{{/if}}"></i>
           <span class="navbar__link {{#if view.explore}}navbar__link--toggled{{/if}}">Explore</span>
         </a>
       </li>
-      <li class="navbar__item {{#if view.add-chal}}navbar__item--toggled{{/if}}">
+      <li class="navbar__item navbar__item--opaque {{#if view.add-chal}}navbar__item--toggled{{/if}}">
         <a href="/challenges/add" class="navbar__link">
           <i class="navbar__icon icon  icon--large {{#if view.add-chal}}icon--plus-white{{else}}icon--plus{{/if}}"></i>
           <span class="navbar__link {{#if view.add-chal}}navbar__link--toggled{{/if}}">Add Challenge</span>
         </a>
       </li>
-      <li class="navbar__item {{#if view.profile}}navbar__item--toggled{{/if}}">
+      <li class="navbar__item navbar__item--opaque {{#if view.profile}}navbar__item--toggled{{/if}}">
         <a href="/orgs/{{permissions.organisation_id}}" class="navbar__link">
           <i class="navbar__icon icon icon--large {{#if view.profile}}icon--profile-white{{else}}icon--profile{{/if}}"></i>
           <span class="navbar__link {{#if view.profile}}navbar__link--toggled{{/if}}">Profile</span>
@@ -46,14 +46,14 @@
 {{/if}}
 
 {{#if permissions.secondary}}
-    <ul class="navbar__links navbar__links--opaque">
-      <li class="navbar__item {{#if view.explore}}navbar__item--toggled{{/if}}">
+    <ul class="navbar__links">
+      <li class="navbar__item navbar__item--opaque {{#if view.explore}}navbar__item--toggled{{/if}}">
         <a href="/orgs" class="navbar__link">
           <i class="navbar__icon icon icon--large {{#if view.explore}}icon--explore-white{{else}}icon--explore{{/if}}"></i>
           <span class="navbar__link {{#if view.explore}}navbar__link--toggled{{/if}}">Explore</span>
         </a>
       </li>
-      <li class="navbar__item {{#if view.profile}}navbar__item--toggled{{/if}}">
+      <li class="navbar__item navbar__item--opaque {{#if view.profile}}navbar__item--toggled{{/if}}">
         <a href="/orgs/{{permissions.organisation_id}}" class="navbar__link">
           <i class="navbar__icon icon icon--large {{#if view.profile}}icon--profile-white{{else}}icon--profile{{/if}}"></i>
           <span class="navbar__link {{#if view.profile}}navbar__link--toggled{{/if}}">Profile</span>
