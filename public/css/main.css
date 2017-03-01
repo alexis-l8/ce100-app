@@ -1426,6 +1426,8 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     display: table;
     height: 4rem;
     position: fixed;
+    top: 0;
+    z-index: 10;
   }
   .navbar-top__item--desktop {
     padding: 0 0.7rem;
@@ -1458,12 +1460,18 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     top: 3.8rem;
   }
   .toggle-menu__link--add {
-    padding: rem 0;
+    padding: 2rem 0;
   }
   .togglebar__link--desktop, .togglebar__link--desktop:link, .togglebar__link--desktop:visited {
     font-size: 1rem;
   }
 
+  .container {
+    margin: 3.8rem auto;
+  }
+  .container--login {
+    margin: 0 auto;
+  }
   .container--desktop {
     background-color: #f2f2f2;
     min-height: 90%;
