@@ -1,4 +1,4 @@
-<li class="list__item list__item--tall list__item--desktop">
+<li class="list__item list__item--tall">
 
   {{#if permissions.admin}}
     <a href="/insights/{{id}}/edit">
@@ -11,12 +11,12 @@
   <div class="list__subblock panels">
     <a href={{url}} target="_blank"
      class="card__header card__header--challenge
-            card__header--desktop u-float-left--desktop u-table--half
+            card__header--desktop du-float-left desktop-grid desktop-grid--half
             text-decoration--none
             {{#if permissions.admin}}card__editable{{/if}}"
       >{{title}}</a>
-    <p class="anchor anchor--left anchor--small u-float-right--desktop u-table--quarter">{{author}}</p>
-    <p class="anchor anchor--left anchor--small u-table--fluid">{{type}}</p>
+    <p class="anchor anchor--left anchor--small du-float-right desktop-grid desktop-grid--quarter">{{author}}</p>
+    <p class="anchor anchor--left anchor--small desktop-grid desktop-grid--fluid">{{type}}</p>
   </div>
 
 </li>
