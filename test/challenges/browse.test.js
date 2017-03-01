@@ -80,9 +80,9 @@ tape('/challenges?tags=' + filterTag.id + ' - challenges are filtered correctly 
           server.inject(browseAll('primary_3', filterTag.id), function (primaryRes) {
             server.inject(browseAll('secondary_12', filterTag.id), function (secondaryRes) {
               // split at each challenge card
-              var admin = adminRes.payload.split('<li class="list__item ');
-              var primary = primaryRes.payload.split('<li class="list__item ');
-              var secondary = secondaryRes.payload.split('<li class="list__item ');
+              var admin = adminRes.payload.split('<li class="list__item');
+              var primary = primaryRes.payload.split('<li class="list__item');
+              var secondary = secondaryRes.payload.split('<li class="list__item');
 
               // check that they each have equal number of challenges displayed
               t.equal(admin.length-1, 2, 'admin can see correct number of challenges');

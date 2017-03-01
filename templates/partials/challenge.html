@@ -1,5 +1,5 @@
 {{#if view.profile}}
-  <li class="list__item list__item--blue">
+  <li class="list__item list__item--blue du-no-padding">
 {{else}}
   <li class="list__item list__item--tall">
 {{/if}}
@@ -9,14 +9,21 @@
       <a href="/challenges/{{id}}/edit">
         <i class="icon icon--edit icon--edit-challenge-on-profile icon--desktop"></i>
       </a>
-  {{/if}}
+    {{/if}}
   {{/if}}
 
   <div class="list__subblock">
-    <a href="/challenges/{{id}}" class="card__header card__header--challenge card__data--link {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}">
+    <a href="/challenges/{{id}}"
+       class="card__header
+              card__header--challenge
+              card__header--desktop
+              card__header--inline
+              card__data--link
+              {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}
+              {{#if view.profile}}card__header--desktop-large{{/if}}"
+              >
       {{title}}
-      <i class="navbar__icon icon icon--open-link"></i>
-  </a>
+    </a>
 
     {{#if shared_by}}
     <p class="list__data list__data--secondary">Shared by
