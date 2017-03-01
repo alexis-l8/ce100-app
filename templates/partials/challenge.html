@@ -1,7 +1,7 @@
 {{#if view.profile}}
-  <li class="list__item list__item--blue">
+  <li class="list__item list__item--blue list__item--desktop">
 {{else}}
-  <li class="list__item list__item--tall">
+  <li class="list__item list__item--tall list__item--desktop">
 {{/if}}
 
   {{#if permissions.primary}}
@@ -9,18 +9,29 @@
       <a href="/challenges/{{id}}/edit">
         <i class="icon icon--edit icon--edit-challenge-on-profile icon--desktop"></i>
       </a>
-  {{/if}}
+    {{/if}}
   {{/if}}
 
   <div class="list__subblock">
-    <a href="/challenges/{{id}}" class="card__header--challenge card__data--link {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}">
+    <a href="/challenges/{{id}}"
+       class="card__header
+              card__header--challenge
+              card__header--desktop
+              card__header--inline
+              card__data--link
+              {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}"
+              >
       {{title}}
-      <i class="navbar__icon icon icon--open-link"></i>
-  </a>
+      {{#if view.profile}}
+        <i class="navbar__icon icon icon--open-link-white"></i>
+      {{else}}
+        <i class="navbar__icon icon icon--open-link"></i>
+      {{/if}}
+    </a>
 
     {{#if shared_by}}
-    <p class="anchor anchor--shared-by anchor--left u-teal">Shared by
-      <a href="/orgs/{{org_id}}" class="anchor anchor--shared-by anchor--left u-teal">
+    <p class="anchor anchor--shared-by anchor--left anchor--desktop u-teal">Shared by&nbsp
+      <a href="/orgs/{{org_id}}" class="anchor anchor--shared-by anchor--left anchor--desktop u-teal">
         {{shared_by}}
       </a>
     </p>
