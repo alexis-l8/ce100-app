@@ -252,17 +252,18 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     table-layout: fixed;
     margin: auto;
 }
-    .navbar__links--opaque {
-      opacity: 0.5;
-    }
     .navbar__item {
         display: table-cell;
         vertical-align: bottom;
         width: 50%;
         text-align: center;
     }
+    .navbar__item--opaque {
+      opacity: 0.5;
+    }
     .navbar__item--toggled {
         background-color: #66d9e0;
+        opacity: 1;
     }
     .navbar__item:hover {
         background-color: #f2f2f2;

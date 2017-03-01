@@ -12,7 +12,7 @@
     <g id="Symbols" stroke="#ffffff" stroke-width="1" fill="none">
         <g id="Explore">
             <use id="Oval" stroke="#ffffff" mask="url(#mask-2)" stroke-width="1.62337662" xlink:href="#path-1"></use>
-            <path d="M7.1332438,2.06657713 L8.3832711,7.1332438 L5.88321651,7.1332438 L7.1332438,2.06657713 Z M7.1332438,12.1999105 L5.88321651,7.1332438 L8.3832711,7.1332438 L7.1332438,12.1999105 Z" id="Combined-Shape" fill="none" transform="translate(20.133244, 20.133244) scale(-3, -3) rotate(-135.000000) translate(-7.133244, -7.133244) "></path>
+            <path d="M7.1332438,2.06657713 L8.3832711,7.1332438 L5.88321651,7.1332438 L7.1332438,2.06657713 Z M7.1332438,12.1999105 L5.88321651,7.1332438 L8.3832711,7.1332438 L7.1332438,12.1999105 Z" id="Combined-Shape" fill="#ffffff" transform="translate(20.133244, 20.133244) scale(-3, -3) rotate(-135.000000) translate(-7.133244, -7.133244) "></path>
         </g>
     </g>
 </svg>
