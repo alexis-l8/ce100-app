@@ -193,6 +193,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     -webkit-transform: translate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
     -ms-transform: translate(30deg); /* IE 9 */
 }
+.icon--cancel-top {
+    top: 3rem;
+    right: 1rem;
+}
 .icon--edit {
     position: absolute;
     top: 0.5rem;
@@ -315,8 +319,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       top: 3.4rem;
     }
         .toggle-menu__top--burger {
+          top: 0;
+          padding: 5rem 0;
           bottom: 0;
-          padding-top: 4rem;
           width: 100%;
           display: none;
         }
@@ -1467,6 +1472,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   }
   .toggle-menu__top {
     top: 3.8rem;
+  }
+  .toggle-menu__top--burger {
+    padding: 4rem 0;
   }
   .toggle-menu__link--add {
     padding: 2rem 0;
