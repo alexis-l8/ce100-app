@@ -34,11 +34,11 @@
             id="{{id}}">
 
     <div class="list__hidden-details">
-      <a class="list__data u-teal" href="mailto:{{email}}">
+      <a class="anchor list__data" href="mailto:{{email}}">
         <div class="u-text-wrap">{{email}}</div>
       </a>
 
-      <span class="list__data u-teal">{{phone}}</span>
+      <span class="list__data"><a href="tel:{{primary.phone}}" class="card__data--link">{{phone}}</a></span>
 
       {{#if permissions.admin}}
         <span class="list__data u-teal">{{user_type}}</span>

@@ -73,18 +73,21 @@ body {
 
 /*
 Marine-blue :   #003253;
+(copy main color)
+
 
 Navy:           #002944;
 
 Denim:          #40667e;
 
 Bluey-grey:     #89a0ae;
+additional copy/link color
 
 White:          #ffffff;
 
 anchor-red:     #900000;
 
-Teal:     #66d9e0;
+Teal:           #66d9e0;
 
 Light-teal:     #B4ECEF;
 Used for a disabled (unclickable) tag
@@ -272,12 +275,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         .navbar__link {
             display: block;
             text-decoration: none;
-            color: #40667e; /* Denim */
+            color: #003253;
             font-size: 0.75rem;
             cursor: pointer;
         }
         .navbar__link:visited {
-            color: #40667e; /* Denim */
+            color: #003253;
         }
         .navbar__link:hover {
             text-decoration: none;
@@ -303,14 +306,14 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 
     .toggle-menu__bottom {
-      background-color: #40667e;
+      background-color: #003253;
       width: 50%;
       bottom: 3.5em;
       display: none;
     }
 
     .toggle-menu__top {
-      background-color: #002944;
+      background-color: #003253;
       top: 3.4rem;
     }
         .toggle-menu__top--burger {
@@ -363,7 +366,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     font-size: 0.875rem;
   }
   .togglebar__link--selected, .togglebar__link--selected:visited {
-    color: #40667e;
+    color: #003253;
   }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -415,7 +418,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   font-size: 0.875rem;
 }
 .title--with-logo--blue {
-    color: #40667e;
+    color: #003253;
 }
 .title--tall {
     vertical-align: middle;
@@ -444,11 +447,13 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     text-align: left;
     line-height: 1.5;
 }
+    .copy--additional {
+        color: #89a0ae;
+    }
     .copy--login {
         color: #ffffff;
         text-align: center;
         margin: 0.8rem auto;
-        text-decoration: none;
     }
     .copy--extra-padding {
         margin-bottom: 5rem;
@@ -470,7 +475,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 
     .list__item {
-        color: #40667e;
+        color: #003253;
         position: relative;
         font-size: 1.125rem;
         padding: 1.5rem;
@@ -495,8 +500,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
         .list__data {
             display: block;
-            color: #40667e;
-            text-decoration: none;
+            color: #003253;
             padding: 0.3rem 0 0 0;
             font-size: 0.875rem;
         }
@@ -508,9 +512,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             width: 100%;
         }
         .list__data--primary {
-            color: #40667e;
+            color: #003253;
             font-size: 1.2rem;
             padding: 0;
+            text-decoration: none;
         }
         .list__data--secondary {
             color: #89a0ae;
@@ -665,7 +670,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 .card {
     padding: 2.75rem 1.55rem 1.75rem;
     text-align: center;
-    color: #40667e;
+    color: #003253;
     border-bottom: 1px solid rgba(64, 101, 126, 0.1);
     line-height: 1;
     position: relative;
@@ -712,9 +717,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         display: block;
         margin-bottom: 1rem;
         font-size: 0.875rem;
+        text-decoration: none;
     }
         .card__header--challenge {
-            color: #40667e;
+            color: #003253;
             font-size: 1.125rem;
             line-height: 1.375rem;
             margin-bottom: 0.3rem;
@@ -724,7 +730,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         }
         .card__header--suggested-matches {
             font-size: 0.875rem;
-            color: #40667e;
+            color: #003253;
             text-align: center;
             opacity: 0.5;
             margin-bottom: 1rem;
@@ -746,9 +752,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     margin-bottom: 0.5rem;
 }
         .card__data--link {
-          text-decoration: none;
           color: inherit;
-          margin: 0;
         }
         .card__data--linked-button {
           font-size: 1.5rem;
@@ -822,7 +826,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   color: #66d9e0;
   text-align: center;
   display: block;
-  text-decoration: none;
   width: 8rem;
 }
 .landing-card__icon--with-text {
@@ -889,7 +892,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         /*space between the bottom of a form input and the top of the next label is 37px*/
         /*This is calculated with 28px margin bottom of a form input, and 9px padding-top of a form label*/
         padding-top: 0.5625rem; /* 9px */
-        color: #40667e;
+        color: #003253;
         font-size: 1rem;
     }
         .form__label--long {
@@ -897,7 +900,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         }
         .form__label--additional {
           /*Gives the user additional information on filling out a specific input*/
-          color: rgba(64,102,126, 0.5);
+          color: #89a0ae;
           font-size: 0.875rem;
           padding-top: 0;
           margin-top: -0.5rem;
@@ -919,7 +922,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         font-family: inherit;
         font-size: 0.875rem; /* 14px */
         width: 100%;
-        color: #40667e;
+        color: #003253;
         border-radius: 3px;
         background-color: #f2f2f2;
         border: solid 1px #ebeced;
@@ -1003,14 +1006,13 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     .form__copy {
       font-size: 0.875rem; /* 14px */
       text-align: center;
-      color: #40667e;
+      color: #003253;
       margin-bottom: 1.438rem;
     }
 
 
     .form__anchor {
         color: #66d9e0;
-        text-decoration: none;
     }
         .form__anchor--danger:visited {
             color: #66d9e0;
@@ -1112,20 +1114,29 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     Anchors
   |||||||||||||||||||||||||||||||||||||||||||*/
 .anchor {
+  color: #003253;
 }
 
 .anchor:link {
     text-align: center;
     display: inline-block;
-    color: #89a0ae;
+    color: #003253;
 }
 .anchor:visited {
-    color: #40667e;
+    color: #003253;
 }
 .anchor:hover {
-    text-decoration: none;
 }
-    .anchor--red:link {
+.anchor:active {
+    color: #66d9e0;
+}
+.anchor--additional, .anchor--additional:link, .anchor--additional:visited, .anchor--additional:hover  {
+    color: #89a0ae;
+}
+.anchor--additional:active {
+    color: #003253;
+}
+    .anchor--red:link, .anchor--red:hover, .anchor--red:visited {
         color: #900000;
     }
 
@@ -1141,20 +1152,19 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       display: block;
       text-align: left;
       width: 100%;
-      color: #40667e;
+      color: #003253;
       margin: 0 0 1.1875rem 0;
-      text-decoration: none;
     }
-    .anchor--shared-by, .anchor--shared-by:link, .anchor--shared-by:visited {
-        font-size: 0.875rem;
-        line-height: 1;
-    }
-    .anchor--left, .anchor--left:link, .anchor--left:visited {
-        color: rgba(64, 102, 126, 0.5);
-        text-align: left;
-        padding: 0.4rem 0 0 0;
-        margin: 0;
-    }
+.anchor--shared-by, .anchor--shared-by:link, .anchor--shared-by:visited {
+    font-size: 0.875rem;
+    line-height: 1;
+}
+
+.anchor--left, .anchor--left:link, .anchor--left:visited {
+    text-align: left;
+    padding: 0.4rem 0 0 0;
+    margin: 0;
+}
     .anchor--right, .anchor--right:link, .anchor--right:visited {
         text-align: right;
     }
@@ -1214,7 +1224,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 
 .text-decoration--none {
-  text-decoration: none;
 }
 
 .log-in-logo {
@@ -1336,8 +1345,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       float: right;
       margin-right: 1.3rem;
     }
-
-
         .navbar-top__burger--checkbox {
           display: none;
         }
@@ -1345,27 +1352,14 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
           display: none;
         }
 
-        /*.burger-checkbox-desktop:checked ~ .toggle-menu__top--add {
-            display: block;
-        }
-
-        .burger-checkbox-desktop:checked ~ .toggle-menu__top--add {
-            display: block;
-        }*/
-
         .navbar-top__burger--checkbox:checked ~ .toggle-menu__top--burger {
             display: block;
             position: fixed;
         }
-        /*.navbar-top__burger--checkbox:checked ~ .toggle-menu__top--add {
-            display: none;
-        }*/
         .navbar-top__add--checkbox:checked ~ .toggle-menu__top--add {
             display: block;
         }
-        /*.navbar-top__add--checkbox:checked ~ .toggle-menu__top--burger {
-            display: none;
-        }*/
+
 /*|||||||||||||||||||||||||||||||||||||||||||||
     snackbar classes
   |||||||||||||||||||||||||||||||||||||||||||*/
@@ -1551,6 +1545,21 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   .card--narrow {
     padding: 0.5rem 0rem;
     border-bottom: 0;
+  }
+  .list__item--blue {
+      background-color: inherit;
+      color: #003253;
+      text-align: left;
+  }
+
+  .title--desktop {
+    display: inline-block;
+    text-align: left;
+    color: #003253;
+    padding: 0.5rem 0 1rem 0;
+    margin: 1rem 1.5rem;
+    font-size: 1.125rem;
+    width: 90%;
   }
   .card--blue {
       background-color: inherit;

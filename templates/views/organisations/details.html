@@ -33,8 +33,8 @@
           <h2 class="card__header card__header--desktop card__header--underline">GET IN TOUCH</h2>
           <span class="card__data card__data--desktop">{{primary.first_name}} {{primary.last_name}}</span>
           <span class="card__data card__data--desktop">{{primary.job_title}}</span>
-          <span class="card__data card__data--desktop"><a href="tel:{{primary.phone}}" class="card__data--link">{{primary.phone}}</a></span>
-          <span class="card__data  card__data--desktop u-teal"><a href="mailto:{{primary.email}}" class="card__data--link">{{primary.email}}</a></span>
+          <span class="card__data card__data--desktop"><a href="tel:{{primary.phone}}" class="anchor card__data--link">{{primary.phone}}</a></span>
+          <span class="card__data  card__data--desktop"><a href="mailto:{{primary.email}}" class="link-colors-accessibility card__data--link">{{primary.email}}</a></span>
         </div>
       {{else}}
         <div class="card card--desktop">
@@ -74,7 +74,7 @@
               </div>
               <!-- Desktop -->
               <a href="/challenges/add" class="button button--small button--margin button--desktop button--top-margin button--clear button--dark-blue u-float-left desktop">+ Challenge</a>
-              <a href="/orgs/{{org.id}}/archived-challenges" class="anchor anchor--left anchor--top-margin u-float-right text-decoration--none desktop">Archived challenges</a>
+              <a href="/orgs/{{org.id}}/archived-challenges" class="anchor anchor--additional anchor--left anchor--top-margin u-float-right text-decoration--none desktop">Archived challenges</a>
             {{/if}}
           {{/if}}
     </div>
