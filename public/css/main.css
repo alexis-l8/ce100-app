@@ -822,6 +822,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 .landing-card__icon-container--with-text {
   font-size: 0.8rem;
   color: #66d9e0;
+  text-decoration: none;
   text-align: center;
   display: block;
   width: 8rem;
@@ -1235,6 +1236,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 
 .u-text-decoration--none {
+  text-decoration: none;
 }
 
 .log-in-logo {
