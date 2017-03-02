@@ -1530,6 +1530,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     padding: 3rem 0;
     margin: 0;
   }
+  .d-card--centred {
+    max-width: 35rem;
+    margin: auto;
+  }
 
   .card {
     text-align: left;
@@ -1581,6 +1585,22 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       background-color: inherit;
       color: #40667e;
       border: inherit;
+  }
+  .card__copy--challenge {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+
+  }
+  .card__header--challenge {
+    margin-bottom: 1.5rem;
+    font-size: 1.3125rem;
+    margin-top: 0.5rem;
+  }
+
+  .list__item--blue {
+      background-color: inherit;
+      color: #40667e;
+      text-align: left;
   }
   .card__header--desktop {
       font-size: 1rem;
