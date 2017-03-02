@@ -433,8 +433,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   font-size: 0.875rem;
   line-height: 1.375rem;
 }
-.title--off-white {
-    color: #ffffff;
+.title--opaque {
     opacity: 0.75;
 }
 
