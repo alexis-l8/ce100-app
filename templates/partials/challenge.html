@@ -17,8 +17,8 @@
        class="card__header
               card__header--challenge
               card__header--desktop
-              card__header--inline
               card__data--link
+              card__header--inline
               {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}
               {{#if view.profile}}card__header--desktop-large{{/if}}"
               >
@@ -26,7 +26,7 @@
     </a>
 
     {{#if shared_by}}
-    <p class="list__data list__data--secondary">Shared by
+    <p class="list__data list__data--secondary list__data--inline du-float-right">Shared by
       <a href="/orgs/{{org_id}}" class="anchor anchor--additional">
         {{shared_by}}
       </a>
