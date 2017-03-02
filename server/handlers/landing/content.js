@@ -17,7 +17,7 @@ module.exports = function(profile) {
     {
       title: 'Get to know the network',
       description:
-        'Find out what other member’s are working on and get in touch.',
+        'Find out what other members are working on and get in touch.',
       link: {
         text: 'See organisations',
         url: '/orgs'
