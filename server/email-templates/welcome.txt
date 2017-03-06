@@ -1,7 +1,13 @@
-Hi {{first_name}} {{last_name}}
+Hi {{first_name}},
 
-Welcome to CE100!
+Welcome to the CE100 member's area!
+The Ellen MacArthur Foundation team has created this app to help you solve your challenges faster by connecting you to the members and insights that can support you in achieving your circular economy goals.
+You can click here to activate your account.
 To access our log in page, please copy and paste the following link into your browser.
+
 {{url}}/people/activate/{{hashedId}}
 
-EMF
+We hope that you find the app useful and encourage you to get in touch with any feedback you have by using the pop up window in the app or emailing us at ce100@ellenmacarthurfoundation.org.
+
+Best,
+CE100 team
