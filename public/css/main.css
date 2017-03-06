@@ -1088,10 +1088,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 
 .button--landing {
+    background-color: transparent;
+    color: white;
+    border: solid 1px #66d9e0;
     font-size: 0.8rem;
     text-transform: none;
     padding: 0.5rem 1.5rem;
-    background-color: #66d9e0;
     width: 9rem;
     margin-top: 2rem;
 }

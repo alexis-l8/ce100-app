@@ -2,15 +2,20 @@
 
 var Hapi = require('hapi');
 var path = require('path');
+
+// plugins
 var inert = require('inert');
 var handlebars = require('handlebars');
 var vision = require('vision');
 var hapiError = require('hapi-error');
+var httpsRedirect = require('./https-redirect.js');
 var auth = require('./auth.js');
-var routes = require('./routes.js');
-var pg = require('pg');
 var good = require('good');
+
+var routes = require('./routes.js');
+
 // pg plugins
+var pg = require('pg');
 var tags = require('tags-system');
 var challenges = require('pg-challenges');
 var people = require('pg-people');
@@ -107,7 +112,8 @@ function initServer (config, callback) {
             vision,
             { register: hapiError, options: optionError },
             auth,
-            { register: good, options: goodOptions }
+            { register: good, options: goodOptions },
+            httpsRedirect
           ], function (err) {
             if (err) {
               return callback(err, server, pool);
