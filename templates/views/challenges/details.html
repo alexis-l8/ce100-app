@@ -4,51 +4,51 @@
 
 <!-- Main Content -->
 <div class="container">
-  <div class="card card--header">
-    <h1 class="title">Challenge</h1>
-    <a class="icon icon--cancel" href="{{cancelUrl}}"></a>
-  </div>
-
-  <div class="card card--details">
-    {{#if permissions.primary}}
-      {{#if permissions.editable}}
-        <a href="/challenges/{{challenge.id}}/edit">
-          <i class="icon icon--edit icon--edit-blue icon--desktop"></i>
-        </a>
-      {{/if}}
-    {{/if}}
-    <p class="card__header card__header--challenge card__header--extra-margin {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}">
-      {{challenge.title}}
-    </p>
-    <p class="card__copy">{{challenge.description}}</p>
-    {{#each challenge.tags}}
-      <a class="text-decoration--none" href="/challenges?tags={{id}}">
-        <span class="tag__label">{{name}}</span>
-      </a>
-    {{/each}}
-
-    <h4 class="card__copy anchor anchor--shared-by anchor--right u-no-margin">Shared by
-      <a class="card__copy anchor anchor--shared-by anchor--right u-no-margin" href="/orgs/{{challenge.org_id}}">
-        {{challenge.org_name}}
-      </a>
-    </h4>
-  </div>
-  {{#if permissions.editable}}
-    <div class="card card--suggested-matches">
-      <h2 class="card__header card__header--suggested-matches">MATCHED WITH</h2>
-      {{#if suggested_matches}}
-      {{#each suggested_matches}}
-        <a class="anchor anchor--suggested-matches" href="/orgs/{{id}}">{{name}}</a>
-      {{/each}}
-      {{else}}
-        <p class="card__copy">No organisations match this challenge</p>
-      {{/if}}
+    <div class="card card--header">
+      <h1 class="title">Challenge</h1>
+      <a class="icon icon--cancel" href="{{cancelUrl}}"></a>
     </div>
-  {{/if}}
-    </form>
+
+    <div class="card card--details d-card--centred">
+      {{#if permissions.primary}}
+        {{#if permissions.editable}}
+          <a href="/challenges/{{challenge.id}}/edit">
+            <i class="icon icon--edit icon--edit-blue icon--desktop"></i>
+          </a>
+        {{/if}}
+      {{/if}}
+      <p class="card__header card__header--challenge  card__header--extra-margin {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}">
+        {{challenge.title}}
+      </p>
+      <p class="card__copy card__copy--challenge">{{challenge.description}}</p>
+      {{#each challenge.tags}}
+        <a class="u-text-decoration--none" href="/challenges?tags={{id}}">
+          <span class="tag__label">{{name}}</span>
+        </a>
+      {{/each}}
+
+
+      <h4 class="card__copy anchor anchor--shared-by anchor--right u-no-margin">Shared by
+        <a class="card__copy anchor anchor--shared-by anchor--right u-no-margin" href="/orgs/{{challenge.org_id}}">
+          {{challenge.org_name}}
+        </a>
+      </h4>
+    </div>
+    {{#if permissions.editable}}
+      <div class="card card--suggested-matches d-card--centred">
+        <h2 class="card__header card__header--suggested-matches">MATCHED WITH</h2>
+        {{#if suggested_matches}}
+        {{#each suggested_matches}}
+          <a class="anchor anchor--suggested-matches" href="/orgs/{{id}}">{{name}}</a>
+        {{/each}}
+        {{else}}
+          <p class="card__copy">No organisations match this challenge</p>
+        {{/if}}
+      </div>
+    {{/if}}
 </div>
 
-<!-- Include Feedback Widget -->
-{{>feedback}}
+
+
 <!-- Include Navbar -->
 {{>navbar}}

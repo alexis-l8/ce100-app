@@ -1,6 +1,7 @@
-Hi {{first_name}} {{last_name}},
+Hi {{first_name}},
 
-We have received a reset password request. To reset your password, please copy and paste the following link into your browser.
+Forgotten your password? Don’t worry, simply click the link below to reset it.
+
 {{url}}/people/password-reset/{{hashedId}}
 
 
