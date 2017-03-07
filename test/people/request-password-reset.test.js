@@ -35,7 +35,7 @@ tape('/password-reset (GET) - password reset view: --> ' + __filename, function 
 
 tape('/password-reset (POST) - password reset good email: --> ' + __filename, function (t) {
   var expectedUser = {
-    subject: 'CE100 password reset requested',
+    subject: 'Reset your password for the CE100 member\'s area',
     url: config.root_url,
     email: 'sa@ro.co',
     first_name: 'Sally',

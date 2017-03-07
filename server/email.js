@@ -7,9 +7,9 @@ var config = require('./config.js');
 sendEmail.set_template_directory('server/email-templates');
 
 var subjects = {
-  welcome: 'Welcome to CE100!',
-  reset: 'CE100 password reset requested'
-}
+  welcome: 'Activate your CE100 member\'s area account',
+  reset: 'Reset your password for the CE100 member\'s area'
+};
 
 function send (emailType, user, callback) {
   var expiresIn = emailType === 'reset' && { expiresIn: 60*5 }
