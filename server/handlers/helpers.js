@@ -4,7 +4,15 @@ var url = require('url');
 var helpers = {};
 
 var INSIGHT_TYPES = [
-  'CASE STUDY', 'PAPER', 'PRESENTATION', 'REPORT', 'VIDEO', 'WORKSHOP SUMMARY'
+  'CASE STUDY',
+  'PAPER',
+  'PRESENTATION',
+  'REPORT',
+  'VIDEO',
+  'WORKSHOP SUMMARY',
+  'CO.PROJECT',
+  'IMAGE',
+  'LINK'
 ];
 
 ///// *** S3 Image Upload *** /////
