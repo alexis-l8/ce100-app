@@ -410,10 +410,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     font-size: 1rem;
     font-weight: normal;
     color: #ffffff;
-    text-transform: lowercase;
- }
- .title::first-letter {
-   text-transform: uppercase;
  }
 .title--with-logo {
   padding: 0rem;
