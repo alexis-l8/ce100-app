@@ -48,7 +48,7 @@ tape('/insights/add: add new resource as admin', function (t) {
     author: 'Committee on Climate Change',
     type: 'REPORT',
     resource: true,
-    active: 'on'
+    active: true
   };
 
   sessions.addAll(function () {
