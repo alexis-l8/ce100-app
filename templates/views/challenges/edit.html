@@ -34,9 +34,11 @@
         {{#if tags}}
         <div class="form__section">
 
+          <div id="tag__labels">
           {{#each tags}}
-            <span class="tag__label">{{name}}</span>
+              <span class="tag__label">{{name}}</span>
           {{/each}}
+        </div>
         </div>
         <button class="button" type="button" id="edit-tags">Edit tags<i class="icon icon--arrow-right icon--arrow-inside-button"></i></button>
         {{/if}}
@@ -70,37 +72,57 @@
   var tagList = document.getElementById('tag-list');
   var selectTags = document.getElementById('select-tags');
   var cancelTags = document.getElementById('cancel-tags');
-  var tag;
-  var i;
+  var tag, i, j;
   var currentState = {{{"initialTags"}}}
 
   editTagsButton.addEventListener('click', function(){
     unselectTags();
     tagList.style.display = 'block'
     for (i = 0; i < currentState.length; i++) {
-        tag = document.getElementById('tag_' + currentState[i]);
+        tag = document.getElementById('tag_' + currentState[i].id);
         tag.checked = true;
     }
   })
 
   cancelTags.addEventListener('click', function() {
-
+    tagList.style.display = 'none'
   })
 
   selectTags.addEventListener('click', function() {
     //get selected tags
     var selectedTags = document.querySelectorAll('.tag__input:checked:not(.cat)')
+    var labels = document.querySelectorAll('.tag__label')
+
     currentState = [];
     for(i = 0; i < selectedTags.length; i++) {
-      currentState.push(selectedTags[i].value);
+      var obj = {}
+      obj.id = selectedTags[i].value
+      for (j = 0; j < labels.length; j++) {
+        if ((labels[j] || {}).htmlFor === 'tag_'+obj.id+'') {
+          obj.name = labels[j].innerHTML
+        }
+      }
+      currentState.push(obj);
     }
-
+    tagList.style.display = 'none'
+    updateTagsInEditChallenge();
   })
 
   var unselectTags = function() {
     var tags = document.querySelectorAll('.tag__input:checked:not(.cat)');
     for(i = 0; i < tags.length; i++) {
       tags[i].checked = false;
+    }
+  }
+
+  var updateTagsInEditChallenge = function() {
+    var tagLabelsList = document.getElementById('tag__labels');
+    tagLabelsList.innerHTML = '';
+    for (i = 0; i < currentState.length; i++) {
+      var newtagLabel = document.createElement('span')
+      newtagLabel.className = 'tag__label'
+      newtagLabel.innerHTML = currentState[i].name
+      tagLabelsList.append(newtagLabel)
     }
   }
 
