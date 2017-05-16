@@ -57,7 +57,7 @@ tape('/insights/add cannot be viewed by a primary user', function (t) {
     author: 'P Diffy',
     type: 'REPORT',
     resource: false,
-    active: 'on'
+    active: true
   };
 
   sessions.addAll(function () {
@@ -101,7 +101,7 @@ tape('/insights/add: add insight as admin', function (t) {
     author: 'P Diffy',
     type: 'REPORT',
     resource: false,
-    active: 'on'
+    active: true
   };
 
   sessions.addAll(function () {
@@ -161,7 +161,7 @@ tape('/insights/add: fail validation (no title)', function (t) {
     author: 'P Diffy',
     type: 'REPORT',
     resource: false,
-    active: 'on'
+    active: true
   };
 
   sessions.addAll(function () {
