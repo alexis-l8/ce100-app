@@ -25,15 +25,29 @@ module.exports = function (request, reply, source, joiErr) {
           var challenge = chal[0];
 
           Hoek.assert(!dbErr, 'database error');
-          options = Object.assign(
-            permissions,
-            challenge,
-            helpers.getPermissions(
-              loggedIn, 'organisation_id', challenge.org_id),
-            { error: error }
-          );
 
-          return reply.view('challenges/edit', options).code(error ? 401 : 200);
+          request.server.methods.pg.tags.getTagsForEdit('challenges', cid,
+            function (pgErr, tags) {
+              Hoek.assert(!pgErr, 'database error');
+
+              options = Object.assign(
+                permissions,
+                challenge,
+                {tagList: helpers.locationCategoryToEnd(tags)},
+                helpers.getPermissions(
+                  loggedIn, 'organisation_id', challenge.org_id),
+                { error: error }
+              );
+
+              var idTags = challenge.tags.map(function(t) {
+                return t.id;
+              })
+
+              options.initialTags = JSON.stringify(idTags);
+
+              return reply.view('challenges/edit', options).code(error ? 401 : 200);
+
+            });
         });
     });
 };
