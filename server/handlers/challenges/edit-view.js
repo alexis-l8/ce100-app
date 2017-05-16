@@ -40,7 +40,10 @@ module.exports = function (request, reply, source, joiErr) {
               );
 
               var idTags = challenge.tags.map(function(t) {
-                return t.id;
+                var obj = {}
+                obj.id = t.id;
+                obj.name = t.name;
+                return obj;
               })
 
               options.initialTags = JSON.stringify(idTags);
