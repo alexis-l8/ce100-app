@@ -38,13 +38,14 @@
             <span class="tag__label">{{name}}</span>
           {{/each}}
         </div>
+        <button class="button" type="button" id="edit-tags">Edit tags<i class="icon icon--arrow-right icon--arrow-inside-button"></i></button>
         {{/if}}
       </div>
 
       <p class="copy form__copy">Clicking 'Save' will make your challenge public to the network</p>
 
 
-      <button class="button" type="submit">Save & edit tags<i class="icon icon--arrow-right icon--arrow-inside-button"></i></button>
+      <button class="button" type="submit">Save & Publish<i class="icon icon--arrow-right icon--arrow-inside-button"></i></button>
 
       <!-- Show archive and primary user if admin is logged in -->
         <div class="form__section">
@@ -60,9 +61,50 @@
 
     </form>
 
+    {{>modal-tags}}
 </div>
 
 
+<script type="text/javascript">
+  var editTagsButton = document.getElementById('edit-tags');
+  var tagList = document.getElementById('tag-list');
+  var selectTags = document.getElementById('select-tags');
+  var cancelTags = document.getElementById('cancel-tags');
+  var tag;
+  var i;
+  var currentState = {{{"initialTags"}}}
+
+  editTagsButton.addEventListener('click', function(){
+    unselectTags();
+    tagList.style.display = 'block'
+    for (i = 0; i < currentState.length; i++) {
+        tag = document.getElementById('tag_' + currentState[i]);
+        tag.checked = true;
+    }
+  })
+
+  cancelTags.addEventListener('click', function() {
+
+  })
+
+  selectTags.addEventListener('click', function() {
+    //get selected tags
+    var selectedTags = document.querySelectorAll('.tag__input:checked:not(.cat)')
+    currentState = [];
+    for(i = 0; i < selectedTags.length; i++) {
+      currentState.push(selectedTags[i].value);
+    }
+
+  })
+
+  var unselectTags = function() {
+    var tags = document.querySelectorAll('.tag__input:checked:not(.cat)');
+    for(i = 0; i < tags.length; i++) {
+      tags[i].checked = false;
+    }
+  }
+
+</script>
 
 <!-- Include Navbar -->
 {{>navbar}}
