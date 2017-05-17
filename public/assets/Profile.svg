@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
-  <title>Artboard 3</title>
-  <g id="Symbols" stroke="#40667e" stroke-width="0.1" fill="#40667e">
-    <path d="M6.94,3A1.65,1.65,0,1,1,5.29,4.65,1.65,1.65,0,0,1,6.94,3m0-1A2.65,2.65,0,1,0,9.59,4.65,2.65,2.65,0,0,0,6.94,2Z"/>
-    <path d="M7,9c3,0,5,.91,5.68,2H1.32C2,9.89,4,9,7,9M7,8c-4.81,0-7,2.08-7,4H14c0-2-2.17-4-7-4Z"/>
-  </g>
+<svg width="64px" height="31px" viewBox="0 0 64 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>profile copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="New-Icons" transform="translate(-100.000000, -22.000000)" fill-rule="nonzero" fill="#40667E">
+            <g id="profile-copy" transform="translate(100.000000, 22.000000)">
+                <path d="M15.21,4.62 C19.5750554,4.61595453 23.5125489,7.24228718 25.1857872,11.273912 C26.8590254,15.3055367 25.9383488,19.9481474 22.8532185,23.0361395 C19.7680882,26.1241317 15.1263333,27.0491127 11.0931588,25.3796133 C7.05998429,23.7101139 4.43000187,19.7750572 4.43,15.41 C4.43550181,9.45703059 9.25703825,4.63102148 15.21,4.62 L15.21,4.62 Z M15.21,0.62 C9.20457561,0.603823685 3.7822313,4.21109472 1.47657614,9.75630329 C-0.829079022,15.3015119 0.437168518,21.689848 4.68366023,25.9363398 C8.93015195,30.1828315 15.3184881,31.449079 20.8636967,29.1434239 C26.4089053,26.8377687 30.0161763,21.4154244 30,15.41 C30.0000297,7.23521274 23.3847575,0.602049325 15.21,0.58 L15.21,0.62 Z" id="Shape"></path>
+                <rect id="Rectangle-path" x="36.82" y="1.24" width="20.22" height="4.04"></rect>
+                <rect id="Rectangle-path" x="36.82" y="13.05" width="26.59" height="4.04"></rect>
+                <rect id="Rectangle-path" x="36.82" y="24.86" width="20.22" height="4.04"></rect>
+            </g>
+        </g>
+    </g>
 </svg>

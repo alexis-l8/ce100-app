@@ -131,18 +131,22 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 .icon--plus-white {
     background-image: url("../assets/Plus-white.svg");
 }
+
 .icon--profile {
     background-image: url("../assets/Profile.svg");
+    background-position: center;
+    width: 2.5rem;
+    height: 1rem;
 }
-.icon--profile-white {
-    background-image: url("../assets/Profile-white.svg");
-}
-.icon--profile-blue {
-    background-image: url("../assets/Profile-blue.svg");
-}
+    .icon--profile-white { /* Must be combined with .icon--profile
+                              for proper positioning. */
+        background-image: url("../assets/Profile-white.svg");
+    }
+
 .icon--burger {
     background-image: url("../assets/Burger.svg");
-    width: 1.4rem;
+    height: 1.375rem;
+    background-position: center;
 }
 .icon--logo {
     background-image: url("../assets/logo.png");
@@ -1199,27 +1203,26 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 .logo {
     display: block;
     margin: 0 auto 2rem;
-    width: 2.9rem; /* 46px */
 }
-.logo--login {
-    padding-top: 6rem;
-    width: 9rem;
-    margin: 0 auto 4rem;
-}
+    .logo--login {
+      padding-top: 6rem;
+      width: 9rem;
+      margin: 0 auto 4rem;
+    }
     .logo--with-title {
       margin: 1.7rem auto 0.5rem;
       background-color: #ffffff;
       border-radius: 50%;
-      max-width: 2.9rem;
+      max-width: 2.9rem; /* 46px */
     }
     .logo--with-title-default {
-        background-color: transparent;
-        border-radius: 0;
+      background-color: transparent;
+      border-radius: 0;
     }
     .logo--with-title-custom {
-        width: 2.9rem;
-        height: 2.9rem;
-        background-color: transparent;
+      width: 2.9rem;
+      height: 2.9rem;
+      background-color: transparent;
     }
 
 
@@ -1496,10 +1499,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     overflow-y: hidden;
   }
   .logo--desktop {
-    position: relative;
-    top: 0.75rem;
+    position: relative; /* allows for top adjustments */
+    top: 0.125rem;
     display: inline-block;
-    margin: 1.5rem 0.75rem 0;
+    margin: 0 1rem 0 0;
   }
   .list__logo {
     width: 2.875rem;
@@ -1649,7 +1652,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     width: 1.6rem;
     height: 1.6rem;
   }
-
+  .icon--profile {
+    width: 1.5rem;
+  }
   .icon--desktop {
     padding-top: 0.5rem;
     width: 1.4rem;
