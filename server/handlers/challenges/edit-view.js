@@ -38,6 +38,7 @@ module.exports = function (request, reply, source, joiErr) {
                 challenge,
                 {initialTags: JSON.stringify(challenge.tags)},
                 {tagList: tagList},
+
                 helpers.getPermissions(
                   loggedIn, 'organisation_id', challenge.org_id),
                 { error: error }
@@ -63,7 +64,6 @@ module.exports = function (request, reply, source, joiErr) {
               })
 
               options.tagCat = JSON.stringify(tagCat);
-
 
               return reply.view('challenges/edit', options).code(error ? 401 : 200);
 

@@ -70,14 +70,18 @@
 
     </form>
 
-    {{>modal-tags}}
+    <div class="modal">
+      <div class="modal__content">
+        {{>modal-tags}}
+      </div>
+    </div>
 </div>
-
-{{>test}}
 
 <script type="text/javascript">
   var editTagsButton = document.getElementById('edit-tags');
   var tagList = document.getElementById('tag-list');
+  var modal = document.querySelector('.modal')
+  var closeIcon = document.querySelector('.icon--cancel--modal')
   var selectTagsButton = document.getElementById('select-tags');
   var cancelTagsButton = document.getElementById('cancel-tags');
   var tag, i, j;
@@ -158,7 +162,8 @@
   // OPEN MODAL
   editTagsButton.addEventListener('click', function(){
     selectCheckbox(currentStateTags, currentStateCategories);
-    tagList.style.display = 'block'
+    modal.style.display = 'block';
+    toggleNoScrollToBody()
   });
 
   // SELECT TAGS
@@ -170,14 +175,43 @@
       currentStateCategories = updateCurrentStateCategories(selectedTags, tagCat);
       updateTagNames(currentStateTags);
       hiddenInputTagIds(currentStateTags, inputTagIds)
-      tagList.style.display = 'none';
+      modal.style.display = 'none';
     }
   });
 
 
   cancelTagsButton.addEventListener('click', function() {
-    tagList.style.display = 'none';
+    modal.style.display = 'none';
+    toggleNoScrollToBody()
   })
+
+  var toggleNoScrollToBody = function() {
+  var body = document.body
+  var classes = body.className.split(" ");
+  var i = classes.indexOf("noscroll");
+  if (i >= 0) {
+    removeClass(body,"noscroll")
+  }
+  else {
+    classes.push("noscroll");
+    body.className = classes.join(" ");
+  }
+}
+closeIcon.addEventListener('click', function() {
+  modal.style.display = 'none';
+  toggleNoScrollToBody();
+})
+
+function hasClass(ele,cls) {
+  return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+}
+
+function removeClass(ele,cls) {
+  if (hasClass(ele,cls)) {
+      var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+      ele.className=ele.className.replace(reg,' ');
+  }
+}
 
 </script>
 
