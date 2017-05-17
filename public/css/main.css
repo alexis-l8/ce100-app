@@ -1768,7 +1768,49 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   }
 }
 
-/*tag list modal*/
-#tag-list {
+/* ---------------------------------------------- */
+/* ------------------ MODAL --------------------- */
+/* ---------------------------------------------- */
+
+.modal {
   display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+
+  background-color: rgb(255,255,255); /* fallback background color */
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.modal__content {
+  width: 50%;
+  height: 80%;
+  margin: 5% auto;
+  background-color: white;
+  overflow: auto;
+}
+
+.card--modal {
+  position: fixed;
+  width: 50%;
+}
+
+.tag__title--modal {
+  font-size: 1rem;
+  text-align: left;
+  padding: 1rem 3rem;
+}
+
+.form__subsection--modal {
+  padding: 1rem 3rem;
+}
+
+/* This class will be applied to the body so that it does not scroll when modal is open */
+
+.noscroll {
+  overflow: hidden;
 }

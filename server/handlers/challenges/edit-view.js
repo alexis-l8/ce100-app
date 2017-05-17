@@ -38,7 +38,7 @@ module.exports = function (request, reply, source, joiErr) {
                   loggedIn, 'organisation_id', challenge.org_id),
                 { error: error }
               );
-
+              console.log(challenge);
               var idTags = challenge.tags.map(function(t) {
                 var obj = {}
                 obj.id = t.id;
