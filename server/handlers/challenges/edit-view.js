@@ -23,6 +23,7 @@ module.exports = function (request, reply, source, joiErr) {
       return request.server.methods.pg.challenges.getById(cid,
         function (dbErr, chal) {
           var challenge = chal[0];
+          var initialCategories = [];
 
           Hoek.assert(!dbErr, 'database error');
 
@@ -33,20 +34,24 @@ module.exports = function (request, reply, source, joiErr) {
               options = Object.assign(
                 permissions,
                 challenge,
+                {initialTags: JSON.stringify(challenge.tags)},
                 {tagList: helpers.locationCategoryToEnd(tags)},
                 helpers.getPermissions(
                   loggedIn, 'organisation_id', challenge.org_id),
                 { error: error }
               );
 
-              var idTags = challenge.tags.map(function(t) {
-                var obj = {}
-                obj.id = t.id;
-                obj.name = t.name;
-                return obj;
+              // create initial state for categories, ie categories that are selected
+              initialCategories = options.tagList.filter(function(t) {
+                return t.selected;
+              }).map(function(t) {
+                return {
+                  category_id: t.category_id,
+                  category_name: t.category_name
+                }
               })
 
-              options.initialTags = JSON.stringify(idTags);
+              options.initialCategories = JSON.stringify(initialCategories);
 
               return reply.view('challenges/edit', options).code(error ? 401 : 200);
 

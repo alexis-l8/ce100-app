@@ -73,13 +73,16 @@
   var selectTags = document.getElementById('select-tags');
   var cancelTags = document.getElementById('cancel-tags');
   var tag, i, j;
-  var currentState = {{{"initialTags"}}}
+
+  // INITIAL STATES ON PAGE LOAD
+  var currentStateTags = {{{"initialTags"}}};
+  var currentStateCategories = {{{"initialCategories"}}}
 
   editTagsButton.addEventListener('click', function(){
     unselectTags();
     tagList.style.display = 'block'
-    for (i = 0; i < currentState.length; i++) {
-        tag = document.getElementById('tag_' + currentState[i].id);
+    for (i = 0; i < currentStateTags.length; i++) {
+        tag = document.getElementById('tag_' + currentStateTags[i].id);
         tag.checked = true;
     }
   })
@@ -93,7 +96,7 @@
     var selectedTags = document.querySelectorAll('.tag__input:checked:not(.cat)')
     var labels = document.querySelectorAll('.tag__label')
 
-    currentState = [];
+    currentStateTags = [];
     for(i = 0; i < selectedTags.length; i++) {
       var obj = {}
       obj.id = selectedTags[i].value
@@ -102,7 +105,7 @@
           obj.name = labels[j].innerHTML
         }
       }
-      currentState.push(obj);
+      currentStateTags.push(obj);
     }
     tagList.style.display = 'none'
     updateTagsInEditChallenge();
@@ -118,13 +121,16 @@
   var updateTagsInEditChallenge = function() {
     var tagLabelsList = document.getElementById('tag__labels');
     tagLabelsList.innerHTML = '';
-    for (i = 0; i < currentState.length; i++) {
+    for (i = 0; i < currentStateTags.length; i++) {
       var newtagLabel = document.createElement('span')
       newtagLabel.className = 'tag__label'
-      newtagLabel.innerHTML = currentState[i].name
+      newtagLabel.innerHTML = currentStateTags[i].name
       tagLabelsList.append(newtagLabel)
     }
   }
+
+  // create 2 arrays which represent the selected tags and categories
+
 
 </script>
 
