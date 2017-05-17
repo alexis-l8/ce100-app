@@ -142,11 +142,11 @@ helpers.getCancelUrl = function (req) {
   var defaultHomePage = req.auth.credentials.organisation_id
     ? '/orgs/' + req.auth.credentials.organisation_id // non-admin default
     : '/orgs'; // admin default
-  var previous = url.parse(req.info.referrer).path;
+  var previous = url.parse(req.info.referrer).path || '';
   var current = req.path;
 
   // if the previous path is same as current, redirect to the user's default
-  return current === previous ? defaultHomePage : previous;
+  return (current === previous || previous.indexOf('/tags') > -1) ? defaultHomePage : previous;
 };
 
 helpers.getView = function (url) {
