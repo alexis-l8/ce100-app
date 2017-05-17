@@ -121,7 +121,7 @@ tape('/challenges/{id}/edit POST endpoint, primary user can update existing info
         t.ok(!error, 'No error on init server');
         server.inject(editChal(primaryToken, chalId, updatedChal), function (res) {
           t.equal(res.statusCode, 302, 'Primary can view edit challenge view');
-          t.equal(res.headers.location, '/challenges/' + chalId + '/tags', 'Admin redirected to add tags view');
+          t.equal(res.headers.location, '/challenges/' + chalId, 'Primary user redirected to the challenge card');
           server.inject(viewChals(primaryToken, chalId, updatedChal), function (res) {
             t.ok(res.result.indexOf(updatedChal.title) > -1, 'active challenge title correctly updated');
             t.end();
