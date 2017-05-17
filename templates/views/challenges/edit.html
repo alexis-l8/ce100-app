@@ -79,6 +79,7 @@
   var cancelTags = document.getElementById('cancel-tags');
   var tag, i, j;
   var currentState = {{{"initialTags"}}}
+  var closeIcon = document.querySelector('.icon--cancel--modal')
 
   editTagsButton.addEventListener('click', function(){
     unselectTags();
@@ -133,19 +134,38 @@
     }
   }
 
+  function hasClass(ele,cls) {
+return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+}
+
+function removeClass(ele,cls) {
+    if (hasClass(ele,cls)) {
+        var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+        ele.className=ele.className.replace(reg,' ');
+    }
+}
+
   var toggleNoScrollToBody = function() {
     var body = document.body
     var classes = body.className.split(" ");
     var i = classes.indexOf("noscroll");
-
+    console.log(body);
+    console.log(classes);
+    console.log(classes.indexOf("noscroll"));
+    console.log(i, 'i');
     if (i >= 0) {
-      classes.splice(i, 1);
+      removeClass(body,"noscroll")
     }
     else {
       classes.push("noscroll");
-      x.className = classes.join(" ");
+      body.className = classes.join(" ");
     }
   }
+
+  closeIcon.addEventListener('click', function() {
+    modal.style.display = 'none';
+    toggleNoScrollToBody();
+  })
 
 </script>
 
