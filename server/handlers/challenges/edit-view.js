@@ -30,12 +30,14 @@ module.exports = function (request, reply, source, joiErr) {
           request.server.methods.pg.tags.getTagsForEdit('challenges', cid,
             function (pgErr, tags) {
               Hoek.assert(!pgErr, 'database error');
+              var tagList = helpers.locationCategoryToEnd(tags);
+              var tagCat = {};
 
               options = Object.assign(
                 permissions,
                 challenge,
                 {initialTags: JSON.stringify(challenge.tags)},
-                {tagList: helpers.locationCategoryToEnd(tags)},
+                {tagList: tagList},
                 helpers.getPermissions(
                   loggedIn, 'organisation_id', challenge.org_id),
                 { error: error }
@@ -52,6 +54,16 @@ module.exports = function (request, reply, source, joiErr) {
               })
 
               options.initialCategories = JSON.stringify(initialCategories);
+
+              // crate a map tag -> catgory
+              tagList.forEach(function(cat) {
+                cat.tags.forEach(function(t) {
+                  tagCat[t.tag_id] = {category_id: cat.category_id, category_name: cat.category_name};
+                })
+              })
+
+              options.tagCat = JSON.stringify(tagCat);
+
 
               return reply.view('challenges/edit', options).code(error ? 401 : 200);
 
