@@ -31,24 +31,23 @@
                   >{{#if error.values.description}}{{error.values.description}}{{else}}{{description}}{{/if}}
         </textarea>
 
-        {{#if tags}}
         <div class="form__section">
-
-          <div id="tag__labels">
-          {{#each tags}}
-              <span class="tag__label">{{name}}</span>
-          {{/each}}
+            <div id="tag__labels">
+            {{#if tags}}
+              {{#each tags}}
+                  <span class="tag__label">{{name}}</span>
+              {{/each}}
+            {{/if}}
+          </div>
+          <button class="button" type="button" id="edit-tags">Edit tags</button>
         </div>
-        </div>
 
-        <button class="button" type="button" id="edit-tags">Edit tags<i class="icon icon--arrow-right icon--arrow-inside-button"></i></button>
-        {{/if}}
       </div>
 
       <p class="copy form__copy">Clicking 'Save' will make your challenge public to the network</p>
 
 
-      <button class="button" type="submit">Save & Publish<i class="icon icon--arrow-right icon--arrow-inside-button"></i></button>
+      <button class="button" type="submit">Save & Publish</button>
 
       <!-- Show archive and primary user if admin is logged in -->
         <div class="form__section">
@@ -72,148 +71,14 @@
 
     <div class="modal">
       <div class="modal__content">
-        {{>modal-tags}}
+        {{>modal/modal-tags}}
       </div>
     </div>
 </div>
 
-<script type="text/javascript">
-  var editTagsButton = document.getElementById('edit-tags');
-  var tagList = document.getElementById('tag-list');
-  var modal = document.querySelector('.modal')
-  var closeIcon = document.querySelector('.icon--cancel--modal')
-  var selectTagsButton = document.getElementById('select-tags');
-  var cancelTagsButton = document.getElementById('cancel-tags');
-  var tag, i, j;
-
-  // Helper functions
-  function selectCheckbox(tags, categories) {
-    // reset the selected elements
-    var selectedTags = document.querySelectorAll('.tag__input:checked:not(.cat)');
-    var selectedCategories = document.querySelectorAll('.cat:checked')
-    unselect(selectedTags);
-    unselect(selectedCategories);
-    // select the tags based on the State
-    for (i = 0; i < tags.length; i++) {
-        document.getElementById('tag_' + tags[i].id).checked = true;
-    }
-    // select categories
-    for (i = 0; i < categories.length; i++) {
-        document.getElementById('cat_' + categories[i].category_id).checked = true;
-    }
-  }
-
-  function unselect(elts) {
-    for(i = 0; i < elts.length; i++) {
-      elts[i].checked = false;
-    }
-  }
-
-  function updateCurrentStateTags(tags) {
-    var name;
-    var state = [];
-    for (i = 0; i < tags.length; i++) {
-      name = tags[i].nextElementSibling.innerHTML
-      state.push({id: tags[i].value, name: name})
-    }
-    return state;
-  }
-
-  function updateCurrentStateCategories(tags, tagCat) {
-    var state = [];
-    var catIds = [];
-    var cat;
-    for (i = 0; i < tags.length; i++) {
-      cat = tagCat[tags[i].value];
-      if(catIds.indexOf(cat.category_id) === -1) {
-        state.push(cat);
-      }
-    }
-    return state;
-  }
-
-  function updateTagNames(tags) {
-    var tagLabelsList = document.getElementById('tag__labels');
-    tagLabelsList.innerHTML = '';
-    for (i = 0; i < tags.length; i++) {
-      var newtagLabel = document.createElement('span')
-      newtagLabel.className = 'tag__label'
-      newtagLabel.innerHTML = tags[i].name
-      tagLabelsList.append(newtagLabel)
-    }
-  }
-
-  function hiddenInputTagIds(tags, div) {
-    div.innerHTML = '';
-    for (i = 0; i < tags.length; i++) {
-      var inputTagId = document.createElement('input')
-      inputTagId.type = 'hidden';
-      inputTagId.name = 'tags';
-      inputTagId.value = tags[i].id;
-      div.append(inputTagId);
-    }
-  }
-
-  // INITIAL STATES ON PAGE LOAD
-  var currentStateTags = {{{"initialTags"}}};
-  var currentStateCategories = {{{"initialCategories"}}}
-  var tagCat = {{{"tagCat"}}}
-
-  // OPEN MODAL
-  editTagsButton.addEventListener('click', function(){
-    selectCheckbox(currentStateTags, currentStateCategories);
-    modal.style.display = 'block';
-    toggleNoScrollToBody()
-  });
-
-  // SELECT TAGS
-  selectTagsButton.addEventListener('click', function() {
-    var selectedTags = document.querySelectorAll('.tag__input:checked:not(.cat)');
-    if (selectedTags.length < 10) {
-      var inputTagIds = document.getElementById('form-tag-ids');
-      currentStateTags = updateCurrentStateTags(selectedTags);
-      currentStateCategories = updateCurrentStateCategories(selectedTags, tagCat);
-      updateTagNames(currentStateTags);
-      hiddenInputTagIds(currentStateTags, inputTagIds)
-      modal.style.display = 'none';
-    }
-  });
-
-
-  cancelTagsButton.addEventListener('click', function() {
-    modal.style.display = 'none';
-    toggleNoScrollToBody()
-  })
-
-  var toggleNoScrollToBody = function() {
-  var body = document.body
-  var classes = body.className.split(" ");
-  var i = classes.indexOf("noscroll");
-  if (i >= 0) {
-    removeClass(body,"noscroll")
-  }
-  else {
-    classes.push("noscroll");
-    body.className = classes.join(" ");
-  }
-}
-closeIcon.addEventListener('click', function() {
-  modal.style.display = 'none';
-  toggleNoScrollToBody();
-})
-
-function hasClass(ele,cls) {
-  return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
-}
-
-function removeClass(ele,cls) {
-  if (hasClass(ele,cls)) {
-      var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
-      ele.className=ele.className.replace(reg,' ');
-  }
-}
-
-</script>
+<!-- tags modal script -->
+{{>modal/helpers}}
+{{>modal/logic}}
 
 <!-- Include Navbar -->
 {{>navbar}}
