@@ -222,6 +222,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     /*used specifically for the challenge with a blue background on mobile, but white on desktop*/
     background-image: url("../assets/Edit-white.svg");
 }
+.icon--edit-tags {
+  display: inline-block;
+  background-image: url("../assets/edit-tags.svg");
+}
 
 .icon--float-right {
   height: 1.3rem;
@@ -353,6 +357,8 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   |||||||||||||||||||||||||||||||||||||||||||*/
   .togglebar {
     background: #f8f8f8;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(64, 101, 126, 0.25);
+    -moz-box-shadow: 0 2px 4px 0 rgba(64, 101, 126, 0.25);
     box-shadow: 0 2px 4px 0 rgba(64, 101, 126, 0.25);
     line-height: 1.75rem;
     height: 4rem;
@@ -364,13 +370,25 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   .togglebar__item--selected, .togglebar__item--selected:hover {
     background: #ffffff;
   }
-    .togglebar__link, .togglebar__link:visited {
+  .togglebar__link, .togglebar__link:visited {
     padding: 1.125rem 0;
     color: #9cafbb;
     font-size: 0.875rem;
   }
+  .togglebar__link:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #003253;
+    font-weight: bold;
+    -webkit-box-shadow: 0px -5px 0px #66d9e0 inset;
+    -moz-box-shadow: 0px -5px 0px #66d9e0 inset;
+    box-shadow: 0px -5px 0px #66d9e0 inset;
+  }
   .togglebar__link--selected, .togglebar__link--selected:visited {
     color: #333333;
+    font-weight: bold;
+    -webkit-box-shadow: 0px -5px 0px #66d9e0 inset;
+    -moz-box-shadow: 0px -5px 0px #66d9e0 inset;
+    box-shadow: 0px -5px 0px #66d9e0 inset;
   }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -947,12 +965,16 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       }
       .form__input--text-area {
         min-height: 4.438rem; /* 71px */
-        box-shadow: inset 0 0.0625rem 0.0625rem 0 #40667E;
+        -webkit-box-shadow: inset 0 0.0625rem 0.0625rem 0 #89a0ae;
+        -moz-box-shadow: inset 0 0.0625rem 0.0625rem 0 #89a0ae;
+        box-shadow: inset 0 0.0625rem 0.0625rem 0 #89a0ae;
         border: none;
         line-height: 1.3rem;
       }
       .form__input--text {
-        box-shadow: inset 0 0.0625rem 0.0625rem 0 #40667E;
+        -webkit-box-shadow: inset 0 0.0625rem 0.0625rem 0 #89a0ae;
+        -moz-box-shadow: inset 0 0.0625rem 0.0625rem 0 #89a0ae;
+        box-shadow: inset 0 0.0625rem 0.0625rem 0 #89a0ae;
         border: none;
         min-height: 2.438rem; /* 39px */
       }
@@ -1113,6 +1135,19 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 .button--dark-blue {
     color: #40667e;
     border: solid 1px #40667e;
+}
+.button--edit {
+    margin: 2rem auto;
+    padding: 0.25rem 0.5rem;
+    min-width: 8.13rem;
+    color: #003253;
+    text-align: center;
+    background-color: #fafafa;
+    border: 1px solid #003253;
+    border-radius: 0.5rem;
+}
+.button--edit__text {
+  padding-left: 0.5rem;
 }
 
 .indicator {
@@ -1451,7 +1486,15 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     line-height: 4rem;
   }
   .navbar-top__item--desktop:hover {
-    background-color: #002C4A;
+    background-color:  rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px -5px 0px #66d9e0 inset;
+    -moz-box-shadow: 0px -5px 0px #66d9e0 inset;
+    box-shadow: 0px -5px 0px #66d9e0 inset;
+  }
+  .navbar-top__item--active-border {
+    -webkit-box-shadow: 0px -5px 0px #66d9e0 inset;
+    -moz-box-shadow: 0px -5px 0px #66d9e0 inset;
+    box-shadow: 0px -5px 0px #66d9e0 inset;
   }
   .navbar-top__item--burger:hover {
     background-color: #003253;
@@ -1493,6 +1536,8 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     margin: 0 auto;
   }
   .container--desktop {
+    -webkit-box-shadow: 0 20rem 0 rgb(242, 242, 242);
+    -moz-box-shadow: 0 20rem 0 rgb(242, 242, 242);
     box-shadow: 0 20rem 0 rgb(242, 242, 242);
     background-color: #f2f2f2;
     min-height: 90%;
@@ -1803,6 +1848,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   -webkit-box-shadow: 0px 2px 8px rgba(137,160,174,0.5);
   -moz-box-shadow: 0px 2px 8px rgba(137,160,174,0.5);
   box-shadow: 0px 2px 8px rgba(137,160,174,0.5);
+}
+
+.icon--cancel--modal {
+  cursor:pointer;
 }
 
 .tag__title--modal {
