@@ -5,17 +5,18 @@
 <!-- Main Content -->
 <div class="container--landing">
 
+  <div class="header--section">
+    <p>{{header.title}}</p>
+    <p>{{header.description}}</p>
+  </div>
+
   <ul>
     {{#each section}}
       {{>landing-cards}}
     {{/each}}
   </ul>
 
-
-
 </div>
-
-
 
 <!-- Include Navbar -->
 {{>navbar}}

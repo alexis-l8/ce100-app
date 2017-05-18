@@ -1,9 +1,9 @@
 module.exports = function(profile) {
-  return [
-    {
-      title: profile.first_name + ', innovation begins with collaboration.',
-      description: 'Get connected to the people making the circular economy happen.'
-    },
+  var header =  {
+        title: profile.first_name + ', innovation begins with collaboration.',
+        description: 'Get connected to the people making the circular economy happen.'
+      };
+  var sections = [
     {
       primaryOnly: true,
       title: 'Tell us about you',
@@ -44,4 +44,5 @@ module.exports = function(profile) {
       }
     }
   ];
+  return {header: header, sections: sections};
 };
