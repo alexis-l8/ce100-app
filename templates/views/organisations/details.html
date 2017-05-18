@@ -24,7 +24,7 @@
         {{/if}}
         {{#if org.tags}}
             {{#each org.tags}}
-              <a href="/orgs?tags={{tag_id}}"><span class="tag__label">{{tag_name}}</span></a>
+              <a href="/orgs?tags={{tag_id}}"><span class="tag__label tag__label--selected">{{tag_name}}</span></a>
             {{/each}}
         {{/if}}
       </div>
@@ -33,8 +33,10 @@
           <h2 class="card__header card__header--desktop card__header--underline">GET IN TOUCH</h2>
           <span class="card__data card__data--desktop">{{primary.first_name}} {{primary.last_name}}</span>
           <span class="card__data card__data--desktop">{{primary.job_title}}</span>
-          <span class="card__data card__data--desktop"><a href="tel:{{primary.phone}}" class="anchor card__data--link">{{primary.phone}}</a></span>
-          <span class="card__data  card__data--desktop"><a href="mailto:{{primary.email}}" class="link-colors-accessibility card__data--link">{{primary.email}}</a></span>
+          <span class="card__data card__data--desktop">
+            <a href="tel:{{primary.phone}}" class="card__data--prim-contact">{{primary.phone}}</a></span>
+          <span class="card__data  card__data--desktop">
+            <a href="mailto:{{primary.email}}" class="card__data--prim-contact">{{primary.email}}</a></span>
         </div>
       {{else}}
         <div class="card card--desktop">
