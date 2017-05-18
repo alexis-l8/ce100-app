@@ -66,7 +66,7 @@ function updateTagNames(tags) {
   tagLabelsList.innerHTML = '';
   for (i = 0; i < tags.length; i++) {
     var newtagLabel = document.createElement('span')
-    newtagLabel.className = 'tag__label'
+    newtagLabel.className = 'tag__label tag__label--selected tag__label--disabled'
     newtagLabel.innerHTML = tags[i].name
     tagLabelsList.append(newtagLabel)
   }
