@@ -17,6 +17,7 @@ module.exports = function (request, reply) {
         { insights: pgRes.insights },
         { filter: helpers.browseViewTabBar('insights', pgRes.filter) },
         { view: helpers.getView(request.path) },
+        {topNavBarType: 'explorer'},
         permissions
       );
 
