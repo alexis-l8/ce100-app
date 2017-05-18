@@ -1796,6 +1796,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   background-color: white;
   overflow: auto;
   border-radius: 0.3rem;
+  -webkit-box-shadow: 0px 2px 8px rgba(137,160,174,0.5);
+  -moz-box-shadow: 0px 2px 8px rgba(137,160,174,0.5);
+  box-shadow: 0px 2px 8px rgba(137,160,174,0.5);
 }
 
 .tag__title--modal {
