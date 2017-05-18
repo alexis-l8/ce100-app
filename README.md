@@ -37,11 +37,24 @@ Clone the GitHub Repository
 ```
 git clone https://github.com/emfoundation/ce100-app.git
 ```
-Ensure you have the required `.env` file, then run:
 
+### Run & create the following Postgres Databases
+
+```
+//run database using
+postgres -D /usr/local/var/postgres
+//create the following databases
+create database ce100;
+create database ce100_test
+```
+
+### Run Redis
+```
+redis-server
+```
+Ensure you have the required `.env` file, then run:
 ```sh
 npm i
-npm run generate-tags
 npm start
 ```
 
