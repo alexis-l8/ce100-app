@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="31px" viewBox="0 0 64 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>Profile Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="64" height="64" rx="32"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Profile-Copy" transform="translate(0.000000, -16.000000)">
+            <path d="M15.21,20.62 C19.5750554,20.6159545 23.5125489,23.2422872 25.1857872,27.273912 C26.8590254,31.3055367 25.9383488,35.9481474 22.8532185,39.0361395 C19.7680882,42.1241317 15.1263333,43.0491127 11.0931588,41.3796133 C7.05998429,39.7101139 4.43000187,35.7750572 4.43,31.41 C4.43550181,25.4570306 9.25703825,20.6310215 15.21,20.62 L15.21,20.62 Z M15.21,16.62 C9.20457561,16.6038237 3.7822313,20.2110947 1.47657614,25.7563033 C-0.829079022,31.3015119 0.437168518,37.689848 4.68366023,41.9363398 C8.93015195,46.1828315 15.3184881,47.449079 20.8636967,45.1434239 C26.4089053,42.8377687 30.0161763,37.4154244 30,31.41 C30.0000297,23.2352127 23.3847575,16.6020493 15.21,16.58 L15.21,16.62 Z" id="Shape" fill="#40667E" fill-rule="nonzero"></path>
+            <rect id="Rectangle-path" fill="#40667E" fill-rule="nonzero" x="36.82" y="17.24" width="20.22" height="4.04"></rect>
+            <rect id="Rectangle-path" fill="#40667E" fill-rule="nonzero" x="36.82" y="29.05" width="26.59" height="4.04"></rect>
+            <rect id="Rectangle-path" fill="#40667E" fill-rule="nonzero" x="36.82" y="40.86" width="20.22" height="4.04"></rect>
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Mask" fill-opacity="0" fill="#FFADAD" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>

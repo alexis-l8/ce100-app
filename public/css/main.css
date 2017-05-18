@@ -565,19 +565,21 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         .list__logo {
           float: left;
           background-color: transparent;
-          margin: 0.5rem 1.5rem 0 0;
-          width: 2.625rem;
-          max-height: 2.625rem;
-          border: solid 0.0625rem #f5f8f9;
           margin: 0.7rem 1.5rem 0 0;
-          width: 2.625rem;
           max-height: 2.625rem;
+          max-width: 3rem;
+          border: none;
+          border-radius: 50%;
           -webkit-transform: translateY(-50%);
           -moz-transform: translateY(-50%);
           -o-transform: translateY(-50%);
           -ms-transform: translateY(-50%);
           transform: translateY(-50%);
         }
+            .list__logo--undefined {
+              width: 3rem;
+              height: 3rem;
+            }
 
         .list__icon {
             height: 1.3rem;
@@ -1506,6 +1508,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   .list__logo {
     width: 2.875rem;
     max-height: 3.125rem;
+    margin-top: 0.5rem;
   }
   .list__item--desktop {
     font-size: 1rem;
