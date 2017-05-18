@@ -650,6 +650,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       color: #ffffff;
       cursor: default;
     }
+    .tag__label--disabled {
+      opacity: 0.5;
+    }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Shapes
