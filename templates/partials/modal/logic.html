@@ -1,5 +1,6 @@
 <script type="text/javascript">
   var editTagsButton = document.getElementById('edit-tags');
+  var tagList = document.getElementById('tag-list');
   var modal = document.querySelector('.modal')
   var closeIcon = document.querySelector('.icon--cancel--modal')
   var selectTagsButton = document.getElementById('select-tags');
@@ -14,7 +15,8 @@
   editTagsButton.addEventListener('click', function(){
     selectCheckbox(currentStateTags, currentStateCategories);
     modal.style.display = 'block';
-    modal.scrollTop = 0
+    modal.scrollTop = 0;
+    tagList.scrollTop = 0;
     toggleNoScrollToBody();
   });
 
