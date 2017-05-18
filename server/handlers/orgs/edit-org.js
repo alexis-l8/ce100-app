@@ -8,6 +8,7 @@ var helpers = require('../helpers.js');
 module.exports = function (request, reply) {
   var orgId = parseInt(request.params.id, 10);
   var loggedIn = request.auth.credentials;
+  var tags = helpers.getTagArray(request.payload.tags);
   var newOrg;
 
   if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin' || loggedIn.scope === 'secondary') {
@@ -21,8 +22,14 @@ module.exports = function (request, reply) {
 
     request.server.methods.pg.organisations.edit(orgId, newOrg, function (error, response) { //eslint-disable-line
       Hoek.assert(!error, 'database error');
+      // update tags
+      return request.server.methods.pg.tags.addTags('organisations', orgId,
+        tags, function (tagsError) {
+          Hoek.assert(!tagsError, 'database error');
 
-      return reply.redirect('/orgs/' + orgId + '/tags');
+          return reply.redirect('/orgs/' + orgId);
+        });
+
     });
   });
 };
