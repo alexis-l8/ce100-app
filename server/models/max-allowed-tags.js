@@ -1,8 +1,6 @@
 'use strict';
 
 var Joi = require('joi');
-var failChal = require('../handlers/challenges/add-tags-view.js');
-var failOrg = require('../handlers/orgs/add-tags-view.js');
 var failInsight = require('../handlers/insights/add-tags-view.js');
 
 var schema = {
@@ -24,13 +22,7 @@ module.exports = {
   },
   failAction: function (request, reply, source, error) {
     var view = request.path.split('/')[1];
-    if (view === 'challenges') {
-      return failChal(request, reply, source, error);
-    }
-    else if (view === 'orgs') {
-      return failOrg(request, reply, source, error);
-    }
-    else if (view === 'insights') {
+    if (view === 'insights') {
       return failInsight(request, reply, source, error);
     }
   }

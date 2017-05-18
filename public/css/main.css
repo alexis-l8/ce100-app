@@ -131,18 +131,22 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 .icon--plus-white {
     background-image: url("../assets/Plus-white.svg");
 }
+
 .icon--profile {
     background-image: url("../assets/Profile.svg");
+    background-position: center;
+    width: 2.5rem;
+    height: 1rem;
 }
-.icon--profile-white {
-    background-image: url("../assets/Profile-white.svg");
-}
-.icon--profile-blue {
-    background-image: url("../assets/Profile-blue.svg");
-}
+    .icon--profile-white { /* Must be combined with .icon--profile
+                              for proper positioning. */
+        background-image: url("../assets/Profile-white.svg");
+    }
+
 .icon--burger {
     background-image: url("../assets/Burger.svg");
-    width: 1.4rem;
+    height: 1.375rem;
+    background-position: center;
 }
 .icon--logo {
     background-image: url("../assets/logo.png");
@@ -575,19 +579,21 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         .list__logo {
           float: left;
           background-color: transparent;
-          margin: 0.5rem 1.5rem 0 0;
-          width: 2.625rem;
-          max-height: 2.625rem;
-          border: solid 0.0625rem #f5f8f9;
           margin: 0.7rem 1.5rem 0 0;
-          width: 2.625rem;
           max-height: 2.625rem;
+          max-width: 3rem;
+          border: none;
+          border-radius: 50%;
           -webkit-transform: translateY(-50%);
           -moz-transform: translateY(-50%);
           -o-transform: translateY(-50%);
           -ms-transform: translateY(-50%);
           transform: translateY(-50%);
         }
+            .list__logo--undefined {
+              width: 3rem;
+              height: 3rem;
+            }
 
         .list__icon {
             height: 1.3rem;
@@ -1216,27 +1222,26 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 .logo {
     display: block;
     margin: 0 auto 2rem;
-    width: 2.9rem; /* 46px */
 }
-.logo--login {
-    padding-top: 6rem;
-    width: 9rem;
-    margin: 0 auto 4rem;
-}
+    .logo--login {
+      padding-top: 6rem;
+      width: 9rem;
+      margin: 0 auto 4rem;
+    }
     .logo--with-title {
       margin: 1.7rem auto 0.5rem;
       background-color: #ffffff;
       border-radius: 50%;
-      max-width: 2.9rem;
+      max-width: 2.9rem; /* 46px */
     }
     .logo--with-title-default {
-        background-color: transparent;
-        border-radius: 0;
+      background-color: transparent;
+      border-radius: 0;
     }
     .logo--with-title-custom {
-        width: 2.9rem;
-        height: 2.9rem;
-        background-color: transparent;
+      width: 2.9rem;
+      height: 2.9rem;
+      background-color: transparent;
     }
 
 
@@ -1523,14 +1528,15 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     overflow-y: hidden;
   }
   .logo--desktop {
-    position: relative;
-    top: 0.75rem;
+    position: relative; /* allows for top adjustments */
+    top: 0.125rem;
     display: inline-block;
-    margin: 1.5rem 0.75rem 0;
+    margin: 0 1rem 0 0;
   }
   .list__logo {
     width: 2.875rem;
     max-height: 3.125rem;
+    margin-top: 0.5rem;
   }
   .list__item--desktop {
     font-size: 1rem;
@@ -1676,7 +1682,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     width: 1.6rem;
     height: 1.6rem;
   }
-
+  .icon--profile {
+    width: 1.5rem;
+  }
   .icon--desktop {
     padding-top: 0.5rem;
     width: 1.4rem;
@@ -1792,5 +1800,124 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   }
   .du-center {
       text-align: center;
+  }
+}
+
+/* ---------------------------------------------- */
+/* ------------------ MODAL --------------------- */
+/* ---------------------------------------------- */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+
+  background-color: rgb(255,255,255); /* fallback background color */
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.modal__content {
+  width: 640px;
+  margin: 7% auto 0;
+  background-color: white;
+  overflow: auto;
+  border-radius: 0.3rem;
+}
+
+.tag__title--modal {
+  font-size: 1rem;
+  text-align: left;
+  padding: 1rem 3rem;
+}
+
+.form__subsection--modal {
+  padding: 1rem 3rem;
+}
+
+.tag-list--modal {
+  overflow: auto;
+  height: 400px; /* fallback fixed height */
+  height: 40vh;
+}
+
+.button-group--modal {
+  background-color: rgba(137, 160, 174, 0.2);
+}
+
+.button-select--modal {
+  width: 50%;
+  margin: 2rem;
+  display: inline-block;
+}
+
+.button-cancel--modal {
+  width: 35%;
+  margin: 2rem 2rem 2rem 0;
+  float: right;
+  display: inline-block;
+}
+
+/* This class will be applied to the body so that it does not scroll when modal is open */
+
+.noscroll {
+  overflow: hidden;
+}
+
+
+/* ---------------------------------------------- */
+/* ---------- MEDIA QUERY MODAL MOBILE ---------- */
+/* ---------------------------------------------- */
+
+@media (max-width: 700px) {
+
+  .card--header--modal {
+    position: fixed;
+  }
+
+  .error--message-modal {
+    margin-top: 64px;
+  }
+
+  .tag__title--modal {
+    font-size: 1rem;
+    text-align: left;
+    padding: 1rem;
+  }
+
+  .form__subsection--modal {
+    padding: 1rem;
+  }
+
+  .modal__content {
+    width: auto;
+    margin: auto;
+  }
+
+  .tag-list--modal {
+    height: auto;
+    margin-bottom: 154px;
+  }
+
+  .button-group--modal {
+    background-color: rgba(137, 160, 174, 1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .button-group--modal {
+    text-align: center;
+  }
+
+  .button-select--modal, .button-cancel--modal {
+    margin: 1rem;
+    float: none;
+    width: auto;
   }
 }

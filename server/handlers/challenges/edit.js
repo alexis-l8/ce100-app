@@ -2,12 +2,14 @@
 
 var Hoek = require('hoek');
 var Boom = require('boom');
+var helpers = require('../helpers');
 
 module.exports = (request, reply) => {
   var loggedIn = request.auth.credentials;
   var cid = request.params.id;
   var updates = request.payload;
   var message;
+  var tags = helpers.getTagArray(updates.tags);
 
   request.server.methods.pg.challenges.checkEditable(loggedIn.userId, cid,
     function (editableErr, primary) {
@@ -22,7 +24,13 @@ module.exports = (request, reply) => {
         function (err, res) {
           Hoek.assert(!err, 'database error');
 
-          return reply.redirect('/challenges/' + cid + '/tags');
+          // update tags
+          return request.server.methods.pg.tags.addTags('challenges', cid,
+            tags, function (tagsError) {
+              Hoek.assert(!tagsError, 'database error');
+
+              return reply.redirect('/challenges/' + cid);
+            });
         });
     });
 };

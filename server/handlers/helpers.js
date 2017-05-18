@@ -167,4 +167,19 @@ helpers.getView = function (url) {
   }
 };
 
+helpers.getTagArray = function (tagsPayload) {
+
+  if (tagsPayload === undefined) {
+    return [];
+  }
+
+  if (typeof tagsPayload === 'string') {
+    return [parseInt(tagsPayload, 10)];
+  }
+
+  return tagsPayload.map(function (tag) {
+    return parseInt(tag, 10);
+  });
+}
+
 module.exports = helpers;

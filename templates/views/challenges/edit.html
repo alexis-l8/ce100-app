@@ -31,24 +31,20 @@
                   >{{#if error.values.description}}{{error.values.description}}{{else}}{{description}}{{/if}}
         </textarea>
 
-        {{#if tags}}
         <div class="form__section">
-
-          {{#each tags}}
-            <span class="tag__label">{{name}}</span>
-          {{/each}}
+          {{>tag-names}}
+          <button class="button" type="button" id="edit-tags">Edit tags</button>
         </div>
-        {{/if}}
+
       </div>
 
       <p class="copy form__copy">Clicking 'Save' will make your challenge public to the network</p>
 
 
-      <button class="button" type="submit">Save & edit tags<i class="icon icon--arrow-right icon--arrow-inside-button"></i></button>
+      <button class="button" type="submit">Save & Publish</button>
 
       <!-- Show archive and primary user if admin is logged in -->
         <div class="form__section">
-
           <a class="form__anchor form__anchor--danger" href="/challenges/{{id}}/toggle-active">
             {{#if active}}
               Archive Challenge
@@ -58,11 +54,15 @@
           </a>
         </div>
 
-    </form>
+        {{>tag-ids}}
 
+    </form>
+    {{>modal/modal-view}}
 </div>
 
-
+<!-- tags modal script -->
+{{>modal/helpers}}
+{{>modal/logic}}
 
 <!-- Include Navbar -->
 {{>navbar}}

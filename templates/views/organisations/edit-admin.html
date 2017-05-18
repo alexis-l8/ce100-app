@@ -46,13 +46,8 @@
         </textarea>
 
         <div class="form__section form__section--left-align">
-          {{#if org.tags}}
-            {{#each org.tags}}
-              <span class="tag__label tag__label--disabled">{{tag_name}}</span>
-            {{/each}}
-          {{else}}
-            <label class="form__label">Add tags on the next screen</label>
-          {{/if}}
+          {{>tag-names}}
+          <button class="button" type="button" id="edit-tags">Edit tags</button>
         </div>
 
       <!-- If there is a linked primary user -->
@@ -71,7 +66,7 @@
 
     </div>
 
-    <button class="button" type="button" id="submit-edit-org" onclick="logoSaver.submitForm({{org.id}})">Save & edit tags<i class="icon icon--arrow-right icon--arrow-inside-button"></i></button>
+    <button class="button" type="button" id="submit-edit-org" onclick="logoSaver.submitForm({{org.id}})">Save & Publish</button>
 
     <!-- Show disable and primary user if admin is logged in -->
     <div class="form__section">
@@ -83,10 +78,15 @@
         {{/if}}
       </a>
     </div>
-
+    {{>tag-ids}}
   </form>
+
+  {{>modal/modal-view}}
 </div>
 
+<!-- tags modal script -->
+{{>modal/helpers}}
+{{>modal/logic}}
 
 
 <!-- Include Navbar -->

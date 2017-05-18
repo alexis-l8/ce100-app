@@ -1,0 +1,53 @@
+<script type="text/javascript">
+  var editTagsButton = document.getElementById('edit-tags');
+  var tagList = document.getElementById('tag-list');
+  var modal = document.querySelector('.modal')
+  var closeIcon = document.querySelector('.icon--cancel--modal')
+  var selectTagsButton = document.getElementById('select-tags');
+  var cancelTagsButton = document.getElementById('cancel-tags');
+
+  // INITIAL STATES ON PAGE LOAD
+  var currentStateTags = {{{"initialTags"}}};
+  var currentStateCategories = {{{"initialCategories"}}};
+  var tagCat = {{{"tagCat"}}};
+
+  // OPEN MODAL
+  editTagsButton.addEventListener('click', function(){
+    selectCheckbox(currentStateTags, currentStateCategories);
+    modal.style.display = 'block';
+    modal.scrollTop = 0;
+    tagList.scrollTop = 0;
+    toggleNoScrollToBody();
+  });
+
+  // SELECT TAGS
+  selectTagsButton.addEventListener('click', function() {
+    var selectedTags = document.querySelectorAll('.tag__input:checked:not(.cat)');
+    if (selectedTags.length < 10) {
+      var inputTagIds = document.getElementById('form-tag-ids');
+      currentStateTags = updateCurrentStateTags(selectedTags);
+      currentStateCategories = updateCurrentStateCategories(selectedTags, tagCat);
+      updateTagNames(currentStateTags);
+      hiddenInputTagIds(currentStateTags, inputTagIds)
+      hideError();
+      modal.style.display = 'none';
+      toggleNoScrollToBody();
+    } else {
+      displayError()
+    }
+  });
+
+  // CANCEL SELECT TAGS
+  cancelTagsButton.addEventListener('click', function() {
+    modal.style.display = 'none';
+    toggleNoScrollToBody();
+    hideError();
+  })
+
+  closeIcon.addEventListener('click', function() {
+    modal.style.display = 'none';
+    toggleNoScrollToBody();
+    hideError();
+  })
+
+</script>

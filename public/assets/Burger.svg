@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="20px" height="12px" viewBox="0 0 20 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
-    <title>Burger</title>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="46px" viewBox="0 0 12 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>ellipsis</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Burger" fill="#ffffff">
-            <polygon id="Fill-1" points="0.0553543307 1.57124545 19.9446457 1.57124545 19.9446457 0.0712454545 0.0553543307 0.0712454545"></polygon>
-            <polygon id="Fill-2" points="0 7.03562273 19.8892913 7.03562273 19.8892913 5.53562273 0 5.53562273"></polygon>
-            <polygon id="Fill-3" points="0 12.5 19.8892913 12.5 19.8892913 11 0 11"></polygon>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.5">
+        <g id="New-Icons" transform="translate(-215.000000, -15.000000)" fill-rule="nonzero" fill="#FFFFFF">
+            <g id="ellipsis" transform="translate(215.000000, 15.000000)">
+                <circle id="Oval" cx="6" cy="5.64" r="5.28"></circle>
+                <circle id="Oval" cx="6" cy="23" r="5.28"></circle>
+                <circle id="Oval" cx="6" cy="40.36" r="5.28"></circle>
+            </g>
         </g>
     </g>
 </svg>

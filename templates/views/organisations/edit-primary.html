@@ -24,7 +24,7 @@
       {{#if org.logo_url}}
         <img class="logo logo--with-title logo--with-title-custom" src="{{org.logo_url}}" alt="{{org.name}} logo">
       {{else}}
-        <img class="logo logo--with-title logo--with-title--blue logo--with-title-default" src="../../../public/assets/Profile-blue.svg" alt="{{org.name}} logo">
+        <img class="logo logo--with-title logo--with-title--blue logo--with-title-default" src="../../../public/assets/Profile.svg" alt="{{org.name}} logo">
       {{/if}}
 
       <h1 class="title title--with-logo title--with-logo--blue">{{org.name}}</h1>
@@ -50,23 +50,22 @@
         </textarea>
 
         <div class="form__section form__section--left-align">
-          {{#if org.tags}}
-            {{#each org.tags}}
-              <span class="tag__label tag__label--disabled">{{tag_name}}</span>
-            {{/each}}
-          {{else}}
-            <label class="form__label">Add tags on the next screen</label>
-          {{/if}}
+          {{>tag-names}}
+          <button class="button" type="button" id="edit-tags">Edit tags</button>
         </div>
 
       </div>
 
-      <button class="button" type="submit">Save & add tags<i class="icon icon--arrow-right icon--arrow-inside-button"></i></button>
-
+      <button class="button" type="submit">Save & Publish</button>
+      {{>tag-ids}}
   </form>
+  {{>modal/modal-view}}
+
 </div>
 
-
+<!-- tags modal script -->
+{{>modal/helpers}}
+{{>modal/logic}}
 
 <!-- Include Navbar -->
 {{>navbar}}
