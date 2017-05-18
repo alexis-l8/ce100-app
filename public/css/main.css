@@ -1825,6 +1825,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   width: 50%;
   margin: 2rem;
   display: inline-block;
+  border: solid 1px rgb(0, 50, 83); /* border added to make this button match
+    the size of the cancel button. This prevents any unwanted whitespace
+    appearing at the bottom of the modal */
 }
 
 .button-cancel--modal {
