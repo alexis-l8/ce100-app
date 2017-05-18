@@ -1,0 +1,29 @@
+<div class="card card--header">
+  <h1 class="title">Select</h1>
+  <a class="icon icon--cancel icon--cancel--modal"></a>
+</div>
+
+<div id="error--message"></div>
+<div class="snackbar snackbar--success">
+  <h1 class="snackbar__content snackbar__content--success">
+    Selecting tags will help people to find you and make sure that you receive suggested matches. We recommend adding up to 5 tags.
+  </h1>
+</div>
+
+<div class="tag-list tag-list--modal" id="tag-list">
+  {{#if tagList}}
+    <div class="form__section form__section--tags">
+      {{#each tagList}}
+        {{>tag}}
+      {{/each}}
+    </div>
+
+  {{else}}
+    <h3>Sorry! No tags were found</h3>
+  {{/if}}
+</div>
+
+<div class="button-group button-group--modal">
+    <button class="button button--margin button-select--modal" type="button" id="select-tags">Select</button>
+    <button class="button button--short button--margin button-cancel--modal button--clear desktop" type="button" id="cancel-tags">Cancel</button>
+</div>

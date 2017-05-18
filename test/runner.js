@@ -15,7 +15,6 @@ require('./challenges/add-chal.test.js');
 require('./challenges/edit-chal.test.js');
 require('./challenges/browse.test.js');
 require('./challenges/details-view.test.js');
-require('./challenges/add-tags-to-challenge.test.js');
 require('./challenges/toggle-active.test.js');
 
 // orgs

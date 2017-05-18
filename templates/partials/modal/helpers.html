@@ -1,0 +1,110 @@
+<script type="text/javascript">
+var i;
+
+function displayError(error) {
+  var error = document.getElementById('error--message');
+  error.className = 'snackbar snackbar--error';
+  var h1 = document.createElement('h1');
+  h1.className = 'snackbar__content snackbar__content--error';
+  h1.innerHTML = "A maximum of 10 tags can be chosen";
+  error.appendChild(h1);
+}
+
+function hideError() {
+  var error = document.getElementById('error--message');
+  error.className = '';
+  error.innerHTML = '';
+}
+
+function selectCheckbox(tags, categories) {
+  // reset the selected elements
+  var selectedTags = document.querySelectorAll('.tag__input:checked:not(.cat)');
+  var selectedCategories = document.querySelectorAll('.cat:checked')
+  unselect(selectedTags);
+  unselect(selectedCategories);
+  // select the tags based on the State
+  for (i = 0; i < tags.length; i++) {
+      document.getElementById('tag_' + tags[i].id).checked = true;
+  }
+  // select categories
+  for (i = 0; i < categories.length; i++) {
+      document.getElementById('cat_' + categories[i].category_id).checked = true;
+  }
+}
+
+function unselect(elts) {
+  for(i = 0; i < elts.length; i++) {
+    elts[i].checked = false;
+  }
+}
+
+function updateCurrentStateTags(tags) {
+  var name;
+  var state = [];
+  for (i = 0; i < tags.length; i++) {
+    name = tags[i].nextElementSibling.innerHTML
+    state.push({id: tags[i].value, name: name})
+  }
+  return state;
+}
+
+function updateCurrentStateCategories(tags, tagCat) {
+  var state = [];
+  var catIds = [];
+  var cat;
+  for (i = 0; i < tags.length; i++) {
+    cat = tagCat[tags[i].value];
+    if(catIds.indexOf(cat.category_id) === -1) {
+      state.push(cat);
+    }
+  }
+  return state;
+}
+
+function updateTagNames(tags) {
+  var tagLabelsList = document.getElementById('tag__labels');
+  tagLabelsList.innerHTML = '';
+  for (i = 0; i < tags.length; i++) {
+    var newtagLabel = document.createElement('span')
+    newtagLabel.className = 'tag__label'
+    newtagLabel.innerHTML = tags[i].name
+    tagLabelsList.append(newtagLabel)
+  }
+}
+
+function hiddenInputTagIds(tags, div) {
+  div.innerHTML = '';
+  for (i = 0; i < tags.length; i++) {
+    var inputTagId = document.createElement('input')
+    inputTagId.type = 'hidden';
+    inputTagId.name = 'tags';
+    inputTagId.value = tags[i].id;
+    div.append(inputTagId);
+  }
+}
+
+function toggleNoScrollToBody() {
+  var body = document.body
+  var classes = body.className.split(" ");
+
+  if (classes.indexOf("noscroll") > -1) {
+    removeClass(body,"noscroll")
+  }
+  else {
+    classes.push("noscroll");
+    body.className = classes.join(" ");
+  }
+}
+
+function hasClass(ele, cls) {
+  return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+}
+
+function removeClass(ele,cls) {
+  if (hasClass(ele,cls)) {
+      var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+      ele.className=ele.className.replace(reg,' ');
+  }
+}
+
+</script>

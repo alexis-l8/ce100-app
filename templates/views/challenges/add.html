@@ -26,23 +26,41 @@
                   id="description"
                   name="description"
                   placeholder="Write Here..."
-                  rows="" cols="50"
-                  >{{#if error.values.description}}{{error.values.description}}{{/if}}</textarea>
+                  rows="" cols="50">
+          {{#if error.values.description}}{{error.values.description}}{{/if}}
+        </textarea>
 
-      {{#if tags}}
-        {{#each tags}}
-          <span class="tag__label tag__label--inactive-link">{{name}}</span>
-        {{/each}}
-      {{/if}}
+        <div class="form__section">
+            <div id="tag__labels">
+            {{#if tags}}
+              {{#each tags}}
+                  <span class="tag__label">{{name}}</span>
+              {{/each}}
+            {{/if}}
+          </div>
+          <button class="button" type="button" id="edit-tags">Edit tags</button>
+        </div>
       </div>
 
       <p class="copy form__copy">Clicking 'Save' will make your challenge public to the network</p>
-      <button class="button" type="submit">Save & add tags<i class="icon icon--arrow-right icon--arrow-inside-button"></i></button>
-
+      <button class="button" type="submit">Save & Publish</button>
+      <div id="form-tag-ids">
+        {{#each tags}}
+            <input type="hidden" name="tags" value="{{id}}">
+        {{/each}}
+      </div>
     </form>
+
+    <div class="modal">
+      <div class="modal__content">
+        {{>modal/modal-tags}}
+      </div>
+    </div>
 </div>
 
-
+<!-- tags modal script -->
+{{>modal/helpers}}
+{{>modal/logic}}
 
 <!-- Include Navbar -->
 {{>navbar}}
