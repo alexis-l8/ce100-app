@@ -39,6 +39,28 @@ tape('/login admin successful', t => {
   });
 });
 
+tape('/login primary - org no mission statement', t => {
+  initServer(config, function (error, server, pool) {
+    var loginPrimary = {
+      email: 'jo@rosie.co',
+      password: 'Hello1'
+    };
+    var options = {
+      method: 'POST',
+      url: '/login',
+      payload: JSON.stringify(loginPrimary)
+    };
+    server.inject(options, res => {
+      t.equal(res.statusCode, 302, 'log in credentials ok');
+      t.ok(res.headers['set-cookie'], 'cookie has been set');
+      t.equal(res.headers.location, '/orgs/10/edit', 'user redirected to edit org to complete mission statement')
+      t.end();
+      server.stop();
+      pool.end();
+    });
+  });
+});
+
 
 tape(file + 'login test', t => {
   initServer(config, function (error, server, pool) {
@@ -117,8 +139,8 @@ tape('/login post logs a user in with incorrect credentials', t => {
   });
 });
 
-
 tape('config reset to true', t => {
+  // reset database on server start
   config.plugins.tags.reset = true;
   config.plugins.people.reset = true;
   config.plugins.challenges.reset = true;
