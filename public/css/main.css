@@ -1498,6 +1498,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   }
   .navbar-top__item--burger:hover {
     background-color: #003253;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
   }
   .navbar-top__logo {
     width: 5rem;
