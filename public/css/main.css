@@ -70,9 +70,7 @@ body {
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 /*
-Marine-blue :   #003253;
-(copy main color)
-
+Main-text :   #333333;
 
 Navy:           #002944;
 
@@ -1576,14 +1574,14 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   }
   .list__item--blue {
       background-color: inherit;
-      color: #003253;
+      color: #333333;
       text-align: left;
   }
 
   .title--desktop {
     display: inline-block;
     text-align: left;
-    color: #003253;
+    color: #333333;
     padding: 0.5rem 0 1rem 0;
     margin: 1rem 1.5rem;
     font-size: 1.125rem;
