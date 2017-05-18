@@ -19,6 +19,7 @@ module.exports = function (request, reply) {
         { data: pgRes.challenges },
         { filter: helpers.browseViewTabBar('challenges', pgRes.filter) },
         { view: helpers.getView(request.path) },
+        {topNavBarType: 'explorer'},
         permissions
       );
 

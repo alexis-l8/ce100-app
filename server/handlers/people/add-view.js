@@ -18,6 +18,7 @@ module.exports = function (request, reply, source, joiErr) {
       { orgs: orgs },
       helpers.userTypeRadios(),
       permissions,
+      {topNavBarType: 'addUser'},
       { error: error }
     );
 

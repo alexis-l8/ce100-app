@@ -6,30 +6,44 @@
   </div>
 
   <div class="navbar-top__links">
-
-    <div class="navbar-top__item navbar-top__item--desktop">
+    {{#if (topNavBar topNavBarType "explorer")}}
+      <div class="navbar-top__item navbar-top__item--desktop navbar-top__item--active-border">
+    {{else}}
+      <div class="navbar-top__item navbar-top__item--desktop">
+    {{/if}}
       <a href="/orgs" class="navbar__top__link navbar-top__link--desktop">
         <i class="navbar__icon icon navbar__icon--desktop icon--explore-white"></i>
-        <span class="navbar__top__link navbar-top__link--desktop">Explore</span>
+          <span class="navbar__top__link navbar-top__link--desktop">Explore</span>
       </a>
     </div>
     {{#if permissions.primary}}
-      <div class="navbar-top__item navbar-top__item--desktop">
+      {{#if (topNavBar topNavBarType "addChallenge")}}
+        <div class="navbar-top__item navbar-top__item--desktop navbar-top__item--active-border">
+      {{else}}
+        <div class="navbar-top__item navbar-top__item--desktop">
+      {{/if}}
         <a href="/challenges/add" class="navbar__top__link navbar-top__link--desktop">
           <i class="navbar__icon icon navbar__icon--desktop icon--plus-white"></i>
-          <span class="navbar__top__link navbar-top__link--desktop">Add</span>
+          <span class="navbar__top__link navbar-top__link--desktop">Challenge</span>
         </a>
       </div>
 
-      <div class="navbar-top__item navbar-top__item--desktop">
+      {{#if (topNavBar topNavBarType "profile")}}
+        <div class="navbar-top__item navbar-top__item--desktop navbar-top__item--active-border">
+      {{else}}
+        <div class="navbar-top__item navbar-top__item--desktop">
+      {{/if}}
         <a href="/orgs/{{permissions.organisation_id}}" class="navbar__top__link navbar-top__link--desktop">
           <i class="navbar__icon icon navbar__icon--desktop icon--profile icon--profile-white"></i>
           <span class="navbar__top__link navbar-top__link--desktop">Profile</span>
         </a>
       </div>
     {{else if permissions.admin}}
-
-      <div class="navbar-top__item navbar-top__item--desktop navbar-top__item--burger navbar__item--toggle">
+      {{#if (topNavBar topNavBarType "addOrg addInsight addUser")}}
+        <div class="navbar-top__item navbar-top__item--desktop navbar-top__item--burger navbar__item--toggle navbar-top__item--active-border">
+      {{else}}
+        <div class="navbar-top__item navbar-top__item--desktop navbar-top__item--burger navbar__item--toggle">
+      {{/if}}
         <label class="navbar__link" for="add-desktop">
           <i class="navbar__icon icon navbar__icon--desktop icon--plus-white"></i>
             <span class="navbar__top__link navbar-top__link--desktop">Add</span>
