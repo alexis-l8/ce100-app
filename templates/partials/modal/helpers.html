@@ -3,7 +3,7 @@ var i;
 
 function displayError(error) {
   var error = document.getElementById('error--message');
-  error.className = 'snackbar snackbar--error';
+  error.className = 'snackbar snackbar--error error--message-modal';
   var h1 = document.createElement('h1');
   h1.className = 'snackbar__content snackbar__content--error';
   h1.innerHTML = "A maximum of 10 tags can be chosen";
@@ -12,7 +12,7 @@ function displayError(error) {
 
 function hideError() {
   var error = document.getElementById('error--message');
-  error.className = '';
+  error.className = 'error--message-modal';
   error.innerHTML = '';
 }
 

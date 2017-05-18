@@ -29,7 +29,8 @@ tape('Admin can edit org --> ' + __filename, function (t) {
     initServer(config, function (error, server, pool) {
       var org = {
         name: 'Google',
-        mission_statement: 'Work hard'
+        mission_statement: 'Work hard',
+        tags: "3"
       }
 
       // admin edit org with id 1
@@ -37,7 +38,7 @@ tape('Admin can edit org --> ' + __filename, function (t) {
 
         // Admin can edit an organisation
         t.equal(res.statusCode, 302, 'successful edit redirects');
-        t.equal(res.headers.location, '/orgs/1/tags', 'redirected to the add tags view');
+        t.equal(res.headers.location, '/orgs/1', 'redirected to the organisation');
 
         server.inject(viewOrg, function (res) {
 
@@ -95,7 +96,7 @@ tape('Primary can edit org --> ' + __filename, function (t) {
 
         // Primary user can edit mission_statement of organisation
         t.equal(res.statusCode, 302, 'successful edit redirects');
-        t.equal(res.headers.location, '/orgs/1/tags', 'redirected to the add tags view');
+        t.equal(res.headers.location, '/orgs/1', 'redirected to the organisation');
 
         server.inject(viewOrg, function (res) {
 

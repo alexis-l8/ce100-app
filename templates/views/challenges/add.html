@@ -31,31 +31,17 @@
         </textarea>
 
         <div class="form__section">
-            <div id="tag__labels">
-            {{#if tags}}
-              {{#each tags}}
-                  <span class="tag__label tag__label--selected">{{name}}</span>
-              {{/each}}
-            {{/if}}
-          </div>
+          {{>tag-names}}
           <button class="button" type="button" id="edit-tags">Edit tags</button>
         </div>
       </div>
 
       <p class="copy form__copy">Clicking 'Save' will make your challenge public to the network</p>
       <button class="button" type="submit">Save & Publish</button>
-      <div id="form-tag-ids">
-        {{#each tags}}
-            <input type="hidden" name="tags" value="{{id}}">
-        {{/each}}
-      </div>
+      {{>tag-ids}}
     </form>
 
-    <div class="modal">
-      <div class="modal__content">
-        {{>modal/modal-tags}}
-      </div>
-    </div>
+    {{>modal/modal-view}}
 </div>
 
 <!-- tags modal script -->

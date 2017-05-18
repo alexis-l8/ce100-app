@@ -18,7 +18,7 @@ var logoSaver = (function () {
       xhttp.onreadystatechange = function () {
         if (this.readyState === 4) {
           if (this.status === 200) {
-            window.location.replace('/orgs/' + id + '/tags');
+            window.location.replace('/orgs/' + id);
           } else {
             document.write(xhttp.responseText);
           }

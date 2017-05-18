@@ -82,16 +82,6 @@ var endpoints = [
     expectedStatusCode: 403
   },
   {
-    url: '/orgs/1/tags',
-    expectedStatusCode: 403
-  },
-  {
-    method: 'POST',
-    url: '/orgs/1/tags',
-    payload: {},
-    expectedStatusCode: 403
-  },
-  {
     url: '/orgs/1/archived-challenges',
     expectedStatusCode: 403
   },

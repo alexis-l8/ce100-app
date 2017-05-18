@@ -9,10 +9,7 @@ var editSchema = require('../models/admin-edit-org.js');
 var toggleActive = require('../handlers/orgs/toggle-active.js');
 var add = require('../handlers/orgs/add.js');
 var addSchema = require('../models/admin-add-org.js');
-var addTagsView = require('../handlers/orgs/add-tags-view.js');
-var addTags = require('../handlers/orgs/add-tags.js');
 var addView = require('../handlers/serve-view.js')('organisations/add');
-var maxAllowedTags = require('../models/max-allowed-tags.js');
 var archivedChallengesView = require('../handlers/orgs/archived-challenges-view.js');
 
 module.exports = [
@@ -66,21 +63,6 @@ module.exports = [
     path: '/orgs/{id}/toggle-active',
     handler: toggleActive,
     config: { auth: { scope: 'admin' } }
-  },
-  {
-    method: 'GET',
-    path: '/orgs/{id}/tags',
-    handler: addTagsView,
-    config: { auth: { scope: ['admin', 'primary'] } }
-  },
-  {
-    method: 'POST',
-    path: '/orgs/{id}/tags',
-    handler: addTags,
-    config: {
-      auth: { scope: ['admin', 'primary'] },
-      validate: maxAllowedTags
-    }
   },
   {
     method: 'GET',
