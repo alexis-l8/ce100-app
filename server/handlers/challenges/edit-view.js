@@ -52,7 +52,7 @@ module.exports = function (request, reply, source, joiErr) {
                   category_id: t.category_id,
                   category_name: t.category_name
                 }
-              })
+              });
 
               options.initialCategories = JSON.stringify(initialCategories);
 

@@ -18,8 +18,6 @@ require('./challenges/details-view.test.js');
 require('./challenges/toggle-active.test.js');
 
 // orgs
-require('./organisations/add-tags-to-org-view.test.js');
-require('./organisations/add-tags-to-org.test.js');
 require('./organisations/toggle-active.test.js');
 require('./organisations/add-org-view.test.js');
 require('./organisations/add-org.test.js');
