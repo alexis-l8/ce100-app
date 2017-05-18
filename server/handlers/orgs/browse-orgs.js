@@ -19,6 +19,7 @@ module.exports = function (request, reply) {
         { data: data.orgs },
         { filter: helpers.browseViewTabBar('orgs', data.filter) },
         { view: helpers.getView(request.path) },
+        {topNavBarType: 'explorer'},
         permissions
       );
 

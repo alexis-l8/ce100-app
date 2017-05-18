@@ -23,6 +23,7 @@ module.exports = function (request, reply, source, joiErr) {
         {initialCategories: JSON.stringify([])},
         {initialTags: JSON.stringify([])},
         {tagList: tagList},
+        {topNavBarType: 'addChallenge'},
         { error: error }
       );
 

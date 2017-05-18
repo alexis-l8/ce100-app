@@ -12,6 +12,7 @@ module.exports = function (request, reply, source, joiErr) {
   var options = Object.assign(
     { typeDropdown: helpers.insightTypeDropdown() },
     permissions,
+    {topNavBarType: 'addInsight'},
     { error: error }
   );
 

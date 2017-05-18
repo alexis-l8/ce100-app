@@ -18,6 +18,7 @@ module.exports = function (request, reply) {
       {},
       orgData,
       { view: helpers.getView(request.path) },
+      {topNavBarType: 'profile'},
       permissions
     );
     return reply.view('organisations/details', options);
