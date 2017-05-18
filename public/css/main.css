@@ -225,6 +225,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     /*used specifically for the challenge with a blue background on mobile, but white on desktop*/
     background-image: url("../assets/Edit-white.svg");
 }
+.icon--edit-tags {
+  display: inline-block;
+  background-image: url("../assets/edit-tags.svg");
+}
 
 .icon--float-right {
   height: 1.3rem;
@@ -1109,6 +1113,19 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     color: #40667e;
     border: solid 1px #40667e;
 }
+.button--edit {
+    margin: 2rem auto;
+    padding: 0.25rem 0.5rem;
+    min-width: 8.13rem;
+    color: #003253;
+    text-align: center;
+    background-color: #fafafa;
+    border: 1px solid #003253;
+    border-radius: 0.5rem;
+}
+.button--edit__text {
+  padding-left: 0.5rem;
+}
 
 .indicator {
   width: 0.5rem;
@@ -1799,6 +1816,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   background-color: white;
   overflow: auto;
   border-radius: 0.3rem;
+}
+
+.icon--cancel--modal {
+  cursor:pointer;
 }
 
 .tag__title--modal {
