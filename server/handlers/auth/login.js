@@ -3,6 +3,7 @@
 var jwt = require('jsonwebtoken');
 var aguid = require('aguid');
 var bcrypt = require('bcrypt');
+var Hoek = require('hoek');
 
 module.exports = function (request, reply) {
   var email = request.payload.email;
@@ -46,7 +47,24 @@ module.exports = function (request, reply) {
           return reply.view('login', {error: { message: 'Sorry, something went wrong. Please try again.', values: request.payload } }).code(500);
         }
         var token = jwt.sign(session, process.env.JWT_SECRET);
-        return reply.redirect('/').state('token', token);
+        var orgId = person.org_id
+
+        if (person.user_type === 'admin') {
+          return reply.redirect('/').state('token', token);
+        }
+        request.server.methods.pg.organisations.getDetails(orgId, function (pgError, orgData) {
+          Hoek.assert(!pgError, 'db error');
+          var userRole = person.user_type
+          var missionStatement = orgData.org.mission_statement
+          // check if user is primary and does not have a mission statement person.user_type === "primary"
+          // send to orgs/{id}/edit
+          // else reply '/'
+          if(userRole === "primary" && !missionStatement) {
+            return reply.redirect('/orgs/' + orgId + '/edit').state('token', token);
+          } else {
+            return reply.redirect('/').state('token', token);
+          }
+        });
       });
     });
   });
