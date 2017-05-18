@@ -1847,6 +1847,14 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
 @media (max-width: 700px) {
 
+  .card--header--modal {
+    position: fixed;
+  }
+
+  .error--message-modal {
+    margin-top: 64px;
+  }
+
   .tag__title--modal {
     font-size: 1rem;
     text-align: left;
