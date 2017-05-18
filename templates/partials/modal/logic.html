@@ -28,6 +28,7 @@
       hiddenInputTagIds(currentStateTags, inputTagIds)
       hideError();
       modal.style.display = 'none';
+      toggleNoScrollToBody();
     } else {
       displayError()
     }
@@ -36,12 +37,14 @@
   // CANCEL SELECT TAGS
   cancelTagsButton.addEventListener('click', function() {
     modal.style.display = 'none';
-    toggleNoScrollToBody()
+    toggleNoScrollToBody();
+    hideError();
   })
 
   closeIcon.addEventListener('click', function() {
     modal.style.display = 'none';
     toggleNoScrollToBody();
+    hideError();
   })
 
 </script>
