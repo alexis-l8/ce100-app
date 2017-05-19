@@ -1942,3 +1942,14 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     width: auto;
   }
 }
+
+/* ---------------------------------------------- */
+/* ---------- INTERCOM MOBILE PLACEMENT ---------- */
+/* ---------------------------------------------- */
+
+
+@media (max-width: 600px) {
+  #intercom-container .intercom-launcher-frame {
+    margin-bottom: 3rem;
+  }
+}
