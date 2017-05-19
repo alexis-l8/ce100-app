@@ -8,6 +8,7 @@ module.exports = function (request, reply, source, joiErr) {
   var permissions = helpers.getPermissions(loggedIn, 'organisation_id', orgId);
   var error = helpers.errorOptions(joiErr);
   var template;
+  var missionStatementMessage = request.query['mission-statment'] === 'false';
 
   if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin' || loggedIn.scope === 'secondary') {
     return reply(Boom.forbidden('You do not have permission to edit that organisation.'));
@@ -32,7 +33,8 @@ module.exports = function (request, reply, source, joiErr) {
           {initialTags: JSON.stringify(selectedTags)},
           {tagList: tagList},
           permissions,
-          {error}
+          {error},
+          {missionStatementMessage: missionStatementMessage}
         );
 
         // create initial state for categories, ie categories that are selected
