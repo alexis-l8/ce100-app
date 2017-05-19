@@ -47,7 +47,7 @@ module.exports = function (request, reply) {
           return reply.view('login', {error: { message: 'Sorry, something went wrong. Please try again.', values: request.payload } }).code(500);
         }
         var token = jwt.sign(session, process.env.JWT_SECRET);
-        var orgId = person.org_id
+        var orgId = person.org_id;
 
         if (person.user_type === 'admin') {
           return reply.redirect('/').state('token', token);
