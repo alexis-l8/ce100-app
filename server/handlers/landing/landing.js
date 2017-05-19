@@ -23,7 +23,7 @@ module.exports = function (request, reply) {
 
       if (loggedIn.scope === 'primary') {
         content = landingContent(profile[0]);
-        sections = content.sections
+        sections = content.sections;
         header = content.header;
       } else {
         content = landingContent(profile[0]);
