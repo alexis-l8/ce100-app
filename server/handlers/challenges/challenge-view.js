@@ -19,6 +19,7 @@ module.exports = function (request, reply) {
     }
     challenge = challengeResponse[0];
     permissions = helpers.getPermissions(loggedIn, 'organisation_id', challenge.org_id);
+    var topNavBarType = permissions.permissions.editable ? 'profile' : 'explorer';
 
     // if challenge is not active,
     // only the user belonging the org that created the challenge can view it
@@ -30,7 +31,8 @@ module.exports = function (request, reply) {
       {},
       permissions,
       { challenge: challenge },
-      { cancelUrl: helpers.getCancelUrl(request) }
+      { cancelUrl: helpers.getCancelUrl(request) },
+      { topNavBarType: topNavBarType }
     );
     // if the logged in user does not belong to this challenges org or is not an
     // admin then they will not be able to see suggested matches
