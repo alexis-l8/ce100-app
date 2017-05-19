@@ -9,6 +9,8 @@ module.exports = function (request, reply) {
   var permissions = helpers.getPermissions(loggedIn);
   var userId = permissions.permissions.userId;
   var options = {};
+  var content;
+  var header;
   var sections;
 
   if (loggedIn.scope === 'admin') {
@@ -20,15 +22,20 @@ module.exports = function (request, reply) {
       Hoek.assert(!pgErr, 'Database Error');
 
       if (loggedIn.scope === 'primary') {
-        sections = landingContent(profile[0]);
+        content = landingContent(profile[0]);
+        sections = content.sections;
+        header = content.header;
       } else {
-        sections = landingContent(profile[0]).filter(function (card, index) {
+        content = landingContent(profile[0]);
+        header = content.header;
+        sections = content.sections.filter(function (card, index) {
           return Boolean(card.primaryOnly) === false;
         });
       }
 
       options = Object.assign(
         { section: addLinkToValue(sections) },
+        {header: header},
         { permissions: permissions.permissions }
       );
 

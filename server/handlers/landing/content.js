@@ -1,9 +1,9 @@
 module.exports = function(profile) {
-  return [
-    {
-      title: profile.first_name + ', innovation begins with collaboration.',
-      description: 'Get connected to the people making the circular economy happen.'
-    },
+  var header =  {
+        title: profile.first_name + ', innovation begins with collaboration.',
+        description: 'Get connected to the people making the circular economy happen.'
+      };
+  var sections = [
     {
       primaryOnly: true,
       title: 'Tell us about you',
@@ -32,16 +32,7 @@ module.exports = function(profile) {
         text: 'Add challenge',
         url: '/challenges/add'
       }
-    },
-    {
-      lastCard: true,
-      title: 'Find the latest insights',
-      description:
-        'Get access to circular economy content on the topics you’re interested in.',
-      link: {
-        text: 'Explore insights',
-        url: '/insights'
-      }
     }
   ];
+  return {header: header, sections: sections};
 };

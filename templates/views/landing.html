@@ -3,19 +3,16 @@
 {{>top-nav-desktop}}
 
 <!-- Main Content -->
-<div class="container--landing">
+<div class="container container--landing">
 
-  <ul>
-    {{#each section}}
-      {{>landing-cards}}
-    {{/each}}
-  </ul>
+  <div class="landing__welcome-message">
+    <p class="landing__title">{{header.title}}</p>
+    <p class="landing__copy">{{header.description}}</p>
+  </div>
 
-
+  <ul class="landing__card-wrapper">{{#each section}}{{>landing-cards}}{{/each}}</ul>
 
 </div>
-
-
 
 <!-- Include Navbar -->
 {{>navbar}}
