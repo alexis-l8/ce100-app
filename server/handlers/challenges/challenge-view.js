@@ -44,7 +44,6 @@ module.exports = function (request, reply) {
 
       Hoek.assert(!pgErr2, errorMessage);
       optionsMatches = Object.assign({}, options, { suggested_matches: orgs });
-
       return reply.view('challenges/details', optionsMatches);
     });
   });
