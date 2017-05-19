@@ -53,7 +53,7 @@ tape('/login primary - org no mission statement', t => {
     server.inject(options, res => {
       t.equal(res.statusCode, 302, 'log in credentials ok');
       t.ok(res.headers['set-cookie'], 'cookie has been set');
-      t.equal(res.headers.location, '/orgs/10/edit', 'user redirected to edit org to complete mission statement')
+      t.equal(res.headers.location, '/orgs/10/edit?mission-statment=false', 'user redirected to edit org to complete mission statement')
       t.end();
       server.stop();
       pool.end();

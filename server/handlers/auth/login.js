@@ -47,21 +47,19 @@ module.exports = function (request, reply) {
           return reply.view('login', {error: { message: 'Sorry, something went wrong. Please try again.', values: request.payload } }).code(500);
         }
         var token = jwt.sign(session, process.env.JWT_SECRET);
-        var orgId = person.org_id;
 
-        if (person.user_type === 'admin') {
+        if (person.user_type === 'primary' && person.org_id) {
+          // get the org and check the mission statement
+          request.server.methods.pg.organisations.getDetails(person.org_id, function (pgError, orgData) {
+            Hoek.assert(!pgError, 'db error');
+            var redirectUrl = orgData.org.mission_statement ?
+              '/' :
+              '/orgs/' + person.org_id + '/edit?mission-statment=false';
+            return reply.redirect(redirectUrl).state('token', token);
+          });
+        } else {
           return reply.redirect('/').state('token', token);
         }
-        request.server.methods.pg.organisations.getDetails(orgId, function (pgError, orgData) {
-          Hoek.assert(!pgError, 'db error');
-          var missionStatement = orgData.org.mission_statement;
-
-          if(person.user_type === "primary" && !missionStatement) {
-            return reply.redirect('/orgs/' + orgId + '/edit').state('token', token);
-          } else {
-            return reply.redirect('/').state('token', token);
-          }
-        });
       });
     });
   });

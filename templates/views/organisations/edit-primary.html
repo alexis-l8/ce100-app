@@ -19,6 +19,12 @@
       </div>
     {{/if}}
 
+    {{#if missionStatementMessage}}
+    <div class="snackbar snackbar--error">
+      <h1 class="snackbar__content snackbar__content--error">Please fill a mission statement for your organisation</h1>
+    </div>
+    {{/if}}
+
     <!-- Logo and Name -->
     <div class="card card--header card--tall card--header--white">
       {{#if org.logo_url}}
