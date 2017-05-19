@@ -47,13 +47,11 @@
           Describe your circular economy vision and highlight how your organisation is working towards it.
         </p>
 
-        <textarea class="form__input form__input--text-area {{error.mission_statement}}"
+        <textarea class="form__input form__input--text-area"
                   id="mission_statement"
                   name="mission_statement"
                   rows="2" cols="50"
-                  required
-                  >{{#if error}}{{error.values.mission_statement}}{{else}}{{org.mission_statement}}{{/if}}
-        </textarea>
+                  required>{{org.mission_statement}}</textarea>
 
         <div class="form__section form__section--left-align">
           {{>tag-names}}
