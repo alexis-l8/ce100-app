@@ -32,16 +32,6 @@ module.exports = function(profile) {
         text: 'Add challenge',
         url: '/challenges/add'
       }
-    },
-    {
-      lastCard: true,
-      title: 'Find the latest insights',
-      description:
-        'Get access to circular economy content on the topics you’re interested in.',
-      link: {
-        text: 'Explore insights',
-        url: '/insights'
-      }
     }
   ];
   return {header: header, sections: sections};
