@@ -696,8 +696,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   text-align: center;
   text-transform: capitalize;
 }
+.tag__label:hover {
+  cursor: pointer;
+}
 .tag__label:active {
-  background-color: #003253;
+  background-color: #40667E;
   color: white;
 }
 .tag__input:checked + .tag__label {
@@ -713,6 +716,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     }
     .tag__label--disabled {
       opacity: 0.5;
+    }
+    .tag__label--disabled:hover {
+      cursor: default;
     }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
