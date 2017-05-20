@@ -40,7 +40,7 @@ tape('Differing permissions on edit org view: --> ' + __filename, function (t) {
           t.equal(res.payload.indexOf('value="Apple'), -1, 'Primary user cannot edit the name of an organisation');
           t.ok(res.payload.indexOf('>Apple</h1>') > -1, 'Primary user can see the Org name title indicating that it is not editable');
 
-          t.ok(res.payload.indexOf('Circular economy vision') > -1, 'Primary user is given custom label for editing mission statement');
+          t.ok(res.payload.indexOf('What are the circular economy ambitions for your organisation?') > -1, 'Primary user is given custom label for editing mission statement');
           t.ok(res.payload.indexOf('UK') > -1, 'Primary user can see tags on the organisation');
           t.ok(res.payload.indexOf('Global Partner') > -1, 'Primary can see correct tags on the organisation');
 

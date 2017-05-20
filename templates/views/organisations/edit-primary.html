@@ -40,7 +40,7 @@
    <form class="form form--desktop" method="post">
       <div class="form__section form__section--main">
         <label class="form__label" for="mission_statement">
-            Circular economy vision
+            What are the circular economy ambitions for your organisation?
         </label>
 
         <p class="form__label form__label--additional">
@@ -56,6 +56,12 @@
         </textarea>
 
         <div class="form__section form__section--left-align">
+          <label class="form__label">
+              Expertise
+          </label>
+          <p class="form__label form__label--additional">
+            Choose tags that describe what your organisation is good at and get matched with challenges that could use your expertise.
+          </p>
           {{>tag-names}}
           <button href="/orgs" class="button button--edit" type="button" id="edit-tags">
             <i class="navbar__icon icon navbar__icon--desktop icon--edit-tags"></i>
@@ -64,7 +70,9 @@
         </div>
 
       </div>
-
+      <p class="form__label form__label--additional form__label--center">
+        Clicking 'save' will make your challenge public on your profile.
+      </p>
       <button class="button" type="submit">Save & Publish</button>
       {{>tag-ids}}
   </form>

@@ -1021,6 +1021,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             margin-bottom: 2.5rem; /* 40px */
         }
 
+        .form__label--center {
+          text-align: center;
+        }
+
     .form__input {
         margin-bottom: 1.75rem; /* 28px */
         font-family: inherit;
