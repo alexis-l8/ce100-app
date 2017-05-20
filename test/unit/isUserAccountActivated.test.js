@@ -15,7 +15,7 @@ tape('check what the account status is for a user', function (t) {
   tests.forEach(function (test) {
     var actual = isUserAccountActivated(test[0][0], test[0][1], test[0][2])
     var expected = test[1];
-    t.equal(actual, expected, test[1])
+    t.equal(actual, expected, test[2])
   });
   t.end();
 });
