@@ -1,5 +1,9 @@
-{{#if isActive}}
+{{#if (isUserAccountActivated isActive accountActivated "active" )}}
   <div class="list__subblock indicator indicator--active indicator--left"></div>
-{{else}}
+{{/if}}
+{{#if (isUserAccountActivated isActive accountActivated "inactive" )}}
   <div class="list__subblock indicator indicator--inactive indicator--left"></div>
+{{/if}}
+{{#if (isUserAccountActivated isActive accountActivated "pending" )}}
+  <div class="list__subblock indicator indicator--pending indicator--left"></div>
 {{/if}}

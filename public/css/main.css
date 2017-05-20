@@ -1243,6 +1243,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   .indicator--inactive {
     background-color: #e33838;
   }
+  .indicator--pending {
+    background-color: #e3dc38;
+  }
   .indicator--left {
     float: left;
     margin: 0.5rem -1rem;
