@@ -698,6 +698,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 .tag__label:hover {
   cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 .tag__label:active {
   background-color: #40667E;
@@ -714,11 +715,16 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       color: #ffffff;
       cursor: default;
     }
+    .tag__label--selected:hover {
+      background-color: #40667E;
+      cursor: pointer;
+    }
     .tag__label--disabled {
       opacity: 0.5;
     }
     .tag__label--disabled:hover {
       cursor: default;
+      background-color: #40667E;
     }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
