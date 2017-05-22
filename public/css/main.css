@@ -1220,10 +1220,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         margin: 2rem auto;
         padding: 0.25rem 0.5rem;
         min-width: 8.13rem;
-        color: #003253;
+        color: #40667e;
         text-align: center;
         background-color: #fafafa;
-        border: 1px solid #003253;
+        border: 1px solid #40667e;
         border-radius: 0.5rem;
     }
     .button--edit__text {
@@ -1236,6 +1236,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     right: 2rem;
     left: 2rem;
     bottom: 2rem;
+  }
+  .button--edit {
+      margin: 2rem 0;
   }
 }
 
@@ -1813,6 +1816,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       width: 95%;
       margin: 0 auto;
   }
+
+  .tag__labels {
+    text-align: left
+  }
+
 /* ---------------------------------------------- */
 /* ------------- DESKTOP HELPERS ---------------- */
 /* ---------------------------------------------- */
