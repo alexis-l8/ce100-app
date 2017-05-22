@@ -6,3 +6,8 @@
     Enable User
   {{/if}}
 </a>
+{{#unless user.account_activated}}
+<a class="form__anchor form__anchor--danger" href="/people/{{user.id}}/resend-activation-link">
+  Resend activation link
+</a>
+{{/unless}}

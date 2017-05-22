@@ -9,6 +9,7 @@ var editView = require('../handlers/people/edit-view.js');
 var edit = require('../handlers/people/edit.js');
 var editModel = require('../models/edit-user.js');
 var toggleActive = require('../handlers/people/toggle-active.js');
+var resendActivationLink = require('../handlers/people/resend-activation-link.js');
 
 module.exports = [
   {
@@ -77,5 +78,11 @@ module.exports = [
       validate: require('../models/confirm-password.js'),
       auth: false
     }
-  }
+  },
+  {
+    method: 'GET',
+    path: '/people/{id}/resend-activation-link',
+    handler: resendActivationLink,
+    config: { auth: { scope: 'admin' } }
+  },
 ];
