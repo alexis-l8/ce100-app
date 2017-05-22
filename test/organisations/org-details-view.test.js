@@ -155,7 +155,7 @@ tape('/orgs/id (GET) - View inactive org details view: --> ' + __filename, funct
         // Admin can view and edit an inactive organisation
         t.ok(res.payload.indexOf('Coca Cola') > -1, 'Admin can view the correct organisation');
         t.ok(res.payload.indexOf('/orgs/7/edit') > -1, 'The admin has edit organisation rights');
-        t.ok(res.payload.indexOf('No Primary User Yet') > -1, 'No primary user is displayed to the admin');
+        t.ok(res.payload.indexOf('No contact details yet.') > -1, 'No primary user is displayed to the admin');
 
         server.inject(viewOrgDetails('primary_3', 7), function (res) {
           t.equal(res.statusCode, 403, 'org doesnt is not accessible, return 403');

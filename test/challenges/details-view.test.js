@@ -145,7 +145,7 @@ users.forEach(function (user) {
             t.ok(html.indexOf('Waste to energy') > -1, 'Tag associated with the challenge is displayed');
 
             // suggested matches
-            t.ok(html.indexOf('MATCHED WITH') > -1, 'Suggested matches shows for ' + userType);
+            t.ok(html.indexOf('MATCHES') > -1, 'Suggested matches shows for ' + userType);
             t.ok(html.indexOf('Co-op Group') > -1, 'Correct org suggested as a match for this challenge');
 
             t.end();

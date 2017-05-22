@@ -36,8 +36,11 @@
     </div>
     {{#if permissions.editable}}
       <div class="card card--suggested-matches d-card--centred">
-        <h2 class="card__header card__header--suggested-matches">MATCHED WITH</h2>
+        <h2 class="card__header card__header--suggested-matches">MATCHES</h2>
         {{#if suggested_matches}}
+        <p class="form__label form__label--additional">
+          These organisations have expertise that might help you with your challenge. Why not get in touch?
+        </p>
         {{#each suggested_matches}}
           <a class="anchor anchor--suggested-matches" href="/orgs/{{id}}">{{name}}</a>
         {{/each}}

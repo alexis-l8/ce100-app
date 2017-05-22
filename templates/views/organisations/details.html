@@ -14,7 +14,7 @@
     </div>
     <div class="desktop-grid desktop-grid--third">
       <div class="card card--desktop">
-        <h2 class="card__header card__header--desktop card__header--underline">OUR CIRCULAR ECONOMY VISION</h2>
+        <h2 class="card__header card__header--desktop card__header--underline">CIRCULAR ECONOMY VISION</h2>
         <p class="card__copy card__copy--extra-margin card__copy--desktop">{{org.mission_statement}}</p>
         {{#if permissions.secondary}}
         {{else if permissions.editable}}
@@ -23,6 +23,7 @@
           </a>
         {{/if}}
         {{#if org.tags}}
+           <h2 class="card__header card__header--desktop card__header--underline">EXPERTISE</h2>
             {{#each org.tags}}
               <a href="/orgs?tags={{tag_id}}"><span class="tag__label tag__label--selected">{{tag_name}}</span></a>
             {{/each}}
@@ -41,7 +42,7 @@
       {{else}}
         <div class="card card--desktop">
           <h2 class="card__header card__header--desktop card__header--underline">GET IN TOUCH</h2>
-          <span class="card__data">No Primary User Yet</span>
+          <span class="card__data">No contact details yet.</span>
         </div>
       {{/if}}
     </div>
@@ -55,15 +56,7 @@
               {{>challenge permissions=../permissions view=../view}}
             {{/each}}
         {{else}}
-          {{#if permissions.primary}}
-            {{#if permissions.editable}}
-              <div class="card card--details card--narrow">
-                <p class="card__header--challenge card__data--link">
-                  You haven't shared a challenge yet.
-                </p>
-              </div>
-              {{/if}}
-            {{/if}}
+          <span class="card__data">No challenges shared yet.</span>
         {{/if}}
         <!-- Archived challenges -->
         {{#if permissions.primary}}
