@@ -7,7 +7,9 @@ var config = require('../../server/config.js');
 var people = require('ce100-mock-data').people;
 
 var activeOnly = people.filter(function (userObj) {
-  return userObj.active === true && userObj.user_type !== 'admin';
+  return userObj.active
+    && userObj.user_type !== 'admin'
+    && userObj.account_activated;
 });
 
 var nonAdminUsers = ['primary_3', 'secondary_12'];
