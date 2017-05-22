@@ -8,10 +8,10 @@ module.exports = function (request, reply) {
 
   var peopleId = request.params.id && parseInt(request.params.id);
 
-  request.server.methods.pg.people.getBy('id', peopleId, function (pgErr, user) {
+  request.server.methods.pg.people.getBy('id', peopleId, function (pgErr, people) {
     Hoek.assert(!pgErr, 'database error');
-    var people = user[0];
-    sendEmail('welcome', people, function (emailErr) {
+    var user = people[0];
+    sendEmail('welcome', user, function (emailErr) {
       Hoek.assert(!emailErr, 'send email error');
 
       return reply.redirect('/people');
