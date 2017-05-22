@@ -1,10 +1,10 @@
 <script type="text/javascript">
-  var editTagsButton = document.getElementById('edit-tags');
-  var tagList = document.getElementById('tag-list');
+  var editTagsButton = document.querySelector('#edit-tags');
+  var tagList = document.querySelector('#tag-list');
   var modal = document.querySelector('.modal')
   var closeIcon = document.querySelector('.icon--cancel--modal')
-  var selectTagsButton = document.getElementById('select-tags');
-  var cancelTagsButton = document.getElementById('cancel-tags');
+  var selectTagsButton = document.querySelector('#select-tags');
+  var cancelTagsButton = document.querySelector('#cancel-tags');
 
   // INITIAL STATES ON PAGE LOAD
   var currentStateTags = {{{"initialTags"}}};
@@ -24,7 +24,7 @@
   selectTagsButton.addEventListener('click', function() {
     var selectedTags = document.querySelectorAll('.tag__input:checked:not(.cat)');
     if (selectedTags.length < 10) {
-      var inputTagIds = document.getElementById('form-tag-ids');
+      var inputTagIds = document.querySelector('#form-tag-ids');
       currentStateTags = updateCurrentStateTags(selectedTags);
       currentStateCategories = updateCurrentStateCategories(selectedTags, tagCat);
       updateTagNames(currentStateTags);
