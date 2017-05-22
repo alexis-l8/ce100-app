@@ -2,7 +2,7 @@
 var i;
 
 function displayError(error) {
-  var error = document.getElementById('error--message');
+  var error = document.querySelector('#error--message');
   error.className = 'snackbar snackbar--error error--message-modal';
   var h1 = document.createElement('h1');
   h1.className = 'snackbar__content snackbar__content--error';
@@ -11,7 +11,7 @@ function displayError(error) {
 }
 
 function hideError() {
-  var error = document.getElementById('error--message');
+  var error = document.querySelector('#error--message');
   error.className = 'error--message-modal';
   error.innerHTML = '';
 }
@@ -24,11 +24,11 @@ function selectCheckbox(tags, categories) {
   unselect(selectedCategories);
   // select the tags based on the State
   for (i = 0; i < tags.length; i++) {
-      document.getElementById('tag_' + tags[i].id).checked = true;
+      document.querySelector('#tag_' + tags[i].id).checked = true;
   }
   // select categories
   for (i = 0; i < categories.length; i++) {
-      document.getElementById('cat_' + categories[i].category_id).checked = true;
+      document.querySelector('#cat_' + categories[i].category_id).checked = true;
   }
 }
 
@@ -62,7 +62,7 @@ function updateCurrentStateCategories(tags, tagCat) {
 }
 
 function updateTagNames(tags) {
-  var tagLabelsList = document.getElementById('tag__labels');
+  var tagLabelsList = document.querySelector('#tag__labels');
   tagLabelsList.innerHTML = '';
   for (i = 0; i < tags.length; i++) {
     var newtagLabel = document.createElement('span')

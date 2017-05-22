@@ -7,8 +7,8 @@ var logoSaver = (function () {
 
   function sendFileToServer (file_name, id) {
     var orgForm =
-      document.getElementById('add-org-form')
-      || document.getElementById('edit-org-form');
+      document.querySelector('#add-org-form')
+      || document.querySelector('#edit-org-form');
     var formData = new FormData(orgForm);
     var xhttp = new XMLHttpRequest();
 
