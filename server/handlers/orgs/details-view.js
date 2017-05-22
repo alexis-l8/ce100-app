@@ -6,6 +6,8 @@ module.exports = function (request, reply) {
   var orgId = parseInt(request.params.id, 10);
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'organisation_id', orgId);
+  var topNavBarType = loggedIn.organisation_id === orgId ? 'profile' : 'explorer';
+
   request.server.methods.pg.organisations.getDetails(orgId, function (error, orgData) {
     Hoek.assert(!error, 'Error retrieving organisation with id ' + orgId)
 
@@ -18,9 +20,10 @@ module.exports = function (request, reply) {
       {},
       orgData,
       { view: helpers.getView(request.path) },
-      {topNavBarType: 'profile'},
+      {topNavBarType: topNavBarType},
       permissions
     );
+
     return reply.view('organisations/details', options);
   });
 };
