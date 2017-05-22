@@ -54,7 +54,7 @@ module.exports = function (request, reply) {
             Hoek.assert(!pgError, 'db error');
             var redirectUrl = orgData.org.mission_statement ?
               '/' :
-              '/orgs/' + person.org_id + '/edit?mission-statment=false';
+              '/orgs/' + person.org_id + '/edit';
             return reply.redirect(redirectUrl).state('token', token);
           });
         } else {

@@ -44,6 +44,33 @@ tape('activate account with not yet activated user, good password: --> ' + __fil
   });
 });
 
+tape('activate account - primary uesr, org without mission statement: --> ' + __filename, function (t) {
+  init(config, function (err, server, pool) {
+    t.ok(!err, 'No error on init server: ', err);
+    server.inject(activateAccount(22, goodPassword), function (res) {
+      t.equal(res.statusCode, 302, 'redirects');
+      t.ok(res.headers['set-cookie'], 'successful activation adds a session cookie');
+      t.ok(res.headers.location, '/org/10/edit', 'redirect to edit org');
+      t.end();
+      server.stop();
+      pool.end();
+    });
+  });
+});
+
+tape('activate account - secondary user: --> ' + __filename, function (t) {
+  init(config, function (err, server, pool) {
+    t.ok(!err, 'No error on init server: ', err);
+    server.inject(activateAccount(18, goodPassword), function (res) {
+      t.equal(res.statusCode, 302, 'redirects');
+      t.ok(res.headers['set-cookie'], 'successful activation adds a session cookie');
+      t.end();
+      server.stop();
+      pool.end();
+    });
+  });
+});
+
 // short password
 tape('short password fails validation: --> ' + __filename, function (t) {
   init(config, function (err, server, pool) {

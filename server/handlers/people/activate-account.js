@@ -31,6 +31,7 @@ module.exports = function (request, reply) {
       Hoek.assert(!bcryptErr, 'bcrypt error');
       request.server.methods.pg.people.addPassword(userId, hashedPassword, function (pgErr, updatedUser) {
         Hoek.assert(!pgErr, 'database errror');
+        var person = updatedUser[0];
         // if no user was updated
         if (updatedUser.length === 0) {
           var error = {
@@ -47,10 +48,18 @@ module.exports = function (request, reply) {
         request.server.app.redis.HSET('sessions', session.jti, JSON.stringify(session), function (redisErr, res) {
           Hoek.assert(!redisErr, 'redis error');
           var token = jwt.sign(session, config.jwt_secret);
-          // redirect a new user with an org to their org profile, else redirect to all orgs
-          return updatedUser.org_id === null
-          ? reply.redirect('/orgs').state('token', token)
-          : reply.redirect('/').state('token', token);
+          if (person.user_type === 'primary' && person.org_id) {
+            // get the org and check the mission statement
+            request.server.methods.pg.organisations.getDetails(person.org_id, function (pgError, orgData) {
+              Hoek.assert(!pgError, 'db error');
+              var redirectUrl = orgData.org.mission_statement ?
+                '/' :
+                '/orgs/' + person.org_id + '/edit';
+              return reply.redirect(redirectUrl).state('token', token);
+            });
+          } else {
+            return reply.redirect('/').state('token', token);
+          }
         });
       });
     });

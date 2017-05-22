@@ -11,13 +11,13 @@ module.exports = {
 var schema = {
   admin: {
     name: Joi.string().min(1).required(),
-    mission_statement: Joi.any().optional(),
+    mission_statement: Joi.string().min(1).required(),
     file_name: Joi.any().optional(),
     logo: Joi.any().optional(),
     tags: [Joi.array(), Joi.string()]
   },
   primary: {
-    mission_statement: Joi.any().optional(),
+    mission_statement: Joi.string().min(1).required(),
     tags: [Joi.array(), Joi.string()]
   }
 };
