@@ -190,11 +190,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     height: 1.3rem;
     width: 1.3rem;
 }
-.icon--edit:hover {
+/*.icon--edit:hover {
   background-color: rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   padding-top: 1.5rem;
-}
+}*/
 .icon--arrow-inside-button {
   display: inline-block;
   width: 1rem;
@@ -204,6 +204,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 .icon--edit-blue {
     background-image: url("../assets/Edit.svg");
+}
+.icon--edit-blue:hover {
+    background-image: url("../assets/Edit-hover.svg");
 }
 .icon--edit-white {
     background-image: url("../assets/Edit-white.svg");
@@ -341,6 +344,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
           padding: 1.5em 0;
           border-bottom: 1px solid #40667E;
         }
+    .toggle-menu__link:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
 
   /*|||||||||||||||||||||||||||||||||||||||||||||
     Toggle Bar in browse view
@@ -609,6 +615,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
           margin: 0;
         }
 
+        .list__ellipsis:hover > * {
+          background-color: rgba(64, 102, 126, 0.75);
+        }
+
         .list__ellipsis + input {
             display: none;
         }
@@ -808,6 +818,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             line-height: 1.375rem;
             margin-bottom: 0.3rem;
         }
+        .card__data--link:hover {
+            color: #003253;
+        }
         .card__header--extra-margin {
             margin-bottom: 0.875rem;
         }
@@ -846,6 +859,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         .card__data--prim-contact {
           color: #40667E;
           text-decoration: none;
+        }
+        .card__data--prim-contact:hover {
+          color: #003253;
         }
     .card__additional {
       color: #40667E;
@@ -1139,6 +1155,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
     .form__anchor {
         color: #40667E;
+        text-decoration: none;
     }
         .form__anchor--danger:visited {
             color: #40667E;
@@ -1146,6 +1163,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         .form__anchor--danger:link {
             margin: 2.625rem auto 2.625rem; /* 42px = 2.625rem */
             display: block;
+        }
+        .form__anchor--danger:hover {
+          color: #003253;
         }
 
 
@@ -1171,6 +1191,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 .button:active {
   background-color: #40667E;
+}
+.button:hover {
+  background-color: #002944;
 }
     .button--secondary {
       background-color: transparent;
@@ -1241,6 +1264,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     .button--edit__text {
       padding-left: 0.5rem;
     }
+    .button--edit:hover {
+      background-color: #fafafa;
+      color: #002944;
+      border: 1px solid #002944;
+    }
 
 @media (min-width: 600px) {
   .button--landing {
@@ -1281,26 +1309,26 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .anchor {
-  color: #333333;
+  color: #40667e;
+  text-decoration: none;
 }
 .anchor:link {
     text-align: center;
     display: inline-block;
-    color: #333333;
+    color: #40667e;
 }
 .anchor:visited {
-    color: #333333;
-}
-.anchor:hover {
+    color: #40667e;
 }
 .anchor:active {
     color: #40667E;
 }
-    .anchor--additional, .anchor--additional:link, .anchor--additional:visited, .anchor--additional:hover  {
-        color: #40667E;
+    .anchor--additional, .anchor--additional:link, .anchor--additional:visited  {
+        color: #40667e;
     }
+
     .anchor--additional:active {
-        color: #333333;
+        color: #40667e;
     }
     .anchor--red:link, .anchor--red:hover, .anchor--red:visited {
         color: #900000;
@@ -1317,7 +1345,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       display: block;
       text-align: left;
       width: 100%;
-      color: #333333;
+      color: #40667e;
       margin: 0 0 1.1875rem 0;
     }
     .anchor--shared-by, .anchor--shared-by:link, .anchor--shared-by:visited {
@@ -1337,6 +1365,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     }
     .anchor--small, .anchor--small:link, .anchor--small:visited {
         font-size: 0.875rem;
+    }
+    .anchor:hover, .anchor--shared-by:hover, .anchor--suggested-matches:hover, .anchor--additional:hover {
+      color: #003253;
     }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -1606,10 +1637,8 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     box-shadow: 0px -5px 0px #66d9e0 inset;
   }
   .navbar-top__item--burger:hover {
-    background-color: #003253;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
-    box-shadow: 0px -5px 0px #66d9e0 inset;
   }
   .navbar-top__logo {
     width: 5rem;
@@ -1773,6 +1802,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   .icon--edit-challenge-on-profile {
       /*ensure icon is blue when in desktop (on a challenge card in org details view)*/
       background-image: url("../assets/Edit.svg");
+  }
+  .icon--edit-challenge-on-profile:hover {
+    background-image: url("../assets/Edit-hover.svg");
   }
   .icon--inline {
     display: inline-block;
