@@ -55,13 +55,23 @@
         </div>
       </div>
 
+      <div class="form__section">
+        {{>tag-names}}
+        <button href="/orgs" class="button button--edit" type="button" id="edit-tags">
+          <i class="navbar__icon icon navbar__icon--desktop icon--edit-tags"></i>
+          <span class="button--edit__text">EDIT TAGS</span>
+        </button>
+      </div>
 
-      <button class="button button--margin" type="submit">Edit Tags</button>
-
+      <button class="button button--margin" type="submit">Save & Publish</button>
+      {{>tag-ids}}
     </form>
+    {{>modal/modal-view}}
 </div>
 
-
+<!-- tags modal script -->
+{{>modal/helpers}}
+{{>modal/logic}}
 
 <!-- Include Navbar -->
 {{>navbar}}
