@@ -26,7 +26,7 @@ tape('Differing permissions on edit org view: --> ' + __filename, function (t) {
         t.ok(res.payload.indexOf('value="Apple') > -1, 'Admin can edit the name of an organisation');
         t.equal(res.payload.indexOf('>Apple</h1>'), -1, 'Admin cannot see the Org name title indicating that it is editable');
 
-        t.ok(res.payload.indexOf('Organisation\'s mission statement') > -1, 'Admin is given custom label');
+        t.ok(res.payload.indexOf('Circular economy vision') > -1, 'Admin is given custom label');
         t.ok(res.payload.indexOf('UK') > -1, 'Admin can see correct tags on the organisation');
         t.ok(res.payload.indexOf('Global Partner') > -1, 'Admin can see correct tags on the organisation');
         t.ok(res.payload.indexOf('/toggle-active') > -1, 'Admin can toggle active an organisation');
