@@ -22,13 +22,14 @@
         <p class="form__label form__label--additional">
           Add a short, descriptive title.
         </p>
-        <input class="form__input form__input--text {{error.title}}" type="text" name="title" id="title" value="{{#if error}}{{error.values.title}}{{else}}{{title}}{{/if}}">
+        <input required class="form__input form__input--text {{error.title}}" type="text" name="title" id="title" value="{{#if error}}{{error.values.title}}{{else}}{{title}}{{/if}}">
 
         <label class="form__label" for="description">Challenge description</label>
         <p class="form__label form__label--additional">
           Tell the network what you need help solving or if there are opportunities for collaboration.
         </p>
-        <textarea class="form__input form__input--text-area {{error.description}}"
+        <textarea required
+                  class="form__input form__input--text-area {{error.description}}"
                   name="description"
                   id="description"
                   placeholder="Write Here..."

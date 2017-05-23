@@ -20,9 +20,10 @@
       <div class="form__section form__section--main">
 
         <label class="form__label" for="title">Challenge title*</label>
-        <input class="form__input form__input--text {{error.title}}" type="text" name="title" id="title" placeholder="Write Here..." value="{{error.values.title}}">
+        <input required class="form__input form__input--text {{error.title}}" type="text" name="title" id="title" placeholder="Write Here..." value="{{error.values.title}}">
         <label class="form__label" for="description">Short description*</label>
-        <textarea class="form__input form__input--text-area {{error.description}}"
+        <textarea required
+                  class="form__input form__input--text-area {{error.description}}"
                   id="description"
                   name="description"
                   placeholder="Write Here..."
