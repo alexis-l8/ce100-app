@@ -190,6 +190,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     height: 1.3rem;
     width: 1.3rem;
 }
+.icon--edit:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  padding-top: 1.5rem;
+}
 .icon--arrow-inside-button {
   display: inline-block;
   width: 1rem;
@@ -716,7 +721,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       cursor: default;
     }
     .tag__label--selected:hover {
-      background-color: #40667E;
+      background-color: #003253;
       cursor: pointer;
     }
     .tag__label--disabled {
@@ -1186,6 +1191,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         text-shadow: 0 1px 0 rgba(0, 49, 83, 0.07);
     }
     .button--login:hover {
+      background-color: rgba(0, 0, 0, 0.1);
     }
     .button--margin {
         margin-bottom: 2rem;
@@ -1206,6 +1212,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         margin-top: 1.25rem;
         margin-bottom: 0rem;
     }
+    .button--landing:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
     .button--clear {
         color: #40667E;
         background-color: transparent;
@@ -1215,6 +1224,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     .button--dark-blue {
         color: #40667e;
         border: solid 1px #40667e;
+    }
+    .button--dark-blue:hover {
+      background-color: rgba(0, 0, 0, 0.1);
     }
     .button--edit {
         margin: 2rem auto;
