@@ -7,6 +7,7 @@ module.exports = function (request, reply) {
   var loggedIn = request.auth.credentials;
   var iid = request.params.id;
   var updates = request.payload;
+  var tags = updates.tags;
 
   if (loggedIn.scope !== 'admin') {
     return reply(Boom.forbidden());
@@ -20,7 +21,11 @@ module.exports = function (request, reply) {
   return request.server.methods.pg.insights.edit(iid, updates,
     function (err) {
       Hoek.assert(!err, 'database error');
+      return request.server.methods.pg.tags.addTags('insights', iid,
+        tags, function (tagsError) {
+          Hoek.assert(!tagsError, 'database error');
 
-      return reply.redirect('/insights/' + iid + '/tags');
+          return reply.redirect('/insights');
+        });
     });
 };
