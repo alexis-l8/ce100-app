@@ -60,3 +60,4 @@ require('./unit/isUserAccountActivated.test.js');
 
 // nightmare
 require('./nightmare/login.test.js');
+require('./nightmare/add-challenge.test.js');
