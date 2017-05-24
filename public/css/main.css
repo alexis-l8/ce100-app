@@ -1317,7 +1317,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 .anchor:link {
     text-align: center;
-    display: inline-block;
     color: #40667e;
 }
 .anchor:visited {
@@ -1991,6 +1990,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 /* ---------------------------------------------- */
 
 @media (max-width: 700px) {
+
+  .card__data--link:hover {
+    color: inherit;
+  }
 
   .card--header--modal {
     position: fixed;
