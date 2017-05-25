@@ -2029,9 +2029,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     bottom: 0;
     left: 0;
     width: 100%;
-  }
-
-  .button-group--modal {
     text-align: center;
   }
 
@@ -2039,7 +2036,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     margin: 1rem;
     float: none;
     width: auto;
+    min-width: 7.8rem;
   }
+
 }
 
 /* ---------------------------------------------- */
