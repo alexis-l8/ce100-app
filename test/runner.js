@@ -56,3 +56,6 @@ require('./unit/getCancelUrl.test.js');
 require('./unit/getView.test.js');
 require('./unit/moveLocationToEnd.test.js');
 require('./unit/isUserAccountActivated.test.js');
+
+// nightmare
+require('./nightmare/login.test.js');
