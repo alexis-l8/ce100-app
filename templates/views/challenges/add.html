@@ -19,16 +19,26 @@
 
       <div class="form__section form__section--main">
 
-        <label class="form__label" for="title">Challenge title*</label>
-        <input class="form__input form__input--text {{error.title}}" type="text" name="title" id="title" placeholder="Write Here..." value="{{error.values.title}}">
-        <label class="form__label" for="description">Short description*</label>
-        <textarea class="form__input form__input--text-area {{error.description}}"
+        <label class="form__label" for="title">Title</label>
+        <p class="form__label form__label--additional">
+          Add a short, descriptive title
+        </p>
+        <input required class="form__input form__input--text {{error.title}}" type="text" name="title" id="title" placeholder="Write Here..." value="{{error.values.title}}">
+        <label class="form__label" for="description">Challenge description</label>
+        <p class="form__label form__label--additional">
+          Tell the network what you need help solving or if there are opportunities for collaboration
+        </p>
+        <textarea required
+                  class="form__input form__input--text-area {{error.description}}"
                   id="description"
                   name="description"
                   placeholder="Write Here..."
                   rows="" cols="50"></textarea>
 
         <div class="form__section">
+          <p class="form__label form__label--additional">
+            Choose tags that help describe your challenge and get matched with organisations that might have the expertise you need.
+          </p>
           {{>tag-names}}
           <button href="/orgs" class="button button--edit" type="button" id="edit-tags">
             <i class="navbar__icon icon navbar__icon--desktop icon--edit-tags"></i>
@@ -37,7 +47,7 @@
         </div>
       </div>
 
-      <p class="copy form__copy">Clicking 'Save' will make your challenge public to the network</p>
+      <p class="copy form__copy">Clicking 'save' will make your challenge public on your profile</p>
       <button class="button" type="submit">Save & Publish</button>
       {{>tag-ids}}
     </form>

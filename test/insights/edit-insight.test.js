@@ -100,7 +100,8 @@ tape('/insights/{id}/edit POST endpoint, admin can update existing info',
       author: 'REN21',
       type: 'REPORT',
       resource: false,
-      active: 'on'
+      active: 'on',
+      tags: []
     };
 
     sessions.addAll(function () {
@@ -114,7 +115,7 @@ tape('/insights/{id}/edit POST endpoint, admin can update existing info',
           );
           t.equal(
             res.headers.location,
-            '/insights/' + insightId + '/tags',
+            '/insights',
             'Admin is redirected to /insights as expected'
           );
           server.inject(viewInsights(primaryToken), function (res) {

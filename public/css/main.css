@@ -190,6 +190,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     height: 1.3rem;
     width: 1.3rem;
 }
+/*.icon--edit:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  padding-top: 1.5rem;
+}*/
 .icon--arrow-inside-button {
   display: inline-block;
   width: 1rem;
@@ -199,6 +204,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 .icon--edit-blue {
     background-image: url("../assets/Edit.svg");
+}
+.icon--edit-blue:hover {
+    background-image: url("../assets/Edit-hover.svg");
 }
 .icon--edit-white {
     background-image: url("../assets/Edit-white.svg");
@@ -336,6 +344,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
           padding: 1.5em 0;
           border-bottom: 1px solid #40667E;
         }
+    .toggle-menu__link:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
 
   /*|||||||||||||||||||||||||||||||||||||||||||||
     Toggle Bar in browse view
@@ -456,6 +467,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       -moz-box-sizing: border-box;
       box-sizing: border-box;
     }
+    .title--dropdown:hover {
+      background-image: url(../assets/Filter-hover.png);
+    }
     .title--with-logo {
       padding: 0rem;
       margin-bottom: 1.7rem;
@@ -503,6 +517,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       font-size: 1.75rem;
       padding: 3rem 0;
       margin: 0;
+    }
+    .title--filter {
+      font-weight: bold;
+      font-size: 0.875rem;
+      letter-spacing: 0.75px;
+      text-transform: uppercase;
     }
 }
 
@@ -602,6 +622,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
           padding: 0.5rem;
           cursor: pointer;
           margin: 0;
+        }
+
+        .list__ellipsis:hover > * {
+          background-color: rgba(64, 102, 126, 0.75);
         }
 
         .list__ellipsis + input {
@@ -716,7 +740,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       cursor: default;
     }
     .tag__label--selected:hover {
-      background-color: #40667E;
+      background-color: #003253;
       cursor: pointer;
     }
     .tag__label--disabled {
@@ -803,6 +827,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             line-height: 1.375rem;
             margin-bottom: 0.3rem;
         }
+        .card__data--link:hover {
+            color: #003253;
+        }
         .card__header--extra-margin {
             margin-bottom: 0.875rem;
         }
@@ -841,6 +868,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         .card__data--prim-contact {
           color: #40667E;
           text-decoration: none;
+        }
+        .card__data--prim-contact:hover {
+          color: #003253;
         }
     .card__additional {
       color: #40667E;
@@ -1134,6 +1164,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
     .form__anchor {
         color: #40667E;
+        text-decoration: none;
     }
         .form__anchor--danger:visited {
             color: #40667E;
@@ -1141,6 +1172,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         .form__anchor--danger:link {
             margin: 2.625rem auto 2.625rem; /* 42px = 2.625rem */
             display: block;
+        }
+        .form__anchor--danger:hover {
+          color: #003253;
         }
 
 
@@ -1167,6 +1201,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 .button:active {
   background-color: #40667E;
 }
+.button:hover {
+  background-color: #002944;
+}
     .button--secondary {
       background-color: transparent;
       color: white;
@@ -1186,6 +1223,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         text-shadow: 0 1px 0 rgba(0, 49, 83, 0.07);
     }
     .button--login:hover {
+      background-color: rgba(0, 0, 0, 0.1);
     }
     .button--margin {
         margin-bottom: 2rem;
@@ -1206,6 +1244,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         margin-top: 1.25rem;
         margin-bottom: 0rem;
     }
+    .button--landing:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
     .button--clear {
         color: #40667E;
         background-color: transparent;
@@ -1216,18 +1257,26 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         color: #40667e;
         border: solid 1px #40667e;
     }
+    .button--dark-blue:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
     .button--edit {
         margin: 2rem auto;
         padding: 0.25rem 0.5rem;
         min-width: 8.13rem;
-        color: #003253;
+        color: #40667e;
         text-align: center;
         background-color: #fafafa;
-        border: 1px solid #003253;
+        border: 1px solid #40667e;
         border-radius: 0.5rem;
     }
     .button--edit__text {
       padding-left: 0.5rem;
+    }
+    .button--edit:hover {
+      background-color: #fafafa;
+      color: #002944;
+      border: 1px solid #002944;
     }
 
 @media (min-width: 600px) {
@@ -1236,6 +1285,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     right: 2rem;
     left: 2rem;
     bottom: 2rem;
+  }
+  .button--edit {
+      margin: 2rem 0;
   }
 }
 
@@ -1266,26 +1318,25 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   |||||||||||||||||||||||||||||||||||||||||||*/
 
 .anchor {
-  color: #333333;
+  color: #40667e;
+  text-decoration: none;
 }
 .anchor:link {
     text-align: center;
-    display: inline-block;
-    color: #333333;
+    color: #40667e;
 }
 .anchor:visited {
-    color: #333333;
-}
-.anchor:hover {
+    color: #40667e;
 }
 .anchor:active {
     color: #40667E;
 }
-    .anchor--additional, .anchor--additional:link, .anchor--additional:visited, .anchor--additional:hover  {
-        color: #40667E;
+    .anchor--additional, .anchor--additional:link, .anchor--additional:visited  {
+        color: #40667e;
     }
+
     .anchor--additional:active {
-        color: #333333;
+        color: #40667e;
     }
     .anchor--red:link, .anchor--red:hover, .anchor--red:visited {
         color: #900000;
@@ -1302,7 +1353,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       display: block;
       text-align: left;
       width: 100%;
-      color: #333333;
+      color: #40667e;
       margin: 0 0 1.1875rem 0;
     }
     .anchor--shared-by, .anchor--shared-by:link, .anchor--shared-by:visited {
@@ -1322,6 +1373,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     }
     .anchor--small, .anchor--small:link, .anchor--small:visited {
         font-size: 0.875rem;
+    }
+    .anchor:hover, .anchor--shared-by:hover, .anchor--suggested-matches:hover, .anchor--additional:hover {
+      color: #003253;
+    }
+    .anchor--login:hover {
+      color: #dfdfdf;
     }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -1591,10 +1648,8 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     box-shadow: 0px -5px 0px #66d9e0 inset;
   }
   .navbar-top__item--burger:hover {
-    background-color: #003253;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
-    box-shadow: 0px -5px 0px #66d9e0 inset;
   }
   .navbar-top__logo {
     width: 5rem;
@@ -1759,6 +1814,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       /*ensure icon is blue when in desktop (on a challenge card in org details view)*/
       background-image: url("../assets/Edit.svg");
   }
+  .icon--edit-challenge-on-profile:hover {
+    background-image: url("../assets/Edit-hover.svg");
+  }
   .icon--inline {
     display: inline-block;
     margin: 0 0 0 1rem;
@@ -1813,6 +1871,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       width: 95%;
       margin: 0 auto;
   }
+
+  .tag__labels {
+    text-align: left
+  }
+
 /* ---------------------------------------------- */
 /* ------------- DESKTOP HELPERS ---------------- */
 /* ---------------------------------------------- */
@@ -1934,6 +1997,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
 @media (max-width: 700px) {
 
+  .card__data--link:hover {
+    color: inherit;
+  }
+
   .card--header--modal {
     position: fixed;
   }
@@ -1968,9 +2035,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     bottom: 0;
     left: 0;
     width: 100%;
-  }
-
-  .button-group--modal {
     text-align: center;
   }
 
@@ -1978,7 +2042,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     margin: 1rem;
     float: none;
     width: auto;
+    min-width: 7.8rem;
   }
+
 }
 
 /* ---------------------------------------------- */

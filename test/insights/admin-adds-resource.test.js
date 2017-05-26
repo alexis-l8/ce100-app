@@ -48,7 +48,8 @@ tape('/insights/add: add new resource as admin', function (t) {
     author: 'Committee on Climate Change',
     type: 'REPORT',
     resource: true,
-    active: true
+    active: true,
+    tags: []
   };
 
   sessions.addAll(function () {
@@ -58,7 +59,6 @@ tape('/insights/add: add new resource as admin', function (t) {
         t.equal(res.statusCode, 302, 'resource added and user is redirected');
         // user redirected to /insights/id/tags
         t.ok(res.headers.location.indexOf('/insights') > -1, 'page redirects to /insights');
-        t.ok(res.headers.location.indexOf('/tags') > -1, 'page redirects to /insights/id/tags');
         server.inject(getAll('primary_3'), function (res) {
           var resources = res.payload.split('<li class="list__item');
           t.equal(resources.length - 1, 2, 'new resource displayed, and total number of resources is now 2');

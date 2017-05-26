@@ -139,15 +139,6 @@ var endpoints = [
     expectedStatusCode: 403
   },
   {
-    url: '/insights/1/tags',
-    expectedStatusCode: 403
-  },
-  {
-    method: 'POST',
-    url: '/insights/1/tags',
-    expectedStatusCode: 403
-  },
-  {
     url: '/insights',
     expectedStatusCode: 200
   },

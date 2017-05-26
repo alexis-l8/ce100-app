@@ -21,7 +21,7 @@ module.exports = function (request, reply, source, joiErr) {
         var tagList = helpers.locationCategoryToEnd(tags);
         var tagCat = {};
         var missionStatementMessage = !Boolean(orgData.org.mission_statement);
-        selectedTags = orgData.org.tags.map(function(t) {
+        var selectedTags = orgData.org.tags.map(function(t) {
           return {name: t.tag_name, id: t.tag_id};
         });
 
