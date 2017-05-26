@@ -498,6 +498,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     display: block;
     text-decoration: none;
   }
+  .title--filter {
+    font-weight: bold;
+    font-size: 0.875rem;
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+  }
 
 @media (min-width: 600px) {
 
@@ -517,12 +523,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       font-size: 1.75rem;
       padding: 3rem 0;
       margin: 0;
-    }
-    .title--filter {
-      font-weight: bold;
-      font-size: 0.875rem;
-      letter-spacing: 0.75px;
-      text-transform: uppercase;
     }
 }
 

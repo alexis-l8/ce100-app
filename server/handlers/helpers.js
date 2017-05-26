@@ -146,7 +146,7 @@ helpers.getCancelUrl = function (req) {
   var current = req.path;
 
   // if the previous path is same as current, redirect to the user's default
-  return (current === previous || previous.indexOf('/edit') > -1) ? defaultHomePage : previous;
+  return (current === previous || previous.indexOf('/edit') > -1 || previous.indexOf('/add') > -1) ? defaultHomePage : previous;
 };
 
 helpers.getView = function (url) {
