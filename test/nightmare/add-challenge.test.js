@@ -30,6 +30,10 @@ tape('user sees a modal when clicking edit tags in add challanges page ' + __fil
           pool.end();
           server.stop();
         })
+        .catch(function(error){
+          t.error(error);
+          t.end();
+        });
   })
 });
 
@@ -57,6 +61,10 @@ tape('user does not see the modal when it is closed by the user ' + __filename, 
           pool.end();
           server.stop();
         })
+        .catch(function(error){
+          t.error(error);
+          t.end();
+        });
   })
 });
 
@@ -90,11 +98,14 @@ tape('user adds a challenge. inc. title, description and tags' + __filename, fun
         })
         .end()
         .then(function(urlPathname) {
-          console.log(typeof urlPathname);
           t.equal(urlPathname, '/challenges/11', 'challenge has been added correctly.');
           t.end();
           pool.end();
           server.stop();
         })
+        .catch(function(error){
+          t.error(error);
+          t.end();
+        });
   })
 });

@@ -23,5 +23,9 @@ tape('test nightmare --> ' + __filename, function (t) {
           server.stop();
           pool.end();
         })
+        .catch(function(error){
+          t.error(error);
+          t.end();
+        });
   })
 });
