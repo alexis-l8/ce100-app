@@ -416,7 +416,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
     .container {
       margin: 4rem auto 0;
-      height: 100vh;
     }
     .container--login {
       margin: 0 auto;
