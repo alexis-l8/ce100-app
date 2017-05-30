@@ -429,7 +429,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       min-height: 90%;
       text-align: center;
       padding-bottom: 0.5rem;
-      overflow-y: hidden;
+      overflow-y: visible;
     }
 }
 
