@@ -51,7 +51,8 @@
     "redis-connection": "^5.0.0",
     "sendemail": "3.3.0",
     "tags-system": "^1.1.7",
-    "vision": "^4.1.1"
+    "vision": "^4.1.1",
+    "wreck": "^12.5.0"
   },
   "devDependencies": {
     "codecov": "^2.2.0",
