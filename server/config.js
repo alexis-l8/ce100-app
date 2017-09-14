@@ -16,7 +16,7 @@ var productionCategories = require('../tags/categories.json');
 
 var prod = {
   env: 'production',
-  damApiUrl: 'http://139.162.209.82',
+  damApiUrl: env.DAM_API_URL,
   data: {
     tags: productionTags,
     categories: productionCategories
@@ -27,7 +27,7 @@ var dev = {
   env: 'dev',
   port: env.PORT || 3000,
   jwt_secret: env.JWT_SECRET,
-  damApiUrl: 'http://139.162.209.82',
+  damApiUrl: env.DAM_API_URL,
   pg: {
     user: auth[0],
     password: auth[1],
@@ -67,7 +67,7 @@ var dev = {
 var test = {
   env: 'test',
   port: 0,
-  damApiUrl: 'http://139.162.209.82',
+  damApiUrl: env.DAM_API_URL,
   pg: {
     user: authTest[0],
     password: authTest[1],
