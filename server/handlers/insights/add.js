@@ -21,7 +21,7 @@ module.exports = function (request, reply) {
     .call(rawData, 'resource');
   insight.active = rawData.active ? true : false;
 
-  if (loggedIn.scope !== 'admin') {
+  if (loggedIn.scope !== 'admin' && loggedIn.scope !== 'content-owner') {
     return reply(Boom.forbidden());
   }
 

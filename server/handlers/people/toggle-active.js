@@ -9,7 +9,7 @@ module.exports = function (request, reply) {
   var toggleActive = request.server.methods.pg.people.toggleActive;
   var message;
 
-  if (loggedIn.scope !== 'admin') {
+  if (loggedIn.scope !== 'admin' && loggedIn.scope !== 'content-owner' ) {
     message = 'You do not have permission to edit the people.';
 
     return reply(Boom.unauthorized(message));

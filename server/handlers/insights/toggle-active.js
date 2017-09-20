@@ -7,7 +7,7 @@ module.exports = function (request, reply) {
   var loggedIn = request.auth.credentials;
   var iid = request.params.id;
 
-  if (loggedIn.scope !== 'admin') {
+  if (loggedIn.scope !== 'admin' && loggedIn.scope !== 'content-owner') {
     return reply(Boom.forbidden());
   }
 
