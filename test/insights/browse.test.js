@@ -91,6 +91,7 @@ nonAdminUsers.forEach(function (user) {
     sessions.addAll(function () {
       init(config, function (error, server, pool) {
         t.ok(!error, 'no initialising error');
+
         server.inject(browseAll(user), function (res) {
           t.equal(res.statusCode, 200, 'route accessible to ' + userType);
 
