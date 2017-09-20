@@ -6,7 +6,7 @@ var Boom = require('boom');
 module.exports = function (request, reply) {
   var loggedIn = request.auth.credentials;
   var editId = request.params.id && JSON.parse(request.params.id);
-  if (loggedIn.userId !== editId && (loggedIn.scope !== 'admin' && loggedIn.scope !== 'content-owner')) {
+  if (parseInt(loggedIn.userId, 10) !== editId && (loggedIn.scope !== 'admin' && loggedIn.scope !== 'content-owner')) {
     return reply(Boom.forbidden());
   }
   return request.server.methods.pg.people.edit(editId, request.payload,
