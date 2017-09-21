@@ -6,7 +6,7 @@ var bcrypt = require('bcrypt');
 var Hoek = require('hoek');
 
 module.exports = function (request, reply) {
-  var email = request.payload.email;
+  var email = request.payload.email.toLowerCase();
   var password = request.payload.password;
 
   request.server.methods.pg.people.getBy('email', email, function (error, pgResponse) {
