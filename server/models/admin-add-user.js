@@ -6,13 +6,13 @@ module.exports = {
     last_name: Joi.string().min(1).required(),
     email: Joi.string().email().required(),
     org_id: Joi.any().when('user_type', {
-      is: 'admin',
+      is: Joi.string().valid('admin', 'content-owner'),
       then: Joi.number().valid(-1).required().options({ language: { any: { allowOnly: 'Admins cannot be attached to an organisation' } } }),
       otherwise: Joi.number().min(1).required()
     }),
     job_title: Joi.string().allow(''),
     phone: Joi.string().regex(/[0-9]+/).min(11).allow(''),
-    user_type: Joi.string().valid('admin', 'primary', 'secondary')
+    user_type: Joi.string().valid('admin', 'content-owner', 'primary', 'secondary')
   },
   failAction: require('../handlers/people/add-view.js')
 };

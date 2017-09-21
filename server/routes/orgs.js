@@ -27,14 +27,14 @@ module.exports = [
     method: 'GET',
     path: '/orgs/add',
     handler: addView,
-    config: { auth: { scope: 'admin' } }
+    config: { auth: { scope: ['admin', 'content-owner'] } }
   },
   {
     method: 'POST',
     path: '/orgs/add',
     handler: add,
     config: {
-      auth: { scope: 'admin' },
+      auth: { scope: ['admin', 'content-owner'] },
       validate: addSchema
     }
   },
@@ -47,7 +47,7 @@ module.exports = [
     method: 'GET',
     path: '/orgs/{id}/edit',
     handler: editView,
-    config: { auth: { scope: ['admin', 'primary'] } }
+    config: { auth: { scope: ['admin', 'primary', 'content-owner'] } }
   },
   {
     method: 'POST',
@@ -55,14 +55,14 @@ module.exports = [
     handler: edit,
     config: {
       validate: editSchema,
-      auth: { scope: ['admin', 'primary'] }
+      auth: { scope: ['admin', 'primary', 'content-owner'] }
     }
   },
   {
     method: 'GET',
     path: '/orgs/{id}/toggle-active',
     handler: toggleActive,
-    config: { auth: { scope: 'admin' } }
+    config: { auth: { scope: ['admin', 'content-owner'] } }
   },
   {
     method: 'GET',

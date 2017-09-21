@@ -41,10 +41,14 @@ helpers.getPermissions = (loggedIn, key, identifier) => {
   return loggedIn && {
     permissions: {
       isMember: loggedIn[key] === identifier,
-      editable: loggedIn[key] === identifier || loggedIn.scope === 'admin',
-      [loggedIn.scope]: true,
+      editable: loggedIn[key] === identifier || loggedIn.scope === 'admin' || loggedIn.scope === 'content-owner',
       userId: loggedIn.userId,
-      organisation_id: loggedIn.organisation_id
+      organisation_id: loggedIn.organisation_id,
+      admin: loggedIn.scope === 'admin' || loggedIn.scope === 'content-owner',
+      "content-owner": loggedIn.scope === 'content-owner',
+      primary: loggedIn.scope === 'primary',
+      secondary: loggedIn.scope === 'secondary'
+
     }
   };
 };
@@ -83,7 +87,7 @@ helpers.editUserOrgDropdown = (orgs, user) => {
 helpers.userTypeRadios = (user_type) => {
   // default to primary
   var checkedType = user_type || 'primary';
-  var userTypes = ['admin', 'primary', 'secondary'];
+  var userTypes = ['admin', 'content-owner', 'primary', 'secondary'];
   var userTypeArr = userTypes.map(type => {
     return {
       name: 'user_type',

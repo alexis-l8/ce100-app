@@ -13,7 +13,7 @@ module.exports = function (request, reply, source, joiErr) {
   var getActiveOrgs = request.server.methods.pg.organisations.getActive;
   var options;
 
-  if (parseInt(loggedIn.userId, 10) !== editId && loggedIn.scope !== 'admin') {
+  if (parseInt(loggedIn.userId, 10) !== editId && (loggedIn.scope !== 'admin' && loggedIn.scope !== 'content-owner') ) {
     return reply(Boom.forbidden());
   }
 

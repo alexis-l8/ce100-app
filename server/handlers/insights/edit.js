@@ -9,7 +9,7 @@ module.exports = function (request, reply) {
   var updates = request.payload;
   var tags = updates.tags;
 
-  if (loggedIn.scope !== 'admin') {
+  if (loggedIn.scope !== 'admin' && loggedIn.scope !== 'content-owner' ) {
     return reply(Boom.forbidden());
   }
 

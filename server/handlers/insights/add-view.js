@@ -10,7 +10,7 @@ module.exports = function (request, reply, source, joiErr) {
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
 
-  if (loggedIn.scope !== 'admin') {
+  if (loggedIn.scope !== 'admin' && loggedIn.scope !== 'content-owner' ) {
     return reply(Boom.forbidden());
   }
 

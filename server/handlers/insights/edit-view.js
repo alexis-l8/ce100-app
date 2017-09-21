@@ -12,7 +12,7 @@ module.exports = function (request, reply, source, joiErr) {
   var options;
   var initialCategories = [];
 
-  if (loggedIn.scope !== 'admin') {
+  if (loggedIn.scope !== 'admin' && loggedIn.scope !== 'content-owner') {
     return reply(Boom.forbidden());
   }
 

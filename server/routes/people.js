@@ -21,14 +21,14 @@ module.exports = [
     method: 'GET',
     path: '/people/add',
     handler: addView,
-    config: { auth: { scope: 'admin' } }
+    config: { auth: { scope: ['admin', 'content-owner'] } }
   },
   {
     method: 'POST',
     path: '/people/add',
     handler: add,
     config: {
-      auth: { scope: 'admin' },
+      auth: { scope: ['admin', 'content-owner'] },
       validate: require('../models/admin-add-user.js')
     }
   },
@@ -47,7 +47,7 @@ module.exports = [
     method: 'GET',
     path: '/people/{id}/toggle-active',
     handler: toggleActive,
-    config: { auth: { scope: 'admin' } }
+    config: { auth: { scope: ['admin', 'content-owner'] } }
   },
   {
     method: 'GET',
@@ -83,6 +83,6 @@ module.exports = [
     method: 'GET',
     path: '/people/{id}/resend-activation-link',
     handler: resendActivationLink,
-    config: { auth: { scope: 'admin' } }
+    config: { auth: { scope: ['admin', 'content-owner'] } }
   },
 ];

@@ -16,7 +16,7 @@ module.exports = [
     path: '/insights/{id}/toggle-active',
     handler: toggleActive,
     config: {
-      auth: { scope: 'admin' }
+      auth: { scope: ['admin', 'content-owner'] }
     }
   },
   {
@@ -24,14 +24,14 @@ module.exports = [
     path: '/insights/{id}/edit',
     handler: editView,
     config: {
-      auth: { scope: 'admin' }
+      auth: { scope: ['admin', 'content-owner'] }
     }
   },
   {
     method: 'POST',
     path: '/insights/{id}/edit',
     handler: editSubmit,
-    config: { auth: { scope: 'admin' } }
+    config: { auth: { scope: ['admin', 'content-owner'] } }
   },
   {
     method: 'GET',
@@ -43,7 +43,7 @@ module.exports = [
     path: '/insights/add',
     handler: addView,
     config: {
-      auth: { scope: 'admin' }
+      auth: { scope: ['admin', 'content-owner'] }
     }
   },
   {
@@ -51,7 +51,7 @@ module.exports = [
     path: '/insights/add',
     handler: addSubmit,
     config: {
-      auth: { scope: 'admin' },
+      auth: { scope: ['admin', 'content-owner'] },
       validate: addModel
     }
   },

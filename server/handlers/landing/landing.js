@@ -13,7 +13,7 @@ module.exports = function (request, reply) {
   var header;
   var sections;
 
-  if (loggedIn.scope === 'admin') {
+  if (loggedIn.scope === 'admin' || loggedIn.scope === 'content-owner' ) {
     return reply.redirect('/orgs');
   }
 
