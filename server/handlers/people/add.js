@@ -8,7 +8,7 @@ var config = require('../../config.js');
 
 module.exports = function (request, reply) {
   var userObj = request.payload;
-
+  userObj.email = userObj.email.toLowerCase();
   request.server.methods.pg.people.add(userObj, function (pgErr, pgRes) {
     var response = pgRes[0];
     Hoek.assert(!pgErr, 'database error');
