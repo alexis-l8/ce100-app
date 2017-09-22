@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #FFFFFF;">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Mail button</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Mail-button">
+            <rect id="Rectangle-4-Copy-4" fill="#F2F2F2" x="0" y="0" width="30" height="30"></rect>
+            <g id="Mail" transform="translate(6.000000, 9.000000)" fill="#40667E">
+                <g id="Fill-68-+-Fill-69-+-Fill-70">
+                    <path d="M9.5,5.37572308 L18.01675,0.239723077 C17.7441,0.0920307692 17.4344,0.000646153846 17.1,0.000646153846 L1.9,0.000646153846 C1.5656,0.000646153846 1.2559,0.0920307692 0.98325,0.239723077 L9.5,5.37572308 Z" id="Fill-69"></path>
+                    <path d="M10.000935,7.24624615 C9.847035,7.33855385 9.674135,7.38470769 9.500285,7.38470769 C9.326435,7.38470769 9.152585,7.33855385 8.998685,7.24624615 L0.003135,1.82224615 C0.003135,1.83055385 0.000285,1.83886154 0.000285,1.84624615 L0.000285,10.1539385 C0.000285,11.1720923 0.852435,12.0000923 1.900285,12.0000923 L17.100285,12.0000923 C18.148135,12.0000923 19.000285,11.1720923 19.000285,10.1539385 L19.000285,1.84624615 C19.000285,1.83886154 18.997435,1.83055385 18.997435,1.82224615 L10.000935,7.24624615 Z" id="Fill-70"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
