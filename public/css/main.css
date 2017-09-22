@@ -570,6 +570,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       padding: 1.25rem 8%;
       font-size: 1.125rem;
     }
+    @media query (min-width: 600px) {
+      .list__item--people {
+        padding: 1rem 3%;
+      }
+    }
+
     .list__item--tall {
         padding: 1.75rem 1.5rem;
         line-height: 1.375rem;
@@ -586,62 +592,45 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             color: #333333;
             padding: 0.3rem 0 0 0;
             font-size: 0.875rem;
+            vertical-align: top;
         }
+            .list__data--primary {
+              color: #333333;
+              font-size: 1.2rem;
+              padding: 0;
+              text-decoration: none;
+            }
+            .list__data--secondary {
+              color: #40667E;
+              padding: 0.1em 0em;
+            }
+
+            .list__data--user-type {
+              padding: 0.2rem;
+              background-color: #F2F2F2;
+              font-size: 0.7rem;
+            }
+
+            .list__data--s-padding {
+              padding: 0.1rem 0 0 0;
+            }
+
+            .list__data--occupation {
+              padding: 0.2rem 0 0.4rem 0;
+              width: 23%;
+            }
+
         .list__subblock {
             display: block;
             line-height: 1.375rem;
         }
-        .list__data--primary {
-            color: #333333;
-            font-size: 1.2rem;
-            padding: 0;
-            text-decoration: none;
-        }
-        .list__data--secondary {
-            color: #40667E;
-            padding: 0.1em 0em;
-        }
+            .list__subblock--inline {
+              display: inline-block;
+            }
 
-        /* Expandable List Items */
-
-        .list__hidden-details {
-            display: none;
-        }
-
-        .list__hidden-details > .list__data{
-            padding: 0;
-            line-height: 1.375rem;
-        }
-
-        .list__ellipsis {
-          position: absolute;
-          width: 1.3rem;
-          right: 0.7rem;
-          bottom: 0.7rem;
-          padding: 0.5rem;
-          cursor: pointer;
-          margin: 0;
-        }
-
-        .list__ellipsis:hover > * {
-          background-color: rgba(64, 102, 126, 0.75);
-        }
-
-        .list__ellipsis + input {
-            display: none;
-        }
-
-        .list__ellipsis + input + div {
-            display: none;
-        }
-
-        .list__ellipsis + input:checked + div {
-            display: block;
-        }
-
-        .list__ellipsis--checked {
-            display: none;
-        }
+            .list__subblock--w95 {
+              width: 95%;
+            }
 
         .list__logo {
           float: left;
@@ -1884,6 +1873,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       word-wrap: break-word;
   }
 
+  .desktop-grid--twenty {
+      width: 20%;
+  }
   .desktop-grid--quarter {
       width: 25%;
   }
@@ -2056,6 +2048,24 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     margin-bottom: 3rem;
   }
 }
+
+/* ---------------------------------------------- */
+/* ---------- CLEO NEW WORK ---------- */
+/* ---------------------------------------------- */
+
+.profile_photo {
+  width: 1.5em;
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 0.25rem;
+}
+
+.contact_icon {
+  vertical-align: middle;
+  width: 0.9rem;
+  display: inline-block;
+}
+
 /* Top white search section (search bar and dropdown ordering)*/
 .search-bar{
   background-color: white;
@@ -2179,3 +2189,22 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       z-index: 1;
     }
 
+/* UTILITY CLASSES */
+
+    .pl1 {
+      padding-left: 0.25rem;
+    }
+
+    .pl2 {
+      padding-left: 0.5rem;
+    }
+
+    @media (min-width: 600px) {
+      .pl2-ns {
+        padding-left:
+      }
+    }
+
+    .display-none {
+      display: none;
+    }
