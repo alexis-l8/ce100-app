@@ -2092,6 +2092,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   padding: 1rem 0 0 2rem;
 }
 
+    .search__icon {
+      width: 1rem;
+      display: inline-block;
+      vertical-align: middle;
+      padding-top: 0.25rem;
+    }
     .search__input {
       width: 18rem;
       border-style: none;
@@ -2195,12 +2201,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             }
 
         .dropdown__arrow {
-          width: 1rem;
+          width: 0.6rem;
           display: inline-block;
           vertical-align: middle;
           padding-left: 0.25rem;
           float: right;
-          padding-top: 0.25rem;
+          padding-top: 0.5rem;
         }
 
     #alphabeticalOrder:checked ~ .dropdown--options {
