@@ -9,6 +9,8 @@ module.exports = function (request, reply) {
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
   var notAdmin = !permissions.permissions.admin;
   var listUsers;
+  var sortBy = request.query.sort;
+  var sorting = "A-Z";
 
   request.server.methods.pg.people.getAllPeople(notAdmin,
     function (pgErr, users) {
@@ -21,9 +23,19 @@ module.exports = function (request, reply) {
       } else {
         listUsers = users;
       }
+      listUsers.sort(function (u1, u2) {
+        if (u1.last_name > u2.last_name) return 1;
+        if (u1.last_name < u2.last_name) return -1;
+        return 0;
+      })
+      if (sortBy === 'z-a') {
+        listUsers.reverse();
+        sorting = "Z-A";
+      }
+
       options = Object.assign(
         {},
-        { users: listUsers },
+        { users: listUsers, sortBy: sorting },
         permissions
       );
 

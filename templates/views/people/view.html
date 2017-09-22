@@ -23,14 +23,14 @@
           <input type="checkbox" id="alphabeticalOrder" class="display-none">
           <label for="alphabeticalOrder">
             <div class="dropdown">
-              <p class="dropdown__text">Click me</p>
+              <p class="dropdown__text">{{sortBy}}</p>
               <img src="../public/assets/dropdown.svg" alt="dropdown arrow" class="dropdown__arrow">
             </div>
           </label>
 
           <div class="dropdown dropdown--options">
-            <a href="/people" class=""><p class="dropdown__text dropdown__text--no-arrow">Alphabetical A-Z</p></a>
-            <a href="/people"><p class="dropdown__text dropdown__text--no-arrow">Alphabetical Z-A</p></a>
+            <a href="/people?sort=a-z" class=""><p class="dropdown__text dropdown__text--no-arrow">Alphabetical A-Z</p></a>
+            <a href="/people?sort=z-a"><p class="dropdown__text dropdown__text--no-arrow">Alphabetical Z-A</p></a>
           </div>
         </div>
 
