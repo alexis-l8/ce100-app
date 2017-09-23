@@ -9,6 +9,35 @@
         <h1 class="title">People</h1>
     </div>
 
+    <section class="search-bar">
+
+      <div class="search">
+        <img src="/public/assets/Magnifying-glass.svg" alt="magnifying glass icon" class="search__icon">
+        <input type="text" placeholder="Filter by name" value="" class="search__input">
+      </div>
+
+      <div class="sorting-section">
+        <p class="sorting-section__text">Sort by</p>
+
+
+        <div class="dropdown-div">
+          <input type="checkbox" id="alphabeticalOrder" class="display-none">
+          <label for="alphabeticalOrder">
+            <div class="dropdown">
+              <p class="dropdown__text">{{sortBy}}</p>
+              <img src="/public/assets/Chevron-down.svg" alt="dropdown arrow" class="dropdown__arrow">
+            </div>
+          </label>
+
+          <div class="dropdown dropdown--options">
+            <a href="/people?sort=a-z" class=""><p class="dropdown__text dropdown__text--no-arrow">Alphabetical A-Z</p></a>
+            <a href="/people?sort=z-a"><p class="dropdown__text dropdown__text--no-arrow">Alphabetical Z-A</p></a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     {{#if users}}
         <ul class="list">
         {{#each users}}

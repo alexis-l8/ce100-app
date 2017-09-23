@@ -570,6 +570,14 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       padding: 1.25rem 8%;
       font-size: 1.125rem;
     }
+
+    @media (min-width: 600px) {
+      .list__item--people {
+        padding: 1rem 3%;
+        font-size: 1.125rem;
+      }
+    }
+
     .list__item--tall {
         padding: 1.75rem 1.5rem;
         line-height: 1.375rem;
@@ -586,62 +594,54 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             color: #333333;
             padding: 0.3rem 0 0 0;
             font-size: 0.875rem;
+            vertical-align: top;
         }
+            .list__data--primary {
+              color: #333333;
+              font-size: 1.2rem;
+              padding: 0;
+              text-decoration: none;
+            }
+            .list__data--secondary {
+              color: #40667E;
+              padding: 0.1em 0em;
+            }
+
+            .list__data--user-type {
+              padding: 0.2rem;
+              background-color: #F2F2F2;
+              font-size: 0.7rem;
+              width: 3.1rem;
+              text-align: center;
+            }
+
+            @media (min-width: 600px) {
+              .list__data--user-type {
+                width: auto;
+                text-align: left;
+              }
+            }
+
+            .list__data--s-padding {
+              padding: 0.1rem 0 0 0;
+            }
+
+            .list__data--occupation {
+              padding: 0.2rem 0 0.4rem 0;
+              width: 23%;
+            }
+
         .list__subblock {
             display: block;
             line-height: 1.375rem;
         }
-        .list__data--primary {
-            color: #333333;
-            font-size: 1.2rem;
-            padding: 0;
-            text-decoration: none;
-        }
-        .list__data--secondary {
-            color: #40667E;
-            padding: 0.1em 0em;
-        }
+            .list__subblock--inline {
+              display: inline-block;
+            }
 
-        /* Expandable List Items */
-
-        .list__hidden-details {
-            display: none;
-        }
-
-        .list__hidden-details > .list__data{
-            padding: 0;
-            line-height: 1.375rem;
-        }
-
-        .list__ellipsis {
-          position: absolute;
-          width: 1.3rem;
-          right: 0.7rem;
-          bottom: 0.7rem;
-          padding: 0.5rem;
-          cursor: pointer;
-          margin: 0;
-        }
-
-        .list__ellipsis:hover > * {
-          background-color: rgba(64, 102, 126, 0.75);
-        }
-
-        .list__ellipsis + input {
-            display: none;
-        }
-
-        .list__ellipsis + input + div {
-            display: none;
-        }
-
-        .list__ellipsis + input:checked + div {
-            display: block;
-        }
-
-        .list__ellipsis--checked {
-            display: none;
-        }
+            .list__subblock--w95 {
+              width: 95%;
+            }
 
         .list__logo {
           float: left;
@@ -1884,6 +1884,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       word-wrap: break-word;
   }
 
+  .desktop-grid--twenty {
+      width: 20%;
+  }
   .desktop-grid--quarter {
       width: 25%;
   }
@@ -2056,3 +2059,177 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     margin-bottom: 3rem;
   }
 }
+
+/* ---------------------------------------------- */
+/* ---------- CLEO NEW WORK ---------- */
+/* ---------------------------------------------- */
+
+.profile_photo {
+  width: 1.5em;
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 0.25rem;
+}
+
+.contact_icon {
+  vertical-align: middle;
+  width: 0.9rem;
+  display: inline-block;
+}
+
+/* Top white search section (search bar and dropdown ordering)*/
+.search-bar{
+  background-color: white;
+  box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
+  margin-bottom: 0.6rem;
+}
+
+/* People Page Search bar*/
+
+.search {
+  display: none;
+  width: 65%;
+  padding: 1rem 0 0 2rem;
+}
+
+    .search__icon {
+      width: 1rem;
+      display: inline-block;
+      vertical-align: middle;
+      padding-top: 0.25rem;
+    }
+    .search__input {
+      width: 18rem;
+      border-style: none;
+      border-width: 0;
+      font-size: 0.875rem;
+      color: #40667e;
+      padding: 0.25rem 0.5rem;
+    }
+
+    /* Placeholder styles */
+    .search__input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: #40667E;
+    }
+    .search__input::-moz-placeholder { /* Firefox 19+ */
+      color: #40667E;
+      opacity: 1;
+    }
+    .search__input:-ms-input-placeholder { /* IE 10+ */
+      color: #40667E;
+    }
+    .search__input:-moz-placeholder { /* Firefox 18- */
+      color: #40667E;
+      opacity: 1;
+    }
+
+
+@media (min-width: 600px) {
+  .search {
+    display: inline-block;
+    width: 65%;
+  }
+}
+
+/* Dropdown A-Z order*/
+.sorting-section {
+  color: #40667e;
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(64, 101, 126, 0.1);
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .sorting-section {
+    width: 30%;
+    text-align: right;
+  }
+}
+
+    .sorting-section__text {
+      display: inline-block;
+      padding: 0 0.75rem;
+    }
+
+    .dropdown-div {
+      position: relative;
+      width: 154px;
+      display: inline-block;
+    }
+        .dropdown {
+          display: inline-block;
+          border-style: solid;
+          border-width: 1px;
+          border-color: #40667e;
+          padding: 0 1rem 0 0.75rem;
+          border-radius: .25rem;
+          margin: 0.75rem 1rem 0.75rem 0;
+          width: 154px;
+          text-align: center;
+          cursor: pointer;
+        }
+
+        .dropdown--options {
+          position: absolute;
+          top: 25px;
+          left: 0px;
+          background-color: white;
+          z-index: -1;
+          display: none;
+        }
+
+        .dropdown__text {
+          display: inline-block;
+          /*width: 88%;*/
+          color: #40667e;
+        }
+
+        @media (min-width: 600px) {
+          .dropdown {
+            width: 7rem;
+          }
+
+          .dropdown__text {
+            width: 77%;
+          }
+        }
+            .dropdown__text--no-arrow {
+              width: 100%;
+              padding: 0
+            }
+
+        .dropdown__arrow {
+          width: 0.6rem;
+          display: inline-block;
+          vertical-align: middle;
+          padding-left: 0.25rem;
+          float: right;
+          padding-top: 0.5rem;
+        }
+
+    #alphabeticalOrder:checked ~ .dropdown--options {
+      display: block;
+      z-index: 1;
+    }
+
+/* UTILITY CLASSES */
+
+    .pl1 {
+      padding-left: 0.25rem;
+    }
+
+    .pl2 {
+      padding-left: 0.5rem;
+    }
+
+    @media (min-width: 600px) {
+      .pl2-ns {
+        padding-left:
+      }
+    }
+
+    .display-none {
+      display: none;
+    }
