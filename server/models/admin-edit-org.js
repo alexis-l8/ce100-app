@@ -21,3 +21,5 @@ var schema = {
     tags: [Joi.array(), Joi.string()]
   }
 };
+
+schema['content-owner'] = schema.admin;
