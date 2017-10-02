@@ -46,7 +46,7 @@
     "pg": "^6.1.5",
     "pg-challenges": "^2.1.1",
     "pg-insights": "^0.0.15",
-    "pg-people": "^0.1.5",
+    "pg-people": "^0.1.6",
     "redis": "^2.7.1",
     "redis-connection": "^5.0.0",
     "sendemail": "3.3.0",
