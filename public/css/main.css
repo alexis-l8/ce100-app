@@ -315,6 +315,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         .toggle-search {
           display: none;
           left: 0;
+          position: fixed;
         }
 
         #search-desktop {
@@ -323,7 +324,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
         #search-desktop:checked ~ .toggle-search {
             display: block;
-            position: fixed;
         }
 
 /* For a nav menu that toggles (eg burger) */
