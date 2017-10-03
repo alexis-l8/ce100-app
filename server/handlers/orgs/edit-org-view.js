@@ -8,8 +8,11 @@ module.exports = function (request, reply, source, joiErr) {
   var permissions = helpers.getPermissions(loggedIn, 'organisation_id', orgId);
   var error = helpers.errorOptions(joiErr);
   var template;
+  var templateName = loggedIn.scope === 'content-owner'? 'admin' : loggedIn.scope;
+  var blocked = !(loggedIn.organisation_id == orgId && loggedIn.scope === 'primary')
+                && (loggedIn.scope !== 'admin' && loggedIn.scope !== 'content-owner');
 
-  if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin' || loggedIn.scope === 'secondary') {
+  if (blocked) {
     return reply(Boom.forbidden('You do not have permission to edit that organisation.'));
   }
 
@@ -58,7 +61,7 @@ module.exports = function (request, reply, source, joiErr) {
         options.tagCat = JSON.stringify(tagCat);
 
 
-        template = 'organisations/edit-' + loggedIn.scope;
+        template = 'organisations/edit-' + templateName;
         return reply.view(template, options).code(error ? 401 : 200);
       });
   });

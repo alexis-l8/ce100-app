@@ -10,8 +10,9 @@ module.exports = function (request, reply) {
   var loggedIn = request.auth.credentials;
   var tags = helpers.getTagArray(request.payload.tags);
   var newOrg;
-
-  if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin' || loggedIn.scope === 'secondary') {
+  var blocked = !(loggedIn.organisation_id == orgId && loggedIn.scope === 'primary')
+                && (loggedIn.scope !== 'admin' && loggedIn.scope !== 'content-owner');
+  if (blocked) {
     return reply(Boom.forbidden('You do not have permission to edit that organisation.'));
   }
 
