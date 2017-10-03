@@ -146,12 +146,16 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     background-position: center;
     margin-top: 0.5rem;
 }
-
-  .icon--magnifying-glass-inline {
-    display: inline-block;
-    vertical-align: middle;
-    padding: 0 1rem;
-    height: 2rem;
+.icon--magnifying-glass-inline {
+  display: none;
+}
+  @media (min-width: 600px) {
+    .icon--magnifying-glass-inline {
+      display: inline-block;
+      vertical-align: middle;
+      padding: 0 1rem;
+      height: 2rem;
+    }
   }
 
 .icon--burger {
@@ -282,6 +286,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         background-color: #40667E;
         opacity: 1;
     }
+    .navbar__item--ellipsis {
+      width: 3rem;
+    }
     .navbar__item:hover {
         background-color: #f2f2f2;
     }
@@ -318,12 +325,17 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
           position: fixed;
         }
 
-        #search-desktop {
+        .search-desktop {
           display: none;
         }
 
-        #search-desktop:checked ~ .toggle-search {
+        .search-desktop:checked ~ .toggle-search {
             display: block;
+            z-index: 98;
+        }
+
+        .search-desktop:checked ~ .navbar-top__item--search {
+          background-color: #022D48;
         }
 
 /* For a nav menu that toggles (eg burger) */
@@ -355,6 +367,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
           width: 20rem;
           display: none;
         }
+        .toggle-menu__top--search {
+          top: 3.4rem;
+          background-color: #022D48;
+          padding: 0;
+        }
     .toggle-menu__link {
       color: #ffffff;
       text-align: center;
@@ -384,7 +401,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
           border: 0;
           outline: 0;
           color: #FFFFFF;
-          background-color: #003253;
+          background-color: #022D48;
           border-bottom: #66d9e0 solid 1px;
           font-family: proxima-nova, 'Karla', Helvetica, Ariel, sans-serif;
           font-size: 1.3rem;
@@ -392,8 +409,15 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
           margin-top: 10rem;
           padding-bottom: 0.4rem;
           text-align: left;
-          width: 35%;
+          width: 69%;
           display: inline-block;
+        }
+
+        @media (min-width: 600px) {
+          .search__input{
+            width: 35%;
+            background-color: #003253;
+          }
         }
 
         .search__input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
