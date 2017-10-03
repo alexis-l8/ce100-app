@@ -9,6 +9,7 @@ module.exports = function (request, reply) {
   });
 };
 
+
 function search(request, term, cb) {
   var pg = request.server.methods.pg;
   var result = {};
