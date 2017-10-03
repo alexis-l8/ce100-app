@@ -16,6 +16,7 @@
           <span class="navbar__top__link navbar-top__link--desktop">Explore</span>
       </a>
     </div>
+
     {{#if permissions.primary}}
       {{#if (topNavBar topNavBarType "addChallenge")}}
         <div class="navbar-top__item navbar-top__item--desktop navbar-top__item--active-border">
@@ -62,6 +63,26 @@
         </a>
       </div>
     {{/if}}
+
+<!-- SEARCH SECTION -->
+
+    <div class="navbar-top__item navbar-top__item--desktop navbar-top__item--burger">
+      <label class="navbar__link" for="search-desktop">
+        <i class="icon icon--magnifying-glass"></i>
+      </label>
+    </div>
+    <input type="checkbox" id="search-desktop" />
+
+    <div class="toggle-search toggle-menu__top--burger toggle-menu__top toggle-menu__top--burger">
+      <form class="search">
+        <i class="icon icon--magnifying-glass icon--magnifying-glass-inline"></i>
+        <input type="text" name="search" placeholder="Search..." class="search__input">
+        <input type="submit" value="Go" class="search__go">
+      </form>
+
+    </div>
+
+<!-- END SEARCH SECTION -->
 
     <div class="navbar-top__item navbar-top__item--desktop navbar-top__item--burger navbar__item--toggle">
       <label class="navbar__link" for="burger-desktop">
