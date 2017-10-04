@@ -2,12 +2,13 @@
 
 var Hoek = require('hoek');
 var Boom = require('boom');
+var helpers = require('../helpers');
 
 module.exports = function (request, reply) {
   var loggedIn = request.auth.credentials;
   var iid = request.params.id;
   var updates = request.payload;
-  var tags = updates.tags;
+  var tags = helpers.getTagArray(updates.tags);
 
   if (loggedIn.scope !== 'admin' && loggedIn.scope !== 'content-owner' ) {
     return reply(Boom.forbidden());
