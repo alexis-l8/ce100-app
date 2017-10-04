@@ -29,7 +29,11 @@ module.exports = [
     handler: add,
     config: {
       auth: { scope: ['admin', 'content-owner'] },
-      validate: require('../models/admin-add-user.js')
+      validate: require('../models/admin-add-user.js'),
+      payload: {
+        output:'stream',
+        parse: true
+      }
     }
   },
   {

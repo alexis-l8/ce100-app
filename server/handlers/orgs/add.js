@@ -4,7 +4,6 @@ var helpers = require('../helpers.js');
 
 module.exports = function (request, reply) {
   var newOrg;
-
   return S3.upload(request.payload, function (err, data) {
     Hoek.assert(!err, 'Image upload error');
     newOrg = helpers.preparePayload(request.payload, data);
