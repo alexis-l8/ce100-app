@@ -1,11 +1,23 @@
 'use strict';
 
 var Hoek = require('hoek');
+var helpers = require('../helpers.js');
 
 module.exports = function (request, reply) {
-  var term = request.query.term.toLowerCase();
-  search(request, term, function (result) {
-    return reply.view('search/search_results', result);
+  var term = request.query.term;
+  var loggedIn = request.auth.credentials;
+  var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
+  search(request, term.toLowerCase(), function (result) {
+    result.people = filterPeople(permissions, result.people);
+
+    var data = Object.assign(
+      result,
+      permissions,
+      {term: term},
+      {total: totalResults(result)}
+    );
+
+    return reply.view('search/search_results', data);
   });
 };
 
@@ -40,3 +52,21 @@ function search(request, term, cb) {
         });
     });
 };
+
+function totalResults(result) {
+  return  result.people.length
+          + result.orgs.length
+          + result.challenges.length
+          + result.insights.length;
+};
+
+function filterPeople(permissions, people) {
+  if (!permissions.permissions.admin) {
+    return people.filter(function(p) {
+      return p.account_activated
+             && (p.user_type === 'primary' || p.user_type === 'secondary' );
+    });
+  } else {
+    return people;
+  }
+}

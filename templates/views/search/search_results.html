@@ -8,10 +8,17 @@
         <h1 class="title">Results</h1>
     </div>
 
+    <p>We've found {{total}} results for "{{term}}"":</p>
+
     <h1>People</h1>
-    {{#each people}}
+    <ul class="list">
+      {{#each people}}
+        {{>user permissions=../permissions}}
+      {{/each}}
+    </ul>
+    <!-- {{#each people}}
       <p>{{first_name}} {{last_name}}  - {{job_title}} at {{org_name}} - {{email}} - {{phone}} - {{user_type}}</p>
-    {{/each}}
+    {{/each}} -->
     <hr>
 
     <h1>Organisation</h1>
