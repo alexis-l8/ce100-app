@@ -5,17 +5,32 @@
     </a>
   </div>
 
-  <div class="navbar-top__item navbar__item--toggle">
+  <input type="checkbox" id="search-mobile" class="search-desktop" />
+  <div class="navbar-top__item navbar-top__item--desktop navbar-top__item--burger navbar-top__item--search">
+    <label class="navbar__link" for="search-mobile">
+      <i class="icon icon--white-magnifying-glass icon--magnifying-glass"></i>
+    </label>
+  </div>
+
+  <div class="navbar-top__item navbar__item--ellipsis">
     <label class="navbar__link" for="burger">
       <i class="icon icon--burger navbar-top__burger"></i>
     </label>
   </div>
-    <input class="navbar-top__burger--checkbox" type="checkbox" id="burger" />
-    <div class="toggle-menu toggle-menu__top toggle-menu__top--burger">
-      <a class="icon icon--cancel icon--cancel-top mobile" href=></a>
-      <a href="/people/{{permissions.userId}}/edit" class="toggle-menu__link toggle-menu__link--burger">Settings</a>
-      <a href="/people" class="toggle-menu__link toggle-menu__link--burger">People</a>
-      <a href="/resources" class="toggle-menu__link toggle-menu__link--burger">Resources</a>
-      <a href="mailto:ce100@ellenmacarthurfoundation.org" class="toggle-menu__link toggle-menu__link--burger">Contact Us</a>
-    </div>
+  <input class="navbar-top__burger--checkbox" type="checkbox" id="burger" />
+  <div class="toggle-menu toggle-menu__top toggle-menu__top--burger">
+    <a class="icon icon--cancel icon--cancel-top mobile" href=></a>
+    <a href="/people/{{permissions.userId}}/edit" class="toggle-menu__link toggle-menu__link--burger">Settings</a>
+    <a href="/people" class="toggle-menu__link toggle-menu__link--burger">People</a>
+    <a href="/resources" class="toggle-menu__link toggle-menu__link--burger">Resources</a>
+    <a href="mailto:ce100@ellenmacarthurfoundation.org" class="toggle-menu__link toggle-menu__link--burger">Contact Us</a>
+  </div>
+
+  <div class="toggle-search toggle-menu__top--burger toggle-menu__top toggle-menu__top--search">
+    <form class="search">
+      <i class="icon icon--white-magnifying-glass icon--magnifying-glass icon--magnifying-glass-inline"></i>
+      <input type="text" name="search" placeholder="Search..." class="search__input">
+      <input type="submit" value="Go" class="search__go">
+    </form>
+  </div>
 </nav>
