@@ -16,30 +16,37 @@
         {{>user permissions=../permissions}}
       {{/each}}
     </ul>
-    <!-- {{#each people}}
-      <p>{{first_name}} {{last_name}}  - {{job_title}} at {{org_name}} - {{email}} - {{phone}} - {{user_type}}</p>
-    {{/each}} -->
-    <hr>
+    {{#unless people.length}}
+      <p>No people found</p>
+    {{/unless}}
 
     <h1>Organisation</h1>
-    {{#each orgs}}
-      <p>{{org_name}}</p>
-      <!-- If logo_url != null show this image file -->
-      <img src="{{org_logo_url}}" alt="{{org_name}} logo">
-    {{/each}}
-    <hr>
+    <ul class="list">
+      {{#each orgs}}
+        {{>search/organisation admin=../permissions.admin}}
+      {{/each}}
+    </ul>
+
+    {{#unless orgs.length}}
+      <p>No organisations found</p>
+    {{/unless}}
 
     <h1>Challenges</h1>
     {{#each challenges}}
       <p>{{title}} - shared by {{org_name}}</p>
     {{/each}}
+    {{#unless challenges.length}}
+      <p>No challenges found</p>
+    {{/unless}}
     <hr>
 
     <h1>Insights</h1>
     {{#each insights}}
       <p>{{title}} - {{type}} - {{author}}</p>
     {{/each}}
-
+    {{#unless insights.length}}
+      <p>No insights found</p>
+    {{/unless}}
 
 </div>
 
