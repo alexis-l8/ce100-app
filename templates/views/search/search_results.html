@@ -1,0 +1,40 @@
+<!-- Include Top Navbar -->
+{{>top-nav}}
+{{>top-nav-desktop}}
+
+<!-- Main Content -->
+<div class="container">
+    <div class="card card--header">
+        <h1 class="title">Results</h1>
+    </div>
+
+    <h1>People</h1>
+    {{#each people}}
+      <p>{{first_name}} {{last_name}}  - {{job_title}} at {{org_name}} - {{email}} - {{phone}} - {{user_type}}</p>
+    {{/each}}
+    <hr>
+
+    <h1>Organisation</h1>
+    {{#each orgs}}
+      <p>{{org_name}}</p>
+      <!-- If logo_url != null show this image file -->
+      <img src="{{org_logo_url}}" alt="{{org_name}} logo">
+    {{/each}}
+    <hr>
+
+    <h1>Challenges</h1>
+    {{#each challenges}}
+      <p>{{title}} - shared by {{org_name}}</p>
+    {{/each}}
+    <hr>
+
+    <h1>Insights</h1>
+    {{#each insights}}
+      <p>{{title}} - {{type}} - {{author}}</p>
+    {{/each}}
+
+
+</div>
+
+<!-- Include Navbar -->
+{{>navbar}}

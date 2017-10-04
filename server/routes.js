@@ -6,5 +6,6 @@ module.exports = [].concat(
   require('./routes/challenges.js'),
   require('./routes/orgs.js'),
   require('./routes/people.js'),
-  require('./routes/insights.js')
+  require('./routes/insights.js'),
+  require('./routes/search.js')
 );
