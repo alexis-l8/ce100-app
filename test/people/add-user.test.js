@@ -8,14 +8,50 @@ var sinon = require('sinon');
 var sendEmail = require('sendemail');
 var people = require('ce100-mock-data').people;
 
-var addUser = function (userObj) {
+
+var multipartKey = function(key) {
+  return 'content-disposition: form-data; name="' + key +'"\r\n';
+}
+
+var multipartValue = function (value) {
+  return   '\r\n' + value + '\r\n';
+}
+
+var multipartPayload = function(payload) {
+  var result = '';
+  var boundaryStart = '--AaB03x\r\n';
+  var boundaryEnd = '--AaB03x--\r\n';
+  // start payload
+  result += boundaryStart;
+
+  // add keys & values
+  var payloadkeys = Object.keys(payload);
+  payloadkeys.forEach(function(k, i) {
+    result += multipartKey(k);
+    result += multipartValue(payload[k]);
+    if (i + 1 < payloadkeys.length) {
+      result += boundaryStart
+    }
+  });
+  // end
+  result += boundaryEnd;
+  return result;
+}
+
+var addUser = function (payload) {
+  var multipart = multipartPayload(payload);
   return {
     method: 'POST',
     url: '/people/add',
-    headers: { cookie: 'token=' + sessions.tokens(config.jwt_secret)['admin_1'] },
-    payload: userObj
+    headers: {
+      cookie: 'token=' + sessions.tokens(config.jwt_secret)['admin_1'],
+      'content-type': 'multipart/form-data; boundary=AaB03x'
+    },
+    payload: multipart
   };
 };
+
+
 
 // failing payloads
 var noFirst = {first_name: ''};
@@ -31,15 +67,10 @@ tape('orgs/add failing validation test', function (t) {
         server.inject(addUser(noLast), function (res) {
           t.equal(res.statusCode, 401, 'no last name fails validation at /people/add');
           t.ok(res.payload.indexOf('last name is not allowed to be empty') > -1, 'reply to user with following message: "last name is not allowed to be empty"');
-          server.inject(addUser(shortPhone), function (res) {
-            t.equal(res.statusCode, 401, 'Too short phone number fails validation at /people/add');
-            t.ok(res.payload.indexOf('phone length must be at least 11 characters long') > -1, 'reply to user with following message: "phone must be at least..."');
-
             t.end();
             server.stop();
             pool.end();
           });
-        });
       });
     });
   });

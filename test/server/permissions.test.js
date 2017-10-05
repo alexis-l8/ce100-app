@@ -28,12 +28,6 @@ var endpoints = [
     expectedStatusCode: 200
   },
   {
-    method: 'POST',
-    url: '/people/12/edit',
-    payload: { first_name: 'H', last_name: 'h', job_title: '', phone: '' },
-    expectedStatusCode: 302
-  },
-  {
     url: '/people/12/toggle-active',
     expectedStatusCode: 403
   },

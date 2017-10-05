@@ -9,7 +9,11 @@
   </a>
   {{/if}}
 
-  <img src="/public/assets/Profile.svg" alt="user profile image" class="profile_photo">
+  {{#if logo_url}}
+    <img src="{{logo_url}}" alt="user profile image" class="profile_photo">
+  {{else}}
+    <img src="/public/assets/default_logo_user.png" alt="user profile image" class="profile_photo">
+  {{/if}}
 
   <div class="list__subblock--inline list__subblock--w95">
     <span class="list__data list__data--small list__data--inline desktop-grid--twenty pl2-ns">{{first_name}} {{last_name}}</span>
