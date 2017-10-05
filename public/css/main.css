@@ -144,7 +144,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     background-image: url("../assets/Magnifying-glass.svg");
     height: 1.375rem;
     background-position: center;
-    margin-top: 0.5rem;
 }
 .icon--white-magnifying-glass {
   background-image: url("../assets/white-magnifying-glass.svg");
@@ -157,7 +156,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       display: inline-block;
       vertical-align: middle;
       padding: 0 1rem;
-      height: 2rem;
+      height: 1.6rem;
     }
   }
 
