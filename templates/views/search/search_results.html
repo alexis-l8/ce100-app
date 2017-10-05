@@ -6,6 +6,11 @@
 <div class="container">
     <div class="card card--header">
         <h1 class="title">Results</h1>
+        <form class="search" action="/search" method="get">
+          <i class="icon icon--white-magnifying-glass icon--magnifying-glass icon--magnifying-glass-inline"></i>
+          <input type="text" name="term" placeholder="{{term}}" class="search__input search__input--results">
+          <input type="submit" value="Go" class="search__go">
+        </form>
     </div>
 
     <p>We've found {{total}} results for "{{term}}"":</p>

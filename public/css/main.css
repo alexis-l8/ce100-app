@@ -434,6 +434,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         .search__input:-moz-placeholder { /* Firefox 18- */
           color: #FFFFFF;
         }
+
+        .search__input--results {
+          margin-top: 1rem;
+        }
+
         .search__go {
           border: 0;
           outline: 0;
