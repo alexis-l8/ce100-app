@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="13px" height="21px" viewBox="0 0 13 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="13px" height="13px" viewBox="0 0 13 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
-    <title>Magnifying-glass</title>
+    <title></title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" line-spacing="21" font-family="FontAwesome" font-size="14" font-weight="normal">
-        <g id="Magnifying-glass" fill="#FFFFFF">
-            <text id="" transform="translate(6.500000, 10.500000) scale(-1, 1) translate(-6.500000, -10.500000) ">
-                <tspan x="0" y="12"></tspan>
-            </text>
+    <g id="Sprint-8-prototype---desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="People-filter-open" transform="translate(-22.000000, -157.000000)" fill="#FFFFFF">
+            <path d="M31.0000107,162.499993 C31.0000107,160.570304 29.4296964,158.999989 27.5000066,158.999989 C25.5703168,158.999989 24.0000024,160.570304 24.0000024,162.499993 C24.0000024,164.429683 25.5703168,165.999998 27.5000066,165.999998 C29.4296964,165.999998 31.0000107,164.429683 31.0000107,162.499993 Z M35.0000155,169.000001 C35.0000155,169.546877 34.54689,170.000002 34.0000143,170.000002 C33.734389,170.000002 33.4765762,169.890627 33.2968885,169.703127 L30.6171978,167.031249 C29.7031342,167.664062 28.6093829,168 27.5000066,168 C24.4609404,168 22,165.53906 22,162.499993 C22,159.460927 24.4609404,156.999987 27.5000066,156.999987 C30.5390727,156.999987 33.0000131,159.460927 33.0000131,162.499993 C33.0000131,163.60937 32.6640752,164.703121 32.031262,165.617185 L34.7109527,168.296875 C34.8906404,168.476563 35.0000155,168.734376 35.0000155,169.000001 Z" id="" transform="translate(28.500008, 163.499995) scale(-1, 1) translate(-28.500008, -163.499995) "></path>
         </g>
     </g>
 </svg>
