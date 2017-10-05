@@ -2210,17 +2210,17 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     }
 
     /* Placeholder styles */
-    .search__input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    .people__search__input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
       color: #40667E;
     }
-    .search__input::-moz-placeholder { /* Firefox 19+ */
+    .people__search__input::-moz-placeholder { /* Firefox 19+ */
       color: #40667E;
       opacity: 1;
     }
-    .search__input:-ms-input-placeholder { /* IE 10+ */
+    .people__search__input:-ms-input-placeholder { /* IE 10+ */
       color: #40667E;
     }
-    .search__input:-moz-placeholder { /* Firefox 18- */
+    .people__search__input:-moz-placeholder { /* Firefox 18- */
       color: #40667E;
       opacity: 1;
     }
