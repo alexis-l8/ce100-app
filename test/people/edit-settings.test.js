@@ -25,12 +25,44 @@ var adminUpdate = {
   user_type: 'admin'
 };
 
+var multipartKey = function(key) {
+  return 'content-disposition: form-data; name="' + key +'"\r\n';
+}
+
+var multipartValue = function (value) {
+  return   '\r\n' + value + '\r\n';
+}
+
+var multipartPayload = function(payload) {
+  var result = '';
+  var boundaryStart = '--AaB03x\r\n';
+  var boundaryEnd = '--AaB03x--\r\n';
+  // start payload
+  result += boundaryStart;
+
+  // add keys & values
+  var payloadkeys = Object.keys(payload);
+  payloadkeys.forEach(function(k, i) {
+    result += multipartKey(k);
+    result += multipartValue(payload[k]);
+    if (i + 1 < payloadkeys.length) {
+      result += boundaryStart
+    }
+  });
+  // end
+  result += boundaryEnd;
+  return result;
+}
+
 function editProfile (user, id, update) {
   return {
     method: update ? 'POST' : 'GET',
     url: '/people/' + id + '/edit',
-    headers: { cookie: 'token=' + sessions.tokens(config.jwt_secret)[user] },
-    payload: !update ? undefined : update
+    headers: {
+      cookie: 'token=' + sessions.tokens(config.jwt_secret)[user],
+      'content-type': 'multipart/form-data; boundary=AaB03x'
+    },
+    payload: !update ? undefined : multipartPayload(update)
   };
 }
 
