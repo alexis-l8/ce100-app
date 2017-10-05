@@ -14,6 +14,10 @@ module.exports = function (request, reply) {
   var file_name = '';
   var newUser;
 
+  if (userObj.email) {
+    userObj.email = userObj.email.toLowerCase();
+  }
+
   if (userObj.logo) {
     logo = userObj.logo._data;
     file_name = userObj.logo.hapi.filename;

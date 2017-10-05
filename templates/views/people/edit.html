@@ -20,8 +20,11 @@
     </div>
     {{/if}}
 
-    <form class="form form--desktop" method="post">
+    <form class="form form--desktop" method="post" enctype="multipart/form-data">
       <div class="form__section form__section--main">
+
+      <label class="form__label form__label--file" for="logo">Profile Picture</label>
+      <input class="form__input form__input--file" type="file" name="logo" value="" id="logo">
 
       <label class="form__label" for="first_name">First name</label>
       <input class="form__input form__input--text {{error.first_name}}" name="first_name" value="{{#if error}}{{error.values.first_name}}{{else}}{{user.first_name}}{{/if}}">

@@ -16,7 +16,7 @@
 
     <form class="form form--desktop" method="post" enctype="multipart/form-data">
       <label class="form__label form__label--file" for="logo">Profile Picture</label>
-      <input class="form__input form__input--file" type="file" name="logo" value="" id="logo" onchange="logoSaver.saveFile(this.files)">
+      <input class="form__input form__input--file" type="file" name="logo" value="" id="logo">
 
       <label class="form__label" for="first_name">First name</label>
       <input class="form__input form__input--text {{error.first_name}}" type="text" name="first_name" id="first_name" placeholder="Write Here..." value="{{error.values.first_name}}">

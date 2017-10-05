@@ -45,7 +45,13 @@ module.exports = [
     method: 'POST',
     path: '/people/{id}/edit',
     handler: edit,
-    config: { validate: editModel }
+    config: {
+      validate: editModel,
+      payload: {
+        output:'stream',
+        parse: true
+      }
+    }
   },
   {
     method: 'GET',

@@ -57,26 +57,6 @@ var addUser = function (payload) {
 var noFirst = {first_name: ''};
 var noLast = {first_name: 'Jaja', last_name: ''};
 var shortPhone = {first_name: 'Jaja', last_name: 'Bink', email: 'ja@ju.co', user_type: 'primary', phone: '+442088377', job_title: 'CEO', org_id: -1};
-// var noFirstM =
-//   '--AaB03x\r\n' +
-//   'content-disposition: form-data; name="first_name"\r\n' +
-//   '\r\n' +
-//   '\r\n' +
-//   '--AaB03x--\r\n';
-//
-// var noLast =
-//   '--AaB03x\r\n' +
-//   'content-disposition: form-data; name="first_name"\r\n' +
-//   '\r\n' +
-//   'jaja\r\n' +
-//   '--AaB03x\r\n' +
-//   'content-disposition: form-data; name="last_name"\r\n' +
-//   '\r\n' +
-//   '\r\n' +
-//   '--AaB03x--\r\n';
-
-
-
 
 tape('orgs/add failing validation test', function (t) {
   sessions.addAll(function () {
