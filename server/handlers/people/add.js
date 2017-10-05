@@ -10,10 +10,14 @@ var helpers = require('../helpers.js');
 
 module.exports = function (request, reply) {
   var userObj = request.payload;
-  var logo = userObj.logo._data;
-  var file_name = userObj.logo.hapi.filename;
+  var logo;
+  var file_name = '';
   var newUser;
 
+  if (userObj.logo) {
+    logo = userObj.logo._data;
+    file_name = userObj.logo.hapi.filename;
+  }
   userObj.logo = logo;
   userObj.file_name = file_name;
   return S3.upload(request.payload, function (err, data) {
