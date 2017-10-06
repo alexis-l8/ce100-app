@@ -14,7 +14,8 @@ module.exports = function (request, reply) {
       result,
       permissions,
       {term: term},
-      {total: totalResults(result)}
+      {total: totalResults(result)},
+      {topNavBarType: 'search'}
     );
 
     return reply.view('search/search_results', data);
