@@ -10,9 +10,11 @@ module.exports = function (request, reply) {
 
   request.server.methods.pg.organisations.getDetails(orgId, function (error, orgData) {
     Hoek.assert(!error, 'Error retrieving organisation with id ' + orgId)
-
-    // If the organisation is not active, then only an admin can view
-    if (loggedIn.scope !== 'admin' && !orgData.org.active) {
+    var blockAccess =
+      !(loggedIn.scope === 'admin' || loggedIn.scope === 'content-owner')
+      && !orgData.org.active;
+    // If the organisation is not active, then only an admin and content-owner can view
+    if (blockAccess) {
       return reply(Boom.forbidden('You cannot access that organisation'));
     }
 
