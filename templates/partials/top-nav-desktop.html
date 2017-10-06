@@ -65,7 +65,11 @@
     {{/if}}
 
     <input type="checkbox" id="search-desktop" class="search-desktop" />
-    <div class="navbar-top__item navbar-top__item--desktop navbar-top__item--burger">
+    {{#if (topNavBar topNavBarType "search")}}
+        <div class="navbar-top__item navbar-top__item--desktop  navbar-top__item--active-border">
+    {{else}}
+        <div class="navbar-top__item navbar-top__item--desktop">
+    {{/if}}
       <label class="navbar__link" for="search-desktop">
         <i class="icon icon--white-magnifying-glass icon--magnifying-glass"></i>
       </label>

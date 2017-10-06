@@ -3,36 +3,53 @@
 {{>top-nav-desktop}}
 
 <!-- Main Content -->
-<div class="container">
+<div class="container mb3">
     <div class="card card--header">
-        <h1 class="title">Results</h1>
+        <form class="search" action="/search" method="get">
+          <i class="icon icon--white-magnifying-glass icon--magnifying-glass icon--magnifying-glass-inline"></i>
+          <input type="text" name="term" placeholder="Search..." value="{{term}}"class="search__input search__input--results">
+          <input type="submit" value="Go" class="search__go mr3">
+        </form>
     </div>
 
-    <h1>People</h1>
-    {{#each people}}
-      <p>{{first_name}} {{last_name}}  - {{job_title}} at {{org_name}} - {{email}} - {{phone}} - {{user_type}}</p>
-    {{/each}}
-    <hr>
+    <p class="results">We've found <span class="b">{{total}}</span> results for '<span class="b">{{term}}</span>'</p>
 
-    <h1>Organisation</h1>
-    {{#each orgs}}
-      <p>{{org_name}}</p>
-      <!-- If logo_url != null show this image file -->
-      <img src="{{org_logo_url}}" alt="{{org_name}} logo">
-    {{/each}}
-    <hr>
+    <h1 class="results results__category">People</h1>
+    <ul class="list">
+      {{#each people}}
+        {{>user permissions=../permissions}}
+      {{/each}}
+    </ul>
+    {{#unless people.length}}
+      <p class="pl3">No people found</p>
+    {{/unless}}
 
-    <h1>Challenges</h1>
+    <h1 class="results results__category">Organisations</h1>
+    <ul class="list">
+      {{#each orgs}}
+        {{>search/organisation admin=../permissions.admin}}
+      {{/each}}
+    </ul>
+
+    {{#unless orgs.length}}
+      <p class="pl3">No organisations found</p>
+    {{/unless}}
+
+    <h1 class="results results__category">Challenges</h1>
     {{#each challenges}}
-      <p>{{title}} - shared by {{org_name}}</p>
+      {{>search/challenges}}
     {{/each}}
-    <hr>
+    {{#unless challenges.length}}
+      <p class="pl3">No challenges found</p>
+    {{/unless}}
 
-    <h1>Insights</h1>
+    <h1 class="results results__category">Insights</h1>
     {{#each insights}}
-      <p>{{title}} - {{type}} - {{author}}</p>
+      {{>search/insights}}
     {{/each}}
-
+    {{#unless insights.length}}
+      <p class="pl3">No insights found</p>
+    {{/unless}}
 
 </div>
 

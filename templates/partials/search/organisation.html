@@ -1,0 +1,15 @@
+<li class="list__item list__item--medium list__item--people">
+
+  {{#if logo_url}}
+    <img class="list__logo" src="{{logo_url}}" alt="{{org_name}} logo">
+  {{else}}
+    <img src="/public/assets/Profile.svg" alt="user profile image" class="profile_photo" alt="{{name}} logo">
+  {{/if}}
+
+  <div class="list__subblock--inline list__subblock--w85">
+    <span class="list__data list__data--small list__data--inline desktop-grid--twenty pl2-ns">
+      <a href="/orgs/{{org_id}}" class="card__data--prim-contact">{{org_name}}</a>
+    </span>
+  </div>
+
+</li>
