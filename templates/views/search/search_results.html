@@ -37,12 +37,7 @@
 
     <h1 class="results results__category">Challenges</h1>
     {{#each challenges}}
-    <div class="results__card">
-      <a href="/challenges/{{id}}" class="results__card--title">
-        <p>{{title}}</p>
-      </a>
-      <p class="results__card--author">Shared by <a href="/orgs/{{org_id}}" class="results__card--author">{{org_name}}</a></p>
-    </div>
+      {{>search/challenges}}
     {{/each}}
     {{#unless challenges.length}}
       <p class="pl3">No challenges found</p>
@@ -50,13 +45,7 @@
 
     <h1 class="results results__category">Insights</h1>
     {{#each insights}}
-    <div class="results__card">
-      <a href="{{url}}" target='_blank' class="results__card--title">
-        <p>{{title}}</p>
-      </a>
-      <p class="results__card--author">{{type}}</p>
-      <p class="results__card--author">{{author}}</p>
-    </div>
+      {{>search/insights}}
     {{/each}}
     {{#unless insights.length}}
       <p class="pl3">No insights found</p>
