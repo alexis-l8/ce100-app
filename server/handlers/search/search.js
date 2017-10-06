@@ -4,7 +4,7 @@ var Hoek = require('hoek');
 var helpers = require('../helpers.js');
 
 module.exports = function (request, reply) {
-  var term = request.query.term;
+  var term = request.query.term.trim();
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
   search(request, term.toLowerCase(), function (result) {
