@@ -210,6 +210,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     height: 1.3rem;
     width: 1.3rem;
 }
+    .icon--edit--org {
+      top: 1rem;
+      right: 5rem;
+    }
 /*.icon--edit:hover {
   background-color: rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
@@ -571,11 +575,18 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     .title--with-logo {
       padding: 0rem;
       margin-bottom: 1.7rem;
-      font-size: 0.875rem;
+      font-size: 1.65rem;
+      color: #000000;
+      display: inline-block;
     }
     .title--with-logo--blue {
       color: #003253;
     }
+    /*.title--mission {
+      color: #000000;
+      text-align: left;
+      font-size: 1.125rem;
+    }*/
     .title--tall {
       vertical-align: middle;
       display: table-cell;
@@ -621,6 +632,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       font-size: 1.75rem;
       padding: 3rem 0;
       margin: 0;
+    }
+    .title--org-name {
+     padding: 2rem 0 0.3rem 0;
+    }
+    .title--inline-45 {
+      width: 50%;
     }
 }
 
@@ -891,7 +908,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     min-height: 4rem;
 }
 .card--header-with-logo {
-  background: radial-gradient(circle at 50% 57%, rgba(9, 51, 81, 0.84), #002944);
+  background: white;
+  border-bottom: lightgray 1.5px solid;
+  margin-bottom: 0.5rem;
+  padding-bottom: 3rem;
 }
 .card--header-tags {
   background-image: radial-gradient(circle at 50% 50%, rgba(0, 49, 83, 0.89), #002944);
@@ -988,6 +1008,26 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         .card__section--bottom {
           margin: 1.75rem auto auto auto;
         }
+
+    .mission-statement--text {
+      max-height: 6.3rem;
+      overflow-y: scroll;
+    }
+
+/* Create see more button which when checked will set max height to auto*/
+/* Make See more say see less when checked */
+/* see more is set as content of label in css*/
+/* using after to set content to see less */
+
+    .mission-statement {
+      position: relative;
+    }
+
+    .mission-statement:after {
+      content: "";
+      position: absolute; top: 0; bottom: 0; left: -7px; right: -7px;
+      box-shadow: inset rgba(255,255,255,0.7) 0 -11px 10px;
+    }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Landing Page - Site Navigation
@@ -1785,6 +1825,8 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     position: relative; /* allows for top adjustments */
     top: 0.125rem;
     display: inline-block;
+    vertical-align: top;
+    padding-top: 2rem;
     margin: 0 1rem 0 0;
   }
   .list__logo {
@@ -1815,8 +1857,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
   .card--desktop {
     height: auto;
-    padding: 1.5rem;
-    margin: 0.5rem 0.125rem;
+    padding: 1.5rem 0rem;
     background-color: #ffffff;
     border: none;
     vertical-align: top;
@@ -2013,9 +2054,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   }
   .du-no-padding {
       padding: 0;
-  }
-  .du-center {
-      text-align: center;
   }
 }
 
@@ -2327,10 +2365,25 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
     @media (min-width: 600px) {
       .pl2-ns {
-        padding-left:
+        padding-left: 0.5rem;
       }
+    }
+
+    @media (min-width: 600px) {
+      .pl5-ns {
+        padding-left: 4rem;
+      }
+    }
+
+    .pt6 {
+      padding-top: 5rem;
+      padding-left: 6rem;
     }
 
     .display-none {
       display: none;
+    }
+
+    .v-top {
+      vertical-align: top;
     }
