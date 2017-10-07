@@ -4,7 +4,7 @@ var Hoek = require('hoek');
 var helpers = require('../helpers.js');
 
 module.exports = function (request, reply) {
-  var term = request.query.term.trim();
+  var term = trimSpaces(request.query.term);
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
   search(request, term.toLowerCase(), function (result) {
@@ -21,6 +21,12 @@ module.exports = function (request, reply) {
     return reply.view('search/search_results', data);
   });
 };
+
+function trimSpaces(term) {
+  return term.split(' ').filter(function (t) {
+    return Boolean(t);
+  }).join(' ')
+}
 
 
 function search(request, term, cb) {
