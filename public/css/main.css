@@ -2173,8 +2173,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
 .profile_photo {
   width: 1.5em;
+  height: 1.5em;
   display: inline-block;
   vertical-align: top;
+  border-radius: 50%;
 }
 
 .contact_icon {
