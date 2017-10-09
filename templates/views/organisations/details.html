@@ -5,27 +5,27 @@
 <!-- Main Content -->
 <div class="container container--desktop">
     <div class="card card--header card--header-with-logo card__header--inline pl5-ns">
-      {{#if org.logo_url}}
-      <img class="logo logo--with-title logo--with-title-custom logo--desktop" src="{{org.logo_url}}" alt="{{org.name}} logo">
+      {{#if org.org_logo_url}}
+      <img class="logo logo--with-title logo--with-title-custom logo--desktop" src="{{org.org_logo_url}}" alt="{{org.org_name}} logo">
       {{else}}
-      <img class="logo logo--with-title logo--with-title-default logo--desktop" src="../public/assets/Profile.svg" alt="{{org.name}} logo">
+      <img class="logo logo--with-title logo--with-title-default logo--desktop" src="../public/assets/Profile.svg" alt="{{org.org_name}} logo">
       {{/if}}
         {{#if permissions.secondary}}
         {{else if permissions.editable}}
-          <a href="/orgs/{{org.id}}/edit">
+          <a href="/orgs/{{org.org_id}}/edit">
             <i class="icon icon--edit icon--edit-blue icon--desktop icon--edit--org"></i>
           </a>
         {{/if}}
       <div class="desktop-grid desktop-grid--half">
-        <h1 class="title title--with-logo title--inline title--extra-large title--org-name">{{org.name}}</h1>
+        <h1 class="title title--with-logo title--inline title--extra-large title--org-name">{{org.org_name}}</h1>
         <div class="mission-statement">
-          <p class="card--desktop card card__copy card__copy--extra-margin card__copy--desktop mission-statement--text">{{org.mission_statement}}</p>
+          <p class="card--desktop card card__copy card__copy--extra-margin card__copy--desktop mission-statement--text">{{org.org_mission_statement}}</p>
         </div>
       </div>
       <div class="desktop-grid desktop-grid--quarter v-top pt6">
         {{#if org.tags}}
             {{#each org.tags}}
-              <a href="/orgs?tags={{tag_id}}"><span class="tag__label tag__label--selected">{{tag_name}}</span></a>
+              <a href="/orgs?tags={{org_tag_id}}"><span class="tag__label tag__label--selected">{{org_tag_name}}</span></a>
             {{/each}}
         {{/if}}
       </div>
@@ -38,7 +38,7 @@
       {{#if challenges}}
       {{#each challenges}}
       <div class="list__subblock--challenge">
-        {{>challenge permissions=../permissions view=../view}}
+        {{>challenge permissions=../permissions view=../view id=chal_id title=chal_title}}
       </div>
       {{/each}}
       {{else}}
@@ -49,30 +49,36 @@
       {{#if permissions.editable}}
       <!-- mobile -->
       <div class="card card--header mobile">
-        <a class="title title--tall title--secondary title--opaque" href="/orgs/{{org.id}}/archived-challenges">
+        <a class="title title--tall title--secondary title--opaque" href="/orgs/{{org.org_id}}/archived-challenges">
           Archived challenges
         </a>
       </div>
       <!-- Desktop -->
       <a href="/challenges/add" class="button button--small button--margin button--desktop button--top-margin button--clear button--dark-blue u-float-left desktop ml5">+ Challenge</a>
-      <a href="/orgs/{{org.id}}/archived-challenges" class="anchor anchor--grey anchor--top-margin u-float-right desktop pr4">Archived challenges</a>
+      <a href="/orgs/{{org.org_id}}/archived-challenges" class="anchor anchor--grey anchor--top-margin u-float-right desktop pr4">Archived challenges</a>
       {{/if}}
       {{/if}}
     </div>
     <div class="desktop-grid desktop-grid--third">
-      {{#if primary.id}}
+      {{#if people}}
         <div class="card card--desktop card--desktop-people pt0">
           <h2 class="card__header card__header--desktop-large card__header--underline pl3">People</h2>
-          <img src="{{primary.logo_url}}" class="pl3 profile_photo" alt="User profile image">
-          <div class="dib">
-            <span class="card__data card__data--desktop pl2">{{primary.first_name}} {{primary.last_name}}</span>
-            <span class="card__data card__data--desktop pl2">{{primary.job_title}}</span>
-            <span class="card__data card__data--desktop pl2">
-              <a href="tel:{{primary.phone}}" class="card__data--prim-contact">{{primary.phone}}</a></span>
-              <span class="card__data  card__data--desktop pl2">
-                <a href="mailto:{{primary.email}}" class="card__data--prim-contact">{{primary.email}}</a>
-              </span>
-          </div>
+          {{#each people}}
+            <div class="db">
+              {{#if logo_url}}
+                <img src="{{logo_url}}" class="pl3 profile_photo" alt="User profile image">
+              {{else}}
+                <img src="/public/assets/default_logo_user.png" alt="user profile image" class="pl3 profile_photo">
+              {{/if}}
+              <span class="card__data card__data--desktop pl2">{{first_name}} {{last_name}}</span>
+              <span class="card__data card__data--desktop pl2">{{job_title}}</span>
+              <span class="card__data card__data--desktop pl2">
+                <a href="tel:{{primary.phone}}" class="card__data--prim-contact">{{phone}}</a></span>
+                <span class="card__data  card__data--desktop pl2">
+                  <a href="mailto:{{primary.email}}" class="card__data--prim-contact">{{email}}</a>
+                </span>
+            </div>
+          {{/each}}
         </div>
       {{else}}
         <div class="card card--desktop">
