@@ -2258,12 +2258,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
     .sorting-section__text {
       display: inline-block;
-      padding: 0 0.75rem;
+      padding: 0 0.75rem 0 0;
     }
 
     .dropdown-div {
       position: relative;
-      width: 154px;
+      width: 184px;
       display: inline-block;
     }
         .dropdown {
