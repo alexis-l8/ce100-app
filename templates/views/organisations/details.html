@@ -64,19 +64,25 @@
         <div class="card card--desktop card--desktop-people pt0">
           <h2 class="card__header card__header--desktop-large card__header--underline pl3">People</h2>
           {{#each people}}
-            <div class="db">
+            <div class="db pb3">
               {{#if logo_url}}
-                <img src="{{logo_url}}" class="pl3 profile_photo" alt="User profile image">
+                <img src="{{logo_url}}" class="pl3 profile_photo dib" alt="User profile image">
               {{else}}
-                <img src="/public/assets/default_logo_user.png" alt="user profile image" class="pl3 profile_photo">
+                <img src="/public/assets/default_logo_user.png" alt="user profile image dib" class="pl3 profile_photo">
               {{/if}}
-              <span class="card__data card__data--desktop pl2">{{first_name}} {{last_name}}</span>
-              <span class="card__data card__data--desktop pl2">{{job_title}}</span>
-              <span class="card__data card__data--desktop pl2">
-                <a href="tel:{{primary.phone}}" class="card__data--prim-contact">{{phone}}</a></span>
-                <span class="card__data  card__data--desktop pl2">
-                  <a href="mailto:{{primary.email}}" class="card__data--prim-contact">{{email}}</a>
-                </span>
+              <div class="dib">
+                <span class="card__data card__data--desktop pl2">{{first_name}} {{last_name}}</span>
+                <span class="card__data card__data--desktop pl2">{{job_title}}</span>
+                <span class="card__data card__data--desktop pl2">
+                  <span class="list__data list__data--s-padding list__data--inline">
+                    <img src="/public/assets/Button-call.svg" alt="Phone icon" class="contact_icon">
+                    <a href="tel:{{primary.phone}}" class="card__data--prim-contact">{{phone}}</a>
+                  </span>
+                  <div class="u-text-wrap card__data--prim-contact">
+                    <img src="/public/assets/Button-mail.svg" alt="Mail icon" class="contact_icon">
+                    {{email}}
+                  </div>
+              </div>
             </div>
           {{/each}}
         </div>

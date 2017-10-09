@@ -2388,7 +2388,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     }
 
     .results--none {
-      padding-left: 1.9rem;
+      padding-left: 3%;
     }
 
     .results__card {
@@ -2444,6 +2444,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
 .pr4 {
   padding-right: 2rem;
+}
+
+.pb3 {
+  padding-bottom: 1rem;
 }
 
 .pl1 {
