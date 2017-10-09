@@ -6,9 +6,9 @@
 <div class="container container--desktop">
     <div class="card card--header card--header-with-logo card__header--inline pl5-ns">
       {{#if org.org_logo_url}}
-      <img class="logo logo--with-title logo--with-title-custom logo--desktop" src="{{org.org_logo_url}}" alt="{{org.org_name}} logo">
+      <img class="logo logo--with-title logo--with-title-custom logo--desktop pb3" src="{{org.org_logo_url}}" alt="{{org.org_name}} logo">
       {{else}}
-      <img class="logo logo--with-title logo--with-title-default logo--desktop" src="../public/assets/Profile.svg" alt="{{org.org_name}} logo">
+      <img class="logo logo--with-title logo--with-title-default logo--desktop pb3" src="../public/assets/Profile.svg" alt="{{org.org_name}} logo">
       {{/if}}
         {{#if permissions.secondary}}
         {{else if permissions.editable}}
@@ -22,7 +22,7 @@
           <p class="card--desktop card card__copy card__copy--extra-margin card__copy--desktop mission-statement--text">{{org.org_mission_statement}}</p>
         </div>
       </div>
-      <div class="desktop-grid desktop-grid--quarter v-top pt6">
+      <div class="desktop-grid desktop-grid--quarter v-top org-tags">
         {{#if org.tags}}
             {{#each org.tags}}
               <a href="/orgs?tags={{org_tag_id}}"><span class="tag__label tag__label--selected">{{org_tag_name}}</span></a>
@@ -32,7 +32,7 @@
     </div>
     <div class="desktop-grid desktop-grid--fluid card--desktop card--desktop-challenge pt0">
       <div class="card card--header mobile">
-        <h2 class="title title--secondary">Challenges</h2>
+        <h2 class="title title--secondary title--secondary-large">Challenges</h2>
       </div>
       <h2 class="card card__header card__header--desktop-large card__header--underline desktop">Challenges</h2>
       {{#if challenges}}
@@ -49,7 +49,7 @@
       {{#if permissions.editable}}
       <!-- mobile -->
       <div class="card card--header mobile">
-        <a class="title title--tall title--secondary title--opaque" href="/orgs/{{org.org_id}}/archived-challenges">
+        <a class="title title--tall title--secondary anchor anchor--white" href="/orgs/{{org.org_id}}/archived-challenges">
           Archived challenges
         </a>
       </div>
@@ -61,14 +61,14 @@
     </div>
     <div class="desktop-grid desktop-grid--third">
       {{#if people}}
-        <div class="card card--desktop card--desktop-people pt0">
-          <h2 class="card__header card__header--desktop-large card__header--underline pl3">People</h2>
+        <div class="card card--desktop card--people pa0 pt0-ns">
+          <h2 class="card__header card__header--desktop-large card__header--underline card__header--people">People</h2>
           {{#each people}}
-            <div class="db pb3">
+            <div class="card--people-mobile">
               {{#if logo_url}}
-                <img src="{{logo_url}}" class="pl3 profile_photo dib" alt="User profile image">
+                <img src="{{logo_url}}" class="profile_photo dib" alt="User profile image">
               {{else}}
-                <img src="/public/assets/default_logo_user.png" alt="user profile image dib" class="pl3 profile_photo">
+                <img src="/public/assets/default_logo_user.png" alt="user profile image" class="profile_photo dib">
               {{/if}}
               <div class="dib">
                 <span class="card__data card__data--desktop pl2">{{first_name}} {{last_name}}</span>

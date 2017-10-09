@@ -212,7 +212,13 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
     .icon--edit--org {
       top: 1rem;
-      right: 5rem;
+      right: 1rem;
+    }
+
+    @media (min-width: 600px) {
+      .icon--edit--org {
+        right: 5rem;
+      }
     }
 /*.icon--edit:hover {
   background-color: rgba(0, 0, 0, 0.1);
@@ -617,6 +623,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     letter-spacing: 0.75px;
     text-transform: uppercase;
   }
+  .title--secondary-large {
+    font-size: 1.125rem;
+  }
 
 @media (min-width: 600px) {
 
@@ -797,9 +806,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             right: 1.3rem;
         }
 
-        .list__subblock--challenge {
-          border-bottom: solid 1px #F2F2F2;
-          margin: 0 2rem 0 4rem;
+        @media (min-width: 600px) {
+          .list__subblock--challenge {
+            border-bottom: solid 1px #F2F2F2;
+            margin: 0 2rem 0 4rem;
+          }
         }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
@@ -919,9 +930,13 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 .card--header-with-logo {
   background: white;
-  border-bottom: lightgray 1.5px solid;
-  margin-bottom: 0.5rem;
   padding-bottom: 3rem;
+}
+@media (min-width: 600px) {
+  .card--header-with-logo {
+    margin-bottom: 0.5rem;
+    border-bottom: lightgray 1.5px solid;
+  }
 }
 .card--header-tags {
   background-image: radial-gradient(circle at 50% 50%, rgba(0, 49, 83, 0.89), #002944);
@@ -957,6 +972,16 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             font-size: 1.125rem;
             line-height: 1.375rem;
             margin-bottom: 0.3rem;
+        }
+        .card__header--people {
+          padding: 2rem;
+          font-size: 1.125rem;
+          background-color: #F2F2F2;
+        }
+        @media (min-width: 600px) {
+          .card__header--people {
+            padding-left: 1rem;
+          }
         }
         .card__data--link:hover {
             color: #003253;
@@ -1022,6 +1047,14 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     .mission-statement--text {
       max-height: 6.3rem;
       overflow-y: scroll;
+      padding-top: 0;
+    }
+
+    @media (min-width: 600px) {
+      .org-tags {
+        padding-top: 5rem;
+        padding-left: 6rem;
+      }
     }
 
 /* Create see more button which when checked will set max height to auto*/
@@ -1534,6 +1567,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     .anchor--grey:link, .anchor--grey:hover, .anchor--grey:visited {
       color: #9cafbb;
     }
+    .anchor--white:link, .anchor--grey:hover, .anchor--grey:visited {
+      color: #FFFFFF;
+      padding-bottom: 2rem;
+    }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Logo
@@ -1885,9 +1922,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     min-width: 69%;
     min-height: 25rem;
   }
-  .card--desktop-people {
-    min-height: 25rem;
-  }
   .card--desktop-no-padding {
     padding: 0;
   }
@@ -1944,6 +1978,17 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   }
   .card__data--desktop, .card__copy--desktop {
       font-size: 1rem;
+  }
+  .card--people {
+    padding-left: 0;
+    padding-bottom: 0;
+    text-align: left;
+  }
+
+  @media (min-width: 600px) {
+    .card--people {
+      min-height: 25rem;
+    }
   }
   .copy--login {
     font-size: 1.3125rem; /* 21px */
@@ -2219,8 +2264,8 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 
 .profile_photo {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
   display: inline-block;
   vertical-align: top;
   border-radius: 50%;
@@ -2433,13 +2478,18 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
 /* UTILITY CLASSES */
 
+.pa0 {
+  padding: 0;
+}
+
 .pt0 {
   padding-top: 0;
 }
 
-.pt6 {
-  padding-top: 5rem;
-  padding-left: 6rem;
+@media (min-width: 600px) {
+  .pt0-ns {
+    padding-top: 0;
+  }
 }
 
 .pr4 {
@@ -2502,6 +2552,17 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   vertical-align: top;
 }
 
+.tl {
+  text-align: left;
+}
+
 .b {
   font-weight: bold;
+}
+
+.card--people-mobile {
+  padding: 0.5rem 0 0.5rem 1rem;
+  text-align: left;
+  display: block;
+  border-bottom: solid 1px rgba(64, 101, 126, 0.1);
 }
