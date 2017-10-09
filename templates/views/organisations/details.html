@@ -4,74 +4,98 @@
 
 <!-- Main Content -->
 <div class="container container--desktop">
-    <div class="card card--header card--header-with-logo card__header--inline du-center">
-      {{#if org.logo_url}}
-      <img class="logo logo--with-title logo--with-title-custom logo--desktop" src="{{org.logo_url}}" alt="{{org.name}} logo">
+    <div class="card card--header card--header-with-logo card__header--inline pl5-ns">
+      {{#if org.org_logo_url}}
+      <img class="logo logo--with-title logo--with-title-custom logo--desktop pb3" src="{{org.org_logo_url}}" alt="{{org.org_name}} logo">
       {{else}}
-      <img class="logo logo--with-title logo--with-title-default logo--desktop" src="../public/assets/Profile.svg" alt="{{org.name}} logo">
+      <img class="logo logo--with-title logo--with-title-default logo--desktop pb3" src="../public/assets/Profile.svg" alt="{{org.org_name}} logo">
       {{/if}}
-      <h1 class="title title--with-logo title--inline title--extra-large">{{org.name}}</h1>
-    </div>
-    <div class="desktop-grid desktop-grid--third">
-      <div class="card card--desktop">
-        <h2 class="card__header card__header--desktop card__header--underline">CIRCULAR ECONOMY VISION</h2>
-        <p class="card__copy card__copy--extra-margin card__copy--desktop">{{org.mission_statement}}</p>
         {{#if permissions.secondary}}
         {{else if permissions.editable}}
-          <a href="/orgs/{{org.id}}/edit">
-            <i class="icon icon--edit icon--edit-blue icon--desktop"></i>
+          <a href="/orgs/{{org.org_id}}/edit">
+            <i class="icon icon--edit icon--edit-blue icon--desktop icon--edit--org"></i>
           </a>
         {{/if}}
+      <div class="desktop-grid desktop-grid--half">
+        <h1 class="title title--with-logo title--inline title--extra-large title--org-name">{{org.org_name}}</h1>
+        <div class="mission-statement">
+          <input type="checkbox" id="see_more" class="display-none">
+          <p class="card--desktop card card__copy card__copy--extra-margin card__copy--desktop mission-statement--text">{{org.org_mission_statement}}</p>
+        </div>
+        <label for="see_more">
+          <p class="">see more</p>
+        </label>
+      </div>
+      <div class="desktop-grid desktop-grid--quarter v-top org-tags">
         {{#if org.tags}}
-           <h2 class="card__header card__header--desktop card__header--underline">EXPERTISE</h2>
             {{#each org.tags}}
-              <a href="/orgs?tags={{tag_id}}"><span class="tag__label tag__label--selected">{{tag_name}}</span></a>
+              <a href="/orgs?tags={{org_tag_id}}"><span class="tag__label tag__label--selected">{{org_tag_name}}</span></a>
             {{/each}}
         {{/if}}
       </div>
-      {{#if primary.id}}
-        <div class="card card--desktop">
-          <h2 class="card__header card__header--desktop card__header--underline">GET IN TOUCH</h2>
-          <span class="card__data card__data--desktop">{{primary.first_name}} {{primary.last_name}}</span>
-          <span class="card__data card__data--desktop">{{primary.job_title}}</span>
-          <span class="card__data card__data--desktop">
-            <a href="tel:{{primary.phone}}" class="card__data--prim-contact">{{primary.phone}}</a></span>
-          <span class="card__data  card__data--desktop">
-            <a href="mailto:{{primary.email}}" class="card__data--prim-contact">{{primary.email}}</a></span>
+    </div>
+    <div class="desktop-grid desktop-grid--fluid card--desktop card--desktop-challenge pt0">
+      <div class="card card--header mobile">
+        <h2 class="title title--secondary title--secondary-large">Challenges</h2>
+      </div>
+      <h2 class="card card__header card__header--desktop-large card__header--underline desktop">Challenges</h2>
+      {{#if challenges}}
+      {{#each challenges}}
+      <div class="list__subblock--challenge">
+        {{>challenge permissions=../permissions view=../view id=chal_id title=chal_title}}
+      </div>
+      {{/each}}
+      {{else}}
+      <span class="card__data">No challenges shared yet.</span>
+      {{/if}}
+      <!-- Archived challenges -->
+      {{#if permissions.primary}}
+      {{#if permissions.editable}}
+      <!-- mobile -->
+      <div class="card card--header mobile">
+        <a class="title title--tall title--secondary anchor anchor--white" href="/orgs/{{org.org_id}}/archived-challenges">
+          Archived challenges
+        </a>
+      </div>
+      <!-- Desktop -->
+      <a href="/challenges/add" class="button button--small button--margin button--desktop button--top-margin button--clear button--dark-blue u-float-left desktop ml5">+ Challenge</a>
+      <a href="/orgs/{{org.org_id}}/archived-challenges" class="anchor anchor--grey anchor--top-margin u-float-right desktop pr4">Archived challenges</a>
+      {{/if}}
+      {{/if}}
+    </div>
+    <div class="desktop-grid desktop-grid--third">
+      {{#if people}}
+        <div class="card card--desktop card--people pa0 pt0-ns">
+          <h2 class="card__header card__header--desktop-large card__header--underline card__header--people">People</h2>
+          {{#each people}}
+            <div class="card--people-mobile">
+              {{#if logo_url}}
+                <img src="{{logo_url}}" class="profile_photo dib" alt="User profile image">
+              {{else}}
+                <img src="/public/assets/default_logo_user.png" alt="user profile image" class="profile_photo dib">
+              {{/if}}
+              <div class="dib">
+                <span class="card__data card__data--desktop pl2">{{first_name}} {{last_name}}</span>
+                <span class="card__data card__data--desktop pl2">{{job_title}}</span>
+                <span class="card__data card__data--desktop pl2">
+                  <span class="list__data list__data--s-padding list__data--inline">
+                    <img src="/public/assets/Button-call.svg" alt="Phone icon" class="contact_icon">
+                    <a href="tel:{{primary.phone}}" class="card__data--prim-contact">{{phone}}</a>
+                  </span>
+                  <div class="u-text-wrap card__data--prim-contact">
+                    <img src="/public/assets/Button-mail.svg" alt="Mail icon" class="contact_icon">
+                    {{email}}
+                  </div>
+              </div>
+            </div>
+          {{/each}}
         </div>
       {{else}}
         <div class="card card--desktop">
-          <h2 class="card__header card__header--desktop card__header--underline">GET IN TOUCH</h2>
-          <span class="card__data">No contact details yet.</span>
+          <h2 class="card__header card__header--desktop-large card__header--underline pl3">People</h2>
+          <span class="card__data pl2">No people yet.</span>
         </div>
       {{/if}}
-    </div>
-    <div class="desktop-grid desktop-grid--fluid card--desktop card--desktop-large">
-        <div class="card card--header mobile">
-          <h2 class="title title--secondary">CHALLENGES</h2>
-        </div>
-        <h2 class="card card__header card__header--desktop card__header--underline desktop">CHALLENGES</h2>
-        {{#if challenges}}
-            {{#each challenges}}
-              {{>challenge permissions=../permissions view=../view}}
-            {{/each}}
-        {{else}}
-          <span class="card__data">No challenges shared yet.</span>
-        {{/if}}
-        <!-- Archived challenges -->
-        {{#if permissions.primary}}
-            {{#if permissions.editable}}
-              <!-- mobile -->
-              <div class="card card--header mobile">
-                <a class="title title--tall title--secondary title--opaque" href="/orgs/{{org.id}}/archived-challenges">
-                  Archived challenges
-                </a>
-              </div>
-              <!-- Desktop -->
-              <a href="/challenges/add" class="button button--small button--margin button--desktop button--top-margin button--clear button--dark-blue u-float-left desktop">+ Challenge</a>
-              <a href="/orgs/{{org.id}}/archived-challenges" class="anchor anchor--additional anchor--left anchor--top-margin u-float-right desktop">Archived challenges</a>
-            {{/if}}
-          {{/if}}
     </div>
 </div>
 

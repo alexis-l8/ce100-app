@@ -21,7 +21,7 @@
       {{/each}}
     </ul>
     {{#unless people.length}}
-      <p class="pl3">No people found</p>
+      <p class="results--none">No people found</p>
     {{/unless}}
 
     <h1 class="results results__category">Organisations</h1>
@@ -32,7 +32,7 @@
     </ul>
 
     {{#unless orgs.length}}
-      <p class="pl3">No organisations found</p>
+      <p class="results--none">No organisations found</p>
     {{/unless}}
 
     <h1 class="results results__category">Challenges</h1>
@@ -40,7 +40,7 @@
       {{>search/challenges}}
     {{/each}}
     {{#unless challenges.length}}
-      <p class="pl3">No challenges found</p>
+      <p class="results--none">No challenges found</p>
     {{/unless}}
 
     <h1 class="results results__category">Insights</h1>
@@ -48,7 +48,7 @@
       {{>search/insights}}
     {{/each}}
     {{#unless insights.length}}
-      <p class="pl3">No insights found</p>
+      <p class="results--none">No insights found</p>
     {{/unless}}
 
 </div>
