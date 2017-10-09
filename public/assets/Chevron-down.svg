@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="14px" height="21px" viewBox="0 0 14 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="8px" height="5px" viewBox="0 0 8 5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
-    <title>Chevron-down</title>
+    <title></title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-size="14" font-family="FontAwesome" line-spacing="21" font-weight="normal">
-        <g id="Chevron-down" fill="#40667E">
-            <text id="">
-                <tspan x="0" y="12"> &#9660;</tspan>
-            </text>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Chevron-down" transform="translate(-3.000000, -9.000000)" fill="#40667E">
+            <path d="M11.0000095,9.49999225 C11.0000095,9.22655443 10.7734468,8.99999166 10.5000089,8.99999166 L3.5000006,8.99999166 C3.22656277,8.99999166 3,9.22655443 3,9.49999225 C3,9.63280491 3.05468757,9.75780506 3.14843768,9.85155517 L6.64844185,13.3515593 C6.74219196,13.4453095 6.86719211,13.499997 7.00000477,13.499997 C7.13281743,13.499997 7.25781758,13.4453095 7.35156769,13.3515593 L10.8515719,9.85155517 C10.945322,9.75780506 11.0000095,9.63280491 11.0000095,9.49999225 Z" id=""></path>
         </g>
     </g>
 </svg>
