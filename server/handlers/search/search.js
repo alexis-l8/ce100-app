@@ -7,19 +7,35 @@ module.exports = function (request, reply) {
   var term = trimSpaces(request.query.term);
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'scope', 'admin');
-  search(request, term.toLowerCase(), function (result) {
-    result.people = filterPeople(permissions, result.people);
+  var options = Object.assign(
+    permissions,
+    {term: term},
+    {topNavBarType: 'search'}
+  );
+  var data;
+  var emptyResult = { people: [], orgs: [], challenges: [], insights: [] };
 
-    var data = Object.assign(
-      result,
-      permissions,
-      {term: term},
-      {total: totalResults(result)},
-      {topNavBarType: 'search'}
+  if (term === '') {
+    data = Object.assign(
+      options,
+      emptyResult,
+      {total: totalResults(emptyResult)}
     );
 
     return reply.view('search/search_results', data);
-  });
+  } else {
+    search(request, term.toLowerCase().replace(/'/g, "''"), function (result) {
+      result.people = filterPeople(permissions, result.people);
+
+      data = Object.assign(
+        options,
+        result,
+        {total: totalResults(result)}
+      );
+
+      return reply.view('search/search_results', data);
+    });
+  }
 };
 
 function trimSpaces(term) {
