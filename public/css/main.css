@@ -771,9 +771,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
               display: inline-block;
             }
 
-            .list__subblock--w85 {
-              width: 85%;
-              padding-left: 0.5rem;
+            @media (min-width: 600px) {
+              .list__subblock--w85 {
+                width: 85%;
+                margin-left: 0.5rem;
+                padding-top: 0.5rem;
+              }
             }
 
         .list__logo {
