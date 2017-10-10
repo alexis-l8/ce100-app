@@ -2505,6 +2505,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   padding-bottom: 1rem;
 }
 
+@media (max-width: 600px) {
+  .pb4-s {
+    padding-bottom: 2rem;
+  }
+}
+
 .pl1 {
   padding-left: 0.25rem;
 }
