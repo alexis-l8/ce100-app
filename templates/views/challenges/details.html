@@ -10,12 +10,10 @@
     </div>
 
     <div class="card card--details d-card--centred">
-      {{#if permissions.primary}}
-        {{#if permissions.editable}}
-          <a href="/challenges/{{challenge.id}}/edit">
-            <i class="icon icon--edit icon--edit-blue icon--desktop"></i>
-          </a>
-        {{/if}}
+      {{#if (allowAccess permissions)}}
+        <a href="/challenges/{{challenge.id}}/edit">
+          <i class="icon icon--edit icon--edit-blue icon--desktop"></i>
+        </a>
       {{/if}}
       <p class="card__header card__header--challenge  card__header--extra-margin {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}">
         {{challenge.title}}

@@ -4,12 +4,10 @@
   <li class="list__item list__item--tall">
 {{/if}}
 
-  {{#if permissions.primary}}
-    {{#if permissions.editable}}
-      <a href="/challenges/{{id}}/edit">
-        <i class="icon icon--edit icon--edit-challenge-on-profile icon--desktop"></i>
-      </a>
-    {{/if}}
+  {{#if (allowAccess permissions)}}
+    <a href="/challenges/{{id}}/edit">
+      <i class="icon icon--edit icon--edit-challenge-on-profile icon--desktop"></i>
+    </a>
   {{/if}}
 
   <div class="list__subblock">

@@ -49,11 +49,11 @@
       <p class="copy form__copy">Clicking 'save' will make your challenge public on your profile</p>
 
 
-      <button class="button" type="submit">Save & Publish</button>
+      <button class="button" type="submit">Save &amp; Publish</button>
 
       <!-- Show archive and primary user if admin is logged in -->
         <div class="form__section">
-          <a class="form__anchor form__anchor--danger" href="/challenges/{{id}}/toggle-active">
+          <a class="form__anchor form__anchor--danger" href="/challenges/{{id}}/toggle-active?org_id={{org_id}}">
             {{#if active}}
               Archive Challenge
             {{else}}

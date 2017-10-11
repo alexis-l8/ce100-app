@@ -46,7 +46,7 @@ module.exports = [
     method: 'GET',
     path: '/challenges/{id}/edit',
     handler: editView,
-    config: { auth: { scope: 'primary' } }
+    config: { auth: { scope: ['primary', 'admin'] } }
   },
   {
     method: 'POST',
@@ -54,13 +54,13 @@ module.exports = [
     handler: editSubmit,
     config: {
       validate: editModel,
-      auth: { scope: 'primary' }
+      auth: { scope: ['primary', 'admin'] }
     }
   },
   {
     method: 'GET',
     path: '/challenges/{id}/toggle-active',
     handler: toggleActive,
-    config: { auth: { scope: 'primary' } }
+    config: { auth: { scope: ['primary', 'admin'] } }
   }
 ];

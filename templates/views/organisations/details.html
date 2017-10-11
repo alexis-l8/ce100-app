@@ -49,8 +49,7 @@
       <span class="card__data">No challenges shared yet.</span>
       {{/if}}
       <!-- Archived challenges -->
-      {{#if permissions.primary}}
-      {{#if permissions.editable}}
+      {{#if (allowAccess permissions)}}
       <!-- mobile -->
       <div class="card card--header mobile">
         <a class="title title--tall title--secondary anchor anchor--white" href="/orgs/{{org.org_id}}/archived-challenges">
@@ -60,7 +59,6 @@
       <!-- Desktop -->
       <a href="/challenges/add" class="button button--small button--margin button--desktop button--top-margin button--clear button--dark-blue u-float-left desktop ml5">+ Challenge</a>
       <a href="/orgs/{{org.org_id}}/archived-challenges" class="anchor anchor--grey anchor--top-margin u-float-right desktop pr4">Archived challenges</a>
-      {{/if}}
       {{/if}}
     </div>
     <div class="desktop-grid desktop-grid--third">
