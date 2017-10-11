@@ -46,7 +46,7 @@
       </div>
       {{/each}}
       {{else}}
-      <span class="card__data">No challenges shared yet.</span>
+      <span class="card__data pt3 pl2">No challenges shared yet.</span>
       {{/if}}
       <!-- Archived challenges -->
       {{#if (allowAccess permissions)}}
@@ -89,9 +89,9 @@
           {{/each}}
         </div>
       {{else}}
-        <div class="card card--desktop">
-          <h2 class="card__header card__header--desktop-large card__header--underline pl3">People</h2>
-          <span class="card__data pl2">No people yet.</span>
+        <div class="card card--desktop pa0 pt0-ns">
+          <h2 class="card__header card__header--desktop-large card__header--underline card__header--people">People</h2>
+          <span class="card__data pl2 pb3 tl">No people yet.</span>
         </div>
       {{/if}}
     </div>
