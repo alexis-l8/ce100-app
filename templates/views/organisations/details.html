@@ -57,7 +57,10 @@
         </a>
       </div>
       <!-- Desktop -->
-      <a href="/challenges/add" class="button button--small button--margin button--desktop button--top-margin button--clear button--dark-blue u-float-left desktop ml5">+ Challenge</a>
+      <!-- only primary can add challenges (not admin) -->
+      {{#if permissions.primary}}
+        <a href="/challenges/add" class="button button--small button--margin button--desktop button--top-margin button--clear button--dark-blue u-float-left desktop ml5">+ Challenge</a>
+      {{/if}}
       <a href="/orgs/{{org.org_id}}/archived-challenges" class="anchor anchor--grey anchor--top-margin u-float-right desktop pr4">Archived challenges</a>
       {{/if}}
     </div>
