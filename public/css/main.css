@@ -461,6 +461,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
           cursor: pointer;
         }
 
+        .search__go:hover {
+          background-color: #5cc3ca;
+        }
+
   /*|||||||||||||||||||||||||||||||||||||||||||||
     Toggle Bar in browse view
   |||||||||||||||||||||||||||||||||||||||||||*/
