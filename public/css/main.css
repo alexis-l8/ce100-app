@@ -776,8 +776,15 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             }
 
             .list__subblock--w85 {
-              width: 85%;
-              padding-left: 0.5rem;
+              width: 80%;
+              margin-left: 0.5rem;
+              padding-top: 0.5rem;
+            }
+
+            @media (min-width: 600px) {
+              .list__subblock--w85 {
+                width: 85%;
+              }
             }
 
         .list__logo {
@@ -2496,6 +2503,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   padding-top: 0;
 }
 
+@media (max-width: 600px) {
+  .pt0-s {
+    padding-top: 0;
+  }
+}
+
 @media (min-width: 600px) {
   .pt0-ns {
     padding-top: 0;
@@ -2576,6 +2589,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   font-weight: bold;
 }
 
+/* On the organisation view page*/
 .card--people-mobile {
   padding: 0.5rem 0 0.5rem 1rem;
   text-align: left;
