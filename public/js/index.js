@@ -61,3 +61,14 @@ var logoSaver = (function () {
     card.style.height = viewportHeight + 'px';
   });
 })();
+
+// hide see more button on organisatoin page is the mission statement is short
+(function () {
+  var seeMore = document.querySelector('#see_more_label');
+  if(seeMore) {
+    var missionStatementLength = document.querySelector('.mission-statement').innerText.trim().length;
+    if (missionStatementLength < 395) {
+      seeMore.style.display = 'none';
+    }
+  }
+})();
