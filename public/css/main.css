@@ -1062,11 +1062,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       }
     }
 
-/* Create see more button which when checked will set max height to auto*/
-/* Make See more say see less when checked */
-/* see more is set as content of label in css*/
-/* using after to set content to see less */
-
     .mission-statement {
       position: relative;
     }
@@ -2363,6 +2358,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       width: 184px;
       display: inline-block;
     }
+
+    @media (min-width: 600px) {
+      .dropdown-div {
+        width: 154px;
+      }
+    }
         .dropdown {
           display: inline-block;
           border-style: solid;
@@ -2503,6 +2504,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
 .pb3 {
   padding-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+  .pb4-s {
+    padding-bottom: 2rem;
+  }
 }
 
 .pl1 {
