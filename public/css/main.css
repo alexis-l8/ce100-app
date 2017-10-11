@@ -2582,3 +2582,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   display: block;
   border-bottom: solid 1px rgba(64, 101, 126, 0.1);
 }
+
+.see-more-label {
+  cursor: pointer;
+}
