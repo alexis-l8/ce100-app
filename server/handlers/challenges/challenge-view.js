@@ -11,6 +11,7 @@ module.exports = function (request, reply) {
   var permissions;
   var options;
   var challenge;
+  var listOfTags;
 
   pgChallenges.getById(cid, function (pgErr1, challengeResponse) {
     Hoek.assert(!pgErr1, 'database error, could not retreive that challenge');
@@ -46,11 +47,13 @@ module.exports = function (request, reply) {
 
       Hoek.assert(!pgErr2, errorMessage);
       optionsMatches = Object.assign({}, options, { suggested_matches: orgs });
-      var listOfTags = challengeResponse.tags.map(function (tag){
+
+      listOfTags = challenge.tags.map(function (tag){
         return tag.id;
       });
-      return pgChallenge.getMatchingChallenges(cid, listOfTags, function(pgErr3, challenges){
+      return pgChallenges.getMatchingChallenges(cid, listOfTags, function(pgErr3, challenges){
         var viewData = Object.assign(optionsMatches, {matchingChallenges : challenges});
+
         return reply.view('challenges/details', viewData);
       })
     });
