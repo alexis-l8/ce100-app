@@ -46,7 +46,13 @@ module.exports = function (request, reply) {
 
       Hoek.assert(!pgErr2, errorMessage);
       optionsMatches = Object.assign({}, options, { suggested_matches: orgs });
-      return reply.view('challenges/details', optionsMatches);
+      var listOfTags = challengeResponse.tags.map(function (tag){
+        return tag.id;
+      });
+      return pgChallenge.getMatchingChallenges(cid, listOfTags, function(pgErr3, challenges){
+        var viewData = Object.assign(optionsMatches, {matchingChallenges : challenges});
+        return reply.view('challenges/details', viewData);
+      })
     });
   });
 };
