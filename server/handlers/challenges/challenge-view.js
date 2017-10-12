@@ -8,6 +8,7 @@ module.exports = function (request, reply) {
   var loggedIn = request.auth.credentials;
   var cid = request.params.id;
   var pgChallenges = request.server.methods.pg.challenges;
+  var pgInsights = request.server.methods.pg.insights;
   var permissions;
   var options;
   var challenge;
@@ -52,10 +53,17 @@ module.exports = function (request, reply) {
         return tag.id;
       });
       return pgChallenges.getMatchingChallenges(cid, listOfTags, function(pgErr3, challenges){
-        var viewData = Object.assign(optionsMatches, {matchingChallenges : challenges});
 
-        return reply.view('challenges/details', viewData);
-      })
+        return pgInsights.getMatchingInsights(listOfTags, function(pgErr3, insights){
+          var viewData = Object.assign(
+            optionsMatches,
+            { matchingChallenges: challenges },
+            { matchingInsights: insights }
+          );
+
+          return reply.view('challenges/details', viewData);
+        });
+      });
     });
   });
 };
