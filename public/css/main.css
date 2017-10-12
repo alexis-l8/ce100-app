@@ -994,6 +994,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             text-align: left;
             min-height: 10rem;
         }
+        .card__header--challenge-bg{
+          background-color: green;
+        }
         .card__header--people {
           padding: 2rem;
           font-size: 1.125rem;
@@ -2612,5 +2615,8 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 }
 
 .edit--challenge {
-  background-color: red;
+  background-color: darkgreen;
+  display: inline-block;
+  width: 15%;
+  padding: 1rem 0 0 1rem;
 }

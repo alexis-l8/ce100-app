@@ -5,26 +5,26 @@
 <!-- Main Content -->
 <div class="container container--desktop">
    <!-- header -->
-    <div class="card card--header card__header--challenge">
+    <div class="card card--header card__header--challenge card__header--challenge-bg">
       <!-- back and edit button -->
       <div class="edit--challenge">
-        <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-        <a class="icon icon--cancel" href="{{cancelUrl}}"></a>
+        <a class="" href="{{cancelUrl}}">< Back</a>
       </div>
+      <!-- {{#if permissions.primary}}
+      {{#if permissions.editable}} -->
+      <a href="/challenges/{{challenge.id}}/edit">
+        <i class="icon icon--edit icon--edit-blue icon--desktop"></i>
+        <p class="edit--challenge">Edit</p>
+      </a>
+      <!-- {{/if}}
+      {{/if}} -->
       <h1 class="title__challenge">{{challenge.title}}</h1>
     </div>
 
     <div class="card card--details d-card--centred">
-      {{#if permissions.primary}}
-        {{#if permissions.editable}}
-          <a href="/challenges/{{challenge.id}}/edit">
-            <i class="icon icon--edit icon--edit-blue icon--desktop"></i>
-          </a>
-        {{/if}}
-      {{/if}}
-      <p class="card__header card__header--challenge  card__header--extra-margin {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}">
+      <!-- <p class="card__header card__header--challenge  card__header--extra-margin {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}">
         {{challenge.title}}
-      </p>
+      </p> -->
       <p class="card__copy card__copy--challenge">{{challenge.description}}</p>
       {{#each challenge.tags}}
         <a class="u-text-decoration--none" href="/challenges?tags={{id}}">
