@@ -631,6 +631,14 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     font-size: 1.125rem;
   }
 
+  .title__challenge {
+    font-size: 2rem;
+    color: white;
+    width: 80%;
+    line-height: 1.25;
+    padding-left: 4rem;
+  }
+
 @media (min-width: 600px) {
 
     .title--desktop {
@@ -983,6 +991,8 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             font-size: 1.125rem;
             line-height: 1.375rem;
             margin-bottom: 0.3rem;
+            text-align: left;
+            min-height: 10rem;
         }
         .card__header--people {
           padding: 2rem;
@@ -2599,4 +2609,8 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
 .see-more-label {
   cursor: pointer;
+}
+
+.edit--challenge {
+  background-color: red;
 }
