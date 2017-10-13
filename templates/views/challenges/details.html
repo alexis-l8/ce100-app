@@ -6,55 +6,59 @@
 <div class="container container--desktop">
    <!-- header -->
     <div class="card card--header card__header--challenge card__header--challenge-bg">
-      <!-- back and edit button -->
-      <div class="edit--challenge">
-        <a class="" href="{{cancelUrl}}">< Back</a>
-      </div>
-      <!-- {{#if permissions.primary}}
-      {{#if permissions.editable}} -->
-      <a href="/challenges/{{challenge.id}}/edit">
-        <i class="icon icon--edit icon--edit-blue icon--desktop"></i>
-        <p class="edit--challenge">Edit</p>
-      </a>
-      <!-- {{/if}}
-      {{/if}} -->
+        <a class="back" href="{{cancelUrl}}">< Back</a>
+        {{#if permissions.primary}}
+        {{#if permissions.editable}}
+        <a href="/challenges/{{challenge.id}}/edit">
+          <i class="icon icon--edit icon--edit-white icon--desktop edit-icon"></i>
+        </a>
+      {{/if}}
+      {{/if}}
       <h1 class="title__challenge">{{challenge.title}}</h1>
     </div>
 
-    <div class="card card--details d-card--centred">
-      <!-- <p class="card__header card__header--challenge  card__header--extra-margin {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}">
-        {{challenge.title}}
-      </p> -->
-      <p class="card__copy card__copy--challenge">{{challenge.description}}</p>
-      {{#each challenge.tags}}
-        <a class="u-text-decoration--none" href="/challenges?tags={{id}}">
-          <span class="tag__label tag__label--selected">{{name}}</span>
-        </a>
-      {{/each}}
+    <div class="containers">
+      <div class="left">
+        <div class="left-inside">
+          <p class="card__copy card__copy--challenge">{{challenge.description}}</p>
+          <h4 class="card__copy anchor anchor--shared-by anchor--right u-no-margin">Shared by
+            <a class="card__copy anchor anchor--shared-by anchor--right u-no-margin" href="/orgs/{{challenge.org_id}}">
+              {{challenge.org_name}}
+            </a>
+          </h4>
+        </div>
+      </div>
+      <div class="right">
+        <div class="right-inside">
+          <h2 class="card__header card__header--suggested-matches">Tagged with</h2>
+          {{#each challenge.tags}}
+          <a class="u-text-decoration--none" href="/challenges?tags={{id}}">
+            <span class="tag__label tag__label--selected">{{name}}</span>
+          </a>
+          {{/each}}
+        </div>
 
-
-      <h4 class="card__copy anchor anchor--shared-by anchor--right u-no-margin">Shared by
-        <a class="card__copy anchor anchor--shared-by anchor--right u-no-margin" href="/orgs/{{challenge.org_id}}">
-          {{challenge.org_name}}
-        </a>
-      </h4>
-    </div>
-    {{#if permissions.editable}}
-      <div class="card card--suggested-matches d-card--centred">
-        <h2 class="card__header card__header--suggested-matches">MATCHES</h2>
-        {{#if suggested_matches}}
-        <p class="form__label form__label--additional">
-          These organisations have expertise that might help you with your challenge. Why not get in touch?
-        </p>
-        {{#each suggested_matches}}
-          <a class="anchor anchor--suggested-matches" href="/orgs/{{id}}">{{name}}</a>
-        {{/each}}
-        {{else}}
-          <p class="card__copy">No organisations match this challenge</p>
+        {{#if permissions.editable}}
+          <div class="right-inside">
+            <h2 class="card__header card__header--suggested-matches">Matched with</h2>
+            {{#if suggested_matches}}
+              <p class="form__label form__label--additional">
+                These organisations have expertise that might help you with your challenge. Why not get in touch?
+              </p>
+              {{#each suggested_matches}}
+                <a class="anchor anchor--suggested-matches" href="/orgs/{{id}}">{{name}}</a>
+              {{/each}}
+            {{else}}
+              <p class="card__copy">No organisations match this challenge</p>
+            {{/if}}
+          </div>
         {{/if}}
       </div>
-    {{/if}}
-</div>
+    </div>
+
+
+
+
 
 
 

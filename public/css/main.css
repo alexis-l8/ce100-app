@@ -632,11 +632,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   }
 
   .title__challenge {
-    font-size: 2rem;
+    font-size: 1.7rem;
     color: white;
     width: 80%;
     line-height: 1.25;
-    padding-left: 4rem;
+    padding: 1rem 0 2rem 2rem;
   }
 
 @media (min-width: 600px) {
@@ -663,6 +663,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     }
     .title--inline-45 {
       width: 50%;
+    }
+    .title__challenge {
+      font-size: 3.1rem;
+      width: 80%;
+      padding-left: 8rem;
+      padding-bottom: 3rem;
     }
 }
 
@@ -976,10 +982,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     color: #ffffff;
     border: none;
 }
-.card--suggested-matches {
-  text-align: left;
-  padding: 1rem 1rem 0;
-}
     .card__header {
         display: block;
         margin-bottom: 1rem;
@@ -992,10 +994,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             line-height: 1.375rem;
             margin-bottom: 0.3rem;
             text-align: left;
-            min-height: 10rem;
         }
         .card__header--challenge-bg{
-          background-color: green;
+          background-color: #061E2E;
+          min-height: 12.5rem;
+          margin: 0
         }
         .card__header--people {
           padding: 2rem;
@@ -1014,11 +1017,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             margin-bottom: 0.875rem;
         }
         .card__header--suggested-matches {
-            font-size: 0.875rem;
+            font-size: 1rem;
             color: #333333;
-            text-align: center;
-            opacity: 0.5;
-            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            font-weight: 900;
         }
 .card__editable {
   display: inline-block;
@@ -1946,6 +1948,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     min-width: 69%;
     min-height: 25rem;
   }
+  .card--desktop-challenge-view {
+    min-height: 40rem;
+    text-align: left;
+  }
   .card--desktop-no-padding {
     padding: 0;
   }
@@ -2614,9 +2620,74 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   cursor: pointer;
 }
 
-.edit--challenge {
-  background-color: darkgreen;
+/*Needs refactoring below here*/
+
+
+.back {
   display: inline-block;
-  width: 15%;
-  padding: 1rem 0 0 1rem;
+  padding: 1.5rem 0 0 1.5rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  color: #9cafbb;
+}
+
+.edit-icon {
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.column {
+  display: inline-block;
+  width: 30%;
+}
+
+.w50 {
+  width: 15rem;
+}
+
+.containers {
+  width: 100%;
+  background-color: orange;
+  display: block;
+}
+
+.left {
+  text-align: left;
+  float: left;
+  background-color: #FFFFFF;
+}
+
+.left-inside {
+  padding: 3rem 2rem 2rem 3rem;
+}
+
+@media (min-width: 600px) {
+  .left {
+    width: 75%;
+    min-height: 62vh;
+  }
+  .left-inside {
+    padding: 3rem 4rem 2rem 7.1rem;
+  }
+}
+
+.right {
+  text-align: left;
+  float: left;
+  background-color: #FFFFFF;
+}
+
+.right-inside {
+  padding: 3rem 1.5rem 3rem 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .right {
+    width: 25%;
+    min-height: 62vh;
+  }
+
+  .right-inside {
+    padding: 3rem 3rem 0 0;
+  }
 }
