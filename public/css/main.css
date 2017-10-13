@@ -996,7 +996,11 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
             text-align: left;
         }
         .card__header--challenge-bg{
-          background-color: #061E2E;
+          background: url("../assets/challenge-banner.jpg") no-repeat center center;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
           min-height: 12.5rem;
           margin: 0
         }
@@ -2657,14 +2661,18 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
 .containers {
   width: 100%;
-  background-color: orange;
+  background-color: #FFFFFF;
   display: block;
+}
+
+@media (min-width: 600px) {
+  .containers {
+    min-height: 62vh;
+  }
 }
 
 .left {
   text-align: left;
-  float: left;
-  background-color: #FFFFFF;
 }
 
 .left-inside {
@@ -2674,7 +2682,8 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 @media (min-width: 600px) {
   .left {
     width: 75%;
-    min-height: 62vh;
+    display: inline-block;
+    vertical-align: top;
   }
   .left-inside {
     padding: 3rem 4rem 2rem 7.1rem;
@@ -2683,18 +2692,16 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
 .right {
   text-align: left;
-  float: left;
-  background-color: #FFFFFF;
 }
 
 .right-inside {
-  padding: 3rem 1.5rem 3rem 1.5rem;
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
 }
 
 @media (min-width: 600px) {
   .right {
-    width: 25%;
-    min-height: 62vh;
+    width: 24%;
+    display: inline-block;
   }
 
   .right-inside {

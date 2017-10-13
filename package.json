@@ -45,7 +45,7 @@
     "jsonwebtoken": "^7.4.0",
     "pg": "^6.1.5",
     "pg-challenges": "^2.3.0",
-    "pg-insights": "^0.1.4",
+    "pg-insights": "^0.2.1",
     "pg-people": "^0.3.2",
     "redis": "^2.7.1",
     "redis-connection": "^5.0.0",

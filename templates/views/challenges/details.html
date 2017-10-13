@@ -8,12 +8,12 @@
     <div class="card card--header card__header--challenge card__header--challenge-bg">
         <a class="back" href="{{cancelUrl}}">< Back</a>
         {{#if permissions.primary}}
-        {{#if permissions.editable}}
-        <a href="/challenges/{{challenge.id}}/edit">
-          <i class="icon icon--edit icon--edit-white icon--desktop edit-icon"></i>
-        </a>
-      {{/if}}
-      {{/if}}
+          {{#if permissions.editable}}
+            <a href="/challenges/{{challenge.id}}/edit">
+              <i class="icon icon--edit icon--edit-white icon--desktop edit-icon"></i>
+            </a>
+          {{/if}}
+        {{/if}}
       <h1 class="title__challenge">{{challenge.title}}</h1>
     </div>
 
@@ -31,25 +31,58 @@
       <div class="right">
         <div class="right-inside">
           <h2 class="card__header card__header--suggested-matches">Tagged with</h2>
-          {{#each challenge.tags}}
-          <a class="u-text-decoration--none" href="/challenges?tags={{id}}">
-            <span class="tag__label tag__label--selected">{{name}}</span>
-          </a>
-          {{/each}}
+
+          {{#if permissions.editable}}
+            {{#if challenge.tags }}
+              {{#each challenge.tags}}
+              <a class="u-text-decoration--none" href="/challenges?tags={{id}}">
+                <span class="tag__label tag__label--selected">{{name}}</span>
+              </a>
+              {{/each}}
+            {{else}}
+              <p class="u-teal">
+                Looks like there is no tag selected for this challenge.
+                <a class="u-teal" href="/challenges/{{id}}/edit">
+                  Add tags here >
+                </a>
+              </p>
+            {{/if}}
+          {{else}}
+            {{#each challenge.tags}}
+            <a class="u-text-decoration--none" href="/challenges?tags={{id}}">
+              <span class="tag__label tag__label--selected">{{name}}</span>
+            </a>
+            {{/each}}
+          {{/if}}
+
         </div>
 
         {{#if permissions.editable}}
           <div class="right-inside">
             <h2 class="card__header card__header--suggested-matches">Matched with</h2>
-            {{#if suggested_matches}}
-              <p class="form__label form__label--additional">
-                These organisations have expertise that might help you with your challenge. Why not get in touch?
-              </p>
-              {{#each suggested_matches}}
-                <a class="anchor anchor--suggested-matches" href="/orgs/{{id}}">{{name}}</a>
-              {{/each}}
+            {{#if (hasMatches suggested_matches matchingChallenges matchingInsights) }}
+              {{#if suggested_matches}}
+                {{#each suggested_matches}}
+                  <a class="anchor anchor--suggested-matches" href="/orgs/{{id}}">{{name}}</a>
+                {{/each}}
+              {{/if}}
+
+              {{#if matchingChallenges}}
+                {{#each matchingChallenges}}
+                  <a class="anchor anchor--suggested-matches" href="/challenges/{{id}}">{{title}}</a>
+                {{/each}}
+              {{/if}}
+
+              {{#if matchingInsights}}
+                {{#each matchingInsights}}
+                  <a class="anchor anchor--suggested-matches" href="{{url}}" target="_blank">{{title}}</a>
+                {{/each}}
+              {{/if}}
             {{else}}
-              <p class="card__copy">No organisations match this challenge</p>
+              <p class="u-teal">
+                We couldn't match your challenge, have you tried to
+                <a class="u-teal" href="/challenges/{{id}}/edit">tag it?</a>
+              </p>
             {{/if}}
           </div>
         {{/if}}
