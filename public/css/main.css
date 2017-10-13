@@ -787,6 +787,18 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
               }
             }
 
+            .list__subblock--people {
+              width: 80%;
+              margin-left: 0.5rem;
+              padding-top: 0.5rem;
+            }
+
+            @media (min-width: 600px) {
+              .list__subblock--people {
+                width: 95%;
+              }
+            }
+
         .list__logo {
           float: left;
           background-color: transparent;
@@ -813,7 +825,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         }
 
         .list__icon--padded {
-            top: 1rem;
+            top: 1.25rem;
             right: 1.3rem;
         }
 
@@ -821,6 +833,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
           .list__subblock--challenge {
             border-bottom: solid 1px #F2F2F2;
             margin: 0 2rem 0 4rem;
+          }
+          .list__icon--padded {
+              top: 1.4rem;
           }
         }
 
@@ -2101,6 +2116,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       word-wrap: break-word;
   }
 
+  .desktop-grid--thirteen {
+      width: 13%;
+  }
+
   .desktop-grid--twenty {
       width: 20%;
   }
@@ -2109,6 +2128,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   }
   .desktop-grid--third {
       width: 30%
+  }
+  .desktop-grid--34 {
+      width: 34%
   }
   .desktop-grid--half {
       width: 50%;
@@ -2597,6 +2619,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
 .b {
   font-weight: bold;
+}
+
+.overflow-ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 /* On the organisation view page*/

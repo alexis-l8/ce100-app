@@ -15,7 +15,7 @@
     <img src="/public/assets/default_logo_user.png" alt="user profile image" class="profile_photo">
   {{/if}}
 
-  <div class="list__subblock--inline list__subblock--w85 centre-details pt0-s">
+  <div class="list__subblock--inline list__subblock--people centre-details pt0-s">
     <span class="list__data list__data--small list__data--inline desktop-grid--twenty pl2-ns pt0-s">{{first_name}} {{last_name}}</span>
     <span class="list__data list__data--small list__data--inline list__data--occupation">
       {{#if job_title}}
@@ -29,13 +29,13 @@
       {{/if}}
     </span>
 
-    <span class="list__data list__data--s-padding list__data--inline desktop-grid--twenty pl2-ns">
+    <span class="list__data list__data--s-padding list__data--inline desktop-grid--thirteen pl2-ns">
       <img src="/public/assets/Button-call.svg" alt="Phone icon" class="contact_icon">
       <a href="tel:{{primary.phone}}" class="card__data--prim-contact">{{phone}}</a>
     </span>
 
-    <a class="anchor list__data list__data--s-padding list__data--inline desktop-grid--quarter" href="mailto:{{email}}">
-      <div class="u-text-wrap">
+    <a class="anchor list__data list__data--s-padding list__data--inline desktop-grid--34" href="mailto:{{email}}">
+      <div class="u-text-wrap pt0 overflow-ellipsis">
         <img src="/public/assets/Button-mail.svg" alt="Mail icon" class="contact_icon">
         {{email}}
       </div>
