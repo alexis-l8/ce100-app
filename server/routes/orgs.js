@@ -68,6 +68,6 @@ module.exports = [
     method: 'GET',
     path: '/orgs/{id}/archived-challenges',
     handler: archivedChallengesView,
-    config: { auth: { scope: 'primary' } }
+    config: { auth: { scope: ['primary', 'admin'] } }
   }
 ];

@@ -47,8 +47,8 @@ helpers.getPermissions = (loggedIn, key, identifier) => {
       admin: loggedIn.scope === 'admin' || loggedIn.scope === 'content-owner',
       "content-owner": loggedIn.scope === 'content-owner',
       primary: loggedIn.scope === 'primary',
-      secondary: loggedIn.scope === 'secondary'
-
+      secondary: loggedIn.scope === 'secondary',
+      superadmin: loggedIn.scope === 'admin'
     }
   };
 };

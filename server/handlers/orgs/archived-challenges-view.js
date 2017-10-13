@@ -7,7 +7,11 @@ module.exports = function (request, reply) {
   var loggedIn = request.auth.credentials;
   var permissions = helpers.getPermissions(loggedIn, 'organisation_id', orgId);
 
-  if (loggedIn.organisation_id !== orgId) {
+  if (!permissions.permissions.organisation_id) {
+    permissions.permissions.organisation_id = orgId;
+  }
+
+  if (loggedIn.organisation_id !== orgId && loggedIn.scope !== 'admin') {
     return reply(Boom.forbidden());
   }
 

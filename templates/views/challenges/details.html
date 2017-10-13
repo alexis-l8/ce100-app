@@ -32,7 +32,7 @@
         <div class="right-inside">
           <h2 class="card__header card__header--suggested-matches">Tagged with</h2>
 
-          {{#if permissions.editable}}
+          {{#if (allowAccess permissions)}}
             {{#if challenge.tags }}
               {{#each challenge.tags}}
               <a class="u-text-decoration--none" href="/challenges?tags={{id}}">
@@ -42,7 +42,7 @@
             {{else}}
               <p class="u-teal">
                 Looks like there is no tag selected for this challenge.
-                <a class="u-teal" href="/challenges/{{id}}/edit">
+                <a class="u-teal" href="/challenges/{{challenge.org_id}}/edit">
                   Add tags here >
                 </a>
               </p>
@@ -57,7 +57,7 @@
 
         </div>
 
-        {{#if permissions.editable}}
+        {{#if (allowAccess permissions)}}
           <div class="right-inside">
             <h2 class="card__header card__header--suggested-matches">Matched with</h2>
             {{#if (hasMatches suggested_matches matchingChallenges matchingInsights) }}
@@ -81,18 +81,13 @@
             {{else}}
               <p class="u-teal">
                 We couldn't match your challenge, have you tried to
-                <a class="u-teal" href="/challenges/{{id}}/edit">tag it?</a>
+                <a class="u-teal" href="/challenges/{{challenge.org_id}}/edit">tag it?</a>
               </p>
             {{/if}}
           </div>
         {{/if}}
       </div>
     </div>
-
-
-
-
-
 
 
 <!-- Include Navbar -->
