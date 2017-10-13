@@ -65,10 +65,18 @@ var logoSaver = (function () {
 // hide see more button on organisatoin page is the mission statement is short
 (function () {
   var seeMore = document.querySelector('#see_more_label');
+  var buttonText = seeMore.querySelector('p');
   if(seeMore) {
     var missionStatementLength = document.querySelector('.mission-statement').innerText.trim().length;
     if (missionStatementLength < 395) {
       seeMore.style.display = 'none';
     }
+    seeMore.addEventListener('click', function(e) {
+      if (buttonText.innerText.trim() === 'see more') {
+        buttonText.innerText = 'see less';
+      } else {
+        buttonText.innerText = 'see more';
+      }
+    })
   }
 })();

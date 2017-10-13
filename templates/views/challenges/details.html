@@ -45,6 +45,29 @@
         {{else}}
           <p class="card__copy">No organisations match this challenge</p>
         {{/if}}
+
+        {{#if matchingChallenges}}
+        <p class="form__label form__label--additional">
+          These challenges may be similar to yours. Why not get in touch?
+        </p>
+        {{#each matchingChallenges}}
+          <a class="anchor anchor--suggested-matches" href="/challenges/{{id}}">{{title}}</a>
+        {{/each}}
+        {{else}}
+          <p class="card__copy">No other challenges match this challenge</p>
+        {{/if}}
+
+        {{#if matchingInsights}}
+        <p class="form__label form__label--additional">
+          These insights may be similar to yours!
+        </p>
+        {{#each matchingInsights}}
+          <a class="anchor anchor--suggested-matches" href="{{url}}" target="_blank">{{title}} - {{type}}</a>
+        {{/each}}
+        {{else}}
+          <p class="card__copy">No other insights match this challenges</p>
+        {{/if}}
+
       </div>
     {{/if}}
 </div>
