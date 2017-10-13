@@ -27,7 +27,7 @@ test('Challenge view - active challenge viewed by an admin with no suggested mat
 
           // admin can see the challenge details, and 'no organisations match these tags'
 
-          t.ok(html.indexOf('/challenges/2/edit') === -1, 'Admin cannot edit a challenge');
+          t.ok(html.indexOf('/challenges/2/edit') > -1, 'Admin cannot edit a challenge');
           t.ok(html.indexOf('Challenge Number 2') > -1, 'Challenge title is displayed');
           t.ok(html.indexOf('How can I...?') > -1, 'Challenge description is displayed');
           t.ok(html.indexOf('Apple') > -1, 'Org that created the challenge is displayed');
@@ -87,7 +87,7 @@ test('Challenge view - inactive challenge viewed by an admin: --> ' + __filename
       t.ok(!err, 'error starting server' + err);
 
       server.inject(challengeView('admin_1', 1), function (res) {
-        t.equal(res.statusCode, 403, 'admin cannot view an inactive challenge');
+        t.equal(res.statusCode, 200, 'admin can view an inactive challenge');
 
         t.end();
         pool.end();
