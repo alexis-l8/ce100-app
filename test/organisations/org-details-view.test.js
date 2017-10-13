@@ -34,12 +34,12 @@ tape('/orgs/id (GET) - Admin view org details view: --> ' + __filename, function
 
         // Challenges
         // We can check the correct challenge name is displayed
-        // Admin cannot edit challenges
-        t.equal(res.payload.indexOf('/challenges/3/edit'), -1, 'Admin cannot edit the organisations challenge');
+        // Admin can edit challenges
+        t.ok(res.payload.indexOf('/challenges/3/edit') > -1, 'Admin can edit the organisations challenge');
         t.ok(res.payload.indexOf('Challenge Number 3') > -1, 'Correct challenge is displayed');
 
         // Challenges
-        t.equal(res.payload.indexOf('/challenges/2/edit'), -1, 'Admin cannot edit the organisations challenge');
+        t.ok(res.payload.indexOf('/challenges/2/edit') > -1, 'Admin can edit the organisations challenge');
         t.ok(res.payload.indexOf('Challenge Number 2') > -1, 'Correct challenge is displayed');
         t.ok(res.payload.indexOf('Go to archived challenges') === -1, 'Admin cannot see archived challenges navigation');
 

@@ -25,7 +25,7 @@ module.exports = function (request, reply) {
 
     // if challenge is not active,
     // only the user belonging the org that created the challenge can view it
-    if (!challenge.active && loggedIn.organisation_id !== challenge.org_id) {
+    if (!challenge.active && loggedIn.organisation_id !== challenge.org_id && loggedIn.scope !== 'admin') {
       return reply(Boom.forbidden('You are not allowed to view that challenge'));
     }
 

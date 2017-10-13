@@ -11,7 +11,7 @@
 
     {{#if challenges}}
       {{#each challenges}}
-        {{>challenge}}
+        {{>challenge permissions=../permissions}}
       {{/each}}
     {{else}}
       <h3 class="title title--blue">You don't have any archived challenges.</h3>

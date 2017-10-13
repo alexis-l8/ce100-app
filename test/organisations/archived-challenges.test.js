@@ -57,7 +57,7 @@ tape('/orgs/1/archived-challenges (GET) - Primary users can view archived challe
 });
 
 
-var testUsers = ['admin_1', 'primary_3', 'secondary_12'];
+var testUsers = ['primary_3', 'secondary_12'];
 
 testUsers.forEach(function (user) {
   var userType = user.split('_')[0];

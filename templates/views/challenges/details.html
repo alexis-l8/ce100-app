@@ -17,6 +17,7 @@
       <h1 class="title__challenge">{{challenge.title}}</h1>
     </div>
 
+<<<<<<< HEAD
     <div class="containers">
       <div class="left">
         <div class="left-inside">
@@ -66,6 +67,23 @@
                   <a class="anchor anchor--suggested-matches" href="/orgs/{{id}}">{{name}}</a>
                 {{/each}}
               {{/if}}
+=======
+    <div class="card card--details d-card--centred">
+      {{#if (allowAccess permissions)}}
+        <a href="/challenges/{{challenge.id}}/edit">
+          <i class="icon icon--edit icon--edit-blue icon--desktop"></i>
+        </a>
+      {{/if}}
+      <p class="card__header card__header--challenge  card__header--extra-margin {{#if permissions.primary}}{{#if permissions.editable}}card__editable{{/if}}{{/if}}">
+        {{challenge.title}}
+      </p>
+      <p class="card__copy card__copy--challenge">{{challenge.description}}</p>
+      {{#each challenge.tags}}
+        <a class="u-text-decoration--none" href="/challenges?tags={{id}}">
+          <span class="tag__label tag__label--selected">{{name}}</span>
+        </a>
+      {{/each}}
+>>>>>>> master
 
               {{#if matchingChallenges}}
                 {{#each matchingChallenges}}

@@ -12,9 +12,9 @@ module.exports = (request, reply) => {
   var tags = helpers.getTagArray(updates.tags);
 
   request.server.methods.pg.challenges.checkEditable(loggedIn.userId, cid,
-    function (editableErr, primary) {
+    function (editableErr, isPrimary) {
       Hoek.assert(!editableErr, 'database error');
-      if (!primary) {
+      if (!(isPrimary || loggedIn.scope == 'admin')) {
         message = 'You do not have permission to edit this challenge.';
 
         return reply(Boom.unauthorized(message));
