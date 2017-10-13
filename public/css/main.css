@@ -1593,7 +1593,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     .anchor--grey:link, .anchor--grey:hover, .anchor--grey:visited {
       color: #9cafbb;
     }
-    .anchor--white:link, .anchor--grey:hover, .anchor--grey:visited {
+    .anchor--white:link, .anchor--white:hover, .anchor--white:visited {
       color: #FFFFFF;
       padding-bottom: 2rem;
     }
@@ -2469,7 +2469,13 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     }
 
     .results--none {
-      padding-left: 3%;
+      padding-left: 8%;
+    }
+
+    @media (min-width: 600px) {
+      .results--none {
+        padding-left: 3%;
+      }
     }
 
     .results__card {
@@ -2534,6 +2540,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   }
 }
 
+.pt3 {
+   padding-top: 1rem;
+ }
+
 .pr4 {
   padding-right: 2rem;
 }
@@ -2572,16 +2582,16 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   }
 }
 
-.mb3 {
-  margin-bottom: 1rem;
-}
-
 .mr3 {
   margin-right: 1rem;
 }
 
 .mr4 {
   margin-right: 2rem;
+}
+
+.mb3 {
+  margin-bottom: 1rem;
 }
 
 .ml5 {
