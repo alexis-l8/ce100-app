@@ -528,6 +528,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
         margin: 0 auto;
         padding-bottom: 3rem;
     }
+    .container--shared-by {
+      padding: 0rem 0rem 2rem 2rem;
+    }
 
 @media (min-width: 600px) {
 
@@ -546,6 +549,9 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       text-align: center;
       padding-bottom: 0.5rem;
       overflow-y: hidden;
+    }
+    .container--shared-by {
+      padding: 1rem 0rem 2rem 8rem;
     }
 }
 
@@ -668,7 +674,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       font-size: 3.1rem;
       width: 80%;
       padding-left: 8rem;
-      padding-bottom: 3rem;
+      padding-bottom: 0;
     }
 }
 
@@ -1573,6 +1579,7 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     .anchor--shared-by, .anchor--shared-by:link, .anchor--shared-by:visited {
         font-size: 0.875rem;
         line-height: 1;
+        color: #FFFFFF;
     }
     .anchor--left, .anchor--left:link, .anchor--left:visited {
         text-align: left;
@@ -1588,10 +1595,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     .anchor--small, .anchor--small:link, .anchor--small:visited {
         font-size: 0.875rem;
     }
-    .anchor:hover, .anchor--shared-by:hover, .anchor--suggested-matches:hover, .anchor--additional:hover {
+    .anchor:hover, .anchor--suggested-matches:hover, .anchor--additional:hover {
       color: #003253;
     }
-    .anchor--login:hover {
+    .anchor--login:hover, .anchor--shared-by:hover {
       color: #dfdfdf;
     }
     .anchor--grey:link, .anchor--grey:hover, .anchor--grey:visited {
@@ -2562,6 +2569,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   }
 }
 
+.pl0 {
+  padding-left: 0rem;
+}
+
 .pl1 {
   padding-left: 0.25rem;
 }
@@ -2661,7 +2672,6 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
 .containers {
   width: 100%;
-  background-color: #FFFFFF;
   display: block;
 }
 
@@ -2677,21 +2687,25 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
 .left-inside {
   padding: 3rem 2rem 2rem 3rem;
+  background-color: #FFFFFF;
 }
 
 @media (min-width: 600px) {
   .left {
-    width: 75%;
+    min-width: 69%;
     display: inline-block;
     vertical-align: top;
   }
   .left-inside {
     padding: 3rem 4rem 2rem 7.1rem;
+    min-height: 24rem;
   }
 }
 
 .right {
   text-align: left;
+  min-height: 9rem;
+  background-color: #FFFFFF;
 }
 
 .right-inside {
@@ -2700,11 +2714,12 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
 
 @media (min-width: 600px) {
   .right {
-    width: 24%;
+    width: 30%;
     display: inline-block;
+    min-height: 29rem;
   }
 
   .right-inside {
-    padding: 3rem 3rem 0 0;
+    padding: 3rem 3rem 0 3rem;
   }
 }

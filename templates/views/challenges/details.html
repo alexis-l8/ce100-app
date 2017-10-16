@@ -13,17 +13,19 @@
             </a>
         {{/if}}
       <h1 class="title__challenge">{{challenge.title}}</h1>
+      <div class="container--shared-by">
+        <h4 class="card__copy anchor anchor--shared-by">Shared by
+          <a class="card__copy anchor anchor--shared-by" href="/orgs/{{challenge.org_id}}">
+            {{challenge.org_name}}
+          </a>
+        </h4>
+      </div>
     </div>
 
     <div class="containers">
       <div class="left">
         <div class="left-inside">
           <p class="card__copy card__copy--challenge">{{challenge.description}}</p>
-          <h4 class="card__copy anchor anchor--shared-by anchor--right u-no-margin">Shared by
-            <a class="card__copy anchor anchor--shared-by anchor--right u-no-margin" href="/orgs/{{challenge.org_id}}">
-              {{challenge.org_name}}
-            </a>
-          </h4>
         </div>
       </div>
       <div class="right">
