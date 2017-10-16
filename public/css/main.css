@@ -210,6 +210,10 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
     height: 1.3rem;
     width: 1.3rem;
 }
+    .icon--edit-challenge {
+      top: 1.5rem;
+      right: 1.5rem;
+    }
     .icon--edit--org {
       top: 1rem;
       right: 1rem;
@@ -554,6 +558,49 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
       padding: 1rem 0rem 2rem 8rem;
     }
 }
+
+    .container--two-third {
+      text-align: left;
+    }
+
+    .container--two-third-inside {
+      padding: 3rem 2rem 2rem 3rem;
+      background-color: #FFFFFF;
+    }
+
+    @media (min-width: 600px) {
+      .container--two-third {
+        min-width: 69%;
+        display: inline-block;
+        vertical-align: top;
+      }
+      .container--two-third-inside {
+        padding: 3rem 4rem 2rem 7.1rem;
+        min-height: 24rem;
+      }
+    }
+
+    .container--third {
+      text-align: left;
+      min-height: 9rem;
+      background-color: #FFFFFF;
+    }
+
+    .container--third-inside {
+      padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+    }
+
+    @media (min-width: 600px) {
+      .container--third {
+        width: 30%;
+        display: inline-block;
+        min-height: 29rem;
+      }
+
+      .container--third-inside {
+        padding: 3rem 3rem 0 3rem;
+      }
+    }
 
 /*|||||||||||||||||||||||||||||||||||||||||||||
     Titles
@@ -1509,6 +1556,18 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   .button--edit {
       margin: 2rem 0;
   }
+}
+
+.button--back {
+  display: inline-block;
+  padding: 1.5rem 0 0 1.5rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  color: #9cafbb;
+}
+
+.button--back:hover {
+  color: #8396A2;
 }
 
 .indicator {
@@ -2621,6 +2680,14 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   display: inline-block;
 }
 
+.db {
+  display: block;
+}
+
+.w-100 {
+  width: 100%;
+}
+
 .v-top {
   vertical-align: top;
 }
@@ -2645,81 +2712,8 @@ Disabled tag color (50% opacity): rgba(0,50,83, 0.5);*/
   cursor: pointer;
 }
 
-/*Needs refactoring below here*/
-
-
-.back {
-  display: inline-block;
-  padding: 1.5rem 0 0 1.5rem;
-  text-decoration: none;
-  font-size: 0.875rem;
-  color: #9cafbb;
-}
-
-.edit-icon {
-  top: 1.5rem;
-  right: 1.5rem;
-}
-
-.column {
-  display: inline-block;
-  width: 30%;
-}
-
-.w50 {
-  width: 15rem;
-}
-
-.containers {
-  width: 100%;
-  display: block;
-}
-
 @media (min-width: 600px) {
-  .containers {
+  .min-h-62 {
     min-height: 62vh;
-  }
-}
-
-.left {
-  text-align: left;
-}
-
-.left-inside {
-  padding: 3rem 2rem 2rem 3rem;
-  background-color: #FFFFFF;
-}
-
-@media (min-width: 600px) {
-  .left {
-    min-width: 69%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .left-inside {
-    padding: 3rem 4rem 2rem 7.1rem;
-    min-height: 24rem;
-  }
-}
-
-.right {
-  text-align: left;
-  min-height: 9rem;
-  background-color: #FFFFFF;
-}
-
-.right-inside {
-  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
-}
-
-@media (min-width: 600px) {
-  .right {
-    width: 30%;
-    display: inline-block;
-    min-height: 29rem;
-  }
-
-  .right-inside {
-    padding: 3rem 3rem 0 3rem;
   }
 }

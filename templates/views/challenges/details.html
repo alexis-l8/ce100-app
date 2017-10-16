@@ -6,10 +6,10 @@
 <div class="container container--desktop">
    <!-- header -->
     <div class="card card--header card__header--challenge card__header--challenge-bg">
-        <a class="back" href="{{cancelUrl}}">< Back</a>
+        <a class="button--back" href="{{cancelUrl}}">< Back</a>
         {{#if (allowAccess permissions)}}
             <a href="/challenges/{{challenge.id}}/edit">
-              <i class="icon icon--edit icon--edit-white icon--desktop edit-icon"></i>
+              <i class="icon icon--edit icon--edit-white icon--desktop icon--edit-challenge"></i>
             </a>
         {{/if}}
       <h1 class="title__challenge">{{challenge.title}}</h1>
@@ -22,14 +22,14 @@
       </div>
     </div>
 
-    <div class="containers">
-      <div class="left">
-        <div class="left-inside">
+    <div class="min-h-62 db w-100">
+      <div class="container--two-third">
+        <div class="container--two-third-inside">
           <p class="card__copy card__copy--challenge">{{challenge.description}}</p>
         </div>
       </div>
-      <div class="right">
-        <div class="right-inside">
+      <div class="container--third">
+        <div class="container--third-inside">
           <h2 class="card__header card__header--suggested-matches">Tagged with</h2>
 
           {{#if (allowAccess permissions)}}
@@ -58,7 +58,7 @@
         </div>
 
         {{#if (allowAccess permissions)}}
-          <div class="right-inside">
+          <div class="container--third-inside">
             <h2 class="card__header card__header--suggested-matches">Matched with</h2>
             {{#if (hasMatches suggested_matches matchingChallenges matchingInsights) }}
               {{#if suggested_matches}}
