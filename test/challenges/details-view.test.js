@@ -145,7 +145,7 @@ users.forEach(function (user) {
             t.ok(html.indexOf('Waste to energy') > -1, 'Tag associated with the challenge is displayed');
 
             // suggested matches
-            t.ok(html.indexOf('MATCHES') > -1, 'Suggested matches shows for ' + userType);
+            t.ok(html.indexOf('Matched with') > -1, 'Suggested matches shows for ' + userType);
             t.ok(html.indexOf('Co-op Group') > -1, 'Correct org suggested as a match for this challenge');
 
             t.end();
@@ -174,7 +174,7 @@ users.forEach(function (user) {
 
             // check permissions
             t.ok(html.indexOf('/challenges/4/edit') === -1, userType + ' user cannot edit a challenge not created by their org');
-            t.ok(html.indexOf('MATCHED WITH') === -1, 'No suggested matches for this challenge are displayed');
+            t.ok(html.indexOf('Matched with') === -1, 'No suggested matches for this challenge are displayed');
 
             // check challenge details content
             t.ok(html.indexOf('Challenge Number 4') > -1, 'Challenge title is displayed');
