@@ -32,7 +32,7 @@ test('Challenge view - active challenge viewed by an admin with no suggested mat
           t.ok(html.indexOf('How can I...?') > -1, 'Challenge description is displayed');
           t.ok(html.indexOf('Apple') > -1, 'Org that created the challenge is displayed');
           t.ok(html.indexOf('Corporate') > -1, 'Tag associated with the challenge is displayed');
-          t.ok(html.indexOf('No organisations match this challenge') > -1,
+          t.ok(html.indexOf('We couldn\'t match your challenge') > -1,
             'Message indicating that there are no suggested matches for this challenge is displayed');
 
 
@@ -67,9 +67,9 @@ test('Challenge view - active challenge viewed by an admin with suggested matche
           t.ok(html.indexOf('Design for disassembly') > -1, 'Tag associated with the challenge is displayed');
 
           // suggested matches
-          t.ok(html.indexOf('Asda') > -1, 'Correct org suggested as a matche for this challenge');
-          t.ok(html.indexOf('EMF') > -1, 'Correct org suggested as a matche for this challenge');
-          t.ok(html.indexOf('Co-op Group') > -1, 'Correct org suggested as a matche for this challenge');
+          t.ok(html.indexOf('Asda') > -1, 'Correct org suggested as a match for this challenge');
+          t.ok(html.indexOf('EMF') > -1, 'Correct org suggested as a match for this challenge');
+          t.ok(html.indexOf('Co-op Group') > -1, 'Correct org suggested as a match for this challenge');
 
           t.end();
           pool.end();
@@ -143,10 +143,6 @@ users.forEach(function (user) {
             t.ok(html.indexOf('Buildings design') > -1, 'Tag associated with the challenge is displayed');
             t.ok(html.indexOf('Fertiliser') > -1, 'Tag associated with the challenge is displayed');
             t.ok(html.indexOf('Waste to energy') > -1, 'Tag associated with the challenge is displayed');
-
-            // suggested matches
-            t.ok(html.indexOf('Matched with') > -1, 'Suggested matches shows for ' + userType);
-            t.ok(html.indexOf('Co-op Group') > -1, 'Correct org suggested as a match for this challenge');
 
             t.end();
             pool.end();
