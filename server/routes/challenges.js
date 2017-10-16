@@ -10,6 +10,7 @@ var editView = require('../handlers/challenges/edit-view.js');
 var editSubmit = require('../handlers/challenges/edit.js');
 var editModel = require('../models/edit-challenge.js');
 var challengeView = require('../handlers/challenges/challenge-view.js');
+var addComment = require('../handlers/challenges/add-comment.js')
 
 module.exports = [
   {
@@ -62,5 +63,10 @@ module.exports = [
     path: '/challenges/{id}/toggle-active',
     handler: toggleActive,
     config: { auth: { scope: ['primary', 'admin'] } }
+  },
+  {
+    method: 'POST',
+    path: '/challenges/comments/add',
+    handler: addComment
   }
 ];

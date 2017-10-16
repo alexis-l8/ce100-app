@@ -184,6 +184,16 @@ helpers.getTagArray = function (tagsPayload) {
   return tagsPayload.map(function (tag) {
     return parseInt(tag, 10);
   });
+};
+
+helpers.formatDate = function(date) {
+  var d = new Date(date);
+  var day = d.getDate();
+  var indexMonth = d.getMonth() + 1;
+  var month = (indexMonth < 10) ? '0' + indexMonth : indexMonth;
+  var year = d.getFullYear();
+  
+  return day + '/' + month + '/' + year;
 }
 
 module.exports = helpers;

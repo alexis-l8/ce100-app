@@ -55,13 +55,22 @@ module.exports = function (request, reply) {
       return pgChallenges.getMatchingChallenges(cid, listOfTags, function(pgErr3, challenges){
 
         return pgInsights.getMatchingInsights(listOfTags, function(pgErr3, insights){
-          var viewData = Object.assign(
-            optionsMatches,
-            { matchingChallenges: challenges },
-            { matchingInsights: insights }
-          );
 
-          return reply.view('challenges/details', viewData);
+          return pgChallenges.getComments(challenge.id, function(pgErr4, comments) {
+
+            comments.forEach(function(c) {
+              c.formatedDate = helpers.formatDate(c.created_at);
+            });
+
+            var viewData = Object.assign(
+              optionsMatches,
+              { matchingChallenges: challenges },
+              { matchingInsights: insights },
+              { comments: comments}
+            );
+
+            return reply.view('challenges/details', viewData);
+          });
         });
       });
     });

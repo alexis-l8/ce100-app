@@ -1,0 +1,17 @@
+<li>
+  {{#if people_logo_url}}
+    <img src="{{people_logo_url}}" alt="user profile image" class="profile_photo">
+  {{else}}
+    <img src="/public/assets/default_logo_user.png" alt="user profile image" class="profile_photo">
+  {{/if}}
+  <span>{{people_first_name}} {{people_last_name}}</span>
+  {{#if org_name}}
+    <span>{{org_name}}</span>
+  {{else}}
+    <span>EMF</span>
+  {{/if}}
+  <span>{{formatedDate}}</span>
+  <div>
+    {{comment}}
+  </div>
+</li>

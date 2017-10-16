@@ -70,8 +70,17 @@
 
       </div>
     {{/if}}
-</div>
+    {{>comments/create}}
 
+    <h2>{{comments.length}} {{resultComments comments.length}}</h2>
+    <div class="">
+      <ul>
+        {{#each comments}}
+          {{>comments/comment}}
+        {{/each}}
+      </ul>
+    </div>
+</div>
 
 
 <!-- Include Navbar -->
